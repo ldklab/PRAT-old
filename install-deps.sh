@@ -13,6 +13,10 @@ fi
 # Need to add all the dependencies for CoreNLP.
 # Get/build the corenlp-current jar and the models jar.
 
+# Install lcov.
+git clone https://github.com/linux-test-project/lcov.git ; cd lcov
+make install
+
 # Get dependencies for angr.
 #apt-get install python3-dev libffi-dev build-essential virtualenvwrapper
 
