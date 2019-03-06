@@ -1,20 +1,26 @@
 package com.ris3.demos;
 
-import java.io.*;
-import java.util.*;
-
 import edu.stanford.nlp.coref.CorefCoreAnnotations;
-
 import edu.stanford.nlp.coref.data.CorefChain;
-import edu.stanford.nlp.io.*;
-import edu.stanford.nlp.ling.*;
-import edu.stanford.nlp.pipeline.*;
+import edu.stanford.nlp.io.IOUtils;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ling.IndexedWord;
+import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
 import edu.stanford.nlp.semgraph.SemanticGraphEdge;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
-import edu.stanford.nlp.trees.*;
-import edu.stanford.nlp.util.*;
+import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.trees.TreeCoreAnnotations;
+import edu.stanford.nlp.util.CoreMap;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * This class demonstrates building and using a Stanford CoreNLP pipeline.
