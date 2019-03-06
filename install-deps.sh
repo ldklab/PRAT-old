@@ -17,6 +17,10 @@ fi
 git clone https://github.com/linux-test-project/lcov.git ; cd lcov
 make install
 
+# Install CoreNLP.
+git clone https://github.com/stanfordnlp/CoreNLP.git; cd CoreNLP
+mvn package
+
 # Get dependencies for angr.
 #apt-get install python3-dev libffi-dev build-essential virtualenvwrapper
 
