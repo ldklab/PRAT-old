@@ -1,38 +1,45 @@
 package com.ris3;
 
 import edu.stanford.nlp.coref.data.CorefChain;
-import edu.stanford.nlp.ling.*;
-import edu.stanford.nlp.ie.util.*;
+import edu.stanford.nlp.ie.util.RelationTriple;
+import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.*;
-import edu.stanford.nlp.semgraph.*;
-import edu.stanford.nlp.trees.*;
+import edu.stanford.nlp.semgraph.SemanticGraph;
+import edu.stanford.nlp.trees.Tree;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 
 public class BasicPipeline {
 
-    public static String text = "Joe Smith was born in California. " +
-            "In 2017, he went to Paris, France in the summer. " +
-            "His flight left at 3:00pm on July 10th, 2017. " +
-            "After eating some escargot for the first time, Joe said, \"That was delicious!\" " +
-            "He sent a postcard to his sister Jane Smith. " +
-            "After hearing about Joe's trip, Jane decided she might go to France one day.";
+    private static final String text = "Ryan is from Los Angeles, CA and works in cybersecurity. " +
+            "His parents are from London, UK. " +
+            "He moved to Boston, MA in 2015 and has been working on his PhD at Northeastern University " +
+            "since September 2018. He travels a lot to different countries every year.";
 
     public static void main(String[] args) {
-        // set up pipeline properties
         Properties props = new Properties();
-        // set the list of annotators to run
-        props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse,depparse,coref,kbp,quote");
-        // set a property for an annotator, in this case the coref annotator is being set to use the neural algorithm
+        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse, depparse, coref");
+        props.setProperty("ner.model", "edu/stanford/nlp/models/ner/english.all.3class.distsim.crf.ser.gz"); // Later I need to make my own model for RFC docs/etc.
+        //props.setProperty("ner.applyNumericClassifiers", "false");
         props.setProperty("coref.algorithm", "neural");
-        // build pipeline
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-        // create a document object
+
+        // set up pipeline properties
+        //Properties props = new Properties();
+        // set the list of annotators to run
+        //props.setProperty("annotators", "tokenize,ssplit,pos,lemma,ner,parse,depparse,coref,kbp,quote");
+        // set a property for an annotator, in this case the coref annotator is being set to use the neural algorithm
+        //props.setProperty("coref.algorithm", "neural");
+        // build pipeline
+        //StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+
+        // Create a document object
         CoreDocument document = new CoreDocument(text);
-        // annnotate the document
+        // Annotate the document
         pipeline.annotate(document);
-        // examples
 
         // 10th token of the document
         CoreLabel token = document.tokens().get(10);
@@ -74,11 +81,12 @@ public class BasicPipeline {
         System.out.println();
 
         // kbp relations found in fifth sentence
+        /*
         List<RelationTriple> relations =
                 document.sentences().get(4).relations();
         System.out.println("Example: relation");
         System.out.println(relations.get(0));
-        System.out.println();
+        System.out.println();*/
 
         // entity mentions in the second sentence
         List<CoreEntityMention> entityMentions = sentence.entityMentions();
@@ -101,7 +109,7 @@ public class BasicPipeline {
         System.out.println();
 
         // get quotes in document
-        List<CoreQuote> quotes = document.quotes();
+        /*List<CoreQuote> quotes = document.quotes();
         CoreQuote quote = quotes.get(0);
         System.out.println("Example: quote");
         System.out.println(quote);
@@ -116,7 +124,7 @@ public class BasicPipeline {
         // canonical speaker of quote
         System.out.println("Example: canonical speaker of quote");
         System.out.println(quote.canonicalSpeaker().get());
-        System.out.println();
+        System.out.println();*/
 
     }
 

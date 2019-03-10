@@ -2,3 +2,5 @@ out
 build
 .DS_STORE
 *.log
+.idea
+workspace.xml
