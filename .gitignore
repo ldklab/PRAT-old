@@ -4,3 +4,4 @@ build
 *.log
 .idea
 workspace.xml
+*.pickle
