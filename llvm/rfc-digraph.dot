@@ -1,0 +1,24 @@
+# Testing manually-constructing a simple digraph from the RFC.
+# This will be at the `component` level.
+digraph {
+	#subgraph cluster_0 {
+	#	label="Example subgraph";
+	#	a -> b[label="0.2",weight="0.2"];
+	#   a -> c[label="0.4",weight="0.4"];
+	#   c -> b[label="0.6",weight="0.6"];
+	#   c -> e[label="0.6",weight="0.6"];
+	#   e -> e[label="0.1",weight="0.1"];
+	#   e -> b[label="0.7",weight="0.7"];
+	#}
+
+	subgraph cluster_1 {
+		label="MQTT Components";
+		"MQTT Broker" -> "SSL/TLS";
+		"MQTT Broker" -> "SOCKS Proxy";
+		"MQTT Broker" -> "Client Threading";
+		"MQTT Broker" -> "systemd Support";
+		"MQTT Broker" -> "Websocket Support";
+		"MQTT Broker" -> "Persistent DB Support";
+		"SSL/TLS" -> "TLS/PSK";
+	}
+}
