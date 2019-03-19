@@ -22,6 +22,8 @@ git clone https://github.com/stanfordnlp/CoreNLP.git; cd CoreNLP
 mvn package
 
 # Get dependencies for angr.
-#apt-get install python3-dev libffi-dev build-essential virtualenvwrapper
+apt-get install python3-dev libffi-dev build-essential virtualenvwrapper
+pip3 install -q h5py pyyaml tensorflow nltk spacy 
+# pip install prodigy.wh1
 
 #mkvirtualenv --python=$(which python3) angr && pip install angr
