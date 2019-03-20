@@ -92,8 +92,8 @@ def main(model=None, output_dir=None, n_iter=100):
 
 		for text, _ in TRAINING_DATA:
 			doc = nlp2(text)
-			print("[+] Entities: {}".format([(ent.text, ent.label_) for ent in doc.ents]))
-			print("[+] Tokens: {}".format([(t.text, t.ent_type_, t.ent_iob) for t in doc]))
+			#print("[+] Entities: {}".format([(ent.text, ent.label_) for ent in doc.ents]))
+			#print("[+] Tokens: {}".format([(t.text, t.ent_type_, t.ent_iob) for t in doc]))
 
 if __name__ == "__main__":
 	plac.call(main)
