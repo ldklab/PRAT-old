@@ -11,7 +11,7 @@ from pathlib import Path
 
 # Define some training data (text from RFC 793).
 TRAINING_DATA = [
-	("Who is Ryan Williams?", {"entities": [(7, 19, "PERSON")]}),
+	("Who is Ryan Williams?", {"entities": [(7, 20, "PERSON")]}),
 	("I like London and Berlin.", {"entities": [(7, 13, "LOC"), (18, 24, "LOC")]})
 ]
 
@@ -23,7 +23,7 @@ LANG = "en"
     output_dir=("Optional output directory", "option", "o", Path),
     n_iter=("Number of training iterations", "option", "n", int),
 )
-def main(model=None, output_dir=None, n_iter=10):
+def main(model=None, output_dir=None, n_iter=100):
 	""" Load model, setup pipeline, train NER. """
 
 	if model is not None:
@@ -44,7 +44,7 @@ def main(model=None, output_dir=None, n_iter=10):
 	# Add the labels.
 	for _, annotations in TRAINING_DATA:
 		for ent in annotations.get("entities"):
-			print("[+] Adding entity: {}".format(ent[2]))
+			#print("[+] Adding entity: {}".format(ent[2]))
 			ner.add_label(ent[2])
 
 	# Disable other pipelines during training.
@@ -70,7 +70,7 @@ def main(model=None, output_dir=None, n_iter=10):
 					losses=losses,
 				)
 
-			print("[+] Losses {}".format(losses))
+		print("[+] Losses {}".format(losses))
 
 	# Test the trained model.
 	for text, _ in TRAINING_DATA:
