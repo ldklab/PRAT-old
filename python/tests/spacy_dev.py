@@ -16,4 +16,4 @@ for ent in doc.ents:
 #    print("{0}/{1} <--{2}-- {3}/{4}".format(
 #        token.text, token.tag_, token.dep_, token.head.text, token.head.tag_))
 
-displacy.serve(doc, style='dep') # style='dep' for dependency tree.
+#displacy.serve(doc, style='dep') # style='dep' for dependency tree.
