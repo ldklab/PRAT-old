@@ -13,6 +13,12 @@ from pathlib import Path
 # Language model to load.
 LANG = "en"
 
+# Default training data.
+TRAINING_DATA = [
+    ("Who is Inigo Montoya?", {"entities": [(7, 17, "PERSON")]}),
+    ("I like London and Berlin.", {"entities": [(7, 13, "LOC"), (18, 24, "LOC")]}),
+]
+
 def load_data(path):
 	with open(path) as f:
 		data = json.load(f)
@@ -21,10 +27,11 @@ def load_data(path):
 
 @plac.annotations(
     model=("Model name. Defaults to blank 'en' model.", "option", "m", str),
+    input_file=("spaCy JSON file to load from.", "option", "i", str),
     output_dir=("Optional output directory", "option", "o", Path),
     n_iter=("Number of training iterations", "option", "n", int),
 )
-def main(model=None, output_dir=None, n_iter=100):
+def main(model=None, input_file=None, output_dir=None, n_iter=100):
 	""" Load model, setup pipeline, train NER. """
 
 	if model is not None:
@@ -33,8 +40,12 @@ def main(model=None, output_dir=None, n_iter=100):
 		nlp = spacy.blank(LANG) # Blank language class.
 		print("[+] Created blank {} model".format(LANG))
 
-	# Data from RFC 793.
-	training_data = load_data("out.json")
+	if input_file is not None:
+		# Manually-annotated data.
+		training_data = load_data(input_file)
+	else:
+		print("[-] No input specified, using example training set.")
+		training_data = TRAINING_DATA
 
 	# Create the pipeline components.
 	# nlp.create_pipe works for built-ins that are registered with spaCy.
