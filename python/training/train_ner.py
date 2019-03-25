@@ -7,7 +7,7 @@ import random
 import json
 import spacy
 
-from spacy.util import minibatch, compounding
+from spacy.util import minibatch, compounding, decaying
 from pathlib import Path
 
 # Language model to load.
@@ -47,6 +47,9 @@ def main(model=None, input_file=None, output_dir=None, n_iter=100):
 		print("[-] No input specified, using example training set.")
 		training_data = TRAINING_DATA
 
+	# Change later, but this is useful for smaller networks.
+	dropout = decaying(0.6, 0.2, 1e-4)
+
 	# Create the pipeline components.
 	# nlp.create_pipe works for built-ins that are registered with spaCy.
 	if "ner" not in nlp.pipe_names:
@@ -69,7 +72,8 @@ def main(model=None, input_file=None, output_dir=None, n_iter=100):
 	with nlp.disable_pipes(*other_pipes):
 		# Reset and initialize weights randomly if training new model.
 		if model is None:
-			nlp.begin_training()
+			optimizer = nlp.begin_training()
+			print("Optimizer attrs: {}".format(optimizer.__dict__))
 
 		for itn in range(n_iter):
 			k += 1
@@ -81,13 +85,14 @@ def main(model=None, input_file=None, output_dir=None, n_iter=100):
 			for batch in batches:
 				texts, annotations = zip(*batch)
 				nlp.update(
-					texts, 			# Batch of texts.
-					annotations, 	# Batch of annotations.
-					drop=0.5, 		# Dropout - harder to memorize data.
+					texts, 					# Batch of texts.
+					annotations, 			# Batch of annotations.
+					drop=next(dropout), 	# Dropout - harder to memorize data.
+					sgd=optimizer,
 					losses=losses,
 				)
 
-			print("[+] Iteration {} of {}\t loss: {}".format(k, n_iter, losses))
+			print("[+] Epoch {} of {}\t loss: {}".format(k, n_iter, losses))
 
 	# Test the trained model.
 	for text, _ in training_data:
@@ -100,8 +105,11 @@ def main(model=None, input_file=None, output_dir=None, n_iter=100):
 		output_dir = Path(output_dir)
 		if not output_dir.exists():
 			output_dir.mkdir()
-		nlp.to_disk(output_dir)
-		print("[+] Saved mode to: {}".format(output_dir))
+
+		# Save using averages, not most recent value.
+		with nlp.use_params(optimizer.averages):
+			nlp.to_disk(output_dir)
+			print("[+] Saved mode to: {}".format(output_dir))
 
 		# Test saved model.
 		#print("[+] Loading from: {}".format(output_dir))
