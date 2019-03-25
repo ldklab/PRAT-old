@@ -3,7 +3,7 @@
 import spacy
 from spacy import displacy
 
-nlp = spacy.load('../models/rfc_793') #en_core_web_lg
+nlp = spacy.load('../models/mqtt') #en_core_web_lg
 
 doc = nlp("""If the ACK control bit is set this field contains the value of the
     next sequence number the sender of the segment is expecting to
