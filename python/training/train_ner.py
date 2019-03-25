@@ -15,7 +15,7 @@ LANG = "en"
 
 # Default training data.
 TRAINING_DATA = [
-    ("Who is Inigo Montoya?", {"entities": [(7, 17, "PERSON")]}),
+    ("Who is Inigo Montoya?", {"entities": [(7, 20, "PERSON")]}),
     ("I like London and Berlin.", {"entities": [(7, 13, "LOC"), (18, 24, "LOC")]}),
 ]
 
@@ -24,6 +24,17 @@ def load_data(path):
 		data = json.load(f)
 	print("[+] Finished loading {}".format(path))
 	return data
+
+def get_batches(train_data, model_type):
+    max_batch_sizes = {"tagger": 32, "parser": 16, "ner": 16, "textcat": 64}
+    max_batch_size = max_batch_sizes[model_type]
+    if len(train_data) < 1000:
+        max_batch_size /= 2
+    if len(train_data) < 500:
+        max_batch_size /= 2
+    batch_size = compounding(1, max_batch_size, 1.001)
+    batches = minibatch(train_data, size=batch_size)
+    return batches
 
 @plac.annotations(
     model=("Model name. Defaults to blank 'en' model.", "option", "m", str),
@@ -73,7 +84,10 @@ def main(model=None, input_file=None, output_dir=None, n_iter=100):
 		# Reset and initialize weights randomly if training new model.
 		if model is None:
 			optimizer = nlp.begin_training()
-			print("Optimizer attrs: {}".format(optimizer.__dict__))
+			#print("Optimizer attrs: {}".format(optimizer.__dict__))
+		else:
+			# Fix later.
+			optimizer = nlp.begin_training()
 
 		for itn in range(n_iter):
 			k += 1
@@ -81,7 +95,8 @@ def main(model=None, input_file=None, output_dir=None, n_iter=100):
 			losses = {}
 
 			# Batch up examples using minibatch.
-			batches = minibatch(training_data, size=compounding(4.0, 32.0, 1.001))
+			#batches = minibatch(training_data, size=compounding(1.0, 32.0, 1.001))
+			batches = get_batches(training_data, "ner")
 			for batch in batches:
 				texts, annotations = zip(*batch)
 				nlp.update(
