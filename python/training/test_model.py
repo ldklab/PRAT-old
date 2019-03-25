@@ -3,7 +3,7 @@
 import spacy
 from spacy import displacy
 
-nlp = spacy.load('rfc') #en_core_web_lg
+nlp = spacy.load('../models/rfc_793') #en_core_web_lg
 
 doc = nlp("""If the ACK control bit is set this field contains the value of the
     next sequence number the sender of the segment is expecting to
@@ -17,8 +17,11 @@ doc2 = nlp("""The CONNECT Packet contains Username and Password fields.
 for ent in doc.ents:
     print(ent.text, ent.label_)
 
-for token in doc:
-	print(token.text, token.tag_)
+for ent in doc2.ents:
+	print(ent.text, ent.label_)
+
+#for token in doc:
+#	print(token.text, token.tag_)
 
 #for token in doc:
 #    print("{0}/{1} <--{2}-- {3}/{4}".format(

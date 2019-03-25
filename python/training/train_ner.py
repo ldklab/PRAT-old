@@ -33,6 +33,7 @@ def main(model=None, output_dir=None, n_iter=100):
 		nlp = spacy.blank(LANG) # Blank language class.
 		print("[+] Created blank {} model".format(LANG))
 
+	# Data from RFC 793.
 	training_data = load_data("out.json")
 
 	# Create the pipeline components.
