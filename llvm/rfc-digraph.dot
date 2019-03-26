@@ -24,7 +24,7 @@ digraph {
 		label="MQTT Features";
 		"Security" -> "SSL/TLS" -> "TLS/PSK";
 		"Network Transport" -> "Websocket Support";
-		"SOCKS Proxy";
+		"Network Transport" -> "SOCKS Proxy";
 		"Client Threading";
 		"Persistent DB Support";
 		"systemd Support";

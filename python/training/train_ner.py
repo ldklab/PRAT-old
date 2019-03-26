@@ -76,7 +76,6 @@ def main(model=None, input_file=None, output_dir=None, n_iter=100):
 			#print("[+] Adding entity: {}".format(ent[2]))
 			ner.add_label(ent[2])
 
-	k = 0
 	# Disable other pipelines during training.
 	other_pipes = [pipe for pipe in nlp.pipe_names if pipe != "ner"]
 	# Only want to train NER.
@@ -90,7 +89,6 @@ def main(model=None, input_file=None, output_dir=None, n_iter=100):
 			optimizer = nlp.begin_training()
 
 		for itn in range(n_iter):
-			k += 1
 			random.shuffle(training_data)
 			losses = {}
 
@@ -107,7 +105,7 @@ def main(model=None, input_file=None, output_dir=None, n_iter=100):
 					losses=losses,
 				)
 
-			print("[+] Epoch {} of {}\t loss: {}".format(k, n_iter, losses))
+			print("[+] Epoch {} of {}\t loss: {}".format(itn+1, n_iter, losses))
 
 	# Test the trained model.
 	for text, _ in training_data:
