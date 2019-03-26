@@ -17,7 +17,6 @@ digraph {
 		"Operational Behavior";
 		"Security";
 		"Network Transport";
-		"Conformance Targets";
 	}
 
 	subgraph cluster_features {
@@ -28,7 +27,6 @@ digraph {
 		"Client Threading";
 		"Persistent DB Support";
 		"systemd Support";
-		"Conformance Targets" -> "TODO";
 		"Operational Behavior" -> "TODO";
 		"Control Packets" -> "TODO";
 	}
