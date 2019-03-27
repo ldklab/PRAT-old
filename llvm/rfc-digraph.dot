@@ -36,7 +36,7 @@ digraph G {
 
 	subgraph cluster_security {
 		label="Security";
-		"SSL/TLS" "TLS/PSK";
+		"SSL/TLS" -> "TLS/PSK";
 	}
 
 	// All the control packets.
