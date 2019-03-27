@@ -1,6 +1,6 @@
-# Testing manually-constructing a simple digraph from the RFC.
-# This will be at the `component` level.
-digraph {
+// Testing manually-constructing a simple digraph from the RFC.
+digraph G {
+	graph [fontsize=10 fontname="Verdana" compound=true];
 	#subgraph cluster_0 {
 	#	label="Example subgraph";
 	#	a -> b[label="0.2",weight="0.2"];
@@ -17,18 +17,62 @@ digraph {
 		"Operational Behavior";
 		"Security";
 		"Network Transport";
+		"Conformance Targets"; // Maybe.
 	}
 
+	// I think this cluster will go away after I fill in the rest.
 	subgraph cluster_features {
 		label="MQTT Features";
-		"Security" -> "SSL/TLS" -> "TLS/PSK";
+		//"Security" -> "SSL/TLS" -> "TLS/PSK";
 		"Network Transport" -> "Websocket Support";
 		"Network Transport" -> "SOCKS Proxy";
 		"Client Threading";
 		"Persistent DB Support";
 		"systemd Support";
-		"Operational Behavior" -> "TODO";
-		"Control Packets" -> "TODO";
+		//"Operational Behavior" -> "TODO";
+		"Conformance Targets" -> "TODO";
+		"Control Packets";
 	}
 
+	subgraph cluster_security {
+		label="Security";
+		"SSL/TLS" "TLS/PSK";
+	}
+
+	// All the control packets.
+	subgraph cluster_packets {
+		label="Control Packets";
+		"Control Packets" -> "CONNECT";
+		"Control Packets" -> "DISCONNECT";
+		"Control Packets" -> "CONNACK";
+		"Control Packets" -> "PUBLISH";
+		"Control Packets" -> "PUBACK";
+		"Control Packets" -> "UNSUBSCRIBE";
+		"Control Packets" -> "UNSUBACK";
+		"Control Packets" -> "SUBSCRIBE";
+		"Control Packets" -> "SUBACK";
+		"Control Packets" -> "PINREQ";
+		"Control Packets" -> "PINGRESP";
+	}
+
+	subgraph cluster_opbehavior {
+		label="Operational Behavior";
+		"Storing State";
+		"Network Connections";
+		"QoS";
+		"Message Delivery Retry";
+		"Message Receipt";
+		"Message Ordering";
+		"Topic Names and Filters";
+		"Handling Errors";
+	}
+
+	subgraph cluster_nettransport {
+		label="Network Transport";
+		// TODO.
+	}
+
+	// Connect the containers.
+	"Operational Behavior" -> "Message Receipt" [ltail=cluster_components lhead=cluster_opbehavior];
+	"Security" -> "SSL/TLS" [ltail=cluster_components lhead=cluster_security];
 }
