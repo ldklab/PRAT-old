@@ -28,8 +28,10 @@ digraph G {
 	subgraph cluster_security {
 		label="Security";
 		"Authentication" -> "User Credentials";
+		"Authentication" -> "SSH";
 		"Encryption" -> "SSL/TLS" -> "TLS/PSK";
 		"Encryption" -> "Message Encryption";
+		"Encryption" -> "SSH";
 	}
 
 	// All the control packets.
@@ -59,7 +61,9 @@ digraph G {
 	subgraph cluster_opbehavior {
 		label="Operational Behavior";
 		"Persistent Session"
-		"Network Connections";
+		"Network Connections" -> "TCP/IP";
+		"Network Connections" -> "WebSockets" -> "WebSocket Support";
+		"Network Connections" -> "TLS";
 		"qos" -> "QoS";
 		"QoS" -> "At most once";
 		"QoS" -> "At least once";
@@ -67,14 +71,19 @@ digraph G {
 		"Message Delivery Retry";
 		"Message Receipt";
 		"Message Ordering";
-		"Topic Names and Filters";
-		"Handling Errors";
 		"Retain Messages";
+
+		// Required opbehavior subgraph.
+		subgraph cluster_op_req {
+			label="Required";
+			"Topic Names and Filters";
+			"Handling Errors";
+		}
 	}
 
 	subgraph cluster_nettransport {
 		label="Network Transport";
-		"SOCKS Proxy";
+		"SOCKS Proxy" -> "SSH";
 		"WebSocket Support";
 	}
 
@@ -86,9 +95,16 @@ digraph G {
 		"Mobile communication";
 	}
 
+	subgraph cluster_conformance {
+		label="Conformance Targets";
+		"MQTT Server";
+		"MQTT Client";
+	}
+
 	// Other dependencies.
 	"CONNACK" -> "session present" -> "Persistent Session";
 	"PUBLISH" -> "retained" -> "Retain Messages";
+	"Authentication" -> "SOCKS Proxy";
 
 	// Connect the containers.
 	"Operational Behavior" -> "Message Ordering" [lhead=cluster_opbehavior];
@@ -96,4 +112,9 @@ digraph G {
 	"Security" -> "Authentication" [lhead=cluster_security];
 	"Network Transport" -> "SOCKS Proxy" [lhead=cluster_nettransport];
 	"WebSocket Support" -> "Push notifications" [lhead=cluster_ws];
+	"Conformance Targets" -> "MQTT Server" [lhead=cluster_conformance];
+	"MQTT Server" -> "UNSUBSCRIBE" [lhead=cluster_packets];
+	"MQTT Server" -> "Handling Errors" [lhead=cluster_op_req];
+	"MQTT Client" -> "UNSUBSCRIBE" [lhead=cluster_packets];
+	"MQTT Client" -> "Handling Errors" [lhead=cluster_op_req];
 }

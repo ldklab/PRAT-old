@@ -23,7 +23,8 @@ mvn package
 
 # Get dependencies for angr.
 apt-get install python3-dev libffi-dev build-essential virtualenvwrapper
-pip3 install -q h5py pyyaml tensorflow nltk spacy
+pip3 install -U -q h5py pyyaml tensorflow nltk spacy
+pip3 install -U networkx
 python -m spacy download en_core_web_sm
 # pip install prodigy.wh1
 
