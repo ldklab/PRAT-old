@@ -27,9 +27,9 @@ digraph G {
 
 	subgraph cluster_security {
 		label="Security";
-		"SSL/TLS" -> "TLS/PSK";
-		"Authentication";
-		"Encryption"
+		"Authentication" -> "User Credentials";
+		"Encryption" -> "SSL/TLS" -> "TLS/PSK";
+		"Encryption" -> "Message Encryption";
 	}
 
 	// All the control packets.
@@ -52,14 +52,15 @@ digraph G {
 		label="Packet Flags";
 		"session present";
 		"retained";
+		"PUBLISH" -> "qos";
+		"PUBACK" -> "qos";
 	}
 
 	subgraph cluster_opbehavior {
 		label="Operational Behavior";
 		"Persistent Session"
 		"Network Connections";
-		"PUBLISH" -> "QoS";
-		"PUBACK" -> "QoS";
+		"qos" -> "QoS";
 		"QoS" -> "At most once";
 		"QoS" -> "At least once";
 		"QoS" -> "Exactly once";
@@ -90,9 +91,9 @@ digraph G {
 	"PUBLISH" -> "retained" -> "Retain Messages";
 
 	// Connect the containers.
-	"Operational Behavior" -> "QoS" [lhead=cluster_opbehavior];
+	"Operational Behavior" -> "Message Ordering" [lhead=cluster_opbehavior];
 	"Control Packets" -> "PUBLISH" [lhead=cluster_packets];
-	"Security" -> "SSL/TLS" [lhead=cluster_security];
+	"Security" -> "Authentication" [lhead=cluster_security];
 	"Network Transport" -> "SOCKS Proxy" [lhead=cluster_nettransport];
 	"WebSocket Support" -> "Push notifications" [lhead=cluster_ws];
 }
