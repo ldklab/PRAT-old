@@ -58,12 +58,20 @@ digraph G {
 		"PUBACK" -> "qos";
 	}
 
+	subgraph cluster_nettransport {
+		label="Network Transport";
+		"SOCKS Proxy" -> "SSH";
+		"WebSocket Support";
+		"TCP/IP";
+		"WebSockets";
+	}
+
 	subgraph cluster_opbehavior {
 		label="Operational Behavior";
 		"Persistent Session"
 		"Network Connections" -> "TCP/IP";
 		"Network Connections" -> "WebSockets" -> "WebSocket Support";
-		"Network Connections" -> "TLS";
+		"Network Connections" -> "SSL/TLS";
 		"qos" -> "QoS";
 		"QoS" -> "At most once";
 		"QoS" -> "At least once";
@@ -79,12 +87,6 @@ digraph G {
 			"Topic Names and Filters";
 			"Handling Errors";
 		}
-	}
-
-	subgraph cluster_nettransport {
-		label="Network Transport";
-		"SOCKS Proxy" -> "SSH";
-		"WebSocket Support";
 	}
 
 	subgraph cluster_ws {
@@ -114,7 +116,7 @@ digraph G {
 	"WebSocket Support" -> "Push notifications" [lhead=cluster_ws];
 	"Conformance Targets" -> "MQTT Server" [lhead=cluster_conformance];
 	"MQTT Server" -> "UNSUBSCRIBE" [lhead=cluster_packets];
-	"MQTT Server" -> "Handling Errors" [lhead=cluster_op_req];
+	"MQTT Server" -> "Topic Names and Filters" [lhead=cluster_op_req];
 	"MQTT Client" -> "UNSUBSCRIBE" [lhead=cluster_packets];
 	"MQTT Client" -> "Handling Errors" [lhead=cluster_op_req];
 }
