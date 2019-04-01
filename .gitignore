@@ -6,3 +6,5 @@ build
 workspace.xml
 *.pickle
 [mM]odels
+[bB]in
+data
