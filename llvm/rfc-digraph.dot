@@ -11,20 +11,6 @@ digraph G {
 		"Conformance Targets"; // Maybe.
 	}
 
-	// I think this cluster will go away after I fill in the rest.
-	subgraph cluster_features {
-		label="MQTT Features";
-		//"Security" -> "SSL/TLS" -> "TLS/PSK";
-		//"Network Transport" -> "Websocket Support";
-		//"Network Transport" -> "SOCKS Proxy";
-		//"Client Threading";
-		//"Persistent DB Support";
-		//"systemd Support";
-		//"Operational Behavior" -> "TODO";
-		//"Conformance Targets";
-		//"Control Packets";
-	}
-
 	subgraph cluster_security {
 		label="Security";
 		"Authentication" -> "User Credentials";
@@ -50,6 +36,8 @@ digraph G {
 		"PINGRESP";
 	}
 
+	// We won't need this in the final graph.
+	// Flags don't have logical behavior behind them.
 	subgraph cluster_flags {
 		label="Packet Flags";
 		"session present";

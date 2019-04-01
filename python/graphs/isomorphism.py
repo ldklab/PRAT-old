@@ -6,6 +6,8 @@ import networkx as nx
 G = nx.Graph()
 H = nx.Graph()
 
+#T = nx.read_dot('../llvm/rfc-diagram.dot')
+
 G.add_edges_from([(1,2), (1,3)])
 G.add_node(1)
 G.add_edge(1, 2)
