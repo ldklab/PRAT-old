@@ -4,8 +4,9 @@ DATA_DIR=../data
 BIN_DIR=../bin
 SRC_DIR=../src
 
-TEXT_DATA=$DATA_DIR/rfc793_processed
-VECTOR_DATA=$DATA_DIR/rfc793-vector.bin
+# Make this a cmd line arg later.
+TEXT_DATA=$DATA_DIR/merged-rfc-1000
+VECTOR_DATA=$DATA_DIR/merged-rfc-1000-vector.bin
 
 if [ ! -e $VECTOR_DATA ]; then
   if [ ! -e $TEXT_DATA ]; then
