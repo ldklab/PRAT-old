@@ -9,6 +9,7 @@ clean:
 	rm -f $(DATA_DIR)/news.2012.en.shuffled-norm0
 	rm -f $(DATA_DIR)/news.2012.en.shuffled-norm0-phrase1
 	rm -f $(DATA_DIR)/news.2012.en.shuffled-norm1-phrase1
+	rm -f $(BIN_DIR)/*
 
 veryclean: clean
 	rm -f $(DATA_DIR)/news.2012.en.shuffled
