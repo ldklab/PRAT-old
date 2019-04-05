@@ -16,5 +16,6 @@ if [ ! -e $VECTOR_DATA ]; then
 	fi
   echo -----------------------------------------------------------------------------------------------------
   echo -- Training vectors...
+  # Default size is 100. 200 caused RAM issues on laptop.
   time $BIN_DIR/word2vec -train $TEXT_DATA -output $VECTOR_DATA -cbow 1 -size 200 -window 8 -negative 25 -hs 0 -sample 1e-4 -threads 20 -binary 1 -iter 15
 fi
