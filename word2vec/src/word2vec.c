@@ -352,14 +352,18 @@ void InitNet() {
   a = posix_memalign((void **)&syn0, 128, (long long)vocab_size * layer1_size * sizeof(real));
 #endif
 
-  if (syn0 == NULL) {printf("Memory allocation failed\n"); exit(1);}
+  if (syn0 == NULL) {
+    printf("Memory allocation failed @ syn0\n");
+    printf("syn0 needed %ld bytes\n", (long long)vocab_size * layer1_size * sizeof(real), 128);
+    exit(1);
+  }
   if (hs) {
 #ifdef _MSC_VER
 	  syn1 = _aligned_malloc((long long)vocab_size * layer1_size * sizeof(real), 128);
 #elif defined  linux
 	  a = posix_memalign((void **)&syn1, 128, (long long)vocab_size * layer1_size * sizeof(real));
 #endif    
-    if (syn1 == NULL) {printf("Memory allocation failed\n"); exit(1);}
+    if (syn1 == NULL) {printf("Memory allocation failed @ syn1\n"); exit(1);}
     for (a = 0; a < vocab_size; a++) for (b = 0; b < layer1_size; b++)
      syn1[a * layer1_size + b] = 0;
   }
