@@ -354,7 +354,7 @@ void InitNet() {
 
   if (syn0 == NULL) {
     printf("Memory allocation failed @ syn0\n");
-    printf("syn0 needed %ld bytes\n", (long long)vocab_size * layer1_size * sizeof(real), 128);
+    printf("syn0 needed %lld MB\n", (long long)vocab_size * layer1_size * sizeof(real), 128);
     exit(1);
   }
   if (hs) {
