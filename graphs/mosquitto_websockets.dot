@@ -5,6 +5,7 @@ digraph G {
 	subgraph cluster_components {
 		label="MQTT Components";
 		"WebSocket Support";
+		"Bridge Support";
 	}
 
 	subgraph cluster_ws {
