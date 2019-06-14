@@ -15,13 +15,16 @@ That corresponds to never being called.
 open (FILE, $ARGV[0]) || die "Error: $!\n";
 my @lines = <FILE>;
 
-print scalar @lines;
-print "\n---------------\n";
+#print scalar @lines;
+print "Lines to remove from ";
+print colored(['bright_red on_black'], "net.c");
+print "\n------------------\n";
 
-# Add regex here to identify '#####'.
+# Look for '#####'.
 foreach my $line (@lines) {
-	print "$line";
+	print colored(['green bold'], "$line") if $line =~ /#{5}/;
 }
+print "------------------\n";
 
 close(FILE);
 
