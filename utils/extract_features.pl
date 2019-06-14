@@ -12,20 +12,31 @@ That corresponds to never being called.
 '-:' corresponds to no code (comments, unreachable, etc.).
 =cut
 
-open (FILE, $ARGV[0]) || die "Error: $!\n";
-my @lines = <FILE>;
+die "Usage: $0 FILE\n" if @ARGV < 1;
 
-#print scalar @lines;
-print "Lines to remove from ";
-print colored(['bright_red on_black'], "$ARGV[0]");
-print "\n------------------\n";
+my $diff_file = $ARGV[0];
 
-# Look for '#####'.
-foreach my $line (@lines) {
-	print colored(['green bold'], "$line") if $line =~ /#{5}/;
+if ($diff_file) {
+	print "Loading: $diff_file\n";
+	parse_file();
 }
-print "------------------\n";
 
-close(FILE);
+sub parse_file {
+	open (FILE, $diff_file) || die "Error: $!\n";
+	my @lines = <FILE>;
+
+	#print scalar @lines;
+	print "Lines to remove from ";
+	print colored(['bright_red on_black'], "$diff_file");
+	print "\n------------------\n";
+
+	# Look for '#####'.
+	foreach my $line (@lines) {
+		print colored(['green bold'], "$line") if $line =~ /#{5}/;
+	}
+	print "------------------\n";
+
+	close(FILE);
+}
 
 exit 1;
