@@ -17,7 +17,7 @@ my @lines = <FILE>;
 
 #print scalar @lines;
 print "Lines to remove from ";
-print colored(['bright_red on_black'], "net.c");
+print colored(['bright_red on_black'], "$ARGV[0]");
 print "\n------------------\n";
 
 # Look for '#####'.
