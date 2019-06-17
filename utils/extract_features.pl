@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+use File::Find;
 use Term::ANSIColor;
 
 =pod
@@ -15,6 +16,15 @@ That corresponds to never being called.
 die "Usage: $0 FILE\n" if @ARGV < 1;
 
 my $diff_file = $ARGV[0];
+my @content;
+
+find(\&wanted, '.');
+
+=pod
+foreach my $temp (@content) {
+	print $temp . "\n";
+}
+=cut
 
 if ($diff_file) {
 	print "Loading: $diff_file\n";
@@ -37,6 +47,11 @@ sub parse_file {
 	print "------------------\n";
 
 	close(FILE);
+}
+
+sub wanted {
+	push @content, $File::Find::name;
+	return;
 }
 
 exit 1;
