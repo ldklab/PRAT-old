@@ -7,7 +7,10 @@ makeCovFiles() {
 	echo "Building project with llvm-gcov..."
 	make
 	echo "Generating gcov files..."
-	./mosquitto
+	./mosquitto &
+	last_pid=$!
+	sleep 5s
+	kill -KILL $last_pid
 	gcov *.c
 	make clean
 }
