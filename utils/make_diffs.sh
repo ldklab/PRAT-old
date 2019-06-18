@@ -7,8 +7,8 @@ set -o errexit -o pipefail -o noclobber -o nounset
 
 # Option strings.
 # TODO: add option for feature to toggle.
-SHORT=d:
-LONG=dir:
+SHORT=d:f:
+LONG=dir:feat:
 
 # Read args.
 OPTS=$(getopt --options $SHORT --long $LONG --name "$0" -- "$@")
@@ -19,16 +19,19 @@ eval set -- "$OPTS"
 
 # Initial values.
 DIR="."
+FEAT="feat_not_specified"
 
 while true; do
 	case "$1" in
 		#-h | --help ) usage ;;
 		-d | --dir ) DIR="$2"; shift 2 ;;
+		-f | --feat ) FEAT="$2"; shift 2 ;;
 		-- ) shift; break ;;
 		* ) break ;;
 	esac
 done
 
+# This is for each fo the feature compilations. 
 makeCovFiles() {
 	echo "Building project with llvm-gcov..."
 	make || exit 1
@@ -38,9 +41,16 @@ makeCovFiles() {
 	sleep 5s
 	kill -KILL $last_pid
 	gcov *.c || exit 1
-	mkdir -p coverage_files
-	mv *.c.gcov coverage_files/
+	mkdir -p "coverage_files_$FEAT"
+	mv *.c.gcov "coverage_files_$FEAT"
 	make clean
+}
+
+# After running makeCovFiles twice (one for with and w/o feature)
+# Check for files in coverage_files/ that match then diff them.
+makeDiffs() {
+	echo "TODO"
+	exit 1
 }
 
 usage() {
