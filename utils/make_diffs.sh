@@ -6,6 +6,7 @@ set -o errexit -o pipefail -o noclobber -o nounset
 # with and without feature enabled.
 
 # Option strings.
+# TODO: add option for feature to toggle.
 SHORT=d:
 LONG=dir:
 
@@ -27,8 +28,6 @@ while true; do
 		* ) break ;;
 	esac
 done
-
-echo DIR=$DIR
 
 makeCovFiles() {
 	echo "Building project with llvm-gcov..."
