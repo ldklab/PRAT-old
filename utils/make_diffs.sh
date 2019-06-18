@@ -33,7 +33,7 @@ makeCovFiles() {
 	echo "Building project with llvm-gcov..."
 	make || exit 1
 	echo "Generating gcov files..."
-	./mosquitto &
+	./mosquitto & # Later this will invoke some comprehensive tests.
 	last_pid=$!
 	sleep 5s
 	kill -KILL $last_pid
