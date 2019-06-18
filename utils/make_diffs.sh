@@ -5,6 +5,12 @@ set -o errexit -o pipefail -o noclobber -o nounset
 # Script to run gcov over C files and diff them
 # with and without feature enabled.
 
+# Some shortcuts for printf colorization.
+RED='\033[0;31m'
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
 # Option strings.
 # TODO: add option for feature to toggle.
 SHORT=d:f:
@@ -37,10 +43,10 @@ done
 # This is for each fo the feature compilations. 
 makeCovFiles() {
 	flag=$1
-	echo "Building project with ${FEAT^^}=$flag"
+	printf "Building project with ${CYAN} ${FEAT^^}=$flag${NC}\n"
 	# Make the binary without the feature.
 	make WITH_${FEAT^^}=$flag || exit 1
-	echo "Generating gcov files..."
+	printf "${GREEN} Generating gcov files...${NC}\n"
 	./mosquitto & # Later this will invoke some comprehensive tests.
 	last_pid=$!
 	sleep 5s
