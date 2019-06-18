@@ -7,6 +7,7 @@ digraph G {
 		"WebSocket Support";
 		"Bridge Support";
 		"With Wrap";
+		"..."
 	}
 
 	subgraph cluster_wrap {
@@ -40,5 +41,6 @@ int deny_severity = LOG_INFO;";
 	"With Wrap" -> "net.c" [lhead=cluster_wrap];
 	"Bridge Support" -> "Other graph";
 	"WebSocket Support" -> "Other graph";
+	"..." -> "Other graph";
 
 }
