@@ -33,16 +33,18 @@ done
 
 # This is for each fo the feature compilations. 
 makeCovFiles() {
-	echo "Building project with llvm-gcov..."
-	make || exit 1
+	flag=$1
+	echo "Building project with $FEAT=$flag"
+	# Make the binary without the feature.
+	make WITH_$FEAT=$flag || exit 1
 	echo "Generating gcov files..."
 	./mosquitto & # Later this will invoke some comprehensive tests.
 	last_pid=$!
 	sleep 5s
 	kill -KILL $last_pid
 	gcov *.c || exit 1
-	mkdir -p "coverage_files_$FEAT"
-	mv *.c.gcov "coverage_files_$FEAT"
+	mkdir -p "coverage_files_$FEAT$flag"
+	mv *.c.gcov "coverage_files_$FEAT$flag"
 	make clean
 }
 
@@ -65,7 +67,7 @@ usage() {
 if [[ $DIR =~ "src" ]]
 then
 	# Run this guy in a subshell @ DIR.
-	(cd $DIR; makeCovFiles)
+	(cd $DIR; makeCovFiles yes && makeCovFiles no)
 else
 	echo "Can't run in this directory. Exiting."
 	exit 1
