@@ -17,9 +17,12 @@ if [ $? != 0 ] ; then echo "Failed to parse options. Exiting." >&2 ; exit 1 ; fi
 
 eval set -- "$OPTS"
 
+# Populate a list of features using some NLP technique later.
+feat_arr=(TLS THREADING BRIDGE PERSISTENCE MEMORY_TRACKING SYS_TREE SYSTEMD SRV UUID WEBSOCKETS)
+
 # Initial values.
 DIR="."
-FEAT="feat_not_specified"
+FEAT=""
 
 while true; do
 	case "$1" in
@@ -34,17 +37,17 @@ done
 # This is for each fo the feature compilations. 
 makeCovFiles() {
 	flag=$1
-	echo "Building project with $FEAT=$flag"
+	echo "Building project with ${FEAT^^}=$flag"
 	# Make the binary without the feature.
-	make WITH_$FEAT=$flag || exit 1
+	make WITH_${FEAT^^}=$flag || exit 1
 	echo "Generating gcov files..."
 	./mosquitto & # Later this will invoke some comprehensive tests.
 	last_pid=$!
 	sleep 5s
 	kill -KILL $last_pid
 	gcov *.c || exit 1
-	mkdir -p "coverage_files_$FEAT$flag"
-	mv *.c.gcov "coverage_files_$FEAT$flag"
+	mkdir -p "coverage_files_${FEAT^^}$flag"
+	mv *.c.gcov "coverage_files_${FEAT^^}$flag"
 	make clean
 }
 
