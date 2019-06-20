@@ -12,7 +12,6 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 # Option strings.
-# TODO: add option for feature to toggle.
 SHORT=d:f:
 LONG=dir:feat:
 
@@ -28,6 +27,7 @@ feat_arr=(TLS THREADING BRIDGE PERSISTENCE MEMORY_TRACKING SYS_TREE SYSTEMD SRV 
 
 # Initial values.
 DIR="."
+WORKDIR=$PWD
 FEAT=""
 
 while true; do
@@ -54,14 +54,31 @@ makeCovFiles() {
 	gcov *.c || exit 1
 	mkdir -p "coverage_files_${FEAT^^}$flag"
 	mv *.c.gcov "coverage_files_${FEAT^^}$flag"
+	mv "coverage_files_${FEAT^^}$flag" $WORKDIR
 	make clean
 }
 
 # After running makeCovFiles twice (one for with and w/o feature)
 # Check for files in coverage_files/ that match then diff them.
-makeDiffs() {
-	echo "TODO"
+findMatches() {
+	dir1="./coverage_files_${FEAT^^}yes"
+	dir2="./coverage_files_${FEAT^^}no"
+	# Find files that are in BOTH dirs.
+	files=$(find "$dir1/" "$dir2/" -printf '%P\n' | sort | uniq -d)
+	for f in $files
+	do
+		makeDiffs "$f"
+	done
 	exit 1
+}
+
+# Create the diffs of pertinent *.gcov files.
+makeDiffs() {
+	mkdir -p "diff_$FEAT"
+	target=$1
+	printf "Generating diff for ${CYAN} $target${NC}...\n"
+	diff "./coverage_files_${FEAT^^}yes/$target" "./coverage_files_${FEAT^^}no/$target" > "diff_$FEAT/$target" &
+	return
 }
 
 usage() {
@@ -76,7 +93,7 @@ usage() {
 if [[ $DIR =~ "src" ]]
 then
 	# Run this guy in a subshell @ DIR.
-	(cd $DIR; makeCovFiles yes && makeCovFiles no)
+	(cd $DIR; makeCovFiles yes && makeCovFiles no; cd -; findMatches)
 else
 	echo "Can't run in this directory. Exiting."
 	exit 1
