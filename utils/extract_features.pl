@@ -13,9 +13,9 @@ That corresponds to never being called.
 '-:' corresponds to no code (comments, unreachable, etc.).
 =cut
 
-die "Usage: $0 FILE\n" if @ARGV < 1;
+die "Usage: $0 DIR\n" if @ARGV < 1;
 
-my $diff_file = $ARGV[0];
+my $diff_dir = $ARGV[0];
 my @content;
 
 find(\&wanted, '.');
@@ -26,27 +26,32 @@ foreach my $temp (@content) {
 }
 =cut
 
-if ($diff_file) {
-	print "Loading: $diff_file\n";
+if ($diff_dir) {
+	#print "Loading: $diff_dir\n";
 	parse_file();
 }
 
 sub parse_file {
-	open (FILE, $diff_file) || die "Error: $!\n";
-	my @lines = <FILE>;
+	my @files = <$diff_dir/*>;
 
-	#print scalar @lines;
-	print "Lines to remove from ";
-	print colored(['bright_red on_black'], "$diff_file");
-	print "\n------------------\n";
+	foreach my $file (@files) {
+		#print $file . "\n";
+		open (FILE, $file) || die "Error: $!\n";
+		my @lines = <FILE>;
 
-	# Look for '#####'.
-	foreach my $line (@lines) {
-		print colored(['green bold'], "$line") if $line =~ /#{5}/;
+		#print scalar @lines;
+		print "Lines to remove from ";
+		print colored(['bright_red on_black'], "$file");
+		print "\n------------------\n";
+
+		# Look for '#####'.
+		foreach my $line (@lines) {
+			print colored(['green bold'], "$line") if $line =~ /#{5}/;
+		}
+		print "------------------\n";
+
+		close(FILE);
 	}
-	print "------------------\n";
-
-	close(FILE);
 }
 
 sub wanted {
