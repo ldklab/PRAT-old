@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -o errexit -o pipefail -o noclobber -o nounset
+trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 
 # Script to run gcov over C files and diff them
 # with and without feature enabled.
@@ -45,17 +46,38 @@ makeCovFiles() {
 	flag=$1
 	printf "Building project with ${CYAN} ${FEAT^^}=$flag${NC}\n"
 	# Make the binary without the feature.
-	make WITH_${FEAT^^}=$flag || exit 1
+	make binary WITH_${FEAT^^}=$flag || exit 1
+	reslove_deps # Do this here because we need the shared lib.
+	./src/mosquitto -p 1337 &
+	broker_pid=$!
+	# Later this will invoke some comprehensive tests.
 	printf "${GREEN} Generating gcov files...${NC}\n"
-	./mosquitto & # Later this will invoke some comprehensive tests.
-	last_pid=$!
+	#mosquitto_tests
 	sleep 5s
-	kill -KILL $last_pid
-	gcov *.c || exit 1
+	#kill -KILL $broker_pid
+	(cd src; gcov *.c; cd -)
 	mkdir -p "coverage_files_${FEAT^^}$flag"
-	mv *.c.gcov "coverage_files_${FEAT^^}$flag"
+	mv src/*.gcov "coverage_files_${FEAT^^}$flag"
 	mv "coverage_files_${FEAT^^}$flag" $WORKDIR
 	make clean
+}
+
+reslove_deps() {
+	if [[ ! -f "/etc/ld.so.conf.d/local.conf" ]]
+	then
+		sudo cp "./lib/libmosquitto.so.1" "/usr/local/lib"
+		sudo echo "/usr/local/lib" > "/etc/ld.so.conf.d/local.conf"
+	else
+		printf "${GREEN} /etc/ld.so.conf.d/local.conf ${NC} already exists. Skipping.\n"
+	fi
+}
+
+mosquitto_tests() {
+	# Broker is running; spawn clients
+	# and run some tests.
+	./client/mosquitto_sub -t 'test/topic1' -v &
+	./client/mosquitto_pub -t 'test/topic1' -m 'hello, world'
+	#exit 1
 }
 
 # After running makeCovFiles twice (one for with and w/o feature)
@@ -90,7 +112,7 @@ usage() {
 }
 
 # I'll remove/fix later.
-if [[ $DIR =~ "src" ]]
+if [[ $DIR =~ "mosquitto-debloat" ]]
 then
 	# Run this guy in a subshell @ DIR.
 	(cd $DIR; makeCovFiles yes && makeCovFiles no; cd -; findMatches)
