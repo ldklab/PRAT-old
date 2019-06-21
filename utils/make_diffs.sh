@@ -55,8 +55,9 @@ makeCovFiles() {
 	printf "${GREEN} Generating gcov files...${NC}\n"
 	#mosquitto_tests
 	sleep 5s
-	#kill -KILL $broker_pid
-	(cd src; gcov *.c; cd -)
+	printf "Stopping broker @ ${RED}$broker_pid${NC}...\n"
+	kill -KILL $broker_pid
+	(cd src; gcov *; cd -)
 	mkdir -p "coverage_files_${FEAT^^}$flag"
 	mv src/*.gcov "coverage_files_${FEAT^^}$flag"
 	mv "coverage_files_${FEAT^^}$flag" $WORKDIR
