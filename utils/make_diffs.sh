@@ -41,14 +41,14 @@ while true; do
 	esac
 done
 
-# This is for each fo the feature compilations. 
+# This is for each of the feature compilations. 
 makeCovFiles() {
 	flag=$1
 	printf "Building project with ${CYAN} ${FEAT^^}=$flag${NC}\n"
 	printf "Running::${CYAN} make binary WITH_${FEAT^^}=$flag${NC}\n"
 	# Make the binary without the feature.
 	make binary WITH_${FEAT^^}=$flag || exit 1
-	resloveDeps # Do this here because we need the shared lib.
+	resloveDeps || exit 1 # Do this here because we need the shared lib.
 	./src/mosquitto &
 	broker_pid=$!
 	# Later this will invoke some comprehensive tests.
@@ -79,6 +79,7 @@ resloveDeps() {
 	if [[ ! -f "/etc/ld.so.conf.d/local.conf" ]]
 	then
 		sudo echo "/usr/local/lib" > "/etc/ld.so.conf.d/local.conf"
+		sudo /sbin/ldconfig
 	else
 		printf "${GREEN} /etc/ld.so.conf.d/local.conf ${NC} already exists. Skipping.\n"
 	fi
@@ -143,3 +144,4 @@ else
 	printf "${RED} Can't run in ${DIR} or ${FEAT^^} does not exist. Exiting.${NC}\n"
 	exit 1
 fi
+
