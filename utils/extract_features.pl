@@ -17,6 +17,7 @@ die "Usage: $0 DIR\n" if @ARGV < 1;
 
 my $diff_dir = $ARGV[0];
 my @content;
+my $line_count = 0;
 
 find(\&wanted, '.');
 
@@ -40,12 +41,16 @@ sub parse_file {
 
 		# Look for '#####'.
 		foreach my $line (@lines) {
-			print colored(['green bold'], "$line") if $line =~ /#{5}/;
+			if ($line =~ /#{5}/) {
+				print colored(['bright_cyan'], "$line");
+				$line_count++;
+			}
 		}
 		print "------------------\n";
 
 		close(FILE);
 	}
+	print colored(['bright_green bold'], "Total lines to remove: " . $line_count . "\n");
 }
 
 sub wanted {

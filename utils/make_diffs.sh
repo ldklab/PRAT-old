@@ -49,11 +49,11 @@ makeCovFiles() {
 	# Make the binary without the feature.
 	make binary WITH_${FEAT^^}=$flag || exit 1
 	resloveDeps # Do this here because we need the shared lib.
-	./src/mosquitto -p 1337 &
+	./src/mosquitto &
 	broker_pid=$!
 	# Later this will invoke some comprehensive tests.
 	printf "${GREEN} Generating gcov files...${NC}\n"
-	#mosquittoTests
+	mosquittoTests || exit 1
 	sleep 5s
 	printf "Stopping broker @ ${RED}$broker_pid${NC}...\n"
 	kill -KILL $broker_pid
@@ -66,9 +66,18 @@ makeCovFiles() {
 }
 
 resloveDeps() {
+	if [[ ! -f "/usr/local/lib/libmosquitto.so.1" ]]
+	then
+		printf "${RED}libmosquitto.so.1 does not exist. Creating...${NC}\n"
+		sudo cp "./lib/libmosquitto.so.1" "/usr/local/lib"
+		sudo /sbin/ldconfig
+	else
+		printf "${GREEN} /usr/local/lib/libmosquitto.so.1 ${NC} already exists. Skipping.\n"
+	fi
+
+	# Conf test.
 	if [[ ! -f "/etc/ld.so.conf.d/local.conf" ]]
 	then
-		sudo cp "./lib/libmosquitto.so.1" "/usr/local/lib"
 		sudo echo "/usr/local/lib" > "/etc/ld.so.conf.d/local.conf"
 	else
 		printf "${GREEN} /etc/ld.so.conf.d/local.conf ${NC} already exists. Skipping.\n"
@@ -101,7 +110,7 @@ findMatches() {
 makeDiffs() {
 	mkdir -p "diff_$FEAT"
 	target=$1
-	printf "Generating diff for ${CYAN} $target${NC}...\n"
+	printf "Generating diff for ${CYAN} $target...${NC}\n"
 	diff "./coverage_files_${FEAT^^}yes/$target" "./coverage_files_${FEAT^^}no/$target" > "diff_$FEAT/$target" &
 	return
 }
