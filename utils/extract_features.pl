@@ -20,12 +20,6 @@ my @content;
 
 find(\&wanted, '.');
 
-=pod
-foreach my $temp (@content) {
-	print $temp . "\n";
-}
-=cut
-
 if ($diff_dir) {
 	#print "Loading: $diff_dir\n";
 	parse_file();

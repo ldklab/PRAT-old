@@ -24,7 +24,7 @@ if [ $? != 0 ] ; then echo "Failed to parse options. Exiting." >&2 ; exit 1 ; fi
 eval set -- "$OPTS"
 
 # Populate a list of features using some NLP technique later.
-feat_arr=(TLS THREADING BRIDGE PERSISTENCE MEMORY_TRACKING SYS_TREE SYSTEMD SRV UUID WEBSOCKETS)
+featArr=("TLS" "THREADING" "BRIDGE" "PERSISTENCE" "MEMORY_TRACKING" "SYS_TREE" "SYSTEMD" "SRV" "UUID" "WEBSOCKETS")
 
 # Initial values.
 DIR="."
@@ -48,12 +48,12 @@ makeCovFiles() {
 	printf "Running::${CYAN} make binary WITH_${FEAT^^}=$flag${NC}\n"
 	# Make the binary without the feature.
 	make binary WITH_${FEAT^^}=$flag || exit 1
-	reslove_deps # Do this here because we need the shared lib.
+	resloveDeps # Do this here because we need the shared lib.
 	./src/mosquitto -p 1337 &
 	broker_pid=$!
 	# Later this will invoke some comprehensive tests.
 	printf "${GREEN} Generating gcov files...${NC}\n"
-	#mosquitto_tests
+	#mosquittoTests
 	sleep 5s
 	printf "Stopping broker @ ${RED}$broker_pid${NC}...\n"
 	kill -KILL $broker_pid
@@ -65,7 +65,7 @@ makeCovFiles() {
 	make clean
 }
 
-reslove_deps() {
+resloveDeps() {
 	if [[ ! -f "/etc/ld.so.conf.d/local.conf" ]]
 	then
 		sudo cp "./lib/libmosquitto.so.1" "/usr/local/lib"
@@ -75,7 +75,7 @@ reslove_deps() {
 	fi
 }
 
-mosquitto_tests() {
+mosquittoTests() {
 	# Broker is running; spawn clients
 	# and run some tests.
 	./client/mosquitto_sub -t 'test/topic1' -v &
@@ -94,7 +94,7 @@ findMatches() {
 	do
 		makeDiffs "$f"
 	done
-	exit 1
+	exit 0
 }
 
 # Create the diffs of pertinent *.gcov files.
@@ -106,6 +106,14 @@ makeDiffs() {
 	return
 }
 
+# Simple function to check if element is in array.
+containsElement() {
+	local e match="$1"
+	shift
+	for e; do [[ "$e" == "$match" ]] && return 0; done
+	return 1
+}
+
 usage() {
 	echo "Usage $0 -d|--dir [source dir]"
 	echo ""
@@ -114,12 +122,15 @@ usage() {
 	exit 1
 }
 
+# Check if feature was correct first.
+#if containsElement "${FEAT^^}" "${featArr[@]}"; then echo "asdfasdf"; fi
+
 # I'll remove/fix later.
-if [[ $DIR =~ "mosquitto-debloat" ]]
+if [[ $DIR =~ "mosquitto-debloat" ]] && containsElement "${FEAT^^}" "${featArr[@]}"
 then
 	# Run this guy in a subshell @ DIR.
 	(cd $DIR; makeCovFiles yes && makeCovFiles no; cd -; findMatches)
 else
-	printf "${RED} Can't run in ${PWD}. Exiting.${NC}\n"
+	printf "${RED} Can't run in ${DIR} or ${FEAT^^} does not exist. Exiting.${NC}\n"
 	exit 1
 fi
