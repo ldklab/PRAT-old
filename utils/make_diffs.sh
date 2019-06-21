@@ -45,6 +45,7 @@ done
 makeCovFiles() {
 	flag=$1
 	printf "Building project with ${CYAN} ${FEAT^^}=$flag${NC}\n"
+	printf "Running::${CYAN} make binary WITH_${FEAT^^}=$flag${NC}\n"
 	# Make the binary without the feature.
 	make binary WITH_${FEAT^^}=$flag || exit 1
 	reslove_deps # Do this here because we need the shared lib.
@@ -59,6 +60,7 @@ makeCovFiles() {
 	mkdir -p "coverage_files_${FEAT^^}$flag"
 	mv src/*.gcov "coverage_files_${FEAT^^}$flag"
 	mv "coverage_files_${FEAT^^}$flag" $WORKDIR
+	printf "Running::${CYAN} make clean${NC}\n"
 	make clean
 }
 
@@ -117,6 +119,6 @@ then
 	# Run this guy in a subshell @ DIR.
 	(cd $DIR; makeCovFiles yes && makeCovFiles no; cd -; findMatches)
 else
-	echo "Can't run in this directory. Exiting."
+	printf "${RED} Can't run in ${PWD}. Exiting.${NC}\n"
 	exit 1
 fi
