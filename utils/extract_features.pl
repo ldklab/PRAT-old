@@ -53,6 +53,17 @@ sub parse_file {
 	print colored(['bright_green bold'], "Total lines to remove: " . $line_count . "\n");
 }
 
+# Check each block of code to be removed and make sure
+# all braces are closed, and for any unused variables.
+# Then check whole source file before recompiling project
+# to check for any errors i nthe whole program.
+sub sanity_check {
+	print "TODO\n";
+	my $cmd = `make`;
+	# Call make command.
+	print $cmd;
+}
+
 sub wanted {
 	push @content, $File::Find::name;
 	return;
