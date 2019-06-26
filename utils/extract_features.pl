@@ -85,4 +85,4 @@ sub wanted {
 	return;
 }
 
-exit 1;
+__END__
