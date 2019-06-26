@@ -28,6 +28,7 @@ if ($diff_dir) {
 
 sub parse_file {
 	my @files = <$diff_dir/*>;
+	my %unused_code;
 
 	foreach my $file (@files) {
 		#print $file . "\n";
@@ -43,6 +44,12 @@ sub parse_file {
 		foreach my $line (@lines) {
 			if ($line =~ /#{5}/) {
 				print colored(['bright_cyan'], "$line");
+
+				# Save off file name + line num.
+				my ($line_num) = $line =~ /(\d+)\:/;
+				my ($file_name) = $file =~ /\/{2}(.*?)\.gcov/;
+				push(@{ $unused_code{$file_name}}, $line_num);
+
 				$line_count++;
 			}
 		}
@@ -51,6 +58,12 @@ sub parse_file {
 		close(FILE);
 	}
 	print colored(['bright_green bold'], "Total lines to remove: " . $line_count . "\n");
+
+	# Print just the file + line numbers to remove.
+	# This will be input to automate removing/recompiling.
+	foreach my $obj (keys %unused_code) {
+		print "\t$obj: @{$unused_code{$obj}}\n";
+	}
 }
 
 # Check each block of code to be removed and make sure
@@ -59,9 +72,12 @@ sub parse_file {
 # to check for any errors i nthe whole program.
 sub sanity_check {
 	print "TODO\n";
-	my $cmd = `make`;
+	my $mk_cmd = `make`;
+	my $cp_cmd = `cp`;
+
 	# Call make command.
-	print $cmd;
+	print $mk_cmd;
+	return;
 }
 
 sub wanted {
