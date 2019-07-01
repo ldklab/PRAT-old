@@ -48,7 +48,7 @@ sub parse_file {
 				# Save off file name + line num.
 				my ($line_num) = $line =~ /(\d+)\:/;
 				my ($file_name) = $file =~ /\/{2}(.*?)\.gcov/;
-				push(@{ $unused_code{$file_name}}, $line_num);
+				push(@{$unused_code{$file_name}}, $line_num);
 
 				$line_count++;
 			}
@@ -62,7 +62,8 @@ sub parse_file {
 	# Print just the file + line numbers to remove.
 	# This will be input to automate removing/recompiling.
 	foreach my $obj (keys %unused_code) {
-		print "\t$obj: @{$unused_code{$obj}}\n";
+		print colored(['bright_cyan'], "\t$obj");
+		print ": @{$unused_code{$obj}}\n";
 	}
 }
 
