@@ -21,6 +21,7 @@ fi
 if [ $OS == "Ubuntu" ]; then
 	# Install all the dependencies required for PRAT.
 	apt-get install -y libssl-dev libwebsockets-dev uuid-dev
+	apt-get install -y libcunit1 libcunit1-doc libcunit1-dev
 elif [ $OS == "Arch Linux" ]; then
 	# Use pacman.
 	# Check actual package names; these aren't set correctly.
