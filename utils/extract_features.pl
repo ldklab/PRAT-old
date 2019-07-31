@@ -65,6 +65,8 @@ sub parse_file {
 		print colored(['bright_cyan'], "\t$obj");
 		print ": @{$unused_code{$obj}}\n";
 	}
+	# Testing.
+	generate_graph();
 }
 
 # Take the data from above to generate the FDG given
@@ -73,8 +75,17 @@ sub parse_file {
 # show the context of the feature.
 sub generate_graph {
 	print "TODO\n";
+	my $filename = 'FDG.dot';
+	open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
 
-	# Implement wrapper for dot generation.
+	my $bp_head = "digraph G {
+	graph [fontsize=10 fontname=\"Verdana\" compound=true];\n";
+	my $bp_foot = "\n}";
+
+	print $fh $bp_head;
+	print $fh "------";
+	print $fh $bp_foot;
+	close $fh;
 
 	return;
 }
