@@ -3,4 +3,4 @@
 all : # TODO.
 
 clean :
-	rm -rf coverage_files* diff_*
+	rm -rf coverage_files* diff_* cov_files_*
