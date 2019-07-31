@@ -67,6 +67,18 @@ sub parse_file {
 	}
 }
 
+# Take the data from above to generate the FDG given
+# the targeted feature. 
+# TODO: generate the FDG for the whole project to 
+# show the context of the feature.
+sub generate_graph {
+	print "TODO\n";
+
+	# Implement wrapper for dot generation.
+
+	return;
+}
+
 # Check each block of code to be removed and make sure
 # all braces are closed, and for any unused variables.
 # Then check whole source file before recompiling project
