@@ -29,6 +29,7 @@ if ($diff_dir) {
 sub parse_file {
 	my @files = <$diff_dir/*>;
 	my %unused_code;
+	my %graph_content;
 
 	# Initialize our dot graph first.
 	my $filename = 'FDG.dot';
@@ -66,8 +67,13 @@ sub parse_file {
 
 				# Save off file name + line num.
 				my ($line_num) = $line =~ /(\d+)\:/;
+				my ($line_src) = $line =~ /\d+\:(.*)/;
+				$line_src =~ s/\"/\\"/g;
+				$line_src =~ s/\%/\\%/g;
 				my ($file_name) = $file =~ /\/{2}(.*?)\.gcov/;
+
 				push(@{$unused_code{$file_name}}, $line_num);
+				push(@{$graph_content{$file_name}}, $line_src . "\n");
 
 				$line_count++;
 			}
@@ -84,27 +90,18 @@ sub parse_file {
 	foreach my $obj (keys %unused_code) {
 		print colored(['bright_cyan'], "\t$obj");
 		print ": @{$unused_code{$obj}}\n";
+	}
 
+	foreach my $gobj (keys %graph_content) {
 		# TODO: print block of code as node, but
 		# need to decide at what granularity.
-		generate_graph($fh, $obj, @{$unused_code{$obj}});
+		# Print out each subgraph cluster in the form:
+		# SRC_FILES_NAME -> LINE.
+		print $fh "\"" , $gobj , "\" -> \"" , @{$graph_content{$gobj}}, "\";\n";
 	}
 
 	print $fh $bp_foot;
 	close $fh;
-}
-
-# Take the data from above to generate the FDG given
-# the targeted feature. 
-# TODO: generate the FDG for the whole project to 
-# show the context of the feature.
-sub generate_graph {
-	my ($p1, $p2, @p3) = @_;
-	# Print out each subgraph cluster in the form:
-	# SRC_FILES_NAME -> LINE.
-	print $p1 "\"" , $p2 , "\" -> \"" , $_,"\";\n" foreach @p3;
-
-	return;
 }
 
 # Check each block of code to be removed and make sure
