@@ -69,11 +69,11 @@ sub parse_file {
 				my ($line_num) = $line =~ /(\d+)\:/;
 				my ($line_src) = $line =~ /\d+\:(.*)/;
 				$line_src =~ s/\"/\\"/g;
-				$line_src =~ s/\%/\\%/g;
+				#$line_src =~ s/\%/\\%/g; # Not sure if these break graphviz.
 				my ($file_name) = $file =~ /\/{2}(.*?)\.gcov/;
 
 				push(@{$unused_code{$file_name}}, $line_num);
-				push(@{$graph_content{$file_name}}, $line_src . "\n");
+				push(@{$graph_content{$file_name}}, $line_src . "\n"); # Also test w/o \n to see if that is a breaking point in rendering.
 
 				$line_count++;
 			}
