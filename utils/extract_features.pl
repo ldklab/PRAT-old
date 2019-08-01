@@ -69,9 +69,6 @@ sub parse_file {
 				my ($file_name) = $file =~ /\/{2}(.*?)\.gcov/;
 				push(@{$unused_code{$file_name}}, $line_num);
 
-				# Testing.
-				generate_graph($fh, $file_name, $line_num);
-
 				$line_count++;
 			}
 		}
@@ -80,9 +77,6 @@ sub parse_file {
 		close(FILE);
 	}
 
-	print $fh $bp_foot;
-	close $fh;
-
 	print colored(['bright_green bold'], "Total lines to remove: " . $line_count . "\n");
 
 	# Print just the file + line numbers to remove.
@@ -90,7 +84,14 @@ sub parse_file {
 	foreach my $obj (keys %unused_code) {
 		print colored(['bright_cyan'], "\t$obj");
 		print ": @{$unused_code{$obj}}\n";
+
+		# TODO: print block of code as node, but
+		# need to decide at what granularity.
+		generate_graph($fh, $obj, @{$unused_code{$obj}});
 	}
+
+	print $fh $bp_foot;
+	close $fh;
 }
 
 # Take the data from above to generate the FDG given
@@ -98,10 +99,10 @@ sub parse_file {
 # TODO: generate the FDG for the whole project to 
 # show the context of the feature.
 sub generate_graph {
-	my ($p1, $p2, $p3) = @_;
+	my ($p1, $p2, @p3) = @_;
 	# Print out each subgraph cluster in the form:
 	# SRC_FILES_NAME -> LINE.
-	print $p1 "\"" . $p2 . "\" -> " . $p3 . ";\n";
+	print $p1 "\"" , $p2 , "\" -> \"" , $_,"\";\n" foreach @p3;
 
 	return;
 }
