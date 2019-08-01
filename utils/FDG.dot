@@ -1,0 +1,2458 @@
+digraph G {
+	graph [fontsize=10 fontname="Verdana" compound=true];
+	subgraph cluster_components {
+		label="MQTT Components";
+		"WebSocket Support";
+		"Bridge Support";
+		"With Wrap";
+		"..."
+	}
+
+	subgraph cluster_bridge {
+		label="Bridge Support";
+"context.c" -> "	int i;
+	if(context->bridge){
+		for(i=0; i<db->bridge_count; i++){
+			if(db->bridges[i] == context){
+				db->bridges[i] = NULL;
+		mosquitto__free(context->bridge->local_clientid);
+		context->bridge->local_clientid = NULL;
+		mosquitto__free(context->bridge->local_username);
+		context->bridge->local_username = NULL;
+		mosquitto__free(context->bridge->local_password);
+		context->bridge->local_password = NULL;
+		if(context->bridge->remote_clientid != context->id){
+			mosquitto__free(context->bridge->remote_clientid);
+		context->bridge->remote_clientid = NULL;
+		if(context->bridge->remote_username != context->username){
+			mosquitto__free(context->bridge->remote_username);
+		context->bridge->remote_username = NULL;
+		if(context->bridge->remote_password != context->password){
+			mosquitto__free(context->bridge->remote_password);
+		context->bridge->remote_password = NULL;
+	int i;
+	if(context->bridge){
+		for(i=0; i<db->bridge_count; i++){
+			if(db->bridges[i] == context){
+				db->bridges[i] = NULL;
+		mosquitto__free(context->bridge->local_clientid);
+		context->bridge->local_clientid = NULL;
+		mosquitto__free(context->bridge->local_username);
+		context->bridge->local_username = NULL;
+		mosquitto__free(context->bridge->local_password);
+		context->bridge->local_password = NULL;
+		if(context->bridge->remote_clientid != context->id){
+			mosquitto__free(context->bridge->remote_clientid);
+		context->bridge->remote_clientid = NULL;
+		if(context->bridge->remote_username != context->username){
+			mosquitto__free(context->bridge->remote_username);
+		context->bridge->remote_username = NULL;
+		if(context->bridge->remote_password != context->password){
+			mosquitto__free(context->bridge->remote_password);
+		context->bridge->remote_password = NULL;
+	int i;
+	if(context->bridge){
+		for(i=0; i<db->bridge_count; i++){
+			if(db->bridges[i] == context){
+				db->bridges[i] = NULL;
+		mosquitto__free(context->bridge->local_clientid);
+		context->bridge->local_clientid = NULL;
+		mosquitto__free(context->bridge->local_username);
+		context->bridge->local_username = NULL;
+		mosquitto__free(context->bridge->local_password);
+		context->bridge->local_password = NULL;
+		if(context->bridge->remote_clientid != context->id){
+			mosquitto__free(context->bridge->remote_clientid);
+		context->bridge->remote_clientid = NULL;
+		if(context->bridge->remote_username != context->username){
+			mosquitto__free(context->bridge->remote_username);
+		context->bridge->remote_username = NULL;
+		if(context->bridge->remote_password != context->password){
+			mosquitto__free(context->bridge->remote_password);
+		context->bridge->remote_password = NULL;
+	int i;
+	if(context->bridge){
+		for(i=0; i<db->bridge_count; i++){
+			if(db->bridges[i] == context){
+				db->bridges[i] = NULL;
+		mosquitto__free(context->bridge->local_clientid);
+		context->bridge->local_clientid = NULL;
+		mosquitto__free(context->bridge->local_username);
+		context->bridge->local_username = NULL;
+		mosquitto__free(context->bridge->local_password);
+		context->bridge->local_password = NULL;
+		if(context->bridge->remote_clientid != context->id){
+			mosquitto__free(context->bridge->remote_clientid);
+		context->bridge->remote_clientid = NULL;
+		if(context->bridge->remote_username != context->username){
+			mosquitto__free(context->bridge->remote_username);
+		context->bridge->remote_username = NULL;
+		if(context->bridge->remote_password != context->password){
+			mosquitto__free(context->bridge->remote_password);
+		context->bridge->remote_password = NULL;
+";
+"send_subscribe.c" -> "	log__printf(mosq, MOSQ_LOG_DEBUG, \"Bridge \%s sending SUBSCRIBE (Mid: \%d, Topic: \%s, QoS: \%d)\", mosq->id, local_mid, topic, topic_qos);
+";
+"handle_publish.c" -> "	char *topic_temp;
+	int i;
+	struct mosquitto__bridge_topic *cur_topic;
+	bool match;
+	if(context->bridge && context->bridge->topics && context->bridge->topic_remapping){
+		for(i=0; i<context->bridge->topic_count; i++){
+			cur_topic = &context->bridge->topics[i];
+			if((cur_topic->direction == bd_both || cur_topic->direction == bd_in)
+					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+				rc = mosquitto_topic_matches_sub(cur_topic->remote_topic, topic, &match);
+				if(rc){
+					mosquitto__free(topic);
+					return rc;
+				if(match){
+					if(cur_topic->remote_prefix){
+						if(!strncmp(cur_topic->remote_prefix, topic, strlen(cur_topic->remote_prefix))){
+							topic_temp = mosquitto__strdup(topic+strlen(cur_topic->remote_prefix));
+							if(!topic_temp){
+								mosquitto__free(topic);
+								return MOSQ_ERR_NOMEM;
+							mosquitto__free(topic);
+							topic = topic_temp;
+					if(cur_topic->local_prefix){
+						len = strlen(topic) + strlen(cur_topic->local_prefix)+1;
+						topic_temp = mosquitto__malloc(len+1);
+						if(!topic_temp){
+							mosquitto__free(topic);
+							return MOSQ_ERR_NOMEM;
+						snprintf(topic_temp, len, \"\%s\%s\", cur_topic->local_prefix, topic);
+						topic_temp[len] = '\0';
+						mosquitto__free(topic);
+						topic = topic_temp;
+";
+"conf.c" -> "	int j;
+	if(config->bridges){
+		for(i=0; i<config->bridge_count; i++){
+			mosquitto__free(config->bridges[i].name);
+			if(config->bridges[i].addresses){
+				for(j=0; j<config->bridges[i].address_count; j++){
+					mosquitto__free(config->bridges[i].addresses[j].address);
+				mosquitto__free(config->bridges[i].addresses);
+			mosquitto__free(config->bridges[i].remote_clientid);
+			mosquitto__free(config->bridges[i].remote_username);
+			mosquitto__free(config->bridges[i].remote_password);
+			mosquitto__free(config->bridges[i].local_clientid);
+			mosquitto__free(config->bridges[i].local_username);
+			mosquitto__free(config->bridges[i].local_password);
+			if(config->bridges[i].topics){
+				for(j=0; j<config->bridges[i].topic_count; j++){
+					mosquitto__free(config->bridges[i].topics[j].topic);
+					mosquitto__free(config->bridges[i].topics[j].local_prefix);
+					mosquitto__free(config->bridges[i].topics[j].remote_prefix);
+					mosquitto__free(config->bridges[i].topics[j].local_topic);
+					mosquitto__free(config->bridges[i].topics[j].remote_topic);
+				mosquitto__free(config->bridges[i].topics);
+			mosquitto__free(config->bridges[i].notification_topic);
+			mosquitto__free(config->bridges[i].tls_version);
+			mosquitto__free(config->bridges[i].tls_cafile);
+			mosquitto__free(config->bridges[i].tls_psk_identity);
+			mosquitto__free(config->bridges[i].tls_psk);
+		mosquitto__free(config->bridges);
+	int j;
+	if(config->bridges){
+		for(i=0; i<config->bridge_count; i++){
+			mosquitto__free(config->bridges[i].name);
+			if(config->bridges[i].addresses){
+				for(j=0; j<config->bridges[i].address_count; j++){
+					mosquitto__free(config->bridges[i].addresses[j].address);
+				mosquitto__free(config->bridges[i].addresses);
+			mosquitto__free(config->bridges[i].remote_clientid);
+			mosquitto__free(config->bridges[i].remote_username);
+			mosquitto__free(config->bridges[i].remote_password);
+			mosquitto__free(config->bridges[i].local_clientid);
+			mosquitto__free(config->bridges[i].local_username);
+			mosquitto__free(config->bridges[i].local_password);
+			if(config->bridges[i].topics){
+				for(j=0; j<config->bridges[i].topic_count; j++){
+					mosquitto__free(config->bridges[i].topics[j].topic);
+					mosquitto__free(config->bridges[i].topics[j].local_prefix);
+					mosquitto__free(config->bridges[i].topics[j].remote_prefix);
+					mosquitto__free(config->bridges[i].topics[j].local_topic);
+					mosquitto__free(config->bridges[i].topics[j].remote_topic);
+				mosquitto__free(config->bridges[i].topics);
+			mosquitto__free(config->bridges[i].notification_topic);
+			mosquitto__free(config->bridges[i].tls_version);
+			mosquitto__free(config->bridges[i].tls_cafile);
+			mosquitto__free(config->bridges[i].tls_psk_identity);
+			mosquitto__free(config->bridges[i].tls_psk);
+		mosquitto__free(config->bridges);
+	int j;
+	if(config->bridges){
+		for(i=0; i<config->bridge_count; i++){
+			mosquitto__free(config->bridges[i].name);
+			if(config->bridges[i].addresses){
+				for(j=0; j<config->bridges[i].address_count; j++){
+					mosquitto__free(config->bridges[i].addresses[j].address);
+				mosquitto__free(config->bridges[i].addresses);
+			mosquitto__free(config->bridges[i].remote_clientid);
+			mosquitto__free(config->bridges[i].remote_username);
+			mosquitto__free(config->bridges[i].remote_password);
+			mosquitto__free(config->bridges[i].local_clientid);
+			mosquitto__free(config->bridges[i].local_username);
+			mosquitto__free(config->bridges[i].local_password);
+			if(config->bridges[i].topics){
+				for(j=0; j<config->bridges[i].topic_count; j++){
+					mosquitto__free(config->bridges[i].topics[j].topic);
+					mosquitto__free(config->bridges[i].topics[j].local_prefix);
+					mosquitto__free(config->bridges[i].topics[j].remote_prefix);
+					mosquitto__free(config->bridges[i].topics[j].local_topic);
+					mosquitto__free(config->bridges[i].topics[j].remote_topic);
+				mosquitto__free(config->bridges[i].topics);
+			mosquitto__free(config->bridges[i].notification_topic);
+			mosquitto__free(config->bridges[i].tls_version);
+			mosquitto__free(config->bridges[i].tls_cafile);
+			mosquitto__free(config->bridges[i].tls_psk_identity);
+			mosquitto__free(config->bridges[i].tls_psk);
+		mosquitto__free(config->bridges);
+	int j;
+	if(config->bridges){
+		for(i=0; i<config->bridge_count; i++){
+			mosquitto__free(config->bridges[i].name);
+			if(config->bridges[i].addresses){
+				for(j=0; j<config->bridges[i].address_count; j++){
+					mosquitto__free(config->bridges[i].addresses[j].address);
+				mosquitto__free(config->bridges[i].addresses);
+			mosquitto__free(config->bridges[i].remote_clientid);
+			mosquitto__free(config->bridges[i].remote_username);
+			mosquitto__free(config->bridges[i].remote_password);
+			mosquitto__free(config->bridges[i].local_clientid);
+			mosquitto__free(config->bridges[i].local_username);
+			mosquitto__free(config->bridges[i].local_password);
+			if(config->bridges[i].topics){
+				for(j=0; j<config->bridges[i].topic_count; j++){
+					mosquitto__free(config->bridges[i].topics[j].topic);
+					mosquitto__free(config->bridges[i].topics[j].local_prefix);
+					mosquitto__free(config->bridges[i].topics[j].remote_prefix);
+					mosquitto__free(config->bridges[i].topics[j].local_topic);
+					mosquitto__free(config->bridges[i].topics[j].remote_topic);
+				mosquitto__free(config->bridges[i].topics);
+			mosquitto__free(config->bridges[i].notification_topic);
+			mosquitto__free(config->bridges[i].tls_version);
+			mosquitto__free(config->bridges[i].tls_cafile);
+			mosquitto__free(config->bridges[i].tls_psk_identity);
+			mosquitto__free(config->bridges[i].tls_psk);
+		mosquitto__free(config->bridges);
+	return config__check(config);
+	return config__check(config);
+	return config__check(config);
+	return config__check(config);
+	for(i=0; i<config->bridge_count; i++){
+		if(!config->bridges[i].name || !config->bridges[i].addresses || !config->bridges[i].topic_count){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+			return MOSQ_ERR_INVAL;
+		if(config->bridges[i].tls_psk && !config->bridges[i].tls_psk_identity){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration: missing bridge_identity.\n\");
+			return MOSQ_ERR_INVAL;
+		if(config->bridges[i].tls_psk_identity && !config->bridges[i].tls_psk){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration: missing bridge_psk.\n\");
+			return MOSQ_ERR_INVAL;
+	for(i=0; i<config->bridge_count; i++){
+		if(!config->bridges[i].name || !config->bridges[i].addresses || !config->bridges[i].topic_count){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+			return MOSQ_ERR_INVAL;
+		if(config->bridges[i].tls_psk && !config->bridges[i].tls_psk_identity){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration: missing bridge_identity.\n\");
+			return MOSQ_ERR_INVAL;
+		if(config->bridges[i].tls_psk_identity && !config->bridges[i].tls_psk){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration: missing bridge_psk.\n\");
+			return MOSQ_ERR_INVAL;
+	for(i=0; i<config->bridge_count; i++){
+		if(!config->bridges[i].name || !config->bridges[i].addresses || !config->bridges[i].topic_count){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+			return MOSQ_ERR_INVAL;
+		if(config->bridges[i].tls_psk && !config->bridges[i].tls_psk_identity){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration: missing bridge_identity.\n\");
+			return MOSQ_ERR_INVAL;
+		if(config->bridges[i].tls_psk_identity && !config->bridges[i].tls_psk){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration: missing bridge_psk.\n\");
+			return MOSQ_ERR_INVAL;
+	for(i=0; i<config->bridge_count; i++){
+		if(!config->bridges[i].name || !config->bridges[i].addresses || !config->bridges[i].topic_count){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+			return MOSQ_ERR_INVAL;
+		if(config->bridges[i].tls_psk && !config->bridges[i].tls_psk_identity){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration: missing bridge_identity.\n\");
+			return MOSQ_ERR_INVAL;
+		if(config->bridges[i].tls_psk_identity && !config->bridges[i].tls_psk){
+			log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration: missing bridge_psk.\n\");
+			return MOSQ_ERR_INVAL;
+	char *tmp_char;
+	struct mosquitto__bridge *cur_bridge = NULL;
+	struct mosquitto__bridge_topic *cur_topic;
+	int len;
+					if(reload) continue; // FIXME
+					if(!cur_bridge || cur_bridge->addresses){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					while((token = strtok_r(NULL, \" \", &saveptr))){
+						if (token[0] == '#'){
+						cur_bridge->address_count++;
+						cur_bridge->addresses = mosquitto__realloc(cur_bridge->addresses, sizeof(struct bridge_address)*cur_bridge->address_count);
+						if(!cur_bridge->addresses){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge->addresses[cur_bridge->address_count-1].address = token;
+					for(i=0; i<cur_bridge->address_count; i++){
+						tmp_char = strrchr(cur_bridge->addresses[i].address, ':');
+						if(tmp_char){
+							tmp_char[0] = '\0';
+							tmp_int = atoi(&tmp_char[1]);
+							if(tmp_int < 1 || tmp_int > 65535){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid port value (\%d).\", tmp_int);
+								return MOSQ_ERR_INVAL;
+							cur_bridge->addresses[i].port = tmp_int;
+							cur_bridge->addresses[i].port = 1883;
+						cur_bridge->addresses[i].address = mosquitto__strdup(cur_bridge->addresses[i].address);
+						conf__attempt_resolve(cur_bridge->addresses[i].address, \"bridge address\", MOSQ_LOG_WARNING, \"Warning\");
+					if(cur_bridge->address_count == 0){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty address value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"bridge_attempt_unsubscribe\", &cur_bridge->attempt_unsubscribe, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_cafile\", &cur_bridge->tls_cafile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_capath\", &cur_bridge->tls_capath, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_certfile\", &cur_bridge->tls_certfile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_cafile || cur_bridge->tls_capath || cur_bridge->tls_certfile || cur_bridge->tls_keyfile){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and identity encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_identity\", &cur_bridge->tls_psk_identity, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"bridge_insecure\", &cur_bridge->tls_insecure, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_insecure){
+						log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge \%s using insecure mode.\", cur_bridge->name);
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_keyfile\", &cur_bridge->tls_keyfile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \"\", &saveptr);
+					if(token){
+						if(!strcmp(token, \"mqttv31\")){
+							cur_bridge->protocol_version = mosq_p_mqtt31;
+						}else if(!strcmp(token, \"mqttv311\")){
+							cur_bridge->protocol_version = mosq_p_mqtt311;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge_protocol_version value (\%s).\", token);
+							return MOSQ_ERR_INVAL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty bridge_protocol_version value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_cafile || cur_bridge->tls_capath || cur_bridge->tls_certfile || cur_bridge->tls_keyfile){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_psk\", &cur_bridge->tls_psk, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_tls_version\", &cur_bridge->tls_version, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote clientid\", &cur_bridge->remote_clientid, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"cleansession\", &cur_bridge->clean_session, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						for(i=0; i<config->bridge_count; i++){
+							if(!strcmp(config->bridges[i].name, token)){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Duplicate bridge name \\"\%s\\".\", token);
+								return MOSQ_ERR_INVAL;
+						config->bridge_count++;
+						config->bridges = mosquitto__realloc(config->bridges, config->bridge_count*sizeof(struct mosquitto__bridge));
+						if(!config->bridges){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge = &(config->bridges[config->bridge_count-1]);
+						memset(cur_bridge, 0, sizeof(struct mosquitto__bridge));
+						cur_bridge->name = mosquitto__strdup(token);
+						if(!cur_bridge->name){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge->keepalive = 60;
+						cur_bridge->notifications = true;
+						cur_bridge->notifications_local_only = false;
+						cur_bridge->start_type = bst_automatic;
+						cur_bridge->idle_timeout = 60;
+						cur_bridge->restart_timeout = 30;
+						cur_bridge->threshold = 10;
+						cur_bridge->try_private = true;
+						cur_bridge->attempt_unsubscribe = true;
+						cur_bridge->protocol_version = mosq_p_mqtt311;
+						cur_bridge->primary_retry_sock = INVALID_SOCKET;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty connection value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"idle_timeout\", &cur_bridge->idle_timeout, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->idle_timeout < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"idle_timeout interval too low, using 1 second.\");
+						cur_bridge->idle_timeout = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"keepalive_interval\", &cur_bridge->keepalive, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->keepalive < 5){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"keepalive interval too low, using 5 seconds.\");
+						cur_bridge->keepalive = 5;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local clientd\", &cur_bridge->local_clientid, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local_password\", &cur_bridge->local_password, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local_username\", &cur_bridge->local_username, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"notifications\", &cur_bridge->notifications, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"notifications_local_only\", &cur_bridge->notifications_local_only, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"notification_topic\", &cur_bridge->notification_topic, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote_password\", &cur_bridge->remote_password, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"restart_timeout\", &cur_bridge->restart_timeout, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->restart_timeout < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"restart_timeout interval too low, using 1 second.\");
+						cur_bridge->restart_timeout = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"round_robin\", &cur_bridge->round_robin, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						if(!strcmp(token, \"automatic\")){
+							cur_bridge->start_type = bst_automatic;
+						}else if(!strcmp(token, \"lazy\")){
+							cur_bridge->start_type = bst_lazy;
+						}else if(!strcmp(token, \"manual\")){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Manual start_type not supported.\");
+							return MOSQ_ERR_INVAL;
+						}else if(!strcmp(token, \"once\")){
+							cur_bridge->start_type = bst_once;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid start_type value in configuration (\%s).\", token);
+							return MOSQ_ERR_INVAL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty start_type value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"threshold\", &cur_bridge->threshold, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->threshold < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"threshold too low, using 1 message.\");
+						cur_bridge->threshold = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						cur_bridge->topic_count++;
+						cur_bridge->topics = mosquitto__realloc(cur_bridge->topics,
+								sizeof(struct mosquitto__bridge_topic)*cur_bridge->topic_count);
+						if(!cur_bridge->topics){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_topic = &cur_bridge->topics[cur_bridge->topic_count-1];
+						if(!strcmp(token, \"\\"\\"\")){
+							cur_topic->topic = NULL;
+							cur_topic->topic = mosquitto__strdup(token);
+							if(!cur_topic->topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->direction = bd_out;
+						cur_topic->qos = 0;
+						cur_topic->local_prefix = NULL;
+						cur_topic->remote_prefix = NULL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty topic value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						if(!strcasecmp(token, \"out\")){
+							cur_topic->direction = bd_out;
+						}else if(!strcasecmp(token, \"in\")){
+							cur_topic->direction = bd_in;
+						}else if(!strcasecmp(token, \"both\")){
+							cur_topic->direction = bd_both;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic direction '\%s'.\", token);
+							return MOSQ_ERR_INVAL;
+						token = strtok_r(NULL, \" \", &saveptr);
+						if(token){
+							if (token[0] == '#'){
+								strtok_r(NULL, \"\", &saveptr);
+							cur_topic->qos = atoi(token);
+							if(cur_topic->qos < 0 || cur_topic->qos > 2){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge QoS level '\%s'.\", token);
+								return MOSQ_ERR_INVAL;
+							token = strtok_r(NULL, \" \", &saveptr);
+							if(token){
+								cur_bridge->topic_remapping = true;
+								if(!strcmp(token, \"\\"\\"\") || token[0] == '#'){
+									cur_topic->local_prefix = NULL;
+									if (token[0] == '#'){
+										strtok_r(NULL, \"\", &saveptr);
+									if(mosquitto_pub_topic_check(token) != MOSQ_ERR_SUCCESS){
+										log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic local prefix '\%s'.\", token);
+										return MOSQ_ERR_INVAL;
+									cur_topic->local_prefix = mosquitto__strdup(token);
+									if(!cur_topic->local_prefix){
+										log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+										return MOSQ_ERR_NOMEM;
+								token = strtok_r(NULL, \" \", &saveptr);
+								if(token){
+									if(!strcmp(token, \"\\"\\"\") || token[0] == '#'){
+										cur_topic->remote_prefix = NULL;
+										if(mosquitto_pub_topic_check(token) != MOSQ_ERR_SUCCESS){
+											log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic remote prefix '\%s'.\", token);
+											return MOSQ_ERR_INVAL;
+										cur_topic->remote_prefix = mosquitto__strdup(token);
+										if(!cur_topic->remote_prefix){
+											log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+											return MOSQ_ERR_NOMEM;
+					if(cur_topic->topic == NULL &&
+							(cur_topic->local_prefix == NULL || cur_topic->remote_prefix == NULL)){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge remapping.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_topic->local_prefix){
+						if(cur_topic->topic){
+							len = strlen(cur_topic->topic) + strlen(cur_topic->local_prefix)+1;
+							cur_topic->local_topic = mosquitto__malloc(len+1);
+							if(!cur_topic->local_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+							snprintf(cur_topic->local_topic, len+1, \"\%s\%s\", cur_topic->local_prefix, cur_topic->topic);
+							cur_topic->local_topic[len] = '\0';
+							cur_topic->local_topic = mosquitto__strdup(cur_topic->local_prefix);
+							if(!cur_topic->local_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->local_topic = mosquitto__strdup(cur_topic->topic);
+						if(!cur_topic->local_topic){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+					if(cur_topic->remote_prefix){
+						if(cur_topic->topic){
+							len = strlen(cur_topic->topic) + strlen(cur_topic->remote_prefix)+1;
+							cur_topic->remote_topic = mosquitto__malloc(len+1);
+							if(!cur_topic->remote_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+							snprintf(cur_topic->remote_topic, len, \"\%s\%s\", cur_topic->remote_prefix, cur_topic->topic);
+							cur_topic->remote_topic[len] = '\0';
+							cur_topic->remote_topic = mosquitto__strdup(cur_topic->remote_prefix);
+							if(!cur_topic->remote_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->remote_topic = mosquitto__strdup(cur_topic->topic);
+						if(!cur_topic->remote_topic){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"try_private\", &cur_bridge->try_private, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote_username\", &cur_bridge->remote_username, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+	char *tmp_char;
+	struct mosquitto__bridge *cur_bridge = NULL;
+	struct mosquitto__bridge_topic *cur_topic;
+	int len;
+					if(reload) continue; // FIXME
+					if(!cur_bridge || cur_bridge->addresses){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					while((token = strtok_r(NULL, \" \", &saveptr))){
+						if (token[0] == '#'){
+						cur_bridge->address_count++;
+						cur_bridge->addresses = mosquitto__realloc(cur_bridge->addresses, sizeof(struct bridge_address)*cur_bridge->address_count);
+						if(!cur_bridge->addresses){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge->addresses[cur_bridge->address_count-1].address = token;
+					for(i=0; i<cur_bridge->address_count; i++){
+						tmp_char = strrchr(cur_bridge->addresses[i].address, ':');
+						if(tmp_char){
+							tmp_char[0] = '\0';
+							tmp_int = atoi(&tmp_char[1]);
+							if(tmp_int < 1 || tmp_int > 65535){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid port value (\%d).\", tmp_int);
+								return MOSQ_ERR_INVAL;
+							cur_bridge->addresses[i].port = tmp_int;
+							cur_bridge->addresses[i].port = 1883;
+						cur_bridge->addresses[i].address = mosquitto__strdup(cur_bridge->addresses[i].address);
+						conf__attempt_resolve(cur_bridge->addresses[i].address, \"bridge address\", MOSQ_LOG_WARNING, \"Warning\");
+					if(cur_bridge->address_count == 0){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty address value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"bridge_attempt_unsubscribe\", &cur_bridge->attempt_unsubscribe, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_cafile\", &cur_bridge->tls_cafile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_capath\", &cur_bridge->tls_capath, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_certfile\", &cur_bridge->tls_certfile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_cafile || cur_bridge->tls_capath || cur_bridge->tls_certfile || cur_bridge->tls_keyfile){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and identity encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_identity\", &cur_bridge->tls_psk_identity, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"bridge_insecure\", &cur_bridge->tls_insecure, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_insecure){
+						log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge \%s using insecure mode.\", cur_bridge->name);
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_keyfile\", &cur_bridge->tls_keyfile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \"\", &saveptr);
+					if(token){
+						if(!strcmp(token, \"mqttv31\")){
+							cur_bridge->protocol_version = mosq_p_mqtt31;
+						}else if(!strcmp(token, \"mqttv311\")){
+							cur_bridge->protocol_version = mosq_p_mqtt311;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge_protocol_version value (\%s).\", token);
+							return MOSQ_ERR_INVAL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty bridge_protocol_version value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_cafile || cur_bridge->tls_capath || cur_bridge->tls_certfile || cur_bridge->tls_keyfile){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_psk\", &cur_bridge->tls_psk, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_tls_version\", &cur_bridge->tls_version, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote clientid\", &cur_bridge->remote_clientid, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"cleansession\", &cur_bridge->clean_session, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						for(i=0; i<config->bridge_count; i++){
+							if(!strcmp(config->bridges[i].name, token)){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Duplicate bridge name \\"\%s\\".\", token);
+								return MOSQ_ERR_INVAL;
+						config->bridge_count++;
+						config->bridges = mosquitto__realloc(config->bridges, config->bridge_count*sizeof(struct mosquitto__bridge));
+						if(!config->bridges){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge = &(config->bridges[config->bridge_count-1]);
+						memset(cur_bridge, 0, sizeof(struct mosquitto__bridge));
+						cur_bridge->name = mosquitto__strdup(token);
+						if(!cur_bridge->name){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge->keepalive = 60;
+						cur_bridge->notifications = true;
+						cur_bridge->notifications_local_only = false;
+						cur_bridge->start_type = bst_automatic;
+						cur_bridge->idle_timeout = 60;
+						cur_bridge->restart_timeout = 30;
+						cur_bridge->threshold = 10;
+						cur_bridge->try_private = true;
+						cur_bridge->attempt_unsubscribe = true;
+						cur_bridge->protocol_version = mosq_p_mqtt311;
+						cur_bridge->primary_retry_sock = INVALID_SOCKET;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty connection value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"idle_timeout\", &cur_bridge->idle_timeout, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->idle_timeout < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"idle_timeout interval too low, using 1 second.\");
+						cur_bridge->idle_timeout = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"keepalive_interval\", &cur_bridge->keepalive, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->keepalive < 5){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"keepalive interval too low, using 5 seconds.\");
+						cur_bridge->keepalive = 5;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local clientd\", &cur_bridge->local_clientid, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local_password\", &cur_bridge->local_password, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local_username\", &cur_bridge->local_username, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"notifications\", &cur_bridge->notifications, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"notifications_local_only\", &cur_bridge->notifications_local_only, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"notification_topic\", &cur_bridge->notification_topic, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote_password\", &cur_bridge->remote_password, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"restart_timeout\", &cur_bridge->restart_timeout, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->restart_timeout < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"restart_timeout interval too low, using 1 second.\");
+						cur_bridge->restart_timeout = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"round_robin\", &cur_bridge->round_robin, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						if(!strcmp(token, \"automatic\")){
+							cur_bridge->start_type = bst_automatic;
+						}else if(!strcmp(token, \"lazy\")){
+							cur_bridge->start_type = bst_lazy;
+						}else if(!strcmp(token, \"manual\")){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Manual start_type not supported.\");
+							return MOSQ_ERR_INVAL;
+						}else if(!strcmp(token, \"once\")){
+							cur_bridge->start_type = bst_once;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid start_type value in configuration (\%s).\", token);
+							return MOSQ_ERR_INVAL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty start_type value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"threshold\", &cur_bridge->threshold, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->threshold < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"threshold too low, using 1 message.\");
+						cur_bridge->threshold = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						cur_bridge->topic_count++;
+						cur_bridge->topics = mosquitto__realloc(cur_bridge->topics,
+								sizeof(struct mosquitto__bridge_topic)*cur_bridge->topic_count);
+						if(!cur_bridge->topics){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_topic = &cur_bridge->topics[cur_bridge->topic_count-1];
+						if(!strcmp(token, \"\\"\\"\")){
+							cur_topic->topic = NULL;
+							cur_topic->topic = mosquitto__strdup(token);
+							if(!cur_topic->topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->direction = bd_out;
+						cur_topic->qos = 0;
+						cur_topic->local_prefix = NULL;
+						cur_topic->remote_prefix = NULL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty topic value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						if(!strcasecmp(token, \"out\")){
+							cur_topic->direction = bd_out;
+						}else if(!strcasecmp(token, \"in\")){
+							cur_topic->direction = bd_in;
+						}else if(!strcasecmp(token, \"both\")){
+							cur_topic->direction = bd_both;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic direction '\%s'.\", token);
+							return MOSQ_ERR_INVAL;
+						token = strtok_r(NULL, \" \", &saveptr);
+						if(token){
+							if (token[0] == '#'){
+								strtok_r(NULL, \"\", &saveptr);
+							cur_topic->qos = atoi(token);
+							if(cur_topic->qos < 0 || cur_topic->qos > 2){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge QoS level '\%s'.\", token);
+								return MOSQ_ERR_INVAL;
+							token = strtok_r(NULL, \" \", &saveptr);
+							if(token){
+								cur_bridge->topic_remapping = true;
+								if(!strcmp(token, \"\\"\\"\") || token[0] == '#'){
+									cur_topic->local_prefix = NULL;
+									if (token[0] == '#'){
+										strtok_r(NULL, \"\", &saveptr);
+									if(mosquitto_pub_topic_check(token) != MOSQ_ERR_SUCCESS){
+										log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic local prefix '\%s'.\", token);
+										return MOSQ_ERR_INVAL;
+									cur_topic->local_prefix = mosquitto__strdup(token);
+									if(!cur_topic->local_prefix){
+										log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+										return MOSQ_ERR_NOMEM;
+								token = strtok_r(NULL, \" \", &saveptr);
+								if(token){
+									if(!strcmp(token, \"\\"\\"\") || token[0] == '#'){
+										cur_topic->remote_prefix = NULL;
+										if(mosquitto_pub_topic_check(token) != MOSQ_ERR_SUCCESS){
+											log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic remote prefix '\%s'.\", token);
+											return MOSQ_ERR_INVAL;
+										cur_topic->remote_prefix = mosquitto__strdup(token);
+										if(!cur_topic->remote_prefix){
+											log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+											return MOSQ_ERR_NOMEM;
+					if(cur_topic->topic == NULL &&
+							(cur_topic->local_prefix == NULL || cur_topic->remote_prefix == NULL)){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge remapping.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_topic->local_prefix){
+						if(cur_topic->topic){
+							len = strlen(cur_topic->topic) + strlen(cur_topic->local_prefix)+1;
+							cur_topic->local_topic = mosquitto__malloc(len+1);
+							if(!cur_topic->local_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+							snprintf(cur_topic->local_topic, len+1, \"\%s\%s\", cur_topic->local_prefix, cur_topic->topic);
+							cur_topic->local_topic[len] = '\0';
+							cur_topic->local_topic = mosquitto__strdup(cur_topic->local_prefix);
+							if(!cur_topic->local_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->local_topic = mosquitto__strdup(cur_topic->topic);
+						if(!cur_topic->local_topic){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+					if(cur_topic->remote_prefix){
+						if(cur_topic->topic){
+							len = strlen(cur_topic->topic) + strlen(cur_topic->remote_prefix)+1;
+							cur_topic->remote_topic = mosquitto__malloc(len+1);
+							if(!cur_topic->remote_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+							snprintf(cur_topic->remote_topic, len, \"\%s\%s\", cur_topic->remote_prefix, cur_topic->topic);
+							cur_topic->remote_topic[len] = '\0';
+							cur_topic->remote_topic = mosquitto__strdup(cur_topic->remote_prefix);
+							if(!cur_topic->remote_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->remote_topic = mosquitto__strdup(cur_topic->topic);
+						if(!cur_topic->remote_topic){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"try_private\", &cur_bridge->try_private, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote_username\", &cur_bridge->remote_username, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+	char *tmp_char;
+	struct mosquitto__bridge *cur_bridge = NULL;
+	struct mosquitto__bridge_topic *cur_topic;
+	int len;
+					if(reload) continue; // FIXME
+					if(!cur_bridge || cur_bridge->addresses){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					while((token = strtok_r(NULL, \" \", &saveptr))){
+						if (token[0] == '#'){
+						cur_bridge->address_count++;
+						cur_bridge->addresses = mosquitto__realloc(cur_bridge->addresses, sizeof(struct bridge_address)*cur_bridge->address_count);
+						if(!cur_bridge->addresses){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge->addresses[cur_bridge->address_count-1].address = token;
+					for(i=0; i<cur_bridge->address_count; i++){
+						tmp_char = strrchr(cur_bridge->addresses[i].address, ':');
+						if(tmp_char){
+							tmp_char[0] = '\0';
+							tmp_int = atoi(&tmp_char[1]);
+							if(tmp_int < 1 || tmp_int > 65535){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid port value (\%d).\", tmp_int);
+								return MOSQ_ERR_INVAL;
+							cur_bridge->addresses[i].port = tmp_int;
+							cur_bridge->addresses[i].port = 1883;
+						cur_bridge->addresses[i].address = mosquitto__strdup(cur_bridge->addresses[i].address);
+						conf__attempt_resolve(cur_bridge->addresses[i].address, \"bridge address\", MOSQ_LOG_WARNING, \"Warning\");
+					if(cur_bridge->address_count == 0){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty address value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"bridge_attempt_unsubscribe\", &cur_bridge->attempt_unsubscribe, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_cafile\", &cur_bridge->tls_cafile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_capath\", &cur_bridge->tls_capath, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_certfile\", &cur_bridge->tls_certfile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_cafile || cur_bridge->tls_capath || cur_bridge->tls_certfile || cur_bridge->tls_keyfile){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and identity encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_identity\", &cur_bridge->tls_psk_identity, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"bridge_insecure\", &cur_bridge->tls_insecure, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_insecure){
+						log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge \%s using insecure mode.\", cur_bridge->name);
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_keyfile\", &cur_bridge->tls_keyfile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \"\", &saveptr);
+					if(token){
+						if(!strcmp(token, \"mqttv31\")){
+							cur_bridge->protocol_version = mosq_p_mqtt31;
+						}else if(!strcmp(token, \"mqttv311\")){
+							cur_bridge->protocol_version = mosq_p_mqtt311;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge_protocol_version value (\%s).\", token);
+							return MOSQ_ERR_INVAL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty bridge_protocol_version value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_cafile || cur_bridge->tls_capath || cur_bridge->tls_certfile || cur_bridge->tls_keyfile){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_psk\", &cur_bridge->tls_psk, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_tls_version\", &cur_bridge->tls_version, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote clientid\", &cur_bridge->remote_clientid, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"cleansession\", &cur_bridge->clean_session, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						for(i=0; i<config->bridge_count; i++){
+							if(!strcmp(config->bridges[i].name, token)){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Duplicate bridge name \\"\%s\\".\", token);
+								return MOSQ_ERR_INVAL;
+						config->bridge_count++;
+						config->bridges = mosquitto__realloc(config->bridges, config->bridge_count*sizeof(struct mosquitto__bridge));
+						if(!config->bridges){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge = &(config->bridges[config->bridge_count-1]);
+						memset(cur_bridge, 0, sizeof(struct mosquitto__bridge));
+						cur_bridge->name = mosquitto__strdup(token);
+						if(!cur_bridge->name){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge->keepalive = 60;
+						cur_bridge->notifications = true;
+						cur_bridge->notifications_local_only = false;
+						cur_bridge->start_type = bst_automatic;
+						cur_bridge->idle_timeout = 60;
+						cur_bridge->restart_timeout = 30;
+						cur_bridge->threshold = 10;
+						cur_bridge->try_private = true;
+						cur_bridge->attempt_unsubscribe = true;
+						cur_bridge->protocol_version = mosq_p_mqtt311;
+						cur_bridge->primary_retry_sock = INVALID_SOCKET;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty connection value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"idle_timeout\", &cur_bridge->idle_timeout, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->idle_timeout < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"idle_timeout interval too low, using 1 second.\");
+						cur_bridge->idle_timeout = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"keepalive_interval\", &cur_bridge->keepalive, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->keepalive < 5){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"keepalive interval too low, using 5 seconds.\");
+						cur_bridge->keepalive = 5;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local clientd\", &cur_bridge->local_clientid, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local_password\", &cur_bridge->local_password, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local_username\", &cur_bridge->local_username, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"notifications\", &cur_bridge->notifications, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"notifications_local_only\", &cur_bridge->notifications_local_only, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"notification_topic\", &cur_bridge->notification_topic, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote_password\", &cur_bridge->remote_password, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"restart_timeout\", &cur_bridge->restart_timeout, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->restart_timeout < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"restart_timeout interval too low, using 1 second.\");
+						cur_bridge->restart_timeout = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"round_robin\", &cur_bridge->round_robin, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						if(!strcmp(token, \"automatic\")){
+							cur_bridge->start_type = bst_automatic;
+						}else if(!strcmp(token, \"lazy\")){
+							cur_bridge->start_type = bst_lazy;
+						}else if(!strcmp(token, \"manual\")){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Manual start_type not supported.\");
+							return MOSQ_ERR_INVAL;
+						}else if(!strcmp(token, \"once\")){
+							cur_bridge->start_type = bst_once;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid start_type value in configuration (\%s).\", token);
+							return MOSQ_ERR_INVAL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty start_type value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"threshold\", &cur_bridge->threshold, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->threshold < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"threshold too low, using 1 message.\");
+						cur_bridge->threshold = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						cur_bridge->topic_count++;
+						cur_bridge->topics = mosquitto__realloc(cur_bridge->topics,
+								sizeof(struct mosquitto__bridge_topic)*cur_bridge->topic_count);
+						if(!cur_bridge->topics){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_topic = &cur_bridge->topics[cur_bridge->topic_count-1];
+						if(!strcmp(token, \"\\"\\"\")){
+							cur_topic->topic = NULL;
+							cur_topic->topic = mosquitto__strdup(token);
+							if(!cur_topic->topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->direction = bd_out;
+						cur_topic->qos = 0;
+						cur_topic->local_prefix = NULL;
+						cur_topic->remote_prefix = NULL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty topic value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						if(!strcasecmp(token, \"out\")){
+							cur_topic->direction = bd_out;
+						}else if(!strcasecmp(token, \"in\")){
+							cur_topic->direction = bd_in;
+						}else if(!strcasecmp(token, \"both\")){
+							cur_topic->direction = bd_both;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic direction '\%s'.\", token);
+							return MOSQ_ERR_INVAL;
+						token = strtok_r(NULL, \" \", &saveptr);
+						if(token){
+							if (token[0] == '#'){
+								strtok_r(NULL, \"\", &saveptr);
+							cur_topic->qos = atoi(token);
+							if(cur_topic->qos < 0 || cur_topic->qos > 2){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge QoS level '\%s'.\", token);
+								return MOSQ_ERR_INVAL;
+							token = strtok_r(NULL, \" \", &saveptr);
+							if(token){
+								cur_bridge->topic_remapping = true;
+								if(!strcmp(token, \"\\"\\"\") || token[0] == '#'){
+									cur_topic->local_prefix = NULL;
+									if (token[0] == '#'){
+										strtok_r(NULL, \"\", &saveptr);
+									if(mosquitto_pub_topic_check(token) != MOSQ_ERR_SUCCESS){
+										log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic local prefix '\%s'.\", token);
+										return MOSQ_ERR_INVAL;
+									cur_topic->local_prefix = mosquitto__strdup(token);
+									if(!cur_topic->local_prefix){
+										log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+										return MOSQ_ERR_NOMEM;
+								token = strtok_r(NULL, \" \", &saveptr);
+								if(token){
+									if(!strcmp(token, \"\\"\\"\") || token[0] == '#'){
+										cur_topic->remote_prefix = NULL;
+										if(mosquitto_pub_topic_check(token) != MOSQ_ERR_SUCCESS){
+											log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic remote prefix '\%s'.\", token);
+											return MOSQ_ERR_INVAL;
+										cur_topic->remote_prefix = mosquitto__strdup(token);
+										if(!cur_topic->remote_prefix){
+											log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+											return MOSQ_ERR_NOMEM;
+					if(cur_topic->topic == NULL &&
+							(cur_topic->local_prefix == NULL || cur_topic->remote_prefix == NULL)){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge remapping.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_topic->local_prefix){
+						if(cur_topic->topic){
+							len = strlen(cur_topic->topic) + strlen(cur_topic->local_prefix)+1;
+							cur_topic->local_topic = mosquitto__malloc(len+1);
+							if(!cur_topic->local_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+							snprintf(cur_topic->local_topic, len+1, \"\%s\%s\", cur_topic->local_prefix, cur_topic->topic);
+							cur_topic->local_topic[len] = '\0';
+							cur_topic->local_topic = mosquitto__strdup(cur_topic->local_prefix);
+							if(!cur_topic->local_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->local_topic = mosquitto__strdup(cur_topic->topic);
+						if(!cur_topic->local_topic){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+					if(cur_topic->remote_prefix){
+						if(cur_topic->topic){
+							len = strlen(cur_topic->topic) + strlen(cur_topic->remote_prefix)+1;
+							cur_topic->remote_topic = mosquitto__malloc(len+1);
+							if(!cur_topic->remote_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+							snprintf(cur_topic->remote_topic, len, \"\%s\%s\", cur_topic->remote_prefix, cur_topic->topic);
+							cur_topic->remote_topic[len] = '\0';
+							cur_topic->remote_topic = mosquitto__strdup(cur_topic->remote_prefix);
+							if(!cur_topic->remote_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->remote_topic = mosquitto__strdup(cur_topic->topic);
+						if(!cur_topic->remote_topic){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"try_private\", &cur_bridge->try_private, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote_username\", &cur_bridge->remote_username, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+	char *tmp_char;
+	struct mosquitto__bridge *cur_bridge = NULL;
+	struct mosquitto__bridge_topic *cur_topic;
+	int len;
+					if(reload) continue; // FIXME
+					if(!cur_bridge || cur_bridge->addresses){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					while((token = strtok_r(NULL, \" \", &saveptr))){
+						if (token[0] == '#'){
+						cur_bridge->address_count++;
+						cur_bridge->addresses = mosquitto__realloc(cur_bridge->addresses, sizeof(struct bridge_address)*cur_bridge->address_count);
+						if(!cur_bridge->addresses){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge->addresses[cur_bridge->address_count-1].address = token;
+					for(i=0; i<cur_bridge->address_count; i++){
+						tmp_char = strrchr(cur_bridge->addresses[i].address, ':');
+						if(tmp_char){
+							tmp_char[0] = '\0';
+							tmp_int = atoi(&tmp_char[1]);
+							if(tmp_int < 1 || tmp_int > 65535){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid port value (\%d).\", tmp_int);
+								return MOSQ_ERR_INVAL;
+							cur_bridge->addresses[i].port = tmp_int;
+							cur_bridge->addresses[i].port = 1883;
+						cur_bridge->addresses[i].address = mosquitto__strdup(cur_bridge->addresses[i].address);
+						conf__attempt_resolve(cur_bridge->addresses[i].address, \"bridge address\", MOSQ_LOG_WARNING, \"Warning\");
+					if(cur_bridge->address_count == 0){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty address value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"bridge_attempt_unsubscribe\", &cur_bridge->attempt_unsubscribe, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_cafile\", &cur_bridge->tls_cafile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_capath\", &cur_bridge->tls_capath, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_certfile\", &cur_bridge->tls_certfile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_cafile || cur_bridge->tls_capath || cur_bridge->tls_certfile || cur_bridge->tls_keyfile){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and identity encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_identity\", &cur_bridge->tls_psk_identity, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"bridge_insecure\", &cur_bridge->tls_insecure, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_insecure){
+						log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge \%s using insecure mode.\", cur_bridge->name);
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_psk_identity || cur_bridge->tls_psk){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_keyfile\", &cur_bridge->tls_keyfile, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \"\", &saveptr);
+					if(token){
+						if(!strcmp(token, \"mqttv31\")){
+							cur_bridge->protocol_version = mosq_p_mqtt31;
+						}else if(!strcmp(token, \"mqttv311\")){
+							cur_bridge->protocol_version = mosq_p_mqtt311;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge_protocol_version value (\%s).\", token);
+							return MOSQ_ERR_INVAL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty bridge_protocol_version value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_bridge->tls_cafile || cur_bridge->tls_capath || cur_bridge->tls_certfile || cur_bridge->tls_keyfile){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Cannot use both certificate and psk encryption in a single bridge.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_psk\", &cur_bridge->tls_psk, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS-PSK support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge_tls_version\", &cur_bridge->tls_version, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge and/or TLS support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote clientid\", &cur_bridge->remote_clientid, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"cleansession\", &cur_bridge->clean_session, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						for(i=0; i<config->bridge_count; i++){
+							if(!strcmp(config->bridges[i].name, token)){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Duplicate bridge name \\"\%s\\".\", token);
+								return MOSQ_ERR_INVAL;
+						config->bridge_count++;
+						config->bridges = mosquitto__realloc(config->bridges, config->bridge_count*sizeof(struct mosquitto__bridge));
+						if(!config->bridges){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge = &(config->bridges[config->bridge_count-1]);
+						memset(cur_bridge, 0, sizeof(struct mosquitto__bridge));
+						cur_bridge->name = mosquitto__strdup(token);
+						if(!cur_bridge->name){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_bridge->keepalive = 60;
+						cur_bridge->notifications = true;
+						cur_bridge->notifications_local_only = false;
+						cur_bridge->start_type = bst_automatic;
+						cur_bridge->idle_timeout = 60;
+						cur_bridge->restart_timeout = 30;
+						cur_bridge->threshold = 10;
+						cur_bridge->try_private = true;
+						cur_bridge->attempt_unsubscribe = true;
+						cur_bridge->protocol_version = mosq_p_mqtt311;
+						cur_bridge->primary_retry_sock = INVALID_SOCKET;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty connection value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"idle_timeout\", &cur_bridge->idle_timeout, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->idle_timeout < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"idle_timeout interval too low, using 1 second.\");
+						cur_bridge->idle_timeout = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"keepalive_interval\", &cur_bridge->keepalive, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->keepalive < 5){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"keepalive interval too low, using 5 seconds.\");
+						cur_bridge->keepalive = 5;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local clientd\", &cur_bridge->local_clientid, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local_password\", &cur_bridge->local_password, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge local_username\", &cur_bridge->local_username, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"notifications\", &cur_bridge->notifications, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"notifications_local_only\", &cur_bridge->notifications_local_only, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"notification_topic\", &cur_bridge->notification_topic, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote_password\", &cur_bridge->remote_password, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"restart_timeout\", &cur_bridge->restart_timeout, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->restart_timeout < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"restart_timeout interval too low, using 1 second.\");
+						cur_bridge->restart_timeout = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"round_robin\", &cur_bridge->round_robin, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						if(!strcmp(token, \"automatic\")){
+							cur_bridge->start_type = bst_automatic;
+						}else if(!strcmp(token, \"lazy\")){
+							cur_bridge->start_type = bst_lazy;
+						}else if(!strcmp(token, \"manual\")){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Manual start_type not supported.\");
+							return MOSQ_ERR_INVAL;
+						}else if(!strcmp(token, \"once\")){
+							cur_bridge->start_type = bst_once;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid start_type value in configuration (\%s).\", token);
+							return MOSQ_ERR_INVAL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty start_type value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_int(&token, \"threshold\", &cur_bridge->threshold, saveptr)) return MOSQ_ERR_INVAL;
+					if(cur_bridge->threshold < 1){
+						log__printf(NULL, MOSQ_LOG_NOTICE, \"threshold too low, using 1 message.\");
+						cur_bridge->threshold = 1;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						cur_bridge->topic_count++;
+						cur_bridge->topics = mosquitto__realloc(cur_bridge->topics,
+								sizeof(struct mosquitto__bridge_topic)*cur_bridge->topic_count);
+						if(!cur_bridge->topics){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+						cur_topic = &cur_bridge->topics[cur_bridge->topic_count-1];
+						if(!strcmp(token, \"\\"\\"\")){
+							cur_topic->topic = NULL;
+							cur_topic->topic = mosquitto__strdup(token);
+							if(!cur_topic->topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->direction = bd_out;
+						cur_topic->qos = 0;
+						cur_topic->local_prefix = NULL;
+						cur_topic->remote_prefix = NULL;
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Empty topic value in configuration.\");
+						return MOSQ_ERR_INVAL;
+					token = strtok_r(NULL, \" \", &saveptr);
+					if(token){
+						if(!strcasecmp(token, \"out\")){
+							cur_topic->direction = bd_out;
+						}else if(!strcasecmp(token, \"in\")){
+							cur_topic->direction = bd_in;
+						}else if(!strcasecmp(token, \"both\")){
+							cur_topic->direction = bd_both;
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic direction '\%s'.\", token);
+							return MOSQ_ERR_INVAL;
+						token = strtok_r(NULL, \" \", &saveptr);
+						if(token){
+							if (token[0] == '#'){
+								strtok_r(NULL, \"\", &saveptr);
+							cur_topic->qos = atoi(token);
+							if(cur_topic->qos < 0 || cur_topic->qos > 2){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge QoS level '\%s'.\", token);
+								return MOSQ_ERR_INVAL;
+							token = strtok_r(NULL, \" \", &saveptr);
+							if(token){
+								cur_bridge->topic_remapping = true;
+								if(!strcmp(token, \"\\"\\"\") || token[0] == '#'){
+									cur_topic->local_prefix = NULL;
+									if (token[0] == '#'){
+										strtok_r(NULL, \"\", &saveptr);
+									if(mosquitto_pub_topic_check(token) != MOSQ_ERR_SUCCESS){
+										log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic local prefix '\%s'.\", token);
+										return MOSQ_ERR_INVAL;
+									cur_topic->local_prefix = mosquitto__strdup(token);
+									if(!cur_topic->local_prefix){
+										log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+										return MOSQ_ERR_NOMEM;
+								token = strtok_r(NULL, \" \", &saveptr);
+								if(token){
+									if(!strcmp(token, \"\\"\\"\") || token[0] == '#'){
+										cur_topic->remote_prefix = NULL;
+										if(mosquitto_pub_topic_check(token) != MOSQ_ERR_SUCCESS){
+											log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge topic remote prefix '\%s'.\", token);
+											return MOSQ_ERR_INVAL;
+										cur_topic->remote_prefix = mosquitto__strdup(token);
+										if(!cur_topic->remote_prefix){
+											log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+											return MOSQ_ERR_NOMEM;
+					if(cur_topic->topic == NULL &&
+							(cur_topic->local_prefix == NULL || cur_topic->remote_prefix == NULL)){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge remapping.\");
+						return MOSQ_ERR_INVAL;
+					if(cur_topic->local_prefix){
+						if(cur_topic->topic){
+							len = strlen(cur_topic->topic) + strlen(cur_topic->local_prefix)+1;
+							cur_topic->local_topic = mosquitto__malloc(len+1);
+							if(!cur_topic->local_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+							snprintf(cur_topic->local_topic, len+1, \"\%s\%s\", cur_topic->local_prefix, cur_topic->topic);
+							cur_topic->local_topic[len] = '\0';
+							cur_topic->local_topic = mosquitto__strdup(cur_topic->local_prefix);
+							if(!cur_topic->local_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->local_topic = mosquitto__strdup(cur_topic->topic);
+						if(!cur_topic->local_topic){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+					if(cur_topic->remote_prefix){
+						if(cur_topic->topic){
+							len = strlen(cur_topic->topic) + strlen(cur_topic->remote_prefix)+1;
+							cur_topic->remote_topic = mosquitto__malloc(len+1);
+							if(!cur_topic->remote_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+							snprintf(cur_topic->remote_topic, len, \"\%s\%s\", cur_topic->remote_prefix, cur_topic->topic);
+							cur_topic->remote_topic[len] = '\0';
+							cur_topic->remote_topic = mosquitto__strdup(cur_topic->remote_prefix);
+							if(!cur_topic->remote_topic){
+								log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+								return MOSQ_ERR_NOMEM;
+						cur_topic->remote_topic = mosquitto__strdup(cur_topic->topic);
+						if(!cur_topic->remote_topic){
+							log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+							return MOSQ_ERR_NOMEM;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_bool(&token, \"try_private\", &cur_bridge->try_private, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+					if(reload) continue; // FIXME
+					if(!cur_bridge){
+						log__printf(NULL, MOSQ_LOG_ERR, \"Error: Invalid bridge configuration.\");
+						return MOSQ_ERR_INVAL;
+					if(conf__parse_string(&token, \"bridge remote_username\", &cur_bridge->remote_username, saveptr)) return MOSQ_ERR_INVAL;
+					log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Bridge support not available.\");
+	int i, j;
+	struct mosquitto__bridge *bridge1, *bridge2;
+	char hostname[256];
+	int len;
+	for(i=0; i<config->bridge_count; i++){
+		bridge1 = &config->bridges[i];
+		if(!bridge1->remote_clientid){
+			if(!gethostname(hostname, 256)){
+				len = strlen(hostname) + strlen(bridge1->name) + 2;
+				bridge1->remote_clientid = mosquitto__malloc(len);
+				if(!bridge1->remote_clientid){
+					return MOSQ_ERR_NOMEM;
+				snprintf(bridge1->remote_clientid, len, \"\%s.\%s\", hostname, bridge1->name);
+				return 1;
+		if(!bridge1->local_clientid){
+			len = strlen(bridge1->remote_clientid) + strlen(\"local.\") + 2;
+			bridge1->local_clientid = mosquitto__malloc(len);
+			if(!bridge1->local_clientid){
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+				return MOSQ_ERR_NOMEM;
+			snprintf(bridge1->local_clientid, len, \"local.\%s\", bridge1->remote_clientid);
+	for(i=0; i<config->bridge_count; i++){
+		bridge1 = &config->bridges[i];
+		for(j=i+1; j<config->bridge_count; j++){
+			bridge2 = &config->bridges[j];
+			if(!strcmp(bridge1->local_clientid, bridge2->local_clientid)){
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error: Bridge local_clientid \"
+				return MOSQ_ERR_INVAL;
+	return MOSQ_ERR_SUCCESS;
+	int i, j;
+	struct mosquitto__bridge *bridge1, *bridge2;
+	char hostname[256];
+	int len;
+	for(i=0; i<config->bridge_count; i++){
+		bridge1 = &config->bridges[i];
+		if(!bridge1->remote_clientid){
+			if(!gethostname(hostname, 256)){
+				len = strlen(hostname) + strlen(bridge1->name) + 2;
+				bridge1->remote_clientid = mosquitto__malloc(len);
+				if(!bridge1->remote_clientid){
+					return MOSQ_ERR_NOMEM;
+				snprintf(bridge1->remote_clientid, len, \"\%s.\%s\", hostname, bridge1->name);
+				return 1;
+		if(!bridge1->local_clientid){
+			len = strlen(bridge1->remote_clientid) + strlen(\"local.\") + 2;
+			bridge1->local_clientid = mosquitto__malloc(len);
+			if(!bridge1->local_clientid){
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+				return MOSQ_ERR_NOMEM;
+			snprintf(bridge1->local_clientid, len, \"local.\%s\", bridge1->remote_clientid);
+	for(i=0; i<config->bridge_count; i++){
+		bridge1 = &config->bridges[i];
+		for(j=i+1; j<config->bridge_count; j++){
+			bridge2 = &config->bridges[j];
+			if(!strcmp(bridge1->local_clientid, bridge2->local_clientid)){
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error: Bridge local_clientid \"
+				return MOSQ_ERR_INVAL;
+	return MOSQ_ERR_SUCCESS;
+	int i, j;
+	struct mosquitto__bridge *bridge1, *bridge2;
+	char hostname[256];
+	int len;
+	for(i=0; i<config->bridge_count; i++){
+		bridge1 = &config->bridges[i];
+		if(!bridge1->remote_clientid){
+			if(!gethostname(hostname, 256)){
+				len = strlen(hostname) + strlen(bridge1->name) + 2;
+				bridge1->remote_clientid = mosquitto__malloc(len);
+				if(!bridge1->remote_clientid){
+					return MOSQ_ERR_NOMEM;
+				snprintf(bridge1->remote_clientid, len, \"\%s.\%s\", hostname, bridge1->name);
+				return 1;
+		if(!bridge1->local_clientid){
+			len = strlen(bridge1->remote_clientid) + strlen(\"local.\") + 2;
+			bridge1->local_clientid = mosquitto__malloc(len);
+			if(!bridge1->local_clientid){
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+				return MOSQ_ERR_NOMEM;
+			snprintf(bridge1->local_clientid, len, \"local.\%s\", bridge1->remote_clientid);
+	for(i=0; i<config->bridge_count; i++){
+		bridge1 = &config->bridges[i];
+		for(j=i+1; j<config->bridge_count; j++){
+			bridge2 = &config->bridges[j];
+			if(!strcmp(bridge1->local_clientid, bridge2->local_clientid)){
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error: Bridge local_clientid \"
+				return MOSQ_ERR_INVAL;
+	return MOSQ_ERR_SUCCESS;
+	int i, j;
+	struct mosquitto__bridge *bridge1, *bridge2;
+	char hostname[256];
+	int len;
+	for(i=0; i<config->bridge_count; i++){
+		bridge1 = &config->bridges[i];
+		if(!bridge1->remote_clientid){
+			if(!gethostname(hostname, 256)){
+				len = strlen(hostname) + strlen(bridge1->name) + 2;
+				bridge1->remote_clientid = mosquitto__malloc(len);
+				if(!bridge1->remote_clientid){
+					return MOSQ_ERR_NOMEM;
+				snprintf(bridge1->remote_clientid, len, \"\%s.\%s\", hostname, bridge1->name);
+				return 1;
+		if(!bridge1->local_clientid){
+			len = strlen(bridge1->remote_clientid) + strlen(\"local.\") + 2;
+			bridge1->local_clientid = mosquitto__malloc(len);
+			if(!bridge1->local_clientid){
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error: Out of memory.\");
+				return MOSQ_ERR_NOMEM;
+			snprintf(bridge1->local_clientid, len, \"local.\%s\", bridge1->remote_clientid);
+	for(i=0; i<config->bridge_count; i++){
+		bridge1 = &config->bridges[i];
+		for(j=i+1; j<config->bridge_count; j++){
+			bridge2 = &config->bridges[j];
+			if(!strcmp(bridge1->local_clientid, bridge2->local_clientid)){
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error: Bridge local_clientid \"
+				return MOSQ_ERR_INVAL;
+	return MOSQ_ERR_SUCCESS;
+";
+"send_unsubscribe.c" -> "	log__printf(mosq, MOSQ_LOG_DEBUG, \"Bridge \%s sending UNSUBSCRIBE (Mid: \%d, Topic: \%s)\", mosq->id, local_mid, topic);
+";
+"mosquitto.c" -> "	for(i=0; i<config.bridge_count; i++){
+		if(bridge__new(&int_db, &(config.bridges[i]))){
+			log__printf(NULL, MOSQ_LOG_WARNING, \"Warning: Unable to connect to bridge \%s.\", 
+					config.bridges[i].name);
+	for(i=0; i<int_db.bridge_count; i++){
+		if(int_db.bridges[i]){
+			context__cleanup(&int_db, int_db.bridges[i], true);
+	mosquitto__free(int_db.bridges);
+";
+"send_disconnect.c" -> "	log__printf(mosq, MOSQ_LOG_DEBUG, \"Bridge \%s sending DISCONNECT\", mosq->id);
+";
+"loop.c" -> "	int rc;
+	int err;
+	socklen_t len;
+	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+		if(context->bridge){
+			ev.data.fd = context->sock;
+			ev.events = EPOLLIN;
+			context->events = EPOLLIN;
+			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error in epoll initial registering bridge: \%s\", strerror(errno));
+				(void)close(db->epollfd);
+				db->epollfd = 0;
+				return MOSQ_ERR_UNKNOWN;
+				if(context->bridge){
+					mosquitto__check_keepalive(db, context);
+					if(context->bridge->round_robin == false
+							&& context->bridge->cur_address != 0
+							&& context->bridge->primary_retry
+							&& now > context->bridge->primary_retry){
+						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+							rc = net__try_connect(context, context->bridge->addresses[0].address,
+									context->bridge->addresses[0].port,
+							if(rc == 0){
+								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+								context->bridge->primary_retry_sock = INVALID_SOCKET;
+								context->bridge->primary_retry = 0;
+								net__socket_close(db, context);
+								context->bridge->cur_address = 0;
+							len = sizeof(int);
+							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+								if(err == 0){
+									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+									context->bridge->primary_retry_sock = INVALID_SOCKET;
+									context->bridge->primary_retry = 0;
+									net__socket_close(db, context);
+									context->bridge->cur_address = context->bridge->address_count-1;
+									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+									context->bridge->primary_retry_sock = INVALID_SOCKET;
+									context->bridge->primary_retry = now+5;
+								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+								context->bridge->primary_retry_sock = INVALID_SOCKET;
+								context->bridge->primary_retry = now+5;
+		for(i=0; i<db->bridge_count; i++){
+			if(!db->bridges[i]) continue;
+			context = db->bridges[i];
+			if(context->sock == INVALID_SOCKET){
+				if(time_count > 0){
+					time_count--;
+					time_count = 1000;
+					now = mosquitto_time();
+				if(!context->bridge->restart_t){
+					context->bridge->restart_t = now+context->bridge->restart_timeout;
+					context->bridge->cur_address++;
+					if(context->bridge->cur_address == context->bridge->address_count){
+						context->bridge->cur_address = 0;
+					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+							rc = bridge__connect(db, context);
+							context->bridge->restart_t = 0;
+							if(rc == MOSQ_ERR_SUCCESS){
+								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+									context->bridge->primary_retry = now + 5;
+								ev.data.fd = context->sock;
+								ev.events = EPOLLIN;
+								if(context->current_out_packet){
+									ev.events |= EPOLLOUT;
+								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+											log__printf(NULL, MOSQ_LOG_DEBUG, \"Error in epoll re-registering bridge: \%s\", strerror(errno));
+									context->events = ev.events;
+								context->bridge->cur_address++;
+								if(context->bridge->cur_address == context->bridge->address_count){
+									context->bridge->cur_address = 0;
+	int rc;
+	int err;
+	socklen_t len;
+	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+		if(context->bridge){
+			ev.data.fd = context->sock;
+			ev.events = EPOLLIN;
+			context->events = EPOLLIN;
+			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error in epoll initial registering bridge: \%s\", strerror(errno));
+				(void)close(db->epollfd);
+				db->epollfd = 0;
+				return MOSQ_ERR_UNKNOWN;
+				if(context->bridge){
+					mosquitto__check_keepalive(db, context);
+					if(context->bridge->round_robin == false
+							&& context->bridge->cur_address != 0
+							&& context->bridge->primary_retry
+							&& now > context->bridge->primary_retry){
+						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+							rc = net__try_connect(context, context->bridge->addresses[0].address,
+									context->bridge->addresses[0].port,
+							if(rc == 0){
+								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+								context->bridge->primary_retry_sock = INVALID_SOCKET;
+								context->bridge->primary_retry = 0;
+								net__socket_close(db, context);
+								context->bridge->cur_address = 0;
+							len = sizeof(int);
+							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+								if(err == 0){
+									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+									context->bridge->primary_retry_sock = INVALID_SOCKET;
+									context->bridge->primary_retry = 0;
+									net__socket_close(db, context);
+									context->bridge->cur_address = context->bridge->address_count-1;
+									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+									context->bridge->primary_retry_sock = INVALID_SOCKET;
+									context->bridge->primary_retry = now+5;
+								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+								context->bridge->primary_retry_sock = INVALID_SOCKET;
+								context->bridge->primary_retry = now+5;
+		for(i=0; i<db->bridge_count; i++){
+			if(!db->bridges[i]) continue;
+			context = db->bridges[i];
+			if(context->sock == INVALID_SOCKET){
+				if(time_count > 0){
+					time_count--;
+					time_count = 1000;
+					now = mosquitto_time();
+				if(!context->bridge->restart_t){
+					context->bridge->restart_t = now+context->bridge->restart_timeout;
+					context->bridge->cur_address++;
+					if(context->bridge->cur_address == context->bridge->address_count){
+						context->bridge->cur_address = 0;
+					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+							rc = bridge__connect(db, context);
+							context->bridge->restart_t = 0;
+							if(rc == MOSQ_ERR_SUCCESS){
+								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+									context->bridge->primary_retry = now + 5;
+								ev.data.fd = context->sock;
+								ev.events = EPOLLIN;
+								if(context->current_out_packet){
+									ev.events |= EPOLLOUT;
+								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+											log__printf(NULL, MOSQ_LOG_DEBUG, \"Error in epoll re-registering bridge: \%s\", strerror(errno));
+									context->events = ev.events;
+								context->bridge->cur_address++;
+								if(context->bridge->cur_address == context->bridge->address_count){
+									context->bridge->cur_address = 0;
+	int rc;
+	int err;
+	socklen_t len;
+	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+		if(context->bridge){
+			ev.data.fd = context->sock;
+			ev.events = EPOLLIN;
+			context->events = EPOLLIN;
+			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error in epoll initial registering bridge: \%s\", strerror(errno));
+				(void)close(db->epollfd);
+				db->epollfd = 0;
+				return MOSQ_ERR_UNKNOWN;
+				if(context->bridge){
+					mosquitto__check_keepalive(db, context);
+					if(context->bridge->round_robin == false
+							&& context->bridge->cur_address != 0
+							&& context->bridge->primary_retry
+							&& now > context->bridge->primary_retry){
+						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+							rc = net__try_connect(context, context->bridge->addresses[0].address,
+									context->bridge->addresses[0].port,
+							if(rc == 0){
+								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+								context->bridge->primary_retry_sock = INVALID_SOCKET;
+								context->bridge->primary_retry = 0;
+								net__socket_close(db, context);
+								context->bridge->cur_address = 0;
+							len = sizeof(int);
+							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+								if(err == 0){
+									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+									context->bridge->primary_retry_sock = INVALID_SOCKET;
+									context->bridge->primary_retry = 0;
+									net__socket_close(db, context);
+									context->bridge->cur_address = context->bridge->address_count-1;
+									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+									context->bridge->primary_retry_sock = INVALID_SOCKET;
+									context->bridge->primary_retry = now+5;
+								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+								context->bridge->primary_retry_sock = INVALID_SOCKET;
+								context->bridge->primary_retry = now+5;
+		for(i=0; i<db->bridge_count; i++){
+			if(!db->bridges[i]) continue;
+			context = db->bridges[i];
+			if(context->sock == INVALID_SOCKET){
+				if(time_count > 0){
+					time_count--;
+					time_count = 1000;
+					now = mosquitto_time();
+				if(!context->bridge->restart_t){
+					context->bridge->restart_t = now+context->bridge->restart_timeout;
+					context->bridge->cur_address++;
+					if(context->bridge->cur_address == context->bridge->address_count){
+						context->bridge->cur_address = 0;
+					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+							rc = bridge__connect(db, context);
+							context->bridge->restart_t = 0;
+							if(rc == MOSQ_ERR_SUCCESS){
+								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+									context->bridge->primary_retry = now + 5;
+								ev.data.fd = context->sock;
+								ev.events = EPOLLIN;
+								if(context->current_out_packet){
+									ev.events |= EPOLLOUT;
+								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+											log__printf(NULL, MOSQ_LOG_DEBUG, \"Error in epoll re-registering bridge: \%s\", strerror(errno));
+									context->events = ev.events;
+								context->bridge->cur_address++;
+								if(context->bridge->cur_address == context->bridge->address_count){
+									context->bridge->cur_address = 0;
+	int rc;
+	int err;
+	socklen_t len;
+	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+		if(context->bridge){
+			ev.data.fd = context->sock;
+			ev.events = EPOLLIN;
+			context->events = EPOLLIN;
+			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+				log__printf(NULL, MOSQ_LOG_ERR, \"Error in epoll initial registering bridge: \%s\", strerror(errno));
+				(void)close(db->epollfd);
+				db->epollfd = 0;
+				return MOSQ_ERR_UNKNOWN;
+				if(context->bridge){
+					mosquitto__check_keepalive(db, context);
+					if(context->bridge->round_robin == false
+							&& context->bridge->cur_address != 0
+							&& context->bridge->primary_retry
+							&& now > context->bridge->primary_retry){
+						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+							rc = net__try_connect(context, context->bridge->addresses[0].address,
+									context->bridge->addresses[0].port,
+							if(rc == 0){
+								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+								context->bridge->primary_retry_sock = INVALID_SOCKET;
+								context->bridge->primary_retry = 0;
+								net__socket_close(db, context);
+								context->bridge->cur_address = 0;
+							len = sizeof(int);
+							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+								if(err == 0){
+									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+									context->bridge->primary_retry_sock = INVALID_SOCKET;
+									context->bridge->primary_retry = 0;
+									net__socket_close(db, context);
+									context->bridge->cur_address = context->bridge->address_count-1;
+									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+									context->bridge->primary_retry_sock = INVALID_SOCKET;
+									context->bridge->primary_retry = now+5;
+								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+								context->bridge->primary_retry_sock = INVALID_SOCKET;
+								context->bridge->primary_retry = now+5;
+		for(i=0; i<db->bridge_count; i++){
+			if(!db->bridges[i]) continue;
+			context = db->bridges[i];
+			if(context->sock == INVALID_SOCKET){
+				if(time_count > 0){
+					time_count--;
+					time_count = 1000;
+					now = mosquitto_time();
+				if(!context->bridge->restart_t){
+					context->bridge->restart_t = now+context->bridge->restart_timeout;
+					context->bridge->cur_address++;
+					if(context->bridge->cur_address == context->bridge->address_count){
+						context->bridge->cur_address = 0;
+					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+							rc = bridge__connect(db, context);
+							context->bridge->restart_t = 0;
+							if(rc == MOSQ_ERR_SUCCESS){
+								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+									context->bridge->primary_retry = now + 5;
+								ev.data.fd = context->sock;
+								ev.events = EPOLLIN;
+								if(context->current_out_packet){
+									ev.events |= EPOLLOUT;
+								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+											log__printf(NULL, MOSQ_LOG_DEBUG, \"Error in epoll re-registering bridge: \%s\", strerror(errno));
+									context->events = ev.events;
+								context->bridge->cur_address++;
+								if(context->bridge->cur_address == context->bridge->address_count){
+									context->bridge->cur_address = 0;
+		if(context->clean_session && !context->bridge){
+		if(context->clean_session){
+		if(context->clean_session && !context->bridge){
+		if(context->clean_session){
+		if(context->clean_session && !context->bridge){
+		if(context->clean_session){
+		if(context->clean_session && !context->bridge){
+		if(context->clean_session){
+";
+"plugin.c" -> "	if(context->bridge){
+		return context->bridge->local_username;
+";
+"read_handle.c" -> "		case CONNACK:
+			return handle__connack(db, context);
+		case SUBACK:
+			return handle__suback(context);
+		case UNSUBACK:
+			return handle__unsuback(context);
+";
+"database.c" -> "	db->bridges = NULL;
+	db->bridge_count = 0;
+	db->bridges = NULL;
+	db->bridge_count = 0;
+	db->bridges = NULL;
+	db->bridge_count = 0;
+	db->bridges = NULL;
+	db->bridge_count = 0;
+				return MOSQ_ERR_NOMEM;
+	if(context->bridge && context->bridge->start_type == bst_lazy
+			&& context->sock == INVALID_SOCKET
+			&& context->msg_count >= context->bridge->threshold){
+		context->bridge->lazy_reconnect = true;
+				return MOSQ_ERR_NOMEM;
+	if(context->bridge && context->bridge->start_type == bst_lazy
+			&& context->sock == INVALID_SOCKET
+			&& context->msg_count >= context->bridge->threshold){
+		context->bridge->lazy_reconnect = true;
+				return MOSQ_ERR_NOMEM;
+	if(context->bridge && context->bridge->start_type == bst_lazy
+			&& context->sock == INVALID_SOCKET
+			&& context->msg_count >= context->bridge->threshold){
+		context->bridge->lazy_reconnect = true;
+				return MOSQ_ERR_NOMEM;
+	if(context->bridge && context->bridge->start_type == bst_lazy
+			&& context->sock == INVALID_SOCKET
+			&& context->msg_count >= context->bridge->threshold){
+		context->bridge->lazy_reconnect = true;
+";
+"send_publish.c" -> "	int i;
+	struct mosquitto__bridge_topic *cur_topic;
+	bool match;
+	int rc;
+	char *mapped_topic = NULL;
+	char *topic_temp = NULL;
+	if(mosq->bridge && mosq->bridge->topics && mosq->bridge->topic_remapping){
+		for(i=0; i<mosq->bridge->topic_count; i++){
+			cur_topic = &mosq->bridge->topics[i];
+			if((cur_topic->direction == bd_both || cur_topic->direction == bd_out)
+					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+				rc = mosquitto_topic_matches_sub(cur_topic->local_topic, topic, &match);
+				if(rc){
+					return rc;
+				if(match){
+					mapped_topic = mosquitto__strdup(topic);
+					if(!mapped_topic) return MOSQ_ERR_NOMEM;
+					if(cur_topic->local_prefix){
+						if(!strncmp(cur_topic->local_prefix, mapped_topic, strlen(cur_topic->local_prefix))){
+							topic_temp = mosquitto__strdup(mapped_topic+strlen(cur_topic->local_prefix));
+							mosquitto__free(mapped_topic);
+							if(!topic_temp){
+					if(cur_topic->remote_prefix){
+						len = strlen(mapped_topic) + strlen(cur_topic->remote_prefix)+1;
+						topic_temp = mosquitto__malloc(len+1);
+						if(!topic_temp){
+							mosquitto__free(mapped_topic);
+							return MOSQ_ERR_NOMEM;
+						snprintf(topic_temp, len, \"\%s\%s\", cur_topic->remote_prefix, mapped_topic);
+						topic_temp[len] = '\0';
+						mosquitto__free(mapped_topic);
+						mapped_topic = topic_temp;
+					log__printf(NULL, MOSQ_LOG_DEBUG, \"Sending PUBLISH to \%s (d\%d, q\%d, r\%d, m\%d, '\%s', ... (\%ld bytes))\", mosq->id, dup, qos, retain, mid, mapped_topic, (long)payloadlen);
+					G_PUB_BYTES_SENT_INC(payloadlen);
+					rc =  send__real_publish(mosq, mid, mapped_topic, payloadlen, payload, qos, retain, dup);
+					mosquitto__free(mapped_topic);
+					return rc;
+	int i;
+	struct mosquitto__bridge_topic *cur_topic;
+	bool match;
+	int rc;
+	char *mapped_topic = NULL;
+	char *topic_temp = NULL;
+	if(mosq->bridge && mosq->bridge->topics && mosq->bridge->topic_remapping){
+		for(i=0; i<mosq->bridge->topic_count; i++){
+			cur_topic = &mosq->bridge->topics[i];
+			if((cur_topic->direction == bd_both || cur_topic->direction == bd_out)
+					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+				rc = mosquitto_topic_matches_sub(cur_topic->local_topic, topic, &match);
+				if(rc){
+					return rc;
+				if(match){
+					mapped_topic = mosquitto__strdup(topic);
+					if(!mapped_topic) return MOSQ_ERR_NOMEM;
+					if(cur_topic->local_prefix){
+						if(!strncmp(cur_topic->local_prefix, mapped_topic, strlen(cur_topic->local_prefix))){
+							topic_temp = mosquitto__strdup(mapped_topic+strlen(cur_topic->local_prefix));
+							mosquitto__free(mapped_topic);
+							if(!topic_temp){
+					if(cur_topic->remote_prefix){
+						len = strlen(mapped_topic) + strlen(cur_topic->remote_prefix)+1;
+						topic_temp = mosquitto__malloc(len+1);
+						if(!topic_temp){
+							mosquitto__free(mapped_topic);
+							return MOSQ_ERR_NOMEM;
+						snprintf(topic_temp, len, \"\%s\%s\", cur_topic->remote_prefix, mapped_topic);
+						topic_temp[len] = '\0';
+						mosquitto__free(mapped_topic);
+						mapped_topic = topic_temp;
+					log__printf(NULL, MOSQ_LOG_DEBUG, \"Sending PUBLISH to \%s (d\%d, q\%d, r\%d, m\%d, '\%s', ... (\%ld bytes))\", mosq->id, dup, qos, retain, mid, mapped_topic, (long)payloadlen);
+					G_PUB_BYTES_SENT_INC(payloadlen);
+					rc =  send__real_publish(mosq, mid, mapped_topic, payloadlen, payload, qos, retain, dup);
+					mosquitto__free(mapped_topic);
+					return rc;
+	int i;
+	struct mosquitto__bridge_topic *cur_topic;
+	bool match;
+	int rc;
+	char *mapped_topic = NULL;
+	char *topic_temp = NULL;
+	if(mosq->bridge && mosq->bridge->topics && mosq->bridge->topic_remapping){
+		for(i=0; i<mosq->bridge->topic_count; i++){
+			cur_topic = &mosq->bridge->topics[i];
+			if((cur_topic->direction == bd_both || cur_topic->direction == bd_out)
+					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+				rc = mosquitto_topic_matches_sub(cur_topic->local_topic, topic, &match);
+				if(rc){
+					return rc;
+				if(match){
+					mapped_topic = mosquitto__strdup(topic);
+					if(!mapped_topic) return MOSQ_ERR_NOMEM;
+					if(cur_topic->local_prefix){
+						if(!strncmp(cur_topic->local_prefix, mapped_topic, strlen(cur_topic->local_prefix))){
+							topic_temp = mosquitto__strdup(mapped_topic+strlen(cur_topic->local_prefix));
+							mosquitto__free(mapped_topic);
+							if(!topic_temp){
+					if(cur_topic->remote_prefix){
+						len = strlen(mapped_topic) + strlen(cur_topic->remote_prefix)+1;
+						topic_temp = mosquitto__malloc(len+1);
+						if(!topic_temp){
+							mosquitto__free(mapped_topic);
+							return MOSQ_ERR_NOMEM;
+						snprintf(topic_temp, len, \"\%s\%s\", cur_topic->remote_prefix, mapped_topic);
+						topic_temp[len] = '\0';
+						mosquitto__free(mapped_topic);
+						mapped_topic = topic_temp;
+					log__printf(NULL, MOSQ_LOG_DEBUG, \"Sending PUBLISH to \%s (d\%d, q\%d, r\%d, m\%d, '\%s', ... (\%ld bytes))\", mosq->id, dup, qos, retain, mid, mapped_topic, (long)payloadlen);
+					G_PUB_BYTES_SENT_INC(payloadlen);
+					rc =  send__real_publish(mosq, mid, mapped_topic, payloadlen, payload, qos, retain, dup);
+					mosquitto__free(mapped_topic);
+					return rc;
+";
+"util_mosq.c" -> "	if(mosq->bridge && mosq->bridge->start_type == bst_lazy
+				&& mosq->sock != INVALID_SOCKET
+				&& now - mosq->next_msg_out - mosq->keepalive >= mosq->bridge->idle_timeout){
+		log__printf(NULL, MOSQ_LOG_NOTICE, \"Bridge connection \%s has exceeded idle timeout, disconnecting.\", mosq->id);
+		net__socket_close(db, mosq);
+		return MOSQ_ERR_SUCCESS;
+	return MOSQ_ERR_SUCCESS;
+	if(mosq->bridge && mosq->bridge->start_type == bst_lazy
+				&& mosq->sock != INVALID_SOCKET
+				&& now - mosq->next_msg_out - mosq->keepalive >= mosq->bridge->idle_timeout){
+		log__printf(NULL, MOSQ_LOG_NOTICE, \"Bridge connection \%s has exceeded idle timeout, disconnecting.\", mosq->id);
+		net__socket_close(db, mosq);
+		return MOSQ_ERR_SUCCESS;
+	return MOSQ_ERR_SUCCESS;
+	if(mosq->bridge && mosq->bridge->start_type == bst_lazy
+				&& mosq->sock != INVALID_SOCKET
+				&& now - mosq->next_msg_out - mosq->keepalive >= mosq->bridge->idle_timeout){
+		log__printf(NULL, MOSQ_LOG_NOTICE, \"Bridge connection \%s has exceeded idle timeout, disconnecting.\", mosq->id);
+		net__socket_close(db, mosq);
+		return MOSQ_ERR_SUCCESS;
+	return MOSQ_ERR_SUCCESS;
+";
+"send_connect.c" -> "	if(mosq->bridge){
+		clientid = mosq->bridge->remote_clientid;
+		username = mosq->bridge->remote_username;
+		password = mosq->bridge->remote_password;
+		clientid = mosq->id;
+		username = mosq->username;
+		password = mosq->password;
+	clientid = mosq->id;
+	username = mosq->username;
+	password = mosq->password;
+	if(mosq->bridge && mosq->bridge->try_private && mosq->bridge->try_private_accepted){
+		version |= 0x80;
+	}
+	log__printf(mosq, MOSQ_LOG_DEBUG, \"Bridge \%s sending CONNECT\", clientid);
+";
+
+}
+}
