@@ -30,6 +30,25 @@ sub parse_file {
 	my @files = <$diff_dir/*>;
 	my %unused_code;
 
+	# Initialize our dot graph first.
+	my $filename = 'FDG.dot';
+	open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
+
+	my $bp_head = "digraph G {
+	graph [fontsize=10 fontname=\"Verdana\" compound=true];
+	subgraph cluster_components {
+		label=\"MQTT Components\";
+		\"WebSocket Support\";
+		\"Bridge Support\";
+		\"With Wrap\";
+		\"...\"
+	}\n
+	subgraph cluster_bridge {
+		label=\"Bridge Support\";\n";
+	my $bp_foot = "\n}\n}";
+
+	print $fh $bp_head;
+
 	foreach my $file (@files) {
 		#print $file . "\n";
 		open (FILE, $file) || die "Error: $!\n";
@@ -50,6 +69,9 @@ sub parse_file {
 				my ($file_name) = $file =~ /\/{2}(.*?)\.gcov/;
 				push(@{$unused_code{$file_name}}, $line_num);
 
+				# Testing.
+				generate_graph($fh, $file_name, $line_num);
+
 				$line_count++;
 			}
 		}
@@ -57,6 +79,10 @@ sub parse_file {
 
 		close(FILE);
 	}
+
+	print $fh $bp_foot;
+	close $fh;
+
 	print colored(['bright_green bold'], "Total lines to remove: " . $line_count . "\n");
 
 	# Print just the file + line numbers to remove.
@@ -65,8 +91,6 @@ sub parse_file {
 		print colored(['bright_cyan'], "\t$obj");
 		print ": @{$unused_code{$obj}}\n";
 	}
-	# Testing.
-	generate_graph();
 }
 
 # Take the data from above to generate the FDG given
@@ -74,18 +98,10 @@ sub parse_file {
 # TODO: generate the FDG for the whole project to 
 # show the context of the feature.
 sub generate_graph {
-	print "TODO\n";
-	my $filename = 'FDG.dot';
-	open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
-
-	my $bp_head = "digraph G {
-	graph [fontsize=10 fontname=\"Verdana\" compound=true];\n";
-	my $bp_foot = "\n}";
-
-	print $fh $bp_head;
-	print $fh "------";
-	print $fh $bp_foot;
-	close $fh;
+	my ($p1, $p2, $p3) = @_;
+	# Print out each subgraph cluster in the form:
+	# SRC_FILES_NAME -> LINE.
+	print $p1 "\"" . $p2 . "\" -> " . $p3 . ";\n";
 
 	return;
 }
@@ -110,3 +126,4 @@ sub wanted {
 }
 
 __END__
+

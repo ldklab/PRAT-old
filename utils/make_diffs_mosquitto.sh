@@ -24,7 +24,7 @@ if [ $? != 0 ] ; then echo "Failed to parse options. Exiting." >&2 ; exit 1 ; fi
 eval set -- "$OPTS"
 
 # Populate a list of features using some NLP technique later.
-featArr=("TLS" "THREADING" "BRIDGE" "PERSISTENCE" "MEMORY_TRACKING" "SYS_TREE" "SYSTEMD" "SRV" "UUID" "WEBSOCKETS" "EC" "SOCKS" "EPOLL" "SHARED_LIBRARIES" "BUNDLED_DEPS")
+featArr=("TLS" "THREADING" "BRIDGE" "PERSISTENCE" "MEMORY_TRACKING" "SYS_TREE" "SYSTEMD" "SRV" "UUID" "WRAP" "WEBSOCKETS" "EC" "SOCKS" "EPOLL" "SHARED_LIBRARIES" "BUNDLED_DEPS")
 
 # Initial values.
 DIR="."
