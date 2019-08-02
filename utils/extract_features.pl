@@ -73,7 +73,7 @@ sub parse_file {
 				my ($file_name) = $file =~ /\/{2}(.*?)\.gcov/;
 
 				push(@{$unused_code{$file_name}}, $line_num);
-				push(@{$graph_content{$file_name}}, $line_src . "\n"); # Also test w/o \n to see if that is a breaking point in rendering.
+				push(@{$graph_content{$file_name}}, $line_src . "\n");
 
 				$line_count++;
 			}
