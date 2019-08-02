@@ -45,7 +45,7 @@ sub parse_file {
 		\"...\"
 	}\n
 	subgraph cluster_bridge {
-		label=\"Bridge Support\";\n";
+		label=\"TODO\";\n";
 	my $bp_foot = "\n}\n}";
 
 	print $fh $bp_head;
