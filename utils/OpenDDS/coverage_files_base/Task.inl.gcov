@@ -1,0 +1,79 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Task.inl
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:// Get the current group id.
+        -:    8:ACE_INLINE int
+        -:    9:ACE_Task_Base::grp_id (void) const
+        -:   10:{
+        -:   11:  ACE_TRACE ("ACE_Task_Base::grp_id");
+        -:   12:  ACE_MT (ACE_GUARD_RETURN (ACE_Thread_Mutex, ace_mon, const_cast <ACE_Thread_Mutex&>(this->lock_), -1));
+        -:   13:  return this->grp_id_;
+        -:   14:}
+        -:   15:
+        -:   16:// Set the current group id.
+        -:   17:
+        -:   18:ACE_INLINE void
+        -:   19:ACE_Task_Base::grp_id (int identifier)
+        -:   20:{
+        -:   21:  ACE_TRACE ("ACE_Task_Base::grp_id");
+        -:   22:  ACE_MT (ACE_GUARD (ACE_Thread_Mutex, ace_mon, this->lock_));
+        -:   23:
+        -:   24:  // Cache the group id in the task and then set it in the
+        -:   25:  // Thread_Manager, if there is one.
+        -:   26:  this->grp_id_ = identifier;
+        -:   27:  if (this->thr_mgr ())
+        -:   28:    this->thr_mgr ()->set_grp (this, identifier);
+        -:   29:}
+        -:   30:
+        -:   31:ACE_INLINE ACE_Thread_Manager *
+        -:   32:ACE_Task_Base::thr_mgr (void) const
+        -:   33:{
+        -:   34:  ACE_TRACE ("ACE_Task_Base::thr_mgr");
+        -:   35:  return this->thr_mgr_;
+        -:   36:}
+        -:   37:
+        -:   38:ACE_INLINE void
+      118:   39:ACE_Task_Base::thr_mgr (ACE_Thread_Manager *thr_mgr)
+        -:   40:{
+        -:   41:  ACE_TRACE ("ACE_Task_Base::thr_mgr");
+      118:   42:  this->thr_mgr_ = thr_mgr;
+      118:   43:}
+        -:   44:
+        -:   45:ACE_INLINE int
+        -:   46:ACE_Task_Base::is_reader (void) const
+        -:   47:{
+        -:   48:  ACE_TRACE ("ACE_Task_Base::is_reader");
+        -:   49:  return (ACE_BIT_ENABLED (this->flags_, ACE_Task_Flags::ACE_READER));
+        -:   50:}
+        -:   51:
+        -:   52:ACE_INLINE int
+        -:   53:ACE_Task_Base::is_writer (void) const
+        -:   54:{
+        -:   55:  ACE_TRACE ("ACE_Task_Base::is_writer");
+        -:   56:  return (ACE_BIT_DISABLED (this->flags_, ACE_Task_Flags::ACE_READER));
+        -:   57:}
+        -:   58:
+        -:   59:// Return the count of the current number of threads.
+        -:   60:ACE_INLINE size_t
+        -:   61:ACE_Task_Base::thr_count (void) const
+        -:   62:{
+        -:   63:  ACE_TRACE ("ACE_Task_Base::thr_count");
+        -:   64:  ACE_MT (ACE_GUARD_RETURN (ACE_Thread_Mutex, ace_mon, const_cast <ACE_Thread_Mutex&>(this->lock_), 0));
+        -:   65:
+        -:   66:  return this->thr_count_;
+        -:   67:}
+        -:   68:
+        -:   69:// Return the thread ID of the last thread to exit svc().
+        -:   70:ACE_INLINE ACE_thread_t
+        -:   71:ACE_Task_Base::last_thread (void) const
+        -:   72:{
+        -:   73:  ACE_TRACE ("ACE_Task_Base::last_thread");
+        -:   74:  return this->last_thread_id_;
+        -:   75:}
+        -:   76:
+        -:   77:ACE_END_VERSIONED_NAMESPACE_DECL

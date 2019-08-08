@@ -1,0 +1,53 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Object_Manager.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:ACE_INLINE
+        -:    8:int
+        -:    9:ACE_Object_Manager::at_exit (ACE_Cleanup *object,
+        -:   10:                             void *param,
+        -:   11:                             const char* name)
+        -:   12:{
+        -:   13:  return ACE_Object_Manager::instance ()->at_exit_i (
+        -:   14:    object,
+        -:   15:    (ACE_CLEANUP_FUNC) ACE_CLEANUP_DESTROYER_NAME,
+        -:   16:    param,
+        -:   17:    name);
+        -:   18:}
+        -:   19:
+        -:   20:ACE_INLINE
+        -:   21:int
+        -:   22:ACE_Object_Manager::at_exit (void *object,
+        -:   23:                             ACE_CLEANUP_FUNC cleanup_hook,
+        -:   24:                             void *param,
+        -:   25:                             const char* name)
+        -:   26:{
+        -:   27:  return ACE_Object_Manager::instance ()->at_exit_i (
+        -:   28:    object,
+        -:   29:    cleanup_hook,
+        -:   30:    param,
+        -:   31:    name);
+        -:   32:}
+        -:   33:
+        -:   34:ACE_INLINE
+        -:   35:int
+    #####:   36:ACE_Object_Manager::remove_at_exit (void *object)
+        -:   37:{
+    #####:   38:  return ACE_Object_Manager::instance ()->remove_at_exit_i (object);
+        -:   39:}
+        -:   40:
+        -:   41:ACE_INLINE
+        -:   42:ACE_Sig_Set &
+        -:   43:ACE_Object_Manager::default_mask (void)
+        -:   44:{
+        -:   45:  // A safe cast, but this static method shouldn't be used anyways.
+        -:   46:  // Use ACE_Object_Manager::default_mask () instead.
+        -:   47:  return
+        -:   48:    *reinterpret_cast<ACE_Sig_Set *> (ACE_OS_Object_Manager::default_mask ());
+        -:   49:}
+        -:   50:
+        -:   51:ACE_END_VERSIONED_NAMESPACE_DECL

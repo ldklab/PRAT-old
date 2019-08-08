@@ -1,0 +1,41 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/SOCK.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/OS_NS_sys_socket.h"
+        -:    6:
+        -:    7:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    8:
+        -:    9:ACE_INLINE
+        -:   10:ACE_SOCK::~ACE_SOCK (void)
+        -:   11:{
+        -:   12:  // ACE_TRACE ("ACE_SOCK::~ACE_SOCK");
+        -:   13:}
+        -:   14:
+        -:   15:ACE_INLINE int
+      163:   16:ACE_SOCK::set_option (int level,
+        -:   17:                      int option,
+        -:   18:                      void *optval,
+        -:   19:                      int optlen) const
+        -:   20:{
+        -:   21:  ACE_TRACE ("ACE_SOCK::set_option");
+      163:   22:  return ACE_OS::setsockopt (this->get_handle (), level,
+      163:   23:                             option, (char *) optval, optlen);
+        -:   24:}
+        -:   25:
+        -:   26:// Provides access to the ACE_OS::getsockopt system call.
+        -:   27:
+        -:   28:ACE_INLINE int
+        -:   29:ACE_SOCK::get_option (int level,
+        -:   30:                      int option,
+        -:   31:                      void *optval,
+        -:   32:                      int *optlen) const
+        -:   33:{
+        -:   34:  ACE_TRACE ("ACE_SOCK::get_option");
+        -:   35:  return ACE_OS::getsockopt (this->get_handle (), level,
+        -:   36:                             option, (char *) optval, optlen);
+        -:   37:}
+        -:   38:
+        -:   39:ACE_END_VERSIONED_NAMESPACE_DECL

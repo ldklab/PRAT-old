@@ -1,0 +1,227 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Arg_Shifter.cpp
+        -:    0:Programs:70
+        -:    1:// $Id$
+        -:    2:
+        -:    3:#ifndef ACE_ARG_SHIFTER_T_CPP
+        -:    4:#define ACE_ARG_SHIFTER_T_CPP
+        -:    5:
+        -:    6:#include "ace/Arg_Shifter.h"
+        -:    7:#include "ace/OS_NS_string.h"
+        -:    8:#include "ace/OS_NS_strings.h"
+        -:    9:#include "ace/OS_Errno.h"
+        -:   10:#include "ace/OS_Memory.h"
+        -:   11:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:   12:# include "ace/Malloc_Base.h"
+        -:   13:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:   14:
+        -:   15:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   16:
+        -:   17:template <typename CHAR_TYPE>
+        -:   18:ACE_Arg_Shifter_T<CHAR_TYPE>::ACE_Arg_Shifter_T (int& argc,
+        -:   19:                                                 const CHAR_TYPE** argv,
+        -:   20:                                                 const CHAR_TYPE** temp)
+        -:   21:  : argc_ (argc),
+        -:   22:    total_size_ (argc),
+        -:   23:    temp_ (temp),
+        -:   24:    argv_ (argv),
+        -:   25:    current_index_ (0),
+        -:   26:    back_ (argc - 1),
+        -:   27:    front_ (0)
+        -:   28:{
+        -:   29:  this->init ();
+        -:   30:}
+        -:   31:
+        -:   32:template <typename CHAR_TYPE>
+      236:   33:ACE_Arg_Shifter_T<CHAR_TYPE>::ACE_Arg_Shifter_T (int& argc,
+        -:   34:                                                 CHAR_TYPE** argv,
+        -:   35:                                                 CHAR_TYPE** temp)
+        -:   36:  : argc_ (argc),
+        -:   37:    total_size_ (argc),
+        -:   38:    temp_ ((const CHAR_TYPE **) temp),
+        -:   39:    argv_ ((const CHAR_TYPE **) argv),
+        -:   40:    current_index_ (0),
+      236:   41:    back_ (argc - 1),
+      472:   42:    front_ (0)
+        -:   43:{
+      236:   44:  this->init ();
+      236:   45:}
+        -:   46:
+        -:   47:template <typename CHAR_TYPE>
+        -:   48:void
+      236:   49:ACE_Arg_Shifter_T<CHAR_TYPE>::init (void)
+        -:   50:{
+        -:   51:  // If not provided with one, allocate a temporary array.
+      236:   52:  if (this->temp_ == 0)
+        -:   53:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:   54:    this->temp_ = reinterpret_cast<const CHAR_TYPE **>
+        -:   55:      (ACE_Allocator::instance ()->malloc (sizeof (CHAR_TYPE*) * this->total_size_));
+        -:   56:#else
+     236*:   57:    ACE_NEW (this->temp_,
+        -:   58:             const CHAR_TYPE *[this->total_size_]);
+        -:   59:#endif /* ACE_HAS_ALLOC_HOOKS */
+      236:   60:  if (this->temp_ != 0)
+        -:   61:    {
+        -:   62:      // Fill the temporary array.
+      236:   63:      this->argc_ = 0;
+     1306:   64:      for (int i = 0; i < this->total_size_; i++)
+        -:   65:        {
+     1070:   66:          this->temp_[i] = this->argv_[i];
+     1070:   67:          this->argv_[i] = 0;
+        -:   68:        }
+        -:   69:    }
+        -:   70:  else
+        -:   71:    {
+        -:   72:      // Allocation failed, prohibit iteration.
+    #####:   73:      this->current_index_ = this->argc_;
+    #####:   74:      this->front_ = this->argc_;
+        -:   75:    }
+        -:   76:}
+        -:   77:
+        -:   78:template <typename CHAR_TYPE>
+      236:   79:ACE_Arg_Shifter_T<CHAR_TYPE>::~ACE_Arg_Shifter_T (void)
+        -:   80:{
+        -:   81:  // Delete the temporary vector.
+        -:   82:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:   83:  if (this->temp_)
+        -:   84:    ACE_Allocator::instance ()->free (this->temp_);
+        -:   85:#else
+      236:   86:  delete [] temp_;
+        -:   87:#endif /* ACE_HAS_ALLOC_HOOKS */
+      236:   88:}
+        -:   89:
+        -:   90:template <typename CHAR_TYPE>
+        -:   91:const CHAR_TYPE *
+        4:   92:ACE_Arg_Shifter_T<CHAR_TYPE>::get_current (void) const
+        -:   93:{
+        4:   94:  const CHAR_TYPE * retval = 0;
+        -:   95:
+        4:   96:  if (this->is_anything_left ())
+        4:   97:    retval =  this->temp_[current_index_];
+        -:   98:
+        4:   99:  return retval;
+        -:  100:}
+        -:  101:
+        -:  102:template <typename CHAR_TYPE>
+        -:  103:const CHAR_TYPE *
+    10894:  104:ACE_Arg_Shifter_T<CHAR_TYPE>::get_the_parameter (const CHAR_TYPE *flag)
+        -:  105:{
+        -:  106:  // the return 0's abound because this method
+        -:  107:  // would otherwise be a deep if { } else { }
+        -:  108:
+        -:  109:  // check to see if any arguments still exist
+    10894:  110:  if (!this->is_anything_left())
+    #####:  111:    return 0;
+        -:  112:
+        -:  113:  // check to see if the flag is the argument
+    10894:  114:  int const offset = this->cur_arg_strncasecmp (flag);
+    10894:  115:  if (offset == -1)
+    10817:  116:    return 0;
+        -:  117:
+       77:  118:  if (offset == 0)
+        -:  119:    {
+       77:  120:      this->consume_arg ();
+        -:  121:
+       77:  122:      if (!this->is_parameter_next())
+        -:  123:        {
+    #####:  124:          return 0;
+        -:  125:        }
+        -:  126:    }
+        -:  127:  // the parameter is in the middle somewhere...
+       77:  128:  return this->temp_[current_index_] + offset;
+        -:  129:}
+        -:  130:
+        -:  131:template <typename CHAR_TYPE>
+        -:  132:int
+    12495:  133:ACE_Arg_Shifter_T<CHAR_TYPE>::cur_arg_strncasecmp (const CHAR_TYPE *flag)
+        -:  134:{
+    12495:  135:  if (!this->is_anything_left ())
+    #####:  136:    return -1;
+        -:  137:
+    12495:  138:  const size_t flag_length = ACE_OS::strlen (flag);
+    12495:  139:  const CHAR_TYPE *arg = this->temp_[this->current_index_];
+        -:  140:
+    12495:  141:  if (ACE_OS::strncasecmp (arg, flag, flag_length) != 0)
+    12414:  142:    return -1;
+        -:  143:
+       81:  144:  const size_t arg_length = ACE_OS::strlen (arg);
+       81:  145:  size_t remaining = flag_length;
+      81*:  146:  while (remaining < arg_length && arg[remaining] == CHAR_TYPE (' '))
+    #####:  147:    ++remaining;
+       81:  148:  return (arg_length == flag_length) ? 0 : static_cast<int> (remaining);
+        -:  149:}
+        -:  150:
+        -:  151:template <typename CHAR_TYPE>
+        -:  152:int
+      158:  153:ACE_Arg_Shifter_T<CHAR_TYPE>::consume_arg (int number)
+        -:  154:{
+      158:  155:  int retval = 0;
+        -:  156:
+        -:  157:  // Stick knowns at the end of the vector (consumed).
+      158:  158:  if (this->is_anything_left() >= number)
+        -:  159:    {
+      158:  160:      for (int i = 0, j = this->back_ - (number - 1);
+      316:  161:           i < number;
+      158:  162:           ++i, ++j, ++this->current_index_)
+      158:  163:        this->argv_[j] = this->temp_[this->current_index_];
+        -:  164:
+      158:  165:      this->back_ -= number;
+      158:  166:      retval = 1;
+        -:  167:    }
+        -:  168:
+      158:  169:  return retval;
+        -:  170:}
+        -:  171:
+        -:  172:template <typename CHAR_TYPE>
+        -:  173:int
+      912:  174:ACE_Arg_Shifter_T<CHAR_TYPE>::ignore_arg (int number)
+        -:  175:{
+      912:  176:  int retval = 0;
+        -:  177:
+        -:  178:  // Keep unknowns at the head of the vector.
+      912:  179:  if (this->is_anything_left () >= number)
+        -:  180:    {
+      912:  181:      for (int i = 0;
+     1824:  182:           i < number;
+     1824:  183:           i++, this->current_index_++, this->front_++)
+      912:  184:        this->argv_[this->front_] = this->temp_[this->current_index_];
+        -:  185:
+      912:  186:      retval = 1;
+      912:  187:      this->argc_ += number;
+        -:  188:    }
+        -:  189:
+      912:  190:  return retval;
+        -:  191:}
+        -:  192:
+        -:  193:template <typename CHAR_TYPE>
+        -:  194:int
+    25769:  195:ACE_Arg_Shifter_T<CHAR_TYPE>::is_anything_left (void) const
+        -:  196:{
+    25769:  197:  return this->total_size_ - this->current_index_;
+        -:  198:}
+        -:  199:
+        -:  200:template <typename CHAR_TYPE>
+        -:  201:int
+        -:  202:ACE_Arg_Shifter_T<CHAR_TYPE>::is_option_next (void) const
+        -:  203:{
+        -:  204:  return this->is_anything_left () &&
+        -:  205:    this->temp_[this->current_index_][0] == '-';
+        -:  206:}
+        -:  207:
+        -:  208:template <typename CHAR_TYPE>
+        -:  209:int
+       79:  210:ACE_Arg_Shifter_T<CHAR_TYPE>::is_parameter_next (void) const
+        -:  211:{
+        -:  212:  return this->is_anything_left ()
+      79*:  213:    && this->temp_[this->current_index_][0] != '-';
+        -:  214:}
+        -:  215:
+        -:  216:template <typename CHAR_TYPE>
+        -:  217:int
+        -:  218:ACE_Arg_Shifter_T<CHAR_TYPE>::num_ignored_args (void) const
+        -:  219:{
+        -:  220:  return this->front_;
+        -:  221:}
+        -:  222:
+        -:  223:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  224:
+        -:  225:#endif /* ACE_ATOMIC_OP_T_CPP */

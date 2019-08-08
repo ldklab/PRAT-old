@@ -1,0 +1,137 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Timer_Queue_Iterator.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:template <class TYPE> ACE_INLINE void
+    #####:    8:ACE_Timer_Node_T<TYPE>::set (const TYPE &type,
+        -:    9:                             const void *a,
+        -:   10:                             const ACE_Time_Value &t,
+        -:   11:                             const ACE_Time_Value &i,
+        -:   12:                             ACE_Timer_Node_T<TYPE> *n,
+        -:   13:                             long timer_id)
+        -:   14:{
+    #####:   15:  this->type_ = type;
+    #####:   16:  this->act_ = a;
+    #####:   17:  this->timer_value_ = t;
+    #####:   18:  this->interval_ = i;
+    #####:   19:  this->next_ = n;
+    #####:   20:  this->timer_id_ = timer_id;
+    #####:   21:}
+        -:   22:
+        -:   23:template <class TYPE> ACE_INLINE void
+        -:   24:ACE_Timer_Node_T<TYPE>::set (const TYPE &type,
+        -:   25:                             const void *a,
+        -:   26:                             const ACE_Time_Value &t,
+        -:   27:                             const ACE_Time_Value &i,
+        -:   28:                             ACE_Timer_Node_T<TYPE> *p,
+        -:   29:                             ACE_Timer_Node_T<TYPE> *n,
+        -:   30:                             long timer_id)
+        -:   31:{
+        -:   32:  this->type_ = type;
+        -:   33:  this->act_ = a;
+        -:   34:  this->timer_value_ = t;
+        -:   35:  this->interval_ = i;
+        -:   36:  this->prev_ = p;
+        -:   37:  this->next_ = n;
+        -:   38:  this->timer_id_ = timer_id;
+        -:   39:}
+        -:   40:
+        -:   41:template <class TYPE> ACE_INLINE TYPE &
+    #####:   42:ACE_Timer_Node_T<TYPE>::get_type (void)
+        -:   43:{
+    #####:   44:  return this->type_;
+        -:   45:}
+        -:   46:
+        -:   47:template <class TYPE> ACE_INLINE void
+        -:   48:ACE_Timer_Node_T<TYPE>::set_type (TYPE &type)
+        -:   49:{
+        -:   50:  this->type_ = type;
+        -:   51:}
+        -:   52:
+        -:   53:template <class TYPE> ACE_INLINE const void *
+    #####:   54:ACE_Timer_Node_T<TYPE>::get_act (void)
+        -:   55:{
+    #####:   56:  return this->act_;
+        -:   57:}
+        -:   58:
+        -:   59:template <class TYPE> ACE_INLINE void
+        -:   60:ACE_Timer_Node_T<TYPE>::set_act (void *act)
+        -:   61:{
+        -:   62:  this->act_ = act;
+        -:   63:}
+        -:   64:
+        -:   65:template <class TYPE> ACE_INLINE const ACE_Time_Value &
+    #####:   66:ACE_Timer_Node_T<TYPE>::get_timer_value (void) const
+        -:   67:{
+    #####:   68:  return this->timer_value_;
+        -:   69:}
+        -:   70:
+        -:   71:template <class TYPE> ACE_INLINE void
+    #####:   72:ACE_Timer_Node_T<TYPE>::set_timer_value (const ACE_Time_Value &timer_value)
+        -:   73:{
+    #####:   74:  this->timer_value_ = timer_value;
+    #####:   75:}
+        -:   76:
+        -:   77:template <class TYPE> ACE_INLINE const ACE_Time_Value &
+    #####:   78:ACE_Timer_Node_T<TYPE>::get_interval (void) const
+        -:   79:{
+    #####:   80:  return this->interval_;
+        -:   81:}
+        -:   82:
+        -:   83:template <class TYPE> ACE_INLINE void
+    #####:   84:ACE_Timer_Node_T<TYPE>::set_interval (const ACE_Time_Value &interval)
+        -:   85:{
+    #####:   86:  this->interval_ = interval;
+    #####:   87:}
+        -:   88:
+        -:   89:template <class TYPE> ACE_INLINE ACE_Timer_Node_T<TYPE> *
+        -:   90:ACE_Timer_Node_T<TYPE>::get_prev (void)
+        -:   91:{
+        -:   92:  return this->prev_;
+        -:   93:}
+        -:   94:
+        -:   95:template <class TYPE> ACE_INLINE void
+        -:   96:ACE_Timer_Node_T<TYPE>::set_prev (ACE_Timer_Node_T<TYPE> *prev)
+        -:   97:{
+        -:   98:  this->prev_ = prev;
+        -:   99:}
+        -:  100:
+        -:  101:template <class TYPE> ACE_INLINE ACE_Timer_Node_T<TYPE> *
+    #####:  102:ACE_Timer_Node_T<TYPE>::get_next (void)
+        -:  103:{
+    #####:  104:  return this->next_;
+        -:  105:}
+        -:  106:
+        -:  107:template <class TYPE> ACE_INLINE void
+    #####:  108:ACE_Timer_Node_T<TYPE>::set_next (ACE_Timer_Node_T<TYPE> *next)
+        -:  109:{
+    #####:  110:  this->next_ = next;
+    #####:  111:}
+        -:  112:
+        -:  113:template <class TYPE> ACE_INLINE long
+    #####:  114:ACE_Timer_Node_T<TYPE>::get_timer_id (void) const
+        -:  115:{
+    #####:  116:  return this->timer_id_;
+        -:  117:}
+        -:  118:
+        -:  119:template <class TYPE> ACE_INLINE void
+        -:  120:ACE_Timer_Node_T<TYPE>::set_timer_id (long timer_id)
+        -:  121:{
+        -:  122:  this->timer_id_ = timer_id;
+        -:  123:}
+        -:  124:
+        -:  125:template <class TYPE> ACE_INLINE void
+    #####:  126:ACE_Timer_Node_T<TYPE>::get_dispatch_info (ACE_Timer_Node_Dispatch_Info_T<TYPE> &info)
+        -:  127:{
+        -:  128:  // Yes, do a copy
+    #####:  129:  info.type_ = this->type_;
+    #####:  130:  info.act_  = this->act_;
+    #####:  131:  info.recurring_timer_ =
+    #####:  132:    this->interval_ > ACE_Time_Value::zero;
+    #####:  133:}
+        -:  134:
+        -:  135:ACE_END_VERSIONED_NAMESPACE_DECL

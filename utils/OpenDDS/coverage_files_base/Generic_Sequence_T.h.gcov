@@ -1,0 +1,1971 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Generic_Sequence_T.h
+        -:    0:Programs:51
+        -:    1:#ifndef guard_generic_sequence_hpp
+        -:    2:#define guard_generic_sequence_hpp
+        -:    3:/**
+        -:    4: * @file Generic_Sequence_T.h
+        -:    5: *
+        -:    6: * @brief Implement the generic version of CORBA sequences.
+        -:    7: *
+        -:    8: * All CORBA sequences are based on this class template.  The behavior
+        -:    9: * of this class is controlled by two sets of traits.  First, the
+        -:   10: * ALLOCATION_TRAITS control how buffers are allocated and
+        -:   11: * initialized.  Since this is where most of the variation between
+        -:   12: * unbounded and bounded sequences is found, the ALLOCATION_TRAITS can
+        -:   13: * be thought as the bounded aspect of the sequence.
+        -:   14: *
+        -:   15: * Second, the element traits control how are elements copied,
+        -:   16: * initialized and released.  Value-like types, such as integers and
+        -:   17: * structures, have trivial initialization and release requirements
+        -:   18: * (their constructor/destructors do the job!)   But reference-like
+        -:   19: * types, such as strings and object references, have more complicated
+        -:   20: * requirements.  This is yet another aspect of the sequences, we can
+        -:   21: * call it the "element copy semantics" or something.
+        -:   22: *
+        -:   23: * Oh, and let us not forget the type that the sequences encapsulates.
+        -:   24: *
+        -:   25: * The intent is not for sequences to simply derive or instantiate this
+        -:   26: * type.  Instead, different each sequence type is written using
+        -:   27: * composition.  They instantiate a generic sequence with the correct
+        -:   28: * traits, and implement the adapt the generic sequence interface to
+        -:   29: * whatever requirements the spec may impose.  For example, replace()
+        -:   30: * has different number of arguments in bounded vs. unbounded
+        -:   31: * sequences, and operator[] returns different types depending on the
+        -:   32: * underlying type of the sequence.
+        -:   33: *
+        -:   34: * This class offers the strong exception-safety guarantee, as long as
+        -:   35: * destructors and release operations do not throw.
+        -:   36: *
+        -:   37: * This class is not thread-safe.  Thread-safe collections are mostly
+        -:   38: * useless anyways.
+        -:   39: *
+        -:   40: * In general the performance characteristics of the class depends on
+        -:   41: * the traits.  Obviously, they can only be expressed on the number of
+        -:   42: * element constructor and destructor calls.  If the constructor takes
+        -:   43: * O(K) time that is not the sequence fault!
+        -:   44: *
+        -:   45: * All accessors are O(1), single-element modifiers are O(1), multiple
+        -:   46: * element modifiers are O(n + m) where n is the number of elements
+        -:   47: * originally in the sequence, and m is the number of elements left in
+        -:   48: * the sequence afterwards.
+        -:   49: *
+        -:   50: * Beware:
+        -:   51: * - get_buffer(true) may modify multiple elements
+        -:   52: * - length(CORBA::ULong) may modify multiple elements!
+        -:   53: *
+        -:   54: * $Id$
+        -:   55: *
+        -:   56: * @author Carlos O'Ryan
+        -:   57: */
+        -:   58:
+        -:   59:#include "tao/Range_Checking_T.h"
+        -:   60:#include "ace/checked_iterator.h"
+        -:   61:
+        -:   62:#include <algorithm>
+        -:   63:
+        -:   64:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   65:
+        -:   66:namespace TAO
+        -:   67:{
+        -:   68:namespace details
+        -:   69:{
+        -:   70:
+        -:   71:#if defined TAO_HAS_SEQUENCE_ITERATORS && TAO_HAS_SEQUENCE_ITERATORS == 1
+        -:   72:
+        -:   73:// Forward declare the iterators
+        -:   74:template<typename T>
+        -:   75:class Generic_Sequence_Iterator;
+        -:   76:
+        -:   77:template<typename T>
+        -:   78:class Const_Generic_Sequence_Iterator;
+        -:   79:
+        -:   80:template<typename T>
+        -:   81:class Generic_Sequence_Reverse_Iterator;
+        -:   82:
+        -:   83:template<typename T>
+        -:   84:class Const_Generic_Sequence_Reverse_Iterator;
+        -:   85:
+        -:   86:#endif /* TAO_HAS_SEQUENCE_ITERATORS==1 */
+        -:   87:
+        -:   88:template<typename T,
+        -:   89:         class ALLOCATION_TRAITS,
+        -:   90:         class ELEMENT_TRAITS>
+        -:   91:class generic_sequence
+        -:   92:{
+        -:   93:
+        -:   94:#if defined TAO_HAS_SEQUENCE_ITERATORS && TAO_HAS_SEQUENCE_ITERATORS == 1
+        -:   95:
+        -:   96:  friend class Generic_Sequence_Iterator<generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS> >;
+        -:   97:  friend class Const_Generic_Sequence_Iterator<generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS> >;
+        -:   98:  friend class Generic_Sequence_Reverse_Iterator<generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS> >;
+        -:   99:  friend class Const_Generic_Sequence_Reverse_Iterator<generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS> >;
+        -:  100:
+        -:  101:#endif /* TAO_HAS_SEQUENCE_ITERATORS==1 */
+        -:  102:
+        -:  103:public:
+        -:  104:  typedef T value_type;
+        -:  105:  typedef ALLOCATION_TRAITS allocation_traits;
+        -:  106:  typedef ELEMENT_TRAITS element_traits;
+        -:  107:  typedef range_checking<value_type,true> range;
+        -:  108:
+        -:  109:  /// Default constructor.
+        -:  110:  generic_sequence(void)
+        -:  111:    : maximum_(allocation_traits::default_maximum())
+        -:  112:    , length_(0)
+        -:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+        -:  114:    , release_(buffer_ != 0)
+        -:  115:  {
+        -:  116:  }
+        -:  117:
+        -:  118:  /// Constructor with control of ownership.
+        -:  119:  explicit generic_sequence(CORBA::ULong maximum)
+        -:  120:    : maximum_(maximum)
+        -:  121:    , length_(0)
+        -:  122:    , buffer_(allocbuf(maximum_))
+        -:  123:    , release_(true)
+        -:  124:  {
+        -:  125:  }
+        -:  126:
+    #####:  127:  generic_sequence(
+        -:  128:      CORBA::ULong maximum,
+        -:  129:      CORBA::ULong length,
+        -:  130:      value_type * data,
+        -:  131:      CORBA::Boolean release)
+        -:  132:    : maximum_(maximum)
+        -:  133:    , length_(length)
+        -:  134:    , buffer_(data)
+    #####:  135:    , release_(release)
+        -:  136:  {
+    #####:  137:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+    #####:  127:  generic_sequence(
+        -:  128:      CORBA::ULong maximum,
+        -:  129:      CORBA::ULong length,
+        -:  130:      value_type * data,
+        -:  131:      CORBA::Boolean release)
+        -:  132:    : maximum_(maximum)
+        -:  133:    , length_(length)
+        -:  134:    , buffer_(data)
+    #####:  135:    , release_(release)
+        -:  136:  {
+    #####:  137:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+    #####:  127:  generic_sequence(
+        -:  128:      CORBA::ULong maximum,
+        -:  129:      CORBA::ULong length,
+        -:  130:      value_type * data,
+        -:  131:      CORBA::Boolean release)
+        -:  132:    : maximum_(maximum)
+        -:  133:    , length_(length)
+        -:  134:    , buffer_(data)
+    #####:  135:    , release_(release)
+        -:  136:  {
+    #####:  137:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+    #####:  127:  generic_sequence(
+        -:  128:      CORBA::ULong maximum,
+        -:  129:      CORBA::ULong length,
+        -:  130:      value_type * data,
+        -:  131:      CORBA::Boolean release)
+        -:  132:    : maximum_(maximum)
+        -:  133:    , length_(length)
+        -:  134:    , buffer_(data)
+    #####:  135:    , release_(release)
+        -:  136:  {
+    #####:  137:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+    #####:  127:  generic_sequence(
+        -:  128:      CORBA::ULong maximum,
+        -:  129:      CORBA::ULong length,
+        -:  130:      value_type * data,
+        -:  131:      CORBA::Boolean release)
+        -:  132:    : maximum_(maximum)
+        -:  133:    , length_(length)
+        -:  134:    , buffer_(data)
+    #####:  135:    , release_(release)
+        -:  136:  {
+    #####:  137:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+    #####:  127:  generic_sequence(
+        -:  128:      CORBA::ULong maximum,
+        -:  129:      CORBA::ULong length,
+        -:  130:      value_type * data,
+        -:  131:      CORBA::Boolean release)
+        -:  132:    : maximum_(maximum)
+        -:  133:    , length_(length)
+        -:  134:    , buffer_(data)
+    #####:  135:    , release_(release)
+        -:  136:  {
+    #####:  137:  }
+------------------
+_ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_EC2EjjPS2_b:
+    #####:  127:  generic_sequence(
+        -:  128:      CORBA::ULong maximum,
+        -:  129:      CORBA::ULong length,
+        -:  130:      value_type * data,
+        -:  131:      CORBA::Boolean release)
+        -:  132:    : maximum_(maximum)
+        -:  133:    , length_(length)
+        -:  134:    , buffer_(data)
+    #####:  135:    , release_(release)
+        -:  136:  {
+    #####:  137:  }
+------------------
+        -:  138:
+        -:  139:  /// Copy constructor
+    #####:  140:  generic_sequence(generic_sequence const & rhs)
+        -:  141:    : maximum_(0)
+        -:  142:    , length_(0)
+        -:  143:    , buffer_(0)
+    #####:  144:    , release_(false)
+        -:  145:  {
+    #####:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+        -:  147:    {
+    #####:  148:      maximum_ = rhs.maximum_;
+    #####:  149:      length_ = rhs.length_;
+    #####:  150:      return;
+        -:  151:    }
+    #####:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+    #####:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+        -:  154:                         true);
+    #####:  155:    element_traits::initialize_range(
+    #####:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+    #####:  157:    element_traits::copy_range(
+        -:  158:        rhs.buffer_,
+    #####:  159:        rhs.buffer_ + rhs.length_,
+    #####:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+    #####:  161:    swap(tmp);
+        -:  162:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2ERKS9_:
+    #####:  140:  generic_sequence(generic_sequence const & rhs)
+        -:  141:    : maximum_(0)
+        -:  142:    , length_(0)
+        -:  143:    , buffer_(0)
+    #####:  144:    , release_(false)
+        -:  145:  {
+    #####:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+        -:  147:    {
+    #####:  148:      maximum_ = rhs.maximum_;
+    #####:  149:      length_ = rhs.length_;
+    #####:  150:      return;
+        -:  151:    }
+    #####:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+    #####:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+        -:  154:                         true);
+    #####:  155:    element_traits::initialize_range(
+    #####:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+    #####:  157:    element_traits::copy_range(
+        -:  158:        rhs.buffer_,
+    #####:  159:        rhs.buffer_ + rhs.length_,
+    #####:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+    #####:  161:    swap(tmp);
+        -:  162:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2ERKS9_:
+    #####:  140:  generic_sequence(generic_sequence const & rhs)
+        -:  141:    : maximum_(0)
+        -:  142:    , length_(0)
+        -:  143:    , buffer_(0)
+    #####:  144:    , release_(false)
+        -:  145:  {
+    #####:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+        -:  147:    {
+    #####:  148:      maximum_ = rhs.maximum_;
+    #####:  149:      length_ = rhs.length_;
+    #####:  150:      return;
+        -:  151:    }
+    #####:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+    #####:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+        -:  154:                         true);
+    #####:  155:    element_traits::initialize_range(
+    #####:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+    #####:  157:    element_traits::copy_range(
+        -:  158:        rhs.buffer_,
+    #####:  159:        rhs.buffer_ + rhs.length_,
+    #####:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+    #####:  161:    swap(tmp);
+        -:  162:  }
+------------------
+_ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_EC2ERKS7_:
+    #####:  140:  generic_sequence(generic_sequence const & rhs)
+        -:  141:    : maximum_(0)
+        -:  142:    , length_(0)
+        -:  143:    , buffer_(0)
+    #####:  144:    , release_(false)
+        -:  145:  {
+    #####:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+        -:  147:    {
+    #####:  148:      maximum_ = rhs.maximum_;
+    #####:  149:      length_ = rhs.length_;
+    #####:  150:      return;
+        -:  151:    }
+    #####:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+    #####:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+        -:  154:                         true);
+    #####:  155:    element_traits::initialize_range(
+    #####:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+    #####:  157:    element_traits::copy_range(
+        -:  158:        rhs.buffer_,
+    #####:  159:        rhs.buffer_ + rhs.length_,
+    #####:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+    #####:  161:    swap(tmp);
+        -:  162:  }
+------------------
+        -:  163:
+        -:  164:  /// Assignment operator
+    #####:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+        -:  166:  {
+    #####:  167:    generic_sequence tmp(rhs);
+    #####:  168:    swap(tmp);
+    #####:  169:    return * this;
+        -:  170:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEaSERKS9_:
+    #####:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+        -:  166:  {
+    #####:  167:    generic_sequence tmp(rhs);
+    #####:  168:    swap(tmp);
+    #####:  169:    return * this;
+        -:  170:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEaSERKS9_:
+    #####:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+        -:  166:  {
+    #####:  167:    generic_sequence tmp(rhs);
+    #####:  168:    swap(tmp);
+    #####:  169:    return * this;
+        -:  170:  }
+------------------
+_ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_EaSERKS7_:
+    #####:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+        -:  166:  {
+    #####:  167:    generic_sequence tmp(rhs);
+    #####:  168:    swap(tmp);
+    #####:  169:    return * this;
+        -:  170:  }
+------------------
+        -:  171:
+        -:  172:  /// Destructor.
+    #####:  173:  ~generic_sequence()
+        -:  174:  {
+    #####:  175:    if (release_)
+        -:  176:    {
+    #####:  177:      freebuf(buffer_);
+        -:  178:    }
+    #####:  179:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+    #####:  173:  ~generic_sequence()
+        -:  174:  {
+    #####:  175:    if (release_)
+        -:  176:    {
+    #####:  177:      freebuf(buffer_);
+        -:  178:    }
+    #####:  179:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+    #####:  173:  ~generic_sequence()
+        -:  174:  {
+    #####:  175:    if (release_)
+        -:  176:    {
+    #####:  177:      freebuf(buffer_);
+        -:  178:    }
+    #####:  179:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+    #####:  173:  ~generic_sequence()
+        -:  174:  {
+    #####:  175:    if (release_)
+        -:  176:    {
+    #####:  177:      freebuf(buffer_);
+        -:  178:    }
+    #####:  179:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+    #####:  173:  ~generic_sequence()
+        -:  174:  {
+    #####:  175:    if (release_)
+        -:  176:    {
+    #####:  177:      freebuf(buffer_);
+        -:  178:    }
+    #####:  179:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+    #####:  173:  ~generic_sequence()
+        -:  174:  {
+    #####:  175:    if (release_)
+        -:  176:    {
+    #####:  177:      freebuf(buffer_);
+        -:  178:    }
+    #####:  179:  }
+------------------
+_ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_ED2Ev:
+    #####:  173:  ~generic_sequence()
+        -:  174:  {
+    #####:  175:    if (release_)
+        -:  176:    {
+    #####:  177:      freebuf(buffer_);
+        -:  178:    }
+    #####:  179:  }
+------------------
+        -:  180:
+        -:  181:  /// Return the maximum length of the sequence
+        -:  182:  inline CORBA::ULong maximum() const
+        -:  183:  {
+        -:  184:    return maximum_;
+        -:  185:  }
+        -:  186:
+        -:  187:  /// Returns the state of the sequence release flag.
+        -:  188:  inline CORBA::Boolean release() const
+        -:  189:  {
+        -:  190:    return release_;
+        -:  191:  }
+        -:  192:
+        -:  193:  /// Returns the length of the sequence
+    #####:  194:  inline CORBA::ULong length() const
+        -:  195:  {
+    #####:  196:    return length_;
+        -:  197:  }
+------------------
+_ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+    #####:  194:  inline CORBA::ULong length() const
+        -:  195:  {
+    #####:  196:    return length_;
+        -:  197:  }
+------------------
+_ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+    #####:  194:  inline CORBA::ULong length() const
+        -:  195:  {
+    #####:  196:    return length_;
+        -:  197:  }
+------------------
+_ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+    #####:  194:  inline CORBA::ULong length() const
+        -:  195:  {
+    #####:  196:    return length_;
+        -:  197:  }
+------------------
+_ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+    #####:  194:  inline CORBA::ULong length() const
+        -:  195:  {
+    #####:  196:    return length_;
+        -:  197:  }
+------------------
+_ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+    #####:  194:  inline CORBA::ULong length() const
+        -:  195:  {
+    #####:  196:    return length_;
+        -:  197:  }
+------------------
+        -:  198:
+        -:  199:  /// Set a new length for the sequence
+    #####:  200:  void length(CORBA::ULong length)
+        -:  201:  {
+    #####:  202:    if (length <= maximum_)
+        -:  203:    {
+    #####:  204:      if (buffer_ == 0)
+        -:  205:        {
+    #####:  206:          buffer_ = allocbuf(maximum_);
+    #####:  207:          release_ = true;
+    #####:  208:          length_ = length;
+        -:  209:          // Since allocbuf returns completely initialized buffer
+        -:  210:          // no further actions are required.
+    #####:  211:          return;
+        -:  212:        }
+        -:  213:
+        -:  214:      // When sequence doesn't own a buffer it's not allowed
+        -:  215:      // to change it in any way.
+    #####:  216:      if (length < length_ && release_)
+        -:  217:      {
+        -:  218:        // TODO This code does not provide the strong-exception
+        -:  219:        //      guarantee, but it does provide the weak-exception
+        -:  220:        //      guarantee.  The problem would appear when
+        -:  221:        //      initialize_range() raises an exception after several
+        -:  222:        //      elements have been modified.  One could argue that
+        -:  223:        //      this problem is irrelevant, as the elements already
+        -:  224:        //      modified are unreachable to conforming applications.
+    #####:  225:        element_traits::release_range(
+    #####:  226:          buffer_ + length, buffer_ + length_);
+    #####:  227:        element_traits::initialize_range(
+    #####:  228:          buffer_ + length, buffer_ + length_);
+        -:  229:      }
+    #####:  230:      length_ = length;
+    #####:  231:      return;
+        -:  232:    }
+        -:  233:
+    #####:  234:    generic_sequence tmp(length, length,
+        -:  235:                         allocation_traits::allocbuf_noinit(length),
+        -:  236:                         true);
+        -:  237:    // First do initialize_range. If it will throw then tmp will be
+        -:  238:    // destructed but *this will remain unchanged.
+    #####:  239:    element_traits::initialize_range(
+    #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+    #####:  241:    element_traits::copy_swap_range(
+        -:  242:      buffer_,
+    #####:  243:      buffer_ + length_,
+    #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+        -:  245:
+    #####:  246:    swap(tmp);
+        -:  247:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEj:
+    #####:  200:  void length(CORBA::ULong length)
+        -:  201:  {
+    #####:  202:    if (length <= maximum_)
+        -:  203:    {
+    #####:  204:      if (buffer_ == 0)
+        -:  205:        {
+    #####:  206:          buffer_ = allocbuf(maximum_);
+    #####:  207:          release_ = true;
+    #####:  208:          length_ = length;
+        -:  209:          // Since allocbuf returns completely initialized buffer
+        -:  210:          // no further actions are required.
+    #####:  211:          return;
+        -:  212:        }
+        -:  213:
+        -:  214:      // When sequence doesn't own a buffer it's not allowed
+        -:  215:      // to change it in any way.
+    #####:  216:      if (length < length_ && release_)
+        -:  217:      {
+        -:  218:        // TODO This code does not provide the strong-exception
+        -:  219:        //      guarantee, but it does provide the weak-exception
+        -:  220:        //      guarantee.  The problem would appear when
+        -:  221:        //      initialize_range() raises an exception after several
+        -:  222:        //      elements have been modified.  One could argue that
+        -:  223:        //      this problem is irrelevant, as the elements already
+        -:  224:        //      modified are unreachable to conforming applications.
+    #####:  225:        element_traits::release_range(
+    #####:  226:          buffer_ + length, buffer_ + length_);
+    #####:  227:        element_traits::initialize_range(
+    #####:  228:          buffer_ + length, buffer_ + length_);
+        -:  229:      }
+    #####:  230:      length_ = length;
+    #####:  231:      return;
+        -:  232:    }
+        -:  233:
+    #####:  234:    generic_sequence tmp(length, length,
+        -:  235:                         allocation_traits::allocbuf_noinit(length),
+        -:  236:                         true);
+        -:  237:    // First do initialize_range. If it will throw then tmp will be
+        -:  238:    // destructed but *this will remain unchanged.
+    #####:  239:    element_traits::initialize_range(
+    #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+    #####:  241:    element_traits::copy_swap_range(
+        -:  242:      buffer_,
+    #####:  243:      buffer_ + length_,
+    #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+        -:  245:
+    #####:  246:    swap(tmp);
+        -:  247:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEj:
+    #####:  200:  void length(CORBA::ULong length)
+        -:  201:  {
+    #####:  202:    if (length <= maximum_)
+        -:  203:    {
+    #####:  204:      if (buffer_ == 0)
+        -:  205:        {
+    #####:  206:          buffer_ = allocbuf(maximum_);
+    #####:  207:          release_ = true;
+    #####:  208:          length_ = length;
+        -:  209:          // Since allocbuf returns completely initialized buffer
+        -:  210:          // no further actions are required.
+    #####:  211:          return;
+        -:  212:        }
+        -:  213:
+        -:  214:      // When sequence doesn't own a buffer it's not allowed
+        -:  215:      // to change it in any way.
+    #####:  216:      if (length < length_ && release_)
+        -:  217:      {
+        -:  218:        // TODO This code does not provide the strong-exception
+        -:  219:        //      guarantee, but it does provide the weak-exception
+        -:  220:        //      guarantee.  The problem would appear when
+        -:  221:        //      initialize_range() raises an exception after several
+        -:  222:        //      elements have been modified.  One could argue that
+        -:  223:        //      this problem is irrelevant, as the elements already
+        -:  224:        //      modified are unreachable to conforming applications.
+    #####:  225:        element_traits::release_range(
+    #####:  226:          buffer_ + length, buffer_ + length_);
+    #####:  227:        element_traits::initialize_range(
+    #####:  228:          buffer_ + length, buffer_ + length_);
+        -:  229:      }
+    #####:  230:      length_ = length;
+    #####:  231:      return;
+        -:  232:    }
+        -:  233:
+    #####:  234:    generic_sequence tmp(length, length,
+        -:  235:                         allocation_traits::allocbuf_noinit(length),
+        -:  236:                         true);
+        -:  237:    // First do initialize_range. If it will throw then tmp will be
+        -:  238:    // destructed but *this will remain unchanged.
+    #####:  239:    element_traits::initialize_range(
+    #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+    #####:  241:    element_traits::copy_swap_range(
+        -:  242:      buffer_,
+    #####:  243:      buffer_ + length_,
+    #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+        -:  245:
+    #####:  246:    swap(tmp);
+        -:  247:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEj:
+    #####:  200:  void length(CORBA::ULong length)
+        -:  201:  {
+    #####:  202:    if (length <= maximum_)
+        -:  203:    {
+    #####:  204:      if (buffer_ == 0)
+        -:  205:        {
+    #####:  206:          buffer_ = allocbuf(maximum_);
+    #####:  207:          release_ = true;
+    #####:  208:          length_ = length;
+        -:  209:          // Since allocbuf returns completely initialized buffer
+        -:  210:          // no further actions are required.
+    #####:  211:          return;
+        -:  212:        }
+        -:  213:
+        -:  214:      // When sequence doesn't own a buffer it's not allowed
+        -:  215:      // to change it in any way.
+    #####:  216:      if (length < length_ && release_)
+        -:  217:      {
+        -:  218:        // TODO This code does not provide the strong-exception
+        -:  219:        //      guarantee, but it does provide the weak-exception
+        -:  220:        //      guarantee.  The problem would appear when
+        -:  221:        //      initialize_range() raises an exception after several
+        -:  222:        //      elements have been modified.  One could argue that
+        -:  223:        //      this problem is irrelevant, as the elements already
+        -:  224:        //      modified are unreachable to conforming applications.
+    #####:  225:        element_traits::release_range(
+    #####:  226:          buffer_ + length, buffer_ + length_);
+    #####:  227:        element_traits::initialize_range(
+    #####:  228:          buffer_ + length, buffer_ + length_);
+        -:  229:      }
+    #####:  230:      length_ = length;
+    #####:  231:      return;
+        -:  232:    }
+        -:  233:
+    #####:  234:    generic_sequence tmp(length, length,
+        -:  235:                         allocation_traits::allocbuf_noinit(length),
+        -:  236:                         true);
+        -:  237:    // First do initialize_range. If it will throw then tmp will be
+        -:  238:    // destructed but *this will remain unchanged.
+    #####:  239:    element_traits::initialize_range(
+    #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+    #####:  241:    element_traits::copy_swap_range(
+        -:  242:      buffer_,
+    #####:  243:      buffer_ + length_,
+    #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+        -:  245:
+    #####:  246:    swap(tmp);
+        -:  247:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEj:
+    #####:  200:  void length(CORBA::ULong length)
+        -:  201:  {
+    #####:  202:    if (length <= maximum_)
+        -:  203:    {
+    #####:  204:      if (buffer_ == 0)
+        -:  205:        {
+    #####:  206:          buffer_ = allocbuf(maximum_);
+    #####:  207:          release_ = true;
+    #####:  208:          length_ = length;
+        -:  209:          // Since allocbuf returns completely initialized buffer
+        -:  210:          // no further actions are required.
+    #####:  211:          return;
+        -:  212:        }
+        -:  213:
+        -:  214:      // When sequence doesn't own a buffer it's not allowed
+        -:  215:      // to change it in any way.
+    #####:  216:      if (length < length_ && release_)
+        -:  217:      {
+        -:  218:        // TODO This code does not provide the strong-exception
+        -:  219:        //      guarantee, but it does provide the weak-exception
+        -:  220:        //      guarantee.  The problem would appear when
+        -:  221:        //      initialize_range() raises an exception after several
+        -:  222:        //      elements have been modified.  One could argue that
+        -:  223:        //      this problem is irrelevant, as the elements already
+        -:  224:        //      modified are unreachable to conforming applications.
+    #####:  225:        element_traits::release_range(
+    #####:  226:          buffer_ + length, buffer_ + length_);
+    #####:  227:        element_traits::initialize_range(
+    #####:  228:          buffer_ + length, buffer_ + length_);
+        -:  229:      }
+    #####:  230:      length_ = length;
+    #####:  231:      return;
+        -:  232:    }
+        -:  233:
+    #####:  234:    generic_sequence tmp(length, length,
+        -:  235:                         allocation_traits::allocbuf_noinit(length),
+        -:  236:                         true);
+        -:  237:    // First do initialize_range. If it will throw then tmp will be
+        -:  238:    // destructed but *this will remain unchanged.
+    #####:  239:    element_traits::initialize_range(
+    #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+    #####:  241:    element_traits::copy_swap_range(
+        -:  242:      buffer_,
+    #####:  243:      buffer_ + length_,
+    #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+        -:  245:
+    #####:  246:    swap(tmp);
+        -:  247:  }
+------------------
+        -:  248:
+        -:  249:  /// Get a const element from the sequence
+    #####:  250:  value_type const & operator[](CORBA::ULong i) const
+        -:  251:  {
+    #####:  252:    range::check(i, length_, maximum_, "operator[]() const");
+    #####:  253:    return buffer_[i];
+        -:  254:  }
+------------------
+_ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+    #####:  250:  value_type const & operator[](CORBA::ULong i) const
+        -:  251:  {
+    #####:  252:    range::check(i, length_, maximum_, "operator[]() const");
+    #####:  253:    return buffer_[i];
+        -:  254:  }
+------------------
+_ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+    #####:  250:  value_type const & operator[](CORBA::ULong i) const
+        -:  251:  {
+    #####:  252:    range::check(i, length_, maximum_, "operator[]() const");
+    #####:  253:    return buffer_[i];
+        -:  254:  }
+------------------
+        -:  255:
+        -:  256:  /// Get an element from the sequence
+    #####:  257:  value_type & operator[](CORBA::ULong i)
+        -:  258:  {
+    #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+    #####:  260:    return buffer_[i];
+        -:  261:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+    #####:  257:  value_type & operator[](CORBA::ULong i)
+        -:  258:  {
+    #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+    #####:  260:    return buffer_[i];
+        -:  261:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+    #####:  257:  value_type & operator[](CORBA::ULong i)
+        -:  258:  {
+    #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+    #####:  260:    return buffer_[i];
+        -:  261:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+    #####:  257:  value_type & operator[](CORBA::ULong i)
+        -:  258:  {
+    #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+    #####:  260:    return buffer_[i];
+        -:  261:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+    #####:  257:  value_type & operator[](CORBA::ULong i)
+        -:  258:  {
+    #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+    #####:  260:    return buffer_[i];
+        -:  261:  }
+------------------
+        -:  262:
+        -:  263:  /**
+        -:  264:   * Allows the buffer underlying a sequence to be replaced.  The
+        -:  265:   * parameters to replace() are identical in type, order, and purpose
+        -:  266:   * to those for the <T *data> constructor for the sequence.
+        -:  267:   */
+        -:  268:  void replace(
+        -:  269:      CORBA::ULong maximum,
+        -:  270:      CORBA::ULong length,
+        -:  271:      value_type * data,
+        -:  272:      CORBA::Boolean release)
+        -:  273:  {
+        -:  274:    generic_sequence tmp(maximum, length, data, release);
+        -:  275:    swap(tmp);
+        -:  276:  }
+        -:  277:
+        -:  278:  /**
+        -:  279:   * This function allows read-only access to the sequence buffer.
+        -:  280:   * The sequence returns its buffer, allocating one of one has not
+        -:  281:   * yet been allocated.  No direct modification of the returned
+        -:  282:   * buffer by the caller is permitted.
+        -:  283:   */
+        -:  284:  value_type const * get_buffer() const
+        -:  285:  {
+        -:  286:    if (buffer_ == 0)
+        -:  287:    {
+        -:  288:      buffer_ = allocbuf(maximum_);
+        -:  289:      release_ = true;
+        -:  290:    }
+        -:  291:    return buffer_;
+        -:  292:  }
+        -:  293:
+        -:  294:  /// Allows read-write access to the underlying buffer.
+        -:  295:  /**
+        -:  296:   * If @a orphan is FALSE the sequence returns a pointer to its buffer,
+        -:  297:   * allocating one if it has not yet done so.  The number of elements in the
+        -:  298:   * buffer can be determined from the sequence length() accessor.
+        -:  299:   *
+        -:  300:   * If the @a orphan argument to get_buffer() is FALSE, the sequence
+        -:  301:   * maintains ownership of the underlying buffer.  Elements in the
+        -:  302:   * returned buffer may be directly replaced by the caller.  For
+        -:  303:   * sequences of strings, wide strings, and object references, the
+        -:  304:   * caller must use the sequence @c release accessor to determine
+        -:  305:   * whether elements should be freed (using @c string_free,
+        -:  306:   * @c wstring_free, or @c CORBA::release for strings, wide strings,
+        -:  307:   * and object references, respective) before being directly assigned
+        -:  308:   * to.
+        -:  309:   *
+        -:  310:   * If the @a orphan argument to @a get_buffer is TRUE, the sequence
+        -:  311:   * yields ownership of the buffer to the caller.  If @a orphan is
+        -:  312:   * TRUE and the sequence does not own its buffer (i.e., its
+        -:  313:   * release_ flag is FALSE), the return value is a null pointer.  If
+        -:  314:   * the buffer is taken from the sequence using this form of
+        -:  315:   * get_buffer(), the sequence reverts to the same state it would
+        -:  316:   * have if constructed using its default constructor.  The caller
+        -:  317:   * becomes responsible for eventually freeing each element of the
+        -:  318:   * returned buffer (for strings, wide string, and object
+        -:  319:   * references), and then freeing the returned buffer itself using
+        -:  320:   * freebuf().
+        -:  321:   */
+        -:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+        -:  323:  {
+        -:  324:    if (orphan && !release_)
+        -:  325:    {
+        -:  326:      return 0;
+        -:  327:    }
+        -:  328:    if (buffer_ == 0)
+        -:  329:    {
+        -:  330:      buffer_ = allocbuf(maximum_);
+        -:  331:      if (!orphan)
+        -:  332:        {
+        -:  333:          release_ = true;
+        -:  334:        }
+        -:  335:    }
+        -:  336:    if (!orphan)
+        -:  337:    {
+        -:  338:      return buffer_;
+        -:  339:    }
+        -:  340:
+        -:  341:    generic_sequence tmp;
+        -:  342:    swap(tmp);
+        -:  343:    tmp.release_ = false;
+        -:  344:
+        -:  345:    return tmp.buffer_;
+        -:  346:  }
+        -:  347:
+    #####:  348:  void swap(generic_sequence & rhs) throw()
+        -:  349:  {
+    #####:  350:    std::swap(maximum_, rhs.maximum_);
+    #####:  351:    std::swap(length_, rhs.length_);
+    #####:  352:    std::swap(buffer_, rhs.buffer_);
+    #####:  353:    std::swap(release_, rhs.release_);
+    #####:  354:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+    #####:  348:  void swap(generic_sequence & rhs) throw()
+        -:  349:  {
+    #####:  350:    std::swap(maximum_, rhs.maximum_);
+    #####:  351:    std::swap(length_, rhs.length_);
+    #####:  352:    std::swap(buffer_, rhs.buffer_);
+    #####:  353:    std::swap(release_, rhs.release_);
+    #####:  354:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+    #####:  348:  void swap(generic_sequence & rhs) throw()
+        -:  349:  {
+    #####:  350:    std::swap(maximum_, rhs.maximum_);
+    #####:  351:    std::swap(length_, rhs.length_);
+    #####:  352:    std::swap(buffer_, rhs.buffer_);
+    #####:  353:    std::swap(release_, rhs.release_);
+    #####:  354:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+    #####:  348:  void swap(generic_sequence & rhs) throw()
+        -:  349:  {
+    #####:  350:    std::swap(maximum_, rhs.maximum_);
+    #####:  351:    std::swap(length_, rhs.length_);
+    #####:  352:    std::swap(buffer_, rhs.buffer_);
+    #####:  353:    std::swap(release_, rhs.release_);
+    #####:  354:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+    #####:  348:  void swap(generic_sequence & rhs) throw()
+        -:  349:  {
+    #####:  350:    std::swap(maximum_, rhs.maximum_);
+    #####:  351:    std::swap(length_, rhs.length_);
+    #####:  352:    std::swap(buffer_, rhs.buffer_);
+    #####:  353:    std::swap(release_, rhs.release_);
+    #####:  354:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+    #####:  348:  void swap(generic_sequence & rhs) throw()
+        -:  349:  {
+    #####:  350:    std::swap(maximum_, rhs.maximum_);
+    #####:  351:    std::swap(length_, rhs.length_);
+    #####:  352:    std::swap(buffer_, rhs.buffer_);
+    #####:  353:    std::swap(release_, rhs.release_);
+    #####:  354:  }
+------------------
+_ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_E4swapERS7_:
+    #####:  348:  void swap(generic_sequence & rhs) throw()
+        -:  349:  {
+    #####:  350:    std::swap(maximum_, rhs.maximum_);
+    #####:  351:    std::swap(length_, rhs.length_);
+    #####:  352:    std::swap(buffer_, rhs.buffer_);
+    #####:  353:    std::swap(release_, rhs.release_);
+    #####:  354:  }
+------------------
+        -:  355:
+    #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+        -:  357:  {
+    #####:  358:    return allocation_traits::allocbuf(maximum);
+        -:  359:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE8allocbufEj:
+    #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+        -:  357:  {
+    #####:  358:    return allocation_traits::allocbuf(maximum);
+        -:  359:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE8allocbufEj:
+    #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+        -:  357:  {
+    #####:  358:    return allocation_traits::allocbuf(maximum);
+        -:  359:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE8allocbufEj:
+    #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+        -:  357:  {
+    #####:  358:    return allocation_traits::allocbuf(maximum);
+        -:  359:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE8allocbufEj:
+    #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+        -:  357:  {
+    #####:  358:    return allocation_traits::allocbuf(maximum);
+        -:  359:  }
+------------------
+        -:  360:
+    #####:  361:  static void freebuf(value_type * buffer)
+        -:  362:  {
+    #####:  363:    allocation_traits::freebuf(buffer);
+    #####:  364:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+    #####:  361:  static void freebuf(value_type * buffer)
+        -:  362:  {
+    #####:  363:    allocation_traits::freebuf(buffer);
+    #####:  364:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+    #####:  361:  static void freebuf(value_type * buffer)
+        -:  362:  {
+    #####:  363:    allocation_traits::freebuf(buffer);
+    #####:  364:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+    #####:  361:  static void freebuf(value_type * buffer)
+        -:  362:  {
+    #####:  363:    allocation_traits::freebuf(buffer);
+    #####:  364:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+    #####:  361:  static void freebuf(value_type * buffer)
+        -:  362:  {
+    #####:  363:    allocation_traits::freebuf(buffer);
+    #####:  364:  }
+------------------
+_ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+    #####:  361:  static void freebuf(value_type * buffer)
+        -:  362:  {
+    #####:  363:    allocation_traits::freebuf(buffer);
+    #####:  364:  }
+------------------
+_ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_E7freebufEPS2_:
+    #####:  361:  static void freebuf(value_type * buffer)
+        -:  362:  {
+    #####:  363:    allocation_traits::freebuf(buffer);
+    #####:  364:  }
+------------------
+        -:  365:
+        -:  366:#if defined TAO_HAS_SEQUENCE_ITERATORS && TAO_HAS_SEQUENCE_ITERATORS == 1
+        -:  367:
+        -:  368:  ///
+        -:  369:  /// Additions to support iterator semantics for TAO sequences.
+        -:  370:  ///
+        -:  371:
+        -:  372:  // = Traits and factory methods that create iterators.
+        -:  373:  typedef Generic_Sequence_Iterator<generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS> > iterator;
+        -:  374:  typedef Const_Generic_Sequence_Iterator<generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS> > const_iterator;
+        -:  375:  typedef Generic_Sequence_Reverse_Iterator<generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS> > reverse_iterator;
+        -:  376:  typedef Const_Generic_Sequence_Reverse_Iterator<generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS> > const_reverse_iterator;
+        -:  377:
+        -:  378:  /// Get an iterator that points to the beginning of the sequence.
+        -:  379:  iterator begin (void)
+        -:  380:  {
+        -:  381:    return typename generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS>::iterator (this);
+        -:  382:  }
+        -:  383:
+        -:  384:  /// Get a const iterator that points to the beginning of the sequence.
+        -:  385:  const_iterator begin (void) const
+        -:  386:  {
+        -:  387:    return typename generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS>::const_iterator (this);
+        -:  388:  }
+        -:  389:
+        -:  390:  /// Get an iterator that points to the end of the sequence.
+        -:  391:  iterator end (void)
+        -:  392:  {
+        -:  393:    return typename generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS>::iterator (this,
+        -:  394:      this->length_);
+        -:  395:  }
+        -:  396:
+        -:  397:  /// Get a const iterator that points to the end of the sequence.
+        -:  398:  const_iterator end (void) const
+        -:  399:  {
+        -:  400:    return typename generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS>::const_iterator (this,
+        -:  401:            this->length_);
+        -:  402:  }
+        -:  403:
+        -:  404:  // Get a reverse iterator that points to the end of the sequence.
+        -:  405:  reverse_iterator rbegin (void)
+        -:  406:  {
+        -:  407:    // Here we need to be at the last element - not one past.
+        -:  408:    return typename generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS>::reverse_iterator (this,
+        -:  409:              this->length_ - 1);
+        -:  410:  }
+        -:  411:
+        -:  412:  // Get a const reverse iterator that points to the end of the sequence.
+        -:  413:  const_reverse_iterator rbegin (void) const
+        -:  414:  {
+        -:  415:    // Here we need to be at the last element - not one past.
+        -:  416:    return typename generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS>::const_reverse_iterator (this,
+        -:  417:                     this->length_ - 1);
+        -:  418:  }
+        -:  419:
+        -:  420:  // Get a reverse iterator that points to one before the
+        -:  421:  // beginning of the sequence.
+        -:  422:  reverse_iterator rend (void)
+        -:  423:  {
+        -:  424:    // Here we need to be at one before the first element - not the first.
+        -:  425:    return typename generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS>::reverse_iterator (this,
+        -:  426:              -1);
+        -:  427:  }
+        -:  428:
+        -:  429:  // Get a const reverse iterator that points to one before the
+        -:  430:  // beginning of the sequence.
+        -:  431:  const_reverse_iterator rend (void) const
+        -:  432:  {
+        -:  433:    // Here we need to be at one before the first element - not the first.
+        -:  434:    return typename generic_sequence<T, ALLOCATION_TRAITS, ELEMENT_TRAITS>::const_reverse_iterator (this,
+        -:  435:              -1);
+        -:  436:  }
+        -:  437:
+        -:  438:#endif /* TAO_HAS_SEQUENCE_ITERATORS==1 */
+        -:  439:
+        -:  440:private:
+        -:  441:  /// The maximum number of elements the buffer can contain.
+        -:  442:  CORBA::ULong maximum_;
+        -:  443:  /// The current number of elements in the buffer.
+        -:  444:  CORBA::ULong length_;
+        -:  445:  /// The buffer with all the elements
+        -:  446:  mutable value_type * buffer_;
+        -:  447:  /// If true then the sequence should release the buffer when it is
+        -:  448:  /// destroyed.
+        -:  449:  mutable CORBA::Boolean release_;
+        -:  450:};
+        -:  451:
+        -:  452:#if defined TAO_HAS_SEQUENCE_ITERATORS && TAO_HAS_SEQUENCE_ITERATORS == 1
+        -:  453:
+        -:  454:/**
+        -:  455: * @class Generic_Sequence_Iterator
+        -:  456: * @brief Implements a random access iterator for generic sequence type
+        -:  457: *        classes.
+        -:  458: */
+        -:  459:template <typename SEQUENCE_T>
+        -:  460:  class Generic_Sequence_Iterator
+        -:  461:{
+        -:  462:  friend class Const_Generic_Sequence_Iterator<SEQUENCE_T>;
+        -:  463:
+        -:  464:public:
+        -:  465:  // = Necessary traits
+        -:  466:  typedef std::random_access_iterator_tag iterator_category;
+        -:  467:  typedef typename SEQUENCE_T::value_type value_type;
+        -:  468:  typedef typename SEQUENCE_T::value_type *pointer;
+        -:  469:  typedef typename SEQUENCE_T::value_type &reference;
+        -:  470:  typedef typename SEQUENCE_T::allocation_traits allocation_traits;
+        -:  471:  typedef typename SEQUENCE_T::element_traits element_traits;
+        -:  472:  typedef CORBA::Long difference_type;
+        -:  473:
+        -:  474:  /// Construct a Generic_Sequence_Iterator at position pos.
+        -:  475:  Generic_Sequence_Iterator (generic_sequence<value_type,
+        -:  476:                            allocation_traits,
+        -:  477:                            element_traits> *sequence,
+        -:  478:           size_t pos = 0)
+        -:  479:    : sequence_ (sequence),
+        -:  480:    pos_ (pos)
+        -:  481:      {
+        -:  482:      }
+        -:  483:
+        -:  484:  /// Copy constructor
+        -:  485:  Generic_Sequence_Iterator (Generic_Sequence_Iterator<SEQUENCE_T> const & rhs)
+        -:  486:    : sequence_ (rhs.sequence_),
+        -:  487:    pos_ (rhs.pos_)
+        -:  488:      {
+        -:  489:      }
+        -:  490:
+        -:  491:  /// Assignment operator
+        -:  492:  Generic_Sequence_Iterator & operator= (
+        -:  493:          Generic_Sequence_Iterator<SEQUENCE_T> const & rhs)
+        -:  494:    {
+        -:  495:      Generic_Sequence_Iterator tmp(rhs);
+        -:  496:      swap (tmp);
+        -:  497:      return * this;
+        -:  498:    }
+        -:  499:
+        -:  500:  /// swaps all members
+        -:  501:  void swap(Generic_Sequence_Iterator<SEQUENCE_T> & rhs)
+        -:  502:    throw()
+        -:  503:    {
+        -:  504:      std::swap (sequence_, rhs.sequence_);
+        -:  505:      std::swap (this->pos_, rhs.pos_);
+        -:  506:    }
+        -:  507:
+        -:  508:  /// typecast operator to Const_Generic_Sequence_Iterator
+        -:  509:  operator Const_Generic_Sequence_Iterator<SEQUENCE_T> ()
+        -:  510:  {
+        -:  511:    return Const_Generic_Sequence_Iterator<SEQUENCE_T> (*this);
+        -:  512:  }
+        -:  513:
+        -:  514:  /// Dereference operator returns a reference to the item contained
+        -:  515:  /// at the current position
+        -:  516:  value_type & operator* (void)
+        -:  517:    {
+        -:  518:      // Access the underlying element in the sequence.
+        -:  519:      return (*(this->sequence_))[this->pos_];
+        -:  520:    }
+        -:  521:
+        -:  522:  /// Returns a const reference to the item contained at the current position
+        -:  523:  const value_type & operator* (void) const
+        -:  524:    {
+        -:  525:      // Access the underlying element in the sequence.
+        -:  526:      return (*(this->sequence_))[this->pos_];
+        -:  527:    }
+        -:  528:
+        -:  529:  /// Preincrement operator
+        -:  530:  Generic_Sequence_Iterator<SEQUENCE_T> &operator++ (void)
+        -:  531:    {
+        -:  532:      // Increment the position.
+        -:  533:      // We also need to check if we're now past the end.
+        -:  534:      ++this->pos_;
+        -:  535:      return *this;
+        -:  536:    }
+        -:  537:
+        -:  538:  /// Postincrement operator
+        -:  539:  Generic_Sequence_Iterator<SEQUENCE_T> operator++ (int)
+        -:  540:    {
+        -:  541:      // Create a temporary to return so that it's not modified.
+        -:  542:      Generic_Sequence_Iterator<SEQUENCE_T> temp_iter (this->sequence_, this->pos_);
+        -:  543:      // Increment the position.
+        -:  544:      // We also need to check if we're now past the end.
+        -:  545:      ++this->pos_;
+        -:  546:      return temp_iter;
+        -:  547:    }
+        -:  548:
+        -:  549:  /// Predecrement operator
+        -:  550:  Generic_Sequence_Iterator<SEQUENCE_T> &operator-- (void)
+        -:  551:    {
+        -:  552:      --this->pos_;
+        -:  553:      return *this;
+        -:  554:    }
+        -:  555:
+        -:  556:  /// Postdecrement operator
+        -:  557:  Generic_Sequence_Iterator<SEQUENCE_T> operator-- (int)
+        -:  558:    {
+        -:  559:      // Create a temporary to return so that it's not modified.
+        -:  560:      Generic_Sequence_Iterator<SEQUENCE_T> temp_iter (this->sequence_, this->pos_);
+        -:  561:      --this->pos_;
+        -:  562:      return temp_iter;
+        -:  563:    }
+        -:  564:
+        -:  565:  /// Iterator addition
+        -:  566:  Generic_Sequence_Iterator<SEQUENCE_T> &operator+= (difference_type n)
+        -:  567:    {
+        -:  568:      // Move ahead n elements.
+        -:  569:      this->pos_ += n;
+        -:  570:      return *this;
+        -:  571:    }
+        -:  572:
+        -:  573:  /// Iterator addition
+        -:  574:  Generic_Sequence_Iterator<SEQUENCE_T> operator+ (difference_type n)
+        -:  575:    {
+        -:  576:      // Create a temporary to return and move it ahead n elements.
+        -:  577:      return Generic_Sequence_Iterator<SEQUENCE_T> (this->sequence_, this->pos_ + n);
+        -:  578:    }
+        -:  579:
+        -:  580:  /// Iterator subtraction
+        -:  581:  Generic_Sequence_Iterator<SEQUENCE_T> &operator-= (difference_type n)
+        -:  582:    {
+        -:  583:      // Move back n elements.
+        -:  584:      this->pos_ -= n;
+        -:  585:      return *this;
+        -:  586:    }
+        -:  587:
+        -:  588:  /// Iterator subtraction
+        -:  589:  Generic_Sequence_Iterator<SEQUENCE_T> operator- (difference_type n)
+        -:  590:    {
+        -:  591:      // Create a temporary to return and move it back n elements.
+        -:  592:      return Generic_Sequence_Iterator<SEQUENCE_T> (this->sequence_, this->pos_ - n);
+        -:  593:    }
+        -:  594:
+        -:  595:  /// Difference
+        -:  596:  difference_type operator- (const Generic_Sequence_Iterator<SEQUENCE_T> & rhs)
+        -:  597:    {
+        -:  598:      // I think order is important here (i.e., rhs before this).
+        -:  599:      return this->pos_ - rhs.pos_;
+        -:  600:    }
+        -:  601:
+        -:  602:  /// Difference
+        -:  603:  difference_type operator- (const Const_Generic_Sequence_Iterator<SEQUENCE_T> & rhs)
+        -:  604:    {
+        -:  605:      // I think order is important here (i.e., rhs before this).
+        -:  606:      return this->pos_ - rhs.pos_;
+        -:  607:    }
+        -:  608:
+        -:  609:
+        -:  610:  /// Element operator/assignment
+        -:  611:  value_type & operator[] (difference_type n)
+        -:  612:    {
+        -:  613:      // Return the element at position n
+        -:  614:      return (*(this->sequence_))[this->pos_ + n];
+        -:  615:    }
+        -:  616:
+        -:  617:  /// Less than
+        -:  618:  bool operator< (const Generic_Sequence_Iterator<SEQUENCE_T> & rhs)
+        -:  619:    {
+        -:  620:      // Return if this iterator is less than the passed in iterator.
+        -:  621:      return this->pos_ < rhs.pos_;
+        -:  622:    }
+        -:  623:
+        -:  624:  /// Less than
+        -:  625:  bool operator< (const Const_Generic_Sequence_Iterator<SEQUENCE_T> & rhs)
+        -:  626:    {
+        -:  627:      // Return if this iterator is less than the passed in iterator.
+        -:  628:      return this->pos_ < rhs.pos_;
+        -:  629:    }
+        -:  630:
+        -:  631:
+        -:  632:  /// Equality operator
+        -:  633:  bool operator== (const Generic_Sequence_Iterator<SEQUENCE_T> &rhs) const
+        -:  634:  {
+        -:  635:    // Compare all the data members for equality.
+        -:  636:    return this->sequence_ == rhs.sequence_
+        -:  637:        && this->pos_ == rhs.pos_;
+        -:  638:  }
+        -:  639:
+        -:  640:  /// Nonequality operator
+        -:  641:  bool operator!= (const Generic_Sequence_Iterator<SEQUENCE_T> &rhs) const
+        -:  642:  {
+        -:  643:    return !(*this == rhs);
+        -:  644:  }
+        -:  645:
+        -:  646:private:
+        -:  647:  /// the sequence with which we are dealing
+        -:  648:  generic_sequence<value_type, allocation_traits, element_traits> *sequence_;
+        -:  649:
+        -:  650:  /// Our current position in the sequence.
+        -:  651:  mutable difference_type pos_;
+        -:  652:};
+        -:  653:
+        -:  654:
+        -:  655:/// Iterator addition with the difference_type being the first argument.
+        -:  656:template<typename SEQUENCE_T>
+        -:  657: Generic_Sequence_Iterator<SEQUENCE_T>
+        -:  658:  operator+ (typename Generic_Sequence_Iterator<SEQUENCE_T>::difference_type n,
+        -:  659:             const Generic_Sequence_Iterator<SEQUENCE_T> & iter)
+        -:  660:   {
+        -:  661:     // Create an iter and move it ahead n elements.
+        -:  662:     return Generic_Sequence_Iterator<SEQUENCE_T> (iter.sequence_, iter.pos_ + n);
+        -:  663:   }
+        -:  664:
+        -:  665:/// Iterator subtraction with the difference_type being the first argument.
+        -:  666:template<typename SEQUENCE_T>
+        -:  667: Generic_Sequence_Iterator<SEQUENCE_T> operator-
+        -:  668:   (typename Generic_Sequence_Iterator<SEQUENCE_T>::difference_type n,
+        -:  669:    Generic_Sequence_Iterator<SEQUENCE_T> iter)
+        -:  670:   {
+        -:  671:     // Create an iter and move it back n elements.
+        -:  672:     return Generic_Sequence_Iterator<SEQUENCE_T> (iter.sequence_, iter.pos_ - n);
+        -:  673:   }
+        -:  674:
+        -:  675:
+        -:  676:/**
+        -:  677: * @class Const_Generic_Sequence_Iterator
+        -:  678: * @brief Implements a constant random access iterator for generic sequence
+        -:  679: *        type classes.
+        -:  680: *
+        -:  681: * Note:  Having a const Iterator does not guarantee that the current
+        -:  682: * *position* that it points to will not change, it only guarantees that
+        -:  683: * you cannot change the underlying array!
+        -:  684: */
+        -:  685:template <typename SEQUENCE_T>
+        -:  686:class Const_Generic_Sequence_Iterator
+        -:  687:{
+        -:  688:  friend class Generic_Sequence_Iterator<SEQUENCE_T>;
+        -:  689:
+        -:  690:public:
+        -:  691:  // = Necessary traits
+        -:  692:  typedef std::random_access_iterator_tag iterator_category;
+        -:  693:  typedef typename SEQUENCE_T::value_type value_type;
+        -:  694:  typedef typename SEQUENCE_T::value_type *pointer;
+        -:  695:  typedef typename SEQUENCE_T::value_type &reference;
+        -:  696:  typedef typename SEQUENCE_T::allocation_traits allocation_traits;
+        -:  697:  typedef typename SEQUENCE_T::element_traits element_traits;
+        -:  698:  typedef int difference_type;
+        -:  699:
+        -:  700:  /// Construct a Const_Generic_Sequence_Iterator at position pos from
+        -:  701:  /// a const sequence.
+        -:  702:  Const_Generic_Sequence_Iterator (const generic_sequence<value_type,
+        -:  703:                                                          allocation_traits,
+        -:  704:                                                          element_traits> *sequence,
+        -:  705:           size_t pos = 0)
+        -:  706:    : sequence_ (sequence),
+        -:  707:    pos_ (pos)
+        -:  708:      {
+        -:  709:      }
+        -:  710:
+        -:  711:  virtual ~Const_Generic_Sequence_Iterator ()
+        -:  712:    {
+        -:  713:    }
+        -:  714:
+        -:  715:  /// Copy constructor
+        -:  716:  Const_Generic_Sequence_Iterator (
+        -:  717:    Const_Generic_Sequence_Iterator<SEQUENCE_T> const & rhs)
+        -:  718:    : sequence_ (rhs.sequence_),
+        -:  719:    pos_ (rhs.pos_)
+        -:  720:      {
+        -:  721:      }
+        -:  722:
+        -:  723:  /// Copy constructor initializing by a Generic_Sequence_Iterator
+        -:  724:  explicit Const_Generic_Sequence_Iterator (
+        -:  725:    Generic_Sequence_Iterator<SEQUENCE_T> const & rhs)
+        -:  726:    : sequence_ (rhs.sequence_),
+        -:  727:    pos_ (rhs.pos_)
+        -:  728:      {
+        -:  729:      }
+        -:  730:
+        -:  731:  /// Assignment operator
+        -:  732:  Const_Generic_Sequence_Iterator & operator= (
+        -:  733:                Const_Generic_Sequence_Iterator<SEQUENCE_T> const & rhs)
+        -:  734:    {
+        -:  735:      Const_Generic_Sequence_Iterator tmp(rhs);
+        -:  736:      swap (tmp);
+        -:  737:      return * this;
+        -:  738:    }
+        -:  739:
+        -:  740:  /// swaps all members
+        -:  741:  void swap(Const_Generic_Sequence_Iterator<SEQUENCE_T> & rhs)
+        -:  742:    throw()
+        -:  743:    {
+        -:  744:      std::swap (sequence_, rhs.sequence_);
+        -:  745:      std::swap (this->pos_, rhs.pos_);
+        -:  746:    }
+        -:  747:
+        -:  748:  /// Dereference operator returns a reference to the item contained
+        -:  749:  /// at the current position
+        -:  750:  const value_type & operator* (void) const
+        -:  751:    {
+        -:  752:      // Access the underlying element in the sequence.
+        -:  753:      return (*(this->sequence_))[this->pos_];
+        -:  754:    }
+        -:  755:
+        -:  756:  /// Preincrement operator
+        -:  757:  const Const_Generic_Sequence_Iterator<SEQUENCE_T> &operator++ (void) const
+        -:  758:    {
+        -:  759:      // Increment the position.
+        -:  760:      // We also need to check if we're now past the end.
+        -:  761:      ++this->pos_;
+        -:  762:      return * this;
+        -:  763:    }
+        -:  764:
+        -:  765:  /// Postincrement operator
+        -:  766:  Const_Generic_Sequence_Iterator<SEQUENCE_T> operator++ (int) const
+        -:  767:    {
+        -:  768:      // Create a temporary to return so that it's not modified.
+        -:  769:      Const_Generic_Sequence_Iterator<SEQUENCE_T> temp_iter (this->sequence_, this->pos_);
+        -:  770:      // Increment the position.
+        -:  771:      // We also need to check if we're now past the end.
+        -:  772:      ++this->pos_;
+        -:  773:      return temp_iter;
+        -:  774:    }
+        -:  775:
+        -:  776:  /// Predecrement operator
+        -:  777:  const Const_Generic_Sequence_Iterator<SEQUENCE_T> &operator-- (void) const
+        -:  778:    {
+        -:  779:      --this->pos_;
+        -:  780:      return * this;
+        -:  781:    }
+        -:  782:
+        -:  783:  /// Postdecrement operator
+        -:  784:  Const_Generic_Sequence_Iterator<SEQUENCE_T> operator-- (int) const
+        -:  785:    {
+        -:  786:      // Create a temporary to return so that it's not modified.
+        -:  787:      Const_Generic_Sequence_Iterator<SEQUENCE_T> temp_iter (this->sequence_, this->pos_);
+        -:  788:      --this->pos_;
+        -:  789:      return temp_iter;
+        -:  790:    }
+        -:  791:
+        -:  792:  /// Iterator addition
+        -:  793:  const Const_Generic_Sequence_Iterator<SEQUENCE_T> &operator+= (difference_type n) const
+        -:  794:    {
+        -:  795:      // Move ahead n elements.
+        -:  796:      this->pos_ += n;
+        -:  797:      return * this;
+        -:  798:    }
+        -:  799:
+        -:  800:  /// Iterator addition
+        -:  801:  Const_Generic_Sequence_Iterator<SEQUENCE_T> operator+ (difference_type n) const
+        -:  802:    {
+        -:  803:      // Create a temporary to return and move it ahead n elements.
+        -:  804:      return Const_Generic_Sequence_Iterator<SEQUENCE_T> (this->sequence_, this->pos_ + n);
+        -:  805:    }
+        -:  806:
+        -:  807:  /// Iterator subtraction
+        -:  808:  const Const_Generic_Sequence_Iterator<SEQUENCE_T> &operator-= (difference_type n) const
+        -:  809:    {
+        -:  810:      // Move back n elements.
+        -:  811:      this->pos_ -= n;
+        -:  812:      return * this;
+        -:  813:    }
+        -:  814:
+        -:  815:  /// Iterator subtraction
+        -:  816:  Const_Generic_Sequence_Iterator<SEQUENCE_T> operator- (difference_type n) const
+        -:  817:    {
+        -:  818:      // Create a temporary to return and move it back n elements.
+        -:  819:      return Const_Generic_Sequence_Iterator<SEQUENCE_T> (this->sequence_, this->pos_ - n);
+        -:  820:    }
+        -:  821:
+        -:  822:  /// Difference
+        -:  823:  difference_type operator- (const Const_Generic_Sequence_Iterator<SEQUENCE_T> & rhs) const
+        -:  824:    {
+        -:  825:      // I think the order is important here (i.e., rhs before this).
+        -:  826:      return this->pos_ - rhs.pos_;
+        -:  827:    }
+        -:  828:
+        -:  829:  /// Element operator/assignment
+        -:  830:  const value_type & operator[] (difference_type n) const
+        -:  831:    {
+        -:  832:      // Return the element at position n
+        -:  833:      return (*(this->sequence_))[this->pos_ + n];
+        -:  834:    }
+        -:  835:
+        -:  836:  /// Less than
+        -:  837:  virtual bool operator< (const Const_Generic_Sequence_Iterator<SEQUENCE_T> & rhs) const
+        -:  838:    {
+        -:  839:      // Return if this iterator is less than the passed in iterator.
+        -:  840:      return this->pos_ < rhs.pos_;
+        -:  841:    }
+        -:  842:
+        -:  843:  /// Equality operator
+        -:  844:  bool operator== (const Const_Generic_Sequence_Iterator<SEQUENCE_T> &rhs) const
+        -:  845:  {
+        -:  846:    // Compare all the data members for equality.
+        -:  847:    return this->sequence_ == rhs.sequence_
+        -:  848:        && this->pos_ == rhs.pos_;
+        -:  849:  }
+        -:  850:
+        -:  851:  /// Nonequality operator
+        -:  852:  bool operator!= (const Const_Generic_Sequence_Iterator<SEQUENCE_T> &rhs) const
+        -:  853:  {
+        -:  854:    return !(*this == rhs);
+        -:  855:  }
+        -:  856:
+        -:  857:private:
+        -:  858:  /// the array we are dealing with
+        -:  859:  const generic_sequence<value_type, allocation_traits, element_traits> *sequence_;
+        -:  860:
+        -:  861:  /// Our current position in the sequence.
+        -:  862:  mutable difference_type pos_;
+        -:  863:};
+        -:  864:
+        -:  865:/// Iterator addition with the difference_type being the first argument.
+        -:  866:template<typename SEQUENCE_T>
+        -:  867: Const_Generic_Sequence_Iterator<SEQUENCE_T> operator+
+        -:  868:   (typename Generic_Sequence_Iterator<SEQUENCE_T>::difference_type n,
+        -:  869:    Const_Generic_Sequence_Iterator<SEQUENCE_T> iter)
+        -:  870:   {
+        -:  871:     // Create an iter and move it ahead n elements.
+        -:  872:     return Const_Generic_Sequence_Iterator<SEQUENCE_T> (iter.sequence_, iter.pos_ + n);
+        -:  873:   }
+        -:  874:
+        -:  875:/// Iterator subtraction with the difference_type being the first argument.
+        -:  876:template<typename SEQUENCE_T>
+        -:  877: Const_Generic_Sequence_Iterator<SEQUENCE_T> operator-
+        -:  878:   (typename Generic_Sequence_Iterator<SEQUENCE_T>::difference_type n,
+        -:  879:    Const_Generic_Sequence_Iterator<SEQUENCE_T> iter)
+        -:  880:   {
+        -:  881:     // Create an iter and move it back n elements.
+        -:  882:     return Const_Generic_Sequence_Iterator<SEQUENCE_T> (iter.sequence_, iter.pos_ - n);
+        -:  883:   }
+        -:  884:
+        -:  885:
+        -:  886:/**
+        -:  887: * @class Generic_Sequence_Reverse_Iterator
+        -:  888: * @brief Implements a reverse random access iterator for generic sequence
+        -:  889: *        type classes.
+        -:  890: */
+        -:  891:template <typename SEQUENCE_T>
+        -:  892:class Generic_Sequence_Reverse_Iterator
+        -:  893:{
+        -:  894:  friend class Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T>;
+        -:  895:
+        -:  896:public:
+        -:  897:  // = Necessary traits
+        -:  898:  typedef std::random_access_iterator_tag iterator_category;
+        -:  899:  typedef typename SEQUENCE_T::value_type value_type;
+        -:  900:  typedef typename SEQUENCE_T::value_type *pointer;
+        -:  901:  typedef typename SEQUENCE_T::value_type &reference;
+        -:  902:  typedef typename SEQUENCE_T::allocation_traits allocation_traits;
+        -:  903:  typedef typename SEQUENCE_T::element_traits element_traits;
+        -:  904:  typedef int difference_type;
+        -:  905:
+        -:  906:  /// Construct a Generic_Sequence_Reverse_Iterator at position pos with before_start flag.
+        -:  907:  Generic_Sequence_Reverse_Iterator (generic_sequence<value_type,
+        -:  908:                              allocation_traits,
+        -:  909:                              element_traits> *sequence,
+        -:  910:             size_t pos)
+        -:  911:    : sequence_ (sequence),
+        -:  912:    pos_ (pos)
+        -:  913:      {
+        -:  914:      }
+        -:  915:
+        -:  916:  /// Copy constructor
+        -:  917:  Generic_Sequence_Reverse_Iterator (
+        -:  918:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> const & rhs)
+        -:  919:    : sequence_ (rhs.sequence_),
+        -:  920:    pos_ (rhs.pos_)
+        -:  921:      {
+        -:  922:      }
+        -:  923:
+        -:  924:  /// Assignment operator
+        -:  925:  Generic_Sequence_Reverse_Iterator & operator= (
+        -:  926:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> const & rhs)
+        -:  927:    {
+        -:  928:      Generic_Sequence_Reverse_Iterator tmp(rhs);
+        -:  929:      swap (tmp);
+        -:  930:      return * this;
+        -:  931:    }
+        -:  932:
+        -:  933:  /// swaps all members
+        -:  934:  void swap(Generic_Sequence_Reverse_Iterator<SEQUENCE_T> & rhs)
+        -:  935:    throw()
+        -:  936:    {
+        -:  937:      std::swap (sequence_, rhs.sequence_);
+        -:  938:      std::swap (this->pos_, rhs.pos_);
+        -:  939:    }
+        -:  940:
+        -:  941:  /// Dereference operator returns a reference to the item contained
+        -:  942:  /// at the current position
+        -:  943:  value_type & operator* (void)
+        -:  944:    {
+        -:  945:      // Access the underlying element in the sequence.
+        -:  946:      return (*(this->sequence_))[this->pos_];
+        -:  947:    }
+        -:  948:
+        -:  949:  /// Returns a const reference to the item contained at the current position
+        -:  950:  const value_type& operator* (void) const
+        -:  951:    {
+        -:  952:      // Access the underlying element in the sequence.
+        -:  953:      return (*(this->sequence_))[this->pos_];
+        -:  954:    }
+        -:  955:
+        -:  956:  /// Preincrement operator
+        -:  957:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &operator++ (void)
+        -:  958:    {
+        -:  959:      // Decrement the position for reverse iterators.
+        -:  960:      // We also need to check if we're now before the start.
+        -:  961:      --this->pos_;
+        -:  962:      return *this;
+        -:  963:    }
+        -:  964:
+        -:  965:  /// Postincrement operator
+        -:  966:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator++ (int)
+        -:  967:    {
+        -:  968:      // Create a temporary to return so that it's not modified.
+        -:  969:      Generic_Sequence_Reverse_Iterator<SEQUENCE_T> temp_iter (this->sequence_, this->pos_);
+        -:  970:      // Decrement the position for reverse iterators.
+        -:  971:      // We also need to check if we're now past the end.
+        -:  972:      --this->pos_;
+        -:  973:      return temp_iter;
+        -:  974:    }
+        -:  975:
+        -:  976:  /// Predecrement operator
+        -:  977:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &operator-- (void)
+        -:  978:    {
+        -:  979:      // Increment the position for reverse iterators.
+        -:  980:      ++this->pos_;
+        -:  981:      return *this;
+        -:  982:    }
+        -:  983:
+        -:  984:  /// Postdecrement operator
+        -:  985:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator-- (int)
+        -:  986:    {
+        -:  987:      // Create a temporary to return so that it's not modified.
+        -:  988:      Generic_Sequence_Reverse_Iterator<SEQUENCE_T> temp_iter (this->sequence_, this->pos_);
+        -:  989:      // Increment the position for reverse iterators.
+        -:  990:      ++this->pos_;
+        -:  991:      return temp_iter;
+        -:  992:    }
+        -:  993:
+        -:  994:  /// Iterator addition
+        -:  995:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &operator+= (difference_type n)
+        -:  996:    {
+        -:  997:      // Move back n elements for reverse iterators.
+        -:  998:      this->pos_ -= n;
+        -:  999:      return *this;
+        -: 1000:    }
+        -: 1001:
+        -: 1002:  /// Iterator addition
+        -: 1003:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator+ (difference_type n)
+        -: 1004:    {
+        -: 1005:      // Create a temporary to return and move it back n elements for
+        -: 1006:      // reverse iterators.
+        -: 1007:      return Generic_Sequence_Reverse_Iterator<SEQUENCE_T> (this->sequence_, this->pos_ - n);
+        -: 1008:    }
+        -: 1009:
+        -: 1010:  /// Iterator subtraction
+        -: 1011:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &operator-= (difference_type n)
+        -: 1012:    {
+        -: 1013:      // Move ahead n elements for reverse iterators.
+        -: 1014:      this->pos_ += n;
+        -: 1015:      return *this;
+        -: 1016:    }
+        -: 1017:
+        -: 1018:  /// Iterator subtraction
+        -: 1019:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator- (difference_type n)
+        -: 1020:    {
+        -: 1021:      // Create a temporary to return and move it ahead n elements for
+        -: 1022:      // reverse iterators.
+        -: 1023:      return Generic_Sequence_Reverse_Iterator<SEQUENCE_T> (this->sequence_, this->pos_ + n);
+        -: 1024:    }
+        -: 1025:
+        -: 1026:  /// Difference
+        -: 1027:  difference_type operator- (const Generic_Sequence_Reverse_Iterator<SEQUENCE_T> & rhs)
+        -: 1028:    {
+        -: 1029:      // I think order is important here (i.e., rhs before this).
+        -: 1030:      return rhs.pos_ - this->pos_;
+        -: 1031:    }
+        -: 1032:
+        -: 1033:  /// Difference
+        -: 1034:  difference_type operator- (const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> & rhs)
+        -: 1035:    {
+        -: 1036:      // I think order is important here (i.e., rhs before this).
+        -: 1037:      return rhs.pos_ - this->pos_;
+        -: 1038:    }
+        -: 1039:
+        -: 1040:
+        -: 1041:  /// Element operator/assignment
+        -: 1042:  value_type & operator[] (difference_type n)
+        -: 1043:    {
+        -: 1044:      // Return the element at position n
+        -: 1045:      return (*(this->sequence_))[this->pos_ - n];
+        -: 1046:    }
+        -: 1047:
+        -: 1048:  /// Less than
+        -: 1049:  bool operator< (const Generic_Sequence_Reverse_Iterator<SEQUENCE_T> & rhs)
+        -: 1050:    {
+        -: 1051:      // Return if this iterator is less than the passed in iterator.
+        -: 1052:      // For reverse iterators reverse the logic.
+        -: 1053:      return this->pos_ > rhs.pos_;
+        -: 1054:    }
+        -: 1055:
+        -: 1056:  /// Less than
+        -: 1057:  bool operator< (const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> & rhs)
+        -: 1058:    {
+        -: 1059:      // Return if this iterator is less than the passed in iterator.
+        -: 1060:      // For reverse iterators reverse the logic.
+        -: 1061:      return this->pos_ > rhs.pos_;
+        -: 1062:    }
+        -: 1063:
+        -: 1064:
+        -: 1065:  /// Equality operator
+        -: 1066:  bool operator== (const Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &rhs) const
+        -: 1067:  {
+        -: 1068:    // Compare all the data members for equality.
+        -: 1069:    return this->sequence_ == rhs.sequence_
+        -: 1070:           && this->pos_ == rhs.pos_;
+        -: 1071:  }
+        -: 1072:
+        -: 1073:  /// Equality operator
+        -: 1074:  bool operator== (const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &rhs) const
+        -: 1075:  {
+        -: 1076:    // Compare all the data members for equality.
+        -: 1077:    return this->sequence_ == rhs.sequence_
+        -: 1078:           && this->pos_ == rhs.pos_;
+        -: 1079:  }
+        -: 1080:
+        -: 1081:  /// Nonequality operator
+        -: 1082:  bool operator!= (const Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &rhs) const
+        -: 1083:  {
+        -: 1084:    return !(*this == rhs);
+        -: 1085:  }
+        -: 1086:
+        -: 1087:  /// Nonequality operator
+        -: 1088:  bool operator!= (const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &rhs) const
+        -: 1089:  {
+        -: 1090:    return !(*this == rhs);
+        -: 1091:  }
+        -: 1092:
+        -: 1093:private:
+        -: 1094:  /// The sequence with which we are dealing
+        -: 1095:  generic_sequence<value_type, allocation_traits, element_traits> *sequence_;
+        -: 1096:
+        -: 1097:  /// Our current position in the sequence.
+        -: 1098:  mutable difference_type pos_;
+        -: 1099:};
+        -: 1100:
+        -: 1101:/// Iterator addition with the difference_type being the first argument.
+        -: 1102:template<typename SEQUENCE_T>
+        -: 1103: Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator+
+        -: 1104:   (typename Generic_Sequence_Reverse_Iterator<SEQUENCE_T>::difference_type n,
+        -: 1105:    Generic_Sequence_Reverse_Iterator<SEQUENCE_T> iter)
+        -: 1106:   {
+        -: 1107:     // Create an iter and move it back n elements for reverse iterators.
+        -: 1108:     return Generic_Sequence_Reverse_Iterator<SEQUENCE_T> (iter.sequence_, iter.pos_ - n);
+        -: 1109:   }
+        -: 1110:
+        -: 1111:/// Iterator subtraction with the difference_type being the first argument.
+        -: 1112:template<typename SEQUENCE_T>
+        -: 1113: Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator-
+        -: 1114:   (typename Generic_Sequence_Reverse_Iterator<SEQUENCE_T>::difference_type n,
+        -: 1115:    Generic_Sequence_Reverse_Iterator<SEQUENCE_T> iter)
+        -: 1116:   {
+        -: 1117:     // Create an iter and move it ahead n elements for reverse iterators.
+        -: 1118:     return Generic_Sequence_Reverse_Iterator<SEQUENCE_T> (iter.sequence_, iter.pos_ + n);
+        -: 1119:   }
+        -: 1120:
+        -: 1121:
+        -: 1122:/**
+        -: 1123: * @class Const_Generic_Sequence_Reverse_Iterator
+        -: 1124: * @brief Implements a constant reverse random access iterator for generic
+        -: 1125: *        sequence type classes.
+        -: 1126: *
+        -: 1127: * Note:  Having a const Iterator does not guarantee that the current
+        -: 1128: * *position* that it points to will not change, it only guarantees that
+        -: 1129: * you cannot change the underlying array!
+        -: 1130: */
+        -: 1131:template <typename SEQUENCE_T>
+        -: 1132:class Const_Generic_Sequence_Reverse_Iterator
+        -: 1133:{
+        -: 1134:  friend class Generic_Sequence_Reverse_Iterator<SEQUENCE_T>;
+        -: 1135:
+        -: 1136:public:
+        -: 1137:  // = Necessary traits
+        -: 1138:  typedef std::random_access_iterator_tag iterator_category;
+        -: 1139:  typedef typename SEQUENCE_T::value_type value_type;
+        -: 1140:  typedef typename SEQUENCE_T::value_type *pointer;
+        -: 1141:  typedef typename SEQUENCE_T::value_type &reference;
+        -: 1142:  typedef typename SEQUENCE_T::allocation_traits allocation_traits;
+        -: 1143:  typedef typename SEQUENCE_T::element_traits element_traits;
+        -: 1144:  typedef int difference_type;
+        -: 1145:
+        -: 1146:  /// Construct a Const_Generic_Sequence_Reverse_Iterator at position pos
+        -: 1147:  /// using a const sequence.
+        -: 1148:  Const_Generic_Sequence_Reverse_Iterator (const generic_sequence<value_type,
+        -: 1149:                                    allocation_traits,
+        -: 1150:                                    element_traits> *sequence,
+        -: 1151:             size_t pos)
+        -: 1152:    : sequence_ (sequence),
+        -: 1153:    pos_ (pos)
+        -: 1154:      {
+        -: 1155:      }
+        -: 1156:
+        -: 1157:  /// Copy constructor
+        -: 1158:  Const_Generic_Sequence_Reverse_Iterator (
+        -: 1159:  Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> const & rhs)
+        -: 1160:    : sequence_ (rhs.sequence_),
+        -: 1161:    pos_ (rhs.pos_)
+        -: 1162:      {
+        -: 1163:      }
+        -: 1164:
+        -: 1165:  /// Copy constructor
+        -: 1166:  Const_Generic_Sequence_Reverse_Iterator (
+        -: 1167:  Generic_Sequence_Reverse_Iterator<SEQUENCE_T> const & rhs)
+        -: 1168:    : sequence_ (rhs.sequence_),
+        -: 1169:    pos_ (rhs.pos_)
+        -: 1170:      {
+        -: 1171:      }
+        -: 1172:
+        -: 1173:  /// Assignment operator
+        -: 1174:  Const_Generic_Sequence_Reverse_Iterator & operator= (
+        -: 1175:  Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> const & rhs)
+        -: 1176:    {
+        -: 1177:      Const_Generic_Sequence_Reverse_Iterator tmp(rhs);
+        -: 1178:      swap (tmp);
+        -: 1179:      return * this;
+        -: 1180:    }
+        -: 1181:
+        -: 1182:  /// swaps all members
+        -: 1183:  void swap(Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> & rhs)
+        -: 1184:    throw()
+        -: 1185:    {
+        -: 1186:      std::swap (sequence_, rhs.sequence_);
+        -: 1187:      std::swap (this->pos_, rhs.pos_);
+        -: 1188:    }
+        -: 1189:
+        -: 1190:  /// typecast operator to Generic_Sequence_Reverse_Iterator
+        -: 1191:
+        -: 1192:  /// Dereference operator returns a reference to the item contained
+        -: 1193:  /// at the current position
+        -: 1194:  const value_type& operator* (void) const
+        -: 1195:    {
+        -: 1196:      // Access the underlying element in the sequence.
+        -: 1197:      return (*this->sequence_)[this->pos_];
+        -: 1198:    }
+        -: 1199:
+        -: 1200:  /// Preincrement operator
+        -: 1201:  const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &operator++ (void) const
+        -: 1202:    {
+        -: 1203:      // Decrement the position for reveres iterators.
+        -: 1204:      // We also need to check if we're now before the start.
+        -: 1205:      --this->pos_;
+        -: 1206:      return *this;
+        -: 1207:    }
+        -: 1208:
+        -: 1209:  /// Postincrement operator
+        -: 1210:  Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator++ (int) const
+        -: 1211:    {
+        -: 1212:      // Create a temporary to return so that it's not modified.
+        -: 1213:      Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> temp_iter (this->sequence_, this->pos_);
+        -: 1214:      // Decrement the position for reverse iterators.
+        -: 1215:      // We also need to check if we're now before the start.
+        -: 1216:      --this->pos_;
+        -: 1217:      return temp_iter;
+        -: 1218:    }
+        -: 1219:
+        -: 1220:  /// Predecrement operator
+        -: 1221:  const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &operator-- (void) const
+        -: 1222:    {
+        -: 1223:      // Increment the position for reverse iterators.
+        -: 1224:      ++this->pos_;
+        -: 1225:      return *this;
+        -: 1226:    }
+        -: 1227:
+        -: 1228:  /// Postdecrement operator
+        -: 1229:  Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator-- (int) const
+        -: 1230:    {
+        -: 1231:      // Create a temporary to return so that it's not modified.
+        -: 1232:      Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> temp_iter (this->sequence_, this->pos_);
+        -: 1233:      // Increment the position for reverse iterators.
+        -: 1234:      ++this->pos_;
+        -: 1235:      return temp_iter;
+        -: 1236:    }
+        -: 1237:
+        -: 1238:  /// Iterator addition
+        -: 1239:  const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &operator+= (difference_type n) const
+        -: 1240:    {
+        -: 1241:      // Move back n elements for reverse iterators.
+        -: 1242:      this->pos_ -= n;
+        -: 1243:      return *this;
+        -: 1244:    }
+        -: 1245:
+        -: 1246:  /// Iterator addition
+        -: 1247:  Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator+ (difference_type n) const
+        -: 1248:    {
+        -: 1249:      // Create a temporary to return and move it back n elements for
+        -: 1250:      // reverse iterators.
+        -: 1251:      return Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> (this->sequence_, this->pos_ - n);
+        -: 1252:    }
+        -: 1253:
+        -: 1254:  /// Iterator subtraction
+        -: 1255:  const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &operator-= (difference_type n) const
+        -: 1256:    {
+        -: 1257:      // Move ahead n elements for reverse iterators.
+        -: 1258:      this->pos_ += n;
+        -: 1259:      return *this;
+        -: 1260:    }
+        -: 1261:
+        -: 1262:  /// Iterator subtraction
+        -: 1263:  Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator- (difference_type n) const
+        -: 1264:    {
+        -: 1265:      // Create a temporary to return and move it ahead n elements for
+        -: 1266:      // reverse iterators.
+        -: 1267:      return Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> (this->sequence_, this->pos_ + n);
+        -: 1268:    }
+        -: 1269:
+        -: 1270:  /// Difference
+        -: 1271:  difference_type operator- (const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> & rhs) const
+        -: 1272:    {
+        -: 1273:      // I think order is important here (i.e., rhs before this).
+        -: 1274:      return rhs.pos_ - this->pos_;
+        -: 1275:    }
+        -: 1276:
+        -: 1277:  /// Element operator/assignment
+        -: 1278:  const value_type & operator[] (difference_type n) const
+        -: 1279:    {
+        -: 1280:      // Return the element at position n
+        -: 1281:      return (*(this->sequence_))[this->pos_ - n];
+        -: 1282:    }
+        -: 1283:
+        -: 1284:  /// Less than
+        -: 1285:  bool operator< (const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> & rhs) const
+        -: 1286:    {
+        -: 1287:      // Return if this iterator is less than the passed in iterator.
+        -: 1288:      // For reverse iterators reverse the logic.
+        -: 1289:      return this->pos_ > rhs.pos_;
+        -: 1290:    }
+        -: 1291:
+        -: 1292:  /// Equality operator
+        -: 1293:  bool operator== (const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &rhs) const
+        -: 1294:  {
+        -: 1295:    // Compare all the data members for equality.
+        -: 1296:    return this->sequence_ == rhs.sequence_
+        -: 1297:        && this->pos_ == rhs.pos_;
+        -: 1298:  }
+        -: 1299:
+        -: 1300:  /// Nonequality operator
+        -: 1301:  bool operator!= (const Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> &rhs) const
+        -: 1302:  {
+        -: 1303:    return !(*this == rhs);
+        -: 1304:  }
+        -: 1305:
+        -: 1306:private:
+        -: 1307:  /// the array we are dealing with
+        -: 1308:  const generic_sequence<value_type, allocation_traits, element_traits> *sequence_;
+        -: 1309:
+        -: 1310:  /// Our current position in the sequence.
+        -: 1311:  mutable difference_type pos_;
+        -: 1312:};
+        -: 1313:
+        -: 1314:/// Iterator addition with the difference_type being the first argument.
+        -: 1315:template<typename SEQUENCE_T>
+        -: 1316: Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator+
+        -: 1317:   (typename Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T>::difference_type n,
+        -: 1318:    Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> iter)
+        -: 1319:   {
+        -: 1320:     // Create an iter and move it back n elements for reverse iterators.
+        -: 1321:     return Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> (iter.sequence_, iter.pos_ - n);
+        -: 1322:   }
+        -: 1323:
+        -: 1324:/// Iterator subtraction with the difference_type being the first argument.
+        -: 1325:template<typename SEQUENCE_T>
+        -: 1326: Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> operator-
+        -: 1327:   (typename Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T>::difference_type n,
+        -: 1328:    Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> iter)
+        -: 1329:   {
+        -: 1330:     // Create an iter and move it ahead n elements for reverse iterators.
+        -: 1331:     return Const_Generic_Sequence_Reverse_Iterator<SEQUENCE_T> (iter.sequence_, iter.pos_ + n);
+        -: 1332:   }
+        -: 1333:
+        -: 1334:#endif /* TAO_HAS_SEQUENCE_ITERATORS==1 */
+        -: 1335:
+        -: 1336:} // namespace details
+        -: 1337:} // namespace TAO
+        -: 1338:
+        -: 1339:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1340:
+        -: 1341:#endif // guard_generic_sequence_hpp

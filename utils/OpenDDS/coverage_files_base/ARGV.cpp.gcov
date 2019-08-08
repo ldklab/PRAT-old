@@ -1,0 +1,423 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/ARGV.cpp
+        -:    0:Programs:70
+        -:    1:// $Id$
+        -:    2:
+        -:    3:#ifndef ACE_ARGV_CPP
+        -:    4:#define ACE_ARGV_CPP
+        -:    5:
+        -:    6:#include "ace/Log_Category.h"
+        -:    7:#include "ace/OS_NS_unistd.h"
+        -:    8:#include "ace/OS_NS_string.h"
+        -:    9:#include "ace/OS_Memory.h"
+        -:   10:
+        -:   11:#if !defined (__ACE_INLINE__)
+        -:   12:#include "ace/ARGV.inl"
+        -:   13:#endif /* __ACE_INLINE__ */
+        -:   14:
+        -:   15:// Open versioned namespace, if enabled by the user.
+        -:   16:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   17:
+        -:   18:ACE_ALLOC_HOOK_DEFINE_Tt (ACE_ARGV_Queue_Entry_T)
+        -:   19:ACE_ALLOC_HOOK_DEFINE_Tt (ACE_ARGV_T)
+        -:   20:
+        -:   21:template <typename CHAR_TYPE>
+        -:   22:void
+        -:   23:ACE_ARGV_Queue_Entry_T<CHAR_TYPE>::dump (void) const
+        -:   24:{
+        -:   25:#if defined (ACE_HAS_DUMP)
+        -:   26:  ACE_TRACE ("ACE_ARGV_Queue_Entry_T::dump");
+        -:   27:
+        -:   28:  ACELIB_DEBUG ((LM_DEBUG, ACE_BEGIN_DUMP, this));
+        -:   29:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("arg_ = %s"), this->arg_));
+        -:   30:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("quote_arg_ = %d"), (int)this->quote_arg_));
+        -:   31:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:   32:#endif /* ACE_HAS_DUMP */
+        -:   33:}
+        -:   34:
+        -:   35:template <typename CHAR_TYPE>
+        -:   36:void
+        -:   37:ACE_ARGV_T<CHAR_TYPE>::dump (void) const
+        -:   38:{
+        -:   39:#if defined (ACE_HAS_DUMP)
+        -:   40:  ACE_TRACE ("ACE_ARGV_T::dump");
+        -:   41:
+        -:   42:  ACELIB_DEBUG ((LM_DEBUG, ACE_BEGIN_DUMP, this));
+        -:   43:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("argc_ = %d"), this->argc_));
+        -:   44:
+        -:   45:  ACE_ARGV *this_obj = const_cast<ACE_ARGV *> (this);
+        -:   46:
+        -:   47:  for (int i = 0; i < this->argc_; i++)
+        -:   48:    ACELIB_DEBUG ((LM_DEBUG,
+        -:   49:                ACE_TEXT ("\nargv_[%i] = %s"),
+        -:   50:                i,
+        -:   51:                this_obj->argv ()[i]));
+        -:   52:
+        -:   53:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("\nbuf = %s\n"), this->buf_));
+        -:   54:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("\n")));
+        -:   55:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:   56:#endif /* ACE_HAS_DUMP */
+        -:   57:}
+        -:   58:
+        -:   59:// Creates this->argv_ out of this->buf_.  New memory is allocated for
+        -:   60:// each element of the array.  This is used by the array-to-string
+        -:   61:// style constructor and for creating this->argv_ when in iterative
+        -:   62:// mode.
+        -:   63:
+        -:   64:template <typename CHAR_TYPE>
+        -:   65:int
+        -:   66:ACE_ARGV_T<CHAR_TYPE>::string_to_argv (void)
+        -:   67:{
+        -:   68:  ACE_TRACE ("ACE_ARGV_T::string_to_argv");
+        -:   69:
+        -:   70:  return ACE_OS::string_to_argv (this->buf_,
+        -:   71:                                 this->argc_,
+        -:   72:                                 this->argv_,
+        -:   73:                                 this->substitute_env_args_);
+        -:   74:}
+        -:   75:
+        -:   76:template <typename CHAR_TYPE>
+        -:   77:ACE_ARGV_T<CHAR_TYPE>::ACE_ARGV_T (const CHAR_TYPE buf[],
+        -:   78:                                   bool substitute_env_args)
+        -:   79:  : substitute_env_args_ (substitute_env_args),
+        -:   80:    iterative_ (false),
+        -:   81:    argc_ (0),
+        -:   82:    argv_ (0),
+        -:   83:    buf_ (0),
+        -:   84:    length_ (0),
+        -:   85:    queue_ ()
+        -:   86:{
+        -:   87:  ACE_TRACE ("ACE_ARGV_T::ACE_ARGV_T CHAR_TYPE[] to CHAR_TYPE *[]");
+        -:   88:
+        -:   89:  if (buf == 0 || buf[0] == 0)
+        -:   90:    return;
+        -:   91:
+        -:   92:  // Make an internal copy of the string.
+        -:   93:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:   94:  ACE_ALLOCATOR(this->buf_,
+        -:   95:                          static_cast<char*> (ACE_Allocator::instance()->malloc(sizeof (CHAR_TYPE) * (ACE_OS::strlen (buf) + 1))));
+        -:   96:#else
+        -:   97:  ACE_NEW (this->buf_,
+        -:   98:           CHAR_TYPE[ACE_OS::strlen (buf) + 1]);
+        -:   99:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:  100:
+        -:  101:  ACE_OS::strcpy (this->buf_, buf);
+        -:  102:
+        -:  103:  // Create this->argv_.
+        -:  104:  if (this->string_to_argv () == -1)
+        -:  105:    ACELIB_ERROR ((LM_ERROR,
+        -:  106:                ACE_TEXT ("%p\n"),
+        -:  107:                ACE_TEXT ("string_to_argv")));
+        -:  108:}
+        -:  109:
+        -:  110:template <typename CHAR_TYPE>
+        -:  111:ACE_ARGV_T<CHAR_TYPE>::ACE_ARGV_T (CHAR_TYPE *argv[],
+        -:  112:                                   bool substitute_env_args,
+        -:  113:                                   bool quote_arg)
+        -:  114:  : substitute_env_args_ (substitute_env_args),
+        -:  115:    iterative_ (false),
+        -:  116:    argc_ (0),
+        -:  117:    argv_ (0),
+        -:  118:    buf_ (0),
+        -:  119:    length_ (0),
+        -:  120:    queue_ ()
+        -:  121:{
+        -:  122:  ACE_TRACE ("ACE_ARGV_T::ACE_ARGV_T CHAR_TYPE*[] to CHAR_TYPE[]");
+        -:  123:
+        -:  124:  if (argv == 0 || argv[0] == 0)
+        -:  125:    return;
+        -:  126:
+        -:  127:  this->argc_ = ACE_OS::argv_to_string (argv,
+        -:  128:                                        this->buf_,
+        -:  129:                                        substitute_env_args,
+        -:  130:                                        quote_arg);
+        -:  131:}
+        -:  132:
+        -:  133:template <typename CHAR_TYPE>
+        -:  134:ACE_ARGV_T<CHAR_TYPE>::ACE_ARGV_T (int argc,
+        -:  135:                                   CHAR_TYPE *argv[],
+        -:  136:                                   bool substitute_env_args,
+        -:  137:                                   bool quote_arg)
+        -:  138:  : substitute_env_args_ (substitute_env_args),
+        -:  139:    iterative_ (false),
+        -:  140:    argc_ (0),
+        -:  141:    argv_ (0),
+        -:  142:    buf_ (0),
+        -:  143:    length_ (0),
+        -:  144:    queue_ ()
+        -:  145:{
+        -:  146:  ACE_TRACE ("ACE_ARGV_T::ACE_ARGV_T int,CHAR_TYPE*[] to CHAR_TYPE[]");
+        -:  147:
+        -:  148:  this->argc_ = ACE_OS::argv_to_string (argc,
+        -:  149:                                        argv,
+        -:  150:                                        this->buf_,
+        -:  151:                                        substitute_env_args,
+        -:  152:                                        quote_arg);
+        -:  153:}
+        -:  154:
+        -:  155:
+        -:  156:template <typename CHAR_TYPE>
+        -:  157:ACE_ARGV_T<CHAR_TYPE>::ACE_ARGV_T (CHAR_TYPE *first_argv[],
+        -:  158:                                   CHAR_TYPE *second_argv[],
+        -:  159:                                   bool substitute_env_args,
+        -:  160:                                   bool quote_args)
+        -:  161:  : substitute_env_args_ (substitute_env_args),
+        -:  162:    iterative_ (false),
+        -:  163:    argc_ (0),
+        -:  164:    argv_ (0),
+        -:  165:    buf_ (0),
+        -:  166:    length_ (0),
+        -:  167:    queue_ ()
+        -:  168:{
+        -:  169:  ACE_TRACE ("ACE_ARGV_T::ACE_ARGV_T CHAR_TYPE*[] + CHAR_TYPE *[] to CHAR_TYPE[]");
+        -:  170:
+        -:  171:  int first_argc = 0;
+        -:  172:  int second_argc = 0;
+        -:  173:
+        -:  174:  CHAR_TYPE *first_buf = 0;
+        -:  175:  CHAR_TYPE *second_buf = 0;
+        -:  176:  size_t buf_len = 1;
+        -:  177:
+        -:  178:  // convert the first argv to a string
+        -:  179:  if (first_argv != 0 && first_argv[0] != 0)
+        -:  180:    {
+        -:  181:      first_argc = ACE_OS::argv_to_string (first_argv,
+        -:  182:                                           first_buf,
+        -:  183:                                           substitute_env_args,
+        -:  184:                                           quote_args);
+        -:  185:      buf_len += ACE_OS::strlen (first_buf);
+        -:  186:    }
+        -:  187:
+        -:  188:  // convert the second argv to a string
+        -:  189:  if (second_argv != 0 && second_argv[0] != 0)
+        -:  190:    {
+        -:  191:      second_argc = ACE_OS::argv_to_string (second_argv,
+        -:  192:                                            second_buf,
+        -:  193:                                            substitute_env_args,
+        -:  194:                                            quote_args);
+        -:  195:      buf_len += ACE_OS::strlen (second_buf);
+        -:  196:    }
+        -:  197:
+        -:  198:  // Add the number of arguments in both the argvs.
+        -:  199:  this->argc_ = first_argc + second_argc;
+        -:  200:
+        -:  201:  // Allocate memory to the lenght of the combined argv string.
+        -:  202:  ACE_NEW (this->buf_,
+        -:  203:           CHAR_TYPE[buf_len + 1]);
+        -:  204:
+        -:  205:  // copy the first argv string to the buffer
+        -:  206:  ACE_OS::strcpy (this->buf_, first_buf);
+        -:  207:
+        -:  208:  // concatenate the second argv string to the buffer
+        -:  209:  ACE_OS::strcat (this->buf_, second_buf);
+        -:  210:
+        -:  211:  //   Delete the first and second buffers
+        -:  212:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  213:  ACE_Allocator::instance()->free (first_buf);
+        -:  214:  ACE_Allocator::instance()->free (second_buf);
+        -:  215:#else
+        -:  216:  delete [] first_buf;
+        -:  217:  delete [] second_buf;
+        -:  218:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:  219:}
+        -:  220:
+        -:  221:template <typename CHAR_TYPE>
+      118:  222:ACE_ARGV_T<CHAR_TYPE>::ACE_ARGV_T (bool substitute_env_args)
+        -:  223:  : substitute_env_args_ (substitute_env_args),
+        -:  224:    iterative_ (true),
+        -:  225:    argc_ (0),
+        -:  226:    argv_ (0),
+        -:  227:    buf_ (0),
+        -:  228:    length_ (0),
+      118:  229:    queue_ ()
+        -:  230:{
+        -:  231:  ACE_TRACE ("ACE_ARGV_T::ACE_ARGV_T Iterative");
+        -:  232:
+        -:  233:  // Nothing to do yet -- the user puts in arguments via add ()
+      118:  234:}
+        -:  235:
+        -:  236:template <typename CHAR_TYPE>
+        -:  237:int
+      122:  238:ACE_ARGV_T<CHAR_TYPE>::add (const CHAR_TYPE *next_arg, bool quote_arg)
+        -:  239:{
+        -:  240:  // Only allow this to work in the "iterative" verion -- the
+        -:  241:  // ACE_ARGVs created with the one argument constructor.
+      122:  242:  if (!this->iterative_)
+        -:  243:    {
+    #####:  244:      errno = EINVAL;
+    #####:  245:      return -1;
+        -:  246:    }
+        -:  247:
+      122:  248:  this->length_ += ACE_OS::strlen (next_arg);
+     122*:  249:  if (quote_arg && ACE_OS::strchr (next_arg, ' ') != 0)
+        -:  250:    {
+    #####:  251:      this->length_ += 2;
+    #####:  252:      if (ACE_OS::strchr (next_arg, '"') != 0)
+    #####:  253:        for (const CHAR_TYPE * p = next_arg; *p != '\0'; ++p)
+    #####:  254:          if (*p == '"') ++this->length_;
+        -:  255:    }
+        -:  256:  else
+        -:  257:    {
+      122:  258:      quote_arg = false;
+        -:  259:    }
+        -:  260:
+        -:  261:  // Put the new argument at the end of the queue.
+      122:  262:  if (this->queue_.enqueue_tail (ACE_ARGV_Queue_Entry_T<CHAR_TYPE> (next_arg, quote_arg)) == -1)
+    #####:  263:    ACELIB_ERROR_RETURN ((LM_ERROR,
+        -:  264:                       ACE_TEXT ("Can't add more to ARGV queue")),
+        -:  265:                      -1);
+        -:  266:
+      122:  267:  ++this->argc_;
+        -:  268:
+        -:  269:  // Wipe argv_ and buf_ away so that they will be recreated if the
+        -:  270:  // user calls argv () or buf ().
+      122:  271:  if (this->argv_ != 0)
+        -:  272:    {
+    #####:  273:      for (int i = 0; this->argv_[i] != 0; i++)
+    #####:  274:        ACE_OS::free ((void *) this->argv_[i]);
+        -:  275:
+        -:  276:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  277:      ACE_Allocator::instance()->free (this->argv_);
+        -:  278:#else
+    #####:  279:      delete [] this->argv_;
+        -:  280:#endif /* ACE_HAS_ALLOC_HOOKS */
+    #####:  281:      this->argv_ = 0;
+        -:  282:    }
+        -:  283:
+        -:  284:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  285:  ACE_Allocator::instance()->free (this->buf_);
+        -:  286:#else
+     122*:  287:  delete [] this->buf_;
+        -:  288:#endif /* ACE_HAS_ALLOC_HOOKS */
+      122:  289:  this->buf_ = 0;
+        -:  290:
+      122:  291:  return 0;
+        -:  292:}
+        -:  293:
+        -:  294:template <typename CHAR_TYPE>
+        -:  295:int
+        -:  296:ACE_ARGV_T<CHAR_TYPE>::add (CHAR_TYPE *argv[], bool quote_args)
+        -:  297:{
+        -:  298:  for (int i = 0; argv[i] != 0; i++)
+        -:  299:    if (this->add (argv[i], quote_args) == -1)
+        -:  300:      return -1;
+        -:  301:
+        -:  302:  return 0;
+        -:  303:}
+        -:  304:
+        -:  305:// Free up argv_ and buf_
+        -:  306:
+        -:  307:template <typename CHAR_TYPE>
+    #####:  308:ACE_ARGV_T<CHAR_TYPE>::~ACE_ARGV_T (void)
+        -:  309:{
+        -:  310:  ACE_TRACE ("ACE_ARGV_T::~ACE_ARGV_T");
+        -:  311:
+    #####:  312:  if (this->argv_ != 0)
+    #####:  313:    for (int i = 0; this->argv_[i] != 0; i++)
+        -:  314:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  315:      ACE_Allocator::instance()->free ((void *) this->argv_[i]);
+        -:  316:#else
+    #####:  317:      ACE_OS::free ((void *) this->argv_[i]);
+        -:  318:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:  319:
+        -:  320:
+        -:  321:
+        -:  322:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  323:  ACE_Allocator::instance()->free (this->argv_);
+        -:  324:  ACE_Allocator::instance()->free (this->buf_);
+        -:  325:#else
+    #####:  326:  delete [] this->argv_;
+    #####:  327:  delete [] this->buf_;
+        -:  328:#endif /* ACE_HAS_ALLOC_HOOKS */
+    #####:  329:}
+        -:  330:
+        -:  331:// Create buf_ out of the queue_.  This is only used in the
+        -:  332:// "iterative" mode.
+        -:  333:
+        -:  334:template <typename CHAR_TYPE>
+        -:  335:int
+        -:  336:ACE_ARGV_T<CHAR_TYPE>::create_buf_from_queue (void)
+        -:  337:{
+        -:  338:  ACE_TRACE ("ACE_ARGV_T::create_buf_from_queue");
+        -:  339:
+        -:  340:  // If the are no arguments, don't do anything
+        -:  341:  if (this->argc_ <= 0)
+        -:  342:    return -1;
+        -:  343:
+        -:  344:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  345:  ACE_Allocator::instance()->free (this->buf_);
+        -:  346:#else
+        -:  347:  delete [] this->buf_;
+        -:  348:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:  349:
+        -:  350:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  351:  ACE_ALLOCATOR_RETURN (this->buf_,
+        -:  352:                        static_cast<char*> (ACE_Allocator::instance()->malloc(sizeof (CHAR_TYPE) * (this->length_ + this->argc_))),
+        -:  353:                        -1);
+        -:  354:#else
+        -:  355:  ACE_NEW_RETURN (this->buf_,
+        -:  356:                  CHAR_TYPE[this->length_ + this->argc_],
+        -:  357:                  -1);
+        -:  358:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:  359:
+        -:  360:  // Get an iterator over the queue
+        -:  361:  ACE_Unbounded_Queue_Iterator<ACE_ARGV_Queue_Entry_T<CHAR_TYPE> > iter (this->queue_);
+        -:  362:
+        -:  363:  ACE_ARGV_Queue_Entry_T<CHAR_TYPE> *arg = 0;
+        -:  364:  CHAR_TYPE *ptr = this->buf_;
+        -:  365:  size_t len;
+        -:  366:
+        -:  367:  while (!iter.done ())
+        -:  368:    {
+        -:  369:      // Get next argument from the queue.
+        -:  370:      iter.next (arg);
+        -:  371:      iter.advance ();
+        -:  372:
+        -:  373:      if (arg->quote_arg_)
+        -:  374:        {
+        -:  375:          *ptr++ = '"';
+        -:  376:          if (ACE_OS::strchr (arg->arg_, '"') != 0)
+        -:  377:            {
+        -:  378:              CHAR_TYPE prev = 0;
+        -:  379:              for (const CHAR_TYPE * p = arg->arg_; *p != '\0'; ++p)
+        -:  380:                {
+        -:  381:                  if (*p == '"' && prev != '\\') *ptr++ = '\\';
+        -:  382:                  prev = *ptr++ = *p;
+        -:  383:                }
+        -:  384:            }
+        -:  385:          else
+        -:  386:            {
+        -:  387:              len = ACE_OS::strlen (arg->arg_);
+        -:  388:              // Copy the argument into buf_
+        -:  389:              ACE_OS::memcpy ((void *) ptr,
+        -:  390:                              (const void *) (arg->arg_),
+        -:  391:                              len * sizeof (CHAR_TYPE));
+        -:  392:              // Move the pointer down.
+        -:  393:              ptr += len;
+        -:  394:            }
+        -:  395:          *ptr++ = '"';
+        -:  396:        }
+        -:  397:      else
+        -:  398:        {
+        -:  399:          len = ACE_OS::strlen (arg->arg_);
+        -:  400:          // Copy the argument into buf_
+        -:  401:          ACE_OS::memcpy ((void *) ptr,
+        -:  402:                          (const void *) (arg->arg_),
+        -:  403:                          len * sizeof (CHAR_TYPE));
+        -:  404:          // Move the pointer down.
+        -:  405:          ptr += len;
+        -:  406:        }
+        -:  407:
+        -:  408:      // Put in an argument separating space.
+        -:  409:      *ptr++ = ' ';
+        -:  410:    }
+        -:  411:
+        -:  412:  // Put in the NUL terminator
+        -:  413:  ptr[-1] = '\0';
+        -:  414:
+        -:  415:  return 0;
+        -:  416:}
+        -:  417:
+        -:  418:// Close versioned namespace, if enabled by the user.
+        -:  419:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  420:
+        -:  421:#endif /* ACE_ARGV_CPP */

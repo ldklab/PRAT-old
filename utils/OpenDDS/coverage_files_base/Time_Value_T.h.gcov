@@ -1,0 +1,203 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Time_Value_T.h
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file    Time_Value_T.h
+        -:    6: *
+        -:    7: *  $Id$
+        -:    8: *
+        -:    9: *  @author Martin Corino <mcorino@remedy.nl>
+        -:   10: */
+        -:   11://=============================================================================
+        -:   12:
+        -:   13:#ifndef ACE_TIME_VALUE_T_H
+        -:   14:#define ACE_TIME_VALUE_T_H
+        -:   15:
+        -:   16:#include /**/ "ace/pre.h"
+        -:   17:
+        -:   18:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   19:# pragma once
+        -:   20:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   21:
+        -:   22:#include "ace/Time_Value.h"
+        -:   23:
+        -:   24:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   25:
+        -:   26:/**
+        -:   27: * @class ACE_Time_Value
+        -:   28: *
+        -:   29: * @brief Operations on "timeval" structures, which express time in
+        -:   30: * seconds (secs) and microseconds (usecs).
+        -:   31: *
+        -:   32: * This class centralizes all the time related processing in
+        -:   33: * ACE.  These time values are typically used in conjunction with OS
+        -:   34: * mechanisms like <select>, <poll>, or <cond_timedwait>.
+        -:   35: */
+        -:   36:template <class TIME_POLICY>
+        -:   37:class ACE_Time_Value_T : public ACE_Time_Value
+        -:   38:{
+        -:   39:public:
+        -:   40:  typedef TIME_POLICY time_policy_t;
+        -:   41:
+        -:   42:  // = Initialization methods.
+        -:   43:
+        -:   44:  /// Default Constructor.
+        -:   45:  ACE_Time_Value_T (void) {}
+        -:   46:
+        -:   47:  /// Constructor.
+        -:   48:  explicit ACE_Time_Value_T (time_t sec, suseconds_t usec = 0)
+        -:   49:    : ACE_Time_Value (sec, usec) {}
+        -:   50:
+        -:   51:  // = Methods for converting to/from various time formats.
+        -:   52:
+        -:   53:  /// Construct the ACE_Time_Value from a timeval.
+        -:   54:  explicit ACE_Time_Value_T (const struct timeval &t)
+        -:   55:    : ACE_Time_Value (t) {}
+        -:   56:
+        -:   57:  /// Construct the ACE_Time_Value object from a timespec_t.
+        -:   58:  explicit ACE_Time_Value_T (const timespec_t &t)
+        -:   59:    : ACE_Time_Value (t) {}
+        -:   60:
+        -:   61:  /// Construct from ACE_Time_Value_T<TIME_POLICY>
+    #####:   62:  ACE_Time_Value_T(const ACE_Time_Value_T<TIME_POLICY>& tv)
+        -:   63:    : ACE_Time_Value (tv),
+    #####:   64:      time_policy_ (tv.time_policy_)
+    #####:   65:  {}
+        -:   66:
+        -:   67:  /// Construct from ACE_Time_Value
+    #####:   68:  explicit ACE_Time_Value_T(const ACE_Time_Value& tv,
+        -:   69:                            const TIME_POLICY& tp = TIME_POLICY ())
+        -:   70:    : ACE_Time_Value (tv),
+    #####:   71:      time_policy_ (tp)
+    #####:   72:  {}
+        -:   73:
+        -:   74:  /// Destructor
+    #####:   75:  virtual ~ACE_Time_Value_T () {}
+------------------
+_ZN16ACE_Time_Value_TI24ACE_FPointer_Time_PolicyED0Ev:
+    #####:   75:  virtual ~ACE_Time_Value_T () {}
+------------------
+_ZN16ACE_Time_Value_TI24ACE_FPointer_Time_PolicyED2Ev:
+    #####:   75:  virtual ~ACE_Time_Value_T () {}
+------------------
+        -:   76:
+        -:   77:  /// Add @a tv to this.
+        -:   78:  ACE_Time_Value_T<TIME_POLICY> &operator += (const ACE_Time_Value &tv);
+        -:   79:
+        -:   80:  /// Add @a tv to this.
+        -:   81:  ACE_Time_Value_T<TIME_POLICY> &operator += (time_t tv);
+        -:   82:
+        -:   83:  /// Assign @ tv to this
+        -:   84:  ACE_Time_Value_T<TIME_POLICY> &operator = (const ACE_Time_Value_T<TIME_POLICY> &tv);
+        -:   85:
+        -:   86:  /// Assign @ tv to this
+        -:   87:  ACE_Time_Value_T<TIME_POLICY> &operator = (const ACE_Time_Value &tv);
+        -:   88:
+        -:   89:  /// Assign @ tv to this
+        -:   90:  ACE_Time_Value_T<TIME_POLICY> &operator = (time_t tv);
+        -:   91:
+        -:   92:  /// Subtract @a tv to this.
+        -:   93:  ACE_Time_Value_T<TIME_POLICY> &operator -= (const ACE_Time_Value &tv);
+        -:   94:
+        -:   95:  /// Subtract @a tv to this.
+        -:   96:  ACE_Time_Value_T<TIME_POLICY> &operator -= (time_t tv);
+        -:   97:
+        -:   98:  /**
+        -:   99:    \brief Multiply the time value by the @a d factor.
+        -:  100:    \note The result of the operator is valid for results from range
+        -:  101:    < (ACE_INT32_MIN, -999999), (ACE_INT32_MAX, 999999) >. Result
+        -:  102:    outside this range are saturated to a limit.
+        -:  103:     */
+        -:  104:  ACE_Time_Value_T<TIME_POLICY> &operator *= (double d);
+        -:  105:
+        -:  106:  /// Increment microseconds as postfix.
+        -:  107:  /**
+        -:  108:   * @note The only reason this is here is to allow the use of ACE_Atomic_Op
+        -:  109:   * with ACE_Time_Value.
+        -:  110:   */
+        -:  111:  ACE_Time_Value_T<TIME_POLICY> operator++ (int);
+        -:  112:
+        -:  113:  /// Increment microseconds as prefix.
+        -:  114:  /**
+        -:  115:   * @note The only reason this is here is to allow the use of ACE_Atomic_Op
+        -:  116:   * with ACE_Time_Value.
+        -:  117:   */
+        -:  118:  ACE_Time_Value_T<TIME_POLICY> &operator++ (void);
+        -:  119:
+        -:  120:  /// Decrement microseconds as postfix.
+        -:  121:  /**
+        -:  122:   * @note The only reason this is here is to allow the use of ACE_Atomic_Op
+        -:  123:   * with ACE_Time_Value.
+        -:  124:   */
+        -:  125:  ACE_Time_Value_T<TIME_POLICY> operator-- (int);
+        -:  126:
+        -:  127:  /// Decrement microseconds as prefix.
+        -:  128:  /**
+        -:  129:   * @note The only reason this is here is to allow the use of ACE_Atomic_Op
+        -:  130:   * with ACE_Time_Value.
+        -:  131:   */
+        -:  132:  ACE_Time_Value_T<TIME_POLICY> &operator-- (void);
+        -:  133:
+        -:  134:  /// Get current time of day according to time policy.
+        -:  135:  /**
+        -:  136:   * @return  Time value representing current time of day according to time policy.
+        -:  137:   */
+        -:  138:  virtual ACE_Time_Value now () const;
+        -:  139:
+        -:  140:  /// Converts absolute time value to time value relative to current time of day.
+        -:  141:  /**
+        -:  142:   * @return  Relative time value.
+        -:  143:   *
+        -:  144:   * @note    This method uses it's time_policy_ member to get the current
+        -:  145:   *          time of day.
+        -:  146:   *          The developer is responsible for making sure this is an absolute
+        -:  147:   *          time value compatible with the active time policy.
+        -:  148:   *          Note that the returned time value has no notion of the time policy
+        -:  149:   *          on which it is based anymore.
+        -:  150:   */
+        -:  151:  virtual ACE_Time_Value to_relative_time () const;
+        -:  152:
+        -:  153:  /// Converts relative time value to absolute time value based on current time of day.
+        -:  154:  /**
+        -:  155:   * @return  Absolute time value.
+        -:  156:   *
+        -:  157:   * @note    This method uses it's time_policy_ member to get the current
+        -:  158:   *          time of day.
+        -:  159:   *          The developer is responsible for making sure this is a relative
+        -:  160:   *          time value.
+        -:  161:   *          Note that the returned time value has no notion of the time policy
+        -:  162:   *          on which it is based anymore.
+        -:  163:   */
+        -:  164:  virtual ACE_Time_Value to_absolute_time () const;
+        -:  165:
+        -:  166:  /// Duplicates this time value (incl. time policy).
+        -:  167:  /**
+        -:  168:   * @return  Dynamically allocated time value copy.
+        -:  169:   *
+        -:  170:   * @note    The caller is responsible for freeing the copy when it's not needed
+        -:  171:   *          anymore.
+        -:  172:   */
+        -:  173:  virtual ACE_Time_Value * duplicate () const;
+        -:  174:
+        -:  175:private:
+        -:  176:  TIME_POLICY time_policy_;
+        -:  177:};
+        -:  178:
+        -:  179:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  180:
+        -:  181:#if defined (__ACE_INLINE__)
+        -:  182:#include "ace/Time_Value_T.inl"
+        -:  183:#endif /* __ACE_INLINE__ */
+        -:  184:
+        -:  185:#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
+        -:  186:#include "ace/Time_Value_T.cpp"
+        -:  187:#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
+        -:  188:
+        -:  189:#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
+        -:  190:#pragma implementation ("Time_Value_T.cpp")
+        -:  191:#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
+        -:  192:
+        -:  193:#include /**/ "ace/post.h"
+        -:  194:#endif /* ACE_TIME_VALUE_T_H */

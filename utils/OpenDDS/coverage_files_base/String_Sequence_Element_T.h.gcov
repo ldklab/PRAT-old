@@ -1,0 +1,152 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Sequence_Element_T.h
+        -:    0:Programs:70
+        -:    1:#ifndef guard_string_sequence_element_hpp
+        -:    2:#define guard_string_sequence_element_hpp
+        -:    3:/**
+        -:    4: * @file
+        -:    5: *
+        -:    6: * @brief Implement the type returned by operator[] in string
+        -:    7: * sequences.
+        -:    8: *
+        -:    9: * $Id$
+        -:   10: *
+        -:   11: * @author Carlos O'Ryan
+        -:   12: */
+        -:   13:
+        -:   14:#include "tao/Basic_Types.h"
+        -:   15:
+        -:   16:#include <algorithm>
+        -:   17:
+        -:   18:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   19:
+        -:   20:namespace TAO
+        -:   21:{
+        -:   22:namespace details
+        -:   23:{
+        -:   24:
+        -:   25:template<typename traits>
+        -:   26:class string_sequence_element
+        -:   27:{
+        -:   28:public:
+        -:   29:  typedef typename traits::char_type character_type;
+        -:   30:  typedef character_type * value_type;
+        -:   31:  typedef character_type const * const_value_type;
+        -:   32:  typedef typename traits::string_var string_var;
+        -:   33:  typedef typename traits::string_out string_out;
+        -:   34:  typedef typename traits::string_mgr string_mgr;
+        -:   35:
+        -:   36:private:
+    #####:   37:  inline string_sequence_element<traits> & pseudo_copy_swap(string_var & rhs)
+        -:   38:  {
+    #####:   39:    if (release())
+        -:   40:      {
+    #####:   41:        traits::release(*element_);
+        -:   42:      }
+    #####:   43:    *element_ = rhs._retn();
+    #####:   44:    return *this;
+        -:   45:  }
+        -:   46:
+        -:   47:public:
+    #####:   48:  string_sequence_element(
+        -:   49:      value_type & e, CORBA::Boolean release)
+        -:   50:    : element_(&e)
+    #####:   51:    , release_(release)
+        -:   52:  {
+    #####:   53:  }
+        -:   54:
+        -:   55:  string_sequence_element(
+        -:   56:      string_sequence_element const & rhs)
+        -:   57:    : element_(rhs.element_)
+        -:   58:    , release_(rhs.release_)
+        -:   59:  {
+        -:   60:  }
+        -:   61:
+    #####:   62:  ~string_sequence_element()
+        -:   63:  {
+    #####:   64:  }
+        -:   65:
+    #####:   66:  string_sequence_element & operator=(const_value_type rhs)
+        -:   67:  {
+    #####:   68:    string_var tmp(rhs);
+    #####:   69:    return pseudo_copy_swap(tmp);
+        -:   70:  }
+        -:   71:
+        -:   72:  string_sequence_element & operator=(value_type rhs)
+        -:   73:  {
+        -:   74:    string_var tmp(rhs);
+        -:   75:    return pseudo_copy_swap(tmp);
+        -:   76:  }
+        -:   77:
+        -:   78:  string_sequence_element & operator=(string_sequence_element const & rhs)
+        -:   79:  {
+        -:   80:    string_var tmp(static_cast<const_value_type>(rhs));
+        -:   81:    return pseudo_copy_swap(tmp);
+        -:   82:  }
+        -:   83:
+        -:   84:  string_sequence_element & operator=(string_var const & rhs)
+        -:   85:  {
+        -:   86:    string_var tmp(rhs);
+        -:   87:    return pseudo_copy_swap(tmp);
+        -:   88:  }
+        -:   89:
+        -:   90:  string_sequence_element & operator=(string_mgr const & rhs)
+        -:   91:  {
+        -:   92:    string_var tmp(rhs.in());
+        -:   93:    return pseudo_copy_swap(tmp);
+        -:   94:  }
+        -:   95:
+        -:   96:  inline operator const_value_type() const
+        -:   97:  {
+        -:   98:    return *this->element_;
+        -:   99:  }
+        -:  100:
+        -:  101:  inline const character_type *in (void) const {
+        -:  102:    return *this->element_;
+        -:  103:  }
+        -:  104:
+        -:  105:  inline character_type *&inout (void) const {
+        -:  106:    return *this->element_;
+        -:  107:  }
+        -:  108:
+        -:  109:  inline string_out out (void) const {
+        -:  110:
+        -:  111:    if (release())
+        -:  112:      {
+        -:  113:        traits::release(*element_);
+        -:  114:      }
+        -:  115:
+        -:  116:    return *this->element_;
+        -:  117:  }
+        -:  118:
+        -:  119:  inline character_type *_retn (void) {
+        -:  120:    character_type * copy = *this->element_;
+        -:  121:    *this->element_ = traits::default_initializer();
+        -:  122:    return copy;
+        -:  123:  }
+        -:  124:
+        -:  125:  void swap(string_sequence_element & rhs)
+        -:  126:  {
+        -:  127:    std::swap(element_, rhs.element_);
+        -:  128:    std::swap(release_, rhs.release_);
+        -:  129:  }
+        -:  130:
+    #####:  131:  CORBA::Boolean release() const
+        -:  132:  {
+    #####:  133:    return this->release_;
+        -:  134:  }
+        -:  135:
+        -:  136:private:
+        -:  137:  // This function is not implemented
+        -:  138:  string_sequence_element();
+        -:  139:
+        -:  140:private:
+        -:  141:  value_type * element_;
+        -:  142:  CORBA::Boolean release_;
+        -:  143:};
+        -:  144:
+        -:  145:} // namespace details
+        -:  146:} // namespace CORBA
+        -:  147:
+        -:  148:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  149:
+        -:  150:#endif // guard_string_sequence_element_hpp

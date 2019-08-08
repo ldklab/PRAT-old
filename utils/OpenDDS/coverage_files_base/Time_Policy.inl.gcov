@@ -1,0 +1,97 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Time_Policy.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/OS_NS_sys_time.h"
+        -:    6:#include "ace/High_Res_Timer.h"
+        -:    7:
+        -:    8:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    9:
+        -:   10:ACE_INLINE ACE_Time_Value_T<ACE_System_Time_Policy>
+        -:   11:ACE_System_Time_Policy::operator()() const
+        -:   12:{
+        -:   13:  return ACE_Time_Value_T<ACE_System_Time_Policy> (ACE_OS::gettimeofday());
+        -:   14:}
+        -:   15:
+        -:   16:ACE_INLINE void
+        -:   17:ACE_System_Time_Policy::set_gettimeofday (ACE_Time_Value (*)(void))
+        -:   18:{
+        -:   19:}
+        -:   20:
+        -:   21:ACE_INLINE ACE_Time_Value_T<ACE_HR_Time_Policy>
+        -:   22:ACE_HR_Time_Policy::operator()() const
+        -:   23:{
+        -:   24:  return ACE_Time_Value_T<ACE_HR_Time_Policy> (ACE_High_Res_Timer::gettimeofday_hr ());
+        -:   25:}
+        -:   26:
+        -:   27:ACE_INLINE void
+        -:   28:ACE_HR_Time_Policy::set_gettimeofday (ACE_Time_Value (*)(void))
+        -:   29:{
+        -:   30:}
+        -:   31:
+        -:   32:ACE_INLINE
+    #####:   33:ACE_FPointer_Time_Policy::ACE_FPointer_Time_Policy()
+    #####:   34:  : function_(ACE_OS::gettimeofday)
+        -:   35:{
+    #####:   36:}
+        -:   37:
+        -:   38:ACE_INLINE
+        -:   39:ACE_FPointer_Time_Policy::
+        -:   40:ACE_FPointer_Time_Policy(ACE_FPointer_Time_Policy::FPtr f)
+        -:   41:  : function_(f)
+        -:   42:{
+        -:   43:}
+        -:   44:
+        -:   45:ACE_INLINE ACE_Time_Value_T<ACE_FPointer_Time_Policy>
+    #####:   46:ACE_FPointer_Time_Policy::operator()() const
+        -:   47:{
+    #####:   48:  return ACE_Time_Value_T<ACE_FPointer_Time_Policy> ((*this->function_)(), *this);
+        -:   49:}
+        -:   50:
+        -:   51:ACE_INLINE void
+    #####:   52:ACE_FPointer_Time_Policy::set_gettimeofday (ACE_Time_Value (*f)(void))
+        -:   53:{
+    #####:   54:  this->function_ = f;
+    #####:   55:}
+        -:   56:
+        -:   57:ACE_INLINE ACE_Time_Value_T<ACE_Delegating_Time_Policy>
+        -:   58:ACE_Dynamic_Time_Policy_Base::operator()() const
+        -:   59:{
+        -:   60:  return this->gettimeofday ();
+        -:   61:}
+        -:   62:
+        -:   63:ACE_INLINE void
+        -:   64:ACE_Dynamic_Time_Policy_Base::set_gettimeofday (ACE_Time_Value (*)(void))
+        -:   65:{
+        -:   66:}
+        -:   67:
+        -:   68:ACE_INLINE ACE_Time_Value_T<ACE_Delegating_Time_Policy>
+        -:   69:ACE_Delegating_Time_Policy::operator()() const
+        -:   70:{
+        -:   71:  return (*this->delegate_) ();
+        -:   72:}
+        -:   73:
+        -:   74:ACE_INLINE void
+        -:   75:ACE_Delegating_Time_Policy::set_gettimeofday (ACE_Time_Value (*)(void))
+        -:   76:{
+        -:   77:}
+        -:   78:
+        -:   79:ACE_INLINE void
+        -:   80:ACE_Delegating_Time_Policy::set_delegate (ACE_Dynamic_Time_Policy_Base const * delegate)
+        -:   81:{
+        -:   82:  if (delegate != 0)
+        -:   83:    {
+        -:   84:      this->delegate_ = delegate;
+        -:   85:    }
+        -:   86:}
+        -:   87:
+        -:   88:ACE_INLINE ACE_Delegating_Time_Policy&
+        -:   89:ACE_Delegating_Time_Policy::operator =(ACE_Delegating_Time_Policy const & pol)
+        -:   90:{
+        -:   91:  this->delegate_ = pol.delegate_;
+        -:   92:  return *this;
+        -:   93:}
+        -:   94:
+        -:   95:ACE_END_VERSIONED_NAMESPACE_DECL

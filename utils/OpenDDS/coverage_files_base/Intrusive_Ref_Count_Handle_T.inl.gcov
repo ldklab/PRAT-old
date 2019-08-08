@@ -1,0 +1,1258 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Intrusive_Ref_Count_Handle_T.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:template <typename T>
+        -:    8:ACE_INLINE
+        -:    9:TAO_Intrusive_Ref_Count_Handle<T>::TAO_Intrusive_Ref_Count_Handle (void)
+        -:   10:  : ptr_(0)
+        -:   11:{
+        -:   12:}
+        -:   13:
+        -:   14:
+        -:   15:template <typename T>
+        -:   16:ACE_INLINE
+        -:   17:TAO_Intrusive_Ref_Count_Handle<T>::TAO_Intrusive_Ref_Count_Handle (
+        -:   18:  T*   p,
+        -:   19:  bool take_ownership)
+        -:   20:  : ptr_(p)
+        -:   21:{
+        -:   22:  if (!take_ownership)
+        -:   23:    {
+        -:   24:      this->claim ();
+        -:   25:    }
+        -:   26:}
+        -:   27:
+        -:   28:
+        -:   29:template <typename T>
+        -:   30:ACE_INLINE
+        -:   31:TAO_Intrusive_Ref_Count_Handle<T>::TAO_Intrusive_Ref_Count_Handle (
+        -:   32:  const TAO_Intrusive_Ref_Count_Handle<T>& b)
+        -:   33:  : ptr_(b.ptr_)
+        -:   34:{
+        -:   35:  this->claim();
+        -:   36:}
+        -:   37:
+        -:   38:
+        -:   39:template <typename T>
+        -:   40:ACE_INLINE
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EED2Ev:
+    #####:   41:TAO_Intrusive_Ref_Count_Handle<T>::~TAO_Intrusive_Ref_Count_Handle()
+        -:   42:{
+    #####:   43:  this->drop();
+    #####:   44:}
+------------------
+        -:   45:
+        -:   46:
+        -:   47:template <typename T>
+        -:   48:ACE_INLINE
+        -:   49:TAO_Intrusive_Ref_Count_Handle<T>&
+        -:   50:TAO_Intrusive_Ref_Count_Handle<T>::operator=(T* p)
+        -:   51:{
+        -:   52:  TAO_Intrusive_Ref_Count_Handle<T> tmp (p);
+        -:   53:  return this->operator= (tmp);
+        -:   54:}
+        -:   55:
+        -:   56:
+        -:   57:template <typename T>
+        -:   58:ACE_INLINE
+        -:   59:TAO_Intrusive_Ref_Count_Handle<T>&
+        -:   60:TAO_Intrusive_Ref_Count_Handle<T>::operator=
+        -:   61:                                 (const TAO_Intrusive_Ref_Count_Handle<T>& b)
+        -:   62:{
+        -:   63:  // Strongly exception-safe assignment through the usual copy and
+        -:   64:  // swap technique.
+        -:   65:
+        -:   66:  TAO_Intrusive_Ref_Count_Handle<T> tmp (b);
+        -:   67:
+        -:   68:  T * old_ptr = this->ptr_;
+        -:   69:  this->ptr_ = tmp.ptr_;
+        -:   70:  tmp.ptr_ = old_ptr;
+        -:   71:
+        -:   72:  return *this;
+        -:   73:}
+        -:   74:
+        -:   75:
+        -:   76:template <typename T>
+        -:   77:ACE_INLINE
+        -:   78:T*
+        -:   79:TAO_Intrusive_Ref_Count_Handle<T>::operator->() const
+        -:   80:{
+        -:   81:  return this->ptr_;
+        -:   82:}
+        -:   83:
+        -:   84:
+        -:   85:template <typename T>
+        -:   86:ACE_INLINE
+        -:   87:bool
+        -:   88:TAO_Intrusive_Ref_Count_Handle<T>::is_nil() const
+        -:   89:{
+        -:   90:  return this->ptr_ == 0;
+        -:   91:}
+        -:   92:
+        -:   93:
+        -:   94:template <typename T>
+        -:   95:ACE_INLINE
+        -:   96:T*
+        -:   97:TAO_Intrusive_Ref_Count_Handle<T>::in() const
+        -:   98:{
+        -:   99:  return this->ptr_;
+        -:  100:}
+        -:  101:
+        -:  102:
+        -:  103:template <typename T>
+        -:  104:ACE_INLINE
+        -:  105:T*&
+        -:  106:TAO_Intrusive_Ref_Count_Handle<T>::inout()
+        -:  107:{
+        -:  108:  return this->ptr_;
+        -:  109:}
+        -:  110:
+        -:  111:
+        -:  112:template <typename T>
+        -:  113:ACE_INLINE
+        -:  114:T*&
+        -:  115:TAO_Intrusive_Ref_Count_Handle<T>::out()
+        -:  116:{
+        -:  117:  this->drop();
+        -:  118:  return this->ptr_;
+        -:  119:}
+        -:  120:
+        -:  121:
+        -:  122:template <typename T>
+        -:  123:ACE_INLINE
+        -:  124:T*
+        -:  125:TAO_Intrusive_Ref_Count_Handle<T>::_retn()
+        -:  126:{
+        -:  127:  T* retval = this->ptr_;
+        -:  128:  this->ptr_ = 0;
+        -:  129:  return retval;
+        -:  130:}
+        -:  131:
+        -:  132:
+        -:  133:template <typename T>
+        -:  134:ACE_INLINE
+        -:  135:bool
+        -:  136:TAO_Intrusive_Ref_Count_Handle<T>::operator== (const TAO_Intrusive_Ref_Count_Handle& h) const
+        -:  137:{
+        -:  138:  return this->ptr_ == h.in();
+        -:  139:}
+        -:  140:
+        -:  141:
+        -:  142:template <typename T>
+        -:  143:ACE_INLINE
+        -:  144:void
+        -:  145:TAO_Intrusive_Ref_Count_Handle<T>::claim()
+        -:  146:{
+        -:  147:  if (this->ptr_ != 0)
+        -:  148:    {
+        -:  149:      this->ptr_->_add_ref();
+        -:  150:    }
+        -:  151:}
+        -:  152:
+        -:  153:
+        -:  154:template <typename T>
+        -:  155:ACE_INLINE
+        -:  156:void
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPv15ACE_String_BaseIcE14ACE_Null_MutexES5_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+_ZN30TAO_Intrusive_Ref_Count_HandleI30TAO_Intrusive_Ref_Count_ObjectI20ACE_Hash_Map_ManagerIPvS2_14ACE_Null_MutexES3_EE4dropEv:
+    #####:  157:TAO_Intrusive_Ref_Count_Handle<T>::drop()
+        -:  158:{
+    #####:  159:  if (this->ptr_ != 0)
+        -:  160:    {
+    #####:  161:      this->ptr_->_remove_ref();
+    #####:  162:      this->ptr_ = 0;
+        -:  163:    }
+    #####:  164:}
+------------------
+        -:  165:
+        -:  166:TAO_END_VERSIONED_NAMESPACE_DECL

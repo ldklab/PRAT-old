@@ -1,0 +1,314 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/OS_NS_sys_stat.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/OS_NS_unistd.h"
+        -:    6:#include "ace/OS_NS_fcntl.h"
+        -:    7:#include "ace/OS_NS_errno.h"
+        -:    8:#include "ace/OS_NS_macros.h"
+        -:    9:
+        -:   10:#ifdef ACE_MQX
+        -:   11:#  include "ace/MQX_Filesystem.h"
+        -:   12:#endif
+        -:   13:
+        -:   14:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   15:
+        -:   16:namespace ACE_OS
+        -:   17:{
+        -:   18:
+        -:   19:  ACE_INLINE ACE_HANDLE
+        -:   20:  creat (const ACE_TCHAR *filename, mode_t mode)
+        -:   21:  {
+        -:   22:    ACE_OS_TRACE ("ACE_OS::creat");
+        -:   23:#if defined (ACE_WIN32) || defined (ACE_MQX)
+        -:   24:    return ACE_OS::open (filename, O_CREAT|O_TRUNC|O_WRONLY, mode);
+        -:   25:#else
+        -:   26:    ACE_OSCALL_RETURN (::creat (ACE_TEXT_ALWAYS_CHAR (filename), mode),
+        -:   27:                       ACE_HANDLE, ACE_INVALID_HANDLE);
+        -:   28:#endif /* ACE_WIN32 */
+        -:   29:  }
+        -:   30:
+        -:   31:  ACE_INLINE int
+    #####:   32:  fstat (ACE_HANDLE handle, ACE_stat *stp)
+        -:   33:  {
+        -:   34:    ACE_OS_TRACE ("ACE_OS::fstat");
+        -:   35:#if defined (ACE_HAS_X86_STAT_MACROS)
+        -:   36:    // Solaris for intel uses an macro for fstat(), this is a wrapper
+        -:   37:    // for _fxstat() use of the macro.
+        -:   38:    // causes compile and runtime problems.
+        -:   39:    ACE_OSCALL_RETURN (::_fxstat (_STAT_VER, handle, stp), int, -1);
+        -:   40:#elif defined (ACE_WIN32)
+        -:   41:    BY_HANDLE_FILE_INFORMATION fdata;
+        -:   42:
+        -:   43:    if (::GetFileInformationByHandle (handle, &fdata) == FALSE)
+        -:   44:      {
+        -:   45:        ACE_OS::set_errno_to_last_error ();
+        -:   46:        return -1;
+        -:   47:      }
+        -:   48:    else if (fdata.nFileSizeHigh != 0)
+        -:   49:      {
+        -:   50:        errno = EINVAL;
+        -:   51:        return -1;
+        -:   52:      }
+        -:   53:    else
+        -:   54:      {
+        -:   55:        stp->st_size = fdata.nFileSizeLow;
+        -:   56:        stp->st_atime = ACE_Time_Value (fdata.ftLastAccessTime).sec ();
+        -:   57:        stp->st_mtime = ACE_Time_Value (fdata.ftLastWriteTime).sec ();
+        -:   58:        stp->st_ctime = ACE_Time_Value (fdata.ftCreationTime).sec ();
+        -:   59:        stp->st_nlink = static_cast<short> (fdata.nNumberOfLinks);
+        -:   60:        stp->st_dev = stp->st_rdev = 0; // No equivalent conversion.
+        -:   61:        stp->st_mode = S_IXOTH | S_IROTH |
+        -:   62:          (fdata.dwFileAttributes & FILE_ATTRIBUTE_READONLY ? 0 : S_IWOTH) |
+        -:   63:          (fdata.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY ? S_IFDIR : S_IFREG);
+        -:   64:      }
+        -:   65:    return 0;
+        -:   66:#elif defined (ACE_LACKS_FSTAT)
+        -:   67:    ACE_NOTSUP_RETURN (-1);
+        -:   68:#elif defined (ACE_MQX)
+        -:   69:    return MQX_Filesystem::inst ().fstat (handle, stp);
+        -:   70:#else
+        -:   71:#  if defined (ACE_OPENVMS)
+        -:   72:    //FUZZ: disable check_for_lack_ACE_OS
+        -:   73:    ::fsync(handle);
+        -:   74:    //FUZZ: enable check_for_lack_ACE_OS
+        -:   75:#  endif
+    #####:   76:    ACE_OSCALL_RETURN (::fstat (handle, stp), int, -1);
+        -:   77:#endif /* !ACE_HAS_X86_STAT_MACROS */
+        -:   78:  }
+        -:   79:
+        -:   80:  // This function returns the number of bytes in the file referenced by
+        -:   81:  // FD.
+        -:   82:
+        -:   83:  ACE_INLINE ACE_OFF_T
+        -:   84:  filesize (ACE_HANDLE handle)
+        -:   85:  {
+        -:   86:    ACE_OS_TRACE ("ACE_OS::filesize");
+        -:   87:#if defined (ACE_WIN32)
+        -:   88:# if defined (_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64
+        -:   89:    LARGE_INTEGER size;
+        -:   90:    return
+        -:   91:      (::GetFileSizeEx (handle, &size)
+        -:   92:       ? size.QuadPart
+        -:   93:       : (ACE_OS::set_errno_to_last_error (), -1));
+        -:   94:# else
+        -:   95:    DWORD const size = ::GetFileSize (handle, 0);
+        -:   96:    return
+        -:   97:      (size != INVALID_FILE_SIZE
+        -:   98:       ? static_cast<ACE_OFF_T> (size)
+        -:   99:       : (ACE_OS::set_errno_to_last_error (), -1));
+        -:  100:# endif  /* _FILE_OFFSET_BITS == 64 */
+        -:  101:#else /* !ACE_WIN32 */
+        -:  102:    ACE_stat sb;
+        -:  103:    return ACE_OS::fstat (handle, &sb) == -1 ?
+        -:  104:                    static_cast<ACE_OFF_T> (-1) : sb.st_size;
+        -:  105:#endif
+        -:  106:  }
+        -:  107:
+        -:  108:  ACE_INLINE ACE_OFF_T
+        -:  109:  filesize (const ACE_TCHAR *filename)
+        -:  110:  {
+        -:  111:    ACE_OS_TRACE ("ACE_OS::filesize");
+        -:  112:
+        -:  113:    ACE_HANDLE const h = ACE_OS::open (filename, O_RDONLY);
+        -:  114:    if (h != ACE_INVALID_HANDLE)
+        -:  115:      {
+        -:  116:        ACE_OFF_T size = ACE_OS::filesize (h);
+        -:  117:        ACE_OS::close (h);
+        -:  118:        return size;
+        -:  119:      }
+        -:  120:    else
+        -:  121:      return -1;
+        -:  122:  }
+        -:  123:
+        -:  124:  ACE_INLINE int
+        -:  125:  lstat (const char *file, ACE_stat *stp)
+        -:  126:  {
+        -:  127:    ACE_OS_TRACE ("ACE_OS::lstat");
+        -:  128:# if defined (ACE_LACKS_LSTAT)
+        -:  129:    return ACE_OS::stat (file, stp);
+        -:  130:# elif defined (ACE_HAS_X86_STAT_MACROS)
+        -:  131:    // Solaris for intel uses an macro for lstat(), this macro is a
+        -:  132:    // wrapper for _lxstat().
+        -:  133:    ACE_OSCALL_RETURN (::_lxstat (_STAT_VER, file, stp), int, -1);
+        -:  134:# else /* !ACE_HAS_X86_STAT_MACROS */
+        -:  135:    ACE_OSCALL_RETURN (::lstat (file, stp), int, -1);
+        -:  136:# endif /* ACE_LACKS_LSTAT */
+        -:  137:  }
+        -:  138:
+        -:  139:#if defined (ACE_HAS_WCHAR)
+        -:  140:  ACE_INLINE int
+        -:  141:  lstat (const wchar_t *file, ACE_stat *stp)
+        -:  142:  {
+        -:  143:    ACE_OS_TRACE ("ACE_OS::lstat");
+        -:  144:# if defined (ACE_LACKS_LSTAT)
+        -:  145:    return ACE_OS::stat (file, stp);
+        -:  146:# else
+        -:  147:    return ACE_OS::lstat (ACE_Wide_To_Ascii (file).char_rep (), stp);
+        -:  148:# endif /* ACE_LACKS_LSTAT */
+        -:  149:  }
+        -:  150:#endif /* ACE_HAS_WCHAR */
+        -:  151:
+        -:  152:  ACE_INLINE int
+        -:  153:  mkdir (const char *path, mode_t mode)
+        -:  154:  {
+        -:  155:#if defined (ACE_HAS_WINCE)
+        -:  156:    ACE_UNUSED_ARG (mode);
+        -:  157:    ACE_WIN32CALL_RETURN (ACE_ADAPT_RETVAL (::CreateDirectory (ACE_TEXT_CHAR_TO_TCHAR (path), 0),
+        -:  158:                                            ace_result_),
+        -:  159:                          int, -1);
+        -:  160:#elif defined (ACE_MQX)
+        -:  161:    ACE_UNUSED_ARG (mode);
+        -:  162:    return MQX_Filesystem::inst ().mkdir (path);
+        -:  163:#elif defined (ACE_LACKS_MKDIR)
+        -:  164:    ACE_NOTSUP_RETURN (-1);
+        -:  165:#elif defined (ACE_MKDIR_LACKS_MODE)
+        -:  166:    ACE_UNUSED_ARG (mode);
+        -:  167:    ACE_OSCALL_RETURN (::mkdir (path), int, -1);
+        -:  168:#else
+        -:  169:    ACE_OSCALL_RETURN (::mkdir (path, mode), int, -1);
+        -:  170:#endif
+        -:  171:  }
+        -:  172:
+        -:  173:#if defined (ACE_HAS_WCHAR)
+        -:  174:
+        -:  175:  ACE_INLINE int
+        -:  176:  mkdir (const wchar_t *path, mode_t mode)
+        -:  177:  {
+        -:  178:#if defined (ACE_HAS_WINCE)
+        -:  179:    ACE_UNUSED_ARG (mode);
+        -:  180:    ACE_WIN32CALL_RETURN (ACE_ADAPT_RETVAL (CreateDirectoryW (path, 0),
+        -:  181:                                            ace_result_),
+        -:  182:                          int, -1);
+        -:  183:#elif defined (ACE_WIN32) && defined (ACE_USES_WCHAR)
+        -:  184:    ACE_UNUSED_ARG (mode);
+        -:  185:    ACE_OSCALL_RETURN (::_wmkdir (path), int, -1);
+        -:  186:#else
+        -:  187:    return ACE_OS::mkdir (ACE_Wide_To_Ascii (path).char_rep (), mode);
+        -:  188:#endif /* ACE_HAS_WINCE */
+        -:  189:  }
+        -:  190:
+        -:  191:#endif /* ACE_HAS_WCHAR */
+        -:  192:
+        -:  193:  ACE_INLINE int
+        -:  194:  mkfifo (const ACE_TCHAR *file, mode_t mode)
+        -:  195:  {
+        -:  196:    ACE_OS_TRACE ("ACE_OS::mkfifo");
+        -:  197:#if defined (ACE_LACKS_MKFIFO)
+        -:  198:    ACE_UNUSED_ARG (file);
+        -:  199:    ACE_UNUSED_ARG (mode);
+        -:  200:    ACE_NOTSUP_RETURN (-1);
+        -:  201:#else
+        -:  202:    ACE_OSCALL_RETURN (::mkfifo (ACE_TEXT_ALWAYS_CHAR (file), mode), int, -1);
+        -:  203:#endif /* ACE_LACKS_MKFIFO */
+        -:  204:  }
+        -:  205:
+        -:  206:  ACE_INLINE int
+        -:  207:  stat (const char *file, ACE_stat *stp)
+        -:  208:  {
+        -:  209:    ACE_OS_TRACE ("ACE_OS::stat");
+        -:  210:#if defined (ACE_HAS_NONCONST_STAT)
+        -:  211:    ACE_OSCALL_RETURN (::stat (const_cast <char *> (file), stp), int, -1);
+        -:  212:#elif defined (ACE_LACKS_STAT)
+        -:  213:    ACE_NOTSUP_RETURN (-1);
+        -:  214:#elif defined (ACE_HAS_WINCE)
+        -:  215:    ACE_TEXT_WIN32_FIND_DATA fdata;
+        -:  216:
+        -:  217:    HANDLE fhandle;
+        -:  218:
+        -:  219:    fhandle = ::FindFirstFile (ACE_TEXT_CHAR_TO_TCHAR (file), &fdata);
+        -:  220:    if (fhandle == INVALID_HANDLE_VALUE)
+        -:  221:      {
+        -:  222:        ACE_OS::set_errno_to_last_error ();
+        -:  223:        return -1;
+        -:  224:      }
+        -:  225:    else if (fdata.nFileSizeHigh != 0)
+        -:  226:      {
+        -:  227:        errno = EINVAL;
+        -:  228:        return -1;
+        -:  229:      }
+        -:  230:    else
+        -:  231:      {
+        -:  232:        stp->st_mode = static_cast<mode_t>(fdata.dwFileAttributes);
+        -:  233:        stp->st_size = fdata.nFileSizeLow;
+        -:  234:        stp->st_atime = ACE_Time_Value (fdata.ftLastAccessTime).sec ();
+        -:  235:        stp->st_mtime = ACE_Time_Value (fdata.ftLastWriteTime).sec ();
+        -:  236:        stp->st_ctime = ACE_Time_Value (fdata.ftCreationTime).sec ();
+        -:  237:      }
+        -:  238:    return 0;
+        -:  239:#elif defined (ACE_HAS_X86_STAT_MACROS)
+        -:  240:    // Solaris for intel uses an macro for stat(), this macro is a
+        -:  241:    // wrapper for _xstat().
+        -:  242:    ACE_OSCALL_RETURN (::_xstat (_STAT_VER, file, stp), int, -1);
+        -:  243:#elif defined (ACE_MQX)
+        -:  244:    return MQX_Filesystem::inst ().stat (file, stp);
+        -:  245:#else
+        -:  246:    ACE_OSCALL_RETURN (ACE_STAT_FUNC_NAME (file, stp), int, -1);
+        -:  247:#endif /* ACE_HAS_NONCONST_STAT */
+        -:  248:  }
+        -:  249:
+        -:  250:#if defined (ACE_HAS_WCHAR)
+        -:  251:  ACE_INLINE int
+        -:  252:  stat (const wchar_t *file, ACE_stat *stp)
+        -:  253:  {
+        -:  254:    ACE_OS_TRACE ("ACE_OS::stat");
+        -:  255:#if defined (ACE_HAS_WINCE)
+        -:  256:    WIN32_FIND_DATAW fdata;
+        -:  257:
+        -:  258:    HANDLE fhandle;
+        -:  259:
+        -:  260:    fhandle = ::FindFirstFileW (file, &fdata);
+        -:  261:    if (fhandle == INVALID_HANDLE_VALUE)
+        -:  262:      {
+        -:  263:        ACE_OS::set_errno_to_last_error ();
+        -:  264:        return -1;
+        -:  265:      }
+        -:  266:    else if (fdata.nFileSizeHigh != 0)
+        -:  267:      {
+        -:  268:        errno = EINVAL;
+        -:  269:        return -1;
+        -:  270:      }
+        -:  271:    else
+        -:  272:      {
+        -:  273:        stp->st_mode = static_cast<mode_t>(fdata.dwFileAttributes);
+        -:  274:        stp->st_size = fdata.nFileSizeLow;
+        -:  275:        stp->st_atime = ACE_Time_Value (fdata.ftLastAccessTime).sec ();
+        -:  276:        stp->st_mtime = ACE_Time_Value (fdata.ftLastWriteTime).sec ();
+        -:  277:        stp->st_ctime = ACE_Time_Value (fdata.ftCreationTime).sec ();
+        -:  278:      }
+        -:  279:    return 0;
+        -:  280:#elif defined (__BORLANDC__) \
+        -:  281:      || defined (_MSC_VER) \
+        -:  282:      || (defined (__MINGW32__) && !defined (__MINGW64_VERSION_MAJOR))
+        -:  283:    ACE_OSCALL_RETURN (ACE_WSTAT_FUNC_NAME (file, stp), int, -1);
+        -:  284:#else /* ACE_HAS_WINCE */
+        -:  285:    ACE_Wide_To_Ascii nfile (file);
+        -:  286:    return ACE_OS::stat (nfile.char_rep (), stp);
+        -:  287:#endif /* ACE_HAS_WINCE */
+        -:  288:  }
+        -:  289:#endif /* ACE_HAS_WCHAR */
+        -:  290:
+        -:  291:  ACE_INLINE mode_t
+        -:  292:  umask (mode_t cmask)
+        -:  293:  {
+        -:  294:    ACE_OS_TRACE ("ACE_OS::umask");
+        -:  295:# if defined (ACE_LACKS_UMASK)
+        -:  296:    ACE_UNUSED_ARG (cmask);
+        -:  297:    ACE_NOTSUP_RETURN ((mode_t)-1);
+        -:  298:# elif defined (ACE_HAS_TR24731_2005_CRT)
+        -:  299:    int old_mode;
+        -:  300:    int new_mode = static_cast<int> (cmask);
+        -:  301:    ACE_SECURECRTCALL (_umask_s (new_mode, &old_mode), mode_t, -1, old_mode);
+        -:  302:    return static_cast<mode_t> (old_mode);
+        -:  303:# elif defined (ACE_WIN32) && !defined (__BORLANDC__)
+        -:  304:    ACE_OSCALL_RETURN (::_umask (cmask), mode_t, -1);
+        -:  305:# else
+        -:  306:    return ::umask (cmask); // This call shouldn't fail...
+        -:  307:# endif /* ACE_LACKS_UMASK */
+        -:  308:  }
+        -:  309:
+        -:  310:} // ACE_OS namespace
+        -:  311:
+        -:  312:ACE_END_VERSIONED_NAMESPACE_DECL

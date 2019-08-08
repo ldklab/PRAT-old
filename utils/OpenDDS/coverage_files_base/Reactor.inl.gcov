@@ -1,0 +1,513 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Reactor.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/Reactor_Impl.h"
+        -:    6:
+        -:    7:/*
+        -:    8: * Hook to specialize the Reactor with the concrete implementation
+        -:    9: * known at compile time.
+        -:   10: */
+        -:   11://@@ REACTOR_SPL_INCLUDE_FORWARD_DECL_ADD_HOOK
+        -:   12:
+        -:   13:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   14:
+        -:   15:// Run the event loop until the <ACE_Reactor::handle_events> method
+        -:   16:// returns -1 or the <end_event_loop> method is invoked.
+        -:   17:ACE_INLINE int
+        -:   18:ACE_Reactor::run_event_loop (void)
+        -:   19:{
+        -:   20:  ACE_TRACE ("ACE_Reactor::run_event_loop");
+        -:   21:  ACE_Reactor *r = ACE_Reactor::instance ();
+        -:   22:
+        -:   23:  if (r == 0)
+        -:   24:    return -1;
+        -:   25:
+        -:   26:  return r->run_reactor_event_loop (ACE_Reactor::check_reconfiguration);
+        -:   27:}
+        -:   28:
+        -:   29:// Run the event loop until the <ACE_Reactor::handle_events>
+        -:   30:// method returns -1, the <end_event_loop> method
+        -:   31:// is invoked, or the <ACE_Time_Value> expires.
+        -:   32:
+        -:   33:ACE_INLINE int
+        -:   34:ACE_Reactor::run_event_loop (ACE_Time_Value &tv)
+        -:   35:{
+        -:   36:  ACE_TRACE ("ACE_Reactor::run_event_loop");
+        -:   37:  ACE_Reactor *r = ACE_Reactor::instance ();
+        -:   38:
+        -:   39:  if (r == 0)
+        -:   40:    return -1;
+        -:   41:
+        -:   42:  return r->run_reactor_event_loop
+        -:   43:    (tv, ACE_Reactor::check_reconfiguration);
+        -:   44:}
+        -:   45:
+        -:   46:// Run the event loop until the <ACE_Reactor::alertable_handle_events> method
+        -:   47:// returns -1 or the <end_event_loop> method is invoked.
+        -:   48:
+        -:   49:ACE_INLINE int
+        -:   50:ACE_Reactor::run_alertable_event_loop (void)
+        -:   51:{
+        -:   52:  ACE_TRACE ("ACE_Reactor::run_alertable_event_loop");
+        -:   53:  ACE_Reactor *r = ACE_Reactor::instance ();
+        -:   54:
+        -:   55:  if (r == 0)
+        -:   56:    return -1;
+        -:   57:
+        -:   58:  return r->run_alertable_reactor_event_loop (ACE_Reactor::check_reconfiguration);
+        -:   59:}
+        -:   60:
+        -:   61:// Run the event loop until the <ACE_Reactor::alertable_handle_events>
+        -:   62:// method returns -1, the <end_event_loop> method
+        -:   63:// is invoked, or the <ACE_Time_Value> expires.
+        -:   64:
+        -:   65:ACE_INLINE int
+        -:   66:ACE_Reactor::run_alertable_event_loop (ACE_Time_Value &tv)
+        -:   67:{
+        -:   68:  ACE_TRACE ("ACE_Reactor::run_alertable_event_loop");
+        -:   69:  ACE_Reactor *r = ACE_Reactor::instance ();
+        -:   70:
+        -:   71:  if (r == 0)
+        -:   72:    return -1;
+        -:   73:
+        -:   74:  return r->run_alertable_reactor_event_loop
+        -:   75:    (tv, ACE_Reactor::check_reconfiguration);
+        -:   76:}
+        -:   77:
+        -:   78:ACE_INLINE void
+        -:   79:ACE_Reactor::reset_event_loop (void)
+        -:   80:{
+        -:   81:  ACE_TRACE ("ACE_Reactor::reset_event_loop");
+        -:   82:
+        -:   83:  ACE_Reactor::instance ()->reset_reactor_event_loop ();
+        -:   84:}
+        -:   85:
+        -:   86:ACE_INLINE int
+        -:   87:ACE_Reactor::end_event_loop (void)
+        -:   88:{
+        -:   89:  ACE_TRACE ("ACE_Reactor::end_event_loop");
+        -:   90:  ACE_Reactor::instance ()->end_reactor_event_loop ();
+        -:   91:
+        -:   92:  return 0;
+        -:   93:}
+        -:   94:
+        -:   95:ACE_INLINE int
+        -:   96:ACE_Reactor::event_loop_done (void)
+        -:   97:{
+        -:   98:  ACE_TRACE ("ACE_Reactor::event_loop_done");
+        -:   99:  return ACE_Reactor::instance ()->reactor_event_loop_done ();
+        -:  100:}
+        -:  101:
+        -:  102:ACE_INLINE int
+    #####:  103:ACE_Reactor::end_reactor_event_loop (void)
+        -:  104:{
+        -:  105:  ACE_TRACE ("ACE_Reactor::end_reactor_event_loop");
+        -:  106:
+    #####:  107:  this->implementation_->deactivate (1);
+        -:  108:
+    #####:  109:  return 0;
+        -:  110:}
+        -:  111:
+        -:  112:ACE_INLINE void
+        -:  113:ACE_Reactor::reset_reactor_event_loop (void)
+        -:  114:{
+        -:  115:  ACE_TRACE ("ACE_Reactor::reset_reactor_event_loop");
+        -:  116:
+        -:  117:  this->implementation_->deactivate (0);
+        -:  118:}
+        -:  119:
+        -:  120:ACE_INLINE int
+        -:  121:ACE_Reactor::resumable_handler (void)
+        -:  122:{
+        -:  123:  return this->implementation ()->resumable_handler ();
+        -:  124:}
+        -:  125:
+        -:  126:ACE_INLINE ACE_Reactor_Impl *
+    #####:  127:ACE_Reactor::implementation (void) const
+        -:  128:{
+    #####:  129:  return this->implementation_;
+        -:  130:}
+------------------
+_ZNK11ACE_Reactor14implementationEv:
+    #####:  127:ACE_Reactor::implementation (void) const
+        -:  128:{
+    #####:  129:  return this->implementation_;
+        -:  130:}
+------------------
+_ZNK11ACE_Reactor14implementationEv:
+    #####:  127:ACE_Reactor::implementation (void) const
+        -:  128:{
+    #####:  129:  return this->implementation_;
+        -:  130:}
+------------------
+        -:  131:
+        -:  132:ACE_INLINE void
+        -:  133:ACE_Reactor::implementation (ACE_Reactor_Impl *impl)
+        -:  134:{
+        -:  135:  this->implementation_ = impl;
+        -:  136:}
+        -:  137:
+        -:  138:ACE_INLINE int
+        -:  139:ACE_Reactor::current_info (ACE_HANDLE handle, size_t &size)
+        -:  140:{
+        -:  141:  return this->implementation ()->current_info (handle, size);
+        -:  142:}
+        -:  143:
+        -:  144:ACE_INLINE int
+        -:  145:ACE_Reactor::open (size_t size,
+        -:  146:                   bool restart,
+        -:  147:                   ACE_Sig_Handler *signal_handler,
+        -:  148:                   ACE_Timer_Queue *timer_queue)
+        -:  149:{
+        -:  150:  return this->implementation ()->open (size,
+        -:  151:                                        restart,
+        -:  152:                                        signal_handler,
+        -:  153:                                        timer_queue);
+        -:  154:}
+        -:  155:ACE_INLINE int
+        -:  156:ACE_Reactor::set_sig_handler (ACE_Sig_Handler *signal_handler)
+        -:  157:{
+        -:  158:  return this->implementation ()->set_sig_handler (signal_handler);
+        -:  159:}
+        -:  160:
+        -:  161:ACE_INLINE int
+        -:  162:ACE_Reactor::timer_queue (ACE_Timer_Queue *tq)
+        -:  163:{
+        -:  164:  return this->implementation ()->timer_queue (tq);
+        -:  165:}
+        -:  166:
+        -:  167:ACE_INLINE ACE_Timer_Queue *
+        -:  168:ACE_Reactor::timer_queue (void) const
+        -:  169:{
+        -:  170:  return this->implementation ()->timer_queue ();
+        -:  171:}
+        -:  172:
+        -:  173:ACE_INLINE int
+        -:  174:ACE_Reactor::close (void)
+        -:  175:{
+        -:  176:  return this->implementation ()->close ();
+        -:  177:}
+        -:  178:
+        -:  179:ACE_INLINE int
+        -:  180:ACE_Reactor::work_pending (const ACE_Time_Value &max_wait_time)
+        -:  181:{
+        -:  182:  return this->implementation ()->work_pending (max_wait_time);
+        -:  183:}
+        -:  184:
+        -:  185:ACE_INLINE int
+        -:  186:ACE_Reactor::handle_events (ACE_Time_Value *max_wait_time)
+        -:  187:{
+        -:  188:  return this->implementation ()->handle_events (max_wait_time);
+        -:  189:}
+        -:  190:
+        -:  191:ACE_INLINE int
+        -:  192:ACE_Reactor::alertable_handle_events (ACE_Time_Value *max_wait_time)
+        -:  193:{
+        -:  194:  return this->implementation ()->alertable_handle_events (max_wait_time);
+        -:  195:}
+        -:  196:
+        -:  197:ACE_INLINE int
+        -:  198:ACE_Reactor::handle_events (ACE_Time_Value &max_wait_time)
+        -:  199:{
+        -:  200:  return this->implementation ()->handle_events (max_wait_time);
+        -:  201:}
+        -:  202:
+        -:  203:ACE_INLINE int
+        -:  204:ACE_Reactor::alertable_handle_events (ACE_Time_Value &max_wait_time)
+        -:  205:{
+        -:  206:  return this->implementation ()->alertable_handle_events (max_wait_time);
+        -:  207:}
+        -:  208:
+        -:  209:ACE_INLINE int
+        -:  210:ACE_Reactor::register_handler (int signum,
+        -:  211:                               ACE_Event_Handler *new_sh,
+        -:  212:                               ACE_Sig_Action *new_disp,
+        -:  213:                               ACE_Event_Handler **old_sh,
+        -:  214:                               ACE_Sig_Action *old_disp)
+        -:  215:{
+        -:  216:  return this->implementation ()->register_handler (signum,
+        -:  217:                                                    new_sh,
+        -:  218:                                                    new_disp,
+        -:  219:                                                    old_sh,
+        -:  220:                                                    old_disp);
+        -:  221:}
+        -:  222:
+        -:  223:ACE_INLINE int
+        -:  224:ACE_Reactor::register_handler (const ACE_Sig_Set &sigset,
+        -:  225:                               ACE_Event_Handler *new_sh,
+        -:  226:                               ACE_Sig_Action *new_disp)
+        -:  227:{
+        -:  228:  return this->implementation ()->register_handler (sigset,
+        -:  229:                                                    new_sh,
+        -:  230:                                                    new_disp);
+        -:  231:}
+        -:  232:
+        -:  233:ACE_INLINE int
+        -:  234:ACE_Reactor::remove_handler (ACE_Event_Handler *event_handler,
+        -:  235:                             ACE_Reactor_Mask mask)
+        -:  236:{
+        -:  237:  return this->implementation ()->remove_handler (event_handler, mask);
+        -:  238:}
+        -:  239:
+        -:  240:ACE_INLINE int
+      136:  241:ACE_Reactor::remove_handler (ACE_HANDLE handle,
+        -:  242:                             ACE_Reactor_Mask mask)
+        -:  243:{
+      136:  244:  return this->implementation ()->remove_handler (handle, mask);
+        -:  245:}
+        -:  246:
+        -:  247:ACE_INLINE int
+        -:  248:ACE_Reactor::remove_handler (const ACE_Handle_Set &handle_set,
+        -:  249:                             ACE_Reactor_Mask mask)
+        -:  250:{
+        -:  251:  return this->implementation ()->remove_handler (handle_set, mask);
+        -:  252:}
+        -:  253:
+        -:  254:ACE_INLINE int
+        -:  255:ACE_Reactor::remove_handler (int signum,
+        -:  256:                             ACE_Sig_Action *new_disp,
+        -:  257:                             ACE_Sig_Action *old_disp,
+        -:  258:                             int sigkey)
+        -:  259:{
+        -:  260:  return this->implementation ()->remove_handler (signum,
+        -:  261:                                                  new_disp,
+        -:  262:                                                  old_disp,
+        -:  263:                                                  sigkey);
+        -:  264:}
+        -:  265:
+        -:  266:ACE_INLINE int
+        -:  267:ACE_Reactor::remove_handler (const ACE_Sig_Set &sigset)
+        -:  268:{
+        -:  269:  return this->implementation ()->remove_handler (sigset);
+        -:  270:}
+        -:  271:
+        -:  272:ACE_INLINE int
+        -:  273:ACE_Reactor::suspend_handler (ACE_Event_Handler *event_handler)
+        -:  274:{
+        -:  275:  return this->implementation ()->suspend_handler (event_handler);
+        -:  276:}
+        -:  277:
+        -:  278:ACE_INLINE int
+        -:  279:ACE_Reactor::suspend_handler (ACE_HANDLE handle)
+        -:  280:{
+        -:  281:  return this->implementation ()->suspend_handler (handle);
+        -:  282:}
+        -:  283:
+        -:  284:ACE_INLINE int
+        -:  285:ACE_Reactor::suspend_handler (const ACE_Handle_Set &handles)
+        -:  286:{
+        -:  287:  return this->implementation ()->suspend_handler (handles);
+        -:  288:}
+        -:  289:
+        -:  290:ACE_INLINE int
+        -:  291:ACE_Reactor::suspend_handlers (void)
+        -:  292:{
+        -:  293:  return this->implementation ()->suspend_handlers ();
+        -:  294:}
+        -:  295:
+        -:  296:ACE_INLINE int
+        -:  297:ACE_Reactor::resume_handler (ACE_Event_Handler *event_handler)
+        -:  298:{
+        -:  299:  return this->implementation ()->resume_handler (event_handler);
+        -:  300:}
+        -:  301:
+        -:  302:ACE_INLINE int
+        -:  303:ACE_Reactor::resume_handler (ACE_HANDLE handle)
+        -:  304:{
+        -:  305:  return this->implementation ()->resume_handler (handle);
+        -:  306:}
+        -:  307:
+        -:  308:ACE_INLINE int
+        -:  309:ACE_Reactor::resume_handler (const ACE_Handle_Set &handles)
+        -:  310:{
+        -:  311:  return this->implementation ()->resume_handler (handles);
+        -:  312:}
+        -:  313:
+        -:  314:ACE_INLINE int
+        -:  315:ACE_Reactor::resume_handlers (void)
+        -:  316:{
+        -:  317:  return this->implementation ()->resume_handlers ();
+        -:  318:}
+        -:  319:
+        -:  320:ACE_INLINE int
+    #####:  321:ACE_Reactor::schedule_wakeup (ACE_HANDLE handle,
+        -:  322:                              ACE_Reactor_Mask masks_to_be_added)
+        -:  323:{
+    #####:  324:  return implementation ()->schedule_wakeup (handle, masks_to_be_added);
+        -:  325:}
+        -:  326:
+        -:  327:ACE_INLINE int
+        -:  328:ACE_Reactor::cancel_wakeup (ACE_Event_Handler *event_handler,
+        -:  329:                            ACE_Reactor_Mask masks_to_be_cleared)
+        -:  330:{
+        -:  331:  return this->implementation ()->cancel_wakeup (event_handler,
+        -:  332:                                                 masks_to_be_cleared);
+        -:  333:}
+        -:  334:
+        -:  335:ACE_INLINE int
+    #####:  336:ACE_Reactor::cancel_wakeup (ACE_HANDLE handle,
+        -:  337:                            ACE_Reactor_Mask masks_to_be_cleared)
+        -:  338:{
+    #####:  339:  return this->implementation ()->cancel_wakeup (handle,
+    #####:  340:                                                 masks_to_be_cleared);
+        -:  341:}
+        -:  342:
+        -:  343:ACE_INLINE void
+        -:  344:ACE_Reactor::max_notify_iterations (int iterations)
+        -:  345:{
+        -:  346:  this->implementation ()->max_notify_iterations (iterations);
+        -:  347:}
+        -:  348:
+        -:  349:ACE_INLINE int
+        -:  350:ACE_Reactor::max_notify_iterations (void)
+        -:  351:{
+        -:  352:  return this->implementation ()->max_notify_iterations ();
+        -:  353:}
+        -:  354:
+        -:  355:ACE_INLINE int
+        -:  356:ACE_Reactor::purge_pending_notifications (ACE_Event_Handler *eh,
+        -:  357:                                          ACE_Reactor_Mask   mask)
+        -:  358:{
+        -:  359:  return this->implementation ()->purge_pending_notifications (eh, mask);
+        -:  360:}
+        -:  361:
+        -:  362:ACE_INLINE ACE_Event_Handler *
+        -:  363:ACE_Reactor::find_handler (ACE_HANDLE handle)
+        -:  364:{
+        -:  365:  return this->implementation ()->find_handler (handle);
+        -:  366:}
+        -:  367:
+        -:  368:ACE_INLINE int
+        -:  369:ACE_Reactor::handler (ACE_HANDLE handle,
+        -:  370:                      ACE_Reactor_Mask mask,
+        -:  371:                      ACE_Event_Handler **event_handler)
+        -:  372:{
+        -:  373:  return this->implementation ()->handler (handle, mask, event_handler);
+        -:  374:}
+        -:  375:
+        -:  376:ACE_INLINE int
+        -:  377:ACE_Reactor::handler (int signum,
+        -:  378:                      ACE_Event_Handler **event_handler)
+        -:  379:{
+        -:  380:  return this->implementation ()->handler (signum, event_handler);
+        -:  381:}
+        -:  382:
+        -:  383:ACE_INLINE int
+        -:  384:ACE_Reactor::initialized (void)
+        -:  385:{
+        -:  386:  return this->implementation ()->initialized ();
+        -:  387:}
+        -:  388:
+        -:  389:ACE_INLINE ACE_Lock &
+        -:  390:ACE_Reactor::lock (void)
+        -:  391:{
+        -:  392:  return this->implementation ()->lock ();
+        -:  393:}
+        -:  394:
+        -:  395:ACE_INLINE void
+        -:  396:ACE_Reactor::wakeup_all_threads (void)
+        -:  397:{
+        -:  398:  this->implementation ()->wakeup_all_threads ();
+        -:  399:}
+        -:  400:
+        -:  401:ACE_INLINE int
+    #####:  402:ACE_Reactor::owner (ACE_thread_t new_owner, ACE_thread_t *old_owner)
+        -:  403:{
+    #####:  404:  return this->implementation ()->owner (new_owner,  old_owner);
+        -:  405:}
+        -:  406:
+        -:  407:ACE_INLINE int
+        -:  408:ACE_Reactor::owner (ACE_thread_t *owner)
+        -:  409:{
+        -:  410:  return this->implementation ()->owner (owner);
+        -:  411:}
+        -:  412:
+        -:  413:ACE_INLINE bool
+        -:  414:ACE_Reactor::restart (void)
+        -:  415:{
+        -:  416:  return this->implementation ()->restart ();
+        -:  417:}
+        -:  418:
+        -:  419:ACE_INLINE bool
+        -:  420:ACE_Reactor::restart (bool r)
+        -:  421:{
+        -:  422:  return this->implementation ()->restart (r);
+        -:  423:}
+        -:  424:
+        -:  425:ACE_INLINE void
+        -:  426:ACE_Reactor::requeue_position (int position)
+        -:  427:{
+        -:  428:  this->implementation ()->requeue_position (position);
+        -:  429:}
+        -:  430:
+        -:  431:ACE_INLINE int
+        -:  432:ACE_Reactor::requeue_position (void)
+        -:  433:{
+        -:  434:  return this->implementation ()->requeue_position ();
+        -:  435:}
+        -:  436:
+        -:  437:ACE_INLINE int
+        -:  438:ACE_Reactor::mask_ops (ACE_Event_Handler *event_handler,
+        -:  439:                       ACE_Reactor_Mask mask,
+        -:  440:                       int ops)
+        -:  441:{
+        -:  442:  return this->implementation ()->mask_ops (event_handler, mask, ops);
+        -:  443:}
+        -:  444:
+        -:  445:ACE_INLINE int
+        -:  446:ACE_Reactor::mask_ops (ACE_HANDLE handle,
+        -:  447:                       ACE_Reactor_Mask mask,
+        -:  448:                       int ops)
+        -:  449:{
+        -:  450:  return this->implementation ()->mask_ops (handle, mask, ops);
+        -:  451:}
+        -:  452:
+        -:  453:ACE_INLINE int
+        -:  454:ACE_Reactor::ready_ops (ACE_Event_Handler *event_handler,
+        -:  455:                        ACE_Reactor_Mask mask,
+        -:  456:                        int ops)
+        -:  457:{
+        -:  458:  return this->implementation ()->ready_ops (event_handler, mask, ops);
+        -:  459:}
+        -:  460:
+        -:  461:ACE_INLINE int
+        -:  462:ACE_Reactor::ready_ops (ACE_HANDLE handle,
+        -:  463:                        ACE_Reactor_Mask mask,
+        -:  464:                        int ops)
+        -:  465:{
+        -:  466:  return this->implementation ()->ready_ops (handle, mask, ops);
+        -:  467:}
+        -:  468:
+        -:  469:ACE_INLINE int
+        -:  470:ACE_Reactor::reactor_event_loop_done (void)
+        -:  471:{
+        -:  472:  ACE_TRACE ("ACE_Reactor::reactor_event_loop_done");
+        -:  473:  return this->implementation_->deactivated ();
+        -:  474:}
+        -:  475:
+        -:  476:ACE_INLINE size_t
+        -:  477:ACE_Reactor::size (void) const
+        -:  478:{
+        -:  479:  return this->implementation ()->size ();
+        -:  480:}
+        -:  481:
+        -:  482:ACE_INLINE bool
+        -:  483:ACE_Reactor::uses_event_associations (void)
+        -:  484:{
+        -:  485:  return this->implementation ()->uses_event_associations ();
+        -:  486:}
+        -:  487:
+        -:  488:ACE_INLINE void
+        -:  489:ACE_Reactor::dump (void) const
+        -:  490:{
+        -:  491:#if defined (ACE_HAS_DUMP)
+        -:  492:  ACE_TRACE ("ACE_Reactor::dump");
+        -:  493:
+        -:  494:  implementation_->dump ();
+        -:  495:#endif /* ACE_HAS_DUMP */
+        -:  496:}
+        -:  497:
+        -:  498:ACE_END_VERSIONED_NAMESPACE_DECL

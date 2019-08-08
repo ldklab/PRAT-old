@@ -1,0 +1,203 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Value_Traits_T.h
+        -:    0:Programs:51
+        -:    1:#ifndef guard_value_traits_hpp
+        -:    2:#define guard_value_traits_hpp
+        -:    3:/**
+        -:    4: * @file
+        -:    5: *
+        -:    6: * @brief Implement the element manipulation traits for types with
+        -:    7: * value-like semantics.
+        -:    8: *
+        -:    9: * $Id$
+        -:   10: *
+        -:   11: * @author Carlos O'Ryan
+        -:   12: */
+        -:   13:
+        -:   14:#include /**/ "tao/Versioned_Namespace.h"
+        -:   15:
+        -:   16:#include <algorithm>
+        -:   17:
+        -:   18:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   19:
+        -:   20:namespace TAO
+        -:   21:{
+        -:   22:namespace details
+        -:   23:{
+        -:   24:
+        -:   25:template<typename T, bool dummy>
+        -:   26:struct value_traits
+        -:   27:{
+        -:   28:  typedef T value_type;
+        -:   29:  typedef T const const_value_type;
+        -:   30:
+        -:   31:  inline static void zero_range(
+        -:   32:      value_type * begin , value_type * end)
+        -:   33:  {
+        -:   34:    std::fill(begin, end, value_type ());
+        -:   35:  }
+        -:   36:
+    #####:   37:  inline static void initialize_range(
+        -:   38:      value_type * begin, value_type * end)
+        -:   39:  {
+    #####:   40:    std::fill(begin, end, value_type ());
+    #####:   41:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE16initialize_rangeEPS4_S6_:
+    #####:   37:  inline static void initialize_range(
+        -:   38:      value_type * begin, value_type * end)
+        -:   39:  {
+    #####:   40:    std::fill(begin, end, value_type ());
+    #####:   41:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE16initialize_rangeEPS4_S6_:
+    #####:   37:  inline static void initialize_range(
+        -:   38:      value_type * begin, value_type * end)
+        -:   39:  {
+    #####:   40:    std::fill(begin, end, value_type ());
+    #####:   41:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE16initialize_rangeEPS4_S6_:
+    #####:   37:  inline static void initialize_range(
+        -:   38:      value_type * begin, value_type * end)
+        -:   39:  {
+    #####:   40:    std::fill(begin, end, value_type ());
+    #####:   41:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE16initialize_rangeEPS4_S6_:
+    #####:   37:  inline static void initialize_range(
+        -:   38:      value_type * begin, value_type * end)
+        -:   39:  {
+    #####:   40:    std::fill(begin, end, value_type ());
+    #####:   41:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE16initialize_rangeEPS4_S6_:
+    #####:   37:  inline static void initialize_range(
+        -:   38:      value_type * begin, value_type * end)
+        -:   39:  {
+    #####:   40:    std::fill(begin, end, value_type ());
+    #####:   41:  }
+------------------
+        -:   42:
+    #####:   43:  inline static void release_range(
+        -:   44:      value_type *, value_type *)
+        -:   45:  {
+        -:   46:    // Noop for value sequences
+    #####:   47:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE13release_rangeEPS4_S6_:
+    #####:   43:  inline static void release_range(
+        -:   44:      value_type *, value_type *)
+        -:   45:  {
+        -:   46:    // Noop for value sequences
+    #####:   47:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE13release_rangeEPS4_S6_:
+    #####:   43:  inline static void release_range(
+        -:   44:      value_type *, value_type *)
+        -:   45:  {
+        -:   46:    // Noop for value sequences
+    #####:   47:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE13release_rangeEPS4_S6_:
+    #####:   43:  inline static void release_range(
+        -:   44:      value_type *, value_type *)
+        -:   45:  {
+        -:   46:    // Noop for value sequences
+    #####:   47:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE13release_rangeEPS4_S6_:
+    #####:   43:  inline static void release_range(
+        -:   44:      value_type *, value_type *)
+        -:   45:  {
+        -:   46:    // Noop for value sequences
+    #####:   47:  }
+------------------
+        -:   48:
+        -:   49:  // Allow MSVC++ >= 8 checked iterators to be used.
+        -:   50:  template <typename iter>
+    #####:   51:  inline static void copy_range(
+        -:   52:      value_type * begin, value_type * end, iter dst)
+        -:   53:  {
+    #####:   54:    std::copy(begin, end, dst);
+    #####:   55:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+    #####:   51:  inline static void copy_range(
+        -:   52:      value_type * begin, value_type * end, iter dst)
+        -:   53:  {
+    #####:   54:    std::copy(begin, end, dst);
+    #####:   55:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+    #####:   51:  inline static void copy_range(
+        -:   52:      value_type * begin, value_type * end, iter dst)
+        -:   53:  {
+    #####:   54:    std::copy(begin, end, dst);
+    #####:   55:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+    #####:   51:  inline static void copy_range(
+        -:   52:      value_type * begin, value_type * end, iter dst)
+        -:   53:  {
+    #####:   54:    std::copy(begin, end, dst);
+    #####:   55:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+    #####:   51:  inline static void copy_range(
+        -:   52:      value_type * begin, value_type * end, iter dst)
+        -:   53:  {
+    #####:   54:    std::copy(begin, end, dst);
+    #####:   55:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+    #####:   51:  inline static void copy_range(
+        -:   52:      value_type * begin, value_type * end, iter dst)
+        -:   53:  {
+    #####:   54:    std::copy(begin, end, dst);
+    #####:   55:  }
+------------------
+        -:   56:
+        -:   57:  // Allow MSVC++ >= 8 checked iterators to be used.
+        -:   58:  template <typename iter>
+    #####:   59:  inline static void copy_swap_range(
+        -:   60:      value_type * begin, value_type * end, iter dst)
+        -:   61:  {
+    #####:   62:    copy_range(begin, end, dst);
+    #####:   63:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE15copy_swap_rangeIPS4_EEvS7_S7_T_:
+    #####:   59:  inline static void copy_swap_range(
+        -:   60:      value_type * begin, value_type * end, iter dst)
+        -:   61:  {
+    #####:   62:    copy_range(begin, end, dst);
+    #####:   63:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE15copy_swap_rangeIPS4_EEvS7_S7_T_:
+    #####:   59:  inline static void copy_swap_range(
+        -:   60:      value_type * begin, value_type * end, iter dst)
+        -:   61:  {
+    #####:   62:    copy_range(begin, end, dst);
+    #####:   63:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE15copy_swap_rangeIPS4_EEvS7_S7_T_:
+    #####:   59:  inline static void copy_swap_range(
+        -:   60:      value_type * begin, value_type * end, iter dst)
+        -:   61:  {
+    #####:   62:    copy_range(begin, end, dst);
+    #####:   63:  }
+------------------
+_ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE15copy_swap_rangeIPS4_EEvS7_S7_T_:
+    #####:   59:  inline static void copy_swap_range(
+        -:   60:      value_type * begin, value_type * end, iter dst)
+        -:   61:  {
+    #####:   62:    copy_range(begin, end, dst);
+    #####:   63:  }
+------------------
+        -:   64:};
+        -:   65:
+        -:   66:} // namespace details
+        -:   67:} // namespace CORBA
+        -:   68:
+        -:   69:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:   70:
+        -:   71:#endif // guard_value_traits_hpp

@@ -1,0 +1,591 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Singleton.cpp
+        -:    0:Programs:51
+        -:    1:// $Id$
+        -:    2:
+        -:    3:#ifndef ACE_SINGLETON_CPP
+        -:    4:#define ACE_SINGLETON_CPP
+        -:    5:
+        -:    6:#include "ace/Singleton.h"
+        -:    7:
+        -:    8:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:    9:# pragma once
+        -:   10:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   11:
+        -:   12:#if !defined (__ACE_INLINE__)
+        -:   13:#include "ace/Singleton.inl"
+        -:   14:#endif /* __ACE_INLINE__ */
+        -:   15:
+        -:   16:#include "ace/Object_Manager.h"
+        -:   17:#include "ace/Log_Category.h"
+        -:   18:#include "ace/Framework_Component.h"
+        -:   19:#include "ace/Guard_T.h"
+        -:   20:#include "ace/os_include/os_typeinfo.h"
+        -:   21:
+        -:   22:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   23:
+        -:   24:ACE_ALLOC_HOOK_DEFINE_Tcc(ACE_Singleton)
+        -:   25:ACE_ALLOC_HOOK_DEFINE_Tcc(ACE_Unmanaged_Singleton)
+        -:   26:ACE_ALLOC_HOOK_DEFINE_Tcc(ACE_TSS_Singleton)
+        -:   27:ACE_ALLOC_HOOK_DEFINE_Tcc(ACE_Unmanaged_TSS_Singleton)
+        -:   28:ACE_ALLOC_HOOK_DEFINE_Tcc(ACE_DLL_Singleton_T)
+        -:   29:ACE_ALLOC_HOOK_DEFINE_Tc(ACE_DLL_Singleton_Adapter_T)
+        -:   30:
+        -:   31:template <class TYPE, class ACE_LOCK> void
+        -:   32:ACE_Singleton<TYPE, ACE_LOCK>::dump (void)
+        -:   33:{
+        -:   34:#if defined (ACE_HAS_DUMP)
+        -:   35:  ACE_TRACE ("ACE_Singleton<TYPE, ACE_LOCK>::dump");
+        -:   36:
+        -:   37:#if !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:   38:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("instance_ = %x"),
+        -:   39:              ACE_Singleton<TYPE, ACE_LOCK>::instance_i ()));
+        -:   40:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:   41:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:   42:#endif /* ACE_HAS_DUMP */
+        -:   43:}
+        -:   44:
+        -:   45:template <class TYPE, class ACE_LOCK> ACE_Singleton<TYPE, ACE_LOCK> *&
+      119:   46:ACE_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+        -:   47:{
+        -:   48:#if defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:   49:  // Pointer to the Singleton instance.  This works around a bug with
+        -:   50:  // G++ and it's (mis-)handling of templates and statics...
+        -:   51:  static ACE_Singleton<TYPE, ACE_LOCK> *singleton_ = 0;
+        -:   52:
+        -:   53:  return singleton_;
+        -:   54:#else
+      119:   55:  return ACE_Singleton<TYPE, ACE_LOCK>::singleton_;
+        -:   56:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:   57:}
+        -:   58:
+        -:   59:template <class TYPE, class ACE_LOCK> TYPE *
+        -:   60:ACE_Singleton<TYPE, ACE_LOCK>::instance (void)
+        -:   61:{
+        -:   62:  ACE_TRACE ("ACE_Singleton<TYPE, ACE_LOCK>::instance");
+        -:   63:
+        -:   64:  ACE_Singleton<TYPE, ACE_LOCK> *&singleton =
+        -:   65:    ACE_Singleton<TYPE, ACE_LOCK>::instance_i ();
+        -:   66:
+        -:   67:  // Perform the Double-Check pattern...
+        -:   68:  if (singleton == 0)
+        -:   69:    {
+        -:   70:      if (ACE_Object_Manager::starting_up () ||
+        -:   71:          ACE_Object_Manager::shutting_down ())
+        -:   72:        {
+        -:   73:          // The program is still starting up, and therefore assumed
+        -:   74:          // to be single threaded.  There's no need to double-check.
+        -:   75:          // Or, the ACE_Object_Manager instance has been destroyed,
+        -:   76:          // so the preallocated lock is not available.  Either way,
+        -:   77:          // don't register for destruction with the
+        -:   78:          // ACE_Object_Manager:  we'll have to leak this instance.
+        -:   79:
+        -:   80:          ACE_NEW_RETURN (singleton, (ACE_Singleton<TYPE, ACE_LOCK>), 0);
+        -:   81:        }
+        -:   82:      else
+        -:   83:        {
+        -:   84:#if defined (ACE_MT_SAFE) && (ACE_MT_SAFE != 0)
+        -:   85:          // Obtain a lock from the ACE_Object_Manager.  The pointer
+        -:   86:          // is static, so we only obtain one per ACE_Singleton
+        -:   87:          // instantiation.
+        -:   88:#if defined(ACE_FACE_SAFETY_BASE)
+        -:   89:          static ACE_LOCK the_lock;
+        -:   90:          static ACE_LOCK *lock = &the_lock;
+        -:   91:#else /* ACE_FACE_SAFETY_BASE */
+        -:   92:          static ACE_LOCK *lock = 0;
+        -:   93:#endif /* ACE_FACE_SAFETY_BASE */
+        -:   94:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
+        -:   95:            // Failed to acquire the lock!
+        -:   96:            return 0;
+        -:   97:
+        -:   98:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
+        -:   99:
+        -:  100:          if (singleton == 0)
+        -:  101:            {
+        -:  102:#endif /* ACE_MT_SAFE */
+        -:  103:              ACE_NEW_RETURN (singleton, (ACE_Singleton<TYPE, ACE_LOCK>), 0);
+        -:  104:
+        -:  105:              // Register for destruction with ACE_Object_Manager.
+        -:  106:#if !defined (ACE_MT_SAFE) || (ACE_MT_SAFE == 0)
+        -:  107:              ACE_Object_Manager::at_exit (singleton, 0, typeid (TYPE).name ());
+        -:  108:#else
+        -:  109:              ACE_Object_Manager::at_exit (singleton, &lock,
+        -:  110:                                           typeid (TYPE).name ());
+        -:  111:            }
+        -:  112:#endif /* ACE_MT_SAFE */
+        -:  113:        }
+        -:  114:    }
+        -:  115:
+        -:  116:  return &singleton->instance_;
+        -:  117:}
+        -:  118:
+        -:  119:template <class TYPE, class ACE_LOCK> void
+      119:  120:ACE_Singleton<TYPE, ACE_LOCK>::cleanup (void *param)
+        -:  121:{
+      119:  122:  ACE_Object_Manager::remove_at_exit (this);
+      119:  123:  delete this;
+      119:  124:  ACE_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+        -:  125:
+        -:  126:#if !defined ACE_MT_SAFE || ACE_MT_SAFE == 0 || defined ACE_FACE_SAFETY_BASE
+        -:  127:  ACE_UNUSED_ARG (param);
+        -:  128:#else
+      119:  129:  if (param)
+        -:  130:    {
+    #####:  131:      ACE_LOCK **lock = static_cast<ACE_LOCK **> (param);
+    #####:  132:      *lock = 0;
+        -:  133:    }
+        -:  134:#endif
+      119:  135:}
+        -:  136:
+        -:  137:template <class TYPE, class ACE_LOCK> void
+        -:  138:ACE_Singleton<TYPE, ACE_LOCK>::close (void)
+        -:  139:{
+        -:  140:  ACE_Singleton<TYPE, ACE_LOCK> *&singleton =
+        -:  141:    ACE_Singleton<TYPE, ACE_LOCK>::instance_i ();
+        -:  142:
+        -:  143:  if (singleton)
+        -:  144:    {
+        -:  145:      singleton->cleanup ();
+        -:  146:      ACE_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+        -:  147:    }
+        -:  148:}
+        -:  149:
+        -:  150:#if !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  151:// Pointer to the Singleton instance.
+        -:  152:template <class TYPE, class ACE_LOCK> ACE_Singleton<TYPE, ACE_LOCK> *
+        -:  153:ACE_Singleton<TYPE, ACE_LOCK>::singleton_ = 0;
+        -:  154:
+        -:  155:template <class TYPE, class ACE_LOCK> ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *
+        -:  156:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::singleton_ = 0;
+        -:  157:#endif /* !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES) */
+        -:  158:
+        -:  159:template <class TYPE, class ACE_LOCK> void
+        -:  160:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::dump (void)
+        -:  161:{
+        -:  162:#if defined (ACE_HAS_DUMP)
+        -:  163:  ACE_TRACE ("ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::dump");
+        -:  164:
+        -:  165:#if !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  166:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("instance_ = %x"),
+        -:  167:              ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ()));
+        -:  168:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:  169:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:  170:#endif /* ACE_HAS_DUMP */
+        -:  171:}
+        -:  172:
+        -:  173:template <class TYPE, class ACE_LOCK>
+        -:  174:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&
+      647:  175:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+        -:  176:{
+        -:  177:#if defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  178:  // Pointer to the Singleton instance.  This works around a bug with
+        -:  179:  // G++ and it's (mis-)handling of templates and statics...
+        -:  180:  static ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *singleton_ = 0;
+        -:  181:
+        -:  182:  return singleton_;
+        -:  183:#else
+      647:  184:  return ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::singleton_;
+        -:  185:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:  186:}
+        -:  187:
+        -:  188:template <class TYPE, class ACE_LOCK> TYPE *
+      409:  189:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance (void)
+        -:  190:{
+        -:  191:  ACE_TRACE ("ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance");
+        -:  192:
+        -:  193:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
+      409:  194:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
+        -:  195:
+        -:  196:  // Perform the Double-Check pattern...
+      409:  197:  if (singleton == 0)
+        -:  198:    {
+     238*:  199:      if (ACE_Object_Manager::starting_up () ||
+      119:  200:          ACE_Object_Manager::shutting_down ())
+        -:  201:        {
+        -:  202:          // The program is still starting up, and therefore assumed
+        -:  203:          // to be single threaded.  There's no need to double-check.
+        -:  204:          // Or, the ACE_Object_Manager instance has been destroyed,
+        -:  205:          // so the preallocated lock is not available.  Either way,
+        -:  206:          // don't register for destruction with the
+        -:  207:          // ACE_Object_Manager:  we'll have to leak this instance.
+        -:  208:
+    #####:  209:          ACE_NEW_RETURN (singleton, (ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>),
+        -:  210:                          0);
+        -:  211:        }
+        -:  212:      else
+        -:  213:        {
+        -:  214:#if defined (ACE_MT_SAFE) && (ACE_MT_SAFE != 0)
+        -:  215:          // Obtain a lock from the ACE_Object_Manager.  The pointer
+        -:  216:          // is static, so we only obtain one per
+        -:  217:          // ACE_Unmanaged_Singleton instantiation.
+        -:  218:#if defined(ACE_FACE_SAFETY_BASE)
+        -:  219:          static ACE_LOCK the_lock;
+        -:  220:          static ACE_LOCK *lock = &the_lock;
+        -:  221:#else /* ACE_FACE_SAFETY_BASE */
+        -:  222:          static ACE_LOCK *lock = 0;
+        -:  223:#endif /* ACE_FACE_SAFETY_BASE */
+      119:  224:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
+        -:  225:            // Failed to acquire the lock!
+    #####:  226:            return 0;
+        -:  227:
+     119*:  228:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
+        -:  229:#endif /* ACE_MT_SAFE */
+        -:  230:
+      119:  231:          if (singleton == 0)
+     119*:  232:            ACE_NEW_RETURN (singleton,
+        -:  233:                            (ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>),
+        -:  234:                            0);
+        -:  235:        }
+        -:  236:    }
+        -:  237:
+      409:  238:  return &singleton->instance_;
+        -:  239:}
+        -:  240:
+        -:  241:template <class TYPE, class ACE_LOCK> void
+      119:  242:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::close (void)
+        -:  243:{
+        -:  244:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
+      119:  245:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
+        -:  246:
+      119:  247:  if (singleton)
+        -:  248:    {
+      119:  249:      singleton->cleanup ();
+      119:  250:      ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+        -:  251:    }
+      119:  252:}
+        -:  253:
+        -:  254:template <class TYPE, class ACE_LOCK> void
+        -:  255:ACE_TSS_Singleton<TYPE, ACE_LOCK>::dump (void)
+        -:  256:{
+        -:  257:#if defined (ACE_HAS_DUMP)
+        -:  258:  ACE_TRACE ("ACE_TSS_Singleton<TYPE, ACE_LOCK>::dump");
+        -:  259:
+        -:  260:#if !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  261:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("instance_ = %x"),
+        -:  262:              ACE_TSS_Singleton<TYPE, ACE_LOCK>::instance_i ()));
+        -:  263:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:  264:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:  265:#endif /* ACE_HAS_DUMP */
+        -:  266:}
+        -:  267:
+        -:  268:template <class TYPE, class ACE_LOCK> ACE_TSS_Singleton<TYPE, ACE_LOCK> *&
+        -:  269:ACE_TSS_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+        -:  270:{
+        -:  271:#if defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  272:  // Pointer to the Singleton instance.  This works around a bug with
+        -:  273:  // G++ and it's (mis-)handling of templates and statics...
+        -:  274:  static ACE_TSS_Singleton<TYPE, ACE_LOCK> *singleton_ = 0;
+        -:  275:
+        -:  276:  return singleton_;
+        -:  277:#else
+        -:  278:  return ACE_TSS_Singleton<TYPE, ACE_LOCK>::singleton_;
+        -:  279:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:  280:}
+        -:  281:
+        -:  282:template <class TYPE, class ACE_LOCK> TYPE *
+        -:  283:ACE_TSS_Singleton<TYPE, ACE_LOCK>::instance (void)
+        -:  284:{
+        -:  285:  ACE_TRACE ("ACE_TSS_Singleton<TYPE, ACE_LOCK>::instance");
+        -:  286:
+        -:  287:  ACE_TSS_Singleton<TYPE, ACE_LOCK> *&singleton =
+        -:  288:    ACE_TSS_Singleton<TYPE, ACE_LOCK>::instance_i ();
+        -:  289:
+        -:  290:  // Perform the Double-Check pattern...
+        -:  291:  if (singleton == 0)
+        -:  292:    {
+        -:  293:      if (ACE_Object_Manager::starting_up () ||
+        -:  294:          ACE_Object_Manager::shutting_down ())
+        -:  295:        {
+        -:  296:          // The program is still starting up, and therefore assumed
+        -:  297:          // to be single threaded.  There's no need to double-check.
+        -:  298:          // Or, the ACE_Object_Manager instance has been destroyed,
+        -:  299:          // so the preallocated lock is not available.  Either way,
+        -:  300:          // don't register for destruction with the
+        -:  301:          // ACE_Object_Manager:  we'll have to leak this instance.
+        -:  302:
+        -:  303:          ACE_NEW_RETURN (singleton, (ACE_TSS_Singleton<TYPE, ACE_LOCK>), 0);
+        -:  304:        }
+        -:  305:      else
+        -:  306:        {
+        -:  307:#if defined (ACE_MT_SAFE) && (ACE_MT_SAFE != 0)
+        -:  308:
+        -:  309:          // Obtain a lock from the ACE_Object_Manager.  The pointer
+        -:  310:          // is static, so we only obtain one per ACE_Singleton instantiation.
+        -:  311:#if defined(ACE_FACE_SAFETY_BASE)
+        -:  312:          static ACE_LOCK the_lock;
+        -:  313:          static ACE_LOCK *lock = &the_lock;
+        -:  314:#else /* ACE_FACE_SAFETY_BASE */
+        -:  315:          static ACE_LOCK *lock = 0;
+        -:  316:#endif /* ACE_FACE_SAFETY_BASE */
+        -:  317:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
+        -:  318:            // Failed to acquire the lock!
+        -:  319:            return 0;
+        -:  320:
+        -:  321:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
+        -:  322:
+        -:  323:          if (singleton == 0)
+        -:  324:            {
+        -:  325:#endif /* ACE_MT_SAFE */
+        -:  326:              ACE_NEW_RETURN (singleton, (ACE_TSS_Singleton<TYPE, ACE_LOCK>),
+        -:  327:                              0);
+        -:  328:
+        -:  329:              // Register for destruction with ACE_Object_Manager.
+        -:  330:              ACE_Object_Manager::at_exit (singleton, 0, typeid (TYPE).name ());
+        -:  331:#if defined (ACE_MT_SAFE) && (ACE_MT_SAFE != 0)
+        -:  332:            }
+        -:  333:#endif /* ACE_MT_SAFE */
+        -:  334:        }
+        -:  335:    }
+        -:  336:
+        -:  337:  return ACE_TSS_GET (&singleton->instance_, TYPE);
+        -:  338:}
+        -:  339:
+        -:  340:template <class TYPE, class ACE_LOCK> void
+        -:  341:ACE_TSS_Singleton<TYPE, ACE_LOCK>::cleanup (void *)
+        -:  342:{
+        -:  343:  delete this;
+        -:  344:  ACE_TSS_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+        -:  345:}
+        -:  346:
+        -:  347:template <class TYPE, class ACE_LOCK> void
+        -:  348:ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::dump (void)
+        -:  349:{
+        -:  350:#if defined (ACE_HAS_DUMP)
+        -:  351:  ACE_TRACE ("ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::dump");
+        -:  352:
+        -:  353:#if !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  354:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("instance_ = %x"),
+        -:  355:              ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::instance_i ()));
+        -:  356:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:  357:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:  358:#endif /* ACE_HAS_DUMP */
+        -:  359:}
+        -:  360:
+        -:  361:template <class TYPE, class ACE_LOCK>
+        -:  362:ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK> *&
+        -:  363:ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+        -:  364:{
+        -:  365:#if defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  366:  // Pointer to the Singleton instance.  This works around a bug with
+        -:  367:  // G++ and it's (mis-)handling of templates and statics...
+        -:  368:  static ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK> *singleton_ = 0;
+        -:  369:
+        -:  370:  return singleton_;
+        -:  371:#else
+        -:  372:  return ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::singleton_;
+        -:  373:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:  374:}
+        -:  375:
+        -:  376:template <class TYPE, class ACE_LOCK> TYPE *
+        -:  377:ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::instance (void)
+        -:  378:{
+        -:  379:  ACE_TRACE ("ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::instance");
+        -:  380:
+        -:  381:  ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK> *&singleton =
+        -:  382:    ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::instance_i ();
+        -:  383:
+        -:  384:  // Perform the Double-Check pattern...
+        -:  385:  if (singleton == 0)
+        -:  386:    {
+        -:  387:      if (ACE_Object_Manager::starting_up () ||
+        -:  388:          ACE_Object_Manager::shutting_down ())
+        -:  389:        {
+        -:  390:          // The program is still starting up, and therefore assumed
+        -:  391:          // to be single threaded.  There's no need to double-check.
+        -:  392:          // Or, the ACE_Object_Manager instance has been destroyed,
+        -:  393:          // so the preallocated lock is not available.  Either way,
+        -:  394:          // don't register for destruction with the
+        -:  395:          // ACE_Object_Manager:  we'll have to leak this instance.
+        -:  396:
+        -:  397:          ACE_NEW_RETURN (singleton,
+        -:  398:                          (ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>),
+        -:  399:                          0);
+        -:  400:        }
+        -:  401:      else
+        -:  402:        {
+        -:  403:#if defined (ACE_MT_SAFE) && (ACE_MT_SAFE != 0)
+        -:  404:          // Obtain a lock from the ACE_Object_Manager.  The pointer
+        -:  405:          // is static, so we only obtain one per
+        -:  406:          // ACE_Unmanaged_Singleton instantiation.
+        -:  407:#if defined(ACE_FACE_SAFETY_BASE)
+        -:  408:          static ACE_LOCK the_lock;
+        -:  409:          static ACE_LOCK *lock = &the_lock;
+        -:  410:#else /* ACE_FACE_SAFETY_BASE */
+        -:  411:          static ACE_LOCK *lock = 0;
+        -:  412:#endif /* ACE_FACE_SAFETY_BASE */
+        -:  413:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
+        -:  414:            // Failed to acquire the lock!
+        -:  415:            return 0;
+        -:  416:
+        -:  417:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
+        -:  418:#endif /* ACE_MT_SAFE */
+        -:  419:
+        -:  420:          if (singleton == 0)
+        -:  421:            ACE_NEW_RETURN (singleton,
+        -:  422:                            (ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>),
+        -:  423:                            0);
+        -:  424:        }
+        -:  425:    }
+        -:  426:
+        -:  427:  return ACE_TSS_GET (&singleton->instance_, TYPE);
+        -:  428:}
+        -:  429:
+        -:  430:template <class TYPE, class ACE_LOCK> void
+        -:  431:ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::close (void)
+        -:  432:{
+        -:  433:  ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK> *&singleton =
+        -:  434:    ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::instance_i ();
+        -:  435:
+        -:  436:  if (singleton)
+        -:  437:    singleton->cleanup ();
+        -:  438:}
+        -:  439:
+        -:  440:#if !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  441:// Pointer to the Singleton instance.
+        -:  442:template <class TYPE, class ACE_LOCK> ACE_TSS_Singleton <TYPE, ACE_LOCK> *
+        -:  443:ACE_TSS_Singleton<TYPE, ACE_LOCK>::singleton_ = 0;
+        -:  444:
+        -:  445:template <class TYPE, class ACE_LOCK>
+        -:  446:ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK> *
+        -:  447:ACE_Unmanaged_TSS_Singleton<TYPE, ACE_LOCK>::singleton_ = 0;
+        -:  448:#endif /* !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES) */
+        -:  449:
+        -:  450:/*************************************************************************/
+        -:  451:
+        -:  452:#if !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  453:// Pointer to the Singleton instance.
+        -:  454:template <class TYPE, class ACE_LOCK> ACE_DLL_Singleton_T<TYPE, ACE_LOCK> *
+        -:  455:ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::singleton_ = 0;
+        -:  456:#endif /* !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES) */
+        -:  457:
+        -:  458:template <class TYPE, class ACE_LOCK> void
+        -:  459:ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::dump (void)
+        -:  460:{
+        -:  461:#if defined (ACE_HAS_DUMP)
+        -:  462:  ACE_TRACE ("ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::dump");
+        -:  463:
+        -:  464:#if !defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  465:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("instance_ = %x"),
+        -:  466:              ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::instance_i ()));
+        -:  467:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:  468:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:  469:#endif /* ACE_HAS_DUMP */
+        -:  470:}
+        -:  471:
+        -:  472:template <class TYPE, class ACE_LOCK>
+        -:  473:ACE_DLL_Singleton_T<TYPE, ACE_LOCK> *&
+        -:  474:ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::instance_i (void)
+        -:  475:{
+        -:  476:  ACE_TRACE ("ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::instance_i");
+        -:  477:
+        -:  478:#if defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
+        -:  479:  // Pointer to the Singleton instance.  This works around a bug with
+        -:  480:  // G++ and it's (mis-)handling of templates and statics...
+        -:  481:  static ACE_DLL_Singleton_T<TYPE, ACE_LOCK> *singleton_ = 0;
+        -:  482:
+        -:  483:  return singleton_;
+        -:  484:#else
+        -:  485:  return ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::singleton_;
+        -:  486:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
+        -:  487:}
+        -:  488:
+        -:  489:template <class TYPE, class ACE_LOCK> TYPE *
+        -:  490:ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::instance (void)
+        -:  491:{
+        -:  492:  ACE_TRACE ("ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::instance");
+        -:  493:
+        -:  494:  ACE_DLL_Singleton_T<TYPE, ACE_LOCK> *&singleton =
+        -:  495:    ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::instance_i ();
+        -:  496:
+        -:  497:  // Perform the Double-Check pattern...
+        -:  498:  if (singleton == 0)
+        -:  499:    {
+        -:  500:      if (ACE_Object_Manager::starting_up () ||
+        -:  501:          ACE_Object_Manager::shutting_down ())
+        -:  502:        {
+        -:  503:          // The program is still starting up, and therefore assumed
+        -:  504:          // to be single threaded.  There's no need to double-check.
+        -:  505:          // Or, the ACE_Object_Manager instance has been destroyed,
+        -:  506:          // so the preallocated lock is not available.  Either way,
+        -:  507:          // don't register for destruction with the
+        -:  508:          // ACE_Object_Manager:  we'll have to leak this instance.
+        -:  509:
+        -:  510:          ACE_NEW_RETURN (singleton, (ACE_DLL_Singleton_T<TYPE, ACE_LOCK>),
+        -:  511:                          0);
+        -:  512:        }
+        -:  513:      else
+        -:  514:        {
+        -:  515:#if defined (ACE_MT_SAFE) && (ACE_MT_SAFE != 0)
+        -:  516:          // Obtain a lock from the ACE_Object_Manager.  The pointer
+        -:  517:          // is static, so we only obtain one per
+        -:  518:          // ACE_Unmanaged_Singleton instantiation.
+        -:  519:#if defined(ACE_FACE_SAFETY_BASE)
+        -:  520:          static ACE_LOCK the_lock;
+        -:  521:          static ACE_LOCK *lock = &the_lock;
+        -:  522:#else /* ACE_FACE_SAFETY_BASE */
+        -:  523:          static ACE_LOCK *lock = 0;
+        -:  524:#endif /* ACE_FACE_SAFETY_BASE */
+        -:  525:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
+        -:  526:            // Failed to acquire the lock!
+        -:  527:            return 0;
+        -:  528:
+        -:  529:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
+        -:  530:#endif /* ACE_MT_SAFE */
+        -:  531:
+        -:  532:          if (singleton == 0)
+        -:  533:            ACE_NEW_RETURN (singleton,
+        -:  534:                            (ACE_DLL_Singleton_T<TYPE, ACE_LOCK>),
+        -:  535:                            0);
+        -:  536:        }
+        -:  537:      //ACE_REGISTER_FRAMEWORK_COMPONENT(ACE_DLL_Singleton<TYPE,ACE_LOCK>, singleton);
+        -:  538:      ACE_Framework_Repository::instance ()->register_component
+        -:  539:        (new ACE_Framework_Component_T<ACE_DLL_Singleton_T<TYPE, ACE_LOCK> > (singleton));
+        -:  540:    }
+        -:  541:
+        -:  542:  return &singleton->instance_;
+        -:  543:}
+        -:  544:
+        -:  545:template <class TYPE, class ACE_LOCK> void
+        -:  546:ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::close (void)
+        -:  547:{
+        -:  548:  ACE_TRACE ("ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::close");
+        -:  549:
+        -:  550:  ACE_DLL_Singleton_T<TYPE, ACE_LOCK> *&singleton =
+        -:  551:    ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::instance_i ();
+        -:  552:
+        -:  553:  delete singleton;
+        -:  554:  singleton = 0;
+        -:  555:}
+        -:  556:
+        -:  557:template <class TYPE, class ACE_LOCK> void
+        -:  558:ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::close_singleton (void)
+        -:  559:{
+        -:  560:  ACE_TRACE ("ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::close_singleton");
+        -:  561:  ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::close ();
+        -:  562:}
+        -:  563:
+        -:  564:template <class TYPE, class ACE_LOCK> const ACE_TCHAR *
+        -:  565:ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::dll_name (void)
+        -:  566:{
+        -:  567:  return this->instance ()->dll_name ();
+        -:  568:}
+        -:  569:
+        -:  570:template <class TYPE, class ACE_LOCK> const ACE_TCHAR *
+        -:  571:ACE_DLL_Singleton_T<TYPE, ACE_LOCK>::name (void)
+        -:  572:{
+        -:  573:  return this->instance ()->name ();
+        -:  574:}
+        -:  575:
+        -:  576:
+        -:  577:/**********************************************************************/
+        -:  578:
+        -:  579:template <class TYPE> const ACE_TCHAR*
+        -:  580:ACE_DLL_Singleton_Adapter_T<TYPE>::dll_name (void)
+        -:  581:{
+        -:  582:  // @todo make this a constant somewhere (or it there already is one
+        -:  583:  // then use it.
+        -:  584:  return ACE_TEXT("ACE");
+        -:  585:}
+        -:  586:
+        -:  587:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  588:
+        -:  589:#endif /* ACE_SINGLETON_CPP */

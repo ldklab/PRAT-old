@@ -1,0 +1,254 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/INET_Addr.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:
+        -:    6:#include "ace/OS_NS_string.h"
+        -:    7:#include "ace/Global_Macros.h"
+        -:    8:#include "ace/OS_NS_arpa_inet.h"
+        -:    9:
+        -:   10:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   11:
+        -:   12:ACE_INLINE void
+        -:   13:ACE_INET_Addr::reset (void)
+        -:   14:{
+        -:   15:  ACE_OS::memset (&this->inet_addr_, 0, sizeof (this->inet_addr_));
+        -:   16:  if (this->get_type() == AF_INET)
+        -:   17:    {
+        -:   18:#ifdef ACE_HAS_SOCKADDR_IN_SIN_LEN
+        -:   19:      this->inet_addr_.in4_.sin_len = sizeof (this->inet_addr_.in4_);
+        -:   20:#endif
+        -:   21:      this->inet_addr_.in4_.sin_family = AF_INET;
+        -:   22:    }
+        -:   23:#if defined (ACE_HAS_IPV6)
+        -:   24:  else if (this->get_type() == AF_INET6)
+        -:   25:    {
+        -:   26:#ifdef ACE_HAS_SOCKADDR_IN6_SIN6_LEN
+        -:   27:      this->inet_addr_.in6_.sin6_len = sizeof (this->inet_addr_.in6_);
+        -:   28:#endif
+        -:   29:      this->inet_addr_.in6_.sin6_family = AF_INET6;
+        -:   30:    }
+        -:   31:#endif  /* ACE_HAS_IPV6 */
+        -:   32:}
+        -:   33:
+        -:   34:ACE_INLINE int
+        -:   35:ACE_INET_Addr::determine_type (void) const
+        -:   36:{
+        -:   37:#if defined (ACE_HAS_IPV6)
+        -:   38:#  if defined (ACE_USES_IPV4_IPV6_MIGRATION)
+        -:   39:  return ACE::ipv6_enabled () ? AF_INET6 : AF_INET;
+        -:   40:#  else
+        -:   41:  return AF_INET6;
+        -:   42:#  endif /* ACE_USES_IPV4_IPV6_MIGRATION */
+        -:   43:#else
+        -:   44:  return AF_INET;
+        -:   45:#endif /* ACE_HAS_IPV6 */
+        -:   46:}
+        -:   47:
+        -:   48:ACE_INLINE void *
+        -:   49:ACE_INET_Addr::ip_addr_pointer (void) const
+        -:   50:{
+        -:   51:#if defined (ACE_HAS_IPV6)
+        -:   52:  if (this->get_type () == PF_INET)
+        -:   53:    return (void*)&this->inet_addr_.in4_.sin_addr;
+        -:   54:  else
+        -:   55:    return (void*)&this->inet_addr_.in6_.sin6_addr;
+        -:   56:#else
+        -:   57:  return (void*)&this->inet_addr_.in4_.sin_addr;
+        -:   58:#endif
+        -:   59:}
+        -:   60:
+        -:   61:ACE_INLINE int
+        -:   62:ACE_INET_Addr::ip_addr_size (void) const
+        -:   63:{
+        -:   64:  // Since this size value is used to pass to other host db-type
+        -:   65:  // functions (gethostbyaddr, etc.) the length is of int type.
+        -:   66:  // Thus, cast all these sizes back to int. They're all well
+        -:   67:  // within the range of an int anyway.
+        -:   68:#if defined (ACE_HAS_IPV6)
+        -:   69:  if (this->get_type () == PF_INET)
+        -:   70:    return static_cast<int> (sizeof this->inet_addr_.in4_.sin_addr);
+        -:   71:  else
+        -:   72:    return static_cast<int> (sizeof this->inet_addr_.in6_.sin6_addr);
+        -:   73:#else
+        -:   74:  return static_cast<int> (sizeof this->inet_addr_.in4_.sin_addr.s_addr);
+        -:   75:#endif /* ACE_HAS_IPV6 */
+        -:   76:}
+        -:   77:
+        -:   78:// Return the port number, converting it into host byte order...
+        -:   79:
+        -:   80:ACE_INLINE u_short
+      109:   81:ACE_INET_Addr::get_port_number (void) const
+        -:   82:{
+        -:   83:  ACE_TRACE ("ACE_INET_Addr::get_port_number");
+        -:   84:#if defined (ACE_HAS_IPV6)
+        -:   85:  if (this->get_type () == PF_INET)
+        -:   86:    return ACE_NTOHS (this->inet_addr_.in4_.sin_port);
+        -:   87:  else
+        -:   88:    return ACE_NTOHS (this->inet_addr_.in6_.sin6_port);
+        -:   89:#else
+        -:   90:# if defined (ACE_VXWORKS) && ACE_VXWORKS >= 0x690
+        -:   91:  return static_cast<u_short> (ACE_NTOHS (this->inet_addr_.in4_.sin_port));
+        -:   92:# else
+      109:   93:  return ACE_NTOHS (this->inet_addr_.in4_.sin_port);
+        -:   94:# endif
+        -:   95:#endif /* ACE_HAS_IPV6 */
+        -:   96:}
+        -:   97:
+        -:   98:ACE_INLINE int
+        -:   99:ACE_INET_Addr::get_addr_size (void) const
+        -:  100:{
+        -:  101:  ACE_TRACE ("ACE_INET_Addr::get_addr_size");
+        -:  102:#if defined (ACE_HAS_IPV6)
+        -:  103:  if (this->get_type () == PF_INET)
+        -:  104:    return sizeof this->inet_addr_.in4_;
+        -:  105:  else
+        -:  106:    return sizeof this->inet_addr_.in6_;
+        -:  107:#else
+        -:  108:  return sizeof this->inet_addr_.in4_;
+        -:  109:#endif /* ACE_HAS_IPV6 */
+        -:  110:}
+        -:  111:
+        -:  112:ACE_INLINE bool
+        -:  113:ACE_INET_Addr::operator < (const ACE_INET_Addr &rhs) const
+        -:  114:{
+        -:  115:#if defined (ACE_HAS_IPV6)
+        -:  116:  if (this->get_type() != rhs.get_type())
+        -:  117:  {
+        -:  118:    return this->get_type() < rhs.get_type();
+        -:  119:  }
+        -:  120:
+        -:  121:  if (this->get_type() == PF_INET6)
+        -:  122:  {
+        -:  123:    int memval = ACE_OS::memcmp (this->ip_addr_pointer(),
+        -:  124:                                 rhs.ip_addr_pointer(),
+        -:  125:                                 this->ip_addr_size());
+        -:  126:
+        -:  127:    return memval < 0
+        -:  128:            || (memval == 0
+        -:  129:                && (this->get_port_number() < rhs.get_port_number()
+        -:  130:                    || (this->get_port_number() == rhs.get_port_number()
+        -:  131:                        && this->inet_addr_.in6_.sin6_scope_id <
+        -:  132:                            rhs.inet_addr_.in6_.sin6_scope_id)));
+        -:  133:  }
+        -:  134:#endif
+        -:  135:
+        -:  136:  return this->get_ip_address () < rhs.get_ip_address ()
+        -:  137:    || (this->get_ip_address () == rhs.get_ip_address ()
+        -:  138:        && this->get_port_number () < rhs.get_port_number ());
+        -:  139:}
+        -:  140:
+        -:  141:#if defined (ACE_HAS_WCHAR)
+        -:  142:ACE_INLINE int
+        -:  143:ACE_INET_Addr::set (u_short port_number,
+        -:  144:                    const wchar_t host_name[],
+        -:  145:                    int encode,
+        -:  146:                    int address_family)
+        -:  147:{
+        -:  148:  return this->set (port_number,
+        -:  149:                    ACE_Wide_To_Ascii (host_name).char_rep (),
+        -:  150:                    encode,
+        -:  151:                    address_family);
+        -:  152:}
+        -:  153:
+        -:  154:ACE_INLINE int
+        -:  155:ACE_INET_Addr::set (const wchar_t port_name[],
+        -:  156:                    const wchar_t host_name[],
+        -:  157:                    const wchar_t protocol[])
+        -:  158:{
+        -:  159:  return this->set (ACE_Wide_To_Ascii (port_name).char_rep (),
+        -:  160:                    ACE_Wide_To_Ascii (host_name).char_rep (),
+        -:  161:                    ACE_Wide_To_Ascii (protocol).char_rep ());
+        -:  162:}
+        -:  163:
+        -:  164:ACE_INLINE int
+        -:  165:ACE_INET_Addr::set (const wchar_t port_name[],
+        -:  166:                    ACE_UINT32 ip_addr,
+        -:  167:                    const wchar_t protocol[])
+        -:  168:{
+        -:  169:  return this->set (ACE_Wide_To_Ascii (port_name).char_rep (),
+        -:  170:                    ip_addr,
+        -:  171:                    ACE_Wide_To_Ascii (protocol).char_rep ());
+        -:  172:}
+        -:  173:
+        -:  174:ACE_INLINE int
+        -:  175:ACE_INET_Addr::set (const wchar_t addr[], int address_family)
+        -:  176:{
+        -:  177:  return this->set (ACE_Wide_To_Ascii (addr).char_rep (), address_family);
+        -:  178:}
+        -:  179:
+        -:  180:#endif /* ACE_HAS_WCHAR */
+        -:  181:
+        -:  182:// Return @c true if the IP address is INADDR_ANY or IN6ADDR_ANY.
+        -:  183:ACE_INLINE bool
+        -:  184:ACE_INET_Addr::is_any (void) const
+        -:  185:{
+        -:  186:#if defined (ACE_HAS_IPV6)
+        -:  187:  if (this->get_type () == AF_INET6)
+        -:  188:      return IN6_IS_ADDR_UNSPECIFIED (&this->inet_addr_.in6_.sin6_addr);
+        -:  189:#endif /* ACE_HAS_IPV6 */
+        -:  190:
+        -:  191:  return (this->inet_addr_.in4_.sin_addr.s_addr == INADDR_ANY);
+        -:  192:}
+        -:  193:
+        -:  194:// Return @c true if the IP address is IPv4/IPv6 loopback address.
+        -:  195:ACE_INLINE bool
+      480:  196:ACE_INET_Addr::is_loopback (void) const
+        -:  197:{
+        -:  198:#if defined (ACE_HAS_IPV6)
+        -:  199:  if (this->get_type () == AF_INET6)
+        -:  200:      return IN6_IS_ADDR_LOOPBACK (&this->inet_addr_.in6_.sin6_addr);
+        -:  201:#endif /* ACE_HAS_IPV6 */
+        -:  202:
+        -:  203:  // RFC 3330 defines loopback as any address with 127.x.x.x
+      480:  204:  return ((this->get_ip_address () & 0XFF000000) == (INADDR_LOOPBACK & 0XFF000000));
+        -:  205:}
+        -:  206:
+        -:  207:// Return @c true if the IP address is IPv4/IPv6 multicast address.
+        -:  208:ACE_INLINE bool
+        -:  209:ACE_INET_Addr::is_multicast (void) const
+        -:  210:{
+        -:  211:#if defined (ACE_HAS_IPV6)
+        -:  212:  if (this->get_type() == AF_INET6)
+        -:  213:    return this->inet_addr_.in6_.sin6_addr.s6_addr[0] == 0xFF;
+        -:  214:#endif /* ACE_HAS_IPV6 */
+        -:  215:  return
+        -:  216:    (*static_cast<const unsigned char*> (
+        -:  217:        static_cast<const void*> (&this->inet_addr_.in4_.sin_addr.s_addr)) & 0xf0) == 0xe0;
+        -:  218:}
+        -:  219:
+        -:  220:#if defined (ACE_HAS_IPV6)
+        -:  221:// Return @c true if the IP address is IPv6 linklocal address.
+        -:  222:ACE_INLINE bool
+        -:  223:ACE_INET_Addr::is_linklocal (void) const
+        -:  224:{
+        -:  225:  if (this->get_type () == AF_INET6)
+        -:  226:      return IN6_IS_ADDR_LINKLOCAL (&this->inet_addr_.in6_.sin6_addr);
+        -:  227:
+        -:  228:  return false;
+        -:  229:}
+        -:  230:
+        -:  231:// Return @c true if the IP address is IPv4 mapped IPv6 address.
+        -:  232:ACE_INLINE bool
+        -:  233:ACE_INET_Addr::is_ipv4_mapped_ipv6 (void) const
+        -:  234:{
+        -:  235:  if (this->get_type () == AF_INET6)
+        -:  236:      return IN6_IS_ADDR_V4MAPPED (&this->inet_addr_.in6_.sin6_addr);
+        -:  237:
+        -:  238:  return false;
+        -:  239:}
+        -:  240:
+        -:  241:// Return @c true if the IP address is IPv4-compatible IPv6 address.
+        -:  242:ACE_INLINE bool
+        -:  243:ACE_INET_Addr::is_ipv4_compat_ipv6 (void) const
+        -:  244:{
+        -:  245:  if (this->get_type () == AF_INET6)
+        -:  246:      return IN6_IS_ADDR_V4COMPAT (&this->inet_addr_.in6_.sin6_addr);
+        -:  247:
+        -:  248:  return false;
+        -:  249:}
+        -:  250:#endif /* ACE_HAS_IPV6 */
+        -:  251:
+        -:  252:ACE_END_VERSIONED_NAMESPACE_DECL

@@ -1,0 +1,690 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Atomic_Op_GCC_T.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2:// $Id$
+        -:    3:
+        -:    4:#if defined (ACE_HAS_GCC_ATOMIC_BUILTINS) && (ACE_HAS_GCC_ATOMIC_BUILTINS == 1)
+        -:    5:
+        -:    6:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    7:
+        -:    8:template <typename T>
+        -:    9:ACE_INLINE
+        -:   10:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (void)
+        -:   11:  : value_ (0)
+        -:   12:{
+        -:   13:}
+        -:   14:
+        -:   15:template <typename T>
+        -:   16:ACE_INLINE
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEC2Em:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEC2Em:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEC2Em:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEC2Em:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEC2Em:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEC2Em:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEC2Em:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEC2Em:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEC2El:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEC2Em:
+    #####:   17:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (T c)
+    #####:   18:  : value_ (c)
+        -:   19:{
+    #####:   20:}
+------------------
+        -:   21:
+        -:   22:template <typename T>
+        -:   23:ACE_INLINE
+        -:   24:ACE_Atomic_Op_GCC<T>::ACE_Atomic_Op_GCC (
+        -:   25:  const ACE_Atomic_Op_GCC<T> &rhs)
+        -:   26:  : value_ (rhs.value_)
+        -:   27:{
+        -:   28:}
+        -:   29:
+        -:   30:template <typename T>
+        -:   31:ACE_INLINE T
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEppEv:
+    #####:   32:ACE_Atomic_Op_GCC<T>::operator++ (void)
+        -:   33:{
+    #####:   34:  return __sync_add_and_fetch (&this->value_, 1);
+        -:   35:}
+------------------
+        -:   36:
+        -:   37:template <typename T>
+        -:   38:ACE_INLINE T
+    #####:   39:ACE_Atomic_Op_GCC<T>::operator++ (int)
+        -:   40:{
+    #####:   41:  return __sync_fetch_and_add (&this->value_, 1);
+        -:   42:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEppEi:
+    #####:   39:ACE_Atomic_Op_GCC<T>::operator++ (int)
+        -:   40:{
+    #####:   41:  return __sync_fetch_and_add (&this->value_, 1);
+        -:   42:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEppEi:
+    #####:   39:ACE_Atomic_Op_GCC<T>::operator++ (int)
+        -:   40:{
+    #####:   41:  return __sync_fetch_and_add (&this->value_, 1);
+        -:   42:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEppEi:
+    #####:   39:ACE_Atomic_Op_GCC<T>::operator++ (int)
+        -:   40:{
+    #####:   41:  return __sync_fetch_and_add (&this->value_, 1);
+        -:   42:}
+------------------
+        -:   43:
+        -:   44:template <typename T>
+        -:   45:ACE_INLINE T
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCImEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+_ZN17ACE_Atomic_Op_GCCIlEmmEv:
+    #####:   46:ACE_Atomic_Op_GCC<T>::operator-- (void)
+        -:   47:{
+    #####:   48:  return __sync_sub_and_fetch (&this->value_, 1);
+        -:   49:}
+------------------
+        -:   50:
+        -:   51:template <typename T>
+        -:   52:ACE_INLINE T
+        -:   53:ACE_Atomic_Op_GCC<T>::operator-- (int)
+        -:   54:{
+        -:   55:  return __sync_fetch_and_sub (&this->value_, 1);
+        -:   56:}
+        -:   57:
+        -:   58:template <typename T>
+        -:   59:ACE_INLINE T
+        -:   60:ACE_Atomic_Op_GCC<T>::operator+= (T rhs)
+        -:   61:{
+        -:   62:  return __sync_add_and_fetch (&this->value_, rhs);
+        -:   63:}
+        -:   64:
+        -:   65:template <typename T>
+        -:   66:ACE_INLINE T
+        -:   67:ACE_Atomic_Op_GCC<T>::operator-= (T rhs)
+        -:   68:{
+        -:   69:  return __sync_sub_and_fetch (&this->value_, rhs);
+        -:   70:}
+        -:   71:
+        -:   72:template <typename T>
+        -:   73:ACE_INLINE bool
+    #####:   74:ACE_Atomic_Op_GCC<T>::operator== (T rhs) const
+        -:   75:{
+    #####:   76:  return (this->value_ == rhs);
+        -:   77:}
+------------------
+_ZNK17ACE_Atomic_Op_GCCImEeqEm:
+    #####:   74:ACE_Atomic_Op_GCC<T>::operator== (T rhs) const
+        -:   75:{
+    #####:   76:  return (this->value_ == rhs);
+        -:   77:}
+------------------
+_ZNK17ACE_Atomic_Op_GCCIlEeqEl:
+    #####:   74:ACE_Atomic_Op_GCC<T>::operator== (T rhs) const
+        -:   75:{
+    #####:   76:  return (this->value_ == rhs);
+        -:   77:}
+------------------
+_ZNK17ACE_Atomic_Op_GCCImEeqEm:
+    #####:   74:ACE_Atomic_Op_GCC<T>::operator== (T rhs) const
+        -:   75:{
+    #####:   76:  return (this->value_ == rhs);
+        -:   77:}
+------------------
+_ZNK17ACE_Atomic_Op_GCCImEeqEm:
+    #####:   74:ACE_Atomic_Op_GCC<T>::operator== (T rhs) const
+        -:   75:{
+    #####:   76:  return (this->value_ == rhs);
+        -:   77:}
+------------------
+        -:   78:
+        -:   79:template <typename T>
+        -:   80:ACE_INLINE bool
+        -:   81:ACE_Atomic_Op_GCC<T>::operator!= (T rhs) const
+        -:   82:{
+        -:   83:  return (this->value_ != rhs);
+        -:   84:}
+        -:   85:
+        -:   86:template <typename T>
+        -:   87:ACE_INLINE bool
+        -:   88:ACE_Atomic_Op_GCC<T>::operator>= (T rhs) const
+        -:   89:{
+        -:   90:  return (this->value_ >= rhs);
+        -:   91:}
+        -:   92:
+        -:   93:template <typename T>
+        -:   94:ACE_INLINE bool
+    #####:   95:ACE_Atomic_Op_GCC<T>::operator> (T rhs) const
+        -:   96:{
+    #####:   97:  return (this->value_ > rhs);
+        -:   98:}
+------------------
+_ZNK17ACE_Atomic_Op_GCCImEgtEm:
+    #####:   95:ACE_Atomic_Op_GCC<T>::operator> (T rhs) const
+        -:   96:{
+    #####:   97:  return (this->value_ > rhs);
+        -:   98:}
+------------------
+_ZNK17ACE_Atomic_Op_GCCImEgtEm:
+    #####:   95:ACE_Atomic_Op_GCC<T>::operator> (T rhs) const
+        -:   96:{
+    #####:   97:  return (this->value_ > rhs);
+        -:   98:}
+------------------
+_ZNK17ACE_Atomic_Op_GCCImEgtEm:
+    #####:   95:ACE_Atomic_Op_GCC<T>::operator> (T rhs) const
+        -:   96:{
+    #####:   97:  return (this->value_ > rhs);
+        -:   98:}
+------------------
+        -:   99:
+        -:  100:template <typename T>
+        -:  101:ACE_INLINE bool
+        -:  102:ACE_Atomic_Op_GCC<T>::operator<= (T rhs) const
+        -:  103:{
+        -:  104:  return (this->value_ <= rhs);
+        -:  105:}
+        -:  106:
+        -:  107:template <typename T>
+        -:  108:ACE_INLINE bool
+        -:  109:ACE_Atomic_Op_GCC<T>::operator< (T rhs) const
+        -:  110:{
+        -:  111:  return (this->value_ < rhs);
+        -:  112:}
+        -:  113:
+        -:  114:template <typename T>
+        -:  115:ACE_INLINE ACE_Atomic_Op_GCC<T> &
+        -:  116:ACE_Atomic_Op_GCC<T>::operator= (T rhs)
+        -:  117:{
+        -:  118:  (void) __sync_lock_test_and_set (&this->value_, rhs);
+        -:  119:  return *this;
+        -:  120:}
+        -:  121:
+        -:  122:template <typename T>
+        -:  123:ACE_INLINE ACE_Atomic_Op_GCC<T> &
+        -:  124:ACE_Atomic_Op_GCC<T>::operator= (
+        -:  125:   const ACE_Atomic_Op_GCC<T> &rhs)
+        -:  126:{
+        -:  127:  (void) __sync_lock_test_and_set (&this->value_, rhs.value_);
+        -:  128:  return *this;
+        -:  129:}
+        -:  130:
+        -:  131:template <typename T>
+        -:  132:ACE_INLINE T
+        -:  133:ACE_Atomic_Op_GCC<T>::exchange (T newval)
+        -:  134:{
+        -:  135:  return __sync_val_compare_and_swap (&this->value_, this->value_, newval);
+        -:  136:}
+        -:  137:
+        -:  138:template <typename T>
+        -:  139:ACE_INLINE T
+    #####:  140:ACE_Atomic_Op_GCC<T>::value (void) const
+        -:  141:{
+    #####:  142:  return this->value_;
+        -:  143:}
+        -:  144:
+        -:  145:template <typename T>
+        -:  146:ACE_INLINE volatile T &
+        -:  147:ACE_Atomic_Op_GCC<T>::value_i (void)
+        -:  148:{
+        -:  149:  return this->value_;
+        -:  150:}
+        -:  151:
+        -:  152:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  153:
+        -:  154:#endif /* ACE_HAS_GCC_ATOMIC_BUILTINS */

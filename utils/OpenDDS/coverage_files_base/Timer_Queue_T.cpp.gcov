@@ -1,0 +1,499 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Timer_Queue_T.cpp
+        -:    0:Programs:51
+        -:    1:// $Id$
+        -:    2:
+        -:    3:#ifndef ACE_TIMER_QUEUE_T_CPP
+        -:    4:#define ACE_TIMER_QUEUE_T_CPP
+        -:    5:
+        -:    6:#include "ace/config-all.h"
+        -:    7:
+        -:    8:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:    9:# pragma once
+        -:   10:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   11:
+        -:   12:/*
+        -:   13: * Hook to specialize to add includes
+        -:   14: */
+        -:   15://@@ REACTOR_SPL_INCLUDE_FORWARD_DECL_ADD_HOOK
+        -:   16:
+        -:   17:#include "ace/Timer_Queue_T.h"
+        -:   18:#include "ace/Guard_T.h"
+        -:   19:#include "ace/Reverse_Lock_T.h"
+        -:   20:#include "ace/Log_Category.h"
+        -:   21:#include "ace/Null_Mutex.h"
+        -:   22:#include "ace/OS_NS_sys_time.h"
+        -:   23:#include "ace/Functor.h"
+        -:   24:
+        -:   25:#if !defined (__ACE_INLINE__)
+        -:   26:#include "ace/Timer_Queue_T.inl"
+        -:   27:#endif /* __ACE_INLINE__ */
+        -:   28:
+        -:   29:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   30:
+        -:   31:// This fudge factor can be overriden for timers that need it, such as on
+        -:   32:// Solaris, by defining the ACE_TIMER_SKEW symbol in the appropriate config
+        -:   33:// header.
+        -:   34:#if !defined (ACE_TIMER_SKEW)
+        -:   35:#  define ACE_TIMER_SKEW 0
+        -:   36:#endif /* ACE_TIMER_SKEW */
+        -:   37:
+        -:   38:template <class TYPE, class FUNCTOR> ACE_INLINE
+    #####:   39:ACE_Timer_Queue_Upcall_Base<TYPE, FUNCTOR>::ACE_Timer_Queue_Upcall_Base (FUNCTOR * upcall_functor)
+        -:   40:  : ACE_Abstract_Timer_Queue<TYPE>()
+        -:   41:  , ACE_Copy_Disabled()
+        -:   42:  , upcall_functor_(upcall_functor)
+    #####:   43:  , delete_upcall_functor_ (upcall_functor == 0)
+        -:   44:{
+        -:   45:  ACE_TRACE ("ACE_Timer_Queue_Upcall_Base::ACE_Timer_Queue_Upcall_Base");
+        -:   46:
+    #####:   47:  if (upcall_functor != 0)
+        -:   48:    {
+    #####:   49:      return;
+        -:   50:    }
+        -:   51:
+    #####:   52:  ACE_NEW (upcall_functor_, FUNCTOR);
+        -:   53:}
+        -:   54:
+        -:   55:template <class TYPE, class FUNCTOR> ACE_INLINE
+    #####:   56:ACE_Timer_Queue_Upcall_Base<TYPE, FUNCTOR>::~ACE_Timer_Queue_Upcall_Base ()
+        -:   57:{
+        -:   58:  ACE_TRACE ("ACE_Timer_Queue_Upcall_Base::~ACE_Timer_Queue_Upcall_Base");
+    #####:   59:  if (this->delete_upcall_functor_)
+        -:   60:    {
+    #####:   61:      delete this->upcall_functor_;
+        -:   62:    }
+    #####:   63:}
+------------------
+_ZN27ACE_Timer_Queue_Upcall_BaseIP17ACE_Event_Handler39ACE_Event_Handler_Handle_Timeout_UpcallED0Ev:
+    #####:   56:ACE_Timer_Queue_Upcall_Base<TYPE, FUNCTOR>::~ACE_Timer_Queue_Upcall_Base ()
+        -:   57:{
+        -:   58:  ACE_TRACE ("ACE_Timer_Queue_Upcall_Base::~ACE_Timer_Queue_Upcall_Base");
+        -:   59:  if (this->delete_upcall_functor_)
+        -:   60:    {
+        -:   61:      delete this->upcall_functor_;
+        -:   62:    }
+    #####:   63:}
+------------------
+_ZN27ACE_Timer_Queue_Upcall_BaseIP17ACE_Event_Handler39ACE_Event_Handler_Handle_Timeout_UpcallED2Ev:
+    #####:   56:ACE_Timer_Queue_Upcall_Base<TYPE, FUNCTOR>::~ACE_Timer_Queue_Upcall_Base ()
+        -:   57:{
+        -:   58:  ACE_TRACE ("ACE_Timer_Queue_Upcall_Base::~ACE_Timer_Queue_Upcall_Base");
+    #####:   59:  if (this->delete_upcall_functor_)
+        -:   60:    {
+    #####:   61:      delete this->upcall_functor_;
+        -:   62:    }
+    #####:   63:}
+------------------
+        -:   64:
+        -:   65:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_Time_Value
+    #####:   66:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::gettimeofday()
+        -:   67:{
+    #####:   68:  return this->gettimeofday_static();
+        -:   69:}
+        -:   70:
+        -:   71:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> void
+    #####:   72:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::gettimeofday (ACE_Time_Value (*gettimeofday)(void))
+        -:   73:{
+    #####:   74:  this->time_policy_.set_gettimeofday (gettimeofday);
+    #####:   75:}
+        -:   76:
+        -:   77:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_Time_Value *
+    #####:   78:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::calculate_timeout (ACE_Time_Value *max_wait_time)
+        -:   79:{
+        -:   80:  ACE_TRACE ("ACE_Timer_Queue_T::calculate_timeout");
+    #####:   81:  ACE_MT (ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, max_wait_time));
+        -:   82:
+    #####:   83:  if (this->is_empty ())
+        -:   84:    // Nothing on the Timer_Queue, so use whatever the caller gave us.
+    #####:   85:    return max_wait_time;
+        -:   86:  else
+        -:   87:    {
+    #####:   88:      ACE_Time_Value const cur_time = this->gettimeofday_static ();
+        -:   89:
+    #####:   90:      if (this->earliest_time () > cur_time)
+        -:   91:        {
+        -:   92:          // The earliest item on the Timer_Queue is still in the
+        -:   93:          // future.  Therefore, use the smaller of (1) caller's wait
+        -:   94:          // time or (2) the delta time between now and the earliest
+        -:   95:          // time on the Timer_Queue.
+        -:   96:
+    #####:   97:          this->timeout_ = this->earliest_time () - cur_time;
+    #####:   98:          if (max_wait_time == 0 || *max_wait_time > timeout_)
+    #####:   99:            return &this->timeout_;
+        -:  100:          else
+    #####:  101:            return max_wait_time;
+        -:  102:        }
+        -:  103:      else
+        -:  104:        {
+        -:  105:          // The earliest item on the Timer_Queue is now in the past.
+        -:  106:          // Therefore, we've got to "poll" the Reactor, i.e., it must
+        -:  107:          // just check the descriptors and then dispatch timers, etc.
+    #####:  108:          this->timeout_ = ACE_Time_Value::zero;
+    #####:  109:          return &this->timeout_;
+        -:  110:        }
+        -:  111:    }
+        -:  112:}
+        -:  113:
+        -:  114:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_Time_Value *
+    #####:  115:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::calculate_timeout (ACE_Time_Value *max_wait_time,
+        -:  116:                                                               ACE_Time_Value *the_timeout)
+        -:  117:{
+        -:  118:  ACE_TRACE ("ACE_Timer_Queue_T::calculate_timeout");
+        -:  119:
+    #####:  120:  if (the_timeout == 0)
+    #####:  121:    return 0;
+        -:  122:
+    #####:  123:  ACE_MT (ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, max_wait_time));
+        -:  124:
+    #####:  125:  if (this->is_empty ())
+        -:  126:    {
+        -:  127:      // Nothing on the Timer_Queue, so use whatever the caller gave us.
+    #####:  128:      if (max_wait_time)
+    #####:  129:        *the_timeout = *max_wait_time;
+        -:  130:      else
+    #####:  131:        return 0;
+        -:  132:    }
+        -:  133:  else
+        -:  134:    {
+    #####:  135:      ACE_Time_Value cur_time = this->gettimeofday_static ();
+        -:  136:
+    #####:  137:      if (this->earliest_time () > cur_time)
+        -:  138:        {
+        -:  139:          // The earliest item on the Timer_Queue is still in the
+        -:  140:          // future.  Therefore, use the smaller of (1) caller's wait
+        -:  141:          // time or (2) the delta time between now and the earliest
+        -:  142:          // time on the Timer_Queue.
+        -:  143:
+    #####:  144:          *the_timeout = this->earliest_time () - cur_time;
+    #####:  145:          if (!(max_wait_time == 0 || *max_wait_time > *the_timeout))
+    #####:  146:            *the_timeout = *max_wait_time;
+        -:  147:        }
+        -:  148:      else
+        -:  149:        {
+        -:  150:          // The earliest item on the Timer_Queue is now in the past.
+        -:  151:          // Therefore, we've got to "poll" the Reactor, i.e., it must
+        -:  152:          // just check the descriptors and then dispatch timers, etc.
+    #####:  153:          *the_timeout = ACE_Time_Value::zero;
+        -:  154:        }
+        -:  155:    }
+    #####:  156:  return the_timeout;
+        -:  157:}
+        -:  158:
+        -:  159:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_Time_Value
+    #####:  160:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::current_time()
+        -:  161:{
+    #####:  162:  ACE_Time_Value tv = this->gettimeofday_static ();
+    #####:  163:  tv += this->timer_skew();
+    #####:  164:  return tv;
+        -:  165:}
+        -:  166:
+        -:  167:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> void
+    #####:  168:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::dump (void) const
+        -:  169:{
+        -:  170:#if defined (ACE_HAS_DUMP)
+        -:  171:  ACE_TRACE ("ACE_Timer_Queue_T::dump");
+        -:  172:  ACELIB_DEBUG ((LM_DEBUG, ACE_BEGIN_DUMP, this));
+        -:  173:  this->timeout_.dump ();
+        -:  174:  this->timer_skew_.dump ();
+        -:  175:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:  176:#endif /* ACE_HAS_DUMP */
+    #####:  177:}
+        -:  178:
+        -:  179:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY>
+    #####:  180:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::ACE_Timer_Queue_T (FUNCTOR *upcall_functor,
+        -:  181:                                          ACE_Free_List<ACE_Timer_Node_T <TYPE> > *freelist,
+        -:  182:                                          TIME_POLICY const & time_policy)
+        -:  183:  : ACE_Timer_Queue_Upcall_Base<TYPE,FUNCTOR>(upcall_functor),
+        -:  184:    time_policy_ (time_policy),
+    #####:  185:    delete_free_list_ (freelist == 0),
+    #####:  186:    timer_skew_ (0, ACE_TIMER_SKEW)
+        -:  187:{
+        -:  188:  ACE_TRACE ("ACE_Timer_Queue_T::ACE_Timer_Queue_T");
+        -:  189:
+    #####:  190:  if (!freelist)
+    #####:  191:    ACE_NEW (free_list_,
+        -:  192:             (ACE_Locked_Free_List<ACE_Timer_Node_T<TYPE>,ACE_Null_Mutex>));
+        -:  193:  else
+    #####:  194:    free_list_ = freelist;
+        -:  195:}
+        -:  196:
+        -:  197:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY>
+    #####:  198:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::~ACE_Timer_Queue_T (void)
+        -:  199:{
+        -:  200:  ACE_TRACE ("ACE_Timer_Queue_T::~ACE_Timer_Queue_T");
+        -:  201:
+        -:  202:  // Cleanup the free_list on the way out
+    #####:  203:  if (this->delete_free_list_)
+    #####:  204:    delete this->free_list_;
+    #####:  205:}
+------------------
+_ZN17ACE_Timer_Queue_TIP17ACE_Event_Handler39ACE_Event_Handler_Handle_Timeout_Upcall26ACE_Recursive_Thread_Mutex24ACE_FPointer_Time_PolicyED0Ev:
+    #####:  198:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::~ACE_Timer_Queue_T (void)
+        -:  199:{
+        -:  200:  ACE_TRACE ("ACE_Timer_Queue_T::~ACE_Timer_Queue_T");
+        -:  201:
+        -:  202:  // Cleanup the free_list on the way out
+        -:  203:  if (this->delete_free_list_)
+        -:  204:    delete this->free_list_;
+    #####:  205:}
+------------------
+_ZN17ACE_Timer_Queue_TIP17ACE_Event_Handler39ACE_Event_Handler_Handle_Timeout_Upcall26ACE_Recursive_Thread_Mutex24ACE_FPointer_Time_PolicyED2Ev:
+    #####:  198:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::~ACE_Timer_Queue_T (void)
+        -:  199:{
+        -:  200:  ACE_TRACE ("ACE_Timer_Queue_T::~ACE_Timer_Queue_T");
+        -:  201:
+        -:  202:  // Cleanup the free_list on the way out
+    #####:  203:  if (this->delete_free_list_)
+    #####:  204:    delete this->free_list_;
+    #####:  205:}
+------------------
+        -:  206:
+        -:  207:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_Timer_Node_T<TYPE> *
+    #####:  208:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::alloc_node (void)
+        -:  209:{
+    #####:  210:  return this->free_list_->remove ();
+        -:  211:}
+        -:  212:
+        -:  213:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> void
+    #####:  214:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::free_node (ACE_Timer_Node_T<TYPE> *node)
+        -:  215:{
+    #####:  216:  this->free_list_->add (node);
+    #####:  217:}
+        -:  218:
+        -:  219:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_LOCK &
+        -:  220:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::mutex (void)
+        -:  221:{
+        -:  222:  return this->mutex_;
+        -:  223:}
+        -:  224:
+        -:  225:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> long
+    #####:  226:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::schedule (const TYPE &type,
+        -:  227:                                                      const void *act,
+        -:  228:                                                      const ACE_Time_Value &future_time,
+        -:  229:                                                      const ACE_Time_Value &interval)
+        -:  230:{
+    #####:  231:  ACE_MT (ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, -1));
+        -:  232:
+        -:  233:  // Schedule the timer.
+    #####:  234:  long const result =
+        -:  235:    this->schedule_i (type,
+        -:  236:                      act,
+        -:  237:                      future_time,
+        -:  238:                      interval);
+        -:  239:
+        -:  240:  // Return on failure.
+    #####:  241:  if (result == -1)
+    #####:  242:    return result;
+        -:  243:
+        -:  244:  // Inform upcall functor of successful registration.
+    #####:  245:  this->upcall_functor ().registration (*this,
+        -:  246:                                        type,
+        -:  247:                                        act);
+        -:  248:
+        -:  249:  // Return result;
+    #####:  250:  return result;
+        -:  251:}
+        -:  252:
+        -:  253:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> int
+    #####:  254:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::expire (void)
+        -:  255:{
+        -:  256:  // We can't check here is the timer queue is empty, in some
+        -:  257:  // implementations (like the timer heap) calling is_empty()
+        -:  258:  // would at that moment access member variables without having
+        -:  259:  // locked ourself for thread safety
+    #####:  260:  return this->expire (this->gettimeofday_static () + timer_skew_);
+        -:  261:}
+        -:  262:
+        -:  263:// Run the <handle_timeout> method for all Timers whose values are <=
+        -:  264:// <cur_time>.
+        -:  265:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> int
+    #####:  266:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::expire (const ACE_Time_Value &cur_time)
+        -:  267:{
+        -:  268:  ACE_TRACE ("ACE_Timer_Queue_T::expire");
+    #####:  269:  ACE_MT (ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, -1));
+        -:  270:
+        -:  271:  // Keep looping while there are timers remaining and the earliest
+        -:  272:  // timer is <= the <cur_time> passed in to the method.
+        -:  273:
+    #####:  274:  if (this->is_empty ())
+    #####:  275:    return 0;
+        -:  276:
+    #####:  277:  int number_of_timers_expired = 0;
+    #####:  278:  int result = 0;
+        -:  279:
+        -:  280:  ACE_Timer_Node_Dispatch_Info_T<TYPE> info;
+        -:  281:
+    #####:  282:  while ((result = this->dispatch_info_i (cur_time, info)) != 0)
+        -:  283:    {
+    #####:  284:      ACE_MT (ACE_Reverse_Lock<ACE_LOCK> rev_lk(this->mutex_));
+    #####:  285:      ACE_MT (ACE_GUARD_RETURN (ACE_Reverse_Lock<ACE_LOCK>, rmon, rev_lk, -1));
+        -:  286:
+    #####:  287:      const void *upcall_act = 0;
+        -:  288:
+    #####:  289:      this->preinvoke (info, cur_time, upcall_act);
+        -:  290:
+    #####:  291:      this->upcall (info, cur_time);
+        -:  292:
+    #####:  293:      this->postinvoke (info, cur_time, upcall_act);
+        -:  294:
+    #####:  295:      ++number_of_timers_expired;
+        -:  296:
+        -:  297:    }
+        -:  298:
+        -:  299:  ACE_UNUSED_ARG (result);
+    #####:  300:  return number_of_timers_expired;
+        -:  301:}
+        -:  302:
+        -:  303:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> void
+    #####:  304:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::recompute_next_abs_interval_time
+        -:  305:    (ACE_Timer_Node_T<TYPE> *expired,
+        -:  306:     const ACE_Time_Value &cur_time)
+        -:  307:{
+    #####:  308:  if ( expired->get_timer_value () <= cur_time )
+        -:  309:    {
+        -:  310:      /*
+        -:  311:       * Somehow the current time is past when this time was
+        -:  312:       * supposed to expire (e.g., timer took too long,
+        -:  313:       * somebody changed system time, etc.).  There used to
+        -:  314:       * be a simple loop here that skipped ahead one timer
+        -:  315:       * interval at a time, but that was horribly inefficient
+        -:  316:       * (an O(n) algorithm) when the timer duration was small
+        -:  317:       * relative to the amount of time skipped.
+        -:  318:       *
+        -:  319:       * So, we replace the loop with a simple computation,
+        -:  320:       * which also happens to be O(1).  All times get
+        -:  321:       * normalized in the computation to microseconds.
+        -:  322:       *
+        -:  323:       * For reference, the loop looked like this:
+        -:  324:       *
+        -:  325:       *   do
+        -:  326:       *     expired->set_timer_value (expired->get_timer_value () +
+        -:  327:       *                               expired->get_interval ());
+        -:  328:       *   while (expired->get_timer_value () <= cur_time);
+        -:  329:       *
+        -:  330:       */
+        -:  331:
+        -:  332:      // Compute the duration of the timer's interval
+        -:  333:      ACE_UINT64 interval_usec;
+    #####:  334:      expired->get_interval ().to_usec (interval_usec);
+        -:  335:
+        -:  336:      // Compute the span between the current time and when
+        -:  337:      // the timer would have expired in the past (and
+        -:  338:      // normalize to microseconds).
+    #####:  339:      ACE_Time_Value old_diff = cur_time - expired->get_timer_value ();
+        -:  340:      ACE_UINT64 old_diff_usec;
+    #####:  341:      old_diff.to_usec (old_diff_usec);
+        -:  342:
+        -:  343:      // Compute the delta time in the future when the timer
+        -:  344:      // should fire as if it had advanced incrementally.  The
+        -:  345:      // modulo arithmetic accomodates the likely case that
+        -:  346:      // the current time doesn't fall precisely on a timer
+        -:  347:      // firing interval.
+    #####:  348:      ACE_UINT64 new_timer_usec =
+    #####:  349:        interval_usec - (old_diff_usec % interval_usec);
+        -:  350:
+        -:  351:      // Compute the absolute time in the future when this
+        -:  352:      // interval timer should expire.
+    #####:  353:      ACE_Time_Value new_timer_value
+    #####:  354:        (cur_time.sec ()
+    #####:  355:         + static_cast<time_t>(new_timer_usec / ACE_ONE_SECOND_IN_USECS),
+    #####:  356:         cur_time.usec ()
+    #####:  357:         + static_cast<suseconds_t>(new_timer_usec % ACE_ONE_SECOND_IN_USECS));
+        -:  358:
+    #####:  359:      expired->set_timer_value (new_timer_value);
+        -:  360:    }
+    #####:  361:}
+        -:  362:
+        -:  363:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> int
+    #####:  364:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::expire_single (
+        -:  365:    ACE_Command_Base & pre_dispatch_command)
+        -:  366:{
+        -:  367:  ACE_TRACE ("ACE_Timer_Queue_T::expire_single");
+        -:  368:  ACE_Timer_Node_Dispatch_Info_T<TYPE> info;
+    #####:  369:  ACE_Time_Value cur_time;
+        -:  370:  {
+        -:  371:    // Create a scope for the lock ...
+    #####:  372:    ACE_MT (ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, -1));
+        -:  373:
+    #####:  374:    if (this->is_empty ())
+    #####:  375:      return 0;
+        -:  376:
+        -:  377:    // Get the current time
+    #####:  378:    cur_time = this->gettimeofday_static () + this->timer_skew ();
+        -:  379:
+        -:  380:    // Look for a node in the timer queue whose timer <= the present
+        -:  381:    // time.
+    #####:  382:    if (!this->dispatch_info_i (cur_time, info))
+        -:  383:      {
+    #####:  384:        return 0;
+        -:  385:      }
+        -:  386:  }
+        -:  387:  // We do not need the lock anymore, all these operations take place
+        -:  388:  // with local variables.
+    #####:  389:  const void *upcall_act = 0;
+        -:  390:
+        -:  391:  // Preinvoke (handles refcount if needed, etc.)
+    #####:  392:  this->preinvoke (info, cur_time, upcall_act);
+        -:  393:
+        -:  394:  // Release the token before expiration upcall.
+    #####:  395:  pre_dispatch_command.execute();
+        -:  396:
+        -:  397:  // call the functor
+    #####:  398:  this->upcall (info, cur_time);
+        -:  399:
+        -:  400:  // Postinvoke (undo refcount if needed, etc.)
+    #####:  401:  this->postinvoke (info, cur_time, upcall_act);
+        -:  402:
+        -:  403:  // We have dispatched a timer
+    #####:  404:  return 1;
+        -:  405:}
+        -:  406:
+        -:  407:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> int
+    #####:  408:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::dispatch_info_i (const ACE_Time_Value &cur_time,
+        -:  409:                                                             ACE_Timer_Node_Dispatch_Info_T<TYPE> &info)
+        -:  410:{
+        -:  411:  ACE_TRACE ("ACE_Timer_Queue_T::dispatch_info_i");
+        -:  412:
+    #####:  413:  if (this->is_empty ())
+    #####:  414:    return 0;
+        -:  415:
+    #####:  416:  if (this->earliest_time () <= cur_time)
+        -:  417:    {
+    #####:  418:      ACE_Timer_Node_T<TYPE> *expired = this->remove_first ();
+        -:  419:
+        -:  420:      // Get the dispatch info
+    #####:  421:      expired->get_dispatch_info (info);
+        -:  422:
+        -:  423:      // Check if this is an interval timer.
+    #####:  424:      if (expired->get_interval () > ACE_Time_Value::zero)
+        -:  425:        {
+        -:  426:          // Make sure that we skip past values that have already
+        -:  427:          // "expired".
+    #####:  428:          this->recompute_next_abs_interval_time (expired, cur_time);
+        -:  429:
+        -:  430:          // Since this is an interval timer, we need to reschedule
+        -:  431:          // it.
+    #####:  432:          this->reschedule (expired);
+        -:  433:        }
+        -:  434:      else
+        -:  435:        {
+        -:  436:          // Call the factory method to free up the node.
+    #####:  437:          this->free_node (expired);
+        -:  438:        }
+        -:  439:
+    #####:  440:      return 1;
+        -:  441:    }
+        -:  442:
+    #####:  443:  return 0;
+        -:  444:}
+        -:  445:
+        -:  446:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> void
+    #####:  447:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::return_node (ACE_Timer_Node_T<TYPE> *node)
+        -:  448:{
+    #####:  449:  ACE_MT (ACE_GUARD (ACE_LOCK, ace_mon, this->mutex_));
+    #####:  450:  this->free_node (node);
+        -:  451:}
+        -:  452:
+        -:  453:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  454:
+        -:  455:#endif /* ACE_TIMER_QUEUE_T_CPP */

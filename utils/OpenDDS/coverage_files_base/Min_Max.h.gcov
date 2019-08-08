@@ -1,0 +1,72 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Min_Max.h
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file   Min_Max.h
+        -:    6: *
+        -:    7: *  $Id$
+        -:    8: *
+        -:    9: * Define an appropriate set of min()/max() functions using templates.
+        -:   10: *
+        -:   11: *
+        -:   12: *  @author Derek Dominish <Derek.Dominish@Australia.Boeing.com>
+        -:   13: */
+        -:   14://=============================================================================
+        -:   15:
+        -:   16:#ifndef ACE_MIN_MAX_H
+        -:   17:#define ACE_MIN_MAX_H
+        -:   18:#include /**/ "ace/pre.h"
+        -:   19:
+        -:   20:#include /**/ "ace/config-all.h"
+        -:   21:
+        -:   22:# if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   23:#   pragma once
+        -:   24:# endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   25:
+        -:   26:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   27:
+        -:   28:template <class T>
+        -:   29:inline const T &
+    #####:   30:ace_min (const T &t1, const T &t2)
+        -:   31:{
+    #####:   32:  return t2 > t1 ? t1 : t2;
+        -:   33:}
+        -:   34:
+        -:   35:template <class T>
+        -:   36:inline const T &
+     236*:   37:ace_max (const T &t1, const T &t2)
+        -:   38:{
+     236*:   39:  return t1 > t2 ? t1 : t2;
+        -:   40:}
+        -:   41:
+        -:   42:template <class T>
+        -:   43:inline const T &
+        -:   44:ace_min (const T &t1, const T &t2, const T &t3)
+        -:   45:{
+        -:   46:  return ace_min (ace_min (t1, t2), t3);
+        -:   47:}
+        -:   48:
+        -:   49:template <class T>
+        -:   50:inline const T &
+        -:   51:ace_max (const T &t1, const T &t2, const T &t3)
+        -:   52:{
+        -:   53:  return ace_max (ace_max (t1, t2), t3);
+        -:   54:}
+        -:   55:
+        -:   56:template <class T>
+        -:   57:inline const T &
+        -:   58:ace_range (const T &min, const T &max, const T &val)
+        -:   59:{
+        -:   60:  return ace_min (ace_max (min, val), max);
+        -:   61:}
+        -:   62:
+        -:   63:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:   64:
+        -:   65:# define ACE_MIN(a,b)     ace_min((a),(b))
+        -:   66:# define ACE_MAX(a,b)     ace_max((a),(b))
+        -:   67:# define ACE_RANGE(a,b,c) ace_range((a),(b),(c))
+        -:   68:
+        -:   69:#include /**/ "ace/post.h"
+        -:   70:#endif  /* ACE_MIN_MAX_H */

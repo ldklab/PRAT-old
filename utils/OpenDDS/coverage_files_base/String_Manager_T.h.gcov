@@ -1,0 +1,209 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Manager_T.h
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file    String_Manager_T.h
+        -:    6: *
+        -:    7: *  $Id$
+        -:    8: *
+        -:    9: *  @author Johnny Willemsen  <jwillemsen@remedy.nl>
+        -:   10: */
+        -:   11://=============================================================================
+        -:   12:
+        -:   13:#ifndef TAO_STRING_MANAGER_T
+        -:   14:#define TAO_STRING_MANAGER_T
+        -:   15:
+        -:   16:#include /**/ "ace/pre.h"
+        -:   17:
+        -:   18:#include /**/ "tao/TAO_Export.h"
+        -:   19:
+        -:   20:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   21:# pragma once
+        -:   22:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   23:
+        -:   24:#include "ace/OS_NS_string.h"
+        -:   25:#include "tao/Basic_Types.h"
+        -:   26:#include "tao/String_Traits_Base_T.h"
+        -:   27:
+        -:   28:#include <algorithm>
+        -:   29:
+        -:   30:/****************************************************************/
+        -:   31:
+        -:   32:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   33:
+        -:   34:namespace TAO
+        -:   35:{
+        -:   36:template <typename charT>
+        -:   37:class String_Manager_T
+        -:   38:{
+        -:   39:public:
+        -:   40:  typedef charT character_type;
+        -:   41:  typedef TAO::details::string_traits_base <charT> s_traits;
+        -:   42:
+        -:   43:  /// Default CTOR will initialize the underlying ptr_ to empty string.
+    #####:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
+        -:   45:  {
+    #####:   46:  }
+------------------
+_ZN3TAO16String_Manager_TIcEC2Ev:
+    #####:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
+        -:   45:  {
+    #####:   46:  }
+------------------
+_ZN3TAO16String_Manager_TIcEC2Ev:
+    #####:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
+        -:   45:  {
+    #####:   46:  }
+------------------
+        -:   47:
+        -:   48:  /// Copy constructor
+    #####:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
+    #####:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
+        -:   51:  {
+    #####:   52:  }
+------------------
+_ZN3TAO16String_Manager_TIcEC2ERKS1_:
+    #####:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
+    #####:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
+        -:   51:  {
+    #####:   52:  }
+------------------
+_ZN3TAO16String_Manager_TIcEC2ERKS1_:
+    #####:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
+    #####:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
+        -:   51:  {
+    #####:   52:  }
+------------------
+        -:   53:
+        -:   54:  /// Constructor from const char* makes a copy.
+        -:   55:  inline String_Manager_T (const character_type *s) :
+        -:   56:    ptr_ (s_traits::duplicate (s))
+        -:   57:  {
+        -:   58:  }
+        -:   59:
+        -:   60:  /// Destructor
+    #####:   61:  inline ~String_Manager_T (void) {
+    #####:   62:    s_traits::release (this->ptr_);
+    #####:   63:  }
+------------------
+_ZN3TAO16String_Manager_TIcED2Ev:
+    #####:   61:  inline ~String_Manager_T (void) {
+    #####:   62:    s_traits::release (this->ptr_);
+    #####:   63:  }
+------------------
+_ZN3TAO16String_Manager_TIcED2Ev:
+    #####:   61:  inline ~String_Manager_T (void) {
+    #####:   62:    s_traits::release (this->ptr_);
+    #####:   63:  }
+------------------
+        -:   64:
+        -:   65:  /// Assignment from another managed type
+    #####:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
+        -:   67:    // Strongly exception safe by means of copy and non-throwing swap
+        -:   68:    // technique.
+    #####:   69:    String_Manager_T <character_type> tmp (rhs);
+    #####:   70:    std::swap (this->ptr_, tmp.ptr_);
+    #####:   71:    return *this;
+        -:   72:  }
+------------------
+_ZN3TAO16String_Manager_TIcEaSERKS1_:
+    #####:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
+        -:   67:    // Strongly exception safe by means of copy and non-throwing swap
+        -:   68:    // technique.
+    #####:   69:    String_Manager_T <character_type> tmp (rhs);
+    #####:   70:    std::swap (this->ptr_, tmp.ptr_);
+    #####:   71:    return *this;
+        -:   72:  }
+------------------
+_ZN3TAO16String_Manager_TIcEaSERKS1_:
+    #####:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
+        -:   67:    // Strongly exception safe by means of copy and non-throwing swap
+        -:   68:    // technique.
+    #####:   69:    String_Manager_T <character_type> tmp (rhs);
+    #####:   70:    std::swap (this->ptr_, tmp.ptr_);
+    #####:   71:    return *this;
+        -:   72:  }
+------------------
+        -:   73:
+        -:   74:  /// Assignment from var type will make a copy
+        -:   75:  inline String_Manager_T &operator= (const typename s_traits::string_var& value) {
+        -:   76:    // Strongly exception safe by means of copy and non-throwing swap
+        -:   77:    // technique.
+        -:   78:    String_Manager_T <character_type> tmp (value.in ());
+        -:   79:    std::swap (this->ptr_, tmp.ptr_);
+        -:   80:    return *this;
+        -:   81:  }
+        -:   82:
+        -:   83:  /// Assignment from a constant * will make a copy
+        -:   84:  inline String_Manager_T &operator= (const character_type *p) {
+        -:   85:    // Strongly exception safe by means of copy and non-throwing swap
+        -:   86:    // technique.
+        -:   87:    String_Manager_T <character_type> tmp (p);
+        -:   88:    std::swap (this->ptr_, tmp.ptr_);
+        -:   89:    return *this;
+        -:   90:  }
+        -:   91:
+        -:   92:  /// Assignment from char* will not make a copy. The String_Manager_T will now
+        -:   93:  /// own the string.
+        -:   94:  inline String_Manager_T &operator= (character_type *p) {
+        -:   95:    s_traits::release (this->ptr_);
+        -:   96:    this->ptr_ = p;
+        -:   97:    return *this;
+        -:   98:  }
+        -:   99:
+        -:  100:  /// Cast (read-only)
+        -:  101:  inline operator const character_type*() const {
+        -:  102:    return this->ptr_;
+        -:  103:  }
+        -:  104:
+        -:  105:  /// For in parameter.
+    #####:  106:  inline const character_type *in (void) const {
+    #####:  107:    return this->ptr_;
+        -:  108:  }
+        -:  109:
+        -:  110:  /// For inout parameter.
+        -:  111:  inline character_type *&inout (void) {
+        -:  112:    return this->ptr_;
+        -:  113:  }
+        -:  114:
+        -:  115:  /// for out parameter.
+        -:  116:  inline character_type *&out (void) {
+        -:  117:    s_traits::release (this->ptr_);
+        -:  118:    this->ptr_ = 0;
+        -:  119:    return this->ptr_;
+        -:  120:  }
+        -:  121:
+        -:  122:  /// For string of return type.
+        -:  123:  inline character_type *_retn (void) {
+        -:  124:    character_type *temp = this->ptr_;
+        -:  125:    this->ptr_ = 0;
+        -:  126:    return temp;
+        -:  127:  }
+        -:  128:
+        -:  129:private:
+        -:  130:  /// The underlying string
+        -:  131:  character_type *ptr_;
+        -:  132:};
+        -:  133:
+        -:  134:  typedef TAO::String_Manager_T<CORBA::Char> String_Manager;
+        -:  135:  typedef TAO::String_Manager_T<CORBA::WChar> WString_Manager;
+        -:  136:}
+        -:  137:
+        -:  138:
+        -:  139:inline bool operator< (const TAO::String_Manager &lhs, const TAO::String_Manager &rhs)
+        -:  140:{
+        -:  141:  return ACE_OS::strcmp (lhs.in(), rhs.in ()) < 0;
+        -:  142:}
+        -:  143:
+        -:  144:
+        -:  145:inline bool operator< (const TAO::WString_Manager &lhs, const TAO::WString_Manager &rhs)
+        -:  146:{
+        -:  147:  return ACE_OS::strcmp (lhs.in(), rhs.in ()) < 0;
+        -:  148:}
+        -:  149:
+        -:  150:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  151:
+        -:  152:#include /**/ "ace/post.h"
+        -:  153:#endif /* TAO_STRING_MANAGER_T */

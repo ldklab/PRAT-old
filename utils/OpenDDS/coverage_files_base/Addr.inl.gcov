@@ -1,0 +1,59 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Addr.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:// Return the address of the address.
+        -:    6:
+        -:    7:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    8:
+        -:    9:ACE_INLINE bool
+        -:   10:ACE_Addr::operator == (const ACE_Addr &sap) const
+        -:   11:{
+        -:   12:  return (sap.addr_type_ == this->addr_type_ &&
+        -:   13:          sap.addr_size_ == this->addr_size_   );
+        -:   14:}
+        -:   15:
+        -:   16:ACE_INLINE bool
+        -:   17:ACE_Addr::operator != (const ACE_Addr &sap) const
+        -:   18:{
+        -:   19:  return (sap.addr_type_ != this->addr_type_ ||
+        -:   20:          sap.addr_size_ != this->addr_size_   );
+        -:   21:}
+        -:   22:
+        -:   23:/// Return the size of the address.
+        -:   24:ACE_INLINE int
+        -:   25:ACE_Addr::get_size (void) const
+        -:   26:{
+        -:   27:  return this->addr_size_;
+        -:   28:}
+        -:   29:
+        -:   30:/// Sets the size of the address.
+        -:   31:ACE_INLINE void
+        -:   32:ACE_Addr::set_size (int size)
+        -:   33:{
+        -:   34:  this->addr_size_ = size;
+        -:   35:}
+        -:   36:
+        -:   37:/// Return the type of the address.
+        -:   38:ACE_INLINE int
+    15383:   39:ACE_Addr::get_type (void) const
+        -:   40:{
+    15383:   41:  return this->addr_type_;
+        -:   42:}
+        -:   43:
+        -:   44:/// Set the type of the address.
+        -:   45:ACE_INLINE void
+        -:   46:ACE_Addr::set_type (int type)
+        -:   47:{
+        -:   48:  this->addr_type_ = type;
+        -:   49:}
+        -:   50:
+        -:   51:ACE_INLINE unsigned long
+        -:   52:ACE_Addr::hash (void) const
+        -:   53:{
+        -:   54:  return 0;
+        -:   55:}
+        -:   56:
+        -:   57:ACE_END_VERSIONED_NAMESPACE_DECL

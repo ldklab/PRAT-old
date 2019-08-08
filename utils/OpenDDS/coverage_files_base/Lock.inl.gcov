@@ -1,0 +1,25 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Lock.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:ACE_INLINE
+    #####:    8:ACE_Lock::ACE_Lock (void)
+        -:    9:{
+    #####:   10:}
+------------------
+_ZN8ACE_LockC2Ev:
+    #####:    8:ACE_Lock::ACE_Lock (void)
+        -:    9:{
+    #####:   10:}
+------------------
+_ZN8ACE_LockC2Ev:
+    #####:    8:ACE_Lock::ACE_Lock (void)
+        -:    9:{
+    #####:   10:}
+------------------
+        -:   11:
+        -:   12:ACE_END_VERSIONED_NAMESPACE_DECL

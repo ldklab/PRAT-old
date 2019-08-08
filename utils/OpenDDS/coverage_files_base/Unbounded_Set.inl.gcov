@@ -1,0 +1,51 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Unbounded_Set.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/Global_Macros.h"
+        -:    6:
+        -:    7:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    8:
+        -:    9:template <typename T> ACE_INLINE bool
+    #####:   10:ACE_Unbounded_Set_Default_Comparator<T>::operator () (const T  &lhs, const T &rhs) const
+        -:   11:{
+    #####:   12:  return lhs == rhs;
+        -:   13:}
+        -:   14:
+        -:   15:template<typename T>
+    #####:   16:ACE_Unbounded_Set_Iterator<T>::ACE_Unbounded_Set_Iterator (ACE_Unbounded_Set<T> &s,
+        -:   17:                                                           bool end)
+    #####:   18:  : base_type (s, end)
+        -:   19:{
+    #####:   20:}
+        -:   21:
+        -:   22:template<typename T>
+        -:   23:ACE_Unbounded_Set_Iterator<T>::ACE_Unbounded_Set_Iterator (const base_type & s)
+        -:   24:  : base_type  (s)
+        -:   25:{
+        -:   26:}
+        -:   27:
+        -:   28:template<typename T>
+        -:   29:ACE_Unbounded_Set_Const_Iterator<T>::
+        -:   30:ACE_Unbounded_Set_Const_Iterator (const ACE_Unbounded_Set<T> &s,
+        -:   31:                                  bool end)
+        -:   32:  : base_type (s, end)
+        -:   33:{
+        -:   34:}
+        -:   35:
+        -:   36:template<typename T>
+        -:   37:ACE_Unbounded_Set_Const_Iterator<T>::ACE_Unbounded_Set_Const_Iterator (const base_type & s)
+        -:   38:  : base_type  (s)
+        -:   39:{
+        -:   40:}
+        -:   41:
+        -:   42:template<typename T>
+    #####:   43:ACE_Unbounded_Set<T>::ACE_Unbounded_Set (ACE_Allocator *alloc)
+    #####:   44:  : ACE_Unbounded_Set_Ex<T, ACE_Unbounded_Set_Default_Comparator<T> > (alloc)
+        -:   45:{
+    #####:   46:}
+        -:   47:
+        -:   48:
+        -:   49:ACE_END_VERSIONED_NAMESPACE_DECL

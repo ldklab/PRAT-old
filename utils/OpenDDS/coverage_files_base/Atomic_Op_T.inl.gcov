@@ -1,0 +1,624 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Atomic_Op_T.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/Guard_T.h"
+        -:    6:
+        -:    7:#include <algorithm>
+        -:    8:
+        -:    9:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   10:
+        -:   11://
+        -:   12:// ACE_Atomic_Op_Ex inline functions
+        -:   13://
+        -:   14:
+        -:   15:template <class ACE_LOCK, class TYPE>
+        -:   16:ACE_INLINE TYPE
+        -:   17:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator++ (void)
+        -:   18:{
+        -:   19:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator++");
+        -:   20:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+        -:   21:  return ++this->value_;
+        -:   22:}
+        -:   23:
+        -:   24:template <class ACE_LOCK, class TYPE>
+        -:   25:ACE_INLINE TYPE
+        -:   26:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator+= (
+        -:   27:  typename ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::arg_type rhs)
+        -:   28:{
+        -:   29:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator+=");
+        -:   30:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+        -:   31:  return this->value_ += rhs;
+        -:   32:}
+        -:   33:
+        -:   34:template <class ACE_LOCK, class TYPE>
+        -:   35:ACE_INLINE TYPE
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+_ZN16ACE_Atomic_Op_ExI14ACE_Null_MutexlEmmEv:
+    #####:   36:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (void)
+        -:   37:{
+        -:   38:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+    #####:   39:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+    #####:   40:  return --this->value_;
+        -:   41:}
+------------------
+        -:   42:
+        -:   43:template <class ACE_LOCK, class TYPE>
+        -:   44:ACE_INLINE TYPE
+        -:   45:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-= (
+        -:   46:  typename ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::arg_type rhs)
+        -:   47:{
+        -:   48:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-=");
+        -:   49:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+        -:   50:  return this->value_ -= rhs;
+        -:   51:}
+        -:   52:
+        -:   53:template <class ACE_LOCK, class TYPE>
+        -:   54:ACE_INLINE
+        -:   55:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::ACE_Atomic_Op_Ex (
+        -:   56:  ACE_Atomic_Op_Ex<ACE_LOCK, TYPE> const & rhs)
+        -:   57:  : mutex_ (rhs.mutex_)
+        -:   58:  , value_ (rhs.value ())  // rhs.value() returns atomically
+        -:   59:{
+        -:   60:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::ACE_Atomic_Op_Ex");
+        -:   61:}
+        -:   62:
+        -:   63:template <class ACE_LOCK, class TYPE>
+        -:   64:ACE_INLINE TYPE
+        -:   65:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator++ (int)
+        -:   66:{
+        -:   67:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator++");
+        -:   68:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+        -:   69:  return this->value_++;
+        -:   70:}
+        -:   71:
+        -:   72:template <class ACE_LOCK, class TYPE>
+        -:   73:ACE_INLINE TYPE
+        -:   74:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator-- (int)
+        -:   75:{
+        -:   76:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator--");
+        -:   77:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+        -:   78:  return this->value_--;
+        -:   79:}
+        -:   80:
+        -:   81:template <class ACE_LOCK, class TYPE>
+        -:   82:ACE_INLINE bool
+        -:   83:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator== (
+        -:   84:  typename ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:   85:{
+        -:   86:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator==");
+        -:   87:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, false);
+        -:   88:  return this->value_ == rhs;
+        -:   89:}
+        -:   90:
+        -:   91:template <class ACE_LOCK, class TYPE>
+        -:   92:ACE_INLINE bool
+        -:   93:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator!= (
+        -:   94:  typename ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:   95:{
+        -:   96:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator!=");
+        -:   97:  return !(*this == rhs);
+        -:   98:}
+        -:   99:
+        -:  100:template <class ACE_LOCK, class TYPE>
+        -:  101:ACE_INLINE bool
+        -:  102:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator>= (
+        -:  103:  typename ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  104:{
+        -:  105:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator>=");
+        -:  106:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, false);
+        -:  107:  return this->value_ >= rhs;
+        -:  108:}
+        -:  109:
+        -:  110:template <class ACE_LOCK, class TYPE>
+        -:  111:ACE_INLINE bool
+        -:  112:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator> (
+        -:  113:  typename ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  114:{
+        -:  115:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator>");
+        -:  116:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, false);
+        -:  117:  return this->value_ > rhs;
+        -:  118:}
+        -:  119:
+        -:  120:template <class ACE_LOCK, class TYPE>
+        -:  121:ACE_INLINE bool
+        -:  122:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator<= (
+        -:  123:  typename ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  124:{
+        -:  125:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator<=");
+        -:  126:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, false);
+        -:  127:  return this->value_ <= rhs;
+        -:  128:}
+        -:  129:
+        -:  130:template <class ACE_LOCK, class TYPE>
+        -:  131:ACE_INLINE bool
+        -:  132:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator< (
+        -:  133:  typename ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  134:{
+        -:  135:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator<");
+        -:  136:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, false);
+        -:  137:  return this->value_ < rhs;
+        -:  138:}
+        -:  139:
+        -:  140:template <class ACE_LOCK, class TYPE>
+        -:  141:ACE_INLINE ACE_Atomic_Op_Ex<ACE_LOCK, TYPE> &
+        -:  142:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator= (
+        -:  143:  ACE_Atomic_Op_Ex<ACE_LOCK, TYPE> const & rhs)
+        -:  144:{
+        -:  145:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator=");
+        -:  146:
+        -:  147:  ACE_Atomic_Op_Ex<ACE_LOCK, TYPE> tmp (rhs);
+        -:  148:
+        -:  149:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, *this);
+        -:  150:  std::swap (this->value_, tmp.value_);
+        -:  151:
+        -:  152:  return *this;
+        -:  153:}
+        -:  154:
+        -:  155:template <class ACE_LOCK, class TYPE>
+        -:  156:ACE_INLINE TYPE
+        -:  157:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::exchange (TYPE newval)
+        -:  158:{
+        -:  159:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::exchange");
+        -:  160:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+        -:  161:  std::swap (this->value_, newval);
+        -:  162:  return newval;
+        -:  163:}
+        -:  164:
+        -:  165:template <class ACE_LOCK, class TYPE>
+        -:  166:ACE_INLINE TYPE
+        -:  167:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::value (void) const
+        -:  168:{
+        -:  169:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::value");
+        -:  170:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, this->value_);
+        -:  171:  return this->value_;
+        -:  172:}
+        -:  173:
+        -:  174:template <class ACE_LOCK, class TYPE>
+        -:  175:ACE_INLINE TYPE &
+        -:  176:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::value_i (void)
+        -:  177:{
+        -:  178:  // Explicitly return <value_> (by reference).  This gives the user
+        -:  179:  // full, unrestricted access to the underlying value.  This method
+        -:  180:  // will usually be used in conjunction with explicit access to the
+        -:  181:  // lock.  Use with care ;-)
+        -:  182:  return this->value_;
+        -:  183:}
+        -:  184:
+        -:  185:template <class ACE_LOCK, class TYPE>
+        -:  186:ACE_INLINE ACE_Atomic_Op_Ex<ACE_LOCK, TYPE> &
+        -:  187:ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator= (
+        -:  188:  typename ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::arg_type rhs)
+        -:  189:{
+        -:  190:  // ACE_TRACE ("ACE_Atomic_Op_Ex<ACE_LOCK, TYPE>::operator=");
+        -:  191:  ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, *this);
+        -:  192:  this->value_ = rhs;
+        -:  193:  return *this;
+        -:  194:}
+        -:  195:
+        -:  196://
+        -:  197:// ACE_Atomic_Op inline functions
+        -:  198://
+        -:  199:
+        -:  200:template <class ACE_LOCK, class TYPE> ACE_INLINE
+        -:  201:ACE_Atomic_Op<ACE_LOCK, TYPE>::ACE_Atomic_Op (
+        -:  202:  ACE_Atomic_Op<ACE_LOCK, TYPE> const & rhs)
+        -:  203:  : impl_ (own_mutex_, rhs.value ())
+        -:  204:{
+        -:  205:  // ACE_TRACE ("ACE_Atomic_Op<ACE_LOCK, TYPE>::ACE_Atomic_Op");
+        -:  206:}
+        -:  207:
+        -:  208:
+        -:  209:template <class ACE_LOCK, class TYPE>
+        -:  210:ACE_INLINE ACE_Atomic_Op<ACE_LOCK, TYPE> &
+        -:  211:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator= (
+        -:  212:  typename ACE_Atomic_Op<ACE_LOCK, TYPE>::arg_type i)
+        -:  213:{
+        -:  214:  this->impl_ = i;
+        -:  215:  return *this;
+        -:  216:}
+        -:  217:
+        -:  218:template <class ACE_LOCK, class TYPE>
+        -:  219:ACE_INLINE ACE_Atomic_Op<ACE_LOCK, TYPE> &
+        -:  220:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator= (
+        -:  221:  ACE_Atomic_Op<ACE_LOCK, TYPE> const & rhs)
+        -:  222:{
+        -:  223:  this->impl_ = rhs.impl_;
+        -:  224:  return *this;
+        -:  225:}
+        -:  226:
+        -:  227:template <class ACE_LOCK, class TYPE>
+        -:  228:ACE_INLINE TYPE
+        -:  229:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator++ (void)
+        -:  230:{
+        -:  231:  return ++this->impl_;
+        -:  232:}
+        -:  233:
+        -:  234:template <class ACE_LOCK, class TYPE>
+        -:  235:ACE_INLINE TYPE
+        -:  236:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator++ (int)
+        -:  237:{
+        -:  238:  return this->impl_++;
+        -:  239:}
+        -:  240:
+        -:  241:template <class ACE_LOCK, class TYPE>
+        -:  242:ACE_INLINE TYPE
+        -:  243:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator+= (
+        -:  244:  typename ACE_Atomic_Op<ACE_LOCK, TYPE>::arg_type rhs)
+        -:  245:{
+        -:  246:  return this->impl_ += rhs;
+        -:  247:}
+        -:  248:
+        -:  249:template <class ACE_LOCK, class TYPE>
+        -:  250:ACE_INLINE TYPE
+    #####:  251:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator-- (void)
+        -:  252:{
+    #####:  253:  return --this->impl_;
+        -:  254:}
+        -:  255:
+        -:  256:template <class ACE_LOCK, class TYPE>
+        -:  257:ACE_INLINE TYPE
+        -:  258:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator-- (int)
+        -:  259:{
+        -:  260:  return this->impl_--;
+        -:  261:}
+        -:  262:
+        -:  263:template <class ACE_LOCK, class TYPE>
+        -:  264:ACE_INLINE TYPE
+        -:  265:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator-= (
+        -:  266:  typename ACE_Atomic_Op<ACE_LOCK, TYPE>::arg_type rhs)
+        -:  267:{
+        -:  268:  return this->impl_ -= rhs;
+        -:  269:}
+        -:  270:
+        -:  271:template <class ACE_LOCK, class TYPE>
+        -:  272:ACE_INLINE bool
+        -:  273:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator== (
+        -:  274:  typename ACE_Atomic_Op<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  275:{
+        -:  276:  return this->impl_ == rhs;
+        -:  277:}
+        -:  278:
+        -:  279:template <class ACE_LOCK, class TYPE>
+        -:  280:ACE_INLINE bool
+        -:  281:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator!= (
+        -:  282:  typename ACE_Atomic_Op<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  283:{
+        -:  284:  return this->impl_ != rhs;
+        -:  285:}
+        -:  286:
+        -:  287:template <class ACE_LOCK, class TYPE>
+        -:  288:ACE_INLINE bool
+        -:  289:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator>= (
+        -:  290:  typename ACE_Atomic_Op<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  291:{
+        -:  292:  return this->impl_ >= rhs;
+        -:  293:}
+        -:  294:
+        -:  295:template <class ACE_LOCK, class TYPE>
+        -:  296:ACE_INLINE bool
+        -:  297:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator> (
+        -:  298:  typename ACE_Atomic_Op<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  299:{
+        -:  300:  return this->impl_ > rhs;
+        -:  301:}
+        -:  302:
+        -:  303:template <class ACE_LOCK, class TYPE>
+        -:  304:ACE_INLINE bool
+        -:  305:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator<= (
+        -:  306:  typename ACE_Atomic_Op<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  307:{
+        -:  308:  return this->impl_ <= rhs;
+        -:  309:}
+        -:  310:
+        -:  311:template <class ACE_LOCK, class TYPE>
+        -:  312:ACE_INLINE bool
+        -:  313:ACE_Atomic_Op<ACE_LOCK, TYPE>::operator< (
+        -:  314:  typename ACE_Atomic_Op<ACE_LOCK, TYPE>::arg_type rhs) const
+        -:  315:{
+        -:  316:  return this->impl_ < rhs;
+        -:  317:}
+        -:  318:
+        -:  319:template <class ACE_LOCK, class TYPE>
+        -:  320:ACE_INLINE TYPE
+        -:  321:ACE_Atomic_Op<ACE_LOCK, TYPE>::exchange (TYPE newval)
+        -:  322:{
+        -:  323:  return this->impl_.exchange (newval);
+        -:  324:}
+        -:  325:
+        -:  326:template <class ACE_LOCK, class TYPE>
+        -:  327:ACE_INLINE TYPE
+        -:  328:ACE_Atomic_Op<ACE_LOCK, TYPE>::value (void) const
+        -:  329:{
+        -:  330:  return this->impl_.value ();
+        -:  331:}
+        -:  332:
+        -:  333:template <class ACE_LOCK, class TYPE>
+        -:  334:ACE_INLINE void
+        -:  335:ACE_Atomic_Op<ACE_LOCK, TYPE>::dump (void) const
+        -:  336:{
+        -:  337:#if defined (ACE_HAS_DUMP)
+        -:  338:  this->impl_.dump ();
+        -:  339:#endif /* ACE_HAS_DUMP */
+        -:  340:  return;
+        -:  341:}
+        -:  342:template <class ACE_LOCK, class TYPE>
+        -:  343:ACE_INLINE TYPE &
+        -:  344:ACE_Atomic_Op<ACE_LOCK, TYPE>::value_i (void)
+        -:  345:{
+        -:  346:  return this->impl_.value_i ();
+        -:  347:}
+        -:  348:
+        -:  349:ACE_END_VERSIONED_NAMESPACE_DECL

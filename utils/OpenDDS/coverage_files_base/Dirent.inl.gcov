@@ -1,0 +1,101 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Dirent.inl
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/Log_Category.h"
+        -:    6:
+        -:    7:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    8:
+        -:    9:ACE_INLINE int
+    #####:   10:ACE_Dirent::open (const ACE_TCHAR *dirname)
+        -:   11:{
+        -:   12:  // If the directory stream is already open, close it to prevent
+        -:   13:  // possible resource leaks.
+        -:   14:
+    #####:   15:  if (this->dirp_ != 0)
+        -:   16:    {
+    #####:   17:      ACE_OS::closedir (this->dirp_);
+    #####:   18:      this->dirp_ = 0;
+        -:   19:    }
+        -:   20:
+    #####:   21:  this->dirp_ = ACE_OS::opendir (dirname);
+        -:   22:
+    #####:   23:  if (this->dirp_ == 0)
+    #####:   24:    return -1;
+        -:   25:  else
+    #####:   26:    return 0;
+        -:   27:}
+        -:   28:
+        -:   29:ACE_INLINE
+    #####:   30:ACE_Dirent::ACE_Dirent (void)
+    #####:   31:  : dirp_ (0)
+        -:   32:{
+    #####:   33:}
+        -:   34:
+        -:   35:ACE_INLINE
+    #####:   36:ACE_Dirent::ACE_Dirent (const ACE_TCHAR *dirname)
+    #####:   37:  : dirp_ (0)
+        -:   38:{
+    #####:   39:  if (this->open (dirname) == -1)
+    #####:   40:    ACELIB_ERROR ((LM_ERROR,
+        -:   41:                ACE_TEXT ("%p\n"),
+        -:   42:                ACE_TEXT ("ACE_Dirent::ACE_Dirent")));
+    #####:   43:}
+        -:   44:
+        -:   45:ACE_INLINE
+    #####:   46:ACE_Dirent::~ACE_Dirent (void)
+        -:   47:{
+    #####:   48:  if (this->dirp_ != 0)
+    #####:   49:    ACE_OS::closedir (this->dirp_);
+    #####:   50:}
+        -:   51:
+        -:   52:ACE_INLINE ACE_DIRENT *
+    #####:   53:ACE_Dirent::read (void)
+        -:   54:{
+    #####:   55:  return this->dirp_ ? ACE_OS::readdir (this->dirp_) : 0;
+        -:   56:}
+        -:   57:
+        -:   58:ACE_INLINE int
+        -:   59:ACE_Dirent::read (struct ACE_DIRENT *entry,
+        -:   60:                  struct ACE_DIRENT **result)
+        -:   61:{
+        -:   62:  return this->dirp_
+        -:   63:         ? ACE_OS::readdir_r (this->dirp_, entry, result)
+        -:   64:         : 0;
+        -:   65:}
+        -:   66:
+        -:   67:ACE_INLINE void
+        -:   68:ACE_Dirent::close (void)
+        -:   69:{
+        -:   70:  if (this->dirp_ != 0)
+        -:   71:    {
+        -:   72:      ACE_OS::closedir (this->dirp_);
+        -:   73:
+        -:   74:      // Prevent double closure
+        -:   75:      this->dirp_ = 0;
+        -:   76:    }
+        -:   77:}
+        -:   78:
+        -:   79:ACE_INLINE void
+        -:   80:ACE_Dirent::rewind (void)
+        -:   81:{
+        -:   82:  if (this->dirp_)
+        -:   83:    ACE_OS::rewinddir (this->dirp_);
+        -:   84:}
+        -:   85:
+        -:   86:ACE_INLINE void
+        -:   87:ACE_Dirent::seek (long loc)
+        -:   88:{
+        -:   89:  if (this->dirp_)
+        -:   90:    ACE_OS::seekdir (this->dirp_, loc);
+        -:   91:}
+        -:   92:
+        -:   93:ACE_INLINE long
+        -:   94:ACE_Dirent::tell (void)
+        -:   95:{
+        -:   96:  return this->dirp_ ? ACE_OS::telldir (this->dirp_) : 0;
+        -:   97:}
+        -:   98:
+        -:   99:ACE_END_VERSIONED_NAMESPACE_DECL

@@ -1,0 +1,90 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Traits_T.h
+        -:    0:Programs:51
+        -:    1:#ifndef guard_string_traits_hpp
+        -:    2:#define guard_string_traits_hpp
+        -:    3:/**
+        -:    4: * @file
+        -:    5: *
+        -:    6: * @brief Implement the element manipulation traits for string types.
+        -:    7: *
+        -:    8: * $Id$
+        -:    9: *
+        -:   10: * @author Carlos O'Ryan
+        -:   11: */
+        -:   12:
+        -:   13:#include "String_Traits_Base_T.h"
+        -:   14:#include "ace/OS_NS_string.h"
+        -:   15:
+        -:   16:#include <algorithm>
+        -:   17:#include <functional>
+        -:   18:
+        -:   19:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   20:
+        -:   21:namespace TAO
+        -:   22:{
+        -:   23:namespace details
+        -:   24:{
+        -:   25:
+        -:   26:template<typename char_type, class derived>
+        -:   27:struct string_traits_decorator
+        -:   28:{
+        -:   29:  typedef char_type * value_type;
+        -:   30:  typedef char_type const * const_value_type;
+        -:   31:
+    #####:   32:  inline static void zero_range(
+        -:   33:      char_type ** begin, char_type ** end)
+        -:   34:  {
+    #####:   35:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (char_type*));
+    #####:   36:  }
+        -:   37:
+    #####:   38:  inline static void initialize_range(
+        -:   39:      char_type ** begin, char_type ** end)
+        -:   40:  {
+    #####:   41:    std::generate(begin, end, &derived::default_initializer);
+    #####:   42:  }
+        -:   43:
+        -:   44:  // Allow MSVC++ >= 8 checked iterators to be used.
+        -:   45:  template <typename iter>
+    #####:   46:  inline static void copy_range(
+        -:   47:      char_type ** begin, char_type ** end, iter dst)
+        -:   48:  {
+    #####:   49:    std::transform(begin, end, dst, &derived::duplicate);
+    #####:   50:  }
+        -:   51:
+        -:   52:  // Allow MSVC++ >= 8 checked iterators to be used.
+        -:   53:  template <typename iter>
+        -:   54:  inline static void copy_swap_range(
+        -:   55:      char_type ** begin, char_type ** end, iter dst)
+        -:   56:  {
+        -:   57:    std::swap_ranges(begin, end, dst);
+        -:   58:  }
+        -:   59:
+    #####:   60:  inline static void release_range(
+        -:   61:      char_type ** begin, char_type ** end)
+        -:   62:  {
+    #####:   63:    std::for_each(begin, end, &derived::release);
+    #####:   64:  }
+        -:   65:
+        -:   66:  inline static char_type const * initialize_if_zero(char_type * & element)
+        -:   67:  {
+        -:   68:    if (element == 0)
+        -:   69:    {
+        -:   70:      element = derived::default_initializer();
+        -:   71:    }
+        -:   72:    return element;
+        -:   73:  }
+        -:   74:};
+        -:   75:
+        -:   76:template<class charT, bool dummy>
+        -:   77:struct string_traits
+        -:   78:  : public string_traits_base<charT>
+        -:   79:  , public string_traits_decorator<charT,string_traits<charT,dummy> >
+        -:   80:{
+        -:   81:};
+        -:   82:
+        -:   83:} // namespace details
+        -:   84:} // namespace CORBA
+        -:   85:
+        -:   86:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:   87:
+        -:   88:#endif // guard_string_traits_hpp

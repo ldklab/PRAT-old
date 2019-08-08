@@ -1,0 +1,171 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Traits_Base_T.h
+        -:    0:Programs:51
+        -:    1:#ifndef guard_string_traits_base_hpp
+        -:    2:#define guard_string_traits_base_hpp
+        -:    3:/**
+        -:    4: * @file
+        -:    5: *
+        -:    6: * @brief Isolate the string_traits from the accidental differences
+        -:    7: * between wstring and string.
+        -:    8: *
+        -:    9: * $Id$
+        -:   10: *
+        -:   11: * @author Carlos O'Ryan
+        -:   12: */
+        -:   13:
+        -:   14:#include "tao/String_Alloc.h"
+        -:   15:#include "ace/CDR_Stream.h"
+        -:   16:
+        -:   17:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   18:
+        -:   19:namespace TAO
+        -:   20:{
+        -:   21:template<typename charT>
+        -:   22:class String_Manager_T;
+        -:   23:
+        -:   24:template<typename charT>
+        -:   25:class String_var;
+        -:   26:
+        -:   27:template<typename charT>
+        -:   28:class String_out;
+        -:   29:
+        -:   30:namespace details
+        -:   31:{
+        -:   32:
+        -:   33:template<typename charT>
+        -:   34:struct string_traits_base
+        -:   35:{
+        -:   36:};
+        -:   37:
+        -:   38:template<>
+        -:   39:struct string_traits_base<char>
+        -:   40:{
+        -:   41:  typedef char char_type;
+        -:   42:  typedef TAO::String_var <char_type> string_var;
+        -:   43:  typedef TAO::String_out <char_type> string_out;
+        -:   44:  typedef TAO::String_Manager_T <char_type> string_mgr;
+        -:   45:  typedef ACE_InputCDR::to_string to_type;
+        -:   46:  typedef ACE_OutputCDR::from_string from_type;
+        -:   47:
+    #####:   48:  inline static char_type * default_initializer()
+        -:   49:  {
+    #####:   50:    return CORBA::string_dup("");
+        -:   51:  }
+------------------
+_ZN3TAO7details18string_traits_baseIcE19default_initializerEv:
+    #####:   48:  inline static char_type * default_initializer()
+        -:   49:  {
+    #####:   50:    return CORBA::string_dup("");
+        -:   51:  }
+------------------
+_ZN3TAO7details18string_traits_baseIcE19default_initializerEv:
+    #####:   48:  inline static char_type * default_initializer()
+        -:   49:  {
+    #####:   50:    return CORBA::string_dup("");
+        -:   51:  }
+------------------
+_ZN3TAO7details18string_traits_baseIcE19default_initializerEv:
+    #####:   48:  inline static char_type * default_initializer()
+        -:   49:  {
+    #####:   50:    return CORBA::string_dup("");
+        -:   51:  }
+------------------
+        -:   52:
+    #####:   53:  inline static char_type * duplicate(char_type const * s)
+        -:   54:  {
+    #####:   55:    return CORBA::string_dup(s);
+        -:   56:  }
+------------------
+_ZN3TAO7details18string_traits_baseIcE9duplicateEPKc:
+    #####:   53:  inline static char_type * duplicate(char_type const * s)
+        -:   54:  {
+    #####:   55:    return CORBA::string_dup(s);
+        -:   56:  }
+------------------
+_ZN3TAO7details18string_traits_baseIcE9duplicateEPKc:
+    #####:   53:  inline static char_type * duplicate(char_type const * s)
+        -:   54:  {
+    #####:   55:    return CORBA::string_dup(s);
+        -:   56:  }
+------------------
+_ZN3TAO7details18string_traits_baseIcE9duplicateEPKc:
+    #####:   53:  inline static char_type * duplicate(char_type const * s)
+        -:   54:  {
+    #####:   55:    return CORBA::string_dup(s);
+        -:   56:  }
+------------------
+        -:   57:
+    #####:   58:  inline static void release(char_type * s)
+        -:   59:  {
+    #####:   60:    CORBA::string_free(s);
+    #####:   61:  }
+------------------
+_ZN3TAO7details18string_traits_baseIcE7releaseEPc:
+    #####:   58:  inline static void release(char_type * s)
+        -:   59:  {
+    #####:   60:    CORBA::string_free(s);
+    #####:   61:  }
+------------------
+_ZN3TAO7details18string_traits_baseIcE7releaseEPc:
+    #####:   58:  inline static void release(char_type * s)
+        -:   59:  {
+    #####:   60:    CORBA::string_free(s);
+    #####:   61:  }
+------------------
+_ZN3TAO7details18string_traits_baseIcE7releaseEPc:
+    #####:   58:  inline static void release(char_type * s)
+        -:   59:  {
+    #####:   60:    CORBA::string_free(s);
+    #####:   61:  }
+------------------
+        -:   62:
+        -:   63:  inline static char_type * allocate (CORBA::ULong len)
+        -:   64:  {
+        -:   65:    return CORBA::string_alloc (len);
+        -:   66:  }
+        -:   67:};
+        -:   68:
+        -:   69:template<>
+        -:   70:struct string_traits_base<CORBA::WChar>
+        -:   71:{
+        -:   72:  typedef CORBA::WChar char_type;
+        -:   73:  typedef TAO::String_var <char_type> string_var;
+        -:   74:  typedef TAO::String_out <char_type> string_out;
+        -:   75:  typedef TAO::String_Manager_T <char_type> string_mgr;
+        -:   76:  typedef ACE_InputCDR::to_wstring to_type;
+        -:   77:  typedef ACE_OutputCDR::from_wstring from_type;
+        -:   78:
+        -:   79:  inline static char_type * default_initializer()
+        -:   80:  {
+        -:   81:#if defined(ACE_HAS_WCHAR) || defined(ACE_HAS_XPG4_MULTIBYTE_CHAR)
+        -:   82:    return CORBA::wstring_dup(L"");
+        -:   83:#else
+        -:   84://#warning "platform not configured with native wchar_t support"
+        -:   85://    static CORBA::WChar empty[] = { 0 };
+        -:   86:    CORBA::WChar empty[] = { 0 };
+        -:   87:    return CORBA::wstring_dup(empty);
+        -:   88:#endif /* 0 */
+        -:   89:  }
+        -:   90:
+        -:   91:  inline static char_type * duplicate(char_type const * s)
+        -:   92:  {
+        -:   93:    return CORBA::wstring_dup(s);
+        -:   94:  }
+        -:   95:
+        -:   96:  inline static void release(char_type * s)
+        -:   97:  {
+        -:   98:    CORBA::wstring_free(s);
+        -:   99:  }
+        -:  100:
+        -:  101:  inline static char_type * allocate (CORBA::ULong len)
+        -:  102:  {
+        -:  103:    return CORBA::wstring_alloc (len);
+        -:  104:  }
+        -:  105:};
+        -:  106:
+        -:  107:} // namespace details
+        -:  108:} // namespace TAO
+        -:  109:
+        -:  110:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  111:
+        -:  112:#endif // guard_string_traits_base_hpp

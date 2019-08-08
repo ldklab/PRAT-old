@@ -1,0 +1,273 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/OS_NS_signal.h
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file   OS_NS_signal.h
+        -:    6: *
+        -:    7: *  $Id$
+        -:    8: *
+        -:    9: *  @author Douglas C. Schmidt <schmidt@cs.wustl.edu>
+        -:   10: *  @author Jesper S. M|ller<stophph@diku.dk>
+        -:   11: *  @author and a cast of thousands...
+        -:   12: *
+        -:   13: *  Originally in OS.h.
+        -:   14: */
+        -:   15://=============================================================================
+        -:   16:
+        -:   17:#ifndef ACE_OS_NS_SIGNAL_H
+        -:   18:# define ACE_OS_NS_SIGNAL_H
+        -:   19:
+        -:   20:# include /**/ "ace/pre.h"
+        -:   21:
+        -:   22:# include "ace/config-lite.h"
+        -:   23:
+        -:   24:# if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   25:#  pragma once
+        -:   26:# endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   27:
+        -:   28:#include "ace/os_include/os_signal.h"
+        -:   29:#include /**/ "ace/ACE_export.h"
+        -:   30:
+        -:   31:#if defined (ACE_EXPORT_MACRO)
+        -:   32:#  undef ACE_EXPORT_MACRO
+        -:   33:#endif
+        -:   34:#define ACE_EXPORT_MACRO ACE_Export
+        -:   35:
+        -:   36:#if defined (__Lynx__) || defined (__OpenBSD__)
+        -:   37:// LynxOS and OpenBSD define pthread_sigmask() in pthread.h
+        -:   38:# include "ace/os_include/os_pthread.h"
+        -:   39:#endif /* __Lynx__ || OpenBSD */
+        -:   40:
+        -:   41:/*
+        -:   42: * We inline and undef some functions that may be implemented
+        -:   43: * as macros on some platforms. This way macro definitions will
+        -:   44: * be usable later as there is no way to save the macro definition
+        -:   45: * using the pre-processor.
+        -:   46: *
+        -:   47: */
+        -:   48:
+        -:   49:#if !defined (ACE_LACKS_SIGSET)
+    #####:   50:inline int ace_sigemptyset_helper (sigset_t *s)
+        -:   51:{
+        -:   52:#  if defined (sigemptyset)
+        -:   53:  return sigemptyset (s);
+        -:   54:#  undef sigemptyset
+        -:   55:#  else
+    #####:   56:  return ACE_STD_NAMESPACE::sigemptyset (s);
+        -:   57:#  endif /* defined (sigemptyset) */
+        -:   58:}
+        -:   59:
+    #####:   60:inline int ace_sigfillset_helper (sigset_t *s)
+        -:   61:{
+        -:   62:#  if defined (sigfillset)
+        -:   63:  return sigfillset (s);
+        -:   64:#  undef sigfillset
+        -:   65:#  else
+    #####:   66:  return ACE_STD_NAMESPACE::sigfillset (s);
+        -:   67:#  endif /* defined (sigfillset) */
+        -:   68:}
+------------------
+_Z21ace_sigfillset_helperP10__sigset_t:
+    #####:   60:inline int ace_sigfillset_helper (sigset_t *s)
+        -:   61:{
+        -:   62:#  if defined (sigfillset)
+        -:   63:  return sigfillset (s);
+        -:   64:#  undef sigfillset
+        -:   65:#  else
+    #####:   66:  return ACE_STD_NAMESPACE::sigfillset (s);
+        -:   67:#  endif /* defined (sigfillset) */
+        -:   68:}
+------------------
+_Z21ace_sigfillset_helperP10__sigset_t:
+    #####:   60:inline int ace_sigfillset_helper (sigset_t *s)
+        -:   61:{
+        -:   62:#  if defined (sigfillset)
+        -:   63:  return sigfillset (s);
+        -:   64:#  undef sigfillset
+        -:   65:#  else
+    #####:   66:  return ACE_STD_NAMESPACE::sigfillset (s);
+        -:   67:#  endif /* defined (sigfillset) */
+        -:   68:}
+------------------
+_Z21ace_sigfillset_helperP10__sigset_t:
+    #####:   60:inline int ace_sigfillset_helper (sigset_t *s)
+        -:   61:{
+        -:   62:#  if defined (sigfillset)
+        -:   63:  return sigfillset (s);
+        -:   64:#  undef sigfillset
+        -:   65:#  else
+    #####:   66:  return ACE_STD_NAMESPACE::sigfillset (s);
+        -:   67:#  endif /* defined (sigfillset) */
+        -:   68:}
+------------------
+        -:   69:
+        -:   70:inline int ace_sigaddset_helper (sigset_t *s, int signum)
+        -:   71:{
+        -:   72:#  if defined (sigaddset)
+        -:   73:  return sigaddset (s, signum);
+        -:   74:#  undef sigaddset
+        -:   75:#  else
+        -:   76:  return ACE_STD_NAMESPACE::sigaddset (s, signum);
+        -:   77:#  endif /* defined (sigaddset) */
+        -:   78:}
+        -:   79:
+        -:   80:inline int ace_sigdelset_helper (sigset_t *s, int signum)
+        -:   81:{
+        -:   82:#  if defined (sigdelset)
+        -:   83:  return sigdelset (s, signum);
+        -:   84:#  undef sigdelset
+        -:   85:#  else
+        -:   86:  return ACE_STD_NAMESPACE::sigdelset (s, signum);
+        -:   87:#  endif /* defined (sigdelset) */
+        -:   88:}
+        -:   89:
+    #####:   90:inline int ace_sigismember_helper (sigset_t *s, int signum)
+        -:   91:{
+        -:   92:#  if defined (sigismember)
+        -:   93:  return sigismember (s, signum);
+        -:   94:#  undef sigismember
+        -:   95:#  else
+    #####:   96:  return ACE_STD_NAMESPACE::sigismember (s, signum);
+        -:   97:#  endif /* defined (sigismember) */
+        -:   98:}
+        -:   99:#endif /* !defined (ACE_LACKS_SIGSET) */
+        -:  100:
+        -:  101:#if defined (ACE_HAS_SIGSUSPEND)
+        -:  102:inline int ace_sigsuspend_helper (const sigset_t *s)
+        -:  103:{
+        -:  104:#  if defined (sigsuspend)
+        -:  105:  return sigsuspend (s);
+        -:  106:#  undef sigsuspend
+        -:  107:#  else
+        -:  108:  return ACE_STD_NAMESPACE::sigsuspend (s);
+        -:  109:#  endif /* defined (sigsuspen) */
+        -:  110:}
+        -:  111:#endif /* ACE_HAS_SIGSUSPEND */
+        -:  112:
+        -:  113:
+        -:  114:# if !defined (SIG_BLOCK)
+        -:  115:#   define SIG_BLOCK   1
+        -:  116:# endif /* SIG_BLOCK   */
+        -:  117:
+        -:  118:# if !defined (SIG_UNBLOCK)
+        -:  119:#   define SIG_UNBLOCK 2
+        -:  120:# endif /* SIG_UNBLOCK */
+        -:  121:
+        -:  122:# if !defined (SIG_SETMASK)
+        -:  123:#   define SIG_SETMASK 3
+        -:  124:# endif /* SIG_SETMASK */
+        -:  125:
+        -:  126:// Create some useful typedefs.
+        -:  127:
+        -:  128:# if !defined (ACE_HAS_SIGINFO_T)
+        -:  129:struct ACE_Export siginfo_t
+        -:  130:{
+        -:  131:  siginfo_t (ACE_HANDLE handle);
+        -:  132:  siginfo_t (ACE_HANDLE *handles);      // JCEJ 12/23/96
+        -:  133:
+        -:  134:  /// Win32 HANDLE that has become signaled.
+        -:  135:  ACE_HANDLE si_handle_;
+        -:  136:
+        -:  137:  /// Array of Win32 HANDLEs all of which have become signaled.
+        -:  138:  ACE_HANDLE *si_handles_;
+        -:  139:};
+        -:  140:# endif /* ACE_HAS_SIGINFO_T */
+        -:  141:
+        -:  142:#if !defined (ACE_WIN32)
+        -:  143:extern "C"
+        -:  144:{
+        -:  145:  typedef void (*ACE_SIGNAL_C_FUNC)(int, siginfo_t *, void *);
+        -:  146:}
+        -:  147:#endif /* ACE_WIN32 */
+        -:  148:
+        -:  149:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  150:
+        -:  151:// This hack is needed to get around an odd and hard-to-reproduce problem
+        -:  152:// with HP aC++. If struct sigaction is defined extern "C" and the sigaction
+        -:  153:// function in namespace ACE_OS, the compiler sometimes gets confused.
+        -:  154:// If we help it with this typedef, it's fine. User code should not use
+        -:  155:// the ACE typedef - it will be removed without warning as soon as we can
+        -:  156:// either drop support for the broken compilers or figure out how to reproduce
+        -:  157:// it so it can be reported to HP and fixed.
+        -:  158:// There's a similar hack in OS_TLI.h for struct t_optmgmt.
+        -:  159:// Also see ChangeLog entries:
+        -:  160:// Mon Jan 23 16:35:40 UTC 2006  Steve Huston  <shuston@riverace.com>
+        -:  161:// Mon Jan 23 22:08:56 UTC 2006  Steve Huston  <shuston@riverace.com>
+        -:  162:#if defined (__HP_aCC) && (__HP_aCC <= 37300)
+        -:  163:typedef extern "C" struct sigaction  ACE_SIGACTION;
+        -:  164:#else
+        -:  165:typedef struct sigaction ACE_SIGACTION;
+        -:  166:#endif
+        -:  167:
+        -:  168:namespace ACE_OS {
+        -:  169:
+        -:  170:  //@{ @name A set of wrappers for Signals.
+        -:  171:
+        -:  172:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  173:  int kill (pid_t pid,
+        -:  174:            int signum);
+        -:  175:
+        -:  176:#ifdef pthread_sigmask
+        -:  177:# define ACE_PTHREAD_SIGMASK_MACRO pthread_sigmask
+        -:  178:# undef pthread_sigmask
+        -:  179:#endif
+        -:  180:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  181:  int pthread_sigmask (int how,
+        -:  182:                       const sigset_t *nsp,
+        -:  183:                       sigset_t *osp);
+        -:  184:
+        -:  185:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  186:  int sigaction (int signum,
+        -:  187:                 const ACE_SIGACTION *nsa,
+        -:  188:                 ACE_SIGACTION *osa);
+        -:  189:
+        -:  190:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  191:  int sigaddset (sigset_t *s,
+        -:  192:                 int signum);
+        -:  193:
+        -:  194:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  195:  int sigdelset (sigset_t *s,
+        -:  196:                 int signum);
+        -:  197:
+        -:  198:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  199:  int sigemptyset (sigset_t *s);
+        -:  200:
+        -:  201:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  202:  int sigfillset (sigset_t *s);
+        -:  203:
+        -:  204:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  205:  int sigismember (sigset_t *s,
+        -:  206:                   int signum);
+        -:  207:
+        -:  208:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  209:  ACE_SignalHandler signal (int signum,
+        -:  210:                            ACE_SignalHandler);
+        -:  211:
+        -:  212:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  213:  int sigprocmask (int how,
+        -:  214:                   const sigset_t *nsp,
+        -:  215:                   sigset_t *osp);
+        -:  216:
+        -:  217:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  218:  int sigsuspend (const sigset_t *s);
+        -:  219:
+        -:  220:  ACE_NAMESPACE_INLINE_FUNCTION
+        -:  221:  int raise (const int signum);
+        -:  222:  //@}
+        -:  223:
+        -:  224:} /* namespace ACE_OS */
+        -:  225:
+        -:  226:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  227:
+        -:  228:# if defined (ACE_HAS_INLINED_OSCALLS)
+        -:  229:#   if defined (ACE_INLINE)
+        -:  230:#     undef ACE_INLINE
+        -:  231:#   endif /* ACE_INLINE */
+        -:  232:#   define ACE_INLINE inline
+        -:  233:#   include "ace/OS_NS_signal.inl"
+        -:  234:# endif /* ACE_HAS_INLINED_OSCALLS */
+        -:  235:
+        -:  236:# include /**/ "ace/post.h"
+        -:  237:#endif /* ACE_OS_NS_SIGNAL_H */

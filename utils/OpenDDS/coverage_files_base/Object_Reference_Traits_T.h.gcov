@@ -1,0 +1,184 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Object_Reference_Traits_T.h
+        -:    0:Programs:70
+        -:    1:#ifndef guard_object_reference_traits_hpp
+        -:    2:#define guard_object_reference_traits_hpp
+        -:    3:/**
+        -:    4: * @file
+        -:    5: *
+        -:    6: * @brief Implement the element manipulation traits for object
+        -:    7: *        reference types.
+        -:    8: *
+        -:    9: * $Id$
+        -:   10: *
+        -:   11: * @author Carlos O'Ryan
+        -:   12: */
+        -:   13:#include "Object_Reference_Traits_Base_T.h"
+        -:   14:#include "ace/OS_NS_string.h"
+        -:   15:
+        -:   16:#include <algorithm>
+        -:   17:#include <functional>
+        -:   18:
+        -:   19:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   20:
+        -:   21:namespace TAO
+        -:   22:{
+        -:   23:namespace details
+        -:   24:{
+        -:   25:
+        -:   26:template<class object_t, class object_t_var, class derived>
+        -:   27:struct object_reference_traits_decorator
+        -:   28:{
+        -:   29:  typedef object_t object_type;
+        -:   30:  typedef object_type * value_type;
+        -:   31:  typedef object_type const * const_value_type;
+        -:   32:  typedef object_t_var object_type_var;
+        -:   33:
+    #####:   34:  inline static void zero_range(
+        -:   35:      object_type ** begin, object_type ** end)
+        -:   36:  {
+    #####:   37:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (object_type*));
+    #####:   38:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE10zero_rangeEPPS3_SA_:
+    #####:   34:  inline static void zero_range(
+        -:   35:      object_type ** begin, object_type ** end)
+        -:   36:  {
+    #####:   37:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (object_type*));
+    #####:   38:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE10zero_rangeEPPS3_SA_:
+    #####:   34:  inline static void zero_range(
+        -:   35:      object_type ** begin, object_type ** end)
+        -:   36:  {
+    #####:   37:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (object_type*));
+    #####:   38:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS9ConditionE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE10zero_rangeEPPS3_SA_:
+    #####:   34:  inline static void zero_range(
+        -:   35:      object_type ** begin, object_type ** end)
+        -:   36:  {
+    #####:   37:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (object_type*));
+    #####:   38:  }
+------------------
+        -:   39:
+    #####:   40:  inline static void initialize_range(
+        -:   41:      object_type ** begin, object_type ** end)
+        -:   42:  {
+    #####:   43:    std::generate(begin, end, &derived::default_initializer);
+    #####:   44:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE16initialize_rangeEPPS3_SA_:
+    #####:   40:  inline static void initialize_range(
+        -:   41:      object_type ** begin, object_type ** end)
+        -:   42:  {
+    #####:   43:    std::generate(begin, end, &derived::default_initializer);
+    #####:   44:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE16initialize_rangeEPPS3_SA_:
+    #####:   40:  inline static void initialize_range(
+        -:   41:      object_type ** begin, object_type ** end)
+        -:   42:  {
+    #####:   43:    std::generate(begin, end, &derived::default_initializer);
+    #####:   44:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS9ConditionE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE16initialize_rangeEPPS3_SA_:
+    #####:   40:  inline static void initialize_range(
+        -:   41:      object_type ** begin, object_type ** end)
+        -:   42:  {
+    #####:   43:    std::generate(begin, end, &derived::default_initializer);
+    #####:   44:  }
+------------------
+        -:   45:
+        -:   46:  // Allow MSVC++ >= 8 checked iterators to be used.
+        -:   47:  template <typename iter>
+        -:   48:  inline static void copy_range(
+        -:   49:      object_type ** begin, object_type ** end, iter dst)
+        -:   50:  {
+        -:   51:    std::transform(begin, end, dst, &derived::duplicate);
+        -:   52:  }
+        -:   53:
+        -:   54:  // Allow MSVC++ >= 8 checked iterators to be used.
+        -:   55:  template <typename iter>
+       2*:   56:  inline static void copy_swap_range(
+        -:   57:      object_type ** begin, object_type ** end, iter dst)
+        -:   58:  {
+       2*:   59:    std::swap_ranges(begin, end, dst);
+       2*:   60:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE15copy_swap_rangeIPPS3_EEvSB_SB_T_:
+    #####:   56:  inline static void copy_swap_range(
+        -:   57:      object_type ** begin, object_type ** end, iter dst)
+        -:   58:  {
+    #####:   59:    std::swap_ranges(begin, end, dst);
+    #####:   60:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE15copy_swap_rangeIPPS3_EEvSB_SB_T_:
+    #####:   56:  inline static void copy_swap_range(
+        -:   57:      object_type ** begin, object_type ** end, iter dst)
+        -:   58:  {
+    #####:   59:    std::swap_ranges(begin, end, dst);
+    #####:   60:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS9ConditionE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE15copy_swap_rangeIPPS3_EEvSB_SB_T_:
+        2:   56:  inline static void copy_swap_range(
+        -:   57:      object_type ** begin, object_type ** end, iter dst)
+        -:   58:  {
+        2:   59:    std::swap_ranges(begin, end, dst);
+        2:   60:  }
+------------------
+        -:   61:
+    #####:   62:  inline static void release_range(
+        -:   63:      object_type ** begin, object_type ** end)
+        -:   64:  {
+    #####:   65:    std::for_each(begin, end, &derived::release);
+    #####:   66:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE13release_rangeEPPS3_SA_:
+    #####:   62:  inline static void release_range(
+        -:   63:      object_type ** begin, object_type ** end)
+        -:   64:  {
+    #####:   65:    std::for_each(begin, end, &derived::release);
+    #####:   66:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE13release_rangeEPPS3_SA_:
+    #####:   62:  inline static void release_range(
+        -:   63:      object_type ** begin, object_type ** end)
+        -:   64:  {
+    #####:   65:    std::for_each(begin, end, &derived::release);
+    #####:   66:  }
+------------------
+_ZN3TAO7details33object_reference_traits_decoratorIN3DDS9ConditionE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE13release_rangeEPPS3_SA_:
+    #####:   62:  inline static void release_range(
+        -:   63:      object_type ** begin, object_type ** end)
+        -:   64:  {
+    #####:   65:    std::for_each(begin, end, &derived::release);
+    #####:   66:  }
+------------------
+        -:   67:
+        -:   68:  inline static object_type const * initialize_if_zero(object_type * & element)
+        -:   69:  {
+        -:   70:    if (element == 0)
+        -:   71:    {
+        -:   72:      element = derived::nil();
+        -:   73:    }
+        -:   74:    return element;
+        -:   75:  }
+        -:   76:};
+        -:   77:
+        -:   78:template<typename object_t, typename object_t_var, bool dummy>
+        -:   79:struct object_reference_traits
+        -:   80:  : public object_reference_traits_base<object_t, object_t_var>
+        -:   81:  , public object_reference_traits_decorator<object_t, object_t_var, object_reference_traits<object_t,object_t_var,dummy> >
+        -:   82:{
+        -:   83:  typedef object_t object_type;
+        -:   84:  typedef object_type * value_type;
+        -:   85:  typedef object_type const * const_value_type;
+        -:   86:  typedef object_t_var object_type_var;
+        -:   87:};
+        -:   88:
+        -:   89:} // namespace details
+        -:   90:} // namespace CORBA
+        -:   91:
+        -:   92:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:   93:
+        -:   94:#endif // guard_object_reference_traits_hpp

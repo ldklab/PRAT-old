@@ -1,0 +1,342 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/OS_Memory.h
+        -:    0:Programs:24
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file   OS_Memory.h
+        -:    6: *
+        -:    7: *  $Id$
+        -:    8: *
+        -:    9: *  @author Doug Schmidt <schmidt@cs.wustl.edu>
+        -:   10: *  @author Jesper S. M|ller<stophph@diku.dk>
+        -:   11: *  @author and a cast of thousands...
+        -:   12: */
+        -:   13://=============================================================================
+        -:   14:
+        -:   15:#ifndef ACE_OS_MEMORY_H
+        -:   16:#define ACE_OS_MEMORY_H
+        -:   17:#include /**/ "ace/pre.h"
+        -:   18:
+        -:   19:#include /**/ "ace/ACE_export.h"
+        -:   20:
+        -:   21:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   22:# pragma once
+        -:   23:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   24:
+        -:   25:#include "ace/OS_Errno.h"
+        -:   26:#include "ace/Basic_Types.h"
+        -:   27:#include "ace/os_include/os_stddef.h"
+        -:   28:
+        -:   29:// Allow an installation to replace the lowest-level allocation
+        -:   30:// functions without changing the source of ACE.
+        -:   31://
+        -:   32:// To do this, simple #define ACE_*_FUNC macros in config.h to
+        -:   33:// the names of the site-specific functions, e.g.,
+        -:   34://
+        -:   35://   #define ACE_MALLOC_FUNC  dlmalloc
+        -:   36://   #define ACE_CALLOC_FUNC  dlcalloc
+        -:   37://   #define ACE_FREE_FUNC    dlfree
+        -:   38://   #define ACE_REALLOC_FUNC dlrealloc
+        -:   39://
+        -:   40:// For completeness' sake, you should probably put
+        -:   41://   #define ACE_HAS_STRDUP_EMULATION
+        -:   42://   #define ACE_HAS_WCSDUP_EMULATION
+        -:   43:// too, so that you guarantee that strdup() and wcsdup() call your
+        -:   44:// desired mallocator and not the system mallocator.
+        -:   45://
+        -:   46:#if !defined (ACE_MALLOC_FUNC)
+        -:   47:#  define ACE_MALLOC_FUNC ::malloc
+        -:   48:#endif
+        -:   49:#if !defined (ACE_CALLOC_FUNC)
+        -:   50:#  define ACE_CALLOC_FUNC ::calloc
+        -:   51:#endif
+        -:   52:#if !defined (ACE_FREE_FUNC)
+        -:   53:#  define ACE_FREE_FUNC ::free
+        -:   54:#endif
+        -:   55:#if !defined (ACE_REALLOC_FUNC)
+        -:   56:#  define ACE_REALLOC_FUNC ::realloc
+        -:   57:#endif
+        -:   58:
+        -:   59:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   60:
+        -:   61:typedef void * ACE_MALLOC_T;
+        -:   62:
+        -:   63:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:   64:
+        -:   65:// ============================================================================
+        -:   66:// ACE_NEW macros
+        -:   67://
+        -:   68:// A useful abstraction for expressions involving operator new since
+        -:   69:// we can change memory allocation error handling policies (e.g.,
+        -:   70:// depending on whether ANSI/ISO exception handling semantics are
+        -:   71:// being used).
+        -:   72:// ============================================================================
+        -:   73:
+        -:   74:// If new(std::nothrow) is defined then, by definition, new throws exceptions.
+        -:   75:#if defined (ACE_HAS_NEW_NOTHROW)
+        -:   76:#  if !defined (ACE_NEW_THROWS_EXCEPTIONS)
+        -:   77:#    define ACE_NEW_THROWS_EXCEPTIONS
+        -:   78:#  endif
+        -:   79:#endif
+        -:   80:
+        -:   81:// The Windows MFC exception mechanism requires that a caught CException
+        -:   82:// (including the CMemoryException in use here) be freed using its Delete()
+        -:   83:// method. Thus, when MFC is in use and we're catching exceptions as a result
+        -:   84:// of new(), the exception's Delete() method has to be called. No other
+        -:   85:// platform imposes this sort of restriction/requirement. The Windows
+        -:   86:// config stuff (at least for MSVC/MFC) defines a ACE_del_bad_alloc macro
+        -:   87:// that works with its ACE_bad_alloc macro to implement this cleanup
+        -:   88:// requirement. Since no other platform requires this, define it as
+        -:   89:// empty here.
+        -:   90:#if !defined (ACE_del_bad_alloc)
+        -:   91:#  define ACE_del_bad_alloc
+        -:   92:#endif
+        -:   93:
+        -:   94:#if defined (ACE_NEW_THROWS_EXCEPTIONS)
+        -:   95:
+        -:   96:// Since new() throws exceptions, we need a way to avoid passing
+        -:   97:// exceptions past the call to new because ACE counts on having a 0
+        -:   98:// return value for a failed allocation. Some compilers offer the
+        -:   99:// new (nothrow) version, which does exactly what we want. Others
+        -:  100:// do not. For those that do not, this sets up what exception is thrown,
+        -:  101:// and then below we'll do a try/catch around the new to catch it and
+        -:  102:// return a 0 pointer instead.
+        -:  103:
+        -:  104:#  if defined (__HP_aCC)
+        -:  105:      // I know this works for HP aC++... if <stdexcept> is used, it
+        -:  106:      // introduces other stuff that breaks things, like <memory>, which
+        -:  107:      // screws up auto_ptr.
+        -:  108:#    include /**/ <new>
+        -:  109:    // _HP_aCC was first defined at aC++ 03.13 on HP-UX 11. Prior to that
+        -:  110:    // (03.10 and before) a failed new threw bad_alloc. After that (03.13
+        -:  111:    // and above) the exception thrown is dependent on the below settings.
+        -:  112:#    if (HPUX_VERS >= 1100)
+        -:  113:#      if ((__HP_aCC < 32500 && !defined (RWSTD_NO_NAMESPACE)) || \
+        -:  114:           defined (ACE_USES_STD_NAMESPACE_FOR_STDCPP_LIB))
+        -:  115:#        define ACE_bad_alloc ::std::bad_alloc
+        -:  116:#        define ACE_nothrow   ::std::nothrow
+        -:  117:#        define ACE_nothrow_t ::std::nothrow_t
+        -:  118:#      else
+        -:  119:#        define ACE_bad_alloc bad_alloc
+        -:  120:#        define ACE_nothrow   nothrow
+        -:  121:#        define ACE_nothrow_t nothrow_t
+        -:  122:#      endif /* __HP_aCC */
+        -:  123:#    elif ((__HP_aCC <  12500 && !defined (RWSTD_NO_NAMESPACE)) || \
+        -:  124:           defined (ACE_USES_STD_NAMESPACE_FOR_STDCPP_LIB))
+        -:  125:#      define ACE_bad_alloc ::std::bad_alloc
+        -:  126:#      define ACE_nothrow   ::std::nothrow
+        -:  127:#      define ACE_nothrow_t ::std::nothrow_t
+        -:  128:#    else
+        -:  129:#      define ACE_bad_alloc bad_alloc
+        -:  130:#      define ACE_nothrow   nothrow
+        -:  131:#      define ACE_nothrow_t nothrow_t
+        -:  132:#    endif /* HPUX_VERS < 1100 */
+        -:  133:#    define ACE_throw_bad_alloc throw ACE_bad_alloc ()
+        -:  134:#  elif defined (__SUNPRO_CC)
+        -:  135:#      if (__SUNPRO_CC < 0x500) || (__SUNPRO_CC_COMPAT == 4)
+        -:  136:#        include /**/ <exception.h>
+        -:  137:         // Note: we catch ::xalloc rather than just xalloc because of
+        -:  138:         // a name clash with unsafe_ios::xalloc()
+        -:  139:#        define ACE_bad_alloc ::xalloc
+        -:  140:#        define ACE_throw_bad_alloc throw ACE_bad_alloc ("no more memory")
+        -:  141:#      else
+        -:  142:#        include /**/ <new>
+        -:  143:#        define ACE_bad_alloc ::std::bad_alloc
+        -:  144:#        if defined (ACE_HAS_NEW_NOTHROW)
+        -:  145:#          if defined (ACE_USES_STD_NAMESPACE_FOR_STDCPP_LIB)
+        -:  146:#            define ACE_nothrow   ::std::nothrow
+        -:  147:#            define ACE_nothrow_t ::std::nothrow_t
+        -:  148:#          else
+        -:  149:#            define ACE_nothrow   nothrow
+        -:  150:#            define ACE_nothrow_t nothrow_t
+        -:  151:#          endif /* ACE_USES_STD_NAMESPACE_FOR_STDCPP_LIB */
+        -:  152:#        endif /* ACE_HAS_NEW_NOTHROW */
+        -:  153:#        define ACE_throw_bad_alloc throw ACE_bad_alloc ()
+        -:  154:#      endif /* __SUNPRO_CC < 0x500 */
+        -:  155:#  elif defined (ACE_USES_STD_NAMESPACE_FOR_STDCPP_LIB)
+        -:  156:#    include /**/ <new>
+        -:  157:#    if !defined (ACE_bad_alloc)
+        -:  158:#      define ACE_bad_alloc ::std::bad_alloc
+        -:  159:#    endif
+        -:  160:#    define ACE_nothrow   ::std::nothrow
+        -:  161:#    define ACE_nothrow_t ::std::nothrow_t
+        -:  162:     // MFC changes the behavior of operator new at all MSVC versions from 6 up.
+        -:  163:#    if defined (ACE_HAS_MFC) && (ACE_HAS_MFC == 1)
+        -:  164:#      define ACE_throw_bad_alloc AfxThrowMemoryException ()
+        -:  165:#    else
+        -:  166:#      define ACE_throw_bad_alloc throw ACE_bad_alloc ()
+        -:  167:#    endif
+        -:  168:#  else
+        -:  169:#    include /**/ <new>
+        -:  170:#    if !defined (ACE_bad_alloc)
+        -:  171:#      define ACE_bad_alloc bad_alloc
+        -:  172:#    endif
+        -:  173:#    define ACE_nothrow   nothrow
+        -:  174:#    define ACE_nothrow_t nothrow_t
+        -:  175:     // MFC changes the behavior of operator new at all MSVC versions from 6 up.
+        -:  176:#    if defined (ACE_HAS_MFC) && (ACE_HAS_MFC == 1)
+        -:  177:#      define ACE_throw_bad_alloc AfxThrowMemoryException ()
+        -:  178:#    else
+        -:  179:#      define ACE_throw_bad_alloc throw ACE_bad_alloc ()
+        -:  180:#    endif
+        -:  181:#  endif /* __HP_aCC */
+        -:  182:
+        -:  183:#  if defined (ACE_HAS_NEW_NOTHROW)
+        -:  184:#    define ACE_NEW_RETURN(POINTER,CONSTRUCTOR,RET_VAL) \
+        -:  185:   do { POINTER = new (ACE_nothrow) CONSTRUCTOR; \
+        -:  186:     if (POINTER == 0) { errno = ENOMEM; return RET_VAL; } \
+        -:  187:   } while (0)
+        -:  188:#    define ACE_NEW(POINTER,CONSTRUCTOR) \
+        -:  189:   do { POINTER = new(ACE_nothrow) CONSTRUCTOR; \
+        -:  190:     if (POINTER == 0) { errno = ENOMEM; return; } \
+        -:  191:   } while (0)
+        -:  192:#    define ACE_NEW_NORETURN(POINTER,CONSTRUCTOR) \
+        -:  193:   do { POINTER = new(ACE_nothrow) CONSTRUCTOR; \
+        -:  194:     if (POINTER == 0) { errno = ENOMEM; } \
+        -:  195:   } while (0)
+        -:  196:
+        -:  197:#  else
+        -:  198:
+        -:  199:#    define ACE_NEW_RETURN(POINTER,CONSTRUCTOR,RET_VAL) \
+        -:  200:   do { try { POINTER = new CONSTRUCTOR; } \
+        -:  201:     catch (ACE_bad_alloc) { ACE_del_bad_alloc errno = ENOMEM; POINTER = 0; return RET_VAL; } \
+        -:  202:   } while (0)
+        -:  203:
+        -:  204:#    define ACE_NEW(POINTER,CONSTRUCTOR) \
+        -:  205:   do { try { POINTER = new CONSTRUCTOR; } \
+        -:  206:     catch (ACE_bad_alloc) { ACE_del_bad_alloc errno = ENOMEM; POINTER = 0; return; } \
+        -:  207:   } while (0)
+        -:  208:
+        -:  209:#    define ACE_NEW_NORETURN(POINTER,CONSTRUCTOR) \
+        -:  210:   do { try { POINTER = new CONSTRUCTOR; } \
+        -:  211:     catch (ACE_bad_alloc) { ACE_del_bad_alloc errno = ENOMEM; POINTER = 0; } \
+        -:  212:   } while (0)
+        -:  213:#  endif /* ACE_HAS_NEW_NOTHROW */
+        -:  214:
+        -:  215:#else /* ACE_NEW_THROWS_EXCEPTIONS */
+        -:  216:
+        -:  217:# define ACE_NEW_RETURN(POINTER,CONSTRUCTOR,RET_VAL) \
+        -:  218:   do { POINTER = new CONSTRUCTOR; \
+        -:  219:     if (POINTER == 0) { errno = ENOMEM; return RET_VAL; } \
+        -:  220:   } while (0)
+        -:  221:# define ACE_NEW(POINTER,CONSTRUCTOR) \
+        -:  222:   do { POINTER = new CONSTRUCTOR; \
+        -:  223:     if (POINTER == 0) { errno = ENOMEM; return; } \
+        -:  224:   } while (0)
+        -:  225:# define ACE_NEW_NORETURN(POINTER,CONSTRUCTOR) \
+        -:  226:   do { POINTER = new CONSTRUCTOR; \
+        -:  227:     if (POINTER == 0) { errno = ENOMEM; } \
+        -:  228:   } while (0)
+        -:  229:
+        -:  230:# if !defined (ACE_bad_alloc)
+        -:  231:    class ACE_bad_alloc_class {};
+        -:  232:#   define ACE_bad_alloc  ACE_bad_alloc_class
+        -:  233:# endif
+        -:  234:# if defined (ACE_HAS_MFC) && (ACE_HAS_MFC == 1)
+        -:  235:#   define ACE_throw_bad_alloc  AfxThrowMemoryException ()
+        -:  236:# else
+        -:  237:#   define ACE_throw_bad_alloc  return 0
+        -:  238:# endif
+        -:  239:
+        -:  240:#endif /* ACE_NEW_THROWS_EXCEPTIONS */
+        -:  241:
+        -:  242:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  243://@{
+        -:  244:/**
+        -:  245: * @name Efficiently compute aligned pointers to powers of 2 boundaries.
+        -:  246: */
+        -:  247:
+        -:  248:/**
+        -:  249: * Efficiently align "value" up to "alignment", knowing that all such
+        -:  250: * boundaries are binary powers and that we're using two's complement
+        -:  251: * arithmetic.
+        -:  252: *
+        -:  253: * Since the alignment is a power of two its binary representation is:
+        -:  254: *
+        -:  255: * alignment      = 0...010...0
+        -:  256: *
+        -:  257: * hence
+        -:  258: *
+        -:  259: * alignment - 1  = 0...001...1 = T1
+        -:  260: *
+        -:  261: * so the complement is:
+        -:  262: *
+        -:  263: * ~(alignment - 1) = 1...110...0 = T2
+        -:  264: *
+        -:  265: * Notice that there is a multiple of @a alignment in the range
+        -:  266: * [<value>,<value> + T1], also notice that if
+        -:  267: *
+        -:  268: * X = ( <value> + T1 ) & T2
+        -:  269: *
+        -:  270: * then
+        -:  271: *
+        -:  272: * <value> <= X <= <value> + T1
+        -:  273: *
+        -:  274: * because the & operator only changes the last bits, and since X is a
+        -:  275: * multiple of @a alignment (its last bits are zero) we have found the
+        -:  276: * multiple we wanted.
+        -:  277: */
+        -:  278:/// Return the next integer aligned to a required boundary
+        -:  279:/**
+        -:  280: * @param ptr the base pointer
+        -:  281: * @param alignment the required alignment
+        -:  282: */
+        -:  283:#if defined (ACE_OPENVMS) && (!defined (__INITIAL_POINTER_SIZE) || (__INITIAL_POINTER_SIZE < 64))
+        -:  284:inline unsigned int
+        -:  285:ACE_align_binary (unsigned int ptr, unsigned int alignment)
+        -:  286:{
+        -:  287:  unsigned int const tmp = alignment - 1;
+        -:  288:  return (ptr + tmp) & (~tmp);
+        -:  289:}
+        -:  290:#else
+        -:  291:inline uintptr_t
+    #####:  292:ACE_align_binary (uintptr_t ptr, uintptr_t alignment)
+        -:  293:{
+    #####:  294:  uintptr_t const tmp = alignment - 1;
+    #####:  295:  return (ptr + tmp) & (~tmp);
+        -:  296:}
+        -:  297:#endif
+        -:  298:
+        -:  299:#if defined (ACE_OPENVMS) && (!defined (__INITIAL_POINTER_SIZE) || (__INITIAL_POINTER_SIZE < 64))
+        -:  300:/// Return the next address aligned to a required boundary
+        -:  301:inline char *
+        -:  302:ACE_ptr_align_binary (char const * ptr, unsigned int alignment)
+        -:  303:{
+        -:  304:  return
+        -:  305:    reinterpret_cast<char *> (
+        -:  306:      ACE_align_binary (reinterpret_cast<unsigned int> (ptr), alignment));
+        -:  307:}
+        -:  308:
+        -:  309:/// Return the next address aligned to a required boundary
+        -:  310:inline char *
+        -:  311:ACE_ptr_align_binary (unsigned char const * ptr, unsigned int alignment)
+        -:  312:{
+        -:  313:  return
+        -:  314:    ACE_ptr_align_binary (reinterpret_cast<char const *> (ptr), alignment);
+        -:  315:}
+        -:  316:#else
+        -:  317:/// Return the next address aligned to a required boundary
+        -:  318:inline char *
+    #####:  319:ACE_ptr_align_binary (char const * ptr, uintptr_t alignment)
+        -:  320:{
+        -:  321:  return
+        -:  322:    reinterpret_cast<char *> (
+    #####:  323:      ACE_align_binary (reinterpret_cast<uintptr_t> (ptr), alignment));
+        -:  324:}
+        -:  325:
+        -:  326:/// Return the next address aligned to a required boundary
+        -:  327:inline char *
+        -:  328:ACE_ptr_align_binary (unsigned char const * ptr, uintptr_t alignment)
+        -:  329:{
+        -:  330:  return
+        -:  331:    ACE_ptr_align_binary (reinterpret_cast<char const *> (ptr), alignment);
+        -:  332:}
+        -:  333:#endif  /* ACE_OPENVMS && __INITIAL_POINTER_SIZE < 64 */
+        -:  334://@}
+        -:  335:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  336:
+        -:  337:#include "ace/OS_NS_stdlib.h"
+        -:  338:
+        -:  339:#include /**/ "ace/post.h"
+        -:  340:#endif /* ACE_OS_MEMORY_H */

@@ -1,0 +1,154 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Select_Reactor_Base.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/Reactor.h"
+        -:    6:
+        -:    7:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    8:
+        -:    9:ACE_INLINE ACE_Select_Reactor_Handler_Repository::size_type
+    #####:   10:ACE_Select_Reactor_Handler_Repository::size (void) const
+        -:   11:{
+        -:   12:#ifdef ACE_SELECT_REACTOR_BASE_USES_HASH_MAP
+        -:   13:  return this->event_handlers_.total_size ();
+        -:   14:#else
+    #####:   15:  return this->event_handlers_.size ();
+        -:   16:#endif  /* ACE_SELECT_REACTOR_BASE_USES_HASH_MAP */
+        -:   17:}
+        -:   18:
+        -:   19:ACE_INLINE ACE_Select_Reactor_Handler_Repository::max_handlep1_type
+    #####:   20:ACE_Select_Reactor_Handler_Repository::max_handlep1 (void) const
+        -:   21:{
+        -:   22:#ifdef ACE_SELECT_REACTOR_BASE_USES_HASH_MAP
+        -:   23:  return this->event_handlers_.current_size ();
+        -:   24:#else
+    #####:   25:  return this->max_handlep1_;
+        -:   26:#endif  /* ACE_SELECT_REACTOR_BASE_USES_HASH_MAP */
+        -:   27:}
+        -:   28:
+        -:   29:ACE_INLINE int
+    #####:   30:ACE_Select_Reactor_Handler_Repository::unbind (ACE_HANDLE handle,
+        -:   31:                                               ACE_Reactor_Mask mask)
+        -:   32:{
+        -:   33:  // Do not refactor this code to optimize the call to the unbind impl.
+        -:   34:  // To resolve bug 2653, unbind must be called even when find_eh returns
+        -:   35:  // event_handlers_.end().
+        -:   36:
+    #####:   37:  return !this->handle_in_range (handle) ? -1
+    #####:   38:          : this->unbind (handle,
+        -:   39:                          this->find_eh (handle),
+    #####:   40:                          mask);
+        -:   41:}
+        -:   42:
+        -:   43:ACE_INLINE ACE_Event_Handler *
+    #####:   44:ACE_Select_Reactor_Handler_Repository::find (ACE_HANDLE handle)
+        -:   45:{
+        -:   46:  ACE_TRACE ("ACE_Select_Reactor_Handler_Repository::find");
+        -:   47:
+    #####:   48:  ACE_Event_Handler * eh = 0;
+        -:   49:
+    #####:   50:  if (this->handle_in_range (handle))
+        -:   51:    {
+    #####:   52:      map_type::iterator const pos = this->find_eh (handle);
+        -:   53:
+    #####:   54:      if (pos != this->event_handlers_.end ())
+        -:   55:        {
+        -:   56:#ifdef ACE_SELECT_REACTOR_BASE_USES_HASH_MAP
+        -:   57:          eh = (*pos).item ();
+        -:   58:#else
+    #####:   59:          eh = *pos;
+        -:   60:#endif  /* ACE_SELECT_REACTOR_BASE_USES_HASH_MAP */
+        -:   61:        }
+        -:   62:    }
+        -:   63:  // Don't bother setting errno.  It isn't used in the select()-based
+        -:   64:  // reactors and incurs a TSS access.
+        -:   65:  //   else
+        -:   66:  //     {
+        -:   67:  //       errno = ENOENT;
+        -:   68:  //     }
+        -:   69:
+    #####:   70:  return eh;
+        -:   71:}
+        -:   72:
+        -:   73:// ------------------------------------------------------------------
+        -:   74:
+        -:   75:ACE_INLINE bool
+        -:   76:ACE_Select_Reactor_Handler_Repository_Iterator::done (void) const
+        -:   77:{
+        -:   78:#ifdef ACE_SELECT_REACTOR_BASE_USES_HASH_MAP
+        -:   79:  return this->current_ == this->rep_->event_handlers_.end ();
+        -:   80:#else
+        -:   81:  return this->current_ == (this->rep_->event_handlers_.begin ()
+        -:   82:                            + this->rep_->max_handlep1 ());
+        -:   83:#endif /* ACE_SELECT_REACTOR_BASE_USES_HASH_MAP */
+        -:   84:}
+        -:   85:
+        -:   86:// ------------------------------------------------------------------
+        -:   87:
+        -:   88:ACE_INLINE
+        -:   89:ACE_Event_Tuple::ACE_Event_Tuple (void)
+        -:   90:  : handle_ (ACE_INVALID_HANDLE),
+        -:   91:    event_handler_ (0)
+        -:   92:{
+        -:   93:}
+        -:   94:
+        -:   95:ACE_INLINE
+        -:   96:ACE_Event_Tuple::ACE_Event_Tuple (ACE_Event_Handler* eh,
+        -:   97:                                  ACE_HANDLE h)
+        -:   98:  : handle_ (h),
+        -:   99:    event_handler_ (eh)
+        -:  100:{
+        -:  101:}
+        -:  102:
+        -:  103:ACE_INLINE bool
+        -:  104:ACE_Event_Tuple::operator== (const ACE_Event_Tuple &rhs) const
+        -:  105:{
+        -:  106:  return this->handle_ == rhs.handle_;
+        -:  107:}
+        -:  108:
+        -:  109:ACE_INLINE bool
+        -:  110:ACE_Event_Tuple::operator!= (const ACE_Event_Tuple &rhs) const
+        -:  111:{
+        -:  112:  return !(*this == rhs);
+        -:  113:}
+        -:  114:
+        -:  115:#if defined (ACE_WIN32_VC8) || defined (ACE_WIN32_VC9)
+        -:  116:#  pragma warning (push)
+        -:  117:#  pragma warning (disable:4355)  /* Use of 'this' in initializer list */
+        -:  118:#endif
+        -:  119:ACE_INLINE
+    #####:  120:ACE_Select_Reactor_Impl::ACE_Select_Reactor_Impl (bool ms)
+        -:  121:  : handler_rep_ (*this)
+        -:  122:  , timer_queue_ (0)
+        -:  123:  , signal_handler_ (0)
+        -:  124:  , notify_handler_ (0)
+        -:  125:  , delete_timer_queue_ (false)
+        -:  126:  , delete_signal_handler_ (false)
+        -:  127:  , delete_notify_handler_ (false)
+        -:  128:  , initialized_ (false)
+        -:  129:  , restart_ (0)
+        -:  130:  , requeue_position_ (-1) // Requeue at end of waiters by default.
+        -:  131:  , state_changed_ (0)
+        -:  132:  , mask_signals_ (ms)
+    #####:  133:  , supress_renew_ (0)
+        -:  134:{
+    #####:  135:}
+        -:  136:#if defined (ACE_WIN32_VC8) || defined (ACE_WIN32_VC9)
+        -:  137:#  pragma warning (pop)
+        -:  138:#endif
+        -:  139:
+        -:  140:ACE_INLINE int
+    #####:  141:ACE_Select_Reactor_Impl::supress_notify_renew (void)
+        -:  142:{
+    #####:  143:  return this->supress_renew_;
+        -:  144:}
+        -:  145:
+        -:  146:ACE_INLINE void
+        -:  147:ACE_Select_Reactor_Impl::supress_notify_renew (int sr)
+        -:  148:{
+        -:  149:  this->supress_renew_ = sr;
+        -:  150:}
+        -:  151:
+        -:  152:ACE_END_VERSIONED_NAMESPACE_DECL

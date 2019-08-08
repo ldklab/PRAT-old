@@ -1,0 +1,1092 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/OS_NS_sys_socket.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/OS_NS_errno.h"
+        -:    6:#include "ace/OS_NS_macros.h"
+        -:    7:#include "ace/OS_NS_sys_uio.h"
+        -:    8:#include "ace/OS_NS_stdio.h"
+        -:    9:#include "ace/OS_QoS.h"
+        -:   10:#include "ace/Global_Macros.h"
+        -:   11:#include "ace/os_include/netinet/os_in.h"
+        -:   12:
+        -:   13:#if defined (ACE_GETNAME_RETURNS_RANDOM_SIN_ZERO) \
+        -:   14:         && (ACE_GETNAME_RETURNS_RANDOM_SIN_ZERO == 1)
+        -:   15:#include "ace/OS_NS_string.h"
+        -:   16:#endif
+        -:   17:
+        -:   18:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   19:
+        -:   20:#if defined (ACE_HAS_VOIDPTR_SOCKOPT)
+        -:   21:typedef void *ACE_SOCKOPT_TYPE1;
+        -:   22:#elif defined (ACE_HAS_CHARPTR_SOCKOPT)
+        -:   23:typedef char *ACE_SOCKOPT_TYPE1;
+        -:   24:#else
+        -:   25:typedef const char *ACE_SOCKOPT_TYPE1;
+        -:   26:#endif /* ACE_HAS_VOIDPTR_SOCKOPT */
+        -:   27:
+        -:   28:ACE_INLINE ACE_HANDLE
+        -:   29:ACE_OS::accept (ACE_HANDLE handle,
+        -:   30:                struct sockaddr *addr,
+        -:   31:                int *addrlen)
+        -:   32:{
+        -:   33:  ACE_OS_TRACE ("ACE_OS::accept");
+        -:   34:  // On a non-blocking socket with no connections to accept, this
+        -:   35:  // system call will return EWOULDBLOCK or EAGAIN, depending on the
+        -:   36:  // platform.  UNIX 98 allows either errno, and they may be the same
+        -:   37:  // numeric value.  So to make life easier for upper ACE layers as
+        -:   38:  // well as application programmers, always change EAGAIN to
+        -:   39:  // EWOULDBLOCK.  Rather than hack the ACE_OSCALL_RETURN macro, it's
+        -:   40:  // handled explicitly here.  If the ACE_OSCALL macro ever changes,
+        -:   41:  // this function needs to be reviewed.  On Win32, the regular macros
+        -:   42:  // can be used, as this is not an issue.
+        -:   43:
+        -:   44:#if defined (ACE_LACKS_ACCEPT)
+        -:   45:  ACE_UNUSED_ARG (handle);
+        -:   46:  ACE_UNUSED_ARG (addr);
+        -:   47:  ACE_UNUSED_ARG (addrlen);
+        -:   48:  ACE_NOTSUP_RETURN (ACE_INVALID_HANDLE);
+        -:   49:#elif defined (ACE_WIN32)
+        -:   50:  ACE_SOCKCALL_RETURN (::accept ((ACE_SOCKET) handle,
+        -:   51:                                 addr,
+        -:   52:                                 (ACE_SOCKET_LEN *) addrlen),
+        -:   53:                       ACE_HANDLE,
+        -:   54:                       ACE_INVALID_HANDLE);
+        -:   55:#else
+        -:   56:#  if defined (ACE_HAS_BROKEN_ACCEPT_ADDR)
+        -:   57:  // Apparently some platforms like VxWorks can't correctly deal with
+        -:   58:  // a NULL addr.
+        -:   59:
+        -:   60:   sockaddr_in fake_addr;
+        -:   61:   int fake_addrlen;
+        -:   62:
+        -:   63:   if (addrlen == 0)
+        -:   64:     addrlen = &fake_addrlen;
+        -:   65:
+        -:   66:   if (addr == 0)
+        -:   67:     {
+        -:   68:       addr = (sockaddr *) &fake_addr;
+        -:   69:       *addrlen = sizeof fake_addr;
+        -:   70:     }
+        -:   71:#  endif /* ACE_HAS_BROKEN_ACCEPT_ADDR */
+        -:   72:  ACE_HANDLE ace_result = ::accept ((ACE_SOCKET) handle,
+        -:   73:                                    addr,
+        -:   74:                                    (ACE_SOCKET_LEN *) addrlen);
+        -:   75:
+        -:   76:# if !(defined (EAGAIN) && defined (EWOULDBLOCK) && EAGAIN == EWOULDBLOCK)
+        -:   77:  // Optimize this code out if we can detect that EAGAIN ==
+        -:   78:  // EWOULDBLOCK at compile time.  If we cannot detect equality at
+        -:   79:  // compile-time (e.g. if EAGAIN or EWOULDBLOCK are not preprocessor
+        -:   80:  // macros) perform the check at run-time.  The goal is to avoid two
+        -:   81:  // TSS accesses in the _REENTRANT case when EAGAIN == EWOULDBLOCK.
+        -:   82:  if (ace_result == ACE_INVALID_HANDLE
+        -:   83:#  if !defined (EAGAIN) || !defined (EWOULDBLOCK)
+        -:   84:      && EAGAIN != EWOULDBLOCK
+        -:   85:#  endif  /* !EAGAIN || !EWOULDBLOCK */
+        -:   86:      && errno == EAGAIN)
+        -:   87:    {
+        -:   88:      errno = EWOULDBLOCK;
+        -:   89:    }
+        -:   90:# endif /* EAGAIN != EWOULDBLOCK*/
+        -:   91:
+        -:   92:  return ace_result;
+        -:   93:
+        -:   94:#endif /* defined (ACE_WIN32) */
+        -:   95:}
+        -:   96:
+        -:   97:ACE_INLINE int
+        -:   98:ACE_OS::bind (ACE_HANDLE handle, struct sockaddr *addr, int addrlen)
+        -:   99:{
+        -:  100:  ACE_OS_TRACE ("ACE_OS::bind");
+        -:  101:#if defined (ACE_LACKS_BIND)
+        -:  102:  ACE_UNUSED_ARG (handle);
+        -:  103:  ACE_UNUSED_ARG (addr);
+        -:  104:  ACE_UNUSED_ARG (addrlen);
+        -:  105:  ACE_NOTSUP_RETURN (-1);
+        -:  106:#elif defined (ACE_VXWORKS) && (ACE_VXWORKS <= 0x640)
+        -:  107:  // VxWorks clears the sin_port member after a successful bind when
+        -:  108:  // sin_addr != INADDR_ANY, so after the bind we do retrieve the
+        -:  109:  // original address so that user code can safely check the addr
+        -:  110:  // after the bind. See bugzilla 3107 for more details
+        -:  111:  int result;
+        -:  112:  ACE_SOCKCALL (::bind ((ACE_SOCKET) handle,
+        -:  113:                        addr,
+        -:  114:                        (ACE_SOCKET_LEN) addrlen), int, -1, result);
+        -:  115:  if (result == -1)
+        -:  116:    return -1;
+        -:  117:  else
+        -:  118:    return ACE_OS::getsockname (handle, addr, &addrlen);
+        -:  119:#else
+        -:  120:  ACE_SOCKCALL_RETURN (::bind ((ACE_SOCKET) handle,
+        -:  121:                               addr,
+        -:  122:                               (ACE_SOCKET_LEN) addrlen), int, -1);
+        -:  123:#endif
+        -:  124:}
+        -:  125:
+        -:  126:ACE_INLINE int
+        -:  127:ACE_OS::closesocket (ACE_HANDLE handle)
+        -:  128:{
+        -:  129:  ACE_OS_TRACE ("ACE_OS::closesocket");
+        -:  130:#if defined (ACE_WIN32) || defined (ACE_MQX)
+        -:  131:  // @note Do not shutdown the write end here.  Doing so will break
+        -:  132:  //       applications that duplicate a handle on fork(), for
+        -:  133:  //       example, and expect to continue writing in the fork()ed
+        -:  134:  //       process.
+        -:  135:
+        -:  136:  ACE_SOCKCALL_RETURN (::closesocket ((SOCKET) handle), int, -1);
+        -:  137:#else
+        -:  138:  //FUZZ: disable check_for_lack_ACE_OS
+        -:  139:  ACE_OSCALL_RETURN (::close (handle), int, -1);
+        -:  140:  //FUZZ: enable check_for_lack_ACE_OS
+        -:  141:#endif /* ACE_WIN32 */
+        -:  142:}
+        -:  143:
+        -:  144:ACE_INLINE int
+        -:  145:ACE_OS::connect (ACE_HANDLE handle,
+        -:  146:                 struct sockaddr *addr,
+        -:  147:                 int addrlen)
+        -:  148:{
+        -:  149:  ACE_OS_TRACE ("ACE_OS::connect");
+        -:  150:#if defined (ACE_LACKS_CONNECT)
+        -:  151:  ACE_UNUSED_ARG (handle);
+        -:  152:  ACE_UNUSED_ARG (addr);
+        -:  153:  ACE_UNUSED_ARG (addrlen);
+        -:  154:  ACE_NOTSUP_RETURN (-1);
+        -:  155:#else
+        -:  156:  ACE_SOCKCALL_RETURN (::connect ((ACE_SOCKET) handle,
+        -:  157:                                  addr,
+        -:  158:                                  (ACE_SOCKET_LEN) addrlen), int, -1);
+        -:  159:#endif /* ACE_LACKS_CONNECT */
+        -:  160:}
+        -:  161:
+        -:  162:ACE_INLINE int
+        -:  163:ACE_OS::enum_protocols (int *protocols,
+        -:  164:                        ACE_Protocol_Info *protocol_buffer,
+        -:  165:                        u_long *buffer_length)
+        -:  166:{
+        -:  167:#if defined (ACE_HAS_WINSOCK2) && (ACE_HAS_WINSOCK2 != 0)
+        -:  168:
+        -:  169:  ACE_SOCKCALL_RETURN (::WSAEnumProtocols (protocols,
+        -:  170:                                           protocol_buffer,
+        -:  171:                                           buffer_length),
+        -:  172:                       int,
+        -:  173:                       SOCKET_ERROR);
+        -:  174:
+        -:  175:#else
+        -:  176:  ACE_UNUSED_ARG (protocols);
+        -:  177:  ACE_UNUSED_ARG (protocol_buffer);
+        -:  178:  ACE_UNUSED_ARG (buffer_length);
+        -:  179:  ACE_NOTSUP_RETURN (-1);
+        -:  180:#endif /* ACE_HAS_WINSOCK2 */
+        -:  181:}
+        -:  182:
+        -:  183:ACE_INLINE int
+        -:  184:ACE_OS::getpeername (ACE_HANDLE handle, struct sockaddr *addr,
+        -:  185:                     int *addrlen)
+        -:  186:{
+        -:  187:  ACE_OS_TRACE ("ACE_OS::getpeername");
+        -:  188:
+        -:  189:#if defined (ACE_LACKS_GETPEERNAME)
+        -:  190:  ACE_UNUSED_ARG (handle);
+        -:  191:  ACE_UNUSED_ARG (addr);
+        -:  192:  ACE_UNUSED_ARG (addrlen);
+        -:  193:  ACE_NOTSUP_RETURN (-1);
+        -:  194:#elif defined (ACE_GETNAME_RETURNS_RANDOM_SIN_ZERO) \
+        -:  195:           && (ACE_GETNAME_RETURNS_RANDOM_SIN_ZERO == 1)
+        -:  196:  int result;
+        -:  197:  ACE_SOCKCALL (::getpeername ((ACE_SOCKET) handle,
+        -:  198:                               addr,
+        -:  199:                               (ACE_SOCKET_LEN *) addrlen),
+        -:  200:               int,
+        -:  201:                -1,
+        -:  202:                result);
+        -:  203:
+        -:  204:  // Some platforms, like older versions of the Linux kernel, do not
+        -:  205:  // initialize the sin_zero field since that field is generally only
+        -:  206:  // used for padding/alignment purposes.  On those platforms
+        -:  207:  // memcmp()-based comparisons of the sockaddr_in structure, such as
+        -:  208:  // the one in the ACE_INET_Addr equality operator, may fail due to
+        -:  209:  // random bytes in the sin_zero field even though that field is
+        -:  210:  // unused.  Prevent equality comparison of two different sockaddr_in
+        -:  211:  // instances that refer to the same socket from failing by
+        -:  212:  // explicitly initializing the sockaddr_in::sin_zero field to a
+        -:  213:  // consistent value, e.g. zero.
+        -:  214:  if (result != -1 && addr->sa_family == AF_INET)
+        -:  215:    {
+        -:  216:      ACE_OS::memset (reinterpret_cast<struct sockaddr_in *> (addr)->sin_zero,
+        -:  217:                      0,
+        -:  218:                      sizeof (reinterpret_cast<struct sockaddr_in *> (addr)->sin_zero));
+        -:  219:    }
+        -:  220:
+        -:  221:  return result;
+        -:  222:#else
+        -:  223:  ACE_SOCKCALL_RETURN (::getpeername ((ACE_SOCKET) handle,
+        -:  224:                                      addr,
+        -:  225:                                      (ACE_SOCKET_LEN *) addrlen),
+        -:  226:                       int,
+        -:  227:                       -1);
+        -:  228:#endif /* ACE_GETNAME_RETURNS_RANDOM_SIN_ZERO */
+        -:  229:}
+        -:  230:
+        -:  231:ACE_INLINE int
+        -:  232:ACE_OS::getsockname (ACE_HANDLE handle,
+        -:  233:                     struct sockaddr *addr,
+        -:  234:                     int *addrlen)
+        -:  235:{
+        -:  236:  ACE_OS_TRACE ("ACE_OS::getsockname");
+        -:  237:#if defined (ACE_LACKS_GETSOCKNAME)
+        -:  238:  ACE_UNUSED_ARG (handle);
+        -:  239:  ACE_UNUSED_ARG (addr);
+        -:  240:  ACE_UNUSED_ARG (addrlen);
+        -:  241:  ACE_NOTSUP_RETURN (-1);
+        -:  242:#elif defined (ACE_GETNAME_RETURNS_RANDOM_SIN_ZERO) \
+        -:  243:           && (ACE_GETNAME_RETURNS_RANDOM_SIN_ZERO == 1)
+        -:  244:  int result;
+        -:  245:  ACE_SOCKCALL (::getsockname ((ACE_SOCKET) handle,
+        -:  246:                               addr,
+        -:  247:                               (ACE_SOCKET_LEN *) addrlen),
+        -:  248:               int, -1, result);
+        -:  249:
+        -:  250:  // Some platforms, like older versions of the Linux kernel, do not
+        -:  251:  // initialize the sin_zero field since that field is generally only
+        -:  252:  // used for padding/alignment purposes.  On those platforms
+        -:  253:  // memcmp()-based comparisons of the sockaddr_in structure, such as
+        -:  254:  // the one in the ACE_INET_Addr equality operator, may fail due to
+        -:  255:  // random bytes in the sin_zero field even though that field is
+        -:  256:  // unused.  Prevent equality comparison of two different sockaddr_in
+        -:  257:  // instances that refer to the same socket from failing by
+        -:  258:  // explicitly initializing the sockaddr_in::sin_zero field to a
+        -:  259:  // consistent value, e.g. zero.
+        -:  260:  if (result != -1 && addr->sa_family == AF_INET)
+        -:  261:    {
+        -:  262:      ACE_OS::memset (reinterpret_cast<struct sockaddr_in *> (addr)->sin_zero,
+        -:  263:                      0,
+        -:  264:                      sizeof (reinterpret_cast<struct sockaddr_in *> (addr)->sin_zero));
+        -:  265:    }
+        -:  266:
+        -:  267:  return result;
+        -:  268:#else
+        -:  269:  ACE_SOCKCALL_RETURN (::getsockname ((ACE_SOCKET) handle,
+        -:  270:                                      addr,
+        -:  271:                                      (ACE_SOCKET_LEN *) addrlen),
+        -:  272:                       int, -1);
+        -:  273:#endif /* ACE_GETNAME_RETURNS_RANDOM_SIN_ZERO */
+        -:  274:}
+        -:  275:
+        -:  276:#if !defined(ACE_SOCKOPT_LEN)
+        -:  277:#define ACE_SOCKOPT_LEN ACE_SOCKET_LEN
+        -:  278:#endif
+        -:  279:
+        -:  280:ACE_INLINE int
+        -:  281:ACE_OS::getsockopt (ACE_HANDLE handle,
+        -:  282:                    int level,
+        -:  283:                    int optname,
+        -:  284:                    char *optval,
+        -:  285:                    int *optlen)
+        -:  286:{
+        -:  287:  ACE_OS_TRACE ("ACE_OS::getsockopt");
+        -:  288:#if defined (ACE_LACKS_GETSOCKOPT)
+        -:  289:  ACE_UNUSED_ARG (handle);
+        -:  290:  ACE_UNUSED_ARG (level);
+        -:  291:  ACE_UNUSED_ARG (optname);
+        -:  292:  ACE_UNUSED_ARG (optval);
+        -:  293:  ACE_UNUSED_ARG (optlen);
+        -:  294:  ACE_NOTSUP_RETURN (-1);
+        -:  295:#else
+        -:  296:  ACE_SOCKCALL_RETURN (::getsockopt ((ACE_SOCKET) handle,
+        -:  297:                                     level,
+        -:  298:                                     optname,
+        -:  299:                                     optval,
+        -:  300:                                     (ACE_SOCKOPT_LEN *) optlen),
+        -:  301:                       int,
+        -:  302:                       -1);
+        -:  303:#endif /* ACE_LACKS_GETSOCKOPT */
+        -:  304:}
+        -:  305:
+        -:  306:ACE_INLINE int
+        -:  307:ACE_OS::listen (ACE_HANDLE handle, int backlog)
+        -:  308:{
+        -:  309:  ACE_OS_TRACE ("ACE_OS::listen");
+        -:  310:#if defined (ACE_LACKS_LISTEN)
+        -:  311:  ACE_UNUSED_ARG (handle);
+        -:  312:  ACE_UNUSED_ARG (backlog);
+        -:  313:  ACE_NOTSUP_RETURN (-1);
+        -:  314:#else
+        -:  315:  ACE_SOCKCALL_RETURN (::listen ((ACE_SOCKET) handle, backlog), int, -1);
+        -:  316:#endif /* ACE_LACKS_LISTEN */
+        -:  317:}
+        -:  318:
+        -:  319:ACE_INLINE ssize_t
+        -:  320:ACE_OS::recv (ACE_HANDLE handle, char *buf, size_t len, int flags)
+        -:  321:{
+        -:  322:  ACE_OS_TRACE ("ACE_OS::recv");
+        -:  323:
+        -:  324:  // On UNIX, a non-blocking socket with no data to receive, this
+        -:  325:  // system call will return EWOULDBLOCK or EAGAIN, depending on the
+        -:  326:  // platform.  UNIX 98 allows either errno, and they may be the same
+        -:  327:  // numeric value.  So to make life easier for upper ACE layers as
+        -:  328:  // well as application programmers, always change EAGAIN to
+        -:  329:  // EWOULDBLOCK.  Rather than hack the ACE_OSCALL_RETURN macro, it's
+        -:  330:  // handled explicitly here.  If the ACE_OSCALL macro ever changes,
+        -:  331:  // this function needs to be reviewed.  On Win32, the regular macros
+        -:  332:  // can be used, as this is not an issue.
+        -:  333:#if defined (ACE_LACKS_RECV)
+        -:  334:  ACE_UNUSED_ARG (handle);
+        -:  335:  ACE_UNUSED_ARG (buf);
+        -:  336:  ACE_UNUSED_ARG (len);
+        -:  337:  ACE_UNUSED_ARG (flags);
+        -:  338:  ACE_NOTSUP_RETURN (-1);
+        -:  339:#elif defined (ACE_WIN32)
+        -:  340:  ACE_SOCKCALL_RETURN (::recv ((ACE_SOCKET) handle, buf,
+        -:  341:                               static_cast<int> (len), flags), ssize_t, -1);
+        -:  342:#else
+        -:  343:  ssize_t ace_result_;
+        -:  344:  ace_result_ = ::recv ((ACE_SOCKET) handle, buf, len, flags);
+        -:  345:
+        -:  346:# if !(defined (EAGAIN) && defined (EWOULDBLOCK) && EAGAIN == EWOULDBLOCK)
+        -:  347:  // Optimize this code out if we can detect that EAGAIN ==
+        -:  348:  // EWOULDBLOCK at compile time.  If we cannot detect equality at
+        -:  349:  // compile-time (e.g. if EAGAIN or EWOULDBLOCK are not preprocessor
+        -:  350:  // macros) perform the check at run-time.  The goal is to avoid two
+        -:  351:  // TSS accesses in the _REENTRANT case when EAGAIN == EWOULDBLOCK.
+        -:  352:  if (ace_result_ == -1
+        -:  353:#  if !defined (EAGAIN) || !defined (EWOULDBLOCK)
+        -:  354:      && EAGAIN != EWOULDBLOCK
+        -:  355:#  endif  /* !EAGAIN || !EWOULDBLOCK */
+        -:  356:      && errno == EAGAIN)
+        -:  357:    {
+        -:  358:      errno = EWOULDBLOCK;
+        -:  359:    }
+        -:  360:# endif /* EAGAIN != EWOULDBLOCK*/
+        -:  361:
+        -:  362:  return ace_result_;
+        -:  363:#endif /* ACE_LACKS_RECV */
+        -:  364:}
+        -:  365:
+        -:  366:ACE_INLINE ssize_t
+        -:  367:ACE_OS::recvfrom (ACE_HANDLE handle,
+        -:  368:                  char *buf,
+        -:  369:                  size_t len,
+        -:  370:                  int flags,
+        -:  371:                  struct sockaddr *addr,
+        -:  372:                  int *addrlen)
+        -:  373:{
+        -:  374:  ACE_OS_TRACE ("ACE_OS::recvfrom");
+        -:  375:#if defined (ACE_LACKS_RECVFROM)
+        -:  376:  ACE_UNUSED_ARG (handle);
+        -:  377:  ACE_UNUSED_ARG (buf);
+        -:  378:  ACE_UNUSED_ARG (len);
+        -:  379:  ACE_UNUSED_ARG (flags);
+        -:  380:  ACE_UNUSED_ARG (addr);
+        -:  381:  ACE_UNUSED_ARG (addrlen);
+        -:  382:  ACE_NOTSUP_RETURN (-1);
+        -:  383:#elif defined (ACE_WIN32)
+        -:  384:  int const shortened_len = static_cast<int> (len);
+        -:  385:  int const result = ::recvfrom ((ACE_SOCKET) handle,
+        -:  386:                                 buf,
+        -:  387:                                 shortened_len,
+        -:  388:                                 flags,
+        -:  389:                                 addr,
+        -:  390:                                 (ACE_SOCKET_LEN *) addrlen);
+        -:  391:  if (result == SOCKET_ERROR)
+        -:  392:    {
+        -:  393:      ACE_OS::set_errno_to_wsa_last_error ();
+        -:  394:      if (errno == WSAEMSGSIZE &&
+        -:  395:          ACE_BIT_ENABLED (flags, MSG_PEEK))
+        -:  396:        return shortened_len;
+        -:  397:      else
+        -:  398:        return -1;
+        -:  399:    }
+        -:  400:  else
+        -:  401:    {
+        -:  402:#  if defined (ACE_HAS_PHARLAP)
+        -:  403:      // Pharlap ETS (at least to v13) returns a legit address but doesn't
+        -:  404:      // include the sin_zero[8] bytes in the count. Correct for this here.
+        -:  405:      if (addrlen != 0 && addr != 0 &&
+        -:  406:          *addrlen == 8 && addr->sa_family == AF_INET)
+        -:  407:        *addrlen = sizeof(sockaddr_in);
+        -:  408:#  endif /* ACE_HAS_PHARLAP */
+        -:  409:      return result;
+        -:  410:    }
+        -:  411:#else /* non Win32 */
+        -:  412:  ACE_SOCKCALL_RETURN (::recvfrom ((ACE_SOCKET) handle,
+        -:  413:                                   buf,
+        -:  414:                                   len,
+        -:  415:                                   flags,
+        -:  416:                                   addr,
+        -:  417:                                   (ACE_SOCKET_LEN *) addrlen),
+        -:  418:                       ssize_t, -1);
+        -:  419:#endif /* ACE_LACKS_RECVFROM */
+        -:  420:}
+        -:  421:
+        -:  422:ACE_INLINE ssize_t
+        -:  423:ACE_OS::recvfrom (ACE_HANDLE handle,
+        -:  424:                  iovec *buffers,
+        -:  425:                  int buffer_count,
+        -:  426:                  size_t &number_of_bytes_recvd,
+        -:  427:                  int &flags,
+        -:  428:                  struct sockaddr *addr,
+        -:  429:                  int *addrlen,
+        -:  430:                  ACE_OVERLAPPED *overlapped,
+        -:  431:                  ACE_OVERLAPPED_COMPLETION_FUNC func)
+        -:  432:{
+        -:  433:  ACE_OS_TRACE ("ACE_OS::recvfrom");
+        -:  434:
+        -:  435:#if defined (ACE_HAS_WINSOCK2) && (ACE_HAS_WINSOCK2 != 0)
+        -:  436:  DWORD bytes_recvd;
+        -:  437:  DWORD the_flags = flags;
+        -:  438:  int result = ::WSARecvFrom ((SOCKET) handle,
+        -:  439:                              (WSABUF*)buffers,
+        -:  440:                              buffer_count,
+        -:  441:                              &bytes_recvd,
+        -:  442:                              &the_flags,
+        -:  443:                              addr,
+        -:  444:                              addrlen,
+        -:  445:                              overlapped,
+        -:  446:                              func);
+        -:  447:  if (result != 0) {
+        -:  448:    ACE_OS::set_errno_to_wsa_last_error ();
+        -:  449:  }
+        -:  450:  flags = the_flags;
+        -:  451:  number_of_bytes_recvd = static_cast<size_t> (bytes_recvd);
+        -:  452:  return result;
+        -:  453:#else
+        -:  454:  ACE_UNUSED_ARG (handle);
+        -:  455:  ACE_UNUSED_ARG (buffers);
+        -:  456:  ACE_UNUSED_ARG (buffer_count);
+        -:  457:  ACE_UNUSED_ARG (number_of_bytes_recvd);
+        -:  458:  ACE_UNUSED_ARG (flags);
+        -:  459:  ACE_UNUSED_ARG (addr);
+        -:  460:  ACE_UNUSED_ARG (addrlen);
+        -:  461:  ACE_UNUSED_ARG (overlapped);
+        -:  462:  ACE_UNUSED_ARG (func);
+        -:  463:  ACE_NOTSUP_RETURN (-1);
+        -:  464:#endif /* defined (ACE_HAS_WINSOCK2) && (ACE_HAS_WINSOCK2 != 0) */
+        -:  465:}
+        -:  466:
+        -:  467:ACE_INLINE ssize_t
+        -:  468:ACE_OS::recvmsg (ACE_HANDLE handle, struct msghdr *msg, int flags)
+        -:  469:{
+        -:  470:  ACE_OS_TRACE ("ACE_OS::recvmsg");
+        -:  471:#if !defined (ACE_LACKS_RECVMSG)
+        -:  472:# if (defined (ACE_HAS_WINSOCK2) && (ACE_HAS_WINSOCK2 != 0))
+        -:  473:  DWORD bytes_received = 0;
+        -:  474:
+        -:  475:  int result = ::WSARecvFrom ((SOCKET) handle,
+        -:  476:                              (WSABUF *) msg->msg_iov,
+        -:  477:                              msg->msg_iovlen,
+        -:  478:                              &bytes_received,
+        -:  479:                              (DWORD *) &flags,
+        -:  480:                              msg->msg_name,
+        -:  481:                              &msg->msg_namelen,
+        -:  482:                              0,
+        -:  483:                              0);
+        -:  484:
+        -:  485:  if (result != 0)
+        -:  486:    {
+        -:  487:      ACE_OS::set_errno_to_wsa_last_error ();
+        -:  488:      return -1;
+        -:  489:    }
+        -:  490:  else
+        -:  491:    return bytes_received;
+        -:  492:# else /* ACE_HAS_WINSOCK2 */
+        -:  493:  ACE_SOCKCALL_RETURN (::recvmsg (handle, msg, flags), ssize_t, -1);
+        -:  494:# endif /* ACE_HAS_WINSOCK2 */
+        -:  495:#else
+        -:  496:  ACE_UNUSED_ARG (flags);
+        -:  497:  ACE_UNUSED_ARG (msg);
+        -:  498:  ACE_UNUSED_ARG (handle);
+        -:  499:
+        -:  500:  ACE_NOTSUP_RETURN (-1);
+        -:  501:#endif /* ACE_LACKS_RECVMSG */
+        -:  502:}
+        -:  503:
+        -:  504:ACE_INLINE ssize_t
+        -:  505:ACE_OS::recvv (ACE_HANDLE handle,
+        -:  506:               iovec *buffers,
+        -:  507:               int n)
+        -:  508:{
+        -:  509:#if defined (ACE_HAS_WINSOCK2)
+        -:  510:
+        -:  511:  DWORD bytes_received = 0;
+        -:  512:  int result = 1;
+        -:  513:
+        -:  514:  // Winsock 2 has WSARecv and can do this directly, but Winsock 1 needs
+        -:  515:  // to do the recvs piece-by-piece.
+        -:  516:
+        -:  517:# if (ACE_HAS_WINSOCK2 != 0)
+        -:  518:  DWORD flags = 0;
+        -:  519:  result = ::WSARecv ((SOCKET) handle,
+        -:  520:                      (WSABUF *) buffers,
+        -:  521:                      n,
+        -:  522:                      &bytes_received,
+        -:  523:                      &flags,
+        -:  524:                      0,
+        -:  525:                      0);
+        -:  526:# else
+        -:  527:  // Step through the buffers requested by caller; for each one, cycle
+        -:  528:  // through reads until it's filled or an error occurs.
+        -:  529:  for (int i = 0; i < n && result > 0; ++i)
+        -:  530:    {
+        -:  531:      char *chunkp = buffers[i].iov_base;     // Point to part of chunk being read
+        -:  532:      int chunklen = buffers[i].iov_len;    // Track how much to read to chunk
+        -:  533:      while (chunklen > 0 && result > 0)
+        -:  534:        {
+        -:  535:          result = ::recv ((SOCKET) handle, chunkp, chunklen, 0);
+        -:  536:          if (result > 0)
+        -:  537:            {
+        -:  538:              chunkp += result;
+        -:  539:              chunklen -= result;
+        -:  540:              bytes_received += result;
+        -:  541:            }
+        -:  542:        }
+        -:  543:    }
+        -:  544:# endif /* ACE_HAS_WINSOCK2 != 0 */
+        -:  545:
+        -:  546:  if (result == SOCKET_ERROR)
+        -:  547:    {
+        -:  548:      ACE_OS::set_errno_to_wsa_last_error ();
+        -:  549:      return -1;
+        -:  550:    }
+        -:  551:  else
+        -:  552:    return (ssize_t) bytes_received;
+        -:  553:#else
+        -:  554:  return ACE_OS::readv (handle, buffers, n);
+        -:  555:#endif /* ACE_HAS_WINSOCK2 */
+        -:  556:}
+        -:  557:
+        -:  558:ACE_INLINE ssize_t
+        -:  559:ACE_OS::send (ACE_HANDLE handle, const char *buf, size_t len, int flags)
+        -:  560:{
+        -:  561:  ACE_OS_TRACE ("ACE_OS::send");
+        -:  562:
+        -:  563:  // On UNIX, a non-blocking socket with no data to receive, this
+        -:  564:  // system call will return EWOULDBLOCK or EAGAIN, depending on the
+        -:  565:  // platform.  UNIX 98 allows either errno, and they may be the same
+        -:  566:  // numeric value.  So to make life easier for upper ACE layers as
+        -:  567:  // well as application programmers, always change EAGAIN to
+        -:  568:  // EWOULDBLOCK.  Rather than hack the ACE_OSCALL_RETURN macro, it's
+        -:  569:  // handled explicitly here.  If the ACE_OSCALL macro ever changes,
+        -:  570:  // this function needs to be reviewed.  On Win32, the regular macros
+        -:  571:  // can be used, as this is not an issue.
+        -:  572:#if defined (ACE_LACKS_SEND)
+        -:  573:  ACE_UNUSED_ARG (handle);
+        -:  574:  ACE_UNUSED_ARG (buf);
+        -:  575:  ACE_UNUSED_ARG (len);
+        -:  576:  ACE_UNUSED_ARG (flags);
+        -:  577:  ACE_NOTSUP_RETURN (-1);
+        -:  578:#elif defined (ACE_WIN32)
+        -:  579:  ssize_t result = ::send ((ACE_SOCKET) handle,
+        -:  580:                           buf,
+        -:  581:                           static_cast<int> (len),
+        -:  582:                           flags);
+        -:  583:  if (result == -1)
+        -:  584:    {
+        -:  585:      ACE_OS::set_errno_to_wsa_last_error();
+        -:  586:      if (errno != ENOBUFS)
+        -:  587:        return -1;
+        -:  588:
+        -:  589:      ACE_SOCKCALL_RETURN(send_partial_i(handle, buf, len, flags), ssize_t, -1);
+        -:  590:    }
+        -:  591:  else
+        -:  592:    return result;
+        -:  593:
+        -:  594:#else
+        -:  595:# if defined (ACE_MQX)
+        -:  596:  ssize_t const ace_result_ = ::send ((ACE_SOCKET) handle, (void*)buf, len, flags);
+        -:  597:#else
+        -:  598:  ssize_t const ace_result_ = ::send ((ACE_SOCKET) handle, buf, len, flags);
+        -:  599:#endif
+        -:  600:
+        -:  601:# if !(defined (EAGAIN) && defined (EWOULDBLOCK) && EAGAIN == EWOULDBLOCK)
+        -:  602:  // Optimize this code out if we can detect that EAGAIN ==
+        -:  603:  // EWOULDBLOCK at compile time.  If we cannot detect equality at
+        -:  604:  // compile-time (e.g. if EAGAIN or EWOULDBLOCK are not preprocessor
+        -:  605:  // macros) perform the check at run-time.  The goal is to avoid two
+        -:  606:  // TSS accesses in the _REENTRANT case when EAGAIN == EWOULDBLOCK.
+        -:  607:  if (ace_result_ == -1
+        -:  608:#  if !defined (EAGAIN) || !defined (EWOULDBLOCK)
+        -:  609:      && EAGAIN != EWOULDBLOCK
+        -:  610:#  endif  /* !EAGAIN || !EWOULDBLOCK */
+        -:  611:      && errno == EAGAIN)
+        -:  612:    {
+        -:  613:      errno = EWOULDBLOCK;
+        -:  614:    }
+        -:  615:# endif /* EAGAIN != EWOULDBLOCK*/
+        -:  616:
+        -:  617:  return ace_result_;
+        -:  618:#endif /* defined (ACE_WIN32) */
+        -:  619:}
+        -:  620:
+        -:  621:ACE_INLINE ssize_t
+        -:  622:ACE_OS::sendmsg (ACE_HANDLE handle,
+        -:  623:                 const struct msghdr *msg,
+        -:  624:                 int flags)
+        -:  625:{
+        -:  626:  ACE_OS_TRACE ("ACE_OS::sendmsg");
+        -:  627:#if !defined (ACE_LACKS_SENDMSG)
+        -:  628:# if (defined (ACE_HAS_WINSOCK2) && (ACE_HAS_WINSOCK2 != 0))
+        -:  629:  DWORD bytes_sent = 0;
+        -:  630:  int result = ::WSASendTo ((SOCKET) handle,
+        -:  631:                            (WSABUF *) msg->msg_iov,
+        -:  632:                            msg->msg_iovlen,
+        -:  633:                            &bytes_sent,
+        -:  634:                            flags,
+        -:  635:                            msg->msg_name,
+        -:  636:                            msg->msg_namelen,
+        -:  637:                            0,
+        -:  638:                            0);
+        -:  639:
+        -:  640:  if (result != 0)
+        -:  641:    {
+        -:  642:      ACE_OS::set_errno_to_wsa_last_error ();
+        -:  643:      return -1;
+        -:  644:    }
+        -:  645:  else
+        -:  646:    return (ssize_t) bytes_sent;
+        -:  647:# elif defined (ACE_HAS_NONCONST_SENDMSG)
+        -:  648:  ACE_SOCKCALL_RETURN (::sendmsg (handle,
+        -:  649:                                  const_cast<struct msghdr *>(msg),
+        -:  650:                                  flags), ssize_t, -1);
+        -:  651:# else
+        -:  652:  ACE_SOCKCALL_RETURN (::sendmsg (handle, msg, flags), ssize_t, -1);
+        -:  653:# endif
+        -:  654:#else
+        -:  655:  ACE_UNUSED_ARG (flags);
+        -:  656:  ACE_UNUSED_ARG (msg);
+        -:  657:  ACE_UNUSED_ARG (handle);
+        -:  658:
+        -:  659:  ACE_NOTSUP_RETURN (-1);
+        -:  660:#endif /* ACE_LACKS_SENDMSG */
+        -:  661:}
+        -:  662:
+        -:  663:ACE_INLINE ssize_t
+        -:  664:ACE_OS::sendto (ACE_HANDLE handle,
+        -:  665:                const char *buf,
+        -:  666:                size_t len,
+        -:  667:                int flags,
+        -:  668:                const struct sockaddr *addr,
+        -:  669:                int addrlen)
+        -:  670:{
+        -:  671:  ACE_OS_TRACE ("ACE_OS::sendto");
+        -:  672:#if defined (ACE_LACKS_SENDTO)
+        -:  673:  ACE_UNUSED_ARG (handle);
+        -:  674:  ACE_UNUSED_ARG (buf);
+        -:  675:  ACE_UNUSED_ARG (len);
+        -:  676:  ACE_UNUSED_ARG (flags);
+        -:  677:  ACE_UNUSED_ARG (addr);
+        -:  678:  ACE_UNUSED_ARG (addrlen);
+        -:  679:  ACE_NOTSUP_RETURN (-1);
+        -:  680:#elif defined (ACE_VXWORKS)
+        -:  681:  ACE_SOCKCALL_RETURN (::sendto ((ACE_SOCKET) handle,
+        -:  682:                                 const_cast <char *> (buf),
+        -:  683:                                 len,
+        -:  684:                                 flags,
+        -:  685:                                 const_cast<struct sockaddr *> (addr),
+        -:  686:                                 addrlen),
+        -:  687:                       ssize_t, -1);
+        -:  688:#elif defined (ACE_WIN32)
+        -:  689:  ACE_SOCKCALL_RETURN (::sendto ((ACE_SOCKET) handle,
+        -:  690:                                 buf,
+        -:  691:                                 static_cast<int> (len),
+        -:  692:                                 flags,
+        -:  693:                                 const_cast<struct sockaddr *> (addr),
+        -:  694:                                 addrlen),
+        -:  695:                       ssize_t, -1);
+        -:  696:#elif defined (ACE_MQX)
+        -:  697:  ACE_SOCKCALL_RETURN (::sendto ((ACE_SOCKET) handle,
+        -:  698:                                 (void*)buf,
+        -:  699:                                 len,
+        -:  700:                                 flags,
+        -:  701:                                 const_cast<struct sockaddr *> (addr),
+        -:  702:                                 addrlen),
+        -:  703:                       ssize_t, -1);
+        -:  704:#else
+        -:  705:  ACE_SOCKCALL_RETURN (::sendto ((ACE_SOCKET) handle,
+        -:  706:                                 buf,
+        -:  707:                                 len,
+        -:  708:                                 flags,
+        -:  709:                                 const_cast<struct sockaddr *> (addr),
+        -:  710:                                 addrlen),
+        -:  711:                       ssize_t, -1);
+        -:  712:#endif /* ACE_LACKS_SENDTO */
+        -:  713:}
+        -:  714:
+        -:  715:ACE_INLINE ssize_t
+        -:  716:ACE_OS::sendto (ACE_HANDLE handle,
+        -:  717:                const iovec *buffers,
+        -:  718:                int buffer_count,
+        -:  719:                size_t &number_of_bytes_sent,
+        -:  720:                int flags,
+        -:  721:                const struct sockaddr *addr,
+        -:  722:                int addrlen,
+        -:  723:                ACE_OVERLAPPED *overlapped,
+        -:  724:                ACE_OVERLAPPED_COMPLETION_FUNC func)
+        -:  725:{
+        -:  726:  ACE_OS_TRACE ("ACE_OS::sendto");
+        -:  727:#if defined (ACE_HAS_WINSOCK2) && (ACE_HAS_WINSOCK2 != 0)
+        -:  728:  DWORD bytes_sent = 0;
+        -:  729:  int result = ::WSASendTo ((SOCKET) handle,
+        -:  730:                            (WSABUF*) buffers,
+        -:  731:                            buffer_count,
+        -:  732:                            &bytes_sent,
+        -:  733:                            flags,
+        -:  734:                            addr,
+        -:  735:                            addrlen,
+        -:  736:                            overlapped,
+        -:  737:                            func);
+        -:  738:  if (result != 0) {
+        -:  739:    ACE_OS::set_errno_to_wsa_last_error ();
+        -:  740:  }
+        -:  741:  number_of_bytes_sent = static_cast<size_t> (bytes_sent);
+        -:  742:  return (ssize_t) result;
+        -:  743:#else
+        -:  744:  ACE_UNUSED_ARG (overlapped);
+        -:  745:  ACE_UNUSED_ARG (func);
+        -:  746:
+        -:  747:  number_of_bytes_sent = 0;
+        -:  748:
+        -:  749:  ssize_t result = 0;
+        -:  750:
+        -:  751:  for (int i = 0; i < buffer_count; ++i)
+        -:  752:    {
+        -:  753:       result = ACE_OS::sendto (handle,
+        -:  754:                                reinterpret_cast<char *> (
+        -:  755:                                                 buffers[i].iov_base),
+        -:  756:                                buffers[i].iov_len,
+        -:  757:                                flags,
+        -:  758:                                addr,
+        -:  759:                                addrlen);
+        -:  760:       if (result == -1)
+        -:  761:         break;
+        -:  762:       number_of_bytes_sent += static_cast<size_t> (result);
+        -:  763:    }
+        -:  764:
+        -:  765:  return result;
+        -:  766:#endif /* defined (ACE_HAS_WINSOCK2) && (ACE_HAS_WINSOCK2 != 0) */
+        -:  767:}
+        -:  768:
+        -:  769:ACE_INLINE ssize_t
+        -:  770:ACE_OS::sendv (ACE_HANDLE handle,
+        -:  771:               const iovec *buffers,
+        -:  772:               int n)
+        -:  773:{
+        -:  774:#if defined (ACE_HAS_WINSOCK2)
+        -:  775:  DWORD bytes_sent = 0;
+        -:  776:  ssize_t result = 0;
+        -:  777:
+        -:  778:  // Winsock 2 has WSASend and can do this directly, but Winsock 1
+        -:  779:  // needs to do the sends one-by-one.
+        -:  780:# if (ACE_HAS_WINSOCK2 != 0) && !defined (ACE_DONT_USE_WSASEND)
+        -:  781:  result = ::WSASend ((SOCKET) handle,
+        -:  782:                      (WSABUF *) buffers,
+        -:  783:                      n,
+        -:  784:                      &bytes_sent,
+        -:  785:                      0,
+        -:  786:                      0,
+        -:  787:                      0);
+        -:  788:  if (result == SOCKET_ERROR)
+        -:  789:    {
+        -:  790:      ACE_OS::set_errno_to_wsa_last_error ();
+        -:  791:      if ((errno != ENOBUFS) ||
+        -:  792:          (bytes_sent != 0))
+        -:  793:        {
+        -:  794:          return -1;
+        -:  795:        }
+        -:  796:      result = sendv_partial_i(handle, buffers, n);
+        -:  797:      if (result == SOCKET_ERROR)
+        -:  798:        {
+        -:  799:          ACE_OS::set_errno_to_wsa_last_error ();
+        -:  800:          return -1;
+        -:  801:        }
+        -:  802:      bytes_sent = static_cast<DWORD>(result);
+        -:  803:    }
+        -:  804:# else
+        -:  805:  for (int i = 0; i < n; ++i)
+        -:  806:    {
+        -:  807:      result = ::send ((SOCKET) handle,
+        -:  808:                       buffers[i].iov_base,
+        -:  809:                       buffers[i].iov_len,
+        -:  810:                       0);
+        -:  811:
+        -:  812:      if (result == SOCKET_ERROR)
+        -:  813:        {
+        -:  814:          // There is a subtle difference in behaviour depending on
+        -:  815:          // whether or not any data was sent.  If no data was sent,
+        -:  816:          // then always return -1.  Otherwise return bytes_sent.
+        -:  817:          // This gives the caller an opportunity to keep track of
+        -:  818:          // bytes that have already been sent.
+        -:  819:          if (bytes_sent > 0)
+        -:  820:            break;
+        -:  821:          else
+        -:  822:            {
+        -:  823:              ACE_OS::set_errno_to_wsa_last_error ();
+        -:  824:              return -1;
+        -:  825:            }
+        -:  826:        }
+        -:  827:      else
+        -:  828:        {
+        -:  829:          // Gets ignored on error anyway
+        -:  830:          bytes_sent += result;
+        -:  831:
+        -:  832:          // If the transfer isn't complete just drop out of the loop.
+        -:  833:          if (result < (int)buffers[i].iov_len)
+        -:  834:            break;
+        -:  835:        }
+        -:  836:    }
+        -:  837:# endif /* ACE_HAS_WINSOCK2 != 0 */
+        -:  838:
+        -:  839:  return (ssize_t) bytes_sent;
+        -:  840:
+        -:  841:#elif defined (ACE_MQX)
+        -:  842:  ssize_t bytes_sent = 0;
+        -:  843:  for (int i = 0; i < n; ++i)
+        -:  844:    {
+        -:  845:      ssize_t result = ACE_OS::send (handle, buffers[i].iov_base,
+        -:  846:                                     buffers[i].iov_len, 0);
+        -:  847:
+        -:  848:      if (result == -1)
+        -:  849:        {
+        -:  850:          // There is a subtle difference in behaviour depending on
+        -:  851:          // whether or not any data was sent.  If no data was sent,
+        -:  852:          // then always return -1.  Otherwise return bytes_sent.
+        -:  853:          // This gives the caller an opportunity to keep track of
+        -:  854:          // bytes that have already been sent.
+        -:  855:          if (bytes_sent > 0)
+        -:  856:            break;
+        -:  857:          else
+        -:  858:            {
+        -:  859:              // errno should already be set from the ACE_OS::send call.
+        -:  860:              return -1;
+        -:  861:            }
+        -:  862:        }
+        -:  863:      else
+        -:  864:        {
+        -:  865:          // Gets ignored on error anyway
+        -:  866:          bytes_sent += result;
+        -:  867:
+        -:  868:          // If the transfer isn't complete just drop out of the loop.
+        -:  869:          if (result < buffers[i].iov_len)
+        -:  870:            break;
+        -:  871:        }
+        -:  872:    }
+        -:  873:
+        -:  874:  return bytes_sent;
+        -:  875:#elif defined (ACE_HAS_SOCK_BUF_SIZE_MAX)
+        -:  876:
+        -:  877:  // Platform limits the maximum socket message size.  Pare down the
+        -:  878:  // iovec, if necessary, to obey the limit.
+        -:  879:  iovec local_iov[ACE_IOV_MAX];
+        -:  880:  long total = 0;
+        -:  881:  long new_total = 0;
+        -:  882:  for (int i = 0; i < n; i++)
+        -:  883:    {
+        -:  884:      local_iov[i].iov_base = buffers[i].iov_base;
+        -:  885:      local_iov[i].iov_len  = buffers[i].iov_len;
+        -:  886:
+        -:  887:      new_total = total + buffers[i].iov_len;
+        -:  888:      if (new_total >= ACE_HAS_SOCK_BUF_SIZE_MAX_VALUE)
+        -:  889:        {
+        -:  890:          local_iov[i].iov_len = ACE_HAS_SOCK_BUF_SIZE_MAX_VALUE - total;
+        -:  891:          n = i+1;
+        -:  892:          break;
+        -:  893:        }
+        -:  894:      total = new_total;
+        -:  895:    }
+        -:  896:  return ACE_OS::writev (handle, local_iov, n);
+        -:  897:
+        -:  898:#else
+        -:  899:  return ACE_OS::writev (handle, buffers, n);
+        -:  900:#endif /* ACE_HAS_WINSOCK2 */
+        -:  901:}
+        -:  902:
+        -:  903:ACE_INLINE int
+     655*:  904:ACE_OS::setsockopt (ACE_HANDLE handle,
+        -:  905:                    int level,
+        -:  906:                    int optname,
+        -:  907:                    const char *optval,
+        -:  908:                    int optlen)
+        -:  909:{
+        -:  910:  ACE_OS_TRACE ("ACE_OS::setsockopt");
+        -:  911:#if defined (ACE_LACKS_SETSOCKOPT)
+        -:  912:  ACE_UNUSED_ARG (handle);
+        -:  913:  ACE_UNUSED_ARG (level);
+        -:  914:  ACE_UNUSED_ARG (optname);
+        -:  915:  ACE_UNUSED_ARG (optval);
+        -:  916:  ACE_UNUSED_ARG (optlen);
+        -:  917:  ACE_NOTSUP_RETURN (-1);
+        -:  918:#else
+        -:  919:#if defined (ACE_HAS_WINSOCK2) && (ACE_HAS_WINSOCK2 != 0) && defined(SO_REUSEPORT)
+        -:  920:  // To work around an inconsistency with Microsofts implementation of
+        -:  921:  // sockets, we will check for SO_REUSEADDR, and ignore it. Winsock
+        -:  922:  // always behaves as if SO_REUSEADDR=1. Some implementations have
+        -:  923:  // the same behaviour as Winsock, but use a new name for
+        -:  924:  // it. SO_REUSEPORT.  If you want the normal behaviour for
+        -:  925:  // SO_REUSEADDR=0, then NT 4 sp4 and later supports
+        -:  926:  // SO_EXCLUSIVEADDRUSE. This also requires using an updated Platform
+        -:  927:  // SDK so it was decided to ignore the option for now. (Especially
+        -:  928:  // since Windows always sets SO_REUSEADDR=1, which we can mimic by doing
+        -:  929:  // nothing.)
+        -:  930:  if (level == SOL_SOCKET) {
+        -:  931:    if (optname == SO_REUSEADDR) {
+        -:  932:      return 0; // Not supported by Winsock
+        -:  933:    }
+        -:  934:    if (optname == SO_REUSEPORT) {
+        -:  935:      optname = SO_REUSEADDR;
+        -:  936:    }
+        -:  937:  }
+        -:  938:#endif /*ACE_HAS_WINSOCK2*/
+        -:  939:
+        -:  940:  int result;
+     655*:  941:  ACE_SOCKCALL (::setsockopt ((ACE_SOCKET) handle,
+        -:  942:                              level,
+        -:  943:                              optname,
+        -:  944:                              (ACE_SOCKOPT_TYPE1) optval,
+        -:  945:                              optlen),
+        -:  946:                int,
+        -:  947:                -1,
+        -:  948:                result);
+        -:  949:#if defined (WSAEOPNOTSUPP)
+        -:  950:  if (result == -1 && (errno == WSAEOPNOTSUPP || errno == WSAENOPROTOOPT))
+        -:  951:#else
+     655*:  952:  if (result == -1)
+        -:  953:#endif /* WSAEOPNOTSUPP */
+    #####:  954:    errno = ENOTSUP;
+     655*:  955:  return result;
+        -:  956:#endif
+        -:  957:}
+        -:  958:
+        -:  959:ACE_INLINE int
+        -:  960:ACE_OS::shutdown (ACE_HANDLE handle, int how)
+        -:  961:{
+        -:  962:  ACE_OS_TRACE ("ACE_OS::shutdown");
+        -:  963:#if defined (ACE_LACKS_SHUTDOWN)
+        -:  964:  ACE_UNUSED_ARG (handle);
+        -:  965:  ACE_UNUSED_ARG (how);
+        -:  966:  ACE_NOTSUP_RETURN (-1);
+        -:  967:#else
+        -:  968:  ACE_SOCKCALL_RETURN (::shutdown ((ACE_SOCKET) handle, how), int, -1);
+        -:  969:#endif /* ACE_LACKS_SHUTDOWN */
+        -:  970:}
+        -:  971:
+        -:  972:ACE_INLINE ACE_HANDLE
+        -:  973:ACE_OS::socket (int domain,
+        -:  974:                int type,
+        -:  975:                int proto)
+        -:  976:{
+        -:  977:  ACE_OS_TRACE ("ACE_OS::socket");
+        -:  978:#if defined (ACE_LACKS_SOCKET)
+        -:  979:  ACE_UNUSED_ARG (domain);
+        -:  980:  ACE_UNUSED_ARG (type);
+        -:  981:  ACE_UNUSED_ARG (proto);
+        -:  982:  ACE_NOTSUP_RETURN (ACE_INVALID_HANDLE);
+        -:  983:#else
+        -:  984:  ACE_SOCKCALL_RETURN (::socket (domain,
+        -:  985:                                 type,
+        -:  986:                                 proto),
+        -:  987:                       ACE_HANDLE,
+        -:  988:                       ACE_INVALID_HANDLE);
+        -:  989:#endif /* ACE_LACKS_SOCKET */
+        -:  990:}
+        -:  991:
+        -:  992:ACE_INLINE ACE_HANDLE
+        -:  993:ACE_OS::socket (int domain,
+        -:  994:                int type,
+        -:  995:                int proto,
+        -:  996:                ACE_Protocol_Info *protocolinfo,
+        -:  997:                ACE_SOCK_GROUP g,
+        -:  998:                u_long flags)
+        -:  999:{
+        -: 1000:  ACE_OS_TRACE ("ACE_OS::socket");
+        -: 1001:
+        -: 1002:#if defined (ACE_HAS_WINSOCK2) && (ACE_HAS_WINSOCK2 != 0)
+        -: 1003:  ACE_SOCKCALL_RETURN (::WSASocket (domain,
+        -: 1004:                                    type,
+        -: 1005:                                    proto,
+        -: 1006:                                    protocolinfo,
+        -: 1007:                                    g,
+        -: 1008:                                    flags),
+        -: 1009:                       ACE_HANDLE,
+        -: 1010:                       ACE_INVALID_HANDLE);
+        -: 1011:#else
+        -: 1012:  ACE_UNUSED_ARG (protocolinfo);
+        -: 1013:  ACE_UNUSED_ARG (g);
+        -: 1014:  ACE_UNUSED_ARG (flags);
+        -: 1015:
+        -: 1016:  return ACE_OS::socket (domain,
+        -: 1017:                         type,
+        -: 1018:                         proto);
+        -: 1019:#endif /* ACE_HAS_WINSOCK2 */
+        -: 1020:}
+        -: 1021:
+        -: 1022:ACE_INLINE int
+        -: 1023:ACE_OS::socketpair (int domain, int type,
+        -: 1024:                    int protocol, ACE_HANDLE sv[2])
+        -: 1025:{
+        -: 1026:  ACE_OS_TRACE ("ACE_OS::socketpair");
+        -: 1027:#if defined (ACE_LACKS_SOCKETPAIR)
+        -: 1028:  ACE_UNUSED_ARG (domain);
+        -: 1029:  ACE_UNUSED_ARG (type);
+        -: 1030:  ACE_UNUSED_ARG (protocol);
+        -: 1031:  ACE_UNUSED_ARG (sv);
+        -: 1032:
+        -: 1033:  ACE_NOTSUP_RETURN (-1);
+        -: 1034:#else
+        -: 1035:  ACE_OSCALL_RETURN (::socketpair (domain, type, protocol, sv),
+        -: 1036:                     int, -1);
+        -: 1037:#endif /* ACE_LACKS_SOCKETPAIR */
+        -: 1038:}
+        -: 1039:
+        -: 1040:#if defined (ACE_LINUX) && defined (ACE_HAS_IPV6)
+        -: 1041:ACE_INLINE unsigned int
+        -: 1042:ACE_OS::if_nametoindex (const char *ifname)
+        -: 1043:{
+        -: 1044:  ACE_OS_TRACE ("ACE_OS::if_nametoindex");
+        -: 1045:#if defined (ACE_LACKS_IF_NAME_INDEX)
+        -: 1046:  ACE_UNUSED_ARG (ifname);
+        -: 1047:  ACE_NOTSUP_RETURN (0);
+        -: 1048:#else
+        -: 1049:  ACE_OSCALL_RETURN (::if_nametoindex (ifname), int, 0);
+        -: 1050:#endif /* ACE_LACKS_IF_NAME_INDEX */
+        -: 1051:}
+        -: 1052:
+        -: 1053:ACE_INLINE char *
+        -: 1054:ACE_OS::if_indextoname (unsigned int ifindex, char *ifname)
+        -: 1055:{
+        -: 1056:  ACE_OS_TRACE ("ACE_OS::if_indextoname");
+        -: 1057:#if defined (ACE_LACKS_IF_NAME_INDEX)
+        -: 1058:  ACE_UNUSED_ARG (ifindex);
+        -: 1059:  ACE_UNUSED_ARG (ifname);
+        -: 1060:  ACE_NOTSUP_RETURN (0);
+        -: 1061:#else
+        -: 1062:  ACE_OSCALL_RETURN (::if_indextoname (ifindex, ifname), char *, 0);
+        -: 1063:#endif /* ACE_LACKS_IF_NAME_INDEX */
+        -: 1064:}
+        -: 1065:
+        -: 1066:ACE_INLINE struct if_nameindex *
+        -: 1067:ACE_OS::if_nameindex (void)
+        -: 1068:{
+        -: 1069:  ACE_OS_TRACE ("ACE_OS::if_nameindex");
+        -: 1070:#if defined (ACE_LACKS_IF_NAME_INDEX)
+        -: 1071:  ACE_NOTSUP_RETURN (0);
+        -: 1072:#else
+        -: 1073:  ACE_OSCALL_RETURN (::if_nameindex (), struct if_nameindex *, 0);
+        -: 1074:#endif /* ACE_LACKS_IF_NAME_INDEX */
+        -: 1075:}
+        -: 1076:
+        -: 1077:ACE_INLINE void
+        -: 1078:ACE_OS::if_freenameindex (struct if_nameindex *ptr)
+        -: 1079:{
+        -: 1080:  ACE_OS_TRACE ("ACE_OS::if_freenameindex");
+        -: 1081:#if defined (ACE_LACKS_IF_NAME_INDEX)
+        -: 1082:  ACE_UNUSED_ARG (ptr);
+        -: 1083:#else
+        -: 1084:  if (ptr != 0)
+        -: 1085:    ::if_freenameindex (ptr);
+        -: 1086:#endif /* ACE_LACKS_IF_NAME_INDEX */
+        -: 1087:}
+        -: 1088:#endif /* ACE_LINUX && ACE_HAS_IPV6 */
+        -: 1089:
+        -: 1090:ACE_END_VERSIONED_NAMESPACE_DECL

@@ -1,0 +1,548 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Hash_Map_Manager_T.cpp
+        -:    0:Programs:70
+        -:    1:
+        -:    2://=============================================================================
+        -:    3:/**
+        -:    4: *  @file    Hash_Map_Manager_T.cpp
+        -:    5: *
+        -:    6: *  $Id$
+        -:    7: *
+        -:    8: *  @author Douglas C. Schmidt <schmidt@cse.wustl.edu>
+        -:    9: */
+        -:   10://=============================================================================
+        -:   11:
+        -:   12:
+        -:   13:#ifndef ACE_HASH_MAP_MANAGER_T_CPP
+        -:   14:#define ACE_HASH_MAP_MANAGER_T_CPP
+        -:   15:
+        -:   16:#include "ace/Hash_Map_Manager_T.h"
+        -:   17:
+        -:   18:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   19:# pragma once
+        -:   20:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   21:
+        -:   22:#if !defined (__ACE_INLINE__)
+        -:   23:# include "ace/Hash_Map_Manager_T.inl"
+        -:   24:#endif /* __ACE_INLINE__ */
+        -:   25:
+        -:   26:#include "ace/Malloc_Base.h"
+        -:   27:
+        -:   28:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   29:
+        -:   30:ACE_ALLOC_HOOK_DEFINE_Tc5(ACE_Hash_Map_Manager_Ex)
+        -:   31:ACE_ALLOC_HOOK_DEFINE_Tc5(ACE_Hash_Map_Iterator_Base_Ex)
+        -:   32:ACE_ALLOC_HOOK_DEFINE_Tc5(ACE_Hash_Map_Iterator_Ex)
+        -:   33:ACE_ALLOC_HOOK_DEFINE_Tc5(ACE_Hash_Map_Const_Iterator_Base_Ex)
+        -:   34:ACE_ALLOC_HOOK_DEFINE_Tc5(ACE_Hash_Map_Const_Iterator_Ex)
+        -:   35:ACE_ALLOC_HOOK_DEFINE_Tc5(ACE_Hash_Map_Reverse_Iterator_Ex)
+        -:   36:ACE_ALLOC_HOOK_DEFINE_Tc5(ACE_Hash_Map_Const_Reverse_Iterator_Ex)
+        -:   37:
+        -:   38:template <class EXT_ID, class INT_ID>
+    #####:   39:ACE_Hash_Map_Entry<EXT_ID, INT_ID>::ACE_Hash_Map_Entry (ACE_Hash_Map_Entry<EXT_ID, INT_ID> *next,
+        -:   40:                                                        ACE_Hash_Map_Entry<EXT_ID, INT_ID> *prev)
+        -:   41:  : next_ (next),
+    #####:   42:    prev_ (prev)
+        -:   43:{
+    #####:   44:}
+        -:   45:
+        -:   46:template <class EXT_ID, class INT_ID>
+    #####:   47:ACE_Hash_Map_Entry<EXT_ID, INT_ID>::ACE_Hash_Map_Entry (const EXT_ID &ext_id,
+        -:   48:                                                        const INT_ID &int_id,
+        -:   49:                                                        ACE_Hash_Map_Entry<EXT_ID, INT_ID> *next,
+        -:   50:                                                        ACE_Hash_Map_Entry<EXT_ID, INT_ID> *prev)
+        -:   51:  : ext_id_ (ext_id),
+        -:   52:    int_id_ (int_id),
+        -:   53:    next_ (next),
+    #####:   54:    prev_ (prev)
+        -:   55:{
+    #####:   56:}
+        -:   57:
+        -:   58:template <class EXT_ID, class INT_ID>
+    #####:   59:ACE_Hash_Map_Entry<EXT_ID, INT_ID>::~ACE_Hash_Map_Entry (void)
+        -:   60:{
+    #####:   61:}
+        -:   62:
+        -:   63:template <class EXT_ID, class INT_ID> EXT_ID &
+        -:   64:ACE_Hash_Map_Entry<EXT_ID, INT_ID>::key ()
+        -:   65:{
+        -:   66:  return ext_id_;
+        -:   67:}
+        -:   68:
+        -:   69:template <class EXT_ID, class INT_ID> const EXT_ID &
+        -:   70:ACE_Hash_Map_Entry<EXT_ID, INT_ID>::key () const
+        -:   71:{
+        -:   72:  return ext_id_;
+        -:   73:}
+        -:   74:
+        -:   75:template <class EXT_ID, class INT_ID> INT_ID &
+        -:   76:ACE_Hash_Map_Entry<EXT_ID, INT_ID>::item ()
+        -:   77:{
+        -:   78:  return int_id_;
+        -:   79:}
+        -:   80:
+        -:   81:template <class EXT_ID, class INT_ID> const INT_ID &
+        -:   82:ACE_Hash_Map_Entry<EXT_ID, INT_ID>::item () const
+        -:   83:{
+        -:   84:  return int_id_;
+        -:   85:}
+        -:   86:
+        -:   87:template <class EXT_ID, class INT_ID> void
+        -:   88:ACE_Hash_Map_Entry<EXT_ID, INT_ID>::dump (void) const
+        -:   89:{
+        -:   90:#if defined (ACE_HAS_DUMP)
+        -:   91:  ACELIB_DEBUG ((LM_DEBUG, ACE_BEGIN_DUMP, this));
+        -:   92:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("next_ = %d"), this->next_));
+        -:   93:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("prev_ = %d"), this->prev_));
+        -:   94:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:   95:#endif /* ACE_HAS_DUMP */
+        -:   96:}
+        -:   97:
+        -:   98:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> void
+        -:   99:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::dump (void) const
+        -:  100:{
+        -:  101:#if defined (ACE_HAS_DUMP)
+        -:  102:  ACELIB_DEBUG ((LM_DEBUG, ACE_BEGIN_DUMP, this));
+        -:  103:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("total_size_ = %d\n"), this->total_size_));
+        -:  104:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("cur_size_ = %d\n"), this->cur_size_));
+        -:  105:  this->table_allocator_->dump ();
+        -:  106:  this->entry_allocator_->dump ();
+        -:  107:  this->lock_.dump ();
+        -:  108:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:  109:#endif /* ACE_HAS_DUMP */
+        -:  110:}
+        -:  111:
+        -:  112:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+    #####:  113:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::create_buckets (size_t size)
+        -:  114:{
+    #####:  115:  size_t bytes = size * sizeof (ACE_Hash_Map_Entry<EXT_ID, INT_ID>);
+    #####:  116:  void *ptr = 0;
+        -:  117:
+    #####:  118:  ACE_ALLOCATOR_RETURN (ptr,
+        -:  119:                        this->table_allocator_->malloc (bytes),
+        -:  120:                        -1);
+        -:  121:
+    #####:  122:  this->table_ = (ACE_Hash_Map_Entry<EXT_ID, INT_ID> *) ptr;
+        -:  123:
+    #####:  124:  this->total_size_ = size;
+        -:  125:
+        -:  126:  // Initialize each entry in the hash table to be a circular linked
+        -:  127:  // list with the dummy node in the front serving as the anchor of
+        -:  128:  // the list.
+    #####:  129:  for (size_t i = 0; i < size; i++)
+    #####:  130:    new (&this->table_[i]) ACE_Hash_Map_Entry<EXT_ID, INT_ID> (&this->table_[i],
+    #####:  131:                                                               &this->table_[i]);
+    #####:  132:  return 0;
+        -:  133:}
+        -:  134:
+        -:  135:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+    #####:  136:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::open (size_t size,
+        -:  137:                                                                                 ACE_Allocator *table_alloc,
+        -:  138:                                                                                 ACE_Allocator *entry_alloc)
+        -:  139:{
+    #####:  140:  ACE_WRITE_GUARD_RETURN (ACE_LOCK, ace_mon, this->lock_, -1);
+        -:  141:
+        -:  142:  // Calling this->close_i () to ensure we release previous allocated
+        -:  143:  // memory before allocating new one.
+    #####:  144:  this->close_i ();
+        -:  145:
+    #####:  146:  if (table_alloc == 0)
+    #####:  147:    table_alloc = ACE_Allocator::instance ();
+        -:  148:
+    #####:  149:  this->table_allocator_ = table_alloc;
+        -:  150:
+    #####:  151:  if (entry_alloc == 0)
+    #####:  152:    entry_alloc = table_alloc;
+        -:  153:
+    #####:  154:  this->entry_allocator_ = entry_alloc;
+        -:  155:
+        -:  156:  // This assertion is here to help track a situation that shouldn't
+        -:  157:  // happen, but did with Sun C++ 4.1 (before a change to this class
+        -:  158:  // was made: it used to have an enum that was supposed to be defined
+        -:  159:  // to be ACE_DEFAULT_MAP_SIZE, but instead was defined to be 0).
+    #####:  160:  if (size == 0)
+    #####:  161:    return -1;
+        -:  162:
+    #####:  163:  return this->create_buckets (size);
+        -:  164:}
+        -:  165:
+        -:  166:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+    #####:  167:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::close_i (void)
+        -:  168:{
+        -:  169:  // Protect against "double-deletion" in case the destructor also
+        -:  170:  // gets called.
+    #####:  171:  if (this->table_ != 0)
+        -:  172:    {
+        -:  173:      // Remove all the entries.
+    #####:  174:      this->unbind_all_i ();
+        -:  175:
+        -:  176:      // Iterate through the buckets cleaning up the sentinels.
+    #####:  177:      for (size_t i = 0; i < this->total_size_; i++)
+        -:  178:        {
+        -:  179:          // Destroy the dummy entry.
+    #####:  180:          ACE_Hash_Map_Entry<EXT_ID, INT_ID> *entry = &this->table_[i];
+        -:  181:
+        -:  182:          // The second argument results in a no-op instead of
+        -:  183:          // deallocation.
+    #####:  184:          ACE_DES_FREE_TEMPLATE2 (entry, ACE_NOOP,
+        -:  185:                                  ACE_Hash_Map_Entry, EXT_ID, INT_ID);
+        -:  186:        }
+        -:  187:
+        -:  188:      // Reset size.
+    #####:  189:      this->total_size_ = 0;
+        -:  190:
+        -:  191:      // Free table memory.
+    #####:  192:      this->table_allocator_->free (this->table_);
+        -:  193:
+        -:  194:      // Should be done last...
+    #####:  195:      this->table_ = 0;
+        -:  196:    }
+        -:  197:
+    #####:  198:  return 0;
+        -:  199:}
+        -:  200:
+        -:  201:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+    #####:  202:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::unbind_all_i (void)
+        -:  203:{
+        -:  204:  // Iterate through the entire map calling the destuctor of each
+        -:  205:  // <ACE_Hash_Map_Entry>.
+    #####:  206:  for (size_t i = 0; i < this->total_size_; i++)
+        -:  207:    {
+    #####:  208:      for (ACE_Hash_Map_Entry<EXT_ID, INT_ID> *temp_ptr = this->table_[i].next_;
+    #####:  209:           temp_ptr != &this->table_[i];
+        -:  210:           )
+        -:  211:        {
+    #####:  212:          ACE_Hash_Map_Entry<EXT_ID, INT_ID> *hold_ptr = temp_ptr;
+    #####:  213:          temp_ptr = temp_ptr->next_;
+        -:  214:
+        -:  215:          // Explicitly call the destructor.
+    #####:  216:          ACE_DES_FREE_TEMPLATE2 (hold_ptr, this->entry_allocator_->free,
+        -:  217:                                  ACE_Hash_Map_Entry, EXT_ID, INT_ID);
+        -:  218:        }
+        -:  219:
+        -:  220:      // Restore the sentinel.
+    #####:  221:      this->table_[i].next_ = &this->table_[i];
+    #####:  222:      this->table_[i].prev_ = &this->table_[i];
+        -:  223:    }
+        -:  224:
+    #####:  225:  this->cur_size_ = 0;
+        -:  226:
+    #####:  227:  return 0;
+        -:  228:}
+        -:  229:
+        -:  230:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+    #####:  231:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::bind_i (const EXT_ID &ext_id,
+        -:  232:                                                                                   const INT_ID &int_id,
+        -:  233:                                                                                   ACE_Hash_Map_Entry<EXT_ID, INT_ID> *&entry)
+        -:  234:{
+    #####:  235:  size_t loc = 0;
+    #####:  236:  if (this->shared_find (ext_id, entry, loc) == -1)
+        -:  237:    {
+    #####:  238:      void *ptr = 0;
+        -:  239:      // Not found.
+    #####:  240:      ACE_ALLOCATOR_RETURN (ptr,
+        -:  241:                            this->entry_allocator_->malloc (sizeof (ACE_Hash_Map_Entry<EXT_ID, INT_ID>)),
+        -:  242:                            -1);
+        -:  243:
+    #####:  244:      entry = new (ptr) ACE_Hash_Map_Entry<EXT_ID, INT_ID> (ext_id,
+        -:  245:                                                            int_id,
+    #####:  246:                                                            this->table_[loc].next_,
+    #####:  247:                                                            &this->table_[loc]);
+    #####:  248:      this->table_[loc].next_ = entry;
+    #####:  249:      entry->next_->prev_ = entry;
+    #####:  250:      ++this->cur_size_;
+    #####:  251:      return 0;
+        -:  252:    }
+        -:  253:  else
+    #####:  254:    return 1;
+        -:  255:}
+        -:  256:
+        -:  257:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+        -:  258:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::trybind_i (const EXT_ID &ext_id,
+        -:  259:                                                                                      INT_ID &int_id,
+        -:  260:                                                                                      ACE_Hash_Map_Entry<EXT_ID, INT_ID> *&entry)
+        -:  261:{
+        -:  262:  size_t loc = 0;
+        -:  263:  if (this->shared_find (ext_id, entry, loc) == -1)
+        -:  264:    {
+        -:  265:      // Not found.
+        -:  266:      void *ptr = 0;
+        -:  267:      ACE_ALLOCATOR_RETURN (ptr,
+        -:  268:                            this->entry_allocator_->malloc (sizeof (ACE_Hash_Map_Entry<EXT_ID, INT_ID>)),
+        -:  269:                            -1);
+        -:  270:
+        -:  271:      entry = new (ptr) ACE_Hash_Map_Entry<EXT_ID, INT_ID> (ext_id,
+        -:  272:                                                            int_id,
+        -:  273:                                                            this->table_[loc].next_,
+        -:  274:                                                            &this->table_[loc]);
+        -:  275:      this->table_[loc].next_ = entry;
+        -:  276:      entry->next_->prev_ = entry;
+        -:  277:      ++this->cur_size_;
+        -:  278:      return 0;
+        -:  279:    }
+        -:  280:  else
+        -:  281:    return 1;
+        -:  282:}
+        -:  283:
+        -:  284:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+        -:  285:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::unbind_i (const EXT_ID &ext_id,
+        -:  286:                                                                                     INT_ID &int_id)
+        -:  287:{
+        -:  288:  ACE_Hash_Map_Entry<EXT_ID, INT_ID> *temp = 0;
+        -:  289:
+        -:  290:  size_t loc = 0;
+        -:  291:  if (this->shared_find (ext_id, temp, loc) == -1)
+        -:  292:    {
+        -:  293:      errno = ENOENT;
+        -:  294:      return -1;
+        -:  295:    }
+        -:  296:
+        -:  297:  int_id = temp->int_id_;
+        -:  298:
+        -:  299:  return this->unbind_i (temp);
+        -:  300:}
+        -:  301:
+        -:  302:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+        -:  303:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::unbind_i (ACE_Hash_Map_Entry<EXT_ID, INT_ID> *entry)
+        -:  304:{
+        -:  305:  entry->next_->prev_ = entry->prev_;
+        -:  306:  entry->prev_->next_ = entry->next_;
+        -:  307:
+        -:  308:  // Explicitly call the destructor.
+        -:  309:  ACE_DES_FREE_TEMPLATE2 (entry, this->entry_allocator_->free,
+        -:  310:                          ACE_Hash_Map_Entry, EXT_ID, INT_ID);
+        -:  311:
+        -:  312:  --this->cur_size_;
+        -:  313:  return 0;
+        -:  314:}
+        -:  315:
+        -:  316:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+    #####:  317:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::shared_find (const EXT_ID &ext_id,
+        -:  318:                                                                                        ACE_Hash_Map_Entry<EXT_ID, INT_ID> *&entry,
+        -:  319:                                                                                        size_t &loc)
+        -:  320:{
+    #####:  321:  if (this->total_size_ == 0)
+        -:  322:    {
+    #####:  323:      errno = ENOENT;
+    #####:  324:      return -1;
+        -:  325:    }
+        -:  326:
+    #####:  327:  loc = this->hash (ext_id) % this->total_size_;
+        -:  328:
+    #####:  329:  ACE_Hash_Map_Entry<EXT_ID, INT_ID> *temp = this->table_[loc].next_;
+        -:  330:
+    #####:  331:  while (temp != &this->table_[loc] && this->equal (temp->ext_id_, ext_id) == 0)
+    #####:  332:    temp = temp->next_;
+        -:  333:
+    #####:  334:  if (temp == &this->table_[loc])
+        -:  335:    {
+    #####:  336:      errno = ENOENT;
+    #####:  337:      return -1;
+        -:  338:    }
+        -:  339:  else
+        -:  340:    {
+    #####:  341:      entry = temp;
+    #####:  342:      return 0;
+        -:  343:    }
+        -:  344:}
+        -:  345:
+        -:  346:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+        -:  347:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::rebind_i (const EXT_ID &ext_id,
+        -:  348:                                                                                     const INT_ID &int_id,
+        -:  349:                                                                                     ACE_Hash_Map_Entry<EXT_ID, INT_ID> *&entry)
+        -:  350:{
+        -:  351:  size_t dummy = 0;
+        -:  352:  if (this->shared_find (ext_id, entry, dummy) == -1)
+        -:  353:    return this->bind_i (ext_id, int_id);
+        -:  354:  else
+        -:  355:    {
+        -:  356:      entry->ext_id_ = ext_id;
+        -:  357:      entry->int_id_ = int_id;
+        -:  358:      return 1;
+        -:  359:    }
+        -:  360:}
+        -:  361:
+        -:  362:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+        -:  363:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::rebind_i (const EXT_ID &ext_id,
+        -:  364:                                                                                     const INT_ID &int_id,
+        -:  365:                                                                                     INT_ID &old_int_id,
+        -:  366:                                                                                     ACE_Hash_Map_Entry<EXT_ID, INT_ID> *&entry)
+        -:  367:{
+        -:  368:  size_t dummy = 0;
+        -:  369:  if (this->shared_find (ext_id, entry, dummy) == -1)
+        -:  370:    return this->bind_i (ext_id, int_id);
+        -:  371:  else
+        -:  372:    {
+        -:  373:      old_int_id = entry->int_id_;
+        -:  374:      entry->ext_id_ = ext_id;
+        -:  375:      entry->int_id_ = int_id;
+        -:  376:      return 1;
+        -:  377:    }
+        -:  378:}
+        -:  379:
+        -:  380:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+        -:  381:ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::rebind_i (const EXT_ID &ext_id,
+        -:  382:                                                                                     const INT_ID &int_id,
+        -:  383:                                                                                     EXT_ID &old_ext_id,
+        -:  384:                                                                                     INT_ID &old_int_id,
+        -:  385:                                                                                     ACE_Hash_Map_Entry<EXT_ID, INT_ID> *&entry)
+        -:  386:{
+        -:  387:  size_t dummy = 0;
+        -:  388:  if (this->shared_find (ext_id, entry, dummy) == -1)
+        -:  389:    return this->bind_i (ext_id, int_id);
+        -:  390:  else
+        -:  391:    {
+        -:  392:      old_ext_id = entry->ext_id_;
+        -:  393:      old_int_id = entry->int_id_;
+        -:  394:      entry->ext_id_ = ext_id;
+        -:  395:      entry->int_id_ = int_id;
+        -:  396:      return 1;
+        -:  397:    }
+        -:  398:}
+        -:  399:
+        -:  400:// ------------------------------------------------------------
+        -:  401:
+        -:  402:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> void
+        -:  403:ACE_Hash_Map_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::dump_i (void) const
+        -:  404:{
+        -:  405:  ACE_TRACE ("ACE_Hash_Map_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::dump_i");
+        -:  406:
+        -:  407:  ACELIB_DEBUG ((LM_DEBUG, ACE_BEGIN_DUMP, this));
+        -:  408:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("index_ = %d "), this->index_));
+        -:  409:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("next_ = %x"), this->next_));
+        -:  410:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:  411:}
+        -:  412:
+        -:  413:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+    #####:  414:ACE_Hash_Map_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::forward_i (void)
+        -:  415:{
+        -:  416:  ACE_TRACE ("ACE_Hash_Map_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::forward_i");
+        -:  417:
+    #####:  418:  if (this->map_man_->table_ == 0)
+    #####:  419:    return -1;
+        -:  420:  // Handle initial case specially.
+    #####:  421:  else if (this->index_ == -1)
+        -:  422:    {
+    #####:  423:      this->index_++;
+    #####:  424:      return this->forward_i ();
+        -:  425:    }
+    #####:  426:  else if (this->index_ >= static_cast<ssize_t> (this->map_man_->total_size_))
+    #####:  427:    return 0;
+        -:  428:
+    #####:  429:  this->next_ = this->next_->next_;
+    #####:  430:  if (this->next_ == &this->map_man_->table_[this->index_])
+        -:  431:    {
+    #####:  432:      while (++this->index_ < static_cast<ssize_t> (this->map_man_->total_size_))
+        -:  433:        {
+    #####:  434:          this->next_ = this->map_man_->table_[this->index_].next_;
+    #####:  435:          if (this->next_ != &this->map_man_->table_[this->index_])
+    #####:  436:            break;
+        -:  437:        }
+        -:  438:    }
+        -:  439:
+    #####:  440:  return this->index_ < static_cast<ssize_t> (this->map_man_->total_size_);
+        -:  441:}
+        -:  442:
+        -:  443:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+        -:  444:ACE_Hash_Map_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::reverse_i (void)
+        -:  445:{
+        -:  446:  ACE_TRACE ("ACE_Hash_Map_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::reverse_i");
+        -:  447:
+        -:  448:  if (this->map_man_->table_ == 0)
+        -:  449:    return -1;
+        -:  450:  else if (this->index_ == static_cast<ssize_t> (this->map_man_->total_size_))
+        -:  451:    {
+        -:  452:      --this->index_;
+        -:  453:      return this->reverse_i ();
+        -:  454:    }
+        -:  455:  else if (this->index_ < 0)
+        -:  456:    return 0;
+        -:  457:
+        -:  458:  this->next_ = this->next_->prev_;
+        -:  459:  if (this->next_ == &this->map_man_->table_[this->index_])
+        -:  460:    {
+        -:  461:      while (--this->index_ >= 0)
+        -:  462:        {
+        -:  463:          this->next_ = this->map_man_->table_[this->index_].prev_;
+        -:  464:          if (this->next_ != &this->map_man_->table_[this->index_])
+        -:  465:            break;
+        -:  466:        }
+        -:  467:    }
+        -:  468:
+        -:  469:  return this->index_ >= 0;
+        -:  470:}
+        -:  471:
+        -:  472:// ------------------------------------------------------------
+        -:  473:
+        -:  474:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> void
+        -:  475:ACE_Hash_Map_Const_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::dump_i (void) const
+        -:  476:{
+        -:  477:  ACE_TRACE ("ACE_Hash_Map_Const_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::dump_i");
+        -:  478:
+        -:  479:  ACELIB_DEBUG ((LM_DEBUG, ACE_BEGIN_DUMP, this));
+        -:  480:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("index_ = %d "), this->index_));
+        -:  481:  ACELIB_DEBUG ((LM_DEBUG,  ACE_TEXT ("next_ = %x"), this->next_));
+        -:  482:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:  483:}
+        -:  484:
+        -:  485:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+        -:  486:ACE_Hash_Map_Const_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::forward_i (void)
+        -:  487:{
+        -:  488:  ACE_TRACE ("ACE_Hash_Map_Const_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::forward_i");
+        -:  489:
+        -:  490:  if (this->map_man_->table_ == 0)
+        -:  491:    return -1;
+        -:  492:  // Handle initial case specially.
+        -:  493:  else if (this->index_ == -1)
+        -:  494:    {
+        -:  495:      ++this->index_;
+        -:  496:      return this->forward_i ();
+        -:  497:    }
+        -:  498:  else if (this->index_ >= (ssize_t) this->map_man_->total_size_)
+        -:  499:    return 0;
+        -:  500:
+        -:  501:  this->next_ = this->next_->next_;
+        -:  502:  if (this->next_ == &this->map_man_->table_[this->index_])
+        -:  503:    {
+        -:  504:      while (++this->index_ < (ssize_t) this->map_man_->total_size_)
+        -:  505:        {
+        -:  506:          this->next_ = this->map_man_->table_[this->index_].next_;
+        -:  507:          if (this->next_ != &this->map_man_->table_[this->index_])
+        -:  508:            break;
+        -:  509:        }
+        -:  510:    }
+        -:  511:
+        -:  512:  return this->index_ < (ssize_t) this->map_man_->total_size_;
+        -:  513:}
+        -:  514:
+        -:  515:template <class EXT_ID, class INT_ID, class HASH_KEY, class COMPARE_KEYS, class ACE_LOCK> int
+        -:  516:ACE_Hash_Map_Const_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::reverse_i (void)
+        -:  517:{
+        -:  518:  ACE_TRACE ("ACE_Hash_Map_Const_Iterator_Base_Ex<EXT_ID, INT_ID, HASH_KEY, COMPARE_KEYS, ACE_LOCK>::reverse_i");
+        -:  519:
+        -:  520:  if (this->map_man_->table_ == 0)
+        -:  521:    return -1;
+        -:  522:  else if (this->index_ == (ssize_t) this->map_man_->total_size_)
+        -:  523:    {
+        -:  524:      --this->index_;
+        -:  525:      return this->reverse_i ();
+        -:  526:    }
+        -:  527:  else if (this->index_ < 0)
+        -:  528:    return 0;
+        -:  529:
+        -:  530:  this->next_ = this->next_->prev_;
+        -:  531:  if (this->next_ == &this->map_man_->table_[this->index_])
+        -:  532:    {
+        -:  533:      while (--this->index_ >= 0)
+        -:  534:        {
+        -:  535:          this->next_ = this->map_man_->table_[this->index_].prev_;
+        -:  536:          if (this->next_ != &this->map_man_->table_[this->index_])
+        -:  537:            break;
+        -:  538:        }
+        -:  539:    }
+        -:  540:
+        -:  541:  return this->index_ >= 0;
+        -:  542:}
+        -:  543:
+        -:  544:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  545:
+        -:  546:#endif /* ACE_HASH_MAP_MANAGER_T_CPP */

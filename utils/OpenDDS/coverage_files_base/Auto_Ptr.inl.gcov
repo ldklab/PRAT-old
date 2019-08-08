@@ -1,0 +1,186 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Auto_Ptr.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:#include "ace/Global_Macros.h"
+        -:    6:
+        -:    7:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:    8:# include "ace/Malloc_Base.h"
+        -:    9:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:   10:
+        -:   11:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   12:
+        -:   13:template<class X> ACE_INLINE void
+        -:   14:ACE_Auto_Basic_Ptr<X>::dump (void) const
+        -:   15:{
+        -:   16:#if defined (ACE_HAS_DUMP)
+        -:   17:  ACE_TRACE ("ACE_Auto_Basic_Ptr<X>::dump");
+        -:   18:#endif /* ACE_HAS_DUMP */
+        -:   19:}
+        -:   20:
+        -:   21:template<class X> ACE_INLINE void
+        -:   22:ACE_Auto_Basic_Array_Ptr<X>::dump (void) const
+        -:   23:{
+        -:   24:#if defined (ACE_HAS_DUMP)
+        -:   25:  ACE_TRACE ("ACE_Auto_Basic_Array_Ptr<X>::dump");
+        -:   26:#endif /* ACE_HAS_DUMP */
+        -:   27:}
+        -:   28:
+        -:   29:template<class X> ACE_INLINE
+        -:   30:ACE_Auto_Basic_Ptr<X>::ACE_Auto_Basic_Ptr (ACE_Auto_Basic_Ptr<X> &rhs)
+        -:   31:  : p_ (rhs.release ())
+        -:   32:{
+        -:   33:  ACE_TRACE ("ACE_Auto_Basic_Ptr<X>::ACE_Auto_Basic_Ptr");
+        -:   34:}
+        -:   35:
+        -:   36:template<class X> ACE_INLINE X *
+    #####:   37:ACE_Auto_Basic_Ptr<X>::get (void) const
+        -:   38:{
+        -:   39:  ACE_TRACE ("ACE_Auto_Basic_Ptr<X>::get");
+    #####:   40:  return this->p_;
+        -:   41:}
+        -:   42:
+        -:   43:template<class X> ACE_INLINE X *
+    #####:   44:ACE_Auto_Basic_Ptr<X>::release (void)
+        -:   45:{
+        -:   46:  ACE_TRACE ("ACE_Auto_Basic_Ptr<X>::release");
+    #####:   47:  X *old = this->p_;
+    #####:   48:  this->p_ = 0;
+    #####:   49:  return old;
+        -:   50:}
+        -:   51:
+        -:   52:template<class X> ACE_INLINE void
+        -:   53:ACE_Auto_Basic_Ptr<X>::reset (X *p)
+        -:   54:{
+        -:   55:  ACE_TRACE ("ACE_Auto_Basic_Ptr<X>::reset");
+        -:   56:  if (this->get () != p)
+        -:   57:    delete this->get ();
+        -:   58:  this->p_ = p;
+        -:   59:}
+        -:   60:
+        -:   61:template<class X> ACE_INLINE ACE_Auto_Basic_Ptr<X> &
+        -:   62:ACE_Auto_Basic_Ptr<X>::operator= (ACE_Auto_Basic_Ptr<X> &rhs)
+        -:   63:{
+        -:   64:  ACE_TRACE ("ACE_Auto_Basic_Ptr<X>::operator=");
+        -:   65:  if (this != &rhs)
+        -:   66:    {
+        -:   67:      this->reset (rhs.release ());
+        -:   68:    }
+        -:   69:  return *this;
+        -:   70:}
+        -:   71:
+        -:   72:template<class X> ACE_INLINE
+    #####:   73:ACE_Auto_Basic_Ptr<X>::~ACE_Auto_Basic_Ptr (void)
+        -:   74:{
+        -:   75:  ACE_TRACE ("ACE_Auto_Basic_Ptr<X>::~ACE_Auto_Basic_Ptr");
+    #####:   76:  delete this->get ();
+    #####:   77:}
+        -:   78:
+        -:   79:template<class X> ACE_INLINE X &
+        -:   80:ACE_Auto_Basic_Ptr<X>::operator *() const
+        -:   81:{
+        -:   82:  ACE_TRACE ("ACE_Auto_Basic_Ptr<X>::operator *()");
+        -:   83:  return *this->get ();
+        -:   84:}
+        -:   85:
+        -:   86:#if defined (ACE_LACKS_AUTO_PTR) || \
+        -:   87:    !defined (ACE_HAS_STANDARD_CPP_LIBRARY) || \
+        -:   88:             (ACE_HAS_STANDARD_CPP_LIBRARY == 0)
+        -:   89:
+        -:   90:template<class X> ACE_INLINE X *
+        -:   91:auto_ptr<X>::operator-> () const
+        -:   92:{
+        -:   93:  ACE_TRACE ("auto_ptr<X>::operator->");
+        -:   94:  return this->get ();
+        -:   95:}
+        -:   96:
+        -:   97:#endif /* ACE_HAS_STANDARD_CPP_LIBRARY */
+        -:   98:
+        -:   99:template<class X> ACE_INLINE X *
+    #####:  100:ACE_Auto_Ptr<X>::operator-> () const
+        -:  101:{
+        -:  102:  ACE_TRACE ("ACE_Auto_Ptr<X>::operator->");
+    #####:  103:  return this->get ();
+        -:  104:}
+        -:  105:
+        -:  106:template<class X> ACE_INLINE X *
+        -:  107:ACE_Auto_Basic_Array_Ptr<X>::get (void) const
+        -:  108:{
+        -:  109:  ACE_TRACE ("ACE_Auto_Basic_Array_Ptr<X>::get");
+        -:  110:  return this->p_;
+        -:  111:}
+        -:  112:
+        -:  113:template<class X> ACE_INLINE X *
+        -:  114:ACE_Auto_Basic_Array_Ptr<X>::release (void)
+        -:  115:{
+        -:  116:  ACE_TRACE ("ACE_Auto_Basic_Array_Ptr<X>::release");
+        -:  117:  X *old = this->p_;
+        -:  118:  this->p_ = 0;
+        -:  119:  return old;
+        -:  120:}
+        -:  121:
+        -:  122:template<class X> ACE_INLINE void
+        -:  123:ACE_Auto_Basic_Array_Ptr<X>::reset (X *p)
+        -:  124:{
+        -:  125:  ACE_TRACE ("ACE_Auto_Basic_Array_Ptr<X>::reset");
+        -:  126:  if (this->get () != p)
+        -:  127:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  128:    ACE_Allocator::instance()->free(this->get ());
+        -:  129:#else
+        -:  130:    delete [] this->get ();
+        -:  131:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:  132:
+        -:  133:  this->p_ = p;
+        -:  134:}
+        -:  135:
+        -:  136:template<class X> ACE_INLINE
+        -:  137:ACE_Auto_Basic_Array_Ptr<X>::ACE_Auto_Basic_Array_Ptr (ACE_Auto_Basic_Array_Ptr<X> &rhs)
+        -:  138:  : p_ (rhs.release ())
+        -:  139:{
+        -:  140:  ACE_TRACE ("ACE_Auto_Basic_Array_Ptr<X>::ACE_Auto_Basic_Array_Ptr");
+        -:  141:}
+        -:  142:
+        -:  143:template<class X> ACE_INLINE ACE_Auto_Basic_Array_Ptr<X> &
+        -:  144:ACE_Auto_Basic_Array_Ptr<X>::operator= (ACE_Auto_Basic_Array_Ptr<X> &rhs)
+        -:  145:{
+        -:  146:  ACE_TRACE ("ACE_Auto_Basic_Array_Ptr<X>::operator=");
+        -:  147:  if (this != &rhs)
+        -:  148:    {
+        -:  149:      this->reset (rhs.release ());
+        -:  150:    }
+        -:  151:  return *this;
+        -:  152:}
+        -:  153:
+        -:  154:template<class X> ACE_INLINE
+        -:  155:ACE_Auto_Basic_Array_Ptr<X>::~ACE_Auto_Basic_Array_Ptr (void)
+        -:  156:{
+        -:  157:  ACE_TRACE ("ACE_Auto_Basic_Array_Ptr<X>::~ACE_Auto_Basic_Array_Ptr");
+        -:  158:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  159:  ACE_Allocator::instance()->free(this->get ());
+        -:  160:#else
+        -:  161:  delete [] this->get ();
+        -:  162:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:  163:}
+        -:  164:
+        -:  165:template<class X> ACE_INLINE X &
+        -:  166:ACE_Auto_Basic_Array_Ptr<X>::operator *() const
+        -:  167:{
+        -:  168:  return *this->get ();
+        -:  169:}
+        -:  170:
+        -:  171:template<class X> ACE_INLINE X &
+        -:  172:ACE_Auto_Basic_Array_Ptr<X>::operator[](int i) const
+        -:  173:{
+        -:  174:  X *array = this->get ();
+        -:  175:  return array[i];
+        -:  176:}
+        -:  177:
+        -:  178:template<class X> ACE_INLINE X *
+        -:  179:ACE_Auto_Array_Ptr<X>::operator->() const
+        -:  180:{
+        -:  181:  return this->get ();
+        -:  182:}
+        -:  183:
+        -:  184:ACE_END_VERSIONED_NAMESPACE_DECL

@@ -1,0 +1,80 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Timer_Queue_Iterator.cpp
+        -:    0:Programs:51
+        -:    1://$Id$
+        -:    2:
+        -:    3:#ifndef ACE_TIMER_QUEUE_ITERATOR_CPP
+        -:    4:#define ACE_TIMER_QUEUE_ITERATOR_CPP
+        -:    5:
+        -:    6:#include "ace/config-all.h"
+        -:    7:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:    8:# include "ace/Malloc_Base.h"
+        -:    9:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:   10:
+        -:   11:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   12:# pragma once
+        -:   13:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   14:
+        -:   15:#if !defined (__ACE_INLINE__)
+        -:   16:#include "ace/Timer_Queue_Iterator.inl"
+        -:   17:#endif /* __ACE_INLINE__ */
+        -:   18:
+        -:   19:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   20:
+        -:   21:ACE_ALLOC_HOOK_DEFINE_Tc(ACE_Timer_Node_T)
+        -:   22:
+        -:   23:template <class TYPE> void
+        -:   24:ACE_Timer_Node_T<TYPE>::dump (void) const
+        -:   25:{
+        -:   26:#if defined (ACE_HAS_DUMP)
+        -:   27:  ACE_TRACE ("ACE_Timer_Node_T::dump");
+        -:   28:  ACELIB_DEBUG ((LM_DEBUG, ACE_BEGIN_DUMP, this));
+        -:   29:  ACELIB_DEBUG ((LM_DEBUG, ACE_TEXT ("\nact_ = %x"), this->act_));
+        -:   30:  this->timer_value_.dump ();
+        -:   31:  this->interval_.dump ();
+        -:   32:  ACELIB_DEBUG ((LM_DEBUG, ACE_TEXT ("\nprev_ = %x"), this->prev_));
+        -:   33:  ACELIB_DEBUG ((LM_DEBUG, ACE_TEXT ("\nnext_ = %x"), this->next_));
+        -:   34:  ACELIB_DEBUG ((LM_DEBUG, ACE_TEXT ("\ntimer_id_ = %d\n"), this->timer_id_));
+        -:   35:  ACELIB_DEBUG ((LM_DEBUG, ACE_END_DUMP));
+        -:   36:#endif /* ACE_HAS_DUMP */
+        -:   37:}
+        -:   38:
+        -:   39:template <class TYPE>
+    #####:   40:ACE_Timer_Node_T<TYPE>::ACE_Timer_Node_T (void)
+        -:   41:  : act_ (0),
+        -:   42:    prev_ (0),
+        -:   43:    next_ (0),
+    #####:   44:    timer_id_ (-1)
+        -:   45:{
+        -:   46:  ACE_TRACE ("ACE_Timer_Node_T::ACE_Timer_Node_T");
+    #####:   47:}
+        -:   48:
+        -:   49:template <class TYPE>
+    #####:   50:ACE_Timer_Node_T<TYPE>::~ACE_Timer_Node_T (void)
+        -:   51:{
+        -:   52:  ACE_TRACE ("ACE_Timer_Node_T::~ACE_Timer_Node_T");
+    #####:   53:}
+        -:   54:
+        -:   55:template <class TYPE>
+    #####:   56:ACE_Timer_Queue_Iterator_T<TYPE>::ACE_Timer_Queue_Iterator_T (void)
+        -:   57:{
+    #####:   58:}
+        -:   59:
+        -:   60:template <class TYPE>
+    #####:   61:ACE_Timer_Queue_Iterator_T<TYPE>::~ACE_Timer_Queue_Iterator_T (void)
+        -:   62:{
+    #####:   63:}
+------------------
+_ZN26ACE_Timer_Queue_Iterator_TIP17ACE_Event_HandlerED0Ev:
+    #####:   61:ACE_Timer_Queue_Iterator_T<TYPE>::~ACE_Timer_Queue_Iterator_T (void)
+        -:   62:{
+    #####:   63:}
+------------------
+_ZN26ACE_Timer_Queue_Iterator_TIP17ACE_Event_HandlerED2Ev:
+    #####:   61:ACE_Timer_Queue_Iterator_T<TYPE>::~ACE_Timer_Queue_Iterator_T (void)
+        -:   62:{
+    #####:   63:}
+------------------
+        -:   64:
+        -:   65:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:   66:
+        -:   67:#endif /* ACE_TIMER_QUEUE_ITERATOR_CPP */

@@ -1,0 +1,252 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/CORBA_methods.h
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2://=============================================================================
+        -:    3:/**
+        -:    4: *  @file    CORBA_methods.h
+        -:    5: *
+        -:    6: *  $Id$
+        -:    7: *
+        -:    8: *  Declarations of common methods in the CORBA namespace.
+        -:    9: *
+        -:   10: *  @author Jeff Parsons
+        -:   11: */
+        -:   12://=============================================================================
+        -:   13:
+        -:   14:#ifndef TAO_CORBA_METHODS_H
+        -:   15:#define TAO_CORBA_METHODS_H
+        -:   16:
+        -:   17:#include /**/ "ace/pre.h"
+        -:   18:
+        -:   19:#include /**/ "tao/TAO_Export.h"
+        -:   20:
+        -:   21:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   22:# pragma once
+        -:   23:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   24:
+        -:   25:#include "tao/Basic_Types.h"
+        -:   26:#include "tao/orbconf.h"
+        -:   27:
+        -:   28:#if defined (TAO_EXPORT_MACRO)
+        -:   29:#undef TAO_EXPORT_MACRO
+        -:   30:#endif
+        -:   31:#define TAO_EXPORT_MACRO TAO_Export
+        -:   32:
+        -:   33:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   34:
+        -:   35:namespace CORBA
+        -:   36:{
+        -:   37:  class ORB;
+        -:   38:  typedef ORB *ORB_ptr;
+        -:   39:
+        -:   40:  /**
+        -:   41:   * ORB Initialization
+        -:   42:   */
+        -:   43:  extern TAO_Export ORB_ptr ORB_init (int & argc,
+        -:   44:                                      char * argv[],
+        -:   45:                                      const char * orb_name = 0);
+        -:   46:#if defined (ACE_USES_WCHAR)
+        -:   47:  extern TAO_Export ORB_ptr ORB_init (int & argc,
+        -:   48:                                      wchar_t * argv[],
+        -:   49:                                      const char * orb_name = 0);
+        -:   50:
+        -:   51:  extern TAO_Export ORB_ptr ORB_init (int & argc,
+        -:   52:                                      wchar_t * argv[],
+        -:   53:                                      const wchar_t * orb_name);
+        -:   54:#endif
+        -:   55:
+      30*:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+      30*:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS5TopicEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS7WaitSetEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS16TopicDescriptionEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilI16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS18SubscriberListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS18DataReaderListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS18SubscriberListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS18DataReaderListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS17PublisherListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS5TopicEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS18DataWriterListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS14GuardConditionEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilI16TAO_Objref_Var_TIN7OpenDDS4DCPS11TypeSupportEEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS37PublicationBuiltinTopicDataDataReaderEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS25DomainParticipantListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS37PublicationBuiltinTopicDataDataReaderEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS18DataReaderListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS17DomainParticipantEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilI16TAO_Objref_Var_TIN7OpenDDS4DCPS11TypeSupportEEEEbT_:
+       22:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+       22:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilI16TAO_Objref_Var_TIN3DDS5TopicEEEEbT_:
+        8:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+        8:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS18DataWriterListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN7OpenDDS4DCPS18DataWriterListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilI16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS18DataReaderListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN7OpenDDS4DCPS18DataReaderListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+_ZN5CORBA6is_nilIPN3DDS18SubscriberListenerEEEbT_:
+    #####:   56:  template<typename T> inline Boolean is_nil (T x)
+        -:   57:  {
+    #####:   58:    return x == 0;
+        -:   59:  }
+------------------
+        -:   60:
+       2*:   61:  template<typename T> inline void release (T x)
+        -:   62:  {
+       2*:   63:    if (x != 0)
+        -:   64:      {
+       2*:   65:        x->_decr_refcount ();
+        -:   66:      }
+       2*:   67:  }
+------------------
+_ZN5CORBA7releaseIPN3DDS14GuardConditionEEEvT_:
+    #####:   61:  template<typename T> inline void release (T x)
+        -:   62:  {
+    #####:   63:    if (x != 0)
+        -:   64:      {
+    #####:   65:        x->_decr_refcount ();
+        -:   66:      }
+    #####:   67:  }
+------------------
+_ZN5CORBA7releaseIPN3DDS7WaitSetEEEvT_:
+        2:   61:  template<typename T> inline void release (T x)
+        -:   62:  {
+        2:   63:    if (x != 0)
+        -:   64:      {
+        2:   65:        x->_decr_refcount ();
+        -:   66:      }
+        2:   67:  }
+------------------
+        -:   68:}
+        -:   69:
+        -:   70:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:   71:
+        -:   72:#include /**/ "ace/post.h"
+        -:   73:
+        -:   74:#endif  /* TAO_CORBA_METHODS_H */

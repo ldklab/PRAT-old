@@ -1,0 +1,85 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Node.cpp
+        -:    0:Programs:51
+        -:    1:// $Id$
+        -:    2:
+        -:    3:#ifndef ACE_NODE_CPP
+        -:    4:#define ACE_NODE_CPP
+        -:    5:
+        -:    6:#include "ace/Node.h"
+        -:    7:
+        -:    8:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:    9:# include "ace/Malloc_Base.h"
+        -:   10:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:   11:
+        -:   12:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   13:# pragma once
+        -:   14:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   15:
+        -:   16:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   17:
+        -:   18:ACE_ALLOC_HOOK_DEFINE_Tcc(ACE_Node)
+        -:   19:
+        -:   20:template <class T, class C>
+       5*:   21:ACE_Node<T, C>::~ACE_Node (void)
+        -:   22:{
+       5*:   23:}
+------------------
+_ZN8ACE_NodeIN7OpenDDS4DCPS8RcHandleINS1_8DataLinkEEEvED2Ev:
+        5:   21:ACE_Node<T, C>::~ACE_Node (void)
+        -:   22:{
+        5:   23:}
+------------------
+_ZN8ACE_NodeIP16ACE_Timer_Node_TIP17ACE_Event_HandlerE36ACE_Unbounded_Set_Default_ComparatorIS4_EED2Ev:
+    #####:   21:ACE_Node<T, C>::~ACE_Node (void)
+        -:   22:{
+    #####:   23:}
+------------------
+        -:   24:
+        -:   25:template <class T, class C>
+        -:   26:ACE_Node<T, C>::ACE_Node (const T &i, ACE_Node<T, C> *n)
+        -:   27:  : next_ (n),
+        -:   28:    item_ (i)
+        -:   29:{
+        -:   30:  // ACE_TRACE ("ACE_Node<T, C>::ACE_Node");
+        -:   31:}
+        -:   32:
+        -:   33:template <class T, class C>
+       5*:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
+       5*:   35:  : next_ (n)
+        -:   36:{
+        -:   37:  // ACE_TRACE ("ACE_Node<T, C>::ACE_Node");
+       5*:   38:}
+------------------
+_ZN8ACE_NodeIN7OpenDDS4DCPS8RcHandleINS1_8DataLinkEEEvEC2EPS5_i:
+    #####:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
+    #####:   35:  : next_ (n)
+        -:   36:{
+        -:   37:  // ACE_TRACE ("ACE_Node<T, C>::ACE_Node");
+    #####:   38:}
+------------------
+_ZN8ACE_NodeIN7OpenDDS4DCPS8RcHandleINS1_8DataLinkEEEvEC2EPS5_i:
+        5:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
+        5:   35:  : next_ (n)
+        -:   36:{
+        -:   37:  // ACE_TRACE ("ACE_Node<T, C>::ACE_Node");
+        5:   38:}
+------------------
+_ZN8ACE_NodeIP16ACE_Timer_Node_TIP17ACE_Event_HandlerE36ACE_Unbounded_Set_Default_ComparatorIS4_EEC2EPS7_i:
+    #####:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
+    #####:   35:  : next_ (n)
+        -:   36:{
+        -:   37:  // ACE_TRACE ("ACE_Node<T, C>::ACE_Node");
+    #####:   38:}
+------------------
+        -:   39:
+        -:   40:template <class T, class C>
+        -:   41:ACE_Node<T, C>::ACE_Node (const ACE_Node<T, C> &s)
+        -:   42:  : next_ (s.next_),
+        -:   43:    item_ (s.item_)
+        -:   44:{
+        -:   45:  // ACE_TRACE ("ACE_Node<T, C>::ACE_Node");
+        -:   46:}
+        -:   47:
+        -:   48:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:   49:
+        -:   50:#endif /* ACE_NODE_CPP */

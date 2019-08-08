@@ -1,0 +1,230 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Auto_Ptr.h
+        -:    0:Programs:51
+        -:    1:/* -*- C++ -*- */
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file    Auto_Ptr.h
+        -:    6: *
+        -:    7: *  $Id$
+        -:    8: *
+        -:    9: *  @author Doug Schmidt <schmidt@uci.edu>
+        -:   10: *  @author Irfan Pyarali <irfan@cs.wustl.edu>
+        -:   11: *  @author Jack Reeves <jack@fx.com>
+        -:   12: *  @author Dr. Harald M. Mueller <mueller@garwein.hai.siemens.co.at>
+        -:   13: */
+        -:   14://=============================================================================
+        -:   15:
+        -:   16:#ifndef ACE_AUTO_PTR_H
+        -:   17:#define ACE_AUTO_PTR_H
+        -:   18:#include /**/ "ace/pre.h"
+        -:   19:
+        -:   20:#include /**/ "ace/config-all.h"
+        -:   21:
+        -:   22:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   23:# pragma once
+        -:   24:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   25:
+        -:   26:#if defined (_MSC_VER)
+        -:   27:// Suppress warning e.g. "return type for
+        -:   28:// 'ACE_Auto_Array_Pointer<type>::operator ->' is 'type *' (i.e., not a UDT
+        -:   29:// or reference to a UDT.  Will produce errors if applied using infix
+        -:   30:// notation)"
+        -:   31:#  pragma warning(push)
+        -:   32:#  pragma warning(disable: 4284)
+        -:   33:#endif /* _MSC_VER */
+        -:   34:
+        -:   35:
+        -:   36:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   37:
+        -:   38:/**
+        -:   39: * @class ACE_Auto_Basic_Ptr
+        -:   40: *
+        -:   41: * @brief Implements the draft C++ standard auto_ptr abstraction.
+        -:   42: * This class allows one to work on non-object (basic) types
+        -:   43: */
+        -:   44:template <typename X>
+        -:   45:class ACE_Auto_Basic_Ptr
+        -:   46:{
+        -:   47:public:
+        -:   48:  typedef X element_type;
+        -:   49:
+        -:   50:  // = Initialization and termination methods
+    #####:   51:  explicit ACE_Auto_Basic_Ptr (X * p = 0) : p_ (p) {}
+        -:   52:
+        -:   53:  ACE_Auto_Basic_Ptr (ACE_Auto_Basic_Ptr<X> & ap);
+        -:   54:  ACE_Auto_Basic_Ptr<X> &operator= (ACE_Auto_Basic_Ptr<X> & rhs);
+        -:   55:  ~ACE_Auto_Basic_Ptr (void);
+        -:   56:
+        -:   57:  // = Accessor methods.
+        -:   58:  X &operator *() const;
+        -:   59:  X *get (void) const;
+        -:   60:  X *release (void);
+        -:   61:  void reset (X * p = 0);
+        -:   62:
+        -:   63:  /// Dump the state of an object.
+        -:   64:  void dump (void) const;
+        -:   65:
+        -:   66:  /// Declare the dynamic allocation hooks.
+        -:   67:  ACE_ALLOC_HOOK_DECLARE;
+        -:   68:
+        -:   69:protected:
+        -:   70:  X *p_;
+        -:   71:};
+        -:   72:
+        -:   73:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:   74:
+        -:   75:#if !defined (ACE_LACKS_AUTO_PTR) && \
+        -:   76:     defined (ACE_HAS_STANDARD_CPP_LIBRARY) && \
+        -:   77:            (ACE_HAS_STANDARD_CPP_LIBRARY != 0)
+        -:   78:#include <memory>
+        -:   79:#if defined (ACE_USES_STD_NAMESPACE_FOR_STDCPP_LIB) && \
+        -:   80:            (ACE_USES_STD_NAMESPACE_FOR_STDCPP_LIB != 0)
+        -:   81:using std::auto_ptr;
+        -:   82:#endif /* ACE_USES_STD_NAMESPACE_FOR_STDCPP_LIB */
+        -:   83:#else /* ACE_HAS_STANDARD_CPP_LIBRARY */
+        -:   84:
+        -:   85:/**
+        -:   86: * @class auto_ptr
+        -:   87: *
+        -:   88: * @brief Implements the draft C++ standard auto_ptr abstraction.
+        -:   89: */
+        -:   90:template <typename X>
+        -:   91:class auto_ptr : public ACE_Auto_Basic_Ptr<X>
+        -:   92:{
+        -:   93:public:
+        -:   94:  typedef X element_type;
+        -:   95:
+        -:   96:  // = Initialization and termination methods
+        -:   97:  explicit auto_ptr (X * p = 0) : ACE_Auto_Basic_Ptr<X> (p) {}
+        -:   98:  auto_ptr (auto_ptr<X> & ap) : ACE_Auto_Basic_Ptr<X> (ap.release ()) {}
+        -:   99:
+        -:  100:  X *operator-> () const;
+        -:  101:};
+        -:  102:
+        -:  103:#endif /* ACE_HAS_STANDARD_CPP_LIBRARY */
+        -:  104:
+        -:  105:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  106:
+        -:  107:/**
+        -:  108: * @brief Implements the draft C++ standard auto_ptr abstraction.
+        -:  109: * This version can be used instead of auto_ptr<T>
+        -:  110: */
+        -:  111:template <typename X>
+        -:  112:class ACE_Auto_Ptr : public ACE_Auto_Basic_Ptr <X>
+        -:  113:{
+        -:  114:public:
+        -:  115:  typedef X element_type;
+        -:  116:
+        -:  117:  // = Initialization and termination methods
+    #####:  118:  explicit ACE_Auto_Ptr (X * p = 0) : ACE_Auto_Basic_Ptr<X> (p) {}
+        -:  119:
+        -:  120:  X *operator-> () const;
+        -:  121:};
+        -:  122:
+        -:  123:/**
+        -:  124: * @class ACE_Auto_Basic_Array_Ptr
+        -:  125: *
+        -:  126: * @brief Implements an extension to the draft C++ standard auto_ptr
+        -:  127: * abstraction.  This class allows one to work on non-object
+        -:  128: * (basic) types that must be treated as an array, e.g.,
+        -:  129: * deallocated via "delete [] foo".
+        -:  130: */
+        -:  131:template<typename X>
+        -:  132:class ACE_Auto_Basic_Array_Ptr
+        -:  133:{
+        -:  134:public:
+        -:  135:  typedef X element_type;
+        -:  136:
+        -:  137:  // = Initialization and termination methods.
+        -:  138:  explicit ACE_Auto_Basic_Array_Ptr (X * p = 0) : p_ (p) {}
+        -:  139:
+        -:  140:  ACE_Auto_Basic_Array_Ptr (ACE_Auto_Basic_Array_Ptr<X> & ap);
+        -:  141:  ACE_Auto_Basic_Array_Ptr<X> &operator= (ACE_Auto_Basic_Array_Ptr<X> & rhs);
+        -:  142:  ~ACE_Auto_Basic_Array_Ptr (void);
+        -:  143:
+        -:  144:  // = Accessor methods.
+        -:  145:  X & operator* () const;
+        -:  146:  X & operator[] (int i) const;
+        -:  147:  X * get (void) const;
+        -:  148:  X * release (void);
+        -:  149:  void reset (X * p = 0);
+        -:  150:
+        -:  151:  /// Dump the state of an object.
+        -:  152:  void dump (void) const;
+        -:  153:
+        -:  154:  /// Declare the dynamic allocation hooks.
+        -:  155:  ACE_ALLOC_HOOK_DECLARE;
+        -:  156:
+        -:  157:protected:
+        -:  158:  X * p_;
+        -:  159:};
+        -:  160:
+        -:  161:/**
+        -:  162: * @class ACE_Auto_Array_Ptr
+        -:  163: *
+        -:  164: * @brief Implements an extension to the draft C++ standard auto_ptr
+        -:  165: * abstraction.
+        -:  166: */
+        -:  167:template<typename X>
+        -:  168:class ACE_Auto_Array_Ptr : public ACE_Auto_Basic_Array_Ptr<X>
+        -:  169:{
+        -:  170:public:
+        -:  171:  typedef X element_type;
+        -:  172:
+        -:  173:  // = Initialization and termination methods.
+        -:  174:  explicit ACE_Auto_Array_Ptr (X *p = 0)
+        -:  175:    : ACE_Auto_Basic_Array_Ptr<X> (p) {}
+        -:  176:
+        -:  177:  X *operator-> () const;
+        -:  178:};
+        -:  179:
+        -:  180:
+        -:  181:/**
+        -:  182: * @brief Reset given @c auto_ptr element to new element.
+        -:  183: *
+        -:  184: * Some platforms have an older version of auto_ptr support, which
+        -:  185: * lacks reset, and cannot be disabled easily.  Portability to these
+        -:  186: * platforms requires use of this function template.  This function
+        -:  187: * template also works for the @c ACE_Auto_{Basic_}Array_Ptr class
+        -:  188: * template, as well.
+        -:  189: */
+        -:  190:template<typename AUTO_PTR_TYPE, typename PTR_TYPE>
+        -:  191:inline void
+        -:  192:ACE_auto_ptr_reset (AUTO_PTR_TYPE & ap,
+        -:  193:                    PTR_TYPE * p)
+        -:  194:{
+        -:  195:#if defined (ACE_AUTO_PTR_LACKS_RESET)
+        -:  196:  // Allow compiler to adjust pointer to potential base class pointer
+        -:  197:  // of element type found in auto_ptr.
+        -:  198:  typename AUTO_PTR_TYPE::element_type * const tp = p;
+        -:  199:  if (tp != ap.get ())
+        -:  200:    {
+        -:  201:      ap = AUTO_PTR_TYPE (tp);
+        -:  202:    }
+        -:  203:#else
+        -:  204:  ap.reset (p);
+        -:  205:#endif /* ACE_AUTO_PTR_LACKS_RESET */
+        -:  206:}
+        -:  207:
+        -:  208:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  209:
+        -:  210:#if defined (__ACE_INLINE__)
+        -:  211:#include "ace/Auto_Ptr.inl"
+        -:  212:#endif /* __ACE_INLINE__ */
+        -:  213:
+        -:  214:#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
+        -:  215:#include "ace/Auto_Ptr.cpp"
+        -:  216:#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
+        -:  217:
+        -:  218:#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
+        -:  219:#pragma implementation ("Auto_Ptr.cpp")
+        -:  220:#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
+        -:  221:
+        -:  222:#if defined (_MSC_VER)
+        -:  223:// Restore the warning state to what it was before entry.
+        -:  224:#  pragma warning(pop)
+        -:  225:#endif /* _MSC_VER */
+        -:  226:
+        -:  227:#include /**/ "ace/post.h"
+        -:  228:#endif /* ACE_AUTO_PTR_H */

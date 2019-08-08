@@ -1,0 +1,96 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Object_Reference_Traits_Base_T.h
+        -:    0:Programs:70
+        -:    1:#ifndef object_reference_traits_base_hpp
+        -:    2:#define object_reference_traits_base_hpp
+        -:    3:/**
+        -:    4: * @file
+        -:    5: *
+        -:    6: * @brief Base class for the object reference traits.
+        -:    7: *
+        -:    8: * $Id$
+        -:    9: *
+        -:   10: * @author Carlos O'Ryan
+        -:   11: */
+        -:   12:
+        -:   13:#include "tao/Objref_VarOut_T.h"
+        -:   14:
+        -:   15:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   16:
+        -:   17:namespace TAO
+        -:   18:{
+        -:   19:namespace details
+        -:   20:{
+        -:   21:
+        -:   22:template<typename object_t, typename object_t_var>
+        -:   23:struct object_reference_traits_base
+        -:   24:{
+        -:   25:  typedef object_t object_type;
+        -:   26:  typedef object_type * value_type;
+        -:   27:  typedef object_type const * const_value_type;
+        -:   28:  typedef object_t_var object_type_var;
+        -:   29:
+    #####:   30:  inline static void release(object_type * object)
+        -:   31:  {
+    #####:   32:    TAO::Objref_Traits<object_type>::release(object);
+    #####:   33:  }
+------------------
+_ZN3TAO7details28object_reference_traits_baseIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_EE7releaseEPS3_:
+    #####:   30:  inline static void release(object_type * object)
+        -:   31:  {
+    #####:   32:    TAO::Objref_Traits<object_type>::release(object);
+    #####:   33:  }
+------------------
+_ZN3TAO7details28object_reference_traits_baseIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_EE7releaseEPS3_:
+    #####:   30:  inline static void release(object_type * object)
+        -:   31:  {
+    #####:   32:    TAO::Objref_Traits<object_type>::release(object);
+    #####:   33:  }
+------------------
+_ZN3TAO7details28object_reference_traits_baseIN3DDS9ConditionE16TAO_Objref_Var_TIS3_EE7releaseEPS3_:
+    #####:   30:  inline static void release(object_type * object)
+        -:   31:  {
+    #####:   32:    TAO::Objref_Traits<object_type>::release(object);
+    #####:   33:  }
+------------------
+        -:   34:
+        -:   35:  inline static object_type * duplicate(object_type * object)
+        -:   36:  {
+        -:   37:    return TAO::Objref_Traits<object_type>::duplicate(object);
+        -:   38:  }
+        -:   39:
+    #####:   40:  inline static object_type * nil()
+        -:   41:  {
+    #####:   42:    return TAO::Objref_Traits<object_type>::nil();
+        -:   43:  }
+------------------
+_ZN3TAO7details28object_reference_traits_baseIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_EE3nilEv:
+    #####:   40:  inline static object_type * nil()
+        -:   41:  {
+    #####:   42:    return TAO::Objref_Traits<object_type>::nil();
+        -:   43:  }
+------------------
+_ZN3TAO7details28object_reference_traits_baseIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_EE3nilEv:
+    #####:   40:  inline static object_type * nil()
+        -:   41:  {
+    #####:   42:    return TAO::Objref_Traits<object_type>::nil();
+        -:   43:  }
+------------------
+_ZN3TAO7details28object_reference_traits_baseIN3DDS9ConditionE16TAO_Objref_Var_TIS3_EE3nilEv:
+    #####:   40:  inline static object_type * nil()
+        -:   41:  {
+    #####:   42:    return TAO::Objref_Traits<object_type>::nil();
+        -:   43:  }
+------------------
+        -:   44:
+    #####:   45:  inline static object_type * default_initializer()
+        -:   46:  {
+    #####:   47:    return nil();
+        -:   48:  }
+        -:   49:};
+        -:   50:
+        -:   51:} // namespace details
+        -:   52:} // namespace TAO
+        -:   53:
+        -:   54:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:   55:
+        -:   56:#endif // object_reference_traits_base_hpp

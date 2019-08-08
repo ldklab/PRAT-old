@@ -1,0 +1,413 @@
+        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Guard_T.h
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://==========================================================================
+        -:    4:/**
+        -:    5: *  @file    Guard_T.h
+        -:    6: *
+        -:    7: *  $Id$
+        -:    8: *
+        -:    9: *   Moved from Synch.h.
+        -:   10: *
+        -:   11: *  @author Douglas C. Schmidt <schmidt@cs.wustl.edu>
+        -:   12: */
+        -:   13://==========================================================================
+        -:   14:
+        -:   15:#ifndef ACE_GUARD_T_H
+        -:   16:#define ACE_GUARD_T_H
+        -:   17:#include /**/ "ace/pre.h"
+        -:   18:
+        -:   19:#include "ace/Lock.h"
+        -:   20:
+        -:   21:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   22:# pragma once
+        -:   23:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   24:
+        -:   25:#include "ace/Global_Macros.h"
+        -:   26:#include "ace/OS_NS_Thread.h"
+        -:   27:
+        -:   28:// FUZZ: disable check_for_ACE_Guard
+        -:   29:
+        -:   30:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   31:
+        -:   32:/**
+        -:   33: * @class ACE_Guard
+        -:   34: *
+        -:   35: * @brief This data structure is meant to be used within a method or
+        -:   36: * function...  It performs automatic acquisition and release of
+        -:   37: * a parameterized synchronization object ACE_LOCK.
+        -:   38: *
+        -:   39: * The ACE_LOCK class given as an actual parameter must provide, at
+        -:   40: * the very least the acquire(), tryacquire(), release(), and
+        -:   41: * remove() methods.
+        -:   42: *
+        -:   43: * @warning A successfully constructed ACE_Guard does NOT mean that the
+        -:   44: * lock was acquired!  It is the caller's responsibility, after
+        -:   45: * constructing an ACE_Guard, to check whether the lock was successfully
+        -:   46: * acquired.  Code like this is dangerous:
+        -:   47: *   {
+        -:   48: *     ACE_Guard<ACE_Lock> g(lock);
+        -:   49: *     ... perform critical operation requiring lock to be held ...
+        -:   50: *   }
+        -:   51: * Instead, one must do something like this:
+        -:   52: *   {
+        -:   53: *     ACE_Guard<ACE_Lock> g(lock);
+        -:   54: *     if (! g.locked())
+        -:   55: *       {
+        -:   56: *         ... handle error ...
+        -:   57: *       }
+        -:   58: *     else
+        -:   59: *       {
+        -:   60: *         ... perform critical operation requiring lock to be held ...
+        -:   61: *       }
+        -:   62: *   }
+        -:   63: * The ACE_GUARD_RETURN() and ACE_GUARD_REACTION() macros are designed to
+        -:   64: * to help with this.
+        -:   65: */
+        -:   66:template <class ACE_LOCK>
+        -:   67:class ACE_Guard
+        -:   68:{
+        -:   69:public:
+        -:   70:
+        -:   71:  // = Initialization and termination methods.
+        -:   72:  ACE_Guard (ACE_LOCK &l);
+        -:   73:
+        -:   74:  /// Implicitly and automatically acquire (or try to acquire) the
+        -:   75:  /// lock.  If @a block is non-0 then acquire() the ACE_LOCK, else
+        -:   76:  /// tryacquire() it.
+        -:   77:  ACE_Guard (ACE_LOCK &l, bool block);
+        -:   78:
+        -:   79:  /// Initialize the guard without implicitly acquiring the lock. The
+        -:   80:  /// @a become_owner parameter indicates whether the guard should release
+        -:   81:  /// the lock implicitly on destruction. The @a block parameter is
+        -:   82:  /// ignored and is used here to disambiguate with the preceding
+        -:   83:  /// constructor.
+        -:   84:  ACE_Guard (ACE_LOCK &l, bool block, int become_owner);
+        -:   85:
+        -:   86:  /// Implicitly release the lock.
+        -:   87:  ~ACE_Guard (void);
+        -:   88:
+        -:   89:  // = Lock accessors.
+        -:   90:
+        -:   91:  /// Explicitly acquire the lock.
+        -:   92:  int acquire (void);
+        -:   93:
+        -:   94:  /// Conditionally acquire the lock (i.e., won't block).
+        -:   95:  int tryacquire (void);
+        -:   96:
+        -:   97:  /// Explicitly release the lock, but only if it is held!
+        -:   98:  int release (void);
+        -:   99:
+        -:  100:  /// Relinquish ownership of the lock so that it is not released
+        -:  101:  /// implicitly in the destructor.
+        -:  102:  void disown (void);
+        -:  103:
+        -:  104:  // = Utility methods.
+        -:  105:  /// true if locked, false if couldn't acquire the lock
+        -:  106:  /// (errno will contain the reason for this).
+        -:  107:  bool locked (void) const;
+        -:  108:
+        -:  109:  /// Explicitly remove the lock.
+        -:  110:  int remove (void);
+        -:  111:
+        -:  112:  /// Dump the state of an object.
+        -:  113:  void dump (void) const;
+        -:  114:
+        -:  115:  // ACE_ALLOC_HOOK_DECLARE;
+        -:  116:  // Declare the dynamic allocation hooks.
+        -:  117:
+        -:  118:protected:
+        -:  119:
+        -:  120:  /// Helper, meant for subclass only.
+      58*:  121:  ACE_Guard (ACE_LOCK *lock): lock_ (lock), owner_ (0) {}
+------------------
+_ZN9ACE_GuardI19ACE_RW_Thread_MutexEC2EPS0_:
+       58:  121:  ACE_Guard (ACE_LOCK *lock): lock_ (lock), owner_ (0) {}
+------------------
+_ZN9ACE_GuardI19ACE_RW_Thread_MutexEC2EPS0_:
+    #####:  121:  ACE_Guard (ACE_LOCK *lock): lock_ (lock), owner_ (0) {}
+------------------
+        -:  122:
+        -:  123:  /// Pointer to the ACE_LOCK we're guarding.
+        -:  124:  ACE_LOCK *lock_;
+        -:  125:
+        -:  126:  /// Keeps track of whether we acquired the lock or failed.
+        -:  127:  int owner_;
+        -:  128:
+        -:  129:private:
+        -:  130:  // = Prevent assignment and initialization.
+        -:  131:  ACE_UNIMPLEMENTED_FUNC (void operator= (const ACE_Guard<ACE_LOCK> &))
+        -:  132:  ACE_UNIMPLEMENTED_FUNC (ACE_Guard (const ACE_Guard<ACE_LOCK> &))
+        -:  133:};
+        -:  134:
+        -:  135:/**
+        -:  136: * @class ACE_Write_Guard
+        -:  137: *
+        -:  138: * @brief This class is similar to class ACE_Guard, though it
+        -:  139: * acquires/releases a write lock automatically (naturally, the
+        -:  140: * <ACE_LOCK> it is instantiated with must support the appropriate
+        -:  141: * API).
+        -:  142: *
+        -:  143: * @warning See important "WARNING" in comments at top of ACE_Guard.
+        -:  144: */
+        -:  145:template <class ACE_LOCK>
+        -:  146:class ACE_Write_Guard : public ACE_Guard<ACE_LOCK>
+        -:  147:{
+        -:  148:public:
+        -:  149:  // = Initialization method.
+        -:  150:
+        -:  151:  /// Implicitly and automatically acquire a write lock.
+        -:  152:  ACE_Write_Guard (ACE_LOCK &m);
+        -:  153:
+        -:  154:  /// Implicitly and automatically acquire (or try to acquire) a write
+        -:  155:  /// lock.
+        -:  156:  ACE_Write_Guard (ACE_LOCK &m, bool block);
+        -:  157:
+        -:  158:  // = Lock accessors.
+        -:  159:
+        -:  160:  /// Explicitly acquire the write lock.
+        -:  161:  int acquire_write (void);
+        -:  162:
+        -:  163:  /// Explicitly acquire the write lock.
+        -:  164:  int acquire (void);
+        -:  165:
+        -:  166:  /// Conditionally acquire the write lock (i.e., won't block).
+        -:  167:  int tryacquire_write (void);
+        -:  168:
+        -:  169:  /// Conditionally acquire the write lock (i.e., won't block).
+        -:  170:  int tryacquire (void);
+        -:  171:
+        -:  172:  // = Utility methods.
+        -:  173:
+        -:  174:  /// Dump the state of an object.
+        -:  175:  void dump (void) const;
+        -:  176:
+        -:  177:  // ACE_ALLOC_HOOK_DECLARE;
+        -:  178:  // Declare the dynamic allocation hooks.
+        -:  179:};
+        -:  180:
+        -:  181:/**
+        -:  182: * @class ACE_Read_Guard
+        -:  183: *
+        -:  184: * @brief This class is similar to class ACE_Guard, though it
+        -:  185: * acquires/releases a read lock automatically (naturally, the
+        -:  186: * <ACE_LOCK> it is instantiated with must support the appropriate
+        -:  187: * API).
+        -:  188: *
+        -:  189: * @warning See important "WARNING" in comments at top of ACE_Guard.
+        -:  190: */
+        -:  191:template <class ACE_LOCK>
+        -:  192:class ACE_Read_Guard : public ACE_Guard<ACE_LOCK>
+        -:  193:{
+        -:  194:public:
+        -:  195:  // = Initialization methods.
+        -:  196:
+        -:  197:  /// Implicitly and automatically acquire a read lock.
+        -:  198:  ACE_Read_Guard (ACE_LOCK& m);
+        -:  199:
+        -:  200:  /// Implicitly and automatically acquire (or try to acquire) a read
+        -:  201:  /// lock.
+        -:  202:  ACE_Read_Guard (ACE_LOCK &m, bool block);
+        -:  203:
+        -:  204:  // = Lock accessors.
+        -:  205:
+        -:  206:  /// Explicitly acquire the read lock.
+        -:  207:  int acquire_read (void);
+        -:  208:
+        -:  209:  /// Explicitly acquire the read lock.
+        -:  210:  int acquire (void);
+        -:  211:
+        -:  212:  /// Conditionally acquire the read lock (i.e., won't block).
+        -:  213:  int tryacquire_read (void);
+        -:  214:
+        -:  215:  /// Conditionally acquire the read lock (i.e., won't block).
+        -:  216:  int tryacquire (void);
+        -:  217:
+        -:  218:  // = Utility methods.
+        -:  219:
+        -:  220:  /// Dump the state of an object.
+        -:  221:  void dump (void) const;
+        -:  222:
+        -:  223:  // ACE_ALLOC_HOOK_DECLARE;
+        -:  224:  // Declare the dynamic allocation hooks.
+        -:  225:};
+        -:  226:
+        -:  227:#if !(defined (ACE_HAS_THREADS) && (defined (ACE_HAS_THREAD_SPECIFIC_STORAGE) || defined (ACE_HAS_TSS_EMULATION)))
+        -:  228:
+        -:  229:#define ACE_TSS_Guard ACE_Guard
+        -:  230:#define ACE_TSS_Write_GUARD ACE_Write_Guard
+        -:  231:#define ACE_TSS_Read_GUARD ACE_Read_Guard
+        -:  232:
+        -:  233:#else
+        -:  234: /* ACE platform supports some form of threading and
+        -:  235:  thread-specific storage. */
+        -:  236:
+        -:  237:/**
+        -:  238: * @class ACE_TSS_Guard
+        -:  239: *
+        -:  240: * @brief This data structure is meant to be used within a method or
+        -:  241: * function...  It performs automatic aquisition and release of
+        -:  242: * a synchronization object.  Moreover, it ensures that the lock
+        -:  243: * is released even if a thread exits via <thr_exit>!
+        -:  244: */
+        -:  245:template <class ACE_LOCK>
+        -:  246:class ACE_TSS_Guard : private ACE_Copy_Disabled
+        -:  247:{
+        -:  248:public:
+        -:  249:  // = Initialization and termination methods.
+        -:  250:
+        -:  251:  /// Implicitly and automatically acquire the thread-specific lock.
+        -:  252:  ACE_TSS_Guard (ACE_LOCK &lock, bool block = true);
+        -:  253:
+        -:  254:  /// Implicitly release the thread-specific lock.
+        -:  255:  ~ACE_TSS_Guard (void);
+        -:  256:
+        -:  257:  // = Lock accessors.
+        -:  258:
+        -:  259:  /// Explicitly acquire the thread-specific lock.
+        -:  260:  int acquire (void);
+        -:  261:
+        -:  262:  /// Conditionally acquire the thread-specific lock (i.e., won't
+        -:  263:  /// block).
+        -:  264:  int tryacquire (void);
+        -:  265:
+        -:  266:  /// Explicitly release the thread-specific lock.
+        -:  267:  int release (void);
+        -:  268:
+        -:  269:  // = Utility methods.
+        -:  270:  /// Explicitly release the thread-specific lock.
+        -:  271:  int remove (void);
+        -:  272:
+        -:  273:  /// Dump the state of an object.
+        -:  274:  void dump (void) const;
+        -:  275:
+        -:  276:  /// Declare the dynamic allocation hooks.
+        -:  277:  ACE_ALLOC_HOOK_DECLARE;
+        -:  278:
+        -:  279:protected:
+        -:  280:  /// Helper, meant for subclass only.
+        -:  281:  ACE_TSS_Guard (void);
+        -:  282:
+        -:  283:  /// Initialize the key.
+        -:  284:  void init_key (void);
+        -:  285:
+        -:  286:  /// Called when thread exits to clean up the lock.
+        -:  287:  static void cleanup (void *ptr);
+        -:  288:
+        -:  289:  /// Thread-specific key...
+        -:  290:  ACE_thread_key_t key_;
+        -:  291:
+        -:  292:private:
+        -:  293:  // FUZZ: disable check_for_ACE_Guard
+        -:  294:  typedef ACE_Guard<ACE_LOCK> Guard_Type;
+        -:  295:  // FUZZ: enable check_for_ACE_Guard
+        -:  296:};
+        -:  297:
+        -:  298:/**
+        -:  299: * @class ACE_TSS_Write_Guard
+        -:  300: *
+        -:  301: * @brief This class is similar to class ACE_TSS_Guard, though it
+        -:  302: * acquires/releases a write-lock automatically (naturally, the
+        -:  303: * ACE_LOCK it is instantiated with must support the appropriate
+        -:  304: * API).
+        -:  305: */
+        -:  306:template <class ACE_LOCK>
+        -:  307:class ACE_TSS_Write_Guard : public ACE_TSS_Guard<ACE_LOCK>
+        -:  308:{
+        -:  309:public:
+        -:  310:  // = Initialization method.
+        -:  311:
+        -:  312:  /// Implicitly and automatically acquire the thread-specific write lock.
+        -:  313:  ACE_TSS_Write_Guard (ACE_LOCK &lock, bool block = true);
+        -:  314:
+        -:  315:  // = Lock accessors.
+        -:  316:
+        -:  317:  /// Explicitly acquire the thread-specific write lock.
+        -:  318:  int acquire_write (void);
+        -:  319:
+        -:  320:  /// Explicitly acquire the thread-specific write lock.
+        -:  321:  int acquire (void);
+        -:  322:
+        -:  323:  /// Conditionally acquire the thread-specific write lock (i.e., won't block).
+        -:  324:  int tryacquire_write (void);
+        -:  325:
+        -:  326:  /// Conditionally acquire the thread-specific write lock (i.e., won't block).
+        -:  327:  int tryacquire (void);
+        -:  328:
+        -:  329:  // = Utility methods.
+        -:  330:
+        -:  331:  /// Dump the state of an object.
+        -:  332:  void dump (void) const;
+        -:  333:
+        -:  334:  // ACE_ALLOC_HOOK_DECLARE;
+        -:  335:  // Declare the dynamic allocation hooks.
+        -:  336:private:
+        -:  337:  // FUZZ: disable check_for_ACE_Guard
+        -:  338:  typedef ACE_Guard<ACE_LOCK> Guard_Type;
+        -:  339:  typedef ACE_Write_Guard<ACE_LOCK> Write_Guard_Type;
+        -:  340:  // FUZZ: enable check_for_ACE_Guard
+        -:  341:};
+        -:  342:
+        -:  343:/**
+        -:  344: * @class ACE_TSS_Read_Guard
+        -:  345: *
+        -:  346: * @brief This class is similar to class <ACE_TSS_Guard>, though it
+        -:  347: * acquires/releases a read lock automatically (naturally, the
+        -:  348: * <ACE_LOCK> it is instantiated with must support the
+        -:  349: * appropriate API).
+        -:  350: */
+        -:  351:template <class ACE_LOCK>
+        -:  352:class ACE_TSS_Read_Guard : public ACE_TSS_Guard<ACE_LOCK>
+        -:  353:{
+        -:  354:public:
+        -:  355:  // = Initialization method.
+        -:  356:  /// Implicitly and automatically acquire the thread-specific read lock.
+        -:  357:  ACE_TSS_Read_Guard (ACE_LOCK &lock, bool block = true);
+        -:  358:
+        -:  359:  // = Lock accessors.
+        -:  360:  /// Explicitly acquire the thread-specific read lock.
+        -:  361:  int acquire_read (void);
+        -:  362:
+        -:  363:  /// Explicitly acquire the thread-specific read lock.
+        -:  364:  int acquire (void);
+        -:  365:
+        -:  366:  /// Conditionally acquire the thread-specific read lock (i.e., won't
+        -:  367:  /// block).
+        -:  368:  int tryacquire_read (void);
+        -:  369:
+        -:  370:  /// Conditionally acquire the thread-specific read lock (i.e., won't
+        -:  371:  /// block).
+        -:  372:  int tryacquire (void);
+        -:  373:
+        -:  374:  // = Utility methods.
+        -:  375:  /// Dump the state of an object.
+        -:  376:  void dump (void) const;
+        -:  377:
+        -:  378:  // ACE_ALLOC_HOOK_DECLARE;
+        -:  379:  // Declare the dynamic allocation hooks.
+        -:  380:private:
+        -:  381:  // FUZZ: disable check_for_ACE_Guard
+        -:  382:  typedef ACE_Guard<ACE_LOCK> Guard_Type;
+        -:  383:  typedef ACE_Read_Guard<ACE_LOCK> Read_Guard_Type;
+        -:  384:  // FUZZ: enable check_for_ACE_Guard
+        -:  385:};
+        -:  386:
+        -:  387:#endif /* !(defined (ACE_HAS_THREADS) && (defined (ACE_HAS_THREAD_SPECIFIC_STORAGE) || defined (ACE_HAS_TSS_EMULATION))) */
+        -:  388:
+        -:  389:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  390:
+        -:  391:#if defined (__ACE_INLINE__)
+        -:  392:#include "ace/Guard_T.inl"
+        -:  393:#endif /* __ACE_INLINE__ */
+        -:  394:
+        -:  395:#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
+        -:  396:#include "ace/Guard_T.cpp"
+        -:  397:#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
+        -:  398:
+        -:  399:#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
+        -:  400:#pragma implementation ("Guard_T.cpp")
+        -:  401:#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
+        -:  402:
+        -:  403:#include /**/ "ace/post.h"
+        -:  404:#endif /* ACE_GUARD_T_H */
