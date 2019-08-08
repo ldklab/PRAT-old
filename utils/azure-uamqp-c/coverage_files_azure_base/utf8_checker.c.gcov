@@ -1,0 +1,177 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/utf8_checker.c
+        -:    0:Programs:80
+        -:    1: // Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#ifdef __cplusplus
+        -:    5:#include <cstdlib>
+        -:    6:#include <cstdint>
+        -:    7:#else
+        -:    8:#include <stdlib.h>
+        -:    9:#include <stdbool.h>
+        -:   10:#include <stdint.h>
+        -:   11:#endif
+        -:   12:
+        -:   13:#include "azure_c_shared_utility/utf8_checker.h"
+        -:   14:
+    #####:   15:bool utf8_checker_is_valid_utf8(const unsigned char* utf8_str, size_t length)
+        -:   16:{
+        -:   17:    bool result;
+        -:   18:
+    #####:   19:    if (utf8_str == NULL)
+        -:   20:    {
+        -:   21:        /* Codes_SRS_UTF8_CHECKER_01_002: [ If utf8_checker_is_valid_utf8 is called with NULL utf8_str it shall return false. ]*/
+    #####:   22:        result = false;
+        -:   23:    }
+        -:   24:    else
+        -:   25:    {
+    #####:   26:        size_t pos = 0;
+        -:   27:
+        -:   28:        /* Codes_SRS_UTF8_CHECKER_01_003: [ If length is 0, utf8_checker_is_valid_utf8 shall consider utf8_str to be valid UTF-8 and return true. ]*/
+    #####:   29:        result = true;
+        -:   30:
+    #####:   31:        while ((result == true) &&
+        -:   32:               (pos < length))
+        -:   33:        {
+        -:   34:            /* Codes_SRS_UTF8_CHECKER_01_001: [ utf8_checker_is_valid_utf8 shall verify that the sequence of chars pointed to by utf8_str represent UTF-8 encoded codepoints. ]*/
+    #####:   35:            if ((utf8_str[pos] >> 3) == 0x1E)
+        -:   36:            {
+        -:   37:                /* 4 bytes */
+        -:   38:                /* Codes_SRS_UTF8_CHECKER_01_009: [ 000uuuuu zzzzyyyy yyxxxxxx 11110uuu 10uuzzzz 10yyyyyy 10xxxxxx ]*/
+    #####:   39:                uint32_t code_point = (utf8_str[pos] & 0x07);
+        -:   40:
+    #####:   41:                pos++;
+    #####:   42:                if ((pos < length) &&
+    #####:   43:                    ((utf8_str[pos] >> 6) == 0x02))
+        -:   44:                {
+    #####:   45:                    code_point <<= 6;
+    #####:   46:                    code_point += utf8_str[pos] & 0x3F;
+        -:   47:
+    #####:   48:                    pos++;
+    #####:   49:                    if ((pos < length) &&
+    #####:   50:                        ((utf8_str[pos] >> 6) == 0x02))
+        -:   51:                    {
+    #####:   52:                        code_point <<= 6;
+    #####:   53:                        code_point += utf8_str[pos] & 0x3F;
+        -:   54:
+    #####:   55:                        pos++;
+    #####:   56:                        if ((pos < length) &&
+    #####:   57:                            ((utf8_str[pos] >> 6) == 0x02))
+        -:   58:                        {
+    #####:   59:                            code_point <<= 6;
+    #####:   60:                            code_point += utf8_str[pos] & 0x3F;
+        -:   61:
+    #####:   62:                            if (code_point <= 0xFFFF)
+        -:   63:                            {
+    #####:   64:                                result = false;
+        -:   65:                            }
+        -:   66:                            else
+        -:   67:                            {
+        -:   68:                                /* Codes_SRS_UTF8_CHECKER_01_005: [ On success it shall return true. ]*/
+    #####:   69:                                result = true;
+    #####:   70:                                pos++;
+        -:   71:                            }
+        -:   72:                        }
+        -:   73:                        else
+        -:   74:                        {
+    #####:   75:                            result = false;
+        -:   76:                        }
+        -:   77:                    }
+        -:   78:                    else
+        -:   79:                    {
+    #####:   80:                        result = false;
+        -:   81:                    }
+        -:   82:                }
+        -:   83:                else
+        -:   84:                {
+    #####:   85:                    result = false;
+        -:   86:                }
+        -:   87:            }
+    #####:   88:            else if ((utf8_str[pos] >> 4) == 0x0E)
+        -:   89:            {
+        -:   90:                /* 3 bytes */
+        -:   91:                /* Codes_SRS_UTF8_CHECKER_01_008: [ zzzzyyyy yyxxxxxx 1110zzzz 10yyyyyy 10xxxxxx ]*/
+    #####:   92:                uint32_t code_point = (utf8_str[pos] & 0x0F);
+        -:   93:
+    #####:   94:                pos++;
+    #####:   95:                if ((pos < length) &&
+    #####:   96:                    ((utf8_str[pos] >> 6) == 0x02))
+        -:   97:                {
+    #####:   98:                    code_point <<= 6;
+    #####:   99:                    code_point += utf8_str[pos] & 0x3F;
+        -:  100:
+    #####:  101:                    pos++;
+    #####:  102:                    if ((pos < length) &&
+    #####:  103:                        ((utf8_str[pos] >> 6) == 0x02))
+        -:  104:                    {
+    #####:  105:                        code_point <<= 6;
+    #####:  106:                        code_point += utf8_str[pos] & 0x3F;
+        -:  107:
+    #####:  108:                        if (code_point <= 0x7FF)
+        -:  109:                        {
+    #####:  110:                            result = false;
+        -:  111:                        }
+        -:  112:                        else
+        -:  113:                        {
+        -:  114:                            /* Codes_SRS_UTF8_CHECKER_01_005: [ On success it shall return true. ]*/
+    #####:  115:                            result = true;
+    #####:  116:                            pos++;
+        -:  117:                        }
+        -:  118:                    }
+        -:  119:                    else
+        -:  120:                    {
+    #####:  121:                        result = false;
+        -:  122:                    }
+        -:  123:                }
+        -:  124:                else
+        -:  125:                {
+    #####:  126:                    result = false;
+        -:  127:                }
+        -:  128:            }
+    #####:  129:            else if ((utf8_str[pos] >> 5) == 0x06)
+        -:  130:            {
+        -:  131:                /* 2 bytes */
+        -:  132:                /* Codes_SRS_UTF8_CHECKER_01_007: [ 00000yyy yyxxxxxx 110yyyyy 10xxxxxx ]*/
+    #####:  133:                uint32_t code_point = (utf8_str[pos] & 0x1F);
+        -:  134:
+    #####:  135:                pos++;
+    #####:  136:                if ((pos < length) &&
+    #####:  137:                    ((utf8_str[pos] >> 6) == 0x02))
+        -:  138:                {
+    #####:  139:                    code_point <<= 6;
+    #####:  140:                    code_point += utf8_str[pos] & 0x3F;
+        -:  141:
+    #####:  142:                    if (code_point <= 0x7F)
+        -:  143:                    {
+    #####:  144:                        result = false;
+        -:  145:                    }
+        -:  146:                    else
+        -:  147:                    {
+        -:  148:                        /* Codes_SRS_UTF8_CHECKER_01_005: [ On success it shall return true. ]*/
+    #####:  149:                        result = true;
+    #####:  150:                        pos++;
+        -:  151:                    }
+        -:  152:                }
+        -:  153:                else
+        -:  154:                {
+    #####:  155:                    result = false;
+        -:  156:                }
+        -:  157:            }
+    #####:  158:            else if ((utf8_str[pos] >> 7) == 0x00)
+        -:  159:            {
+        -:  160:                /* 1 byte */
+        -:  161:                /* Codes_SRS_UTF8_CHECKER_01_006: [ 00000000 0xxxxxxx 0xxxxxxx ]*/
+        -:  162:                /* Codes_SRS_UTF8_CHECKER_01_005: [ On success it shall return true. ]*/
+    #####:  163:                result = true;
+    #####:  164:                pos++;
+        -:  165:            }
+        -:  166:            else
+        -:  167:            {
+        -:  168:                /* error */
+    #####:  169:                result = false;
+        -:  170:            }
+        -:  171:        }
+        -:  172:    }
+        -:  173:
+    #####:  174:    return result;
+        -:  175:}

@@ -1,0 +1,612 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+139c139
+<         -:  137:            LogError("xio_close failed");
+---
+>     #####:  137:            LogError("xio_close failed");
+152c152
+<         -:  150:            LOG(AZ_LOG_TRACE, LOG_LINE, "-> Header (AMQP 0.1.0.0)");
+---
+>     #####:  150:            LOG(AZ_LOG_TRACE, LOG_LINE, "-> Header (AMQP 0.1.0.0)");
+164c164
+<         -:  162:static const char* get_frame_type_as_string(AMQP_VALUE descriptor)
+---
+>     #####:  162:static const char* get_frame_type_as_string(AMQP_VALUE descriptor)
+168c168
+<         -:  166:    if (is_open_type_by_descriptor(descriptor))
+---
+>     #####:  166:    if (is_open_type_by_descriptor(descriptor))
+170c170
+<         -:  168:        result = "[OPEN]";
+---
+>     #####:  168:        result = "[OPEN]";
+172c172
+<         -:  170:    else if (is_begin_type_by_descriptor(descriptor))
+---
+>     #####:  170:    else if (is_begin_type_by_descriptor(descriptor))
+174c174
+<         -:  172:        result = "[BEGIN]";
+---
+>     #####:  172:        result = "[BEGIN]";
+176c176
+<         -:  174:    else if (is_attach_type_by_descriptor(descriptor))
+---
+>     #####:  174:    else if (is_attach_type_by_descriptor(descriptor))
+178c178
+<         -:  176:        result = "[ATTACH]";
+---
+>     #####:  176:        result = "[ATTACH]";
+180c180
+<         -:  178:    else if (is_flow_type_by_descriptor(descriptor))
+---
+>     #####:  178:    else if (is_flow_type_by_descriptor(descriptor))
+182c182
+<         -:  180:        result = "[FLOW]";
+---
+>     #####:  180:        result = "[FLOW]";
+184c184
+<         -:  182:    else if (is_disposition_type_by_descriptor(descriptor))
+---
+>     #####:  182:    else if (is_disposition_type_by_descriptor(descriptor))
+186c186
+<         -:  184:        result = "[DISPOSITION]";
+---
+>     #####:  184:        result = "[DISPOSITION]";
+188c188
+<         -:  186:    else if (is_transfer_type_by_descriptor(descriptor))
+---
+>     #####:  186:    else if (is_transfer_type_by_descriptor(descriptor))
+190c190
+<         -:  188:        result = "[TRANSFER]";
+---
+>     #####:  188:        result = "[TRANSFER]";
+192c192
+<         -:  190:    else if (is_detach_type_by_descriptor(descriptor))
+---
+>     #####:  190:    else if (is_detach_type_by_descriptor(descriptor))
+194c194
+<         -:  192:        result = "[DETACH]";
+---
+>     #####:  192:        result = "[DETACH]";
+196c196
+<         -:  194:    else if (is_end_type_by_descriptor(descriptor))
+---
+>     #####:  194:    else if (is_end_type_by_descriptor(descriptor))
+198c198
+<         -:  196:        result = "[END]";
+---
+>     #####:  196:        result = "[END]";
+200c200
+<         -:  198:    else if (is_close_type_by_descriptor(descriptor))
+---
+>     #####:  198:    else if (is_close_type_by_descriptor(descriptor))
+202c202
+<         -:  200:        result = "[CLOSE]";
+---
+>     #####:  200:        result = "[CLOSE]";
+206c206
+<         -:  204:        result = "[Unknown]";
+---
+>     #####:  204:        result = "[Unknown]";
+209c209
+<         -:  207:    return result;
+---
+>     #####:  207:    return result;
+218,219c218,219
+<         -:  216:    AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+<         -:  217:    if (descriptor == NULL)
+---
+>     #####:  216:    AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+>     #####:  217:    if (descriptor == NULL)
+221c221
+<         -:  219:        LogError("Error getting performative descriptor");
+---
+>     #####:  219:        LogError("Error getting performative descriptor");
+226,230c226,230
+<         -:  224:        LOG(AZ_LOG_TRACE, 0, "<- ");
+<         -:  225:        LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+<         -:  226:        performative_as_string = NULL;
+<         -:  227:        LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+<         -:  228:        if (performative_as_string != NULL)
+---
+>     #####:  224:        LOG(AZ_LOG_TRACE, 0, "<- ");
+>     #####:  225:        LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+>     #####:  226:        performative_as_string = NULL;
+>     #####:  227:        LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+>     #####:  228:        if (performative_as_string != NULL)
+232c232
+<         -:  230:            free(performative_as_string);
+---
+>     #####:  230:            free(performative_as_string);
+243,244c243,244
+<         -:  241:    AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+<         -:  242:    if (descriptor == NULL)
+---
+>     #####:  241:    AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+>     #####:  242:    if (descriptor == NULL)
+246c246
+<         -:  244:        LogError("Error getting performative descriptor");
+---
+>     #####:  244:        LogError("Error getting performative descriptor");
+251,255c251,255
+<         -:  249:        LOG(AZ_LOG_TRACE, 0, "-> ");
+<         -:  250:        LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+<         -:  251:        performative_as_string = NULL;
+<         -:  252:        LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+<         -:  253:        if (performative_as_string != NULL)
+---
+>     #####:  249:        LOG(AZ_LOG_TRACE, 0, "-> ");
+>     #####:  250:        LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+>     #####:  251:        performative_as_string = NULL;
+>     #####:  252:        LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+>     #####:  253:        if (performative_as_string != NULL)
+257c257
+<         -:  255:            free(performative_as_string);
+---
+>     #####:  255:            free(performative_as_string);
+270c270
+<         -:  268:        LogError("Cannot send encoded bytes");
+---
+>     #####:  268:        LogError("Cannot send encoded bytes");
+274c274
+<         -:  272:            LogError("xio_close failed");
+---
+>     #####:  272:            LogError("xio_close failed");
+288c288
+<         -:  286:        LogError("Cannot set max frame size");
+---
+>     #####:  286:        LogError("Cannot set max frame size");
+293c293
+<         -:  291:            LogError("xio_close failed");
+---
+>     #####:  291:            LogError("xio_close failed");
+305c305
+<         -:  303:            LogError("Cannot create OPEN performative");
+---
+>     #####:  303:            LogError("Cannot create OPEN performative");
+310c310
+<         -:  308:                LogError("xio_close failed");
+---
+>     #####:  308:                LogError("xio_close failed");
+321c321
+<         -:  319:                LogError("Cannot set max frame size");
+---
+>     #####:  319:                LogError("Cannot set max frame size");
+326c326
+<         -:  324:                    LogError("xio_close failed");
+---
+>     #####:  324:                    LogError("xio_close failed");
+335c335
+<         -:  333:                LogError("Cannot set max channel");
+---
+>     #####:  333:                LogError("Cannot set max channel");
+340c340
+<         -:  338:                    LogError("xio_close failed");
+---
+>     #####:  338:                    LogError("xio_close failed");
+354c354
+<         -:  352:                    LogError("xio_close failed");
+---
+>     #####:  352:                    LogError("xio_close failed");
+365c365
+<         -:  363:                LogError("Cannot set hostname");
+---
+>     #####:  363:                LogError("Cannot set hostname");
+370c370
+<         -:  368:                    LogError("xio_close failed");
+---
+>     #####:  368:                    LogError("xio_close failed");
+381c381
+<         -:  379:                LogError("Cannot set properties");
+---
+>     #####:  379:                LogError("Cannot set properties");
+386c386
+<         -:  384:                    LogError("xio_close failed");
+---
+>     #####:  384:                    LogError("xio_close failed");
+397c397
+<         -:  395:                    LogError("Cannot create OPEN AMQP value");
+---
+>     #####:  395:                    LogError("Cannot create OPEN AMQP value");
+402c402
+<         -:  400:                        LogError("xio_close failed");
+---
+>     #####:  400:                        LogError("xio_close failed");
+419c419
+<         -:  417:                        LogError("amqp_frame_codec_encode_frame failed");
+---
+>     #####:  417:                        LogError("amqp_frame_codec_encode_frame failed");
+424c424
+<         -:  422:                            LogError("xio_close failed");
+---
+>     #####:  422:                            LogError("xio_close failed");
+462c462
+<         -:  460:        LogError("Cannot create close performative");
+---
+>     #####:  460:        LogError("Cannot create close performative");
+471c471
+<         -:  469:            LogError("Cannot set error on CLOSE");
+---
+>     #####:  469:            LogError("Cannot set error on CLOSE");
+479c479
+<         -:  477:                LogError("Cannot create AMQP CLOSE performative value");
+---
+>     #####:  477:                LogError("Cannot create AMQP CLOSE performative value");
+490c490
+<         -:  488:                    LogError("amqp_frame_codec_encode_frame failed");
+---
+>     #####:  488:                    LogError("amqp_frame_codec_encode_frame failed");
+522c522
+<         -:  520:            LogError("xio_close failed");
+---
+>     #####:  520:            LogError("xio_close failed");
+532c532
+<         -:  530:            LogError("Cannot set error description on CLOSE frame");
+---
+>     #####:  530:            LogError("Cannot set error description on CLOSE frame");
+537c537
+<         -:  535:                LogError("xio_close failed");
+---
+>     #####:  535:                LogError("xio_close failed");
+545c545
+<         -:  543:            LogError("Cannot set error info on CLOSE frame");
+---
+>     #####:  543:            LogError("Cannot set error info on CLOSE frame");
+550c550
+<         -:  548:                LogError("xio_close failed");
+---
+>     #####:  548:                LogError("xio_close failed");
+557c557
+<         -:  555:            LogError("Cannot send CLOSE frame");
+---
+>     #####:  555:            LogError("Cannot send CLOSE frame");
+562c562
+<         -:  560:                LogError("xio_close failed");
+---
+>     #####:  560:                LogError("xio_close failed");
+594c594
+<         -:  592:        LogError("Cannot find session endpoint for channel %u", (unsigned int)outgoing_channel);
+---
+>     #####:  592:        LogError("Cannot find session endpoint for channel %u", (unsigned int)outgoing_channel);
+620c620
+<         -:  618:        LogError("Cannot find session endpoint for channel %u", (unsigned int)incoming_channel);
+---
+>     #####:  618:        LogError("Cannot find session endpoint for channel %u", (unsigned int)incoming_channel);
+638c638
+<         -:  636:        LogError("Unknown connection state: %d", (int)connection->connection_state);
+---
+>     #####:  636:        LogError("Unknown connection state: %d", (int)connection->connection_state);
+652c652
+<         -:  650:                LogError("xio_close failed");
+---
+>     #####:  650:                LogError("xio_close failed");
+665c665
+<         -:  663:                    LOG(AZ_LOG_TRACE, LOG_LINE, "<- Header (AMQP 0.1.0.0)");
+---
+>     #####:  663:                    LOG(AZ_LOG_TRACE, LOG_LINE, "<- Header (AMQP 0.1.0.0)");
+672c672
+<         -:  670:                    LogError("Cannot send open frame");
+---
+>     #####:  670:                    LogError("Cannot send open frame");
+699c699
+<         -:  697:            LogError("Cannot process received bytes");
+---
+>     #####:  697:            LogError("Cannot process received bytes");
+724c724
+<         -:  722:            LogError("Cannot process received bytes");
+---
+>     #####:  722:            LogError("Cannot process received bytes");
+740c740
+<         -:  738:            LogError("Unknown connection state: %d", (int)connection->connection_state);
+---
+>     #####:  738:            LogError("Unknown connection state: %d", (int)connection->connection_state);
+748c748
+<         -:  746:                LogError("Cannot send header");
+---
+>     #####:  746:                LogError("Cannot send header");
+763c763
+<         -:  761:                LogError("Cannot send OPEN frame");
+---
+>     #####:  761:                LogError("Cannot send OPEN frame");
+794c794
+<         -:  792:            LogError("xio_close failed");
+---
+>     #####:  792:            LogError("xio_close failed");
+807c807
+<         -:  805:        LOG(AZ_LOG_TRACE, LOG_LINE, "<- Empty frame");
+---
+>     #####:  805:        LOG(AZ_LOG_TRACE, LOG_LINE, "<- Empty frame");
+811c811
+<         -:  809:        LogError("Cannot get tickcounter value");
+---
+>     #####:  809:        LogError("Cannot get tickcounter value");
+823c823
+<         -:  821:        LogError("Cannot get tickcounter value");
+---
+>     #####:  821:        LogError("Cannot get tickcounter value");
+837c837
+<         -:  835:                    LogError("connection_endpoint_frame_received::NULL performative");
+---
+>     #####:  835:                    LogError("connection_endpoint_frame_received::NULL performative");
+855c855
+<         -:  853:                            LogError("OPEN frame received on a channel that is not 0");
+---
+>     #####:  853:                            LogError("OPEN frame received on a channel that is not 0");
+862c862
+<         -:  860:                            LogError("OPEN frame received in the OPENED state");
+---
+>     #####:  860:                            LogError("OPEN frame received in the OPENED state");
+873c873
+<         -:  871:                                LogError("connection_endpoint_frame_received::failed parsing OPEN frame");
+---
+>     #####:  871:                                LogError("connection_endpoint_frame_received::failed parsing OPEN frame");
+890c890
+<         -:  888:                                    LogError("connection_endpoint_frame_received::failed parsing OPEN frame");
+---
+>     #####:  888:                                    LogError("connection_endpoint_frame_received::failed parsing OPEN frame");
+936c936
+<         -:  934:                                LogError("xio_close failed");
+---
+>     #####:  934:                                LogError("xio_close failed");
+947c947
+<         -:  945:                                LogError("connection_endpoint_frame_received::failed parsing CLOSE frame");
+---
+>     #####:  945:                                LogError("connection_endpoint_frame_received::failed parsing CLOSE frame");
+954c954
+<         -:  952:                                    LogError("connection_endpoint_frame_received::failed parsing CLOSE frame");
+---
+>     #####:  952:                                    LogError("connection_endpoint_frame_received::failed parsing CLOSE frame");
+971c971
+<         -:  969:                                        LogError("Cannot send CLOSE frame");
+---
+>     #####:  969:                                        LogError("Cannot send CLOSE frame");
+977c977
+<         -:  975:                                        LogError("xio_close failed");
+---
+>     #####:  975:                                        LogError("xio_close failed");
+998c998
+<         -:  996:                            LogError("Failed getting ulong amqp performative");
+---
+>     #####:  996:                            LogError("Failed getting ulong amqp performative");
+1005c1005
+<         -: 1003:                                LogError("Bad performative: %02x", (unsigned int)performative_ulong);
+---
+>     #####: 1003:                                LogError("Bad performative: %02x", (unsigned int)performative_ulong);
+1014c1014
+<         -: 1012:                                    LogError("Cannot get begin performative");
+---
+>     #####: 1012:                                    LogError("Cannot get begin performative");
+1041c1041
+<         -: 1039:                                            LogError("Cannot create session endpoint");
+---
+>     #####: 1039:                                            LogError("Cannot create session endpoint");
+1074c1074
+<         -: 1072:                                    LogError("Cannot find session endpoint for channel %u", (unsigned int)channel);
+---
+>     #####: 1072:                                    LogError("Cannot find session endpoint for channel %u", (unsigned int)channel);
+1103c1103
+<         -: 1101:                    LogError("xio_close failed");
+---
+>     #####: 1101:                    LogError("xio_close failed");
+1115c1115
+<         -: 1113:    LogError("A frame_codec_error occured");
+---
+>     #####: 1113:    LogError("A frame_codec_error occured");
+1123c1123
+<         -: 1121:    LogError("An amqp_frame_codec_error occured");
+---
+>     #####: 1121:    LogError("An amqp_frame_codec_error occured");
+1143c1143
+<         -: 1141:        LogError("Bad arguments: xio = %p, container_id = %p",
+---
+>     #####: 1141:        LogError("Bad arguments: xio = %p, container_id = %p",
+1153c1153
+<         -: 1151:            LogError("Cannot allocate memory for connection");
+---
+>     #####: 1151:            LogError("Cannot allocate memory for connection");
+1164c1164
+<         -: 1162:                LogError("Cannot create frame_codec");
+---
+>     #####: 1162:                LogError("Cannot create frame_codec");
+1174c1174
+<         -: 1172:                    LogError("Cannot create amqp_frame_codec");
+---
+>     #####: 1172:                    LogError("Cannot create amqp_frame_codec");
+1188c1188
+<         -: 1186:                            LogError("Cannot allocate memory for host name");
+---
+>     #####: 1186:                            LogError("Cannot allocate memory for host name");
+1211c1211
+<         -: 1209:                            LogError("Cannot allocate memory for container_id");
+---
+>     #####: 1209:                            LogError("Cannot allocate memory for container_id");
+1223c1223
+<         -: 1221:                                LogError("Cannot create tick counter");
+---
+>     #####: 1221:                                LogError("Cannot create tick counter");
+1273c1273
+<         -: 1271:                                    LogError("Could not retrieve time for last frame received time");
+---
+>     #####: 1271:                                    LogError("Could not retrieve time for last frame received time");
+1305c1305
+<         -: 1303:        LogError("NULL connection");
+---
+>     #####: 1303:        LogError("NULL connection");
+1337c1337
+<         -: 1335:        LogError("NULL connection");
+---
+>     #####: 1335:        LogError("NULL connection");
+1346c1346
+<         -: 1344:                LogError("Opening the underlying IO failed");
+---
+>         9: 1344:                LogError("Opening the underlying IO failed");
+1374c1374
+<         -: 1372:        LogError("NULL connection");
+---
+>     #####: 1372:        LogError("NULL connection");
+1383c1383
+<         -: 1381:                LogError("Opening the underlying IO failed");
+---
+>     #####: 1381:                LogError("Opening the underlying IO failed");
+1411c1411
+<         -: 1409:        LogError("NULL connection");
+---
+>     #####: 1409:        LogError("NULL connection");
+1418c1418
+<         -: 1416:        LogError("Invalid info, expected a map");
+---
+>     #####: 1416:        LogError("Invalid info, expected a map");
+1431c1431
+<         -: 1429:                LogError("Sending CLOSE frame failed");
+---
+>     #####: 1429:                LogError("Sending CLOSE frame failed");
+1439c1439
+<         -: 1437:            LogError("xio_close failed");
+---
+>     #####: 1437:            LogError("xio_close failed");
+1457c1457
+<         -: 1455:        LogError("NULL connection");
+---
+>     #####: 1455:        LogError("NULL connection");
+1464c1464
+<         -: 1462:        LogError("max_frame_size too small");
+---
+>     #####: 1462:        LogError("max_frame_size too small");
+1472c1472
+<         -: 1470:            LogError("Connection already open");
+---
+>     #####: 1470:            LogError("Connection already open");
+1497c1497
+<         -: 1495:        LogError("Bad arguments: connection = %p, max_frame_size = %p",
+---
+>     #####: 1495:        LogError("Bad arguments: connection = %p, max_frame_size = %p",
+1520c1520
+<         -: 1518:        LogError("NULL connection");
+---
+>     #####: 1518:        LogError("NULL connection");
+1528c1528
+<         -: 1526:            LogError("Connection already open");
+---
+>     #####: 1526:            LogError("Connection already open");
+1553c1553
+<         -: 1551:        LogError("Bad arguments: connection = %p, channel_max = %p",
+---
+>     #####: 1551:        LogError("Bad arguments: connection = %p, channel_max = %p",
+1576c1576
+<         -: 1574:        LogError("NULL connection");
+---
+>     #####: 1574:        LogError("NULL connection");
+1584c1584
+<         -: 1582:            LogError("Connection already open");
+---
+>     #####: 1582:            LogError("Connection already open");
+1610c1610
+<         -: 1608:        LogError("Bad arguments: connection = %p, idle_timeout = %p",
+---
+>     #####: 1608:        LogError("Bad arguments: connection = %p, idle_timeout = %p",
+1633c1633
+<         -: 1631:        LogError("NULL connection");
+---
+>     #####: 1631:        LogError("NULL connection");
+1641c1641
+<         -: 1639:            LogError("Connection already open");
+---
+>     #####: 1639:            LogError("Connection already open");
+1668c1668
+<         -: 1666:                    LogError("Cannot clone connection properties");
+---
+>     #####: 1666:                    LogError("Cannot clone connection properties");
+1700c1700
+<         -: 1698:        LogError("Bad arguments: connection = %p, properties = %p",
+---
+>     #####: 1698:        LogError("Bad arguments: connection = %p, properties = %p",
+1722c1722
+<         -: 1720:                LogError("Cannot clone properties");
+---
+>     #####: 1720:                LogError("Cannot clone properties");
+1743c1743
+<         -: 1741:        LogError("Bad arguments: connection = %p, remote_max_frame_size = %p",
+---
+>     #####: 1741:        LogError("Bad arguments: connection = %p, remote_max_frame_size = %p",
+1764c1764
+<         -: 1762:        LogError("NULL connection");
+---
+>     #####: 1762:        LogError("NULL connection");
+1772c1772
+<         -: 1770:            LogError("Could not get tick counter value");
+---
+>     #####: 1770:            LogError("Could not get tick counter value");
+1811c1811
+<         -: 1809:                        LogError("Encoding the empty frame failed");
+---
+>     #####: 1809:                        LogError("Encoding the empty frame failed");
+1819c1819
+<         -: 1817:                            LOG(AZ_LOG_TRACE, LOG_LINE, "-> Empty frame");
+---
+>     #####: 1817:                            LOG(AZ_LOG_TRACE, LOG_LINE, "-> Empty frame");
+1840c1840
+<         -: 1838:        LogError("NULL connection");
+---
+>     #####: 1838:        LogError("NULL connection");
+1860c1860
+<         -: 1858:        LogError("NULL connection");
+---
+>     #####: 1858:        LogError("NULL connection");
+1889c1889
+<         -: 1887:                LogError("Cannot allocate memory for endpoint");
+---
+>     #####: 1887:                LogError("Cannot allocate memory for endpoint");
+1906c1906
+<         -: 1904:                    LogError("Cannot reallocate memory for connection endpoints");
+---
+>     #####: 1904:                    LogError("Cannot reallocate memory for connection endpoints");
+1939c1939
+<         -: 1937:        LogError("Bad arguments: endpoint = %p, on_endpoint_frame_received = %p, on_connection_state_changed = %p",
+---
+>     #####: 1937:        LogError("Bad arguments: endpoint = %p, on_endpoint_frame_received = %p, on_connection_state_changed = %p",
+1962c1962
+<         -: 1960:        LogError("Bad arguments: endpoint = %p, incoming_channel = %p",
+---
+>     #####: 1960:        LogError("Bad arguments: endpoint = %p, incoming_channel = %p",
+1980c1980
+<         -: 1978:        LogError("NULL endpoint");
+---
+>     #####: 1978:        LogError("NULL endpoint");
+2038c2038
+<         -: 2036:        LogError("Bad arguments: endpoint = %p, performative = %p",
+---
+>     #####: 2036:        LogError("Bad arguments: endpoint = %p, performative = %p",
+2050c2050
+<         -: 2048:            LogError("Connection not open");
+---
+>     #####: 2048:            LogError("Connection not open");
+2064c2064
+<         -: 2062:                LogError("Encoding AMQP frame failed");
+---
+>     #####: 2062:                LogError("Encoding AMQP frame failed");
+2076c2076
+<         -: 2074:                    LogError("Getting tick counter value failed");
+---
+>     #####: 2074:                    LogError("Getting tick counter value failed");
+2096c2096
+<         -: 2094:        LogError("NULL connection");
+---
+>     #####: 2094:        LogError("NULL connection");
+2113c2113
+<         -: 2111:        LogError("Bad arguments: connection = %p, idle_timeout_empty_frame_send_ratio = %f",
+---
+>     #####: 2111:        LogError("Bad arguments: connection = %p, idle_timeout_empty_frame_send_ratio = %f",
+2137c2137
+<         -: 2135:        LogError("Invalid arguments: connection = %p, on_connection_close_received = %p, context = %p",
+---
+>     #####: 2135:        LogError("Invalid arguments: connection = %p, on_connection_close_received = %p, context = %p",
+2146c2146
+<         -: 2144:            LogError("Already subscribed for on_connection_close_received events");
+---
+>     #####: 2144:            LogError("Already subscribed for on_connection_close_received events");
+2167c2167
+<         -: 2165:        LogError("NULL event_subscription");
+---
+>     #####: 2165:        LogError("NULL event_subscription");

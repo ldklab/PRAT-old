@@ -1,0 +1,186 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+52c52
+<         -:   50:        LogError("Failed creating value for property key %s", key);
+---
+>     #####:   50:        LogError("Failed creating value for property key %s", key);
+61c61
+<         -:   59:            LogError("Failed creating value for property value %s", value);
+---
+>     #####:   59:            LogError("Failed creating value for property value %s", value);
+69c69
+<         -:   67:                LogError("Failed inserting key/value pair in the map");
+---
+>     #####:   67:                LogError("Failed inserting key/value pair in the map");
+91c91
+<         -:   89:        LogError("on_underlying_amqp_management_open_complete called with NULL context");
+---
+>     #####:   89:        LogError("on_underlying_amqp_management_open_complete called with NULL context");
+100c100
+<         -:   98:            LogError("AMQP management open complete in unknown state");
+---
+>     #####:   98:            LogError("AMQP management open complete in unknown state");
+105c105
+<         -:  103:            LogError("Unexpected AMQP management open complete");
+---
+>     #####:  103:            LogError("Unexpected AMQP management open complete");
+109c109
+<         -:  107:            LogError("Unexpected AMQP management open complete in OPEN");
+---
+>     #####:  107:            LogError("Unexpected AMQP management open complete in OPEN");
+119,120c119,120
+<         3:  117:            default:
+<         -:  118:                LogError("Unknown AMQP management state");
+---
+>     #####:  117:            default:
+>     #####:  118:                LogError("Unknown AMQP management state");
+155c155
+<         -:  153:        LogError("on_underlying_amqp_management_error called with NULL context");
+---
+>     #####:  153:        LogError("on_underlying_amqp_management_error called with NULL context");
+164c164
+<         -:  162:            LogError("AMQP management error in unknown state");
+---
+>     #####:  162:            LogError("AMQP management error in unknown state");
+168c168
+<         -:  166:            LogError("Unexpected AMQP error in CLOSED state");
+---
+>     #####:  166:            LogError("Unexpected AMQP error in CLOSED state");
+193c193
+<         -:  191:        LogError("on_amqp_management_execute_operation_complete called with NULL context");
+---
+>     #####:  191:        LogError("on_amqp_management_execute_operation_complete called with NULL context");
+205c205
+<         -:  203:            LogError("NULL cbs_operation");
+---
+>     #####:  203:            LogError("NULL cbs_operation");
+250c250
+<         -:  248:                LogError("Failed removing operation from the pending list");
+---
+>     #####:  248:                LogError("Failed removing operation from the pending list");
+266c266
+<         -:  264:        LogError("NULL session handle");
+---
+>     #####:  264:        LogError("NULL session handle");
+275c275
+<         -:  273:            LogError("Cannot allocate memory for cbs instance.");
+---
+>     #####:  273:            LogError("Cannot allocate memory for cbs instance.");
+284c284
+<         -:  282:                LogError("Cannot allocate pending operations list.");
+---
+>     #####:  282:                LogError("Cannot allocate pending operations list.");
+294c294
+<         -:  292:                    LogError("Cannot create AMQP management instance for the $cbs node.");
+---
+>     #####:  292:                    LogError("Cannot create AMQP management instance for the $cbs node.");
+302c302
+<         -:  300:                        LogError("Cannot set the override status code key name");
+---
+>     #####:  300:                        LogError("Cannot set the override status code key name");
+310c310
+<         -:  308:                            LogError("Cannot set the override status description key name");
+---
+>     #####:  308:                            LogError("Cannot set the override status description key name");
+341c341
+<         -:  339:        LogError("NULL cbs handle");
+---
+>     #####:  339:        LogError("NULL cbs handle");
+386c386
+<         -:  384:        LogError("Bad arguments: cbs = %p, on_cbs_open_complete = %p, on_cbs_error = %p",
+---
+>     #####:  384:        LogError("Bad arguments: cbs = %p, on_cbs_open_complete = %p, on_cbs_error = %p",
+393c393
+<         -:  391:        LogError("cbs instance already open");
+---
+>     #####:  391:        LogError("cbs instance already open");
+428c428
+<         -:  426:        LogError("NULL cbs handle");
+---
+>     #####:  426:        LogError("NULL cbs handle");
+435c435
+<         -:  433:        LogError("Already closed");
+---
+>     #####:  433:        LogError("Already closed");
+444c444
+<         -:  442:            LogError("Failed closing AMQP management instance");
+---
+>     #####:  442:            LogError("Failed closing AMQP management instance");
+477c477
+<         -:  475:        LogError("Bad arguments: cbs = %p, type = %p, audience = %p, token = %p, on_cbs_put_token_complete = %p",
+---
+>     #####:  475:        LogError("Bad arguments: cbs = %p, type = %p, audience = %p, token = %p, on_cbs_put_token_complete = %p",
+485c485
+<         -:  483:        LogError("put token called while closed or in error");
+---
+>     #####:  483:        LogError("put token called while closed or in error");
+495c495
+<         -:  493:            LogError("message_create failed");
+---
+>     #####:  493:            LogError("message_create failed");
+504c504
+<         -:  502:                LogError("Failed creating token AMQP value");
+---
+>     #####:  502:                LogError("Failed creating token AMQP value");
+513c513
+<         -:  511:                    LogError("Failed setting the token in the message body");
+---
+>     #####:  511:                    LogError("Failed setting the token in the message body");
+522c522
+<         -:  520:                        LogError("Failed creating application properties map");
+---
+>     #####:  520:                        LogError("Failed creating application properties map");
+536c536
+<         -:  534:                                LogError("Failed setting message application properties");
+---
+>     #####:  534:                                LogError("Failed setting message application properties");
+544c544
+<         -:  542:                                    LogError("Failed allocating CBS operation instance");
+---
+>     #####:  542:                                    LogError("Failed allocating CBS operation instance");
+559c559
+<         -:  557:                                        LogError("Failed adding pending operation to list");
+---
+>     #####:  557:                                        LogError("Failed adding pending operation to list");
+579c579
+<         -:  577:                                            LogError("Failed starting AMQP management operation");
+---
+>     #####:  577:                                            LogError("Failed starting AMQP management operation");
+617c617
+<         -:  615:        LogError("Bad arguments: cbs = %p, type = %p, audience = %p, on_cbs_delete_token_complete = %p",
+---
+>     #####:  615:        LogError("Bad arguments: cbs = %p, type = %p, audience = %p, on_cbs_delete_token_complete = %p",
+625c625
+<         -:  623:        LogError("put token called while closed or in error");
+---
+>     #####:  623:        LogError("put token called while closed or in error");
+636c636
+<         -:  634:            LogError("message_create failed");
+---
+>     #####:  634:            LogError("message_create failed");
+645c645
+<         -:  643:                LogError("Failed creating application properties map");
+---
+>     #####:  643:                LogError("Failed creating application properties map");
+660c660
+<         -:  658:                        LogError("Failed setting message application properties");
+---
+>     #####:  658:                        LogError("Failed setting message application properties");
+668c668
+<         -:  666:                            LogError("Failed allocating CBS operation instance");
+---
+>     #####:  666:                            LogError("Failed allocating CBS operation instance");
+683c683
+<         -:  681:                                LogError("Failed adding pending operation to list");
+---
+>     #####:  681:                                LogError("Failed adding pending operation to list");
+704c704
+<         -:  702:                                    LogError("Failed starting AMQP management operation");
+---
+>     #####:  702:                                    LogError("Failed starting AMQP management operation");
+733c733
+<         -:  731:        LogError("NULL cbs handle");
+---
+>     #####:  731:        LogError("NULL cbs handle");

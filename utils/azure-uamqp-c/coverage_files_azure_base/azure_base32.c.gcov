@@ -1,0 +1,399 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/azure_base32.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include <stdint.h>
+        -:    6:#include <ctype.h>
+        -:    7:#include "azure_c_shared_utility/buffer_.h"
+        -:    8:#include "azure_c_shared_utility/xlogging.h"
+        -:    9:#include "azure_c_shared_utility/gballoc.h"
+        -:   10:#include "azure_c_shared_utility/strings.h"
+        -:   11:
+        -:   12:#include "azure_c_shared_utility/azure_base32.h"
+        -:   13:
+        -:   14:static const unsigned char BASE32_EQUAL_SIGN = 32;
+        -:   15:
+        -:   16:static const char BASE32_VALUES[] = "abcdefghijklmnopqrstuvwxyz234567=";
+        -:   17:#define TARGET_BLOCK_SIZE       5
+        -:   18:#define INVALID_CHAR_POS        260
+        -:   19:
+        -:   20:#define BASE32_INPUT_SIZE       8
+        -:   21:
+        -:   22:#define ASCII_VALUE_MAX         0x80
+        -:   23:
+    #####:   24:static size_t base32_encoding_length(size_t src_len)
+        -:   25:{
+    #####:   26:    return (((src_len + TARGET_BLOCK_SIZE - 1) / TARGET_BLOCK_SIZE) * 8);
+        -:   27:}
+        -:   28:
+    #####:   29:static size_t base32_decoding_length(size_t src_len)
+        -:   30:{
+    #####:   31:    return ((src_len*TARGET_BLOCK_SIZE) / 8);
+        -:   32:}
+        -:   33:
+    #####:   34:static unsigned char convert_value_to_base32_char(unsigned char value)
+        -:   35:{
+        -:   36:    unsigned char result;
+        -:   37:
+    #####:   38:    if (value >= 50 && value <= 55)
+        -:   39:    {
+    #####:   40:        result = 0x1a+(value-50);
+        -:   41:    }
+    #####:   42:    else if (value == 61)
+        -:   43:    {
+    #####:   44:        result = 0x20;
+        -:   45:    }
+    #####:   46:    else if ((value <= 49) || (value >= 56 && value <= 64))
+        -:   47:    {
+    #####:   48:        result = 0xFF;
+        -:   49:    }
+    #####:   50:    else if (value >= 65 && value <= 90)
+        -:   51:    {
+    #####:   52:        result = 0x00 + (value - 65);
+        -:   53:    }
+    #####:   54:    else if (value >= 91 && value <= 96)
+        -:   55:    {
+    #####:   56:        result = 0xFF;
+        -:   57:    }
+    #####:   58:    else if (value >= 97 && value <= 123)
+        -:   59:    {
+    #####:   60:        result = 0x00 + (value - 97);
+        -:   61:    }
+        -:   62:    else // value > 123
+        -:   63:    {
+    #####:   64:        result = 0xFF;
+        -:   65:    }
+    #####:   66:    return result;
+        -:   67:}
+        -:   68:
+    #####:   69:static char* base32_encode_impl(const unsigned char* source, size_t src_size)
+        -:   70:{
+        -:   71:    char* result;
+        -:   72:
+        -:   73:    // Allocate target buffer
+    #####:   74:    size_t output_len = base32_encoding_length(src_size);
+        -:   75:    /* Codes_SRS_BASE32_07_009: [ base32_encode_impl shall allocate the buffer to the size of the encoding value. ] */
+    #####:   76:    if ((result = (char*)malloc(output_len + 1)) == NULL)
+        -:   77:    {
+    #####:   78:        LogError("Failure allocating output buffer");
+        -:   79:    }
+        -:   80:    else
+        -:   81:    {
+    #####:   82:        const unsigned char* iterator = source;
+    #####:   83:        size_t block_len = 0;
+    #####:   84:        size_t result_len = 0;
+    #####:   85:        unsigned char pos1 = 0;
+    #####:   86:        unsigned char pos2 = 0;
+    #####:   87:        unsigned char pos3 = 0;
+    #####:   88:        unsigned char pos4 = 0;
+    #####:   89:        unsigned char pos5 = 0;
+    #####:   90:        unsigned char pos6 = 0;
+    #####:   91:        unsigned char pos7 = 0;
+    #####:   92:        unsigned char pos8 = 0;
+        -:   93:
+    #####:   94:        memset(result, 0, output_len + 1);
+        -:   95:
+        -:   96:        // Go through the source buffer sectioning off blocks of 5
+        -:   97:        /* Codes_SRS_BASE32_07_010: [ base32_encode_impl shall look through source and separate each block into 5 bit chunks ] */
+    #####:   98:        while (src_size >= 1 && result != NULL)
+        -:   99:        {
+    #####:  100:            pos1 = pos2 = pos3 = pos4 = pos5 = pos6 = pos7 = pos8 = 0;
+    #####:  101:            block_len = src_size > TARGET_BLOCK_SIZE ? TARGET_BLOCK_SIZE : src_size;
+        -:  102:            // Fall through switch block to process the 5 (or smaller) block
+    #####:  103:            switch (block_len)
+        -:  104:            {
+    #####:  105:            case 5:
+    #####:  106:                pos8 = (iterator[4] & 0x1f);
+    #####:  107:                pos7 = ((iterator[4] & 0xe0) >> 5);
+        -:  108:                // fall through
+    #####:  109:            case 4:
+    #####:  110:                pos7 |= ((iterator[3] & 0x03) << 3);
+    #####:  111:                pos6 = ((iterator[3] & 0x7c) >> 2);
+    #####:  112:                pos5 = ((iterator[3] & 0x80) >> 7);
+        -:  113:                // fall through
+    #####:  114:            case 3:
+    #####:  115:                pos5 |= ((iterator[2] & 0x0f) << 1);
+    #####:  116:                pos4 = ((iterator[2] & 0xf0) >> 4);
+        -:  117:                // fall through
+    #####:  118:            case 2:
+    #####:  119:                pos4 |= ((iterator[1] & 0x01) << 4);
+    #####:  120:                pos3 = ((iterator[1] & 0x3e) >> 1);
+    #####:  121:                pos2 = ((iterator[1] & 0xc0) >> 6);
+        -:  122:                // fall through
+    #####:  123:            case 1:
+    #####:  124:                pos2 |= ((iterator[0] & 0x07) << 2);
+    #####:  125:                pos1 = ((iterator[0] & 0xf8) >> 3);
+    #####:  126:                break;
+        -:  127:            }
+        -:  128:            // Move the iterator the block size
+    #####:  129:            iterator += block_len;
+        -:  130:            // and decrement the src_size;
+    #####:  131:            src_size -= block_len;
+        -:  132:
+        -:  133:            /* Codes_SRS_BASE32_07_012: [ If the src_size is not divisible by 8, base32_encode_impl shall pad the remaining places with =. ] */
+    #####:  134:            switch (block_len)
+        -:  135:            {
+    #####:  136:                case 1: pos3 = pos4 = 32; // fall through
+    #####:  137:                case 2: pos5 = 32; // fall through
+    #####:  138:                case 3: pos6 = pos7 = 32; // fall through
+    #####:  139:                case 4: pos8 = 32; // fall through
+    #####:  140:                case 5:
+    #####:  141:                    break;
+        -:  142:            }
+        -:  143:
+        -:  144:            /* Codes_SRS_BASE32_07_011: [ base32_encode_impl shall then map the 5 bit chunks into one of the BASE32 values (a-z,2,3,4,5,6,7) values. ] */
+    #####:  145:            result[result_len++] = BASE32_VALUES[pos1];
+    #####:  146:            result[result_len++] = BASE32_VALUES[pos2];
+    #####:  147:            result[result_len++] = BASE32_VALUES[pos3];
+    #####:  148:            result[result_len++] = BASE32_VALUES[pos4];
+    #####:  149:            result[result_len++] = BASE32_VALUES[pos5];
+    #####:  150:            result[result_len++] = BASE32_VALUES[pos6];
+    #####:  151:            result[result_len++] = BASE32_VALUES[pos7];
+    #####:  152:            result[result_len++] = BASE32_VALUES[pos8];
+        -:  153:        }
+        -:  154:    }
+    #####:  155:    return result;
+        -:  156:}
+        -:  157:
+    #####:  158:static BUFFER_HANDLE base32_decode_impl(const char* source)
+        -:  159:{
+        -:  160:    BUFFER_HANDLE result;
+        -:  161:
+    #####:  162:    size_t src_length = strlen(source);
+    #####:  163:    if (src_length % BASE32_INPUT_SIZE != 0)
+        -:  164:    {
+        -:  165:        /* Codes_SRS_BASE32_07_021: [ If the source length is not evenly divisible by 8, base32_decode_impl shall return NULL. ] */
+    #####:  166:        LogError("Failure invalid input length %lu", (unsigned long)src_length);
+    #####:  167:        result = NULL;
+        -:  168:    }
+        -:  169:    else
+        -:  170:    {
+    #####:  171:        size_t dest_size = 0;
+        -:  172:        unsigned char* temp_buffer;
+        -:  173:        unsigned char* dest_buff;
+    #####:  174:        bool continue_processing = true;
+        -:  175:        unsigned char input[8];
+    #####:  176:        const char* iterator = source;
+        -:  177:
+        -:  178:        /* Codes_SRS_BASE32_07_022: [ base32_decode_impl shall allocate a temp buffer to store the in process value. ] */
+    #####:  179:        size_t allocation_len = base32_decoding_length(src_length);
+    #####:  180:        if ((temp_buffer = (unsigned char*)malloc(allocation_len)) == NULL)
+        -:  181:        {
+        -:  182:            /* Codes_SRS_BASE32_07_023: [ If an error is encountered, base32_decode_impl shall return NULL. ] */
+    #####:  183:            LogError("Failure allocating buffer");
+    #####:  184:            result = NULL;
+        -:  185:        }
+        -:  186:        else
+        -:  187:        {
+    #####:  188:            dest_buff = temp_buffer;
+    #####:  189:            while (*iterator != '\0')
+        -:  190:            {
+    #####:  191:                size_t index = 0;
+        -:  192:                /* Codes_SRS_BASE32_07_024: [ base32_decode_impl shall loop through and collect 8 characters from the source variable. ] */
+    #####:  193:                for (index = 0; index < BASE32_INPUT_SIZE; index++)
+        -:  194:                {
+    #####:  195:                    input[index] = *iterator;
+    #####:  196:                    iterator++;
+    #####:  197:                    if (input[index] >= ASCII_VALUE_MAX)
+        -:  198:                    {
+    #####:  199:                        LogError("Failure source encoding");
+    #####:  200:                        continue_processing = false;
+    #####:  201:                        break;
+        -:  202:                    }
+        -:  203:
+    #####:  204:                    input[index] = convert_value_to_base32_char(input[index]);
+        -:  205:                }
+        -:  206:
+    #####:  207:                if (!continue_processing)
+        -:  208:                {
+    #####:  209:                    result = NULL;
+    #####:  210:                    break;
+        -:  211:                }
+    #####:  212:                else if ((dest_size + TARGET_BLOCK_SIZE) > allocation_len)
+        -:  213:                {
+    #####:  214:                    LogError("Failure target length exceeded");
+    #####:  215:                    result = NULL;
+    #####:  216:                    continue_processing = false;
+    #####:  217:                    break;
+        -:  218:                }
+        -:  219:                else
+        -:  220:                {
+        -:  221:                    // Codes_SRS_BASE32_07_025: [ base32_decode_impl shall group 5 bytes at a time into the temp buffer. ]
+    #####:  222:                    *dest_buff++ = ((input[0] & 0x1f) << 3) | ((input[1] & 0x1c) >> 2);
+    #####:  223:                    *dest_buff++ = ((input[1] & 0x03) << 6) | ((input[2] & 0x1f) << 1) | ((input[3] & 0x10) >> 4);
+    #####:  224:                    *dest_buff++ = ((input[3] & 0x0f) << 4) | ((input[4] & 0x1e) >> 1);
+    #####:  225:                    *dest_buff++ = ((input[4] & 0x01) << 7) | ((input[5] & 0x1f) << 2) | ((input[6] & 0x18) >> 3);
+    #####:  226:                    *dest_buff++ = ((input[6] & 0x07) << 5) | (input[7] & 0x1f);
+    #####:  227:                    dest_size += TARGET_BLOCK_SIZE;
+        -:  228:                    // If there is padding remove it
+        -:  229:                    // Because we are packing 5 bytes into an 8 byte variable we need to check every other
+        -:  230:                    // variable for padding
+    #####:  231:                    if (input[7] == BASE32_EQUAL_SIGN)
+        -:  232:                    {
+    #####:  233:                        --dest_size;
+    #####:  234:                        if (input[5] == BASE32_EQUAL_SIGN)
+        -:  235:                        {
+    #####:  236:                            --dest_size;
+    #####:  237:                            if (input[4] == BASE32_EQUAL_SIGN)
+        -:  238:                            {
+    #####:  239:                                --dest_size;
+    #####:  240:                                if (input[2] == BASE32_EQUAL_SIGN)
+        -:  241:                                {
+    #####:  242:                                    --dest_size;
+        -:  243:                                }
+        -:  244:                            }
+        -:  245:                        }
+        -:  246:                    }
+        -:  247:                }
+        -:  248:            }
+        -:  249:
+    #####:  250:            if (!continue_processing)
+        -:  251:            {
+    #####:  252:                result = NULL;
+        -:  253:            }
+        -:  254:            else
+        -:  255:            {
+        -:  256:                /* Codes_SRS_BASE32_07_026: [ Once base32_decode_impl is complete it shall create a BUFFER with the temp buffer. ] */
+    #####:  257:                result = BUFFER_create(temp_buffer, dest_size);
+    #####:  258:                if (result == NULL)
+        -:  259:                {
+    #####:  260:                    LogError("Failure: BUFFER_create failed to create decoded buffer");
+        -:  261:                }
+        -:  262:            }
+    #####:  263:            free(temp_buffer);
+        -:  264:        }
+        -:  265:    }
+    #####:  266:    return result;
+        -:  267:}
+        -:  268:
+    #####:  269:BUFFER_HANDLE Azure_Base32_Decode(STRING_HANDLE handle)
+        -:  270:{
+        -:  271:    BUFFER_HANDLE result;
+    #####:  272:    if (handle == NULL)
+        -:  273:    {
+        -:  274:        /* Codes_SRS_BASE32_07_016: [ If source is NULL Azure_Base32_Decode shall return NULL. ] */
+    #####:  275:        LogError("invalid parameter handle");
+    #####:  276:        result = NULL;
+        -:  277:    }
+        -:  278:    else
+        -:  279:    {
+    #####:  280:        const char* str_source = STRING_c_str(handle);
+    #####:  281:        if (str_source == NULL)
+        -:  282:        {
+        -:  283:            /* Codes_SRS_BASE32_07_027: [ If the string in source value is NULL, Azure_Base32_Decode shall return NULL. ] */
+    #####:  284:            LogError("NULL value specified in string");
+    #####:  285:            result = NULL;
+        -:  286:        }
+        -:  287:        else
+        -:  288:        {
+        -:  289:            /* Codes_SRS_BASE32_07_018: [ Azure_Base32_Decode shall call base32_decode_impl to decode the base64 value. ] */
+    #####:  290:            result = base32_decode_impl(str_source);
+        -:  291:        }
+        -:  292:    }
+        -:  293:    /* Codes_SRS_BASE32_07_017: [ On success Azure_Base32_Decode shall return a BUFFER_HANDLE that contains the decoded bytes for source. ] */
+    #####:  294:    return result;
+        -:  295:}
+        -:  296:
+    #####:  297:BUFFER_HANDLE Azure_Base32_Decode_String(const char* source)
+        -:  298:{
+        -:  299:    BUFFER_HANDLE result;
+    #####:  300:    if (source == NULL)
+        -:  301:    {
+        -:  302:        /* Codes_SRS_BASE32_07_008: [ If source is NULL Azure_Base32_Decode_String shall return NULL. ] */
+    #####:  303:        LogError("invalid parameter source=NULL");
+    #####:  304:        result = NULL;
+        -:  305:    }
+        -:  306:    else
+        -:  307:    {
+        -:  308:        /* Codes_SRS_BASE32_07_020: [ Azure_Base32_Decode_String shall call base32_decode_impl to decode the base64 value. ] */
+    #####:  309:        result = base32_decode_impl(source);
+        -:  310:    }
+        -:  311:    /* Codes_SRS_BASE32_07_019: [ On success Azure_Base32_Decode_String shall return a BUFFER_HANDLE that contains the decoded bytes for source. ] */
+    #####:  312:    return result;
+        -:  313:}
+        -:  314:
+    #####:  315:char* Azure_Base32_Encode_Bytes(const unsigned char* source, size_t size)
+        -:  316:{
+        -:  317:    char* result;
+    #####:  318:    if (source == NULL)
+        -:  319:    {
+        -:  320:        /* Codes_SRS_BASE32_07_004: [ If source is NULL Azure_Base32_Encode_Bytes shall return NULL. ] */
+    #####:  321:        result = NULL;
+    #####:  322:        LogError("Failure: Invalid input parameter source");
+        -:  323:    }
+    #####:  324:    else if (size == 0)
+        -:  325:    {
+        -:  326:        /* Codes_SRS_BASE32_07_005: [ If size is 0 Azure_Base32_Encode_Bytes shall return an empty string. ] */
+    #####:  327:        if ((result = malloc(1)) != NULL)
+        -:  328:        {
+    #####:  329:            strcpy(result, "");
+        -:  330:        }
+        -:  331:        else
+        -:  332:        {
+    #####:  333:            LogError("unable to allocate memory for result");
+        -:  334:        }
+        -:  335:    }
+        -:  336:    else
+        -:  337:    {
+        -:  338:        /* Codes_SRS_BASE32_07_007: [ Azure_Base32_Encode_Bytes shall call into base32_Encode_impl to encode the source data. ] */
+    #####:  339:        result = base32_encode_impl(source, size);
+    #####:  340:        if (result == NULL)
+        -:  341:        {
+        -:  342:            /* Codes_SRS_BASE32_07_014: [ Upon failure Azure_Base32_Encode_Bytes shall return NULL. ] */
+    #####:  343:            LogError("encoding of unsigned char failed.");
+        -:  344:        }
+        -:  345:    }
+        -:  346:    /* Codes_SRS_BASE32_07_006: [ If successful Azure_Base32_Encode_Bytes shall return the base32 value of input. ] */
+    #####:  347:    return result;
+        -:  348:}
+        -:  349:
+    #####:  350:STRING_HANDLE Azure_Base32_Encode(BUFFER_HANDLE source)
+        -:  351:{
+        -:  352:    STRING_HANDLE result;
+    #####:  353:    if (source == NULL)
+        -:  354:    {
+        -:  355:        /* Codes_SRS_BASE32_07_001: [ If source is NULL Azure_Base32_Encode shall return NULL. ] */
+    #####:  356:        result = NULL;
+    #####:  357:        LogError("Failure: Invalid input parameter");
+        -:  358:    }
+        -:  359:    else
+        -:  360:    {
+    #####:  361:        size_t input_len = BUFFER_length(source);
+    #####:  362:        const unsigned char* input_value = BUFFER_u_char(source);
+    #####:  363:        if (input_value == NULL || input_len == 0)
+        -:  364:        {
+        -:  365:            /* Codes_SRS_BASE32_07_015: [ If size is 0 Azure_Base32_Encode shall return an empty string. ] */
+    #####:  366:            result = STRING_new();
+    #####:  367:            if (result == NULL)
+        -:  368:            {
+    #####:  369:                LogError("Failure constructing new string.");
+        -:  370:            }
+        -:  371:        }
+        -:  372:        else
+        -:  373:        {
+        -:  374:            /* Codes_SRS_BASE32_07_003: [ Azure_Base32_Encode shall call into base32_Encode_impl to encode the source data. ] */
+    #####:  375:            char* encoded = base32_encode_impl(input_value, input_len);
+    #####:  376:            if (encoded == NULL)
+        -:  377:            {
+        -:  378:                /* Codes_SRS_BASE32_07_014: [ Upon failure Azure_Base32_Encode shall return NULL. ] */
+    #####:  379:                LogError("base32 encode implementation failed.");
+    #####:  380:                result = NULL;
+        -:  381:            }
+        -:  382:            else
+        -:  383:            {
+        -:  384:                /* Codes_SRS_BASE32_07_012: [ Azure_Base32_Encode shall wrap the base32_Encode_impl result into a STRING_HANDLE. ] */
+    #####:  385:                result = STRING_construct(encoded);
+    #####:  386:                if (result == NULL)
+        -:  387:                {
+        -:  388:                    /* Codes_SRS_BASE32_07_014: [ Upon failure Azure_Base32_Encode shall return NULL. ] */
+    #####:  389:                    LogError("string construction failed.");
+        -:  390:                }
+    #####:  391:                free(encoded);
+        -:  392:            }
+        -:  393:        }
+        -:  394:    }
+        -:  395:    /* Codes_SRS_BASE32_07_002: [ If successful Azure_Base32_Encode shall return the base32 value of source. ] */
+    #####:  396:    return result;
+        -:  397:}

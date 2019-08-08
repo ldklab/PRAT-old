@@ -1,0 +1,370 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/src/amqp_frame_codec.c
+        -:    0:Programs:101
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include <stdint.h>
+        -:    6:#include <stddef.h>
+        -:    7:#include <string.h>
+        -:    8:#include "azure_macro_utils/macro_utils.h"
+        -:    9:#include "azure_c_shared_utility/gballoc.h"
+        -:   10:#include "azure_c_shared_utility/xlogging.h"
+        -:   11:#include "azure_uamqp_c/amqp_frame_codec.h"
+        -:   12:#include "azure_uamqp_c/frame_codec.h"
+        -:   13:#include "azure_uamqp_c/amqpvalue.h"
+        -:   14:
+        -:   15:typedef enum AMQP_FRAME_DECODE_STATE_TAG
+        -:   16:{
+        -:   17:    AMQP_FRAME_DECODE_FRAME,
+        -:   18:    AMQP_FRAME_DECODE_ERROR
+        -:   19:} AMQP_FRAME_DECODE_STATE;
+        -:   20:
+        -:   21:typedef struct AMQP_FRAME_CODEC_TAG
+        -:   22:{
+        -:   23:    FRAME_CODEC_HANDLE frame_codec;
+        -:   24:
+        -:   25:    /* decode */
+        -:   26:    AMQP_FRAME_RECEIVED_CALLBACK frame_received_callback;
+        -:   27:    AMQP_EMPTY_FRAME_RECEIVED_CALLBACK empty_frame_received_callback;
+        -:   28:    AMQP_FRAME_CODEC_ERROR_CALLBACK error_callback;
+        -:   29:    void* callback_context;
+        -:   30:    AMQPVALUE_DECODER_HANDLE decoder;
+        -:   31:    AMQP_FRAME_DECODE_STATE decode_state;
+        -:   32:    AMQP_VALUE decoded_performative;
+        -:   33:} AMQP_FRAME_CODEC;
+        -:   34:
+    #####:   35:static void amqp_value_decoded(void* context, AMQP_VALUE decoded_value)
+        -:   36:{
+    #####:   37:    AMQP_FRAME_CODEC_HANDLE amqp_frame_codec = (AMQP_FRAME_CODEC_HANDLE)context;
+        -:   38:    uint64_t performative_descriptor_ulong;
+    #####:   39:    AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(decoded_value);
+        -:   40:
+        -:   41:    /* Codes_SRS_AMQP_FRAME_CODEC_01_060: [If any error occurs while decoding a frame, the decoder shall switch to an error state where decoding shall not be possible anymore.] */
+    #####:   42:    if ((descriptor == NULL) ||
+    #####:   43:        (amqpvalue_get_ulong(descriptor, &performative_descriptor_ulong) != 0) ||
+        -:   44:        /* Codes_SRS_AMQP_FRAME_CODEC_01_003: [The performative MUST be one of those defined in section 2.7 and is encoded as a described type in the AMQP type system.] */
+    #####:   45:        (performative_descriptor_ulong < AMQP_OPEN) ||
+    #####:   46:        (performative_descriptor_ulong > AMQP_CLOSE))
+        -:   47:    {
+        -:   48:        /* Codes_SRS_AMQP_FRAME_CODEC_01_060: [If any error occurs while decoding a frame, the decoder shall switch to an error state where decoding shall not be possible anymore.] */
+    #####:   49:        amqp_frame_codec->decode_state = AMQP_FRAME_DECODE_ERROR;
+        -:   50:    }
+        -:   51:    else
+        -:   52:    {
+    #####:   53:        amqp_frame_codec->decoded_performative = decoded_value;
+        -:   54:    }
+    #####:   55:}
+        -:   56:
+    #####:   57:static void frame_received(void* context, const unsigned char* type_specific, uint32_t type_specific_size, const unsigned char* frame_body, uint32_t frame_body_size)
+        -:   58:{
+    #####:   59:    AMQP_FRAME_CODEC_HANDLE amqp_frame_codec = (AMQP_FRAME_CODEC_HANDLE)context;
+        -:   60:    uint16_t channel;
+        -:   61:
+    #####:   62:    switch (amqp_frame_codec->decode_state)
+        -:   63:    {
+    #####:   64:    default:
+        -:   65:    /* Codes_SRS_AMQP_FRAME_CODEC_01_050: [All subsequent decoding shall fail and no AMQP frames shall be indicated from that point on to the consumers of amqp_frame_codec.] */
+        -:   66:    case AMQP_FRAME_DECODE_ERROR:
+    #####:   67:        break;
+        -:   68:
+    #####:   69:    case AMQP_FRAME_DECODE_FRAME:
+        -:   70:        /* Codes_SRS_AMQP_FRAME_CODEC_01_049: [If not enough type specific bytes are received to decode the channel number, the decoding shall stop with an error.] */
+    #####:   71:        if (type_specific_size < 2)
+        -:   72:        {
+    #####:   73:            amqp_frame_codec->decode_state = AMQP_FRAME_DECODE_ERROR;
+        -:   74:
+        -:   75:            /* Codes_SRS_AMQP_FRAME_CODEC_01_069: [If any error occurs while decoding a frame, the decoder shall indicate the error by calling the amqp_frame_codec_error_callback  and passing to it the callback context argument that was given in amqp_frame_codec_create.] */
+    #####:   76:            amqp_frame_codec->error_callback(amqp_frame_codec->callback_context);
+        -:   77:        }
+        -:   78:        else
+        -:   79:        {
+        -:   80:            /* Codes_SRS_AMQP_FRAME_CODEC_01_001: [Bytes 6 and 7 of an AMQP frame contain the channel number ] */
+    #####:   81:            channel = ((uint16_t)type_specific[0]) << 8;
+    #####:   82:            channel += type_specific[1];
+        -:   83:
+    #####:   84:            if (frame_body_size == 0)
+        -:   85:            {
+        -:   86:                /* Codes_SRS_AMQP_FRAME_CODEC_01_048: [When a frame header is received from frame_codec and the frame payload size is 0, empty_frame_received_callback shall be invoked, while passing the channel number as argument.] */
+        -:   87:                /* Codes_SRS_AMQP_FRAME_CODEC_01_007: [An AMQP frame with no body MAY be used to generate artificial traffic as needed to satisfy any negotiated idle timeout interval ] */
+    #####:   88:                amqp_frame_codec->empty_frame_received_callback(amqp_frame_codec->callback_context, channel);
+        -:   89:            }
+        -:   90:            else
+        -:   91:            {
+        -:   92:                /* Codes_SRS_AMQP_FRAME_CODEC_01_051: [If the frame payload is greater than 0, amqp_frame_codec shall decode the performative as a described AMQP type.] */
+        -:   93:                /* Codes_SRS_AMQP_FRAME_CODEC_01_002: [The frame body is defined as a performative followed by an opaque payload.] */
+    #####:   94:                amqp_frame_codec->decoded_performative = NULL;
+        -:   95:
+    #####:   96:                while ((frame_body_size > 0) &&
+    #####:   97:                       (amqp_frame_codec->decoded_performative == NULL) &&
+    #####:   98:                       (amqp_frame_codec->decode_state != AMQP_FRAME_DECODE_ERROR))
+        -:   99:                {
+        -:  100:                    /* Codes_SRS_AMQP_FRAME_CODEC_01_052: [Decoding the performative shall be done by feeding the bytes to the decoder create in amqp_frame_codec_create.] */
+    #####:  101:                    if (amqpvalue_decode_bytes(amqp_frame_codec->decoder, frame_body, 1) != 0)
+        -:  102:                    {
+        -:  103:                        /* Codes_SRS_AMQP_FRAME_CODEC_01_060: [If any error occurs while decoding a frame, the decoder shall switch to an error state where decoding shall not be possible anymore.] */
+    #####:  104:                        amqp_frame_codec->decode_state = AMQP_FRAME_DECODE_ERROR;
+        -:  105:                    }
+        -:  106:                    else
+        -:  107:                    {
+    #####:  108:                        frame_body_size--;
+    #####:  109:                        frame_body++;
+        -:  110:                    }
+        -:  111:                }
+        -:  112:
+    #####:  113:                if (amqp_frame_codec->decode_state == AMQP_FRAME_DECODE_ERROR)
+        -:  114:                {
+        -:  115:                    /* Codes_SRS_AMQP_FRAME_CODEC_01_069: [If any error occurs while decoding a frame, the decoder shall indicate the error by calling the amqp_frame_codec_error_callback  and passing to it the callback context argument that was given in amqp_frame_codec_create.] */
+    #####:  116:                    amqp_frame_codec->error_callback(amqp_frame_codec->callback_context);
+        -:  117:                }
+        -:  118:                else
+        -:  119:                {
+        -:  120:                    /* Codes_SRS_AMQP_FRAME_CODEC_01_004: [The remaining bytes in the frame body form the payload for that frame.] */
+        -:  121:                    /* Codes_SRS_AMQP_FRAME_CODEC_01_067: [When the performative is decoded, the rest of the frame_bytes shall not be given to the AMQP decoder, but they shall be buffered so that later they are given to the frame_received callback.] */
+        -:  122:                    /* Codes_SRS_AMQP_FRAME_CODEC_01_054: [Once the performative is decoded and all frame payload bytes are received, the callback frame_received_callback shall be called.] */
+        -:  123:                    /* Codes_SRS_AMQP_FRAME_CODEC_01_068: [A pointer to all the payload bytes shall also be passed to frame_received_callback.] */
+    #####:  124:                    amqp_frame_codec->frame_received_callback(amqp_frame_codec->callback_context, channel, amqp_frame_codec->decoded_performative, frame_body, frame_body_size);
+        -:  125:                }
+        -:  126:            }
+        -:  127:        }
+    #####:  128:        break;
+        -:  129:    }
+    #####:  130:}
+        -:  131:
+    #####:  132:static int encode_bytes(void* context, const unsigned char* bytes, size_t length)
+        -:  133:{
+    #####:  134:    PAYLOAD* payload = (PAYLOAD*)context;
+    #####:  135:    (void)memcpy((unsigned char*)payload->bytes + payload->length, bytes, length);
+    #####:  136:    payload->length += length;
+    #####:  137:    return 0;
+        -:  138:}
+        -:  139:
+        -:  140:/* Codes_SRS_AMQP_FRAME_CODEC_01_011: [amqp_frame_codec_create shall create an instance of an amqp_frame_codec and return a non-NULL handle to it.] */
+        6:  141:AMQP_FRAME_CODEC_HANDLE amqp_frame_codec_create(FRAME_CODEC_HANDLE frame_codec, AMQP_FRAME_RECEIVED_CALLBACK frame_received_callback,
+        -:  142:    AMQP_EMPTY_FRAME_RECEIVED_CALLBACK empty_frame_received_callback, AMQP_FRAME_CODEC_ERROR_CALLBACK amqp_frame_codec_error_callback, void* callback_context)
+        -:  143:{
+        -:  144:    AMQP_FRAME_CODEC_HANDLE result;
+        -:  145:
+        -:  146:    /* Codes_SRS_AMQP_FRAME_CODEC_01_012: [If any of the arguments frame_codec, frame_received_callback, amqp_frame_codec_error_callback or empty_frame_received_callback is NULL, amqp_frame_codec_create shall return NULL.] */
+        6:  147:    if ((frame_codec == NULL) ||
+        6:  148:        (frame_received_callback == NULL) ||
+        6:  149:        (empty_frame_received_callback == NULL) ||
+        -:  150:        (amqp_frame_codec_error_callback == NULL))
+        -:  151:    {
+    #####:  152:        LogError("Bad arguments: frame_codec = %p, frame_received_callback = %p, empty_frame_received_callback = %p, amqp_frame_codec_error_callback = %p",
+        -:  153:            frame_codec, frame_received_callback, empty_frame_received_callback, amqp_frame_codec_error_callback);
+    #####:  154:        result = NULL;
+        -:  155:    }
+        -:  156:    else
+        -:  157:    {
+        6:  158:        result = (AMQP_FRAME_CODEC_HANDLE)malloc(sizeof(AMQP_FRAME_CODEC));
+        -:  159:        /* Codes_SRS_AMQP_FRAME_CODEC_01_020: [If allocating memory for the new amqp_frame_codec fails, then amqp_frame_codec_create shall fail and return NULL.] */
+        6:  160:        if (result == NULL)
+        -:  161:        {
+    #####:  162:            LogError("Could not allocate memory for AMQP frame codec");
+        -:  163:        }
+        -:  164:        else
+        -:  165:        {
+        6:  166:            result->frame_codec = frame_codec;
+        6:  167:            result->frame_received_callback = frame_received_callback;
+        6:  168:            result->empty_frame_received_callback = empty_frame_received_callback;
+        6:  169:            result->error_callback = amqp_frame_codec_error_callback;
+        6:  170:            result->callback_context = callback_context;
+        6:  171:            result->decode_state = AMQP_FRAME_DECODE_FRAME;
+        -:  172:
+        -:  173:            /* Codes_SRS_AMQP_FRAME_CODEC_01_018: [amqp_frame_codec_create shall create a decoder to be used for decoding AMQP values.] */
+        6:  174:            result->decoder = amqpvalue_decoder_create(amqp_value_decoded, result);
+        6:  175:            if (result->decoder == NULL)
+        -:  176:            {
+        -:  177:                /* Codes_SRS_AMQP_FRAME_CODEC_01_019: [If creating the decoder fails, amqp_frame_codec_create shall fail and return NULL.] */
+    #####:  178:                LogError("Could not create AMQP decoder");
+    #####:  179:                free(result);
+    #####:  180:                result = NULL;
+        -:  181:            }
+        -:  182:            else
+        -:  183:            {
+        -:  184:                /* Codes_SRS_AMQP_FRAME_CODEC_01_013: [amqp_frame_codec_create shall subscribe for AMQP frames with the given frame_codec.] */
+        6:  185:                if (frame_codec_subscribe(frame_codec, FRAME_TYPE_AMQP, frame_received, result) != 0)
+        -:  186:                {
+        -:  187:                    /* Codes_SRS_AMQP_FRAME_CODEC_01_014: [If subscribing for AMQP frames fails, amqp_frame_codec_create shall fail and return NULL.] */
+    #####:  188:                    LogError("Could not subscribe for received AMQP frames");
+    #####:  189:                    amqpvalue_decoder_destroy(result->decoder);
+    #####:  190:                    free(result);
+    #####:  191:                    result = NULL;
+        -:  192:                }
+        -:  193:            }
+        -:  194:        }
+        -:  195:    }
+        -:  196:
+        6:  197:    return result;
+        -:  198:}
+        -:  199:
+        6:  200:void amqp_frame_codec_destroy(AMQP_FRAME_CODEC_HANDLE amqp_frame_codec)
+        -:  201:{
+        6:  202:    if (amqp_frame_codec == NULL)
+        -:  203:    {
+        -:  204:        /* Codes_SRS_AMQP_FRAME_CODEC_01_016: [If amqp_frame_codec is NULL, amqp_frame_codec_destroy shall do nothing.] */
+    #####:  205:        LogError("NULL amqp_frame_codec");
+        -:  206:    }
+        -:  207:    else
+        -:  208:    {
+        -:  209:        /* Codes_SRS_AMQP_FRAME_CODEC_01_017: [amqp_frame_codec_destroy shall unsubscribe from receiving AMQP frames from the frame_codec that was passed to amqp_frame_codec_create.] */
+        6:  210:        (void)frame_codec_unsubscribe(amqp_frame_codec->frame_codec, FRAME_TYPE_AMQP);
+        -:  211:
+        -:  212:        /* Codes_SRS_AMQP_FRAME_CODEC_01_021: [The decoder created in amqp_frame_codec_create shall be destroyed by amqp_frame_codec_destroy.] */
+        6:  213:        amqpvalue_decoder_destroy(amqp_frame_codec->decoder);
+        -:  214:
+        -:  215:        /* Codes_SRS_AMQP_FRAME_CODEC_01_015: [amqp_frame_codec_destroy shall free all resources associated with the amqp_frame_codec instance.] */
+        6:  216:        free(amqp_frame_codec);
+        -:  217:    }
+        6:  218:}
+        -:  219:
+    #####:  220:int amqp_frame_codec_encode_frame(AMQP_FRAME_CODEC_HANDLE amqp_frame_codec, uint16_t channel, AMQP_VALUE performative, const PAYLOAD* payloads, size_t payload_count, ON_BYTES_ENCODED on_bytes_encoded, void* callback_context)
+        -:  221:{
+        -:  222:    int result;
+        -:  223:
+        -:  224:    /* Codes_SRS_AMQP_FRAME_CODEC_01_024: [If frame_codec, performative or on_bytes_encoded is NULL, amqp_frame_codec_encode_frame shall fail and return a non-zero value.] */
+    #####:  225:    if ((amqp_frame_codec == NULL) ||
+    #####:  226:        (performative == NULL) ||
+        -:  227:        (on_bytes_encoded == NULL))
+        -:  228:    {
+    #####:  229:        LogError("Bad arguments: amqp_frame_codec = %p, performative = %p, on_bytes_encoded = %p",
+        -:  230:            amqp_frame_codec, performative, on_bytes_encoded);
+    #####:  231:        result = MU_FAILURE;
+        -:  232:    }
+        -:  233:    else
+        -:  234:    {
+        -:  235:        AMQP_VALUE descriptor;
+        -:  236:        uint64_t performative_ulong;
+        -:  237:        size_t encoded_size;
+        -:  238:
+    #####:  239:        if ((descriptor = amqpvalue_get_inplace_descriptor(performative)) == NULL)
+        -:  240:        {
+        -:  241:            /* Codes_SRS_AMQP_FRAME_CODEC_01_029: [If any error occurs during encoding, amqp_frame_codec_encode_frame shall fail and return a non-zero value.] */
+    #####:  242:            LogError("Getting the descriptor failed");
+    #####:  243:            result = MU_FAILURE;
+        -:  244:        }
+    #####:  245:        else if (amqpvalue_get_ulong(descriptor, &performative_ulong) != 0)
+        -:  246:        {
+        -:  247:            /* Codes_SRS_AMQP_FRAME_CODEC_01_029: [If any error occurs during encoding, amqp_frame_codec_encode_frame shall fail and return a non-zero value.] */
+    #####:  248:            LogError("Getting the descriptor ulong failed");
+    #####:  249:            result = MU_FAILURE;
+        -:  250:        }
+        -:  251:        /* Codes_SRS_AMQP_FRAME_CODEC_01_008: [The performative MUST be one of those defined in section 2.7 and is encoded as a described type in the AMQP type system.] */
+    #####:  252:        else if ((performative_ulong < AMQP_OPEN) ||
+    #####:  253:            (performative_ulong > AMQP_CLOSE))
+        -:  254:        {
+        -:  255:            /* Codes_SRS_AMQP_FRAME_CODEC_01_029: [If any error occurs during encoding, amqp_frame_codec_encode_frame shall fail and return a non-zero value.] */
+    #####:  256:            LogError("Bad arguments: amqp_frame_codec = %p, performative = %p, on_bytes_encoded = %p",
+        -:  257:                amqp_frame_codec, performative, on_bytes_encoded);
+    #####:  258:            result = MU_FAILURE;
+        -:  259:        }
+        -:  260:        /* Codes_SRS_AMQP_FRAME_CODEC_01_027: [The encoded size of the performative and its fields shall be obtained by calling amqpvalue_get_encoded_size.] */
+    #####:  261:        else if (amqpvalue_get_encoded_size(performative, &encoded_size) != 0)
+        -:  262:        {
+        -:  263:            /* Codes_SRS_AMQP_FRAME_CODEC_01_029: [If any error occurs during encoding, amqp_frame_codec_encode_frame shall fail and return a non-zero value.] */
+    #####:  264:            LogError("Getting the encoded size failed");
+    #####:  265:            result = MU_FAILURE;
+        -:  266:        }
+        -:  267:        else
+        -:  268:        {
+    #####:  269:            unsigned char* amqp_performative_bytes = (unsigned char*)malloc(encoded_size);
+    #####:  270:            if (amqp_performative_bytes == NULL)
+        -:  271:            {
+    #####:  272:                LogError("Could not allocate performative bytes");
+    #####:  273:                result = MU_FAILURE;
+        -:  274:            }
+        -:  275:            else
+        -:  276:            {
+    #####:  277:                PAYLOAD* new_payloads = (PAYLOAD*)malloc(sizeof(PAYLOAD) * (payload_count + 1));
+    #####:  278:                if (new_payloads == NULL)
+        -:  279:                {
+    #####:  280:                    LogError("Could not allocate frame payloads");
+    #####:  281:                    result = MU_FAILURE;
+        -:  282:                }
+        -:  283:                else
+        -:  284:                {
+        -:  285:                    /* Codes_SRS_AMQP_FRAME_CODEC_01_070: [The payloads argument for frame_codec_encode_frame shall be made of the payload for the encoded performative and the payloads passed to amqp_frame_codec_encode_frame.] */
+        -:  286:                    /* Codes_SRS_AMQP_FRAME_CODEC_01_028: [The encode result for the performative shall be placed in a PAYLOAD structure.] */
+    #####:  287:                    new_payloads[0].bytes = amqp_performative_bytes;
+    #####:  288:                    new_payloads[0].length = 0;
+        -:  289:
+    #####:  290:                    if (payload_count > 0)
+        -:  291:                    {
+    #####:  292:                        (void)memcpy(new_payloads + 1, payloads, sizeof(PAYLOAD) * payload_count);
+        -:  293:                    }
+        -:  294:
+    #####:  295:                    if (amqpvalue_encode(performative, encode_bytes, &new_payloads[0]) != 0)
+        -:  296:                    {
+    #####:  297:                        LogError("amqpvalue_encode failed");
+    #####:  298:                        result = MU_FAILURE;
+        -:  299:                    }
+        -:  300:                    else
+        -:  301:                    {
+        -:  302:                        unsigned char channel_bytes[2];
+        -:  303:
+    #####:  304:                        channel_bytes[0] = channel >> 8;
+    #####:  305:                        channel_bytes[1] = channel & 0xFF;
+        -:  306:
+        -:  307:                        /* Codes_SRS_AMQP_FRAME_CODEC_01_005: [Bytes 6 and 7 of an AMQP frame contain the channel number ] */
+        -:  308:                        /* Codes_SRS_AMQP_FRAME_CODEC_01_025: [amqp_frame_codec_encode_frame shall encode the frame header by using frame_codec_encode_frame.] */
+        -:  309:                        /* Codes_SRS_AMQP_FRAME_CODEC_01_006: [The frame body is defined as a performative followed by an opaque payload.] */
+    #####:  310:                        if (frame_codec_encode_frame(amqp_frame_codec->frame_codec, FRAME_TYPE_AMQP, new_payloads, payload_count + 1, channel_bytes, sizeof(channel_bytes), on_bytes_encoded, callback_context) != 0)
+        -:  311:                        {
+        -:  312:                            /* Codes_SRS_AMQP_FRAME_CODEC_01_029: [If any error occurs during encoding, amqp_frame_codec_encode_frame shall fail and return a non-zero value.] */
+    #####:  313:                            LogError("frame_codec_encode_frame failed");
+    #####:  314:                            result = MU_FAILURE;
+        -:  315:                        }
+        -:  316:                        else
+        -:  317:                        {
+        -:  318:                            /* Codes_SRS_AMQP_FRAME_CODEC_01_022: [amqp_frame_codec_begin_encode_frame shall encode the frame header and AMQP performative in an AMQP frame and on success it shall return 0.] */
+    #####:  319:                            result = 0;
+        -:  320:                        }
+        -:  321:                    }
+        -:  322:
+    #####:  323:                    free(new_payloads);
+        -:  324:                }
+        -:  325:
+    #####:  326:                free(amqp_performative_bytes);
+        -:  327:            }
+        -:  328:        }
+        -:  329:    }
+        -:  330:
+    #####:  331:    return result;
+        -:  332:}
+        -:  333:
+        -:  334:/* Codes_SRS_AMQP_FRAME_CODEC_01_042: [amqp_frame_codec_encode_empty_frame shall encode a frame with no payload.] */
+        -:  335:/* Codes_SRS_AMQP_FRAME_CODEC_01_010: [An AMQP frame with no body MAY be used to generate artificial traffic as needed to satisfy any negotiated idle timeout interval ] */
+    #####:  336:int amqp_frame_codec_encode_empty_frame(AMQP_FRAME_CODEC_HANDLE amqp_frame_codec, uint16_t channel, ON_BYTES_ENCODED on_bytes_encoded, void* callback_context)
+        -:  337:{
+        -:  338:    int result;
+        -:  339:
+        -:  340:    /* Codes_SRS_AMQP_FRAME_CODEC_01_045: [If amqp_frame_codec is NULL, amqp_frame_codec_encode_empty_frame shall fail and return a non-zero value.] */
+    #####:  341:    if (amqp_frame_codec == NULL)
+        -:  342:    {
+    #####:  343:        LogError("NULL amqp_frame_codec");
+    #####:  344:        result = MU_FAILURE;
+        -:  345:    }
+        -:  346:    else
+        -:  347:    {
+        -:  348:        unsigned char channel_bytes[2];
+        -:  349:
+    #####:  350:        channel_bytes[0] = channel >> 8;
+    #####:  351:        channel_bytes[1] = channel & 0xFF;
+        -:  352:
+        -:  353:        /* Codes_SRS_AMQP_FRAME_CODEC_01_044: [amqp_frame_codec_encode_empty_frame shall use frame_codec_encode_frame to encode the frame.] */
+    #####:  354:        if (frame_codec_encode_frame(amqp_frame_codec->frame_codec, FRAME_TYPE_AMQP, NULL, 0, channel_bytes, sizeof(channel_bytes), on_bytes_encoded, callback_context) != 0)
+        -:  355:        {
+        -:  356:            /* Codes_SRS_AMQP_FRAME_CODEC_01_046: [If encoding fails in any way, amqp_frame_codec_encode_empty_frame shall fail and return a non-zero value.]  */
+    #####:  357:            LogError("frame_codec_encode_frame failed when encoding empty frame");
+    #####:  358:            result = MU_FAILURE;
+        -:  359:        }
+        -:  360:        else
+        -:  361:        {
+        -:  362:            /* Codes_SRS_AMQP_FRAME_CODEC_01_043: [On success, amqp_frame_codec_encode_empty_frame shall return 0.] */
+    #####:  363:            result = 0;
+        -:  364:        }
+        -:  365:    }
+        -:  366:
+    #####:  367:    return result;
+        -:  368:}

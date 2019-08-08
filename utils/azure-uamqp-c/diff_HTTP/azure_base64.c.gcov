@@ -1,0 +1,112 @@
+22c22
+<       111:   20:        result = 'A' + (char)val;
+---
+>       102:   20:        result = 'A' + (char)val;
+24c24
+<       138:   22:    else if (val < 52)
+---
+>       147:   22:    else if (val < 52)
+26c26
+<       102:   24:        result = 'a' + ((char)val - 26);
+---
+>       105:   24:        result = 'a' + ((char)val - 26);
+28c28
+<        36:   26:    else if (val < 62)
+---
+>        42:   26:    else if (val < 62)
+30c30
+<        27:   28:        result = '0' + ((char)val - 52);
+---
+>        30:   28:        result = '0' + ((char)val - 52);
+32c32
+<         9:   30:    else if (val == 62)
+---
+>        12:   30:    else if (val == 62)
+38c38
+<     #####:   36:        result = '/';
+---
+>         3:   36:        result = '/';
+51c51
+<        37:   20:        result = 'A' + (char)val;
+---
+>        34:   20:        result = 'A' + (char)val;
+53c53
+<        46:   22:    else if (val < 52)
+---
+>        49:   22:    else if (val < 52)
+55c55
+<        34:   24:        result = 'a' + ((char)val - 26);
+---
+>        35:   24:        result = 'a' + ((char)val - 26);
+57c57
+<        12:   26:    else if (val < 62)
+---
+>        14:   26:    else if (val < 62)
+59c59
+<         9:   28:        result = '0' + ((char)val - 52);
+---
+>        10:   28:        result = '0' + ((char)val - 52);
+61c61
+<         3:   30:    else if (val == 62)
+---
+>         4:   30:    else if (val == 62)
+67c67
+<     #####:   36:        result = '/';
+---
+>         1:   36:        result = '/';
+80c80
+<        37:   20:        result = 'A' + (char)val;
+---
+>        34:   20:        result = 'A' + (char)val;
+82c82
+<        46:   22:    else if (val < 52)
+---
+>        49:   22:    else if (val < 52)
+84c84
+<        34:   24:        result = 'a' + ((char)val - 26);
+---
+>        35:   24:        result = 'a' + ((char)val - 26);
+86c86
+<        12:   26:    else if (val < 62)
+---
+>        14:   26:    else if (val < 62)
+88c88
+<         9:   28:        result = '0' + ((char)val - 52);
+---
+>        10:   28:        result = '0' + ((char)val - 52);
+90c90
+<         3:   30:    else if (val == 62)
+---
+>         4:   30:    else if (val == 62)
+96c96
+<     #####:   36:        result = '/';
+---
+>         1:   36:        result = '/';
+109c109
+<        37:   20:        result = 'A' + (char)val;
+---
+>        34:   20:        result = 'A' + (char)val;
+111c111
+<        46:   22:    else if (val < 52)
+---
+>        49:   22:    else if (val < 52)
+113c113
+<        34:   24:        result = 'a' + ((char)val - 26);
+---
+>        35:   24:        result = 'a' + ((char)val - 26);
+115c115
+<        12:   26:    else if (val < 62)
+---
+>        14:   26:    else if (val < 62)
+117c117
+<         9:   28:        result = '0' + ((char)val - 52);
+---
+>        10:   28:        result = '0' + ((char)val - 52);
+119c119
+<         3:   30:    else if (val == 62)
+---
+>         4:   30:    else if (val == 62)
+125c125
+<     #####:   36:        result = '/';
+---
+>         1:   36:        result = '/';

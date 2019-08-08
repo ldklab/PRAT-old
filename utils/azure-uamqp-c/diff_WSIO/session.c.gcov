@@ -1,0 +1,464 @@
+2c2
+<         -:    0:Programs:101
+---
+>         -:    0:Programs:82
+63c63
+<        12:   61:static void remove_link_endpoint(LINK_ENDPOINT_HANDLE link_endpoint)
+---
+>         9:   61:static void remove_link_endpoint(LINK_ENDPOINT_HANDLE link_endpoint)
+65c65
+<        12:   63:    if (link_endpoint != NULL)
+---
+>         9:   63:    if (link_endpoint != NULL)
+67,68c67,68
+<        12:   65:        LINK_ENDPOINT_INSTANCE* endpoint_instance = (LINK_ENDPOINT_INSTANCE*)link_endpoint;
+<        12:   66:        SESSION_INSTANCE* session_instance = endpoint_instance->session;
+---
+>         9:   65:        LINK_ENDPOINT_INSTANCE* endpoint_instance = (LINK_ENDPOINT_INSTANCE*)link_endpoint;
+>         9:   66:        SESSION_INSTANCE* session_instance = endpoint_instance->session;
+71c71
+<       12*:   69:        for (i = 0; i < session_instance->link_endpoint_count; i++)
+---
+>        9*:   69:        for (i = 0; i < session_instance->link_endpoint_count; i++)
+73c73
+<        12:   71:            if (session_instance->link_endpoints[i] == link_endpoint)
+---
+>         9:   71:            if (session_instance->link_endpoints[i] == link_endpoint)
+75c75
+<        12:   73:                break;
+---
+>         9:   73:                break;
+79c79
+<        12:   77:        if (i < session_instance->link_endpoint_count)
+---
+>         9:   77:        if (i < session_instance->link_endpoint_count)
+83c83
+<        12:   81:            if (i < (session_instance->link_endpoint_count - 1))
+---
+>         9:   81:            if (i < (session_instance->link_endpoint_count - 1))
+85c85
+<         6:   83:                (void)memmove(&session_instance->link_endpoints[i], &session_instance->link_endpoints[i + 1], (session_instance->link_endpoint_count - (uint32_t)i - 1) * sizeof(LINK_ENDPOINT_INSTANCE*));
+---
+>         4:   83:                (void)memmove(&session_instance->link_endpoints[i], &session_instance->link_endpoints[i + 1], (session_instance->link_endpoint_count - (uint32_t)i - 1) * sizeof(LINK_ENDPOINT_INSTANCE*));
+88c88
+<        12:   86:            session_instance->link_endpoint_count--;
+---
+>         9:   86:            session_instance->link_endpoint_count--;
+90c90
+<        12:   88:            if (session_instance->link_endpoint_count == 0)
+---
+>         9:   88:            if (session_instance->link_endpoint_count == 0)
+92,93c92,93
+<         6:   90:                free(session_instance->link_endpoints);
+<         6:   91:                session_instance->link_endpoints = NULL;
+---
+>         5:   90:                free(session_instance->link_endpoints);
+>         5:   91:                session_instance->link_endpoints = NULL;
+97,98c97,98
+<         6:   95:                new_endpoints = (LINK_ENDPOINT_INSTANCE**)realloc(session_instance->link_endpoints, sizeof(LINK_ENDPOINT_INSTANCE*) * session_instance->link_endpoint_count);
+<         6:   96:                if (new_endpoints != NULL)
+---
+>         4:   95:                new_endpoints = (LINK_ENDPOINT_INSTANCE**)realloc(session_instance->link_endpoints, sizeof(LINK_ENDPOINT_INSTANCE*) * session_instance->link_endpoint_count);
+>         4:   96:                if (new_endpoints != NULL)
+100c100
+<         6:   98:                    session_instance->link_endpoints = new_endpoints;
+---
+>         4:   98:                    session_instance->link_endpoints = new_endpoints;
+105c105
+<        12:  103:}
+---
+>         9:  103:}
+107c107
+<        12:  105:static void free_link_endpoint(LINK_ENDPOINT_HANDLE link_endpoint)
+---
+>         9:  105:static void free_link_endpoint(LINK_ENDPOINT_HANDLE link_endpoint)
+109c109
+<        12:  107:    if (link_endpoint->name != NULL)
+---
+>         9:  107:    if (link_endpoint->name != NULL)
+111c111
+<        12:  109:        free(link_endpoint->name);
+---
+>         9:  109:        free(link_endpoint->name);
+114,115c114,115
+<        12:  112:    free(link_endpoint);
+<        12:  113:}
+---
+>         9:  112:    free(link_endpoint);
+>         9:  113:}
+117c117
+<        18:  115:static void session_set_state(SESSION_INSTANCE* session_instance, SESSION_STATE session_state)
+---
+>        13:  115:static void session_set_state(SESSION_INSTANCE* session_instance, SESSION_STATE session_state)
+121,122c121,122
+<        18:  119:    session_instance->previous_session_state = session_instance->session_state;
+<        18:  120:    session_instance->session_state = session_state;
+---
+>        13:  119:    session_instance->previous_session_state = session_instance->session_state;
+>        13:  120:    session_instance->session_state = session_state;
+124c124
+<        42:  122:    for (i = 0; i < session_instance->link_endpoint_count; i++)
+---
+>        27:  122:    for (i = 0; i < session_instance->link_endpoint_count; i++)
+126c126
+<        24:  124:        if (session_instance->link_endpoints[i]->on_session_state_changed != NULL)
+---
+>        14:  124:        if (session_instance->link_endpoints[i]->on_session_state_changed != NULL)
+134c134
+<        18:  132:}
+---
+>        13:  132:}
+358c358
+<        12:  356:static void on_connection_state_changed(void* context, CONNECTION_STATE new_connection_state, CONNECTION_STATE previous_connection_state)
+---
+>         8:  356:static void on_connection_state_changed(void* context, CONNECTION_STATE new_connection_state, CONNECTION_STATE previous_connection_state)
+360c360
+<        12:  358:    SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)context;
+---
+>         8:  358:    SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)context;
+363c363
+<       12*:  361:    if ((new_connection_state == CONNECTION_STATE_OPENED) && (previous_connection_state != CONNECTION_STATE_OPENED) && (session_instance->session_state == SESSION_STATE_UNMAPPED))
+---
+>        8*:  361:    if ((new_connection_state == CONNECTION_STATE_OPENED) && (previous_connection_state != CONNECTION_STATE_OPENED) && (session_instance->session_state == SESSION_STATE_UNMAPPED))
+371c371
+<        12:  369:    else if ((new_connection_state == CONNECTION_STATE_CLOSE_RCVD) || (new_connection_state == CONNECTION_STATE_END))
+---
+>         8:  369:    else if ((new_connection_state == CONNECTION_STATE_CLOSE_RCVD) || (new_connection_state == CONNECTION_STATE_END))
+373c373
+<        12:  371:        session_set_state(session_instance, SESSION_STATE_DISCARDING);
+---
+>         8:  371:        session_set_state(session_instance, SESSION_STATE_DISCARDING);
+380c380
+<        12:  378:}
+---
+>         8:  378:}
+731c731
+<         6:  729:SESSION_HANDLE session_create(CONNECTION_HANDLE connection, ON_LINK_ATTACHED on_link_attached, void* callback_context)
+---
+>         5:  729:SESSION_HANDLE session_create(CONNECTION_HANDLE connection, ON_LINK_ATTACHED on_link_attached, void* callback_context)
+735c735
+<         6:  733:    if (connection == NULL)
+---
+>         5:  733:    if (connection == NULL)
+743c743
+<         6:  741:        result = (SESSION_INSTANCE*)malloc(sizeof(SESSION_INSTANCE));
+---
+>         5:  741:        result = (SESSION_INSTANCE*)malloc(sizeof(SESSION_INSTANCE));
+745c745
+<         6:  743:        if (result != NULL)
+---
+>         5:  743:        if (result != NULL)
+747,750c747,750
+<         6:  745:            result->connection = connection;
+<         6:  746:            result->link_endpoints = NULL;
+<         6:  747:            result->link_endpoint_count = 0;
+<         6:  748:            result->handle_max = 4294967295u;
+---
+>         5:  745:            result->connection = connection;
+>         5:  746:            result->link_endpoints = NULL;
+>         5:  747:            result->link_endpoint_count = 0;
+>         5:  748:            result->handle_max = 4294967295u;
+754c754
+<         6:  752:            result->next_outgoing_id = 0;
+---
+>         5:  752:            result->next_outgoing_id = 0;
+756,766c756,766
+<         6:  754:            result->desired_incoming_window = 1;
+<         6:  755:            result->incoming_window = 1;
+<         6:  756:            result->outgoing_window = 1;
+<         6:  757:            result->handle_max = 4294967295u;
+<         6:  758:            result->remote_incoming_window = 0;
+<         6:  759:            result->remote_outgoing_window = 0;
+<         6:  760:            result->previous_session_state = SESSION_STATE_UNMAPPED;
+<         6:  761:            result->is_underlying_connection_open = UNDERLYING_CONNECTION_NOT_OPEN;
+<         6:  762:            result->session_state = SESSION_STATE_UNMAPPED;
+<         6:  763:            result->on_link_attached = on_link_attached;
+<         6:  764:            result->on_link_attached_callback_context = callback_context;
+---
+>         5:  754:            result->desired_incoming_window = 1;
+>         5:  755:            result->incoming_window = 1;
+>         5:  756:            result->outgoing_window = 1;
+>         5:  757:            result->handle_max = 4294967295u;
+>         5:  758:            result->remote_incoming_window = 0;
+>         5:  759:            result->remote_outgoing_window = 0;
+>         5:  760:            result->previous_session_state = SESSION_STATE_UNMAPPED;
+>         5:  761:            result->is_underlying_connection_open = UNDERLYING_CONNECTION_NOT_OPEN;
+>         5:  762:            result->session_state = SESSION_STATE_UNMAPPED;
+>         5:  763:            result->on_link_attached = on_link_attached;
+>         5:  764:            result->on_link_attached_callback_context = callback_context;
+769,770c769,770
+<         6:  767:            result->endpoint = connection_create_endpoint(connection);
+<         6:  768:            if (result->endpoint == NULL)
+---
+>         5:  767:            result->endpoint = connection_create_endpoint(connection);
+>         5:  768:            if (result->endpoint == NULL)
+778c778
+<         6:  776:                session_set_state(result, SESSION_STATE_UNMAPPED);
+---
+>         5:  776:                session_set_state(result, SESSION_STATE_UNMAPPED);
+783c783
+<         6:  781:    return result;
+---
+>         5:  781:    return result;
+826c826
+<         6:  824:void session_destroy(SESSION_HANDLE session)
+---
+>         5:  824:void session_destroy(SESSION_HANDLE session)
+829c829
+<         6:  827:    if (session != NULL)
+---
+>         5:  827:    if (session != NULL)
+831c831
+<         6:  829:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+---
+>         5:  829:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+833c833
+<         6:  831:        session_end(session, NULL, NULL);
+---
+>         5:  831:        session_end(session, NULL, NULL);
+837,838c837,838
+<         6:  835:        connection_destroy_endpoint(session_instance->endpoint);
+<         6:  836:        if (session_instance->link_endpoints != NULL)
+---
+>         5:  835:        connection_destroy_endpoint(session_instance->endpoint);
+>         5:  836:        if (session_instance->link_endpoints != NULL)
+843c843
+<         6:  841:        free(session);
+---
+>         5:  841:        free(session);
+845c845
+<         6:  843:}
+---
+>         5:  843:}
+847c847
+<         9:  845:int session_begin(SESSION_HANDLE session)
+---
+>         7:  845:int session_begin(SESSION_HANDLE session)
+851c851
+<         9:  849:    if (session == NULL)
+---
+>         7:  849:    if (session == NULL)
+857c857
+<         9:  855:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+---
+>         7:  855:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+859c859
+<         9:  857:        if (connection_start_endpoint(session_instance->endpoint, on_frame_received, on_connection_state_changed, session_instance) != 0)
+---
+>         7:  857:        if (connection_start_endpoint(session_instance->endpoint, on_frame_received, on_connection_state_changed, session_instance) != 0)
+865c865
+<         9:  863:            if (!session_instance->is_underlying_connection_open)
+---
+>         7:  863:            if (!session_instance->is_underlying_connection_open)
+867c867
+<         9:  865:                if (connection_open(session_instance->connection) != 0)
+---
+>         7:  865:                if (connection_open(session_instance->connection) != 0)
+869,870c869,870
+<         9:  867:                    session_instance->is_underlying_connection_open = UNDERLYING_CONNECTION_NOT_OPEN;
+<         9:  868:                    result = MU_FAILURE;
+---
+>         7:  867:                    session_instance->is_underlying_connection_open = UNDERLYING_CONNECTION_NOT_OPEN;
+>         7:  868:                    result = MU_FAILURE;
+885c885
+<         9:  883:    return result;
+---
+>         7:  883:    return result;
+888c888
+<         6:  886:int session_end(SESSION_HANDLE session, const char* condition_value, const char* description)
+---
+>         5:  886:int session_end(SESSION_HANDLE session, const char* condition_value, const char* description)
+892c892
+<         6:  890:    if (session == NULL)
+---
+>         5:  890:    if (session == NULL)
+898c898
+<         6:  896:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+---
+>         5:  896:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+901,902c901,902
+<         6:  899:        if ((session_instance->session_state != SESSION_STATE_UNMAPPED) &&
+<         6:  900:            (session_instance->session_state != SESSION_STATE_DISCARDING))
+---
+>         5:  899:        if ((session_instance->session_state != SESSION_STATE_UNMAPPED) &&
+>         5:  900:            (session_instance->session_state != SESSION_STATE_DISCARDING))
+943c943
+<         6:  941:            result = 0;
+---
+>         5:  941:            result = 0;
+947c947
+<        6*:  945:        for (i = 0; i < session_instance->link_endpoint_count; i++)
+---
+>        5*:  945:        for (i = 0; i < session_instance->link_endpoint_count; i++)
+952c952
+<         6:  950:        session_instance->link_endpoint_count = 0;
+---
+>         5:  950:        session_instance->link_endpoint_count = 0;
+955c955
+<         6:  953:    return result;
+---
+>         5:  953:    return result;
+958c958
+<         6:  956:int session_set_incoming_window(SESSION_HANDLE session, uint32_t incoming_window)
+---
+>         5:  956:int session_set_incoming_window(SESSION_HANDLE session, uint32_t incoming_window)
+962c962
+<         6:  960:    if (session == NULL)
+---
+>         5:  960:    if (session == NULL)
+968c968
+<         6:  966:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+---
+>         5:  966:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+970,971c970,971
+<         6:  968:        session_instance->desired_incoming_window = incoming_window;
+<         6:  969:        session_instance->incoming_window = incoming_window;
+---
+>         5:  968:        session_instance->desired_incoming_window = incoming_window;
+>         5:  969:        session_instance->incoming_window = incoming_window;
+973c973
+<         6:  971:        result = 0;
+---
+>         5:  971:        result = 0;
+976c976
+<         6:  974:    return result;
+---
+>         5:  974:    return result;
+1000c1000
+<         5:  998:int session_set_outgoing_window(SESSION_HANDLE session, uint32_t outgoing_window)
+---
+>         4:  998:int session_set_outgoing_window(SESSION_HANDLE session, uint32_t outgoing_window)
+1004c1004
+<         5: 1002:    if (session == NULL)
+---
+>         4: 1002:    if (session == NULL)
+1010c1010
+<         5: 1008:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+---
+>         4: 1008:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+1012c1012
+<         5: 1010:        session_instance->outgoing_window = outgoing_window;
+---
+>         4: 1010:        session_instance->outgoing_window = outgoing_window;
+1014c1014
+<         5: 1012:        result = 0;
+---
+>         4: 1012:        result = 0;
+1017c1017
+<         5: 1015:    return result;
+---
+>         4: 1015:    return result;
+1082c1082
+<        12: 1080:LINK_ENDPOINT_HANDLE session_create_link_endpoint(SESSION_HANDLE session, const char* name)
+---
+>         9: 1080:LINK_ENDPOINT_HANDLE session_create_link_endpoint(SESSION_HANDLE session, const char* name)
+1087c1087
+<        12: 1085:    if ((session == NULL) ||
+---
+>         9: 1085:    if ((session == NULL) ||
+1095c1095
+<        12: 1093:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+---
+>         9: 1093:        SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)session;
+1097c1097
+<        12: 1095:        result = (LINK_ENDPOINT_INSTANCE*)malloc(sizeof(LINK_ENDPOINT_INSTANCE));
+---
+>         9: 1095:        result = (LINK_ENDPOINT_INSTANCE*)malloc(sizeof(LINK_ENDPOINT_INSTANCE));
+1099c1099
+<        12: 1097:        if (result != NULL)
+---
+>         9: 1097:        if (result != NULL)
+1102c1102
+<        12: 1100:            handle selected_handle = 0;
+---
+>         9: 1100:            handle selected_handle = 0;
+1106c1106
+<        21: 1104:            for (i = 0; i < session_instance->link_endpoint_count; i++)
+---
+>        15: 1104:            for (i = 0; i < session_instance->link_endpoint_count; i++)
+1108c1108
+<         9: 1106:                if (session_instance->link_endpoints[i]->output_handle > selected_handle)
+---
+>         6: 1106:                if (session_instance->link_endpoints[i]->output_handle > selected_handle)
+1113c1113
+<         9: 1111:                selected_handle++;
+---
+>         6: 1111:                selected_handle++;
+1116,1125c1116,1125
+<        12: 1114:            result->on_session_state_changed = NULL;
+<        12: 1115:            result->on_session_flow_on = NULL;
+<        12: 1116:            result->frame_received_callback = NULL;
+<        12: 1117:            result->callback_context = NULL;
+<        12: 1118:            result->output_handle = selected_handle;
+<        12: 1119:            result->input_handle = 0xFFFFFFFF;
+<        12: 1120:            result->link_endpoint_state = LINK_ENDPOINT_STATE_NOT_ATTACHED;
+<        12: 1121:            name_length = strlen(name);
+<        12: 1122:            result->name = (char*)malloc(name_length + 1);
+<        12: 1123:            if (result->name == NULL)
+---
+>         9: 1114:            result->on_session_state_changed = NULL;
+>         9: 1115:            result->on_session_flow_on = NULL;
+>         9: 1116:            result->frame_received_callback = NULL;
+>         9: 1117:            result->callback_context = NULL;
+>         9: 1118:            result->output_handle = selected_handle;
+>         9: 1119:            result->input_handle = 0xFFFFFFFF;
+>         9: 1120:            result->link_endpoint_state = LINK_ENDPOINT_STATE_NOT_ATTACHED;
+>         9: 1121:            name_length = strlen(name);
+>         9: 1122:            result->name = (char*)malloc(name_length + 1);
+>         9: 1123:            if (result->name == NULL)
+1134,1135c1134,1135
+<        12: 1132:                (void)memcpy(result->name, name, name_length + 1);
+<        12: 1133:                result->session = session;
+---
+>         9: 1132:                (void)memcpy(result->name, name, name_length + 1);
+>         9: 1133:                result->session = session;
+1137,1138c1137,1138
+<        12: 1135:                new_link_endpoints = (LINK_ENDPOINT_INSTANCE**)realloc(session_instance->link_endpoints, sizeof(LINK_ENDPOINT_INSTANCE*) * (session_instance->link_endpoint_count + 1));
+<        12: 1136:                if (new_link_endpoints == NULL)
+---
+>         9: 1135:                new_link_endpoints = (LINK_ENDPOINT_INSTANCE**)realloc(session_instance->link_endpoints, sizeof(LINK_ENDPOINT_INSTANCE*) * (session_instance->link_endpoint_count + 1));
+>         9: 1136:                if (new_link_endpoints == NULL)
+1147c1147
+<        12: 1145:                    session_instance->link_endpoints = new_link_endpoints;
+---
+>         9: 1145:                    session_instance->link_endpoints = new_link_endpoints;
+1149c1149
+<        12: 1147:                    if (session_instance->link_endpoint_count - selected_handle > 0)
+---
+>         9: 1147:                    if (session_instance->link_endpoint_count - selected_handle > 0)
+1154,1155c1154,1155
+<        12: 1152:                    session_instance->link_endpoints[selected_handle] = result;
+<        12: 1153:                    session_instance->link_endpoint_count++;
+---
+>         9: 1152:                    session_instance->link_endpoints[selected_handle] = result;
+>         9: 1153:                    session_instance->link_endpoint_count++;
+1161c1161
+<        12: 1159:    return result;
+---
+>         9: 1159:    return result;
+1164c1164
+<        12: 1162:void session_destroy_link_endpoint(LINK_ENDPOINT_HANDLE link_endpoint)
+---
+>         9: 1162:void session_destroy_link_endpoint(LINK_ENDPOINT_HANDLE link_endpoint)
+1166c1166
+<        12: 1164:    if (link_endpoint != NULL)
+---
+>         9: 1164:    if (link_endpoint != NULL)
+1168c1168
+<        12: 1166:        LINK_ENDPOINT_INSTANCE* endpoint_instance = (LINK_ENDPOINT_INSTANCE*)link_endpoint;
+---
+>         9: 1166:        LINK_ENDPOINT_INSTANCE* endpoint_instance = (LINK_ENDPOINT_INSTANCE*)link_endpoint;
+1170c1170
+<        12: 1168:        if (endpoint_instance->link_endpoint_state == LINK_ENDPOINT_STATE_ATTACHED)
+---
+>         9: 1168:        if (endpoint_instance->link_endpoint_state == LINK_ENDPOINT_STATE_ATTACHED)
+1176,1177c1176,1177
+<        12: 1174:            remove_link_endpoint(link_endpoint);
+<        12: 1175:            free_link_endpoint(link_endpoint);
+---
+>         9: 1174:            remove_link_endpoint(link_endpoint);
+>         9: 1175:            free_link_endpoint(link_endpoint);
+1180c1180
+<        12: 1178:}
+---
+>         9: 1178:}

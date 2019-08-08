@@ -1,0 +1,168 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/src/sasl_server_mechanism.c
+        -:    0:Programs:101
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include "azure_macro_utils/macro_utils.h"
+        -:    6:#include "azure_c_shared_utility/gballoc.h"
+        -:    7:#include "azure_c_shared_utility/xlogging.h"
+        -:    8:#include "azure_uamqp_c/sasl_server_mechanism.h"
+        -:    9:
+        -:   10:typedef struct SASL_SERVER_MECHANISM_INSTANCE_TAG
+        -:   11:{
+        -:   12:    const SASL_SERVER_MECHANISM_INTERFACE_DESCRIPTION* sasl_server_mechanism_interface_description;
+        -:   13:    CONCRETE_SASL_SERVER_MECHANISM_HANDLE concrete_sasl_server_mechanism;
+        -:   14:} SASL_SERVER_MECHANISM_INSTANCE;
+        -:   15:
+    #####:   16:SASL_SERVER_MECHANISM_HANDLE sasl_server_mechanism_create(const SASL_SERVER_MECHANISM_INTERFACE_DESCRIPTION* sasl_server_mechanism_interface_description, void* sasl_server_mechanism_create_parameters)
+        -:   17:{
+        -:   18:    SASL_SERVER_MECHANISM_HANDLE result;
+        -:   19:
+    #####:   20:    if (sasl_server_mechanism_interface_description == NULL)
+        -:   21:    {
+        -:   22:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_004: [ If the argument `sasl_server_mechanism_interface_description` is NULL, `sasl_server_mechanism_create` shall return NULL.]*/
+    #####:   23:        LogError("NULL sasl_server_mechanism_interface_description");
+    #####:   24:        result = NULL;
+        -:   25:    }
+    #####:   26:    else if ((sasl_server_mechanism_interface_description->create == NULL) ||
+    #####:   27:        (sasl_server_mechanism_interface_description->destroy == NULL) ||
+    #####:   28:        (sasl_server_mechanism_interface_description->handle_initial_response == NULL) ||
+    #####:   29:        (sasl_server_mechanism_interface_description->handle_response == NULL) ||
+    #####:   30:        (sasl_server_mechanism_interface_description->get_mechanism_name == NULL))
+        -:   31:    {
+        -:   32:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_005: [ If any `sasl_server_mechanism_interface_description` member is NULL, `sasl_server_mechanism_create` shall fail and return NULL.]*/
+    #####:   33:        LogError("Bad interface, create = %p, destroy = %p, handle_initial_response = %p, handle_response = %p, get_mechanism_name = %p",
+        -:   34:            sasl_server_mechanism_interface_description->create,
+        -:   35:            sasl_server_mechanism_interface_description->destroy,
+        -:   36:            sasl_server_mechanism_interface_description->handle_initial_response,
+        -:   37:            sasl_server_mechanism_interface_description->handle_response,
+        -:   38:            sasl_server_mechanism_interface_description->get_mechanism_name);
+    #####:   39:        result = NULL;
+        -:   40:    }
+        -:   41:    else
+        -:   42:    {
+        -:   43:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_001: [`sasl_server_mechanism_create` shall return on success a non-NULL handle to a new SASL server mechanism interface.]*/
+    #####:   44:        result = (SASL_SERVER_MECHANISM_HANDLE)malloc(sizeof(SASL_SERVER_MECHANISM_INSTANCE));
+    #####:   45:        if (result == NULL)
+        -:   46:        {
+        -:   47:            /* Codes_SRS_SASL_SERVER_MECHANISM_01_006: [ If allocating the memory needed for the SASL server mechanism interface fails then `sasl_server_mechanism_create` shall fail and return NULL. ]*/
+    #####:   48:            LogError("Could not allocate memory for SASL mechanism");
+        -:   49:        }
+        -:   50:        else
+        -:   51:        {
+    #####:   52:            result->sasl_server_mechanism_interface_description = sasl_server_mechanism_interface_description;
+        -:   53:
+        -:   54:            /* Codes_SRS_SASL_SERVER_MECHANISM_01_002: [ In order to instantiate the concrete SASL server mechanism implementation the function `create` from the `sasl_server_mechanism_interface_description` shall be called, passing the `sasl_server_mechanism_create_parameters` to it.]*/
+    #####:   55:            result->concrete_sasl_server_mechanism = result->sasl_server_mechanism_interface_description->create(sasl_server_mechanism_create_parameters);
+    #####:   56:            if (result->concrete_sasl_server_mechanism == NULL)
+        -:   57:            {
+        -:   58:                /* Codes_SRS_SASL_SERVER_MECHANISM_01_003: [ If the underlying `create` call fails, `sasl_server_mechanism_create` shall return NULL. ]*/
+    #####:   59:                LogError("concrete sasl server mechanism create failed");
+    #####:   60:                free(result);
+    #####:   61:                result = NULL;
+        -:   62:            }
+        -:   63:        }
+        -:   64:    }
+        -:   65:
+    #####:   66:    return result;
+        -:   67:}
+        -:   68:
+    #####:   69:void sasl_server_mechanism_destroy(SASL_SERVER_MECHANISM_HANDLE sasl_server_mechanism)
+        -:   70:{
+    #####:   71:    if (sasl_server_mechanism == NULL)
+        -:   72:    {
+        -:   73:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_009: [ If the argument `sasl_server_mechanism` is NULL, `sasl_server_mechanism_destroy` shall do nothing. ]*/
+    #####:   74:        LogError("NULL sasl_server_mechanism");
+        -:   75:    }
+        -:   76:    else
+        -:   77:    {
+        -:   78:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_008: [ `sasl_server_mechanism_destroy` shall also call the `destroy` function that is member of the `sasl_mechanism_interface_description` argument passed to `sasl_server_mechanism_create`, while passing as argument to `destroy` the result of the underlying concrete SASL mechanism handle. ]*/
+    #####:   79:        sasl_server_mechanism->sasl_server_mechanism_interface_description->destroy(sasl_server_mechanism->concrete_sasl_server_mechanism);
+        -:   80:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_007: [ `sasl_server_mechanism_destroy` shall free all resources associated with the SASL mechanism handle. ]*/
+    #####:   81:        free(sasl_server_mechanism);
+        -:   82:    }
+    #####:   83:}
+        -:   84:
+    #####:   85:int sasl_server_mechanism_handle_initial_response(SASL_SERVER_MECHANISM_HANDLE sasl_server_mechanism, const SASL_SERVER_MECHANISM_BYTES* initial_response_bytes, const char* hostname, bool* send_challenge, SASL_SERVER_MECHANISM_BYTES* challenge_bytes)
+        -:   86:{
+        -:   87:    int result;
+        -:   88:
+    #####:   89:    if (sasl_server_mechanism == NULL)
+        -:   90:    {
+        -:   91:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_012: [ If the argument `sasl_server_mechanism` is NULL, `sasl_server_mechanism_handle_initial_response` shall fail and return a non-zero value. ]*/
+    #####:   92:        LogError("NULL sasl_server_mechanism");
+    #####:   93:        result = MU_FAILURE;
+        -:   94:    }
+        -:   95:    else
+        -:   96:    {
+        -:   97:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_010: [ `sasl_server_mechanism_handle_initial_response` shall call the specific `handle_initial_response` function specified in `sasl_server_mechanism_create`, passing the `initial_response_bytes`, `hostname`, `send_challenge` and `challenge_bytes` arguments to it. ]*/
+    #####:   98:        if (sasl_server_mechanism->sasl_server_mechanism_interface_description->handle_initial_response(sasl_server_mechanism->concrete_sasl_server_mechanism, initial_response_bytes, hostname, send_challenge, challenge_bytes) != 0)
+        -:   99:        {
+        -:  100:            /* Codes_SRS_SASL_SERVER_MECHANISM_01_013: [ If the underlying `handle_initial_response` fails, `sasl_server_mechanism_handle_initial_response` shall fail and return a non-zero value. ]*/
+    #####:  101:            LogError("handle_initial_response_failed");
+    #####:  102:            result = MU_FAILURE;
+        -:  103:        }
+        -:  104:        else
+        -:  105:        {
+        -:  106:            /* Codes_SRS_SASL_SERVER_MECHANISM_01_011: [ On success, `sasl_server_mechanism_handle_initial_response` shall return 0. ]*/
+    #####:  107:            result = 0;
+        -:  108:        }
+        -:  109:    }
+        -:  110:
+    #####:  111:    return result;
+        -:  112:}
+        -:  113:
+    #####:  114:int sasl_server_mechanism_handle_response(SASL_SERVER_MECHANISM_HANDLE sasl_server_mechanism, const SASL_SERVER_MECHANISM_BYTES* response_bytes, bool* send_next_challenge, SASL_SERVER_MECHANISM_BYTES* next_challenge_bytes)
+        -:  115:{
+        -:  116:    int result;
+        -:  117:
+    #####:  118:    if (sasl_server_mechanism == NULL)
+        -:  119:    {
+        -:  120:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_017: [ If the argument `sasl_server_mechanism` is NULL, `sasl_server_mechanism_handle_response` shall fail and return a non-zero value. ]*/
+    #####:  121:        LogError("NULL sasl_server_mechanism");
+    #####:  122:        result = MU_FAILURE;
+        -:  123:    }
+        -:  124:    else
+        -:  125:    {
+        -:  126:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_014: [ `sasl_server_mechanism_handle_response` shall call the specific `handle_response` function specified in `sasl_server_mechanism_create`, passing the `response_bytes`, `send_next_challenge` and `next_challenge_bytes` arguments to it. ]*/
+    #####:  127:        if (sasl_server_mechanism->sasl_server_mechanism_interface_description->handle_response(sasl_server_mechanism->concrete_sasl_server_mechanism, response_bytes, send_next_challenge, next_challenge_bytes) != 0)
+        -:  128:        {
+        -:  129:            /* Codes_SRS_SASL_SERVER_MECHANISM_01_018: [ If the underlying `handle_response` fails, `sasl_server_mechanism_handle_response` shall fail and return a non-zero value. ]*/
+    #####:  130:            LogError("handle_response_failed");
+    #####:  131:            result = MU_FAILURE;
+        -:  132:        }
+        -:  133:        else
+        -:  134:        {
+        -:  135:            /* Codes_SRS_SASL_SERVER_MECHANISM_01_016: [ On success, `sasl_server_mechanism_handle_response` shall return 0. ]*/
+    #####:  136:            result = 0;
+        -:  137:        }
+        -:  138:    }
+        -:  139:
+    #####:  140:    return result;
+        -:  141:}
+        -:  142:
+    #####:  143:const char* sasl_server_mechanism_get_mechanism_name(SASL_SERVER_MECHANISM_HANDLE sasl_server_mechanism)
+        -:  144:{
+        -:  145:    const char* result;
+        -:  146:
+    #####:  147:    if (sasl_server_mechanism == NULL)
+        -:  148:    {
+        -:  149:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_021: [ If the argument `sasl_server_mechanism` is NULL, `sasl_server_mechanism_get_mechanism_name` shall fail and return a non-zero value. ]*/
+    #####:  150:        LogError("NULL sasl_server_mechanism");
+    #####:  151:        result = NULL;
+        -:  152:    }
+        -:  153:    else
+        -:  154:    {
+        -:  155:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_019: [ `sasl_server_mechanism_get_mechanism_name` shall call the specific `get_mechanism_name` function specified in `sasl_server_mechanism_create`. ]*/
+        -:  156:        /* Codes_SRS_SASL_SERVER_MECHANISM_01_020: [ On success, `sasl_server_mechanism_get_mechanism_name` shall return a pointer to a string with the mechanism name. ]*/
+    #####:  157:        result = sasl_server_mechanism->sasl_server_mechanism_interface_description->get_mechanism_name();
+    #####:  158:        if (result == NULL)
+        -:  159:        {
+        -:  160:            /* Codes_SRS_SASL_SERVER_MECHANISM_01_022: [ If the underlying `get_mechanism_name` fails, `sasl_server_mechanism_get_mechanism_name` shall return NULL. ]*/
+    #####:  161:            LogError("concrete_sasl_mechanism_get_mechanism_name failed");
+        -:  162:        }
+        -:  163:    }
+        -:  164:
+    #####:  165:    return result;
+        -:  166:}

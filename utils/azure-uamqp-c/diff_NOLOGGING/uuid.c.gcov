@@ -1,0 +1,44 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+26c26
+<         -:   24:        LogError("Invalid argument (uuid_string=%p, uuid=%p)", uuid_string, uuid);
+---
+>     #####:   24:        LogError("Invalid argument (uuid_string=%p, uuid=%p)", uuid_string, uuid);
+35c35
+<         -:   33:            LogError("Unexpected size for an UUID string (%lu)", (unsigned long)uuid_string_length);
+---
+>     #####:   33:            LogError("Unexpected size for an UUID string (%lu)", (unsigned long)uuid_string_length);
+63c63
+<         -:   61:                        LogError("Failed decoding UUID string (%lu)", (unsigned long)i);
+---
+>     #####:   61:                        LogError("Failed decoding UUID string (%lu)", (unsigned long)i);
+87c87
+<         -:   85:        LogError("Invalid argument (uuid is NULL)");
+---
+>     #####:   85:        LogError("Invalid argument (uuid is NULL)");
+94c94
+<         -:   92:        LogError("Failed allocating UUID string");
+---
+>     #####:   92:        LogError("Failed allocating UUID string");
+110c110
+<         -:  108:            LogError("Failed encoding UUID string");
+---
+>     #####:  108:            LogError("Failed encoding UUID string");
+127c127
+<         -:  125:        LogError("Invalid argument (uuid is NULL)");
+---
+>     #####:  125:        LogError("Invalid argument (uuid is NULL)");
+137c137
+<         -:  135:            LogError("Failed allocating UUID string");
+---
+>     #####:  135:            LogError("Failed allocating UUID string");
+148c148
+<         -:  146:                LogError("Failed generating UUID");
+---
+>     #####:  146:                LogError("Failed generating UUID");
+155c155
+<         -:  153:                LogError("Failed parsing UUID string");
+---
+>     #####:  153:                LogError("Failed parsing UUID string");

@@ -1,0 +1,52 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+25c25
+<         -:   23:        LogError("NULL sasl_mechanism_interface_description");
+---
+>     #####:   23:        LogError("NULL sasl_mechanism_interface_description");
+34c34
+<         -:   32:        LogError("Bad interface, concrete_sasl_mechanism_create = %p, concrete_sasl_mechanism_destroy = %p, concrete_sasl_mechanism_get_init_bytes = %p, concrete_sasl_mechanism_get_mechanism_name = %p",
+---
+>     #####:   32:        LogError("Bad interface, concrete_sasl_mechanism_create = %p, concrete_sasl_mechanism_destroy = %p, concrete_sasl_mechanism_get_init_bytes = %p, concrete_sasl_mechanism_get_mechanism_name = %p",
+47c47
+<         -:   45:            LogError("Could not allocate memory for SASL mechanism");
+---
+>     #####:   45:            LogError("Could not allocate memory for SASL mechanism");
+58c58
+<         -:   56:                LogError("concrete_sasl_mechanism_create failed");
+---
+>     #####:   56:                LogError("concrete_sasl_mechanism_create failed");
+74c74
+<         -:   72:        LogError("NULL sasl_mechanism");
+---
+>     #####:   72:        LogError("NULL sasl_mechanism");
+93c93
+<         -:   91:        LogError("NULL sasl_mechanism");
+---
+>     #####:   91:        LogError("NULL sasl_mechanism");
+102c102
+<         -:  100:            LogError("concrete_sasl_mechanism_get_init_bytes failed");
+---
+>     #####:  100:            LogError("concrete_sasl_mechanism_get_init_bytes failed");
+122c122
+<         -:  120:        LogError("NULL sasl_mechanism");
+---
+>     #####:  120:        LogError("NULL sasl_mechanism");
+131c131
+<         -:  129:        if (result == NULL)
+---
+>     #####:  129:        if (result == NULL)
+133c133
+<         -:  131:            LogError("concrete_sasl_mechanism_get_mechanism_name failed");
+---
+>     #####:  131:            LogError("concrete_sasl_mechanism_get_mechanism_name failed");
+147c147
+<         -:  145:        LogError("NULL sasl_mechanism");
+---
+>     #####:  145:        LogError("NULL sasl_mechanism");
+156c156
+<         -:  154:            LogError("concrete_sasl_mechanism_challenge failed");
+---
+>     #####:  154:            LogError("concrete_sasl_mechanism_challenge failed");

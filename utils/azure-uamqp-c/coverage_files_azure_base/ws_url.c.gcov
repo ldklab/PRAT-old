@@ -1,0 +1,375 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/ws_url.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include "azure_c_shared_utility/ws_url.h"
+        -:    6:#include "azure_c_shared_utility/crt_abstractions.h"
+        -:    7:#include "azure_c_shared_utility/xlogging.h"
+        -:    8:#include "azure_c_shared_utility/string_token.h"
+        -:    9:
+        -:   10:#define WS_PROTOCOL              "ws://"
+        -:   11:#define WSS_PROTOCOL             "wss://"
+        -:   12:#define MIN_URL_PARSABLE_LENGTH  7
+        -:   13:
+        -:   14:typedef struct WS_URL_TAG
+        -:   15:{
+        -:   16:    char* url;
+        -:   17:
+        -:   18:    bool is_secure;
+        -:   19:
+        -:   20:    const char* host;
+        -:   21:    size_t host_length;
+        -:   22:
+        -:   23:    size_t port;
+        -:   24:
+        -:   25:    const char* path;
+        -:   26:    size_t path_length;
+        -:   27:
+        -:   28:    const char* query;
+        -:   29:    size_t query_length;
+        -:   30:} WS_URL;
+        -:   31:
+    #####:   32:static int parse_ws_url(const char* url, WS_URL* ws_url)
+        -:   33:{
+    #####:   34:    int result = 0;
+    #####:   35:    size_t url_length = strlen(url);
+        -:   36:
+    #####:   37:    if (url_length < MIN_URL_PARSABLE_LENGTH)
+        -:   38:    {
+    #####:   39:        LogError("Invalid url (unexpected length)");
+    #####:   40:        result = MU_FAILURE;
+        -:   41:    }
+        -:   42:    // Codes_SRS_WS_URL_09_004: [ If url starts with "ws://" (protocol), ws_url->is_secure shall be set to false ]
+    #####:   43:    if (strncmp(url, WS_PROTOCOL, 5) == 0)
+        -:   44:    {
+    #####:   45:        ws_url->is_secure = false;
+        -:   46:    }
+        -:   47:    // Codes_SRS_WS_URL_09_005: [ If url starts with "wss://" (protocol), ws_url->is_secure shall be set to true ]
+    #####:   48:    else if (strncmp(url, WSS_PROTOCOL, 6) == 0)
+        -:   49:    {
+    #####:   50:        ws_url->is_secure = true;
+        -:   51:    }
+        -:   52:    else
+        -:   53:    {
+        -:   54:        // Codes_SRS_WS_URL_09_024: [ If protocol cannot be identified in url, the function shall fail and return NULL ]
+    #####:   55:        LogError("Url protocol prefix not recognized");
+    #####:   56:        result = MU_FAILURE;
+        -:   57:    }
+        -:   58:
+    #####:   59:    if (result == 0)
+        -:   60:    {
+        -:   61:        size_t host_begin;
+        -:   62:
+    #####:   63:        const char* port_delimiter = ":";
+    #####:   64:        const char* path_delimiter = "/";
+    #####:   65:        const char* query_delimiter = "?";
+        -:   66:        
+        -:   67:        const char* delimiters1[3];
+        -:   68:        const char* delimiters2[1];
+        -:   69:
+    #####:   70:        size_t delimiter_count = 3;
+    #####:   71:        const char** current_delimiters = delimiters1;
+    #####:   72:        const char* previous_delimiter = NULL;
+        -:   73:
+    #####:   74:        bool host_parsed = false;
+    #####:   75:        bool port_parsed = false;
+    #####:   76:        bool path_parsed = false;
+    #####:   77:        bool query_parsed = false;
+        -:   78:
+        -:   79:        STRING_TOKEN_HANDLE token;
+        -:   80:
+    #####:   81:        delimiters1[0] = port_delimiter; 
+    #####:   82:        delimiters1[1] = path_delimiter;
+    #####:   83:        delimiters1[2] = query_delimiter;
+        -:   84:        
+    #####:   85:        delimiters2[0] = query_delimiter;
+        -:   86:
+    #####:   87:        host_begin = (ws_url->is_secure ? 6 : 5);
+        -:   88:
+    #####:   89:        token = StringToken_GetFirst(url + host_begin, url_length - host_begin, current_delimiters, delimiter_count);
+        -:   90:
+    #####:   91:        if (token == NULL)
+        -:   92:        {
+    #####:   93:            LogError("Failed getting first url token");
+    #####:   94:            result = MU_FAILURE;
+        -:   95:        }
+        -:   96:        else
+        -:   97:        {
+        -:   98:            do
+        -:   99:            {
+    #####:  100:                const char* current_delimiter = (char*)StringToken_GetDelimiter(token);
+        -:  101:
+    #####:  102:                if (previous_delimiter == NULL && !host_parsed && !port_parsed && !path_parsed && !query_parsed)
+        -:  103:                {
+        -:  104:                    // Codes_SRS_WS_URL_09_006: [ The pointer to the token starting right after protocol (in the url string) shall be stored in ws_url->host ]
+    #####:  105:                    ws_url->host = (char*)StringToken_GetValue(token);
+        -:  106:                    // Codes_SRS_WS_URL_09_008: [ The length from ws_url->host up to the first occurrence of either ":" (port_delimiter), "/" (path_delimiter), "?" (query_delimiter) or \0 shall be stored in ws_url->host_length ]
+    #####:  107:                    ws_url->host_length = StringToken_GetLength(token);
+        -:  108:
+        -:  109:                    // Codes_SRS_WS_URL_09_007: [ If ws_url->host ends up being NULL, the function shall fail and return NULL ]
+        -:  110:                    // Codes_SRS_WS_URL_09_009: [ If ws_url->host_length ends up being zero, the function shall fail and return NULL ]
+    #####:  111:                    if (ws_url->host == NULL || ws_url->host_length == 0)
+        -:  112:                    {
+    #####:  113:                        LogError("Failed parsing websocket url host");
+    #####:  114:                        result = MU_FAILURE;
+    #####:  115:                        break;
+        -:  116:                    }
+        -:  117:                    else
+        -:  118:                    {
+    #####:  119:                        host_parsed = true;
+        -:  120:                    }
+        -:  121:                }
+        -:  122:                // Codes_SRS_WS_URL_09_010: [ If after ws_url->host the port_delimiter occurs (not preceeded by path_delimiter or query_delimiter) the number that follows shall be parsed and stored in ws_url->port ]
+    #####:  123:                else if (previous_delimiter == port_delimiter && host_parsed && !port_parsed && !path_parsed && !query_parsed)
+    #####:  124:                {
+    #####:  125:                    const char* port = StringToken_GetValue(token);
+    #####:  126:                    size_t port_length = StringToken_GetLength(token);
+        -:  127:
+        -:  128:                    // Codes_SRS_WS_URL_09_011: [ If the port number fails to be parsed, the function shall fail and return NULL ]
+    #####:  129:                    if (port == NULL || port_length == 0)
+        -:  130:                    {
+    #####:  131:                        LogError("Failed parsing websocket url port");
+    #####:  132:                        result = MU_FAILURE;
+    #####:  133:                        break;
+        -:  134:                    }
+        -:  135:                    else
+        -:  136:                    {
+        -:  137:                        char port_copy[10];
+    #####:  138:                        (void)memset(port_copy, 0, sizeof(char) * 10);
+    #####:  139:                        (void)memcpy(port_copy, port, port_length);
+        -:  140:
+    #####:  141:                        ws_url->port = (size_t)atoi(port_copy);
+        -:  142:
+    #####:  143:                        port_parsed = true;
+        -:  144:                    }
+        -:  145:                }
+        -:  146:                // Codes_SRS_WS_URL_09_012: [ If after ws_url->host or the port number the path_delimiter occurs (not preceeded by query_delimiter) the following pointer address shall be stored in ws_url->path ]
+    #####:  147:                else if (previous_delimiter == path_delimiter && host_parsed && !path_parsed && !query_parsed)
+        -:  148:                {
+    #####:  149:                    ws_url->path = (char*)StringToken_GetValue(token);
+        -:  150:                    // Codes_SRS_WS_URL_09_014: [ The length from ws_url->path up to the first occurrence of either query_delimiter or \0 shall be stored in ws_url->path_length ]
+    #####:  151:                    ws_url->path_length = StringToken_GetLength(token);
+        -:  152:
+        -:  153:                    // Codes_SRS_WS_URL_09_013: [ If the path component is present and ws_url->path ends up being NULL, the function shall fail and return NULL ]
+        -:  154:                    // Codes_SRS_WS_URL_09_015: [ If the path component is present and ws_url->path_length ends up being zero, the function shall fail and return NULL ]
+    #####:  155:                    if (ws_url->path == NULL || ws_url->path_length == 0)
+        -:  156:                    {
+    #####:  157:                        LogError("Failed parsing websocket url path");
+    #####:  158:                        result = MU_FAILURE;
+    #####:  159:                        break;
+        -:  160:                    }
+        -:  161:                    else
+        -:  162:                    {
+    #####:  163:                        path_parsed = true;
+        -:  164:                    }
+        -:  165:                }
+        -:  166:                // Codes_SRS_WS_URL_09_016: [ Next if the query_delimiter occurs the following pointer address shall be stored in ws_url->query ]
+    #####:  167:                else if (previous_delimiter == query_delimiter && current_delimiter == NULL && host_parsed && !query_parsed)
+        -:  168:                {
+    #####:  169:                    ws_url->query = (char*)StringToken_GetValue(token);
+        -:  170:                    // Codes_SRS_WS_URL_09_018: [ The length from ws_url->query up to \0 shall be stored in ws_url->query_length ]
+    #####:  171:                    ws_url->query_length = StringToken_GetLength(token);
+        -:  172:
+        -:  173:                    // Codes_SRS_WS_URL_09_017: [ If the query component is present and ws_url->query ends up being NULL, the function shall fail and return NULL ]
+        -:  174:                    // Codes_SRS_WS_URL_09_019: [ If the query component is present and ws_url->query_length ends up being zero, the function shall fail and return NULL ]
+    #####:  175:                    if (ws_url->query == NULL || ws_url->query_length == 0)
+        -:  176:                    {
+    #####:  177:                        LogError("Failed parsing websocket url query");
+    #####:  178:                        result = MU_FAILURE;
+    #####:  179:                        break;
+        -:  180:                    }
+        -:  181:                    else
+        -:  182:                    {
+    #####:  183:                        query_parsed = true;
+        -:  184:                    }
+        -:  185:                }
+        -:  186:                else
+        -:  187:                {
+    #####:  188:                    LogError("Failed parsing websocket url (format not recognized)");
+    #####:  189:                    result = MU_FAILURE;
+    #####:  190:                    break;
+        -:  191:                }
+        -:  192:
+    #####:  193:                if (current_delimiter == path_delimiter)
+        -:  194:                {
+    #####:  195:                    current_delimiters = delimiters2;
+    #####:  196:                    delimiter_count = 1;
+        -:  197:                }
+        -:  198:
+    #####:  199:                previous_delimiter = current_delimiter;
+        -:  200:            }
+    #####:  201:            while (StringToken_GetNext(token, current_delimiters, delimiter_count));
+        -:  202:
+    #####:  203:            StringToken_Destroy(token);
+        -:  204:        }
+        -:  205:    }
+        -:  206:
+    #####:  207:    return result;
+        -:  208:}
+        -:  209:
+    #####:  210:void ws_url_destroy(WS_URL_HANDLE url)
+        -:  211:{
+        -:  212:    // Codes_SRS_WS_URL_09_022: [ If url is NULL, the function shall return without further action ]
+    #####:  213:    if (url != NULL)
+        -:  214:    {
+        -:  215:        // Codes_SRS_WS_URL_09_023: [ Otherwise, the memory allocated for url shall released ]
+    #####:  216:        free(url->url);
+    #####:  217:        free(url);
+        -:  218:    }
+    #####:  219:}
+        -:  220:
+    #####:  221:WS_URL_HANDLE ws_url_create(const char* url)
+        -:  222:{
+        -:  223:    WS_URL* result;
+        -:  224:
+        -:  225:    // Codes_SRS_WS_URL_09_001: [ If url is NULL the function shall fail and return NULL ]
+    #####:  226:    if (url == NULL)
+        -:  227:    {
+    #####:  228:        LogError("Invalid argument (url is NULL)");
+    #####:  229:        result = NULL;
+        -:  230:    }
+        -:  231:    // Codes_SRS_WS_URL_09_002: [ Memory shall be allocated for an instance of WS_URL (aka ws_url) ]
+    #####:  232:    else if ((result = malloc(sizeof(WS_URL))) == NULL)
+        -:  233:    {
+        -:  234:        // Codes_SRS_WS_URL_09_003: [ If ws_url failed to be allocated, the function shall return NULL ]
+    #####:  235:        LogError("Failed to allocate the websockets url");
+        -:  236:    }
+        -:  237:    else
+        -:  238:    {
+    #####:  239:        memset(result, 0, sizeof(WS_URL));
+        -:  240:
+        -:  241:        // Codes_SRS_WS_URL_09_024: [ url shall be copied into ws_url->url ]
+    #####:  242:        if (mallocAndStrcpy_s(&result->url, url) != 0)
+        -:  243:        {
+        -:  244:            // Codes_SRS_WS_URL_09_025: [ If url fails to be copied, the function shall free ws_url and return NULL ]
+    #####:  245:            LogError("Failed copying the source url");
+    #####:  246:            ws_url_destroy(result);
+    #####:  247:            result = NULL;
+        -:  248:        }
+    #####:  249:        else if (parse_ws_url(result->url, result) != 0)
+        -:  250:        {
+        -:  251:            // Codes_SRS_WS_URL_09_020: [ If any component cannot be parsed or is out of order, the function shall fail and return NULL ]
+        -:  252:            // Codes_SRS_WS_URL_09_021: [ If any failure occurs, all memory allocated by the function shall be released before returning ]
+    #####:  253:            LogError("Failed parsing the websockets url");
+    #####:  254:            ws_url_destroy(result);
+    #####:  255:            result = NULL;
+        -:  256:        }
+        -:  257:    }
+        -:  258:
+    #####:  259:    return result;
+        -:  260:}
+        -:  261:
+    #####:  262:int ws_url_is_secure(WS_URL_HANDLE url, bool* is_secure)
+        -:  263:{
+        -:  264:    int result;
+        -:  265:
+        -:  266:    // Codes_SRS_WS_URL_09_026: [ If url is NULL, the function shall return a non-zero value (failure) ]
+    #####:  267:    if (url == NULL || is_secure == NULL)
+        -:  268:    {
+    #####:  269:        LogError("Invalid argument (url=%p, is_secure=%p)", url, is_secure);
+    #####:  270:        result = MU_FAILURE;
+        -:  271:    }
+        -:  272:    else
+        -:  273:    {
+        -:  274:        // Codes_SRS_WS_URL_09_027: [ Otherwize the function shall set is_secure as url->is_secure ]
+    #####:  275:        *is_secure = url->is_secure;
+        -:  276:
+        -:  277:        // Codes_SRS_WS_URL_09_028: [ If no errors occur function shall return zero (success) ]
+    #####:  278:        result = 0;
+        -:  279:    }
+        -:  280:
+    #####:  281:    return result;
+        -:  282:}
+        -:  283:
+    #####:  284:int ws_url_get_host(WS_URL_HANDLE url, const char** host, size_t* length)
+        -:  285:{
+        -:  286:    int result;
+        -:  287:
+        -:  288:    // Codes_SRS_WS_URL_09_029: [ If url or host or length are NULL, the function shall return a non-zero value (failure) ]
+    #####:  289:    if (url == NULL || host == NULL || length == NULL)
+        -:  290:    {
+    #####:  291:        LogError("Invalid argument (url=%p, host=%p, length=%p)", url, host, length);
+    #####:  292:        result = MU_FAILURE;
+        -:  293:    }
+        -:  294:    else
+        -:  295:    {
+        -:  296:        // Codes_SRS_WS_URL_09_030: [ Otherwize the function shall set host to url->host and length to url->host_length ]
+    #####:  297:        *host = url->host;
+    #####:  298:        *length = url->host_length;
+        -:  299:
+        -:  300:        // Codes_SRS_WS_URL_09_031: [ If no errors occur function shall return zero (success) ]
+    #####:  301:        result = 0;
+        -:  302:    }
+        -:  303:
+    #####:  304:    return result;
+        -:  305:}
+        -:  306:
+    #####:  307:int ws_url_get_port(WS_URL_HANDLE url, size_t* port)
+        -:  308:{
+        -:  309:    int result;
+        -:  310:
+        -:  311:    // Codes_SRS_WS_URL_09_038: [ If url or port are NULL, the function shall return a non-zero value (failure) ]
+    #####:  312:    if (url == NULL || port == NULL)
+        -:  313:    {
+    #####:  314:        LogError("Invalid argument (url=%p, port=%p)", url, port);
+    #####:  315:        result = MU_FAILURE;
+        -:  316:    }
+        -:  317:    else
+        -:  318:    {
+        -:  319:        // Codes_SRS_WS_URL_09_039: [ Otherwize the function shall set port as url->port ]
+    #####:  320:        *port = url->port;
+        -:  321:
+        -:  322:        // Codes_SRS_WS_URL_09_040: [ If no errors occur function shall return zero (success) ]
+    #####:  323:        result = 0;
+        -:  324:    }
+        -:  325:
+    #####:  326:    return result;
+        -:  327:}
+        -:  328:
+    #####:  329:int ws_url_get_path(WS_URL_HANDLE url, const char** path, size_t* length)
+        -:  330:{
+        -:  331:    int result;
+        -:  332:
+        -:  333:    // Codes_SRS_WS_URL_09_032: [ If url or path or length are NULL, the function shall return a non-zero value (failure) ]
+    #####:  334:    if (url == NULL || path == NULL || length == NULL)
+        -:  335:    {
+    #####:  336:        LogError("Invalid argument (url=%p, path=%p, length=%p)", url, path, length);
+    #####:  337:        result = MU_FAILURE;
+        -:  338:    }
+        -:  339:    else
+        -:  340:    {
+        -:  341:        // Codes_SRS_WS_URL_09_033: [ Otherwize the function shall set path to url->path and length to url->path_length ]
+    #####:  342:        *path = url->path;
+    #####:  343:        *length = url->path_length;
+        -:  344:
+        -:  345:        // Codes_SRS_WS_URL_09_034: [ If no errors occur function shall return zero (success) ]
+    #####:  346:        result = 0;
+        -:  347:    }
+        -:  348:
+    #####:  349:    return result;
+        -:  350:}
+        -:  351:
+    #####:  352:int ws_url_get_query(WS_URL_HANDLE url, const char** query, size_t* length)
+        -:  353:{
+        -:  354:    int result;
+        -:  355:
+        -:  356:    // Codes_SRS_WS_URL_09_035: [ If url or query or length are NULL, the function shall return a non-zero value (failure) ]
+    #####:  357:    if (url == NULL || query == NULL || length == NULL)
+        -:  358:    {
+    #####:  359:        LogError("Invalid argument (url=%p, query=%p, length=%p)", url, query, length);
+    #####:  360:        result = MU_FAILURE;
+        -:  361:    }
+        -:  362:    else
+        -:  363:    {
+        -:  364:        // Codes_SRS_WS_URL_09_036: [ Otherwize the function shall set query to url->query and length to url->query_length ]
+    #####:  365:        *query = url->query;
+    #####:  366:        *length = url->query_length;
+        -:  367:
+        -:  368:        // Codes_SRS_WS_URL_09_037: [ If no errors occur function shall return zero (success) ]
+    #####:  369:        result = 0;
+        -:  370:    }
+        -:  371:
+    #####:  372:    return result;
+        -:  373:}

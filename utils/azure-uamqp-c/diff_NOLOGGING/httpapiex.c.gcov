@@ -1,0 +1,84 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+46c46
+<         -:   37:        LogError("invalid (NULL) parameter");
+---
+>     #####:   37:        LogError("invalid (NULL) parameter");
+55c55
+<         -:   46:            LogError("malloc failed.");
+---
+>     #####:   46:            LogError("malloc failed.");
+65c65
+<         -:   56:                LogError("unable to STRING_construct");
+---
+>     #####:   56:                LogError("unable to STRING_construct");
+117c117
+<         -:  108:        LogError("unable to HTTPHeaders_Alloc");
+---
+>     #####:  108:        LogError("unable to HTTPHeaders_Alloc");
+220c220
+<         -:  211:        LogError("unable to build the request content");
+---
+>     #####:  211:        LogError("unable to build the request content");
+232c232
+<         -:  223:            LogError("unable to build the request http headers handle");
+---
+>     #####:  223:            LogError("unable to build the request http headers handle");
+271c271
+<         -:  262:                LogError("unable to build response content");
+---
+>     #####:  262:                LogError("unable to build response content");
+293c293
+<         -:  284:                    LogError("unable to build response content");
+---
+>     #####:  284:                    LogError("unable to build response content");
+315c315
+<         -:  306:        LOG_HTTAPIEX_ERROR();
+---
+>     #####:  306:        LOG_HTTAPIEX_ERROR();
+323c323
+<         -:  314:            LOG_HTTAPIEX_ERROR();
+---
+>     #####:  314:            LOG_HTTAPIEX_ERROR();
+346c346
+<         -:  337:                LOG_HTTAPIEX_ERROR();
+---
+>     #####:  337:                LOG_HTTAPIEX_ERROR();
+409c409
+<         -:  400:                                        LogError("HTTPAPI_SetOption failed when called for option %s", option->optionName);
+---
+>     #####:  400:                                        LogError("HTTPAPI_SetOption failed when called for option %s", option->optionName);
+484c484
+<         -:  475:                LogError("unable to recover sending to a working state");
+---
+>     #####:  475:                LogError("unable to recover sending to a working state");
+576c576
+<         -:  567:                LogError("unable to VECTOR_push_back");
+---
+>     #####:  567:                LogError("unable to VECTOR_push_back");
+604c604
+<         -:  595:        LOG_HTTAPIEX_ERROR();
+---
+>     #####:  595:        LOG_HTTAPIEX_ERROR();
+618c618
+<         -:  609:            LOG_HTTAPIEX_ERROR();
+---
+>     #####:  609:            LOG_HTTAPIEX_ERROR();
+624c624
+<         -:  615:            LOG_HTTAPIEX_ERROR();
+---
+>     #####:  615:            LOG_HTTAPIEX_ERROR();
+634c634
+<         -:  625:                LOG_HTTAPIEX_ERROR();
+---
+>     #####:  625:                LOG_HTTAPIEX_ERROR();
+650c650
+<         -:  641:                        LOG_HTTAPIEX_ERROR();
+---
+>     #####:  641:                        LOG_HTTAPIEX_ERROR();
+655c655
+<         -:  646:                        LOG_HTTAPIEX_ERROR();
+---
+>     #####:  646:                        LOG_HTTAPIEX_ERROR();

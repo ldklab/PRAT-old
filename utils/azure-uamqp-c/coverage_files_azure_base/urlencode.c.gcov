@@ -1,0 +1,352 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/urlencode.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include <string.h>
+        -:    6:#include "azure_c_shared_utility/gballoc.h"
+        -:    7:#include "azure_c_shared_utility/urlencode.h"
+        -:    8:#include "azure_c_shared_utility/xlogging.h"
+        -:    9:#include "azure_c_shared_utility/strings.h"
+        -:   10:#include "azure_c_shared_utility/crt_abstractions.h"
+        -:   11:
+        -:   12:#define NIBBLE_TO_STRING(c) (char)((c) < 10 ? (c) + '0' : (c) - 10 + 'a')
+        -:   13:#define NIBBLE_FROM_STRING(c) (char)(ISDIGIT(c) ? (c) - '0' : TOUPPER(c) + 10 - 'A')
+        -:   14:#define IS_HEXDIGIT(c) (            \
+        -:   15:    ((c >= '0') && (c <= '9')) ||   \
+        -:   16:    ((c >= 'A') && (c <= 'F')) ||   \
+        -:   17:    ((c >= 'a') && (c <= 'f'))      \
+        -:   18:)
+        -:   19:#define IS_PRINTABLE(c) (                           \
+        -:   20:    (c == 0) ||                                     \
+        -:   21:    (c == '!') ||                                   \
+        -:   22:    (c == '(') || (c == ')') || (c == '*') ||       \
+        -:   23:    (c == '-') || (c == '.') ||                     \
+        -:   24:    ((c >= '0') && (c <= '9')) ||                   \
+        -:   25:    ((c >= 'A') && (c <= 'Z')) ||                   \
+        -:   26:    (c == '_') ||                                   \
+        -:   27:    ((c >= 'a') && (c <= 'z'))                      \
+        -:   28:)
+        -:   29:
+        -:   30:/*The below macros are to be called on the big nibble of a hex value*/
+        -:   31:#define IS_IN_ASCII_RANGE(c) (  \
+        -:   32:    (c >= '0') && (c <= '7')    \
+        -:   33:)
+        -:   34:#define IS_IN_EXTENDED_ASCII_RANGE(c) ( \
+        -:   35:    ((c >= '8') && (c <= '9')) ||       \
+        -:   36:    ((c >= 'A') && (c <= 'F')) ||       \
+        -:   37:    ((c >= 'a') && (c <= 'f'))          \
+        -:   38:)
+        -:   39:#define IS_IN_CONTINUATION_BYTE_RANGE(c) (  \
+        -:   40:    (c == '8') || (c == '9') ||             \
+        -:   41:    (c == 'A') || (c == 'B') ||             \
+        -:   42:    (c == 'a') || (c == 'b')                \
+        -:   43:)
+        -:   44:#define IS_IN_LEADING_BYTE_RANGE(c) (   \
+        -:   45:    ((c >= 'C') && (c <= 'F')) ||       \
+        -:   46:    ((c >= 'c') && (c <= 'f'))          \
+        -:   47:)
+        -:   48:#define IS_IN_UNSUPPORTED_LEADING_BYTE_RANGE(c) (   \
+        -:   49:    ((c >= 'D') && (c <= 'F')) ||                   \
+        -:   50:    ((c >= 'd') && (c <= 'f'))                      \
+        -:   51:)
+        -:   52:
+      207:   53:static size_t URL_PrintableChar(unsigned char charVal, char* buffer)
+        -:   54:{
+        -:   55:    size_t size;
+      207:   56:    if (IS_PRINTABLE(charVal))
+        -:   57:    {
+      171:   58:        buffer[0] = (char)charVal;
+      171:   59:        size = 1;
+        -:   60:    }
+        -:   61:    else
+        -:   62:    {
+        -:   63:        char bigNibbleStr;
+        -:   64:        char littleNibbleStr;
+       36:   65:        unsigned char bigNibbleVal = charVal >> 4;
+       36:   66:        unsigned char littleNibbleVal = charVal & 0x0F;
+        -:   67:
+       36:   68:        if (bigNibbleVal >= 0x0C)
+        -:   69:        {
+    #####:   70:            bigNibbleVal -= 0x04;
+        -:   71:        }
+        -:   72:
+      36*:   73:        bigNibbleStr = NIBBLE_TO_STRING(bigNibbleVal);
+       36:   74:        littleNibbleStr = NIBBLE_TO_STRING(littleNibbleVal);
+        -:   75:
+       36:   76:        buffer[0] = '%';
+        -:   77:
+       36:   78:        if (charVal < 0x80)
+        -:   79:        {
+       36:   80:            buffer[1] = bigNibbleStr;
+       36:   81:            buffer[2] = littleNibbleStr;
+       36:   82:            size = 3;
+        -:   83:        }
+        -:   84:        else
+        -:   85:        {
+    #####:   86:            buffer[1] = 'c';
+    #####:   87:            buffer[3] = '%';
+    #####:   88:            buffer[4] = bigNibbleStr;
+    #####:   89:            buffer[5] = littleNibbleStr;
+    #####:   90:            if (charVal < 0xC0)
+        -:   91:            {
+    #####:   92:                buffer[2] = '2';
+        -:   93:            }
+        -:   94:            else
+        -:   95:            {
+    #####:   96:                buffer[2] = '3';
+        -:   97:            }
+    #####:   98:            size = 6;
+        -:   99:        }
+        -:  100:    }
+        -:  101:
+      207:  102:    return size;
+        -:  103:}
+        -:  104:
+    #####:  105:static size_t calculateDecodedStringSize(const char* encodedString, size_t len)
+        -:  106:{
+    #####:  107:    size_t decodedSize = 0;
+        -:  108:
+    #####:  109:    if (encodedString == NULL)
+        -:  110:    {
+    #####:  111:        LogError("Null encoded string");
+        -:  112:    }
+    #####:  113:    else if (len == 0)
+        -:  114:    {
+    #####:  115:        decodedSize = 1; //for null terminator
+        -:  116:    }
+        -:  117:    else
+        -:  118:    {
+    #####:  119:        size_t remaining_len = len;
+    #####:  120:        size_t next_step = 0;
+    #####:  121:        size_t i = 0;
+    #####:  122:        while (i < len)
+        -:  123:        {
+        -:  124:            //percent encoded character
+    #####:  125:            if (encodedString[i] == '%')
+        -:  126:            {
+    #####:  127:                if (remaining_len < 3 || !IS_HEXDIGIT(encodedString[i+1]) || !IS_HEXDIGIT(encodedString[i+2]))
+        -:  128:                {
+    #####:  129:                    LogError("Incomplete or invalid percent encoding");
+    #####:  130:                    break;
+        -:  131:                }
+    #####:  132:                else if (!IS_IN_ASCII_RANGE(encodedString[i+1]))
+        -:  133:                {
+    #####:  134:                    LogError("Out of range of characters accepted by this decoder");
+    #####:  135:                    break;
+        -:  136:                }
+        -:  137:                else
+        -:  138:                {
+    #####:  139:                    decodedSize++;
+    #####:  140:                    next_step = 3;
+        -:  141:                }
+        -:  142:            }
+    #####:  143:            else if (!IS_PRINTABLE(encodedString[i]))
+        -:  144:            {
+    #####:  145:                LogError("Unprintable value in encoded string");
+    #####:  146:                break;
+        -:  147:            }
+        -:  148:            //safe character
+        -:  149:            else
+        -:  150:            {
+    #####:  151:                decodedSize++;
+    #####:  152:                next_step = 1;
+        -:  153:            }
+        -:  154:
+    #####:  155:            i += next_step;
+    #####:  156:            remaining_len -= next_step;
+        -:  157:        }
+        -:  158:
+    #####:  159:        if (encodedString[i] != '\0') //i.e. broke out of above loop due to error
+        -:  160:        {
+    #####:  161:            decodedSize = 0;
+        -:  162:        }
+        -:  163:        else
+        -:  164:        {
+    #####:  165:            decodedSize++; //add space for the null terminator
+        -:  166:        }
+        -:  167:    }
+    #####:  168:    return decodedSize;
+        -:  169:}
+        -:  170:
+    #####:  171:static unsigned char charFromNibbles(char bigNibbleStr, char littleNibbleStr)
+        -:  172:{
+    #####:  173:    unsigned char bigNibbleVal = NIBBLE_FROM_STRING(bigNibbleStr);
+    #####:  174:    unsigned char littleNibbleVal = NIBBLE_FROM_STRING(littleNibbleStr);
+        -:  175:
+    #####:  176:    return bigNibbleVal << 4 | littleNibbleVal;
+        -:  177:}
+        -:  178:
+    #####:  179:static void createDecodedString(const char* input, size_t input_size, char* output)
+        -:  180:{
+        -:  181:    /* Note that there is no danger of reckless indexing here, as calculateDecodedStringSize()
+        -:  182:    has already checked lengths of strings to ensure the formatting is always correct*/
+    #####:  183:    size_t i = 0;
+    #####:  184:    while (i <= input_size) //the <= instead of < ensures the '\0' will be copied
+        -:  185:    {
+    #####:  186:        if (input[i] != '%')
+        -:  187:        {
+    #####:  188:            *output++ = input[i];
+    #####:  189:            i++;
+        -:  190:        }
+        -:  191:        else
+        -:  192:        {
+    #####:  193:            *output++ = charFromNibbles(input[i+1], input[i+2]);
+    #####:  194:            i += 3;
+        -:  195:        }
+        -:  196:    }
+    #####:  197:}
+        -:  198:
+      207:  199:static size_t URL_PrintableCharSize(unsigned char charVal)
+        -:  200:{
+        -:  201:    size_t size;
+      207:  202:    if (IS_PRINTABLE(charVal))
+        -:  203:    {
+      171:  204:        size = 1;
+        -:  205:    }
+        -:  206:    else
+        -:  207:    {
+       36:  208:        if (charVal < 0x80)
+        -:  209:        {
+       36:  210:            size = 3;
+        -:  211:        }
+        -:  212:        else
+        -:  213:        {
+    #####:  214:            size = 6;
+        -:  215:        }
+        -:  216:    }
+      207:  217:    return size;
+        -:  218:}
+        -:  219:
+        2:  220:static STRING_HANDLE encode_url_data(const char* text)
+        -:  221:{
+        -:  222:    STRING_HANDLE result;
+        2:  223:    size_t lengthOfResult = 0;
+        -:  224:    char* encodedURL;
+        -:  225:    unsigned char currentUnsignedChar;
+        2:  226:    const char* iterator = text;
+        -:  227:
+        -:  228:    /*Codes_SRS_URL_ENCODE_06_003: [If input is a zero length string then URL_Encode will return a zero length string.]*/
+        -:  229:    do
+        -:  230:    {
+      207:  231:        currentUnsignedChar = (unsigned char)(*iterator++);
+      207:  232:        lengthOfResult += URL_PrintableCharSize(currentUnsignedChar);
+      207:  233:    } while (currentUnsignedChar != 0);
+        -:  234:
+        2:  235:    if ((encodedURL = (char*)malloc(lengthOfResult)) == NULL)
+        -:  236:    {
+        -:  237:        /*Codes_SRS_URL_ENCODE_06_002: [If an error occurs during the encoding of input then URL_Encode will return NULL.]*/
+    #####:  238:        result = NULL;
+    #####:  239:        LogError("URL_Encode:: MALLOC failure on encode.");
+        -:  240:    }
+        -:  241:    else
+        -:  242:    {
+        2:  243:        size_t currentEncodePosition = 0;
+        2:  244:        iterator = text;;
+        -:  245:        do
+        -:  246:        {
+      207:  247:            currentUnsignedChar = (unsigned char)(*iterator++);
+      207:  248:            currentEncodePosition += URL_PrintableChar(currentUnsignedChar, &encodedURL[currentEncodePosition]);
+      207:  249:        } while (currentUnsignedChar != 0);
+        -:  250:
+        2:  251:        result = STRING_new_with_memory(encodedURL);
+        2:  252:        if (result == NULL)
+        -:  253:        {
+    #####:  254:            LogError("URL_Encode:: MALLOC failure on encode.");
+    #####:  255:            free(encodedURL);
+        -:  256:        }
+        -:  257:    }
+        2:  258:    return result;
+        -:  259:}
+        -:  260:
+        1:  261:STRING_HANDLE URL_EncodeString(const char* textEncode)
+        -:  262:{
+        -:  263:    STRING_HANDLE result;
+        1:  264:    if (textEncode == NULL)
+        -:  265:    {
+    #####:  266:        result = NULL;
+        -:  267:    }
+        -:  268:    else
+        -:  269:    {
+        1:  270:        result = encode_url_data(textEncode);
+        -:  271:    }
+        1:  272:    return result;
+        -:  273:}
+        -:  274:
+        1:  275:STRING_HANDLE URL_Encode(STRING_HANDLE input)
+        -:  276:{
+        -:  277:    STRING_HANDLE result;
+        1:  278:    if (input == NULL)
+        -:  279:    {
+        -:  280:        /*Codes_SRS_URL_ENCODE_06_001: [If input is NULL then URL_Encode will return NULL.]*/
+    #####:  281:        result = NULL;
+    #####:  282:        LogError("URL_Encode:: NULL input");
+        -:  283:    }
+        -:  284:    else
+        -:  285:    {
+        1:  286:        result = encode_url_data(STRING_c_str(input));
+        -:  287:    }
+        1:  288:    return result;
+        -:  289:}
+        -:  290:
+    #####:  291:STRING_HANDLE URL_DecodeString(const char* textDecode)
+        -:  292:{
+        -:  293:    STRING_HANDLE result;
+    #####:  294:    if (textDecode == NULL)
+        -:  295:    {
+    #####:  296:        result = NULL;
+        -:  297:    }
+        -:  298:    else
+        -:  299:    {
+    #####:  300:        STRING_HANDLE tempString = STRING_construct(textDecode);
+    #####:  301:        if (tempString == NULL)
+        -:  302:        {
+    #####:  303:            result = NULL;
+        -:  304:        }
+        -:  305:        else
+        -:  306:        {
+    #####:  307:            result = URL_Decode(tempString);
+    #####:  308:            STRING_delete(tempString);
+        -:  309:        }
+        -:  310:    }
+    #####:  311:    return result;
+        -:  312:}
+        -:  313:
+    #####:  314:STRING_HANDLE URL_Decode(STRING_HANDLE input)
+        -:  315:{
+        -:  316:    STRING_HANDLE result;
+    #####:  317:    if (input == NULL)
+        -:  318:    {
+    #####:  319:        LogError("URL_Decode:: NULL input");
+    #####:  320:        result = NULL;
+        -:  321:    }
+        -:  322:    else
+        -:  323:    {
+        -:  324:        size_t decodedStringSize;
+        -:  325:        char* decodedString;
+    #####:  326:        const char* inputString = STRING_c_str(input);
+    #####:  327:        size_t inputLen = strlen(inputString);
+    #####:  328:        if ((decodedStringSize = calculateDecodedStringSize(inputString, inputLen)) == 0)
+        -:  329:        {
+    #####:  330:            LogError("URL_Decode:: Invalid input string");
+    #####:  331:            result = NULL;
+        -:  332:        }
+    #####:  333:        else if ((decodedString = (char*)malloc(decodedStringSize)) == NULL)
+        -:  334:        {
+    #####:  335:            LogError("URL_Decode:: MALLOC failure on decode.");
+    #####:  336:            result = NULL;
+        -:  337:        }
+        -:  338:        else
+        -:  339:        {
+    #####:  340:            createDecodedString(inputString, inputLen, decodedString);
+    #####:  341:            result = STRING_new_with_memory(decodedString);
+    #####:  342:            if (result == NULL)
+        -:  343:            {
+    #####:  344:                LogError("URL_Decode:: MALLOC failure on decode");
+    #####:  345:                free(decodedString);
+        -:  346:            }
+        -:  347:        }
+        -:  348:    }
+    #####:  349:    return result;
+        -:  350:}

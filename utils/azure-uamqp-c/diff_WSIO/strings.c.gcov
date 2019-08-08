@@ -1,0 +1,94 @@
+2c2
+<         -:    0:Programs:80
+---
+>         -:    0:Programs:55
+26c26
+<         5:   24:STRING_HANDLE STRING_new(void)
+---
+>         2:   24:STRING_HANDLE STRING_new(void)
+29c29
+<         5:   27:    if ((result = (STRING*)malloc(sizeof(STRING))) != NULL)
+---
+>         2:   27:    if ((result = (STRING*)malloc(sizeof(STRING))) != NULL)
+31c31
+<         5:   29:        if ((result->s = (char*)malloc(1)) != NULL)
+---
+>         2:   29:        if ((result->s = (char*)malloc(1)) != NULL)
+33c33
+<         5:   31:            result->s[0] = '\0';
+---
+>         2:   31:            result->s[0] = '\0';
+43c43
+<         5:   41:    return (STRING_HANDLE)result;
+---
+>         2:   41:    return (STRING_HANDLE)result;
+370c370
+<        11:  368:int STRING_concat(STRING_HANDLE handle, const char* s2)
+---
+>         9:  368:int STRING_concat(STRING_HANDLE handle, const char* s2)
+373c373
+<        11:  371:    if ((handle == NULL) || (s2 == NULL))
+---
+>         9:  371:    if ((handle == NULL) || (s2 == NULL))
+380,384c380,384
+<        11:  378:        STRING* s1 = (STRING*)handle;
+<        11:  379:        size_t s1Length = strlen(s1->s);
+<        11:  380:        size_t s2Length = strlen(s2);
+<        11:  381:        char* temp = (char*)realloc(s1->s, s1Length + s2Length + 1);
+<        11:  382:        if (temp == NULL)
+---
+>         9:  378:        STRING* s1 = (STRING*)handle;
+>         9:  379:        size_t s1Length = strlen(s1->s);
+>         9:  380:        size_t s2Length = strlen(s2);
+>         9:  381:        char* temp = (char*)realloc(s1->s, s1Length + s2Length + 1);
+>         9:  382:        if (temp == NULL)
+392,394c392,394
+<        11:  390:            s1->s = temp;
+<        11:  391:            (void)memcpy(s1->s + s1Length, s2, s2Length + 1);
+<        11:  392:            result = 0;
+---
+>         9:  390:            s1->s = temp;
+>         9:  391:            (void)memcpy(s1->s + s1Length, s2, s2Length + 1);
+>         9:  392:            result = 0;
+397c397
+<        11:  395:    return result;
+---
+>         9:  395:    return result;
+664c664
+<        12:  662:void STRING_delete(STRING_HANDLE handle)
+---
+>         8:  662:void STRING_delete(STRING_HANDLE handle)
+667c667
+<        12:  665:    if (handle != NULL)
+---
+>         8:  665:    if (handle != NULL)
+669,672c669,672
+<        11:  667:        STRING* value = (STRING*)handle;
+<        11:  668:        free(value->s);
+<        11:  669:        value->s = NULL;
+<        11:  670:        free(value);
+---
+>         8:  667:        STRING* value = (STRING*)handle;
+>         8:  668:        free(value->s);
+>         8:  669:        value->s = NULL;
+>         8:  670:        free(value);
+674c674
+<        12:  672:}
+---
+>         8:  672:}
+677c677
+<         9:  675:const char* STRING_c_str(STRING_HANDLE handle)
+---
+>         6:  675:const char* STRING_c_str(STRING_HANDLE handle)
+680c680
+<         9:  678:    if (handle != NULL)
+---
+>         6:  678:    if (handle != NULL)
+682c682
+<         9:  680:        result = ((STRING*)handle)->s;
+---
+>         6:  680:        result = ((STRING*)handle)->s;
+689c689
+<         9:  687:    return result;
+---
+>         6:  687:    return result;

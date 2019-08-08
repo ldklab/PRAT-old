@@ -1,0 +1,600 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/constbuffer_array.c
+        -:    0:Programs:80
+        -:    1:// Copyright (C) Microsoft Corporation. All rights reserved.
+        -:    2:
+        -:    3:#include <stdlib.h>
+        -:    4:#include <stdbool.h>
+        -:    5:#include <inttypes.h>
+        -:    6:
+        -:    7:#include "azure_c_shared_utility/gballoc.h"
+        -:    8:#include "azure_c_shared_utility/xlogging.h"
+        -:    9:#include "azure_c_shared_utility/optimize_size.h"
+        -:   10:
+        -:   11:#include "azure_c_shared_utility/constbuffer.h"
+        -:   12:#include "azure_c_shared_utility/constbuffer_array.h"
+        -:   13:#include "azure_c_shared_utility/refcount.h"
+        -:   14:
+        -:   15:typedef struct CONSTBUFFER_ARRAY_HANDLE_DATA_TAG
+        -:   16:{
+        -:   17:    uint32_t nBuffers;
+        -:   18:    bool created_with_moved_memory;
+        -:   19:    CONSTBUFFER_HANDLE* buffers;
+        -:   20:#ifdef _MSC_VER
+        -:   21:    /*warning C4200: nonstandard extension used: zero-sized array in struct/union : looks very standard in C99 and it is called flexible array. Documentation-wise is a flexible array, but called "unsized" in Microsoft's docs*/ /*https://msdn.microsoft.com/en-us/library/b6fae073.aspx*/
+        -:   22:#pragma warning(disable:4200)
+        -:   23:#endif
+        -:   24:    CONSTBUFFER_HANDLE buffers_memory[];
+        -:   25:} CONSTBUFFER_ARRAY_HANDLE_DATA;
+        -:   26:
+    #####:   27:DEFINE_REFCOUNT_TYPE(CONSTBUFFER_ARRAY_HANDLE_DATA);
+------------------
+REFCOUNT_CONSTBUFFER_ARRAY_HANDLE_DATA_Destroy:
+    #####:   27:DEFINE_REFCOUNT_TYPE(CONSTBUFFER_ARRAY_HANDLE_DATA);
+------------------
+REFCOUNT_CONSTBUFFER_ARRAY_HANDLE_DATA_Create:
+    #####:   27:DEFINE_REFCOUNT_TYPE(CONSTBUFFER_ARRAY_HANDLE_DATA);
+------------------
+REFCOUNT_CONSTBUFFER_ARRAY_HANDLE_DATA_Create_With_Extra_Size:
+    #####:   27:DEFINE_REFCOUNT_TYPE(CONSTBUFFER_ARRAY_HANDLE_DATA);
+------------------
+        -:   28:
+    #####:   29:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_create, const CONSTBUFFER_HANDLE*, buffers, uint32_t, buffer_count)
+        -:   30:{
+        -:   31:    CONSTBUFFER_ARRAY_HANDLE result;
+        -:   32:
+    #####:   33:    if (
+        -:   34:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_012: [ If buffers is NULL and buffer_count is not 0, constbuffer_array_create shall fail and return NULL. ]*/
+    #####:   35:        (buffers == NULL) && (buffer_count != 0)
+        -:   36:        )
+        -:   37:    {
+    #####:   38:        LogError("Invalid arguments: const CONSTBUFFER_HANDLE* buffers=%p, uint32_t buffer_count=%" PRIu32,
+        -:   39:            buffers, buffer_count);
+        -:   40:    }
+        -:   41:    else
+        -:   42:    {
+        -:   43:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_009: [ constbuffer_array_create shall allocate memory for a new CONSTBUFFER_ARRAY_HANDLE that can hold buffer_count buffers. ]*/
+    #####:   44:        result = REFCOUNT_TYPE_CREATE_WITH_EXTRA_SIZE(CONSTBUFFER_ARRAY_HANDLE_DATA, buffer_count * sizeof(CONSTBUFFER_HANDLE));
+    #####:   45:        if (result == NULL)
+        -:   46:        {
+        -:   47:            /* Codes_SRS_CONSTBUFFER_ARRAY_01_014: [ If any error occurs, constbuffer_array_create shall fail and return NULL. ]*/
+    #####:   48:            LogError("failure in allocating const buffer array");
+        -:   49:        }
+        -:   50:        else
+        -:   51:        {
+        -:   52:            uint32_t i;
+        -:   53:
+    #####:   54:            result->buffers = result->buffers_memory;
+    #####:   55:            result->nBuffers = buffer_count;
+    #####:   56:            result->created_with_moved_memory = false;
+        -:   57:
+    #####:   58:            for (i = 0; i < buffer_count; i++)
+        -:   59:            {
+        -:   60:                /* Codes_SRS_CONSTBUFFER_ARRAY_01_010: [ constbuffer_array_create shall clone the buffers in buffers and store them. ]*/
+    #####:   61:                CONSTBUFFER_IncRef(buffers[i]);
+    #####:   62:                result->buffers[i] = buffers[i];
+        -:   63:            }
+        -:   64:
+        -:   65:            /* Codes_SRS_CONSTBUFFER_ARRAY_01_011: [ On success constbuffer_array_create shall return a non-NULL handle. ]*/
+    #####:   66:            goto all_ok;
+        -:   67:        }
+        -:   68:    }
+        -:   69:
+    #####:   70:    result = NULL;
+        -:   71:
+    #####:   72:all_ok:
+    #####:   73:    return result;
+        -:   74:}
+        -:   75:
+    #####:   76:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_create_empty)
+        -:   77:{
+        -:   78:    CONSTBUFFER_ARRAY_HANDLE result;
+        -:   79:
+        -:   80:    /*Codes_SRS_CONSTBUFFER_ARRAY_02_004: [ constbuffer_array_create_empty shall allocate memory for a new CONSTBUFFER_ARRAY_HANDLE. ]*/
+    #####:   81:    result = REFCOUNT_TYPE_CREATE(CONSTBUFFER_ARRAY_HANDLE_DATA); /*explicit 0*/
+    #####:   82:    if (result == NULL)
+        -:   83:    {
+        -:   84:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_001: [ If are any failure is encountered, constbuffer_array_create_empty shall fail and return NULL. ]*/
+    #####:   85:        LogError("failure allocating const buffer array");
+        -:   86:        /*return as is*/
+        -:   87:    }
+        -:   88:    else
+        -:   89:    {
+        -:   90:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_041: [ constbuffer_array_create_empty shall succeed and return a non-NULL value. ]*/
+    #####:   91:        result->created_with_moved_memory = false;
+    #####:   92:        result->nBuffers = 0;
+    #####:   93:        result->buffers = result->buffers_memory;
+        -:   94:    }
+    #####:   95:    return result;
+        -:   96:}
+        -:   97:
+    #####:   98:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_create_with_move_buffers, CONSTBUFFER_HANDLE*, buffers, uint32_t, buffer_count)
+        -:   99:{
+        -:  100:    CONSTBUFFER_ARRAY_HANDLE result;
+        -:  101:
+        -:  102:    /* Codes_SRS_CONSTBUFFER_ARRAY_01_028: [ If buffers is NULL and buffer_count is not 0, constbuffer_array_create_with_move_buffers shall fail and return NULL. ]*/
+    #####:  103:    if (buffers == NULL)
+        -:  104:    {
+    #####:  105:        LogError("Invalid arguments: CONSTBUFFER_HANDLE* buffers=%p, uint32_t buffer_count=%" PRIu32,
+        -:  106:            buffers, buffer_count);
+    #####:  107:        result = NULL;
+        -:  108:    }
+        -:  109:    else
+        -:  110:    {
+    #####:  111:        result = REFCOUNT_TYPE_CREATE(CONSTBUFFER_ARRAY_HANDLE_DATA); /*explicit 0*/
+    #####:  112:        if (result == NULL)
+        -:  113:        {
+        -:  114:            /* Codes_SRS_CONSTBUFFER_ARRAY_01_030: [ If any error occurs, constbuffer_array_create_with_move_buffers shall fail and return NULL. ]*/
+    #####:  115:            LogError("failure allocating const buffer array");
+        -:  116:            /*return as is*/
+        -:  117:        }
+        -:  118:        else
+        -:  119:        {
+    #####:  120:            result->created_with_moved_memory = true;
+    #####:  121:            result->buffers = buffers;
+    #####:  122:            result->nBuffers = buffer_count;
+        -:  123:        }
+        -:  124:    }
+        -:  125:
+    #####:  126:    return result;
+        -:  127:}
+        -:  128:
+    #####:  129:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_create_from_array_array, const CONSTBUFFER_ARRAY_HANDLE*, buffer_arrays, uint32_t, buffer_array_count)
+        -:  130:{
+        -:  131:    CONSTBUFFER_ARRAY_HANDLE result;
+        -:  132:
+    #####:  133:    if (
+        -:  134:        /*Codes_SRS_CONSTBUFFER_ARRAY_42_009: [ If buffer_arrays is NULL and buffer_array_count is not 0 then constbuffer_array_create_from_array_array shall fail and return NULL. ]*/
+    #####:  135:        (buffer_arrays == NULL && buffer_array_count != 0)
+        -:  136:        )
+        -:  137:    {
+    #####:  138:        LogError("invalid arguments: const CONSTBUFFER_ARRAY_HANDLE* buffer_arrays=%p, uint32_t buffer_array_count=%" PRIu32, buffer_arrays, buffer_array_count);
+        -:  139:    }
+        -:  140:    else
+        -:  141:    {
+        -:  142:        /*Codes_SRS_CONSTBUFFER_ARRAY_42_001: [ If buffer_arrays is NULL or buffer_array_count is 0 then constbuffer_array_create_from_array_array shall create a new, empty CONSTBUFFER_ARRAY_HANDLE. ]*/
+    #####:  143:        if (buffer_arrays == NULL || buffer_array_count == 0)
+        -:  144:        {
+    #####:  145:            result = constbuffer_array_create_empty();
+        -:  146:
+    #####:  147:            if (result == NULL)
+        -:  148:            {
+    #####:  149:                LogError("constbuffer_array_create_empty failed");
+        -:  150:            }
+        -:  151:            else
+        -:  152:            {
+    #####:  153:                goto allOk;
+        -:  154:            }
+        -:  155:        }
+        -:  156:        else
+        -:  157:        {
+    #####:  158:            uint32_t total_buffer_count = 0;
+        -:  159:            uint32_t i;
+    #####:  160:            for (i = 0; i < buffer_array_count; ++i)
+        -:  161:            {
+    #####:  162:                if (buffer_arrays[i] == NULL)
+        -:  163:                {
+        -:  164:                    /*Codes_SRS_CONSTBUFFER_ARRAY_42_002: [ If any const buffer array in buffer_arrays is NULL then constbuffer_array_create_from_array_array shall fail and return NULL. ]*/
+    #####:  165:                    LogError("Invalid arguments: NULL buffer array %" PRIu32, i);
+    #####:  166:                    break;
+        -:  167:                }
+        -:  168:                else
+        -:  169:                {
+        -:  170:                    // Overflow check
+    #####:  171:                    total_buffer_count += buffer_arrays[i]->nBuffers;
+    #####:  172:                    if (total_buffer_count < buffer_arrays[i]->nBuffers)
+        -:  173:                    {
+    #####:  174:                        LogError("Array size overflow while checking index %" PRIu32, i);
+    #####:  175:                        break;
+        -:  176:                    }
+        -:  177:                }
+        -:  178:            }
+        -:  179:
+    #####:  180:            if (i < buffer_array_count)
+        -:  181:            {
+        -:  182:                // Failed in loop, fall through to cleanup
+        -:  183:            }
+        -:  184:            else
+        -:  185:            {
+        -:  186:                /*Codes_SRS_CONSTBUFFER_ARRAY_42_003: [ constbuffer_array_create_from_array_array shall allocate memory to hold all of the CONSTBUFFER_HANDLES from buffer_arrays. ]*/
+    #####:  187:                result = REFCOUNT_TYPE_CREATE_WITH_EXTRA_SIZE(CONSTBUFFER_ARRAY_HANDLE_DATA, (total_buffer_count) * sizeof(CONSTBUFFER_HANDLE));
+    #####:  188:                if (result == NULL)
+        -:  189:                {
+        -:  190:                    /*Codes_SRS_CONSTBUFFER_ARRAY_42_008: [ If there are any failures then constbuffer_array_create_from_array_array shall fail and return NULL. ]*/
+    #####:  191:                    LogError("failure in malloc");
+        -:  192:                }
+        -:  193:                else
+        -:  194:                {
+        -:  195:                    uint32_t dest_idx;
+        -:  196:                    uint32_t array_idx;
+        -:  197:                    uint32_t source_idx;
+        -:  198:
+    #####:  199:                    result->nBuffers = total_buffer_count;
+    #####:  200:                    result->created_with_moved_memory = false;
+    #####:  201:                    result->buffers = result->buffers_memory;
+        -:  202:
+    #####:  203:                    for (dest_idx = 0, array_idx = 0; array_idx < buffer_array_count; ++array_idx)
+        -:  204:                    {
+    #####:  205:                        for (source_idx = 0; source_idx < buffer_arrays[array_idx]->nBuffers; ++source_idx, ++dest_idx)
+        -:  206:                        {
+        -:  207:                            /*Codes_SRS_CONSTBUFFER_ARRAY_42_004: [ constbuffer_array_create_from_array_array shall copy all of the CONSTBUFFER_HANDLES from each const buffer array in buffer_arrays to the newly constructed array by calling CONSTBUFFER_IncRef. ]*/
+    #####:  208:                            CONSTBUFFER_IncRef(buffer_arrays[array_idx]->buffers[source_idx]);
+    #####:  209:                            result->buffers[dest_idx] = buffer_arrays[array_idx]->buffers[source_idx];
+        -:  210:                        }
+        -:  211:                    }
+        -:  212:
+        -:  213:                    /*Codes_SRS_CONSTBUFFER_ARRAY_42_007: [ constbuffer_array_create_from_array_array shall succeed and return a non-NULL value. ]*/
+    #####:  214:                    goto allOk;
+        -:  215:                }
+        -:  216:            }
+        -:  217:        }
+        -:  218:    }
+    #####:  219:    result = NULL;
+    #####:  220:allOk:;
+    #####:  221:    return result;
+        -:  222:}
+        -:  223:
+    #####:  224:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_add_front, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_handle, CONSTBUFFER_HANDLE, constbuffer_handle)
+        -:  225:{
+        -:  226:    CONSTBUFFER_ARRAY_HANDLE result;
+    #####:  227:    if (
+        -:  228:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_006: [ If constbuffer_array_handle is NULL then constbuffer_array_add_front shall fail and return NULL ]*/
+    #####:  229:        (constbuffer_array_handle == NULL) ||
+        -:  230:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_007: [ If constbuffer_handle is NULL then constbuffer_array_add_front shall fail and return NULL ]*/
+        -:  231:        (constbuffer_handle == NULL)
+        -:  232:        )
+        -:  233:    {
+    #####:  234:        LogError("invalid arguments CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, CONSTBUFFER_HANDLE constbuffer_handle=%p", constbuffer_array_handle, constbuffer_handle);
+        -:  235:    }
+        -:  236:    else
+        -:  237:    {
+        -:  238:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_042: [ constbuffer_array_add_front shall allocate enough memory to hold all of constbuffer_array_handle existing CONSTBUFFER_HANDLE and constbuffer_handle. ]*/
+    #####:  239:        result = REFCOUNT_TYPE_CREATE_WITH_EXTRA_SIZE(CONSTBUFFER_ARRAY_HANDLE_DATA, (constbuffer_array_handle->nBuffers + 1) * sizeof(CONSTBUFFER_HANDLE));
+    #####:  240:        if (result == NULL)
+        -:  241:        {
+        -:  242:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_011: [ If there any failures constbuffer_array_add_front shall fail and return NULL. ]*/
+    #####:  243:            LogError("failure in malloc");
+        -:  244:            /*return as is*/
+        -:  245:        }
+        -:  246:        else
+        -:  247:        {
+        -:  248:            uint32_t i;
+        -:  249:
+        -:  250:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_043: [ constbuffer_array_add_front shall copy constbuffer_handle and all of constbuffer_array_handle existing CONSTBUFFER_HANDLE. ]*/
+        -:  251:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_044: [ constbuffer_array_add_front shall inc_ref all the CONSTBUFFER_HANDLE it had copied. ]*/
+    #####:  252:            result->nBuffers = constbuffer_array_handle->nBuffers + 1;
+    #####:  253:            result->created_with_moved_memory = false;
+    #####:  254:            result->buffers = result->buffers_memory;
+    #####:  255:            CONSTBUFFER_IncRef(constbuffer_handle);
+    #####:  256:            result->buffers_memory[0] = constbuffer_handle;
+    #####:  257:            for (i = 1; i < result->nBuffers; i++)
+        -:  258:            {
+    #####:  259:                CONSTBUFFER_IncRef(constbuffer_array_handle->buffers[i - 1]);
+    #####:  260:                result->buffers[i] = constbuffer_array_handle->buffers[i - 1];
+        -:  261:            }
+        -:  262:
+        -:  263:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_010: [ constbuffer_array_add_front shall succeed and return a non-NULL value. ]*/
+    #####:  264:            goto allOk;
+        -:  265:        }
+        -:  266:    }
+        -:  267:    /*Codes_SRS_CONSTBUFFER_ARRAY_02_011: [ If there any failures constbuffer_array_add_front shall fail and return NULL. ]*/
+    #####:  268:    result = NULL;
+    #####:  269:allOk:;
+    #####:  270:    return result;
+        -:  271:}
+        -:  272:
+    #####:  273:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_remove_front, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_handle, CONSTBUFFER_HANDLE*, constbuffer_handle)
+        -:  274:{
+        -:  275:    CONSTBUFFER_ARRAY_HANDLE result;
+    #####:  276:    if (
+        -:  277:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_012: [ If constbuffer_array_handle is NULL then constbuffer_array_remove_front shall fail and return NULL. ]*/
+    #####:  278:        (constbuffer_array_handle == NULL) ||
+        -:  279:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_045: [ If constbuffer_handle is NULL then constbuffer_array_remove_front shall fail and return NULL. ]*/
+        -:  280:        (constbuffer_handle == NULL)
+        -:  281:        )
+        -:  282:    {
+        -:  283:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_036: [ If there are any failures then constbuffer_array_remove_front shall fail and return NULL. ]*/
+    #####:  284:        LogError("invalid arguments CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, CONSTBUFFER_HANDLE* constbuffer_handle=%p", constbuffer_array_handle, constbuffer_handle);
+        -:  285:    }
+        -:  286:    else
+        -:  287:    {
+        -:  288:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_002: [ constbuffer_array_remove_front shall fail when called on a newly constructed CONSTBUFFER_ARRAY_HANDLE. ]*/
+        -:  289:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_013: [ If there is no front CONSTBUFFER_HANDLE then constbuffer_array_remove_front shall fail and return NULL. ]*/
+    #####:  290:        if (constbuffer_array_handle->nBuffers == 0)
+        -:  291:        {
+        -:  292:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_036: [ If there are any failures then constbuffer_array_remove_front shall fail and return NULL. ]*/
+    #####:  293:            LogError("cannot remove from that which does not have");
+        -:  294:        }
+        -:  295:        else
+        -:  296:        {
+        -:  297:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_046: [ constbuffer_array_remove_front shall allocate memory to hold all of constbuffer_array_handle CONSTBUFFER_HANDLEs except the front one. ]*/
+    #####:  298:            result = REFCOUNT_TYPE_CREATE_WITH_EXTRA_SIZE(CONSTBUFFER_ARRAY_HANDLE_DATA, (constbuffer_array_handle->nBuffers - 1) * sizeof(CONSTBUFFER_HANDLE));
+    #####:  299:            if (result == NULL)
+        -:  300:            {
+        -:  301:                /*Codes_SRS_CONSTBUFFER_ARRAY_02_036: [ If there are any failures then constbuffer_array_remove_front shall fail and return NULL. ]*/
+    #####:  302:                LogError("failure in malloc");
+        -:  303:                /*return as is*/
+        -:  304:            }
+        -:  305:            else
+        -:  306:            {
+        -:  307:                uint32_t i;
+        -:  308:
+        -:  309:                /* Codes_SRS_CONSTBUFFER_ARRAY_01_001: [ constbuffer_array_remove_front shall inc_ref the removed buffer. ]*/
+    #####:  310:                CONSTBUFFER_IncRef(constbuffer_array_handle->buffers[0]);
+    #####:  311:                result->nBuffers = constbuffer_array_handle->nBuffers - 1;
+    #####:  312:                result->created_with_moved_memory = false;
+    #####:  313:                result->buffers = result->buffers_memory;
+        -:  314:
+        -:  315:                /*Codes_SRS_CONSTBUFFER_ARRAY_02_047: [ constbuffer_array_remove_front shall copy all of constbuffer_array_handle CONSTBUFFER_HANDLEs except the front one. ]*/
+        -:  316:                /*Codes_SRS_CONSTBUFFER_ARRAY_02_048: [ constbuffer_array_remove_front shall inc_ref all the copied CONSTBUFFER_HANDLEs. ]*/
+    #####:  317:                for (i = 1; i < constbuffer_array_handle->nBuffers; i++)
+        -:  318:                {
+    #####:  319:                    CONSTBUFFER_IncRef(constbuffer_array_handle->buffers[i]);
+    #####:  320:                    result->buffers[i - 1] = constbuffer_array_handle->buffers[i];
+        -:  321:                }
+        -:  322:
+        -:  323:                /*Codes_SRS_CONSTBUFFER_ARRAY_02_049: [ constbuffer_array_remove_front shall succeed, write in constbuffer_handle the front handle and return a non-NULL value. ]*/
+    #####:  324:                *constbuffer_handle = constbuffer_array_handle->buffers[0];
+    #####:  325:                goto allOk;
+        -:  326:            }
+        -:  327:        }
+        -:  328:    }
+        -:  329:    /*Codes_SRS_CONSTBUFFER_ARRAY_02_036: [ If there are any failures then constbuffer_array_remove_front shall fail and return NULL. ]*/
+    #####:  330:    result = NULL;
+    #####:  331:allOk:;
+    #####:  332:    return result;
+        -:  333:}
+        -:  334:
+    #####:  335:IMPLEMENT_MOCKABLE_FUNCTION(, int, constbuffer_array_get_buffer_count, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_handle, uint32_t*, buffer_count)
+        -:  336:{
+        -:  337:    int result;
+        -:  338:
+    #####:  339:    if (
+        -:  340:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_003: [ If constbuffer_array_handle is NULL, constbuffer_array_get_buffer_count shall fail and return a non-zero value. ]*/
+    #####:  341:        (constbuffer_array_handle == NULL) ||
+        -:  342:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_004: [ If buffer_count is NULL, constbuffer_array_get_buffer_count shall fail and return a non-zero value. ]*/
+        -:  343:        (buffer_count == NULL)
+        -:  344:        )
+        -:  345:    {
+    #####:  346:        LogError("Invalid arguments: CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t* buffer_count=%p",
+        -:  347:            constbuffer_array_handle, buffer_count);
+    #####:  348:        result = MU_FAILURE;
+        -:  349:    }
+        -:  350:    else
+        -:  351:    {
+        -:  352:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_002: [ On success, constbuffer_array_get_buffer_count shall return 0 and write the buffer count in buffer_count. ]*/
+    #####:  353:        *buffer_count = constbuffer_array_handle->nBuffers;
+        -:  354:
+    #####:  355:        result = 0;
+        -:  356:    }
+        -:  357:
+    #####:  358:    return result;
+        -:  359:}
+        -:  360:
+    #####:  361:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_HANDLE, constbuffer_array_get_buffer, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_handle, uint32_t, buffer_index)
+        -:  362:{
+        -:  363:    CONSTBUFFER_HANDLE result;
+        -:  364:
+    #####:  365:    if (
+        -:  366:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_007: [ If constbuffer_array_handle is NULL, constbuffer_array_get_buffer shall fail and return NULL. ]*/
+    #####:  367:        (constbuffer_array_handle == NULL) ||
+        -:  368:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_008: [ If buffer_index is greater or equal to the number of buffers in the array, constbuffer_array_get_buffer shall fail and return NULL. ]*/
+    #####:  369:        (buffer_index >= constbuffer_array_handle->nBuffers)
+        -:  370:        )
+        -:  371:    {
+    #####:  372:        LogError("Invalid arguments: CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t buffer_index=%" PRIu32,
+        -:  373:            constbuffer_array_handle, buffer_index);
+        -:  374:    }
+        -:  375:    else
+        -:  376:    {
+        -:  377:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_006: [ The returned handle shall have its reference count incremented. ]*/
+    #####:  378:        CONSTBUFFER_IncRef(constbuffer_array_handle->buffers[buffer_index]);
+    #####:  379:        result = constbuffer_array_handle->buffers[buffer_index];
+        -:  380:
+        -:  381:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_005: [ On success, constbuffer_array_get_buffer shall return a non-NULL handle to the buffer_index-th const buffer in the array. ]*/
+    #####:  382:        goto all_ok;
+        -:  383:    }
+        -:  384:
+    #####:  385:    result = NULL;
+        -:  386:
+    #####:  387:all_ok:
+    #####:  388:    return result;
+        -:  389:}
+        -:  390:
+    #####:  391:IMPLEMENT_MOCKABLE_FUNCTION(, const CONSTBUFFER*, constbuffer_array_get_buffer_content, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_handle, uint32_t, buffer_index)
+        -:  392:{
+        -:  393:    const CONSTBUFFER* result;
+    #####:  394:    if (
+        -:  395:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_023: [ If constbuffer_array_handle is NULL, constbuffer_array_get_buffer_content shall fail and return NULL. ]*/
+    #####:  396:        (constbuffer_array_handle == NULL) ||
+        -:  397:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_024: [ If buffer_index is greater or equal to the number of buffers in the array, constbuffer_array_get_buffer_content shall fail and return NULL. ]*/
+    #####:  398:        (buffer_index >= constbuffer_array_handle->nBuffers)
+        -:  399:        )
+        -:  400:    {
+    #####:  401:        LogError("Invalid arguments: CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t buffer_index=%" PRIu32,
+        -:  402:            constbuffer_array_handle, buffer_index);
+    #####:  403:        result = NULL;
+        -:  404:    }
+        -:  405:    else
+        -:  406:    {
+        -:  407:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_025: [ Otherwise constbuffer_array_get_buffer_content shall call CONSTBUFFER_GetContent for the buffer_index-th buffer and return its result. ]*/
+    #####:  408:        result = CONSTBUFFER_GetContent(constbuffer_array_handle->buffers[buffer_index]);
+        -:  409:    }
+        -:  410:
+    #####:  411:    return result;
+        -:  412:}
+        -:  413:
+    #####:  414:IMPLEMENT_MOCKABLE_FUNCTION(, void, constbuffer_array_inc_ref, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_handle)
+        -:  415:{
+    #####:  416:    if (constbuffer_array_handle == NULL)
+        -:  417:    {
+        -:  418:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_017: [ If constbuffer_array_handle is NULL then constbuffer_array_inc_ref shall return. ]*/
+    #####:  419:        LogError("invalid argument CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p", constbuffer_array_handle);
+        -:  420:    }
+        -:  421:    else
+        -:  422:    {
+        -:  423:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_018: [ Otherwise constbuffer_array_inc_ref shall increment the reference count for constbuffer_array_handle. ]*/
+    #####:  424:        INC_REF(CONSTBUFFER_ARRAY_HANDLE_DATA, constbuffer_array_handle);
+        -:  425:    }
+    #####:  426:}
+        -:  427:
+    #####:  428:IMPLEMENT_MOCKABLE_FUNCTION(, void, constbuffer_array_dec_ref, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_handle)
+        -:  429:{
+    #####:  430:    if (constbuffer_array_handle == NULL)
+        -:  431:    {
+        -:  432:        /*Codes_SRS_CONSTBUFFER_ARRAY_02_039: [ If constbuffer_array_handle is NULL then constbuffer_array_dec_ref shall return. ]*/
+    #####:  433:        LogError("invalid argument CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p", constbuffer_array_handle);
+        -:  434:    }
+        -:  435:    else
+        -:  436:    {
+        -:  437:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_016: [ Otherwise constbuffer_array_dec_ref shall decrement the reference count for constbuffer_array_handle. ]*/
+    #####:  438:        if (DEC_REF(CONSTBUFFER_ARRAY_HANDLE_DATA, constbuffer_array_handle) == DEC_RETURN_ZERO)
+        -:  439:        {
+        -:  440:            uint32_t i;
+        -:  441:
+        -:  442:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_038: [ If the reference count reaches 0, constbuffer_array_dec_ref shall free all used resources. ]*/
+    #####:  443:            for (i = 0; i < constbuffer_array_handle->nBuffers; i++)
+        -:  444:            {
+    #####:  445:                CONSTBUFFER_DecRef(constbuffer_array_handle->buffers[i]);
+        -:  446:            }
+        -:  447:
+    #####:  448:            if (constbuffer_array_handle->created_with_moved_memory)
+        -:  449:            {
+    #####:  450:                free(constbuffer_array_handle->buffers);
+        -:  451:            }
+        -:  452:
+    #####:  453:            REFCOUNT_TYPE_DESTROY(CONSTBUFFER_ARRAY_HANDLE_DATA, constbuffer_array_handle);
+        -:  454:        }
+        -:  455:    }
+    #####:  456:}
+        -:  457:
+    #####:  458:IMPLEMENT_MOCKABLE_FUNCTION(, int, constbuffer_array_get_all_buffers_size, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_handle, uint32_t*, all_buffers_size)
+        -:  459:{
+        -:  460:    int result;
+        -:  461:
+    #####:  462:    if (
+        -:  463:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_019: [ If constbuffer_array_handle is NULL, constbuffer_array_get_all_buffers_size shall fail and return a non-zero value. ]*/
+    #####:  464:        (constbuffer_array_handle == NULL) ||
+        -:  465:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_020: [ If all_buffers_size is NULL, constbuffer_array_get_all_buffers_size shall fail and return a non-zero value. ]*/
+        -:  466:        (all_buffers_size == NULL)
+        -:  467:        )
+        -:  468:    {
+    #####:  469:        LogError("CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t* all_buffers_size=%p",
+        -:  470:            constbuffer_array_handle, all_buffers_size);
+    #####:  471:        result = MU_FAILURE;
+        -:  472:    }
+        -:  473:    else
+        -:  474:    {
+        -:  475:        uint32_t i;
+    #####:  476:        uint32_t total_size = 0;
+        -:  477:
+    #####:  478:        for (i = 0; i < constbuffer_array_handle->nBuffers; i++)
+        -:  479:        {
+    #####:  480:            const CONSTBUFFER* content = CONSTBUFFER_GetContent(constbuffer_array_handle->buffers[i]);
+        -:  481:#if SIZE_MAX > UINT32_MAX
+    #####:  482:            if (content->size > UINT32_MAX)
+        -:  483:            {
+    #####:  484:                break;
+        -:  485:            }
+        -:  486:#endif
+    #####:  487:            if (total_size + (uint32_t)content->size < total_size)
+        -:  488:            {
+    #####:  489:                break;
+        -:  490:            }
+        -:  491:
+    #####:  492:            total_size += (uint32_t)content->size;
+        -:  493:        }
+        -:  494:
+    #####:  495:        if (i < constbuffer_array_handle->nBuffers)
+        -:  496:        {
+        -:  497:            /* Codes_SRS_CONSTBUFFER_ARRAY_01_021: [ If summing up the sizes results in an uint32_t overflow, shall fail and return a non-zero value. ]*/
+    #####:  498:            LogError("Overflow in computing all buffers size");
+    #####:  499:            result = MU_FAILURE;
+        -:  500:        }
+        -:  501:        else
+        -:  502:        {
+        -:  503:            /* Codes_SRS_CONSTBUFFER_ARRAY_01_022: [ Otherwise constbuffer_array_get_all_buffers_size shall write in all_buffers_size the total size of all buffers in the array and return 0. ]*/
+    #####:  504:            *all_buffers_size = total_size;
+    #####:  505:            result = 0;
+        -:  506:        }
+        -:  507:    }
+        -:  508:
+    #####:  509:    return result;
+        -:  510:}
+        -:  511:
+    #####:  512:IMPLEMENT_MOCKABLE_FUNCTION(, const CONSTBUFFER_HANDLE*, constbuffer_array_get_const_buffer_handle_array, CONSTBUFFER_ARRAY_HANDLE, constbuffer_array_handle)
+        -:  513:{
+        -:  514:    const CONSTBUFFER_HANDLE* result;
+        -:  515:
+        -:  516:    /* Codes_SRS_CONSTBUFFER_ARRAY_01_026: [ If constbuffer_array_handle is NULL, constbuffer_array_get_const_buffer_handle_array shall fail and return NULL. ]*/
+    #####:  517:    if (constbuffer_array_handle == NULL)
+        -:  518:    {
+    #####:  519:        LogError("CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p", constbuffer_array_handle);
+    #####:  520:        result = NULL;
+        -:  521:    }
+        -:  522:    else
+        -:  523:    {
+        -:  524:        /* Codes_SRS_CONSTBUFFER_ARRAY_01_027: [ Otherwise constbuffer_array_get_const_buffer_handle_array shall return the array of const buffer handles backing the const buffer array. ]*/
+    #####:  525:        result = constbuffer_array_handle->buffers;
+        -:  526:    }
+        -:  527:
+    #####:  528:    return result;
+        -:  529:}
+        -:  530:
+        -:  531:
+    #####:  532:IMPLEMENT_MOCKABLE_FUNCTION(, bool, CONSTBUFFER_ARRAY_HANDLE_contain_same, CONSTBUFFER_ARRAY_HANDLE, left, CONSTBUFFER_ARRAY_HANDLE, right)
+        -:  533:{
+        -:  534:    bool result;
+    #####:  535:    if (left == NULL)
+        -:  536:    {
+    #####:  537:        if (right == NULL)
+        -:  538:        {
+        -:  539:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_050: [ If left is NULL and right is NULL then CONSTBUFFER_ARRAY_HANDLE_contain_same shall return true. ]*/
+    #####:  540:            result = true;
+        -:  541:        }
+        -:  542:        else
+        -:  543:        {
+        -:  544:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_051: [ If left is NULL and right is not NULL then CONSTBUFFER_ARRAY_HANDLE_contain_same shall return false. ]*/
+    #####:  545:            result = false;
+        -:  546:        }
+        -:  547:    }
+        -:  548:    else
+        -:  549:    {
+    #####:  550:        if (right == NULL)
+        -:  551:        {
+        -:  552:            /*Codes_SRS_CONSTBUFFER_ARRAY_02_052: [ If left is not NULL and right is NULL then CONSTBUFFER_ARRAY_HANDLE_contain_same shall return false. ]*/
+    #####:  553:            result = false;
+        -:  554:        }
+        -:  555:        else
+        -:  556:        {
+    #####:  557:            if (left->nBuffers != right->nBuffers)
+        -:  558:            {
+        -:  559:                /*Codes_SRS_CONSTBUFFER_ARRAY_02_053: [ If the number of CONSTBUFFER_HANDLEs in left is different then the number of CONSTBUFFER_HANDLEs in right then CONSTBUFFER_ARRAY_HANDLE_contain_same shall return false. ]*/
+    #####:  560:                result = false;
+        -:  561:            }
+        -:  562:            else
+        -:  563:            {
+        -:  564:                uint32_t i;
+    #####:  565:                for (i = 0; i < left->nBuffers; i++)
+        -:  566:                {
+        -:  567:                    /*Codes_SRS_CONSTBUFFER_ARRAY_02_054: [ If left and right CONSTBUFFER_HANDLEs at same index are different (as indicated by CONSTBUFFER_HANDLE_contain_same call) then CONSTBUFFER_ARRAY_HANDLE_contain_same shall return false. ]*/
+    #####:  568:                    if (!CONSTBUFFER_HANDLE_contain_same(left->buffers[i], right->buffers[i]))
+        -:  569:                    {
+    #####:  570:                        break;
+        -:  571:                    }
+        -:  572:                }
+        -:  573:
+    #####:  574:                if (i == left->nBuffers)
+        -:  575:                {
+        -:  576:                    /*Codes_SRS_CONSTBUFFER_ARRAY_02_055: [ CONSTBUFFER_ARRAY_HANDLE_contain_same shall return true. ]*/
+    #####:  577:                    result = true;
+        -:  578:                }
+        -:  579:                else
+        -:  580:                {
+        -:  581:                    /*Codes_SRS_CONSTBUFFER_ARRAY_02_054: [ If left and right CONSTBUFFER_HANDLEs at same index are different (as indicated by CONSTBUFFER_HANDLE_contain_same call) then CONSTBUFFER_ARRAY_HANDLE_contain_same shall return false. ]*/
+    #####:  582:                    result = false;
+        -:  583:                }
+        -:  584:            }
+        -:  585:        }
+        -:  586:    }
+    #####:  587:    return result;
+        -:  588:}

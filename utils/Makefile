@@ -12,4 +12,4 @@ prerequisites:
 	sudo ./setup.sh
 
 clean :
-	rm -rf coverage_files* diff_* cov_files_*
+	rm -rf coverage_files* cov_files_*

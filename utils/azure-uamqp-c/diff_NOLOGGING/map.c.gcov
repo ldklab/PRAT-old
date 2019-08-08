@@ -1,0 +1,116 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+115c115
+<         -:  106:        LogError("invalid arg to Map_Clone (NULL)");
+---
+>     #####:  106:        LogError("invalid arg to Map_Clone (NULL)");
+125c125
+<         -:  116:            LogError("unable to malloc");
+---
+>     #####:  116:            LogError("unable to malloc");
+143c143
+<         -:  134:                    LogError("unable to clone keys");
+---
+>     #####:  134:                    LogError("unable to clone keys");
+151c151
+<         -:  142:                    LogError("unable to clone values");
+---
+>     #####:  142:                    LogError("unable to clone values");
+176c176
+<         -:  167:        LogError("realloc error");
+---
+>     #####:  167:        LogError("realloc error");
+187c187
+<         -:  178:            LogError("realloc error");
+---
+>     #####:  178:            LogError("realloc error");
+198c198
+<         -:  189:                    LogError("CATASTROPHIC error, unable to undo through realloc to a smaller size");
+---
+>     #####:  189:                    LogError("CATASTROPHIC error, unable to undo through realloc to a smaller size");
+236c236
+<         -:  227:            LogError("CATASTROPHIC error, unable to undo through realloc to a smaller size");
+---
+>     #####:  227:            LogError("CATASTROPHIC error, unable to undo through realloc to a smaller size");
+246c246
+<         -:  237:            LogError("CATASTROPHIC error, unable to undo through realloc to a smaller size");
+---
+>     #####:  237:            LogError("CATASTROPHIC error, unable to undo through realloc to a smaller size");
+315c315
+<         -:  306:            LogError("unable to mallocAndStrcpy_s");
+---
+>     #####:  306:            LogError("unable to mallocAndStrcpy_s");
+324c324
+<         -:  315:                LogError("unable to mallocAndStrcpy_s");
+---
+>     #####:  315:                LogError("unable to mallocAndStrcpy_s");
+349c349
+<         -:  340:        LOG_MAP_ERROR;
+---
+>     #####:  340:        LOG_MAP_ERROR;
+373c373
+<         -:  364:                    LOG_MAP_ERROR;
+---
+>     #####:  364:                    LOG_MAP_ERROR;
+399c399
+<         -:  390:        LOG_MAP_ERROR;
+---
+>     #####:  390:        LOG_MAP_ERROR;
+419c419
+<         -:  410:                    LOG_MAP_ERROR;
+---
+>     #####:  410:                    LOG_MAP_ERROR;
+436c436
+<         -:  427:                    LOG_MAP_ERROR;
+---
+>     #####:  427:                    LOG_MAP_ERROR;
+462c462
+<         -:  453:        LOG_MAP_ERROR;
+---
+>     #####:  453:        LOG_MAP_ERROR;
+500c500
+<         -:  491:        LOG_MAP_ERROR;
+---
+>     #####:  491:        LOG_MAP_ERROR;
+524c524
+<         -:  515:        LOG_MAP_ERROR;
+---
+>     #####:  515:        LOG_MAP_ERROR;
+547c547
+<         -:  538:        LogError("invalid parameter to Map_GetValueFromKey");
+---
+>     #####:  538:        LogError("invalid parameter to Map_GetValueFromKey");
+580c580
+<         -:  571:        LOG_MAP_ERROR;
+---
+>     #####:  571:        LOG_MAP_ERROR;
+603c603
+<         -:  594:        LogError("invalid arg (NULL)");
+---
+>     #####:  594:        LogError("invalid arg (NULL)");
+611c611
+<         -:  602:            LogError("STRING_construct failed");
+---
+>     #####:  602:            LogError("STRING_construct failed");
+626c626
+<         -:  617:                    LogError("STRING_new_JSON failed");
+---
+>     #####:  617:                    LogError("STRING_new_JSON failed");
+636c636
+<         -:  627:                        LogError("STRING_new_JSON failed");
+---
+>     #####:  627:                        LogError("STRING_new_JSON failed");
+650c650
+<         -:  641:                            LogError("failed to build the JSON");
+---
+>     #####:  641:                            LogError("failed to build the JSON");
+667c667
+<         -:  658:                LogError("error happened during JSON string builder");
+---
+>     #####:  658:                LogError("error happened during JSON string builder");
+673c673
+<         -:  664:                    LogError("failed to build the JSON");
+---
+>     #####:  664:                    LogError("failed to build the JSON");

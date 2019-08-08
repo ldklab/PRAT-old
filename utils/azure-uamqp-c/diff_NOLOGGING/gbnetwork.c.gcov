@@ -1,0 +1,52 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+77c77
+<         -:   75:        LogError("gbnetwork is not initialized.");
+---
+>     #####:   75:        LogError("gbnetwork is not initialized.");
+81c81
+<         -:   79:        LogError("Failed to get the Lock.");
+---
+>     #####:   79:        LogError("Failed to get the Lock.");
+105c105
+<         -:  103:        LogError("Failed to get the Lock.");
+---
+>     #####:  103:        LogError("Failed to get the Lock.");
+136c136
+<         -:  134:        LogError("Failed to get the Lock.");
+---
+>     #####:  134:        LogError("Failed to get the Lock.");
+156c156
+<         -:  154:        LogError("gbnetwork is not initialized.");
+---
+>     #####:  154:        LogError("gbnetwork is not initialized.");
+161c161
+<         -:  159:        LogError("Failed to get the Lock.");
+---
+>     #####:  159:        LogError("Failed to get the Lock.");
+178c178
+<         -:  176:        LogError("gbnetwork is not initialized.");
+---
+>     #####:  176:        LogError("gbnetwork is not initialized.");
+183c183
+<         -:  181:        LogError("Failed to get the Lock.");
+---
+>     #####:  181:        LogError("Failed to get the Lock.");
+200c200
+<         -:  198:        LogError("gbnetwork is not initialized.");
+---
+>     #####:  198:        LogError("gbnetwork is not initialized.");
+205c205
+<         -:  203:        LogError("Failed to get the Lock.");
+---
+>     #####:  203:        LogError("Failed to get the Lock.");
+222c222
+<         -:  220:        LogError("gbnetwork is not initialized.");
+---
+>     #####:  220:        LogError("gbnetwork is not initialized.");
+227c227
+<         -:  225:        LogError("Failed to get the Lock.");
+---
+>     #####:  225:        LogError("Failed to get the Lock.");

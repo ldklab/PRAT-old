@@ -1,0 +1,54 @@
+2c2
+<         -:    0:Programs:80
+---
+>         -:    0:Programs:55
+22c22
+<        39:   20:        result = 'A' + (char)val;
+---
+>        35:   20:        result = 'A' + (char)val;
+24c24
+<        44:   22:    else if (val < 52)
+---
+>        48:   22:    else if (val < 52)
+26c26
+<        26:   24:        result = 'a' + ((char)val - 26);
+---
+>        34:   24:        result = 'a' + ((char)val - 26);
+28c28
+<        18:   26:    else if (val < 62)
+---
+>        14:   26:    else if (val < 62)
+30c30
+<        14:   28:        result = '0' + ((char)val - 52);
+---
+>        11:   28:        result = '0' + ((char)val - 52);
+32c32
+<         4:   30:    else if (val == 62)
+---
+>         3:   30:    else if (val == 62)
+34c34
+<         3:   32:        result = '+';
+---
+>         2:   32:        result = '+';
+188c188
+<         2:  186:BUFFER_HANDLE Azure_Base64_Decode(const char* source)
+---
+>         1:  186:BUFFER_HANDLE Azure_Base64_Decode(const char* source)
+192c192
+<         2:  190:    if (source == NULL)
+---
+>         1:  190:    if (source == NULL)
+199c199
+<         2:  197:        if ((strlen(source) % 4) != 0)
+---
+>         1:  197:        if ((strlen(source) % 4) != 0)
+202,203c202,203
+<         1:  200:            LogError("Invalid length Base64 string!");
+<         1:  201:            result = NULL;
+---
+>     #####:  200:            LogError("Invalid length Base64 string!");
+>     #####:  201:            result = NULL;
+233c233
+<         2:  231:    return result;
+---
+>         1:  231:    return result;

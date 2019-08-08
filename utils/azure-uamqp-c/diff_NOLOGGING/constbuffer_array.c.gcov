@@ -1,0 +1,96 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+50c50
+<         -:   38:        LogError("Invalid arguments: const CONSTBUFFER_HANDLE* buffers=%p, uint32_t buffer_count=%" PRIu32,
+---
+>     #####:   38:        LogError("Invalid arguments: const CONSTBUFFER_HANDLE* buffers=%p, uint32_t buffer_count=%" PRIu32,
+60c60
+<         -:   48:            LogError("failure in allocating const buffer array");
+---
+>     #####:   48:            LogError("failure in allocating const buffer array");
+97c97
+<         -:   85:        LogError("failure allocating const buffer array");
+---
+>     #####:   85:        LogError("failure allocating const buffer array");
+117c117
+<         -:  105:        LogError("Invalid arguments: CONSTBUFFER_HANDLE* buffers=%p, uint32_t buffer_count=%" PRIu32,
+---
+>     #####:  105:        LogError("Invalid arguments: CONSTBUFFER_HANDLE* buffers=%p, uint32_t buffer_count=%" PRIu32,
+127c127
+<         -:  115:            LogError("failure allocating const buffer array");
+---
+>     #####:  115:            LogError("failure allocating const buffer array");
+150c150
+<         -:  138:        LogError("invalid arguments: const CONSTBUFFER_ARRAY_HANDLE* buffer_arrays=%p, uint32_t buffer_array_count=%" PRIu32, buffer_arrays, buffer_array_count);
+---
+>     #####:  138:        LogError("invalid arguments: const CONSTBUFFER_ARRAY_HANDLE* buffer_arrays=%p, uint32_t buffer_array_count=%" PRIu32, buffer_arrays, buffer_array_count);
+161c161
+<         -:  149:                LogError("constbuffer_array_create_empty failed");
+---
+>     #####:  149:                LogError("constbuffer_array_create_empty failed");
+177c177
+<         -:  165:                    LogError("Invalid arguments: NULL buffer array %" PRIu32, i);
+---
+>     #####:  165:                    LogError("Invalid arguments: NULL buffer array %" PRIu32, i);
+186c186
+<         -:  174:                        LogError("Array size overflow while checking index %" PRIu32, i);
+---
+>     #####:  174:                        LogError("Array size overflow while checking index %" PRIu32, i);
+203c203
+<         -:  191:                    LogError("failure in malloc");
+---
+>     #####:  191:                    LogError("failure in malloc");
+246c246
+<         -:  234:        LogError("invalid arguments CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, CONSTBUFFER_HANDLE constbuffer_handle=%p", constbuffer_array_handle, constbuffer_handle);
+---
+>     #####:  234:        LogError("invalid arguments CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, CONSTBUFFER_HANDLE constbuffer_handle=%p", constbuffer_array_handle, constbuffer_handle);
+255c255
+<         -:  243:            LogError("failure in malloc");
+---
+>     #####:  243:            LogError("failure in malloc");
+296c296
+<         -:  284:        LogError("invalid arguments CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, CONSTBUFFER_HANDLE* constbuffer_handle=%p", constbuffer_array_handle, constbuffer_handle);
+---
+>     #####:  284:        LogError("invalid arguments CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, CONSTBUFFER_HANDLE* constbuffer_handle=%p", constbuffer_array_handle, constbuffer_handle);
+305c305
+<         -:  293:            LogError("cannot remove from that which does not have");
+---
+>     #####:  293:            LogError("cannot remove from that which does not have");
+314c314
+<         -:  302:                LogError("failure in malloc");
+---
+>     #####:  302:                LogError("failure in malloc");
+358c358
+<         -:  346:        LogError("Invalid arguments: CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t* buffer_count=%p",
+---
+>     #####:  346:        LogError("Invalid arguments: CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t* buffer_count=%p",
+384c384
+<         -:  372:        LogError("Invalid arguments: CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t buffer_index=%" PRIu32,
+---
+>     #####:  372:        LogError("Invalid arguments: CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t buffer_index=%" PRIu32,
+413c413
+<         -:  401:        LogError("Invalid arguments: CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t buffer_index=%" PRIu32,
+---
+>     #####:  401:        LogError("Invalid arguments: CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t buffer_index=%" PRIu32,
+431c431
+<         -:  419:        LogError("invalid argument CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p", constbuffer_array_handle);
+---
+>     #####:  419:        LogError("invalid argument CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p", constbuffer_array_handle);
+445c445
+<         -:  433:        LogError("invalid argument CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p", constbuffer_array_handle);
+---
+>     #####:  433:        LogError("invalid argument CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p", constbuffer_array_handle);
+481c481
+<         -:  469:        LogError("CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t* all_buffers_size=%p",
+---
+>     #####:  469:        LogError("CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p, uint32_t* all_buffers_size=%p",
+510c510
+<         -:  498:            LogError("Overflow in computing all buffers size");
+---
+>     #####:  498:            LogError("Overflow in computing all buffers size");
+531c531
+<         -:  519:        LogError("CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p", constbuffer_array_handle);
+---
+>     #####:  519:        LogError("CONSTBUFFER_ARRAY_HANDLE constbuffer_array_handle=%p", constbuffer_array_handle);

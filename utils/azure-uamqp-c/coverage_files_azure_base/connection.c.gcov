@@ -1,0 +1,2175 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/src/connection.c
+        -:    0:Programs:101
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include <string.h>
+        -:    6:
+        -:    7:#include "azure_macro_utils/macro_utils.h"
+        -:    8:#include "azure_c_shared_utility/gballoc.h"
+        -:    9:#include "azure_c_shared_utility/xio.h"
+        -:   10:#include "azure_c_shared_utility/xlogging.h"
+        -:   11:#include "azure_c_shared_utility/tickcounter.h"
+        -:   12:
+        -:   13:#include "azure_uamqp_c/connection.h"
+        -:   14:#include "azure_uamqp_c/frame_codec.h"
+        -:   15:#include "azure_uamqp_c/amqpvalue.h"
+        -:   16:#include "azure_uamqp_c/amqp_frame_codec.h"
+        -:   17:#include "azure_uamqp_c/amqp_definitions.h"
+        -:   18:#include "azure_uamqp_c/amqpvalue_to_string.h"
+        -:   19:
+        -:   20:/* Requirements satisfied by the virtue of implementing the ISO:*/
+        -:   21:/* Codes_S_R_S_CONNECTION_01_088: [Any data appearing beyond the protocol header MUST match the version indicated by the protocol header.] */
+        -:   22:/* Codes_S_R_S_CONNECTION_01_015: [Implementations SHOULD NOT expect to be able to reuse open TCP sockets after close performatives have been exchanged.] */
+        -:   23:
+        -:   24:/* Codes_S_R_S_CONNECTION_01_087: [The protocol header consists of the upper case ASCII letters "AMQP" followed by a protocol id of zero, followed by three unsigned bytes representing the major, minor, and revision of the protocol version (currently 1 (MAJOR), 0 (MINOR), 0 (REVISION)). In total this is an 8-octet sequence] */
+        -:   25:static const unsigned char amqp_header[] = { 'A', 'M', 'Q', 'P', 0, 1, 0, 0 };
+        -:   26:
+        -:   27:typedef enum RECEIVE_FRAME_STATE_TAG
+        -:   28:{
+        -:   29:    RECEIVE_FRAME_STATE_FRAME_SIZE,
+        -:   30:    RECEIVE_FRAME_STATE_FRAME_DATA
+        -:   31:} RECEIVE_FRAME_STATE;
+        -:   32:
+        -:   33:typedef struct ON_CONNECTION_CLOSED_EVENT_SUBSCRIPTION_TAG
+        -:   34:{
+        -:   35:    ON_CONNECTION_CLOSE_RECEIVED on_connection_close_received;
+        -:   36:    void* context;
+        -:   37:} ON_CONNECTION_CLOSED_EVENT_SUBSCRIPTION;
+        -:   38:
+        -:   39:typedef struct ENDPOINT_INSTANCE_TAG
+        -:   40:{
+        -:   41:    uint16_t incoming_channel;
+        -:   42:    uint16_t outgoing_channel;
+        -:   43:    ON_ENDPOINT_FRAME_RECEIVED on_endpoint_frame_received;
+        -:   44:    ON_CONNECTION_STATE_CHANGED on_connection_state_changed;
+        -:   45:    void* callback_context;
+        -:   46:    CONNECTION_HANDLE connection;
+        -:   47:} ENDPOINT_INSTANCE;
+        -:   48:
+        -:   49:typedef struct CONNECTION_INSTANCE_TAG
+        -:   50:{
+        -:   51:    XIO_HANDLE io;
+        -:   52:    size_t header_bytes_received;
+        -:   53:    CONNECTION_STATE connection_state;
+        -:   54:    FRAME_CODEC_HANDLE frame_codec;
+        -:   55:    AMQP_FRAME_CODEC_HANDLE amqp_frame_codec;
+        -:   56:    ENDPOINT_INSTANCE** endpoints;
+        -:   57:    uint32_t endpoint_count;
+        -:   58:    char* host_name;
+        -:   59:    char* container_id;
+        -:   60:    TICK_COUNTER_HANDLE tick_counter;
+        -:   61:    uint32_t remote_max_frame_size;
+        -:   62:
+        -:   63:    ON_SEND_COMPLETE on_send_complete;
+        -:   64:    void* on_send_complete_callback_context;
+        -:   65:
+        -:   66:    ON_NEW_ENDPOINT on_new_endpoint;
+        -:   67:    void* on_new_endpoint_callback_context;
+        -:   68:
+        -:   69:    ON_CONNECTION_STATE_CHANGED on_connection_state_changed;
+        -:   70:    void* on_connection_state_changed_callback_context;
+        -:   71:    ON_IO_ERROR on_io_error;
+        -:   72:    void* on_io_error_callback_context;
+        -:   73:
+        -:   74:    ON_CONNECTION_CLOSED_EVENT_SUBSCRIPTION on_connection_close_received_event_subscription;
+        -:   75:
+        -:   76:    /* options */
+        -:   77:    uint32_t max_frame_size;
+        -:   78:    uint16_t channel_max;
+        -:   79:    milliseconds idle_timeout;
+        -:   80:    milliseconds remote_idle_timeout;
+        -:   81:    milliseconds remote_idle_timeout_send_frame_millisecond;
+        -:   82:    double idle_timeout_empty_frame_send_ratio;
+        -:   83:    tickcounter_ms_t last_frame_received_time;
+        -:   84:    tickcounter_ms_t last_frame_sent_time;
+        -:   85:    fields properties;
+        -:   86:
+        -:   87:    unsigned int is_underlying_io_open : 1;
+        -:   88:    unsigned int idle_timeout_specified : 1;
+        -:   89:    unsigned int is_remote_frame_received : 1;
+        -:   90:    unsigned int is_trace_on : 1;
+        -:   91:} CONNECTION_INSTANCE;
+        -:   92:
+        -:   93:/* Codes_S_R_S_CONNECTION_01_258: [on_connection_state_changed shall be invoked whenever the connection state changes.]*/
+       18:   94:static void connection_set_state(CONNECTION_HANDLE connection, CONNECTION_STATE connection_state)
+        -:   95:{
+        -:   96:    uint64_t i;
+        -:   97:
+       18:   98:    CONNECTION_STATE previous_state = connection->connection_state;
+       18:   99:    connection->connection_state = connection_state;
+        -:  100:
+        -:  101:    /* Codes_S_R_S_CONNECTION_22_001: [If a connection state changed occurs and a callback is registered the callback shall be called.] */
+       18:  102:    if (connection->on_connection_state_changed)
+        -:  103:    {
+    #####:  104:        connection->on_connection_state_changed(connection->on_connection_state_changed_callback_context, connection_state, previous_state);
+        -:  105:    }
+        -:  106:
+        -:  107:    /* Codes_S_R_S_CONNECTION_01_260: [Each endpoint's on_connection_state_changed shall be called.] */
+       30:  108:    for (i = 0; i < connection->endpoint_count; i++)
+        -:  109:    {
+        -:  110:        /* Codes_S_R_S_CONNECTION_01_259: [The callback_context passed in connection_create_endpoint.] */
+       12:  111:        if (connection->endpoints[i]->on_connection_state_changed != NULL)
+        -:  112:        {
+       12:  113:            connection->endpoints[i]->on_connection_state_changed(connection->endpoints[i]->callback_context, connection_state, previous_state);
+        -:  114:        }
+        -:  115:    }
+       18:  116:}
+        -:  117:
+        -:  118:// This callback usage needs to be either verified and commented or integrated into
+        -:  119:// the state machine.
+    #####:  120:static void unchecked_on_send_complete(void* context, IO_SEND_RESULT send_result)
+        -:  121:{
+        -:  122:    (void)context;
+        -:  123:    (void)send_result;
+    #####:  124:}
+        -:  125:
+    #####:  126:static int send_header(CONNECTION_HANDLE connection)
+        -:  127:{
+        -:  128:    int result;
+        -:  129:
+        -:  130:    /* Codes_S_R_S_CONNECTION_01_093: [_ When the client opens a new socket connection to a server, it MUST send a protocol header with the client's preferred protocol version.] */
+        -:  131:    /* Codes_S_R_S_CONNECTION_01_104: [Sending the protocol header shall be done by using xio_send.] */
+    #####:  132:    if (xio_send(connection->io, amqp_header, sizeof(amqp_header), unchecked_on_send_complete, NULL) != 0)
+        -:  133:    {
+        -:  134:        /* Codes_S_R_S_CONNECTION_01_106: [When sending the protocol header fails, the connection shall be immediately closed.] */
+    #####:  135:        if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  136:        {
+    #####:  137:            LogError("xio_close failed");
+        -:  138:        }
+        -:  139:
+        -:  140:        /* Codes_S_R_S_CONNECTION_01_057: [END In this state it is illegal for either endpoint to write anything more onto the connection. The connection can be safely closed and discarded.] */
+    #####:  141:        connection_set_state(connection, CONNECTION_STATE_END);
+        -:  142:
+        -:  143:        /* Codes_S_R_S_CONNECTION_01_105: [When xio_send fails, connection_dowork shall return a non-zero value.] */
+    #####:  144:        result = MU_FAILURE;
+        -:  145:    }
+        -:  146:    else
+        -:  147:    {
+    #####:  148:        if (connection->is_trace_on == 1)
+        -:  149:        {
+    #####:  150:            LOG(AZ_LOG_TRACE, LOG_LINE, "-> Header (AMQP 0.1.0.0)");
+        -:  151:        }
+        -:  152:
+        -:  153:        /* Codes_S_R_S_CONNECTION_01_041: [HDR SENT In this state the connection header has been sent to the peer but no connection header has been received.] */
+    #####:  154:        connection_set_state(connection, CONNECTION_STATE_HDR_SENT);
+    #####:  155:        result = 0;
+        -:  156:    }
+        -:  157:
+    #####:  158:    return result;
+        -:  159:}
+        -:  160:
+        -:  161:#ifndef NO_LOGGING
+    #####:  162:static const char* get_frame_type_as_string(AMQP_VALUE descriptor)
+        -:  163:{
+        -:  164:    const char* result;
+        -:  165:
+    #####:  166:    if (is_open_type_by_descriptor(descriptor))
+        -:  167:    {
+    #####:  168:        result = "[OPEN]";
+        -:  169:    }
+    #####:  170:    else if (is_begin_type_by_descriptor(descriptor))
+        -:  171:    {
+    #####:  172:        result = "[BEGIN]";
+        -:  173:    }
+    #####:  174:    else if (is_attach_type_by_descriptor(descriptor))
+        -:  175:    {
+    #####:  176:        result = "[ATTACH]";
+        -:  177:    }
+    #####:  178:    else if (is_flow_type_by_descriptor(descriptor))
+        -:  179:    {
+    #####:  180:        result = "[FLOW]";
+        -:  181:    }
+    #####:  182:    else if (is_disposition_type_by_descriptor(descriptor))
+        -:  183:    {
+    #####:  184:        result = "[DISPOSITION]";
+        -:  185:    }
+    #####:  186:    else if (is_transfer_type_by_descriptor(descriptor))
+        -:  187:    {
+    #####:  188:        result = "[TRANSFER]";
+        -:  189:    }
+    #####:  190:    else if (is_detach_type_by_descriptor(descriptor))
+        -:  191:    {
+    #####:  192:        result = "[DETACH]";
+        -:  193:    }
+    #####:  194:    else if (is_end_type_by_descriptor(descriptor))
+        -:  195:    {
+    #####:  196:        result = "[END]";
+        -:  197:    }
+    #####:  198:    else if (is_close_type_by_descriptor(descriptor))
+        -:  199:    {
+    #####:  200:        result = "[CLOSE]";
+        -:  201:    }
+        -:  202:    else
+        -:  203:    {
+    #####:  204:        result = "[Unknown]";
+        -:  205:    }
+        -:  206:
+    #####:  207:    return result;
+        -:  208:}
+        -:  209:#endif // NO_LOGGING
+        -:  210:
+    #####:  211:static void log_incoming_frame(AMQP_VALUE performative)
+        -:  212:{
+        -:  213:#ifdef NO_LOGGING
+        -:  214:    UNUSED(performative);
+        -:  215:#else
+    #####:  216:    AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+    #####:  217:    if (descriptor == NULL)
+        -:  218:    {
+    #####:  219:        LogError("Error getting performative descriptor");
+        -:  220:    }
+        -:  221:    else
+        -:  222:    {
+        -:  223:        char* performative_as_string;
+    #####:  224:        LOG(AZ_LOG_TRACE, 0, "<- ");
+    #####:  225:        LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+    #####:  226:        performative_as_string = NULL;
+    #####:  227:        LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+    #####:  228:        if (performative_as_string != NULL)
+        -:  229:        {
+    #####:  230:            free(performative_as_string);
+        -:  231:        }
+        -:  232:    }
+        -:  233:#endif
+    #####:  234:}
+        -:  235:
+    #####:  236:static void log_outgoing_frame(AMQP_VALUE performative)
+        -:  237:{
+        -:  238:#ifdef NO_LOGGING
+        -:  239:    UNUSED(performative);
+        -:  240:#else
+    #####:  241:    AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+    #####:  242:    if (descriptor == NULL)
+        -:  243:    {
+    #####:  244:        LogError("Error getting performative descriptor");
+        -:  245:    }
+        -:  246:    else
+        -:  247:    {
+        -:  248:        char* performative_as_string;
+    #####:  249:        LOG(AZ_LOG_TRACE, 0, "-> ");
+    #####:  250:        LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+    #####:  251:        performative_as_string = NULL;
+    #####:  252:        LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+    #####:  253:        if (performative_as_string != NULL)
+        -:  254:        {
+    #####:  255:            free(performative_as_string);
+        -:  256:        }
+        -:  257:    }
+        -:  258:#endif
+    #####:  259:}
+        -:  260:
+    #####:  261:static void on_bytes_encoded(void* context, const unsigned char* bytes, size_t length, bool encode_complete)
+        -:  262:{
+    #####:  263:    CONNECTION_HANDLE connection = (CONNECTION_HANDLE)context;
+    #####:  264:    if (xio_send(connection->io, bytes, length,
+    #####:  265:        (encode_complete && connection->on_send_complete != NULL) ? connection->on_send_complete : unchecked_on_send_complete,
+        -:  266:        connection->on_send_complete_callback_context) != 0)
+        -:  267:    {
+    #####:  268:        LogError("Cannot send encoded bytes");
+        -:  269:
+    #####:  270:        if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  271:        {
+    #####:  272:            LogError("xio_close failed");
+        -:  273:        }
+        -:  274:
+    #####:  275:        connection_set_state(connection, CONNECTION_STATE_END);
+        -:  276:    }
+    #####:  277:}
+        -:  278:
+    #####:  279:static int send_open_frame(CONNECTION_HANDLE connection)
+        -:  280:{
+        -:  281:    int result;
+        -:  282:
+        -:  283:    /* Codes_S_R_S_CONNECTION_01_151: [The connection max_frame_size setting shall be passed down to the frame_codec when the Open frame is sent.] */
+    #####:  284:    if (frame_codec_set_max_frame_size(connection->frame_codec, connection->max_frame_size) != 0)
+        -:  285:    {
+    #####:  286:        LogError("Cannot set max frame size");
+        -:  287:
+        -:  288:        /* Codes_S_R_S_CONNECTION_01_207: [If frame_codec_set_max_frame_size fails the connection shall be closed and the state set to END.] */
+    #####:  289:        if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  290:        {
+    #####:  291:            LogError("xio_close failed");
+        -:  292:        }
+        -:  293:
+    #####:  294:        connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  295:        result = MU_FAILURE;
+        -:  296:    }
+        -:  297:    else
+        -:  298:    {
+        -:  299:        /* Codes_S_R_S_CONNECTION_01_134: [The container id field shall be filled with the container id specified in connection_create.] */
+    #####:  300:        OPEN_HANDLE open_performative = open_create(connection->container_id);
+    #####:  301:        if (open_performative == NULL)
+        -:  302:        {
+    #####:  303:            LogError("Cannot create OPEN performative");
+        -:  304:
+        -:  305:            /* Codes_S_R_S_CONNECTION_01_208: [If the open frame cannot be constructed, the connection shall be closed and set to the END state.] */
+    #####:  306:            if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  307:            {
+    #####:  308:                LogError("xio_close failed");
+        -:  309:            }
+        -:  310:
+    #####:  311:            connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  312:            result = MU_FAILURE;
+        -:  313:        }
+        -:  314:        else
+        -:  315:        {
+        -:  316:            /* Codes_S_R_S_CONNECTION_01_137: [The max_frame_size connection setting shall be set in the open frame by using open_set_max_frame_size.] */
+    #####:  317:            if (open_set_max_frame_size(open_performative, connection->max_frame_size) != 0)
+        -:  318:            {
+    #####:  319:                LogError("Cannot set max frame size");
+        -:  320:
+        -:  321:                /* Codes_S_R_S_CONNECTION_01_208: [If the open frame cannot be constructed, the connection shall be closed and set to the END state.] */
+    #####:  322:                if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  323:                {
+    #####:  324:                    LogError("xio_close failed");
+        -:  325:                }
+        -:  326:
+    #####:  327:                connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  328:                result = MU_FAILURE;
+        -:  329:            }
+        -:  330:            /* Codes_S_R_S_CONNECTION_01_139: [The channel_max connection setting shall be set in the open frame by using open_set_channel_max.] */
+    #####:  331:            else if (open_set_channel_max(open_performative, connection->channel_max) != 0)
+        -:  332:            {
+    #####:  333:                LogError("Cannot set max channel");
+        -:  334:
+        -:  335:                /* Codes_S_R_S_CONNECTION_01_208: [If the open frame cannot be constructed, the connection shall be closed and set to the END state.] */
+    #####:  336:                if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  337:                {
+    #####:  338:                    LogError("xio_close failed");
+        -:  339:                }
+        -:  340:
+    #####:  341:                connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  342:                result = MU_FAILURE;
+        -:  343:            }
+        -:  344:            /* Codes_S_R_S_CONNECTION_01_142: [If no idle_timeout value has been specified, no value shall be stamped in the open frame (no call to open_set_idle_time_out shall be made).] */
+    #####:  345:            else if ((connection->idle_timeout_specified) &&
+        -:  346:                /* Codes_S_R_S_CONNECTION_01_141: [If idle_timeout has been specified by a call to connection_set_idle_timeout, then that value shall be stamped in the open frame.] */
+    #####:  347:                (open_set_idle_time_out(open_performative, connection->idle_timeout) != 0))
+        -:  348:            {
+        -:  349:                /* Codes_S_R_S_CONNECTION_01_208: [If the open frame cannot be constructed, the connection shall be closed and set to the END state.] */
+    #####:  350:                if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  351:                {
+    #####:  352:                    LogError("xio_close failed");
+        -:  353:                }
+        -:  354:
+    #####:  355:                connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  356:                result = MU_FAILURE;
+        -:  357:            }
+        -:  358:            /* Codes_S_R_S_CONNECTION_01_136: [If no hostname value has been specified, no value shall be stamped in the open frame (no call to open_set_hostname shall be made).] */
+    #####:  359:            else if ((connection->host_name != NULL) &&
+        -:  360:                /* Codes_S_R_S_CONNECTION_01_135: [If hostname has been specified by a call to connection_set_hostname, then that value shall be stamped in the open frame.] */
+    #####:  361:                (open_set_hostname(open_performative, connection->host_name) != 0))
+        -:  362:            {
+    #####:  363:                LogError("Cannot set hostname");
+        -:  364:
+        -:  365:                /* Codes_S_R_S_CONNECTION_01_208: [If the open frame cannot be constructed, the connection shall be closed and set to the END state.] */
+    #####:  366:                if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  367:                {
+    #####:  368:                    LogError("xio_close failed");
+        -:  369:                }
+        -:  370:
+    #####:  371:                connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  372:                result = MU_FAILURE;
+        -:  373:            }
+        -:  374:            /* Codes_S_R_S_CONNECTION_01_243: [If no properties value has been specified, no value shall be stamped in the open frame (no call to open_set_properties shall be made).] */
+    #####:  375:            else if ((connection->properties != NULL) &&
+        -:  376:                /* Codes_S_R_S_CONNECTION_01_244: [If properties has been specified by a call to connection_set_properties, then that value shall be stamped in the open frame.] */
+    #####:  377:                (open_set_properties(open_performative, connection->properties) != 0))
+        -:  378:            {
+    #####:  379:                LogError("Cannot set properties");
+        -:  380:
+        -:  381:                /* Codes_S_R_S_CONNECTION_01_208: [If the open frame cannot be constructed, the connection shall be closed and set to the END state.] */
+    #####:  382:                if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  383:                {
+    #####:  384:                    LogError("xio_close failed");
+        -:  385:                }
+        -:  386:
+    #####:  387:                connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  388:                result = MU_FAILURE;
+        -:  389:            }
+        -:  390:            else
+        -:  391:            {
+    #####:  392:                AMQP_VALUE open_performative_value = amqpvalue_create_open(open_performative);
+    #####:  393:                if (open_performative_value == NULL)
+        -:  394:                {
+    #####:  395:                    LogError("Cannot create OPEN AMQP value");
+        -:  396:
+        -:  397:                    /* Codes_S_R_S_CONNECTION_01_208: [If the open frame cannot be constructed, the connection shall be closed and set to the END state.] */
+    #####:  398:                    if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  399:                    {
+    #####:  400:                        LogError("xio_close failed");
+        -:  401:                    }
+        -:  402:
+    #####:  403:                    connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  404:                    result = MU_FAILURE;
+        -:  405:                }
+        -:  406:                else
+        -:  407:                {
+        -:  408:                    /* Codes_S_R_S_CONNECTION_01_002: [Each AMQP connection begins with an exchange of capabilities and limitations, including the maximum frame size.] */
+        -:  409:                    /* Codes_S_R_S_CONNECTION_01_004: [After establishing or accepting a TCP connection and sending the protocol header, each peer MUST send an open frame before sending any other frames.] */
+        -:  410:                    /* Codes_S_R_S_CONNECTION_01_005: [The open frame describes the capabilities and limits of that peer.] */
+        -:  411:                    /* Codes_S_R_S_CONNECTION_01_205: [Sending the AMQP OPEN frame shall be done by calling amqp_frame_codec_begin_encode_frame with channel number 0, the actual performative payload and 0 as payload_size.] */
+        -:  412:                    /* Codes_S_R_S_CONNECTION_01_006: [The open frame can only be sent on channel 0.] */
+    #####:  413:                    connection->on_send_complete = NULL;
+    #####:  414:                    connection->on_send_complete_callback_context = NULL;
+    #####:  415:                    if (amqp_frame_codec_encode_frame(connection->amqp_frame_codec, 0, open_performative_value, NULL, 0, on_bytes_encoded, connection) != 0)
+        -:  416:                    {
+    #####:  417:                        LogError("amqp_frame_codec_encode_frame failed");
+        -:  418:
+        -:  419:                        /* Codes_S_R_S_CONNECTION_01_206: [If sending the frame fails, the connection shall be closed and state set to END.] */
+    #####:  420:                        if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  421:                        {
+    #####:  422:                            LogError("xio_close failed");
+        -:  423:                        }
+        -:  424:
+    #####:  425:                        connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  426:                        result = MU_FAILURE;
+        -:  427:                    }
+        -:  428:                    else
+        -:  429:                    {
+    #####:  430:                        if (connection->is_trace_on == 1)
+        -:  431:                        {
+    #####:  432:                            log_outgoing_frame(open_performative_value);
+        -:  433:                        }
+        -:  434:
+        -:  435:                        /* Codes_S_R_S_CONNECTION_01_046: [OPEN SENT In this state the connection headers have been exchanged. An open frame has been sent to the peer but no open frame has yet been received.] */
+    #####:  436:                        connection_set_state(connection, CONNECTION_STATE_OPEN_SENT);
+    #####:  437:                        result = 0;
+        -:  438:                    }
+        -:  439:
+    #####:  440:                    amqpvalue_destroy(open_performative_value);
+        -:  441:                }
+        -:  442:            }
+        -:  443:
+    #####:  444:            open_destroy(open_performative);
+        -:  445:        }
+        -:  446:    }
+        -:  447:
+    #####:  448:    return result;
+        -:  449:}
+        -:  450:
+    #####:  451:static int send_close_frame(CONNECTION_HANDLE connection, ERROR_HANDLE error_handle)
+        -:  452:{
+        -:  453:    int result;
+        -:  454:    CLOSE_HANDLE close_performative;
+        -:  455:
+        -:  456:    /* Codes_S_R_S_CONNECTION_01_217: [The CLOSE frame shall be constructed by using close_create.] */
+    #####:  457:    close_performative = close_create();
+    #####:  458:    if (close_performative == NULL)
+        -:  459:    {
+    #####:  460:        LogError("Cannot create close performative");
+    #####:  461:        result = MU_FAILURE;
+        -:  462:    }
+        -:  463:    else
+        -:  464:    {
+    #####:  465:        if ((error_handle != NULL) &&
+        -:  466:            /* Codes_S_R_S_CONNECTION_01_238: [If set, this field indicates that the connection is being closed due to an error condition.] */
+    #####:  467:            (close_set_error(close_performative, error_handle) != 0))
+        -:  468:        {
+    #####:  469:            LogError("Cannot set error on CLOSE");
+    #####:  470:            result = MU_FAILURE;
+        -:  471:        }
+        -:  472:        else
+        -:  473:        {
+    #####:  474:            AMQP_VALUE close_performative_value = amqpvalue_create_close(close_performative);
+    #####:  475:            if (close_performative_value == NULL)
+        -:  476:            {
+    #####:  477:                LogError("Cannot create AMQP CLOSE performative value");
+    #####:  478:                result = MU_FAILURE;
+        -:  479:            }
+        -:  480:            else
+        -:  481:            {
+        -:  482:                /* Codes_S_R_S_CONNECTION_01_215: [Sending the AMQP CLOSE frame shall be done by calling amqp_frame_codec_begin_encode_frame with channel number 0, the actual performative payload and 0 as payload_size.] */
+        -:  483:                /* Codes_S_R_S_CONNECTION_01_013: [However, implementations SHOULD send it on channel 0] */
+    #####:  484:                connection->on_send_complete = NULL;
+    #####:  485:                connection->on_send_complete_callback_context = NULL;
+    #####:  486:                if (amqp_frame_codec_encode_frame(connection->amqp_frame_codec, 0, close_performative_value, NULL, 0, on_bytes_encoded, connection) != 0)
+        -:  487:                {
+    #####:  488:                    LogError("amqp_frame_codec_encode_frame failed");
+    #####:  489:                    result = MU_FAILURE;
+        -:  490:                }
+        -:  491:                else
+        -:  492:                {
+    #####:  493:                    if (connection->is_trace_on == 1)
+        -:  494:                    {
+    #####:  495:                        log_outgoing_frame(close_performative_value);
+        -:  496:                    }
+        -:  497:
+    #####:  498:                    result = 0;
+        -:  499:                }
+        -:  500:
+    #####:  501:                amqpvalue_destroy(close_performative_value);
+        -:  502:            }
+        -:  503:        }
+        -:  504:
+    #####:  505:        close_destroy(close_performative);
+        -:  506:    }
+        -:  507:
+    #####:  508:    return result;
+        -:  509:}
+        -:  510:
+    #####:  511:static void close_connection_with_error(CONNECTION_HANDLE connection, const char* condition_value, const char* description, AMQP_VALUE info)
+        -:  512:{
+    #####:  513:    ERROR_HANDLE error_handle = error_create(condition_value);
+        -:  514:
+    #####:  515:    if (error_handle == NULL)
+        -:  516:    {
+        -:  517:        /* Codes_S_R_S_CONNECTION_01_214: [If the close frame cannot be constructed or sent, the connection shall be closed and set to the END state.] */
+    #####:  518:        if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  519:        {
+    #####:  520:            LogError("xio_close failed");
+        -:  521:        }
+        -:  522:
+    #####:  523:        connection_set_state(connection, CONNECTION_STATE_END);
+        -:  524:    }
+        -:  525:    else
+        -:  526:    {
+        -:  527:        /* Codes_S_R_S_CONNECTION_01_219: [The error description shall be set to an implementation defined string.] */
+    #####:  528:        if (error_set_description(error_handle, description) != 0)
+        -:  529:        {
+    #####:  530:            LogError("Cannot set error description on CLOSE frame");
+        -:  531:
+        -:  532:            /* Codes_S_R_S_CONNECTION_01_214: [If the close frame cannot be constructed or sent, the connection shall be closed and set to the END state.] */
+    #####:  533:            if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  534:            {
+    #####:  535:                LogError("xio_close failed");
+        -:  536:            }
+        -:  537:
+    #####:  538:            connection_set_state(connection, CONNECTION_STATE_END);
+        -:  539:        }
+    #####:  540:        else if ((info != NULL) &&
+    #####:  541:            (error_set_info(error_handle, info) != 0))
+        -:  542:        {
+    #####:  543:            LogError("Cannot set error info on CLOSE frame");
+        -:  544:
+        -:  545:            /* Codes_S_R_S_CONNECTION_01_214: [If the close frame cannot be constructed or sent, the connection shall be closed and set to the END state.] */
+    #####:  546:            if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  547:            {
+    #####:  548:                LogError("xio_close failed");
+        -:  549:            }
+        -:  550:
+    #####:  551:            connection_set_state(connection, CONNECTION_STATE_END);
+        -:  552:        }
+    #####:  553:        else if (send_close_frame(connection, error_handle) != 0)
+        -:  554:        {
+    #####:  555:            LogError("Cannot send CLOSE frame");
+        -:  556:
+        -:  557:            /* Codes_S_R_S_CONNECTION_01_214: [If the close frame cannot be constructed or sent, the connection shall be closed and set to the END state.] */
+    #####:  558:            if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  559:            {
+    #####:  560:                LogError("xio_close failed");
+        -:  561:            }
+        -:  562:
+    #####:  563:            connection_set_state(connection, CONNECTION_STATE_END);
+        -:  564:        }
+        -:  565:        else
+        -:  566:        {
+        -:  567:            /* Codes_S_R_S_CONNECTION_01_213: [When passing the bytes to frame_codec fails, a CLOSE frame shall be sent and the state shall be set to DISCARDING.] */
+        -:  568:            /* Codes_S_R_S_CONNECTION_01_055: [DISCARDING The DISCARDING state is a variant of the CLOSE SENT state where the close is triggered by an error.] */
+        -:  569:            /* Codes_S_R_S_CONNECTION_01_010: [After writing this frame the peer SHOULD continue to read from the connection until it receives the partner's close frame ] */
+    #####:  570:            connection_set_state(connection, CONNECTION_STATE_DISCARDING);
+        -:  571:        }
+        -:  572:
+    #####:  573:        error_destroy(error_handle);
+        -:  574:    }
+    #####:  575:}
+        -:  576:
+    #####:  577:static ENDPOINT_INSTANCE* find_session_endpoint_by_outgoing_channel(CONNECTION_HANDLE connection, uint16_t outgoing_channel)
+        -:  578:{
+        -:  579:    uint32_t i;
+        -:  580:    ENDPOINT_INSTANCE* result;
+        -:  581:
+    #####:  582:    for (i = 0; i < connection->endpoint_count; i++)
+        -:  583:    {
+    #####:  584:        if (connection->endpoints[i]->outgoing_channel == outgoing_channel)
+        -:  585:        {
+    #####:  586:            break;
+        -:  587:        }
+        -:  588:    }
+        -:  589:
+    #####:  590:    if (i == connection->endpoint_count)
+        -:  591:    {
+    #####:  592:        LogError("Cannot find session endpoint for channel %u", (unsigned int)outgoing_channel);
+    #####:  593:        result = NULL;
+        -:  594:    }
+        -:  595:    else
+        -:  596:    {
+    #####:  597:        result = connection->endpoints[i];
+        -:  598:    }
+        -:  599:
+    #####:  600:    return result;
+        -:  601:}
+        -:  602:
+    #####:  603:static ENDPOINT_INSTANCE* find_session_endpoint_by_incoming_channel(CONNECTION_HANDLE connection, uint16_t incoming_channel)
+        -:  604:{
+        -:  605:    uint32_t i;
+        -:  606:    ENDPOINT_INSTANCE* result;
+        -:  607:
+    #####:  608:    for (i = 0; i < connection->endpoint_count; i++)
+        -:  609:    {
+    #####:  610:        if (connection->endpoints[i]->incoming_channel == incoming_channel)
+        -:  611:        {
+    #####:  612:            break;
+        -:  613:        }
+        -:  614:    }
+        -:  615:
+    #####:  616:    if (i == connection->endpoint_count)
+        -:  617:    {
+    #####:  618:        LogError("Cannot find session endpoint for channel %u", (unsigned int)incoming_channel);
+    #####:  619:        result = NULL;
+        -:  620:    }
+        -:  621:    else
+        -:  622:    {
+    #####:  623:        result = connection->endpoints[i];
+        -:  624:    }
+        -:  625:
+    #####:  626:    return result;
+        -:  627:}
+        -:  628:
+    #####:  629:static int connection_byte_received(CONNECTION_HANDLE connection, unsigned char b)
+        -:  630:{
+        -:  631:    int result;
+        -:  632:
+    #####:  633:    switch (connection->connection_state)
+        -:  634:    {
+    #####:  635:    default:
+    #####:  636:        LogError("Unknown connection state: %d", (int)connection->connection_state);
+    #####:  637:        result = MU_FAILURE;
+    #####:  638:        break;
+        -:  639:
+        -:  640:    /* Codes_S_R_S_CONNECTION_01_039: [START In this state a connection exists, but nothing has been sent or received. This is the state an implementation would be in immediately after performing a socket connect or socket accept.] */
+    #####:  641:    case CONNECTION_STATE_START:
+        -:  642:
+        -:  643:    /* Codes_S_R_S_CONNECTION_01_041: [HDR SENT In this state the connection header has been sent to the peer but no connection header has been received.] */
+        -:  644:    case CONNECTION_STATE_HDR_SENT:
+    #####:  645:        if (b != amqp_header[connection->header_bytes_received])
+        -:  646:        {
+        -:  647:            /* Codes_S_R_S_CONNECTION_01_089: [If the incoming and outgoing protocol headers do not match, both peers MUST close their outgoing stream] */
+    #####:  648:            if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  649:            {
+    #####:  650:                LogError("xio_close failed");
+        -:  651:            }
+        -:  652:
+    #####:  653:            connection_set_state(connection, CONNECTION_STATE_END);
+    #####:  654:            result = MU_FAILURE;
+        -:  655:        }
+        -:  656:        else
+        -:  657:        {
+    #####:  658:            connection->header_bytes_received++;
+    #####:  659:            if (connection->header_bytes_received == sizeof(amqp_header))
+        -:  660:            {
+    #####:  661:                if (connection->is_trace_on == 1)
+        -:  662:                {
+    #####:  663:                    LOG(AZ_LOG_TRACE, LOG_LINE, "<- Header (AMQP 0.1.0.0)");
+        -:  664:                }
+        -:  665:
+    #####:  666:                connection_set_state(connection, CONNECTION_STATE_HDR_EXCH);
+        -:  667:
+    #####:  668:                if (send_open_frame(connection) != 0)
+        -:  669:                {
+    #####:  670:                    LogError("Cannot send open frame");
+    #####:  671:                    connection_set_state(connection, CONNECTION_STATE_END);
+        -:  672:                }
+        -:  673:            }
+        -:  674:
+    #####:  675:            result = 0;
+        -:  676:        }
+    #####:  677:        break;
+        -:  678:
+        -:  679:    /* Codes_S_R_S_CONNECTION_01_040: [HDR RCVD In this state the connection header has been received from the peer but a connection header has not been sent.] */
+    #####:  680:    case CONNECTION_STATE_HDR_RCVD:
+        -:  681:
+        -:  682:    /* Codes_S_R_S_CONNECTION_01_042: [HDR EXCH In this state the connection header has been sent to the peer and a connection header has been received from the peer.] */
+        -:  683:    /* we should not really get into this state, but just in case, we would treat that in the same way as HDR_RCVD */
+        -:  684:    case CONNECTION_STATE_HDR_EXCH:
+        -:  685:
+        -:  686:    /* Codes_S_R_S_CONNECTION_01_045: [OPEN RCVD In this state the connection headers have been exchanged. An open frame has been received from the peer but an open frame has not been sent.] */
+        -:  687:    case CONNECTION_STATE_OPEN_RCVD:
+        -:  688:
+        -:  689:    /* Codes_S_R_S_CONNECTION_01_046: [OPEN SENT In this state the connection headers have been exchanged. An open frame has been sent to the peer but no open frame has yet been received.] */
+        -:  690:    case CONNECTION_STATE_OPEN_SENT:
+        -:  691:
+        -:  692:    /* Codes_S_R_S_CONNECTION_01_048: [OPENED In this state the connection header and the open frame have been both sent and received.] */
+        -:  693:    case CONNECTION_STATE_OPENED:
+        -:  694:        /* Codes_S_R_S_CONNECTION_01_212: [After the initial handshake has been done all bytes received from the io instance shall be passed to the frame_codec for decoding by calling frame_codec_receive_bytes.] */
+    #####:  695:        if (frame_codec_receive_bytes(connection->frame_codec, &b, 1) != 0)
+        -:  696:        {
+    #####:  697:            LogError("Cannot process received bytes");
+        -:  698:            /* Codes_S_R_S_CONNECTION_01_218: [The error amqp:internal-error shall be set in the error.condition field of the CLOSE frame.] */
+        -:  699:            /* Codes_S_R_S_CONNECTION_01_219: [The error description shall be set to an implementation defined string.] */
+    #####:  700:            close_connection_with_error(connection, "amqp:internal-error", "connection_byte_received::frame_codec_receive_bytes failed", NULL);
+    #####:  701:            result = MU_FAILURE;
+        -:  702:        }
+        -:  703:        else
+        -:  704:        {
+    #####:  705:            result = 0;
+        -:  706:        }
+        -:  707:
+    #####:  708:        break;
+        -:  709:    }
+        -:  710:
+    #####:  711:    return result;
+        -:  712:}
+        -:  713:
+    #####:  714:static void connection_on_bytes_received(void* context, const unsigned char* buffer, size_t size)
+        -:  715:{
+        -:  716:    size_t i;
+        -:  717:
+    #####:  718:    for (i = 0; i < size; i++)
+        -:  719:    {
+    #####:  720:        if (connection_byte_received((CONNECTION_HANDLE)context, buffer[i]) != 0)
+        -:  721:        {
+    #####:  722:            LogError("Cannot process received bytes");
+    #####:  723:            break;
+        -:  724:        }
+        -:  725:    }
+    #####:  726:}
+        -:  727:
+        3:  728:static void connection_on_io_open_complete(void* context, IO_OPEN_RESULT io_open_result)
+        -:  729:{
+        3:  730:    CONNECTION_HANDLE connection = (CONNECTION_HANDLE)context;
+        -:  731:
+        3:  732:    if (io_open_result == IO_OPEN_OK)
+        -:  733:    {
+        -:  734:        /* Codes_S_R_S_CONNECTION_01_084: [The connection_instance state machine implementing the protocol requirements shall be run as part of connection_dowork.] */
+    #####:  735:        switch (connection->connection_state)
+        -:  736:        {
+    #####:  737:        default:
+    #####:  738:            LogError("Unknown connection state: %d", (int)connection->connection_state);
+    #####:  739:            break;
+        -:  740:
+    #####:  741:        case CONNECTION_STATE_START:
+        -:  742:            /* Codes_S_R_S_CONNECTION_01_086: [Prior to sending any frames on a connection_instance, each peer MUST start by sending a protocol header that indicates the protocol version used on the connection_instance.] */
+        -:  743:            /* Codes_S_R_S_CONNECTION_01_091: [The AMQP peer which acted in the role of the TCP client (i.e. the peer that actively opened the connection_instance) MUST immediately send its outgoing protocol header on establishment of the TCP connection_instance.] */
+    #####:  744:            if (send_header(connection) != 0)
+        -:  745:            {
+    #####:  746:                LogError("Cannot send header");
+        -:  747:            }
+    #####:  748:            break;
+        -:  749:
+    #####:  750:        case CONNECTION_STATE_HDR_SENT:
+        -:  751:        case CONNECTION_STATE_OPEN_SENT:
+        -:  752:        case CONNECTION_STATE_OPENED:
+    #####:  753:            break;
+        -:  754:
+    #####:  755:        case CONNECTION_STATE_HDR_EXCH:
+        -:  756:            /* Codes_S_R_S_CONNECTION_01_002: [Each AMQP connection_instance begins with an exchange of capabilities and limitations, including the maximum frame size.] */
+        -:  757:            /* Codes_S_R_S_CONNECTION_01_004: [After establishing or accepting a TCP connection_instance and sending the protocol header, each peer MUST send an open frame before sending any other frames.] */
+        -:  758:            /* Codes_S_R_S_CONNECTION_01_005: [The open frame describes the capabilities and limits of that peer.] */
+    #####:  759:            if (send_open_frame(connection) != 0)
+        -:  760:            {
+    #####:  761:                LogError("Cannot send OPEN frame");
+    #####:  762:                connection_set_state(connection, CONNECTION_STATE_END);
+        -:  763:            }
+    #####:  764:            break;
+        -:  765:
+    #####:  766:        case CONNECTION_STATE_OPEN_RCVD:
+    #####:  767:            break;
+        -:  768:        }
+        -:  769:    }
+        -:  770:    else
+        -:  771:    {
+        3:  772:        connection_set_state(connection, CONNECTION_STATE_END);
+        -:  773:    }
+        3:  774:}
+        -:  775:
+    #####:  776:static void connection_on_io_error(void* context)
+        -:  777:{
+    #####:  778:    CONNECTION_HANDLE connection = (CONNECTION_HANDLE)context;
+        -:  779:
+        -:  780:    /* Codes_S_R_S_CONNECTION_22_005: [If the io notifies the connection instance of an IO_STATE_ERROR state and an io error callback is registered, the connection shall call the registered callback.] */
+    #####:  781:    if (connection->on_io_error)
+        -:  782:    {
+    #####:  783:        connection->on_io_error(connection->on_io_error_callback_context);
+        -:  784:    }
+        -:  785:
+    #####:  786:    if (connection->connection_state != CONNECTION_STATE_END)
+        -:  787:    {
+        -:  788:        /* Codes_S_R_S_CONNECTION_01_202: [If the io notifies the connection instance of an IO_STATE_ERROR state the connection shall be closed and the state set to END.] */
+    #####:  789:        connection_set_state(connection, CONNECTION_STATE_ERROR);
+    #####:  790:        if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  791:        {
+    #####:  792:            LogError("xio_close failed");
+        -:  793:        }
+        -:  794:    }
+    #####:  795:}
+        -:  796:
+    #####:  797:static void on_empty_amqp_frame_received(void* context, uint16_t channel)
+        -:  798:{
+    #####:  799:    CONNECTION_HANDLE connection = (CONNECTION_HANDLE)context;
+        -:  800:    /* It does not matter on which channel we received the frame */
+        -:  801:    (void)channel;
+        -:  802:
+    #####:  803:    if (connection->is_trace_on == 1)
+        -:  804:    {
+    #####:  805:        LOG(AZ_LOG_TRACE, LOG_LINE, "<- Empty frame");
+        -:  806:    }
+    #####:  807:    if (tickcounter_get_current_ms(connection->tick_counter, &connection->last_frame_received_time) != 0)
+        -:  808:    {
+    #####:  809:        LogError("Cannot get tickcounter value");
+        -:  810:    }
+    #####:  811:}
+        -:  812:
+    #####:  813:static void on_amqp_frame_received(void* context, uint16_t channel, AMQP_VALUE performative, const unsigned char* payload_bytes, uint32_t payload_size)
+        -:  814:{
+    #####:  815:    CONNECTION_HANDLE connection = (CONNECTION_HANDLE)context;
+        -:  816:
+        -:  817:    (void)channel;
+        -:  818:
+    #####:  819:    if (tickcounter_get_current_ms(connection->tick_counter, &connection->last_frame_received_time) != 0)
+        -:  820:    {
+    #####:  821:        LogError("Cannot get tickcounter value");
+    #####:  822:        close_connection_with_error(connection, "amqp:internal-error", "cannot get current tick count", NULL);
+        -:  823:    }
+        -:  824:    else
+        -:  825:    {
+    #####:  826:        if (connection->is_underlying_io_open)
+        -:  827:        {
+    #####:  828:            switch (connection->connection_state)
+        -:  829:            {
+    #####:  830:            default:
+    #####:  831:                if (performative == NULL)
+        -:  832:                {
+        -:  833:                    /* Codes_S_R_S_CONNECTION_01_223: [If the on_endpoint_frame_received is called with a NULL performative then the connection shall be closed with the error condition amqp:internal-error and an implementation defined error description.] */
+    #####:  834:                    close_connection_with_error(connection, "amqp:internal-error", "connection_endpoint_frame_received::NULL performative", NULL);
+    #####:  835:                    LogError("connection_endpoint_frame_received::NULL performative");
+        -:  836:                }
+        -:  837:                else
+        -:  838:                {
+    #####:  839:                    AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+        -:  840:
+    #####:  841:                    if (connection->is_trace_on == 1)
+        -:  842:                    {
+    #####:  843:                        log_incoming_frame(performative);
+        -:  844:                    }
+        -:  845:
+    #####:  846:                    if (is_open_type_by_descriptor(descriptor))
+        -:  847:                    {
+    #####:  848:                        if (channel != 0)
+        -:  849:                        {
+        -:  850:                            /* Codes_S_R_S_CONNECTION_01_006: [The open frame can only be sent on channel 0.] */
+        -:  851:                            /* Codes_S_R_S_CONNECTION_01_222: [If an Open frame is received in a manner violating the ISO specification, the connection shall be closed with condition amqp:not-allowed and description being an implementation defined string.] */
+    #####:  852:                            close_connection_with_error(connection, "amqp:not-allowed", "OPEN frame received on a channel that is not 0", NULL);
+    #####:  853:                            LogError("OPEN frame received on a channel that is not 0");
+        -:  854:                        }
+        -:  855:
+    #####:  856:                        if (connection->connection_state == CONNECTION_STATE_OPENED)
+        -:  857:                        {
+        -:  858:                            /* Codes_S_R_S_CONNECTION_01_239: [If an Open frame is received in the Opened state the connection shall be closed with condition amqp:illegal-state and description being an implementation defined string.] */
+    #####:  859:                            close_connection_with_error(connection, "amqp:illegal-state", "OPEN frame received in the OPENED state", NULL);
+    #####:  860:                            LogError("OPEN frame received in the OPENED state");
+        -:  861:                        }
+    #####:  862:                        else if ((connection->connection_state == CONNECTION_STATE_OPEN_SENT) ||
+    #####:  863:                            (connection->connection_state == CONNECTION_STATE_HDR_EXCH))
+        -:  864:                        {
+        -:  865:                            OPEN_HANDLE open_handle;
+    #####:  866:                            if (amqpvalue_get_open(performative, &open_handle) != 0)
+        -:  867:                            {
+        -:  868:                                /* Codes_S_R_S_CONNECTION_01_143: [If any of the values in the received open frame are invalid then the connection shall be closed.] */
+        -:  869:                                /* Codes_S_R_S_CONNECTION_01_220: [The error amqp:invalid-field shall be set in the error.condition field of the CLOSE frame.] */
+    #####:  870:                                close_connection_with_error(connection, "amqp:invalid-field", "connection_endpoint_frame_received::failed parsing OPEN frame", NULL);
+    #####:  871:                                LogError("connection_endpoint_frame_received::failed parsing OPEN frame");
+        -:  872:                            }
+        -:  873:                            else
+        -:  874:                            {
+    #####:  875:                                if (open_get_idle_time_out(open_handle, &connection->remote_idle_timeout) == 0)
+        -:  876:                                {
+        -:  877:                                    /* since we obtained the remote_idle_timeout, compute at what millisecond we should send the empty frame */
+    #####:  878:                                    connection->remote_idle_timeout_send_frame_millisecond = (milliseconds)(connection->idle_timeout_empty_frame_send_ratio * connection->remote_idle_timeout);
+        -:  879:                                }
+        -:  880:
+    #####:  881:                                if ((open_get_max_frame_size(open_handle, &connection->remote_max_frame_size) != 0) ||
+        -:  882:                                    /* Codes_S_R_S_CONNECTION_01_167: [Both peers MUST accept frames of up to 512 (MIN-MAX-FRAME-SIZE) octets.] */
+    #####:  883:                                    (connection->remote_max_frame_size < 512))
+        -:  884:                                {
+        -:  885:                                    /* Codes_S_R_S_CONNECTION_01_143: [If any of the values in the received open frame are invalid then the connection shall be closed.] */
+        -:  886:                                    /* Codes_S_R_S_CONNECTION_01_220: [The error amqp:invalid-field shall be set in the error.condition field of the CLOSE frame.] */
+    #####:  887:                                    close_connection_with_error(connection, "amqp:invalid-field", "connection_endpoint_frame_received::failed parsing OPEN frame", NULL);
+    #####:  888:                                    LogError("connection_endpoint_frame_received::failed parsing OPEN frame");
+        -:  889:                                }
+        -:  890:                                else
+        -:  891:                                {
+    #####:  892:                                    if (connection->connection_state == CONNECTION_STATE_OPEN_SENT)
+        -:  893:                                    {
+    #####:  894:                                        connection_set_state(connection, CONNECTION_STATE_OPENED);
+        -:  895:                                    }
+        -:  896:                                    else
+        -:  897:                                    {
+    #####:  898:                                        if (send_open_frame(connection) != 0)
+        -:  899:                                        {
+    #####:  900:                                            connection_set_state(connection, CONNECTION_STATE_END);
+        -:  901:                                        }
+        -:  902:                                        else
+        -:  903:                                        {
+    #####:  904:                                            connection_set_state(connection, CONNECTION_STATE_OPENED);
+        -:  905:                                        }
+        -:  906:                                    }
+        -:  907:                                }
+        -:  908:
+    #####:  909:                                open_destroy(open_handle);
+        -:  910:                            }
+        -:  911:                        }
+        -:  912:                        else
+        -:  913:                        {
+        -:  914:                            /* do nothing for now ... */
+        -:  915:                        }
+        -:  916:                    }
+    #####:  917:                    else if (is_close_type_by_descriptor(descriptor))
+        -:  918:                    {
+        -:  919:                        /* Codes_S_R_S_CONNECTION_01_242: [The connection module shall accept CLOSE frames even if they have extra payload bytes besides the Close performative.] */
+        -:  920:
+        -:  921:                        /* Codes_S_R_S_CONNECTION_01_225: [HDR_RCVD HDR OPEN] */
+    #####:  922:                        if ((connection->connection_state == CONNECTION_STATE_HDR_RCVD) ||
+        -:  923:                            /* Codes_S_R_S_CONNECTION_01_227: [HDR_EXCH OPEN OPEN] */
+    #####:  924:                            (connection->connection_state == CONNECTION_STATE_HDR_EXCH) ||
+        -:  925:                            /* Codes_S_R_S_CONNECTION_01_228: [OPEN_RCVD OPEN *] */
+    #####:  926:                            (connection->connection_state == CONNECTION_STATE_OPEN_RCVD) ||
+        -:  927:                            /* Codes_S_R_S_CONNECTION_01_235: [CLOSE_SENT - * TCP Close for Write] */
+    #####:  928:                            (connection->connection_state == CONNECTION_STATE_CLOSE_SENT) ||
+        -:  929:                            /* Codes_S_R_S_CONNECTION_01_236: [DISCARDING - * TCP Close for Write] */
+    #####:  930:                            (connection->connection_state == CONNECTION_STATE_DISCARDING))
+        -:  931:                        {
+    #####:  932:                            if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  933:                            {
+    #####:  934:                                LogError("xio_close failed");
+        -:  935:                            }
+        -:  936:                        }
+        -:  937:                        else
+        -:  938:                        {
+        -:  939:                            CLOSE_HANDLE close_handle;
+        -:  940:
+        -:  941:                            /* Codes_S_R_S_CONNECTION_01_012: [A close frame MAY be received on any channel up to the maximum channel number negotiated in open.] */
+    #####:  942:                            if (channel > connection->channel_max)
+        -:  943:                            {
+    #####:  944:                                close_connection_with_error(connection, "amqp:invalid-field", "connection_endpoint_frame_received::failed parsing CLOSE frame", NULL);
+    #####:  945:                                LogError("connection_endpoint_frame_received::failed parsing CLOSE frame");
+        -:  946:                            }
+        -:  947:                            else
+        -:  948:                            {
+    #####:  949:                                if (amqpvalue_get_close(performative, &close_handle) != 0)
+        -:  950:                                {
+    #####:  951:                                    close_connection_with_error(connection, "amqp:invalid-field", "connection_endpoint_frame_received::failed parsing CLOSE frame", NULL);
+    #####:  952:                                    LogError("connection_endpoint_frame_received::failed parsing CLOSE frame");
+        -:  953:                                }
+        -:  954:                                else
+        -:  955:                                {
+        -:  956:                                    ERROR_HANDLE error;
+        -:  957:
+    #####:  958:                                    if (close_get_error(close_handle, &error) != 0)
+        -:  959:                                    {
+    #####:  960:                                        error = NULL;
+        -:  961:                                    }
+        -:  962:
+    #####:  963:                                    close_destroy(close_handle);
+        -:  964:
+    #####:  965:                                    connection_set_state(connection, CONNECTION_STATE_CLOSE_RCVD);
+        -:  966:
+    #####:  967:                                    if (send_close_frame(connection, NULL) != 0)
+        -:  968:                                    {
+    #####:  969:                                        LogError("Cannot send CLOSE frame");
+        -:  970:                                    }
+        -:  971:
+        -:  972:                                    /* Codes_S_R_S_CONNECTION_01_214: [If the close frame cannot be constructed or sent, the connection shall be closed and set to the END state.] */
+    #####:  973:                                    if (xio_close(connection->io, NULL, NULL) != 0)
+        -:  974:                                    {
+    #####:  975:                                        LogError("xio_close failed");
+        -:  976:                                    }
+        -:  977:
+    #####:  978:                                    connection_set_state(connection, CONNECTION_STATE_END);
+        -:  979:
+    #####:  980:                                    if (connection->on_connection_close_received_event_subscription.on_connection_close_received != NULL)
+        -:  981:                                    {
+    #####:  982:                                        connection->on_connection_close_received_event_subscription.on_connection_close_received(connection->on_connection_close_received_event_subscription.context, error);
+        -:  983:                                    }
+        -:  984:
+    #####:  985:                                    error_destroy(error);
+        -:  986:                                }
+        -:  987:                            }
+        -:  988:                        }
+        -:  989:                    }
+        -:  990:                    else
+        -:  991:                    {
+        -:  992:                        uint64_t performative_ulong;
+        -:  993:
+    #####:  994:                        if (amqpvalue_get_ulong(descriptor, &performative_ulong) != 0)
+        -:  995:                        {
+    #####:  996:                            LogError("Failed getting ulong amqp performative");
+        -:  997:                        }
+        -:  998:                        else
+        -:  999:                        {
+    #####: 1000:                            switch (performative_ulong)
+        -: 1001:                            {
+    #####: 1002:                            default:
+    #####: 1003:                                LogError("Bad performative: %02x", (unsigned int)performative_ulong);
+    #####: 1004:                                break;
+        -: 1005:
+    #####: 1006:                            case AMQP_BEGIN:
+        -: 1007:                            {
+        -: 1008:                                BEGIN_HANDLE begin;
+        -: 1009:
+    #####: 1010:                                if (amqpvalue_get_begin(performative, &begin) != 0)
+        -: 1011:                                {
+    #####: 1012:                                    LogError("Cannot get begin performative");
+        -: 1013:                                }
+        -: 1014:                                else
+        -: 1015:                                {
+        -: 1016:                                    uint16_t remote_channel;
+    #####: 1017:                                    ENDPOINT_HANDLE new_endpoint = NULL;
+    #####: 1018:                                    bool remote_begin = false;
+        -: 1019:
+    #####: 1020:                                    if (begin_get_remote_channel(begin, &remote_channel) != 0)
+        -: 1021:                                    {
+    #####: 1022:                                        remote_begin = true;
+    #####: 1023:                                        if (connection->on_new_endpoint != NULL)
+        -: 1024:                                        {
+    #####: 1025:                                            new_endpoint = connection_create_endpoint(connection);
+    #####: 1026:                                            if (!connection->on_new_endpoint(connection->on_new_endpoint_callback_context, new_endpoint))
+        -: 1027:                                            {
+    #####: 1028:                                                connection_destroy_endpoint(new_endpoint);
+    #####: 1029:                                                new_endpoint = NULL;
+        -: 1030:                                            }
+        -: 1031:                                        }
+        -: 1032:                                    }
+        -: 1033:
+    #####: 1034:                                    if (!remote_begin)
+        -: 1035:                                    {
+    #####: 1036:                                        ENDPOINT_INSTANCE* session_endpoint = find_session_endpoint_by_outgoing_channel(connection, remote_channel);
+    #####: 1037:                                        if (session_endpoint == NULL)
+        -: 1038:                                        {
+    #####: 1039:                                            LogError("Cannot create session endpoint");
+        -: 1040:                                        }
+        -: 1041:                                        else
+        -: 1042:                                        {
+    #####: 1043:                                            session_endpoint->incoming_channel = channel;
+    #####: 1044:                                            session_endpoint->on_endpoint_frame_received(session_endpoint->callback_context, performative, payload_size, payload_bytes);
+        -: 1045:                                        }
+        -: 1046:                                    }
+        -: 1047:                                    else
+        -: 1048:                                    {
+    #####: 1049:                                        if (new_endpoint != NULL)
+        -: 1050:                                        {
+    #####: 1051:                                            new_endpoint->incoming_channel = channel;
+    #####: 1052:                                            new_endpoint->on_endpoint_frame_received(new_endpoint->callback_context, performative, payload_size, payload_bytes);
+        -: 1053:                                        }
+        -: 1054:                                    }
+        -: 1055:
+    #####: 1056:                                    begin_destroy(begin);
+        -: 1057:                                }
+        -: 1058:
+    #####: 1059:                                break;
+        -: 1060:                            }
+        -: 1061:
+    #####: 1062:                            case AMQP_FLOW:
+        -: 1063:                            case AMQP_TRANSFER:
+        -: 1064:                            case AMQP_DISPOSITION:
+        -: 1065:                            case AMQP_END:
+        -: 1066:                            case AMQP_ATTACH:
+        -: 1067:                            case AMQP_DETACH:
+        -: 1068:                            {
+    #####: 1069:                                ENDPOINT_INSTANCE* session_endpoint = find_session_endpoint_by_incoming_channel(connection, channel);
+    #####: 1070:                                if (session_endpoint == NULL)
+        -: 1071:                                {
+    #####: 1072:                                    LogError("Cannot find session endpoint for channel %u", (unsigned int)channel);
+        -: 1073:                                }
+        -: 1074:                                else
+        -: 1075:                                {
+    #####: 1076:                                    session_endpoint->on_endpoint_frame_received(session_endpoint->callback_context, performative, payload_size, payload_bytes);
+        -: 1077:                                }
+        -: 1078:
+    #####: 1079:                                break;
+        -: 1080:                            }
+        -: 1081:                            }
+        -: 1082:                        }
+        -: 1083:                    }
+        -: 1084:                }
+    #####: 1085:                break;
+        -: 1086:
+    #####: 1087:            case CONNECTION_STATE_START:
+        -: 1088:                /* Codes_S_R_S_CONNECTION_01_224: [START HDR HDR] */
+        -: 1089:            case CONNECTION_STATE_HDR_SENT:
+        -: 1090:                /* Codes_S_R_S_CONNECTION_01_226: [HDR_SENT OPEN HDR] */
+        -: 1091:            case CONNECTION_STATE_OPEN_PIPE:
+        -: 1092:                /* Codes_S_R_S_CONNECTION_01_230: [OPEN_PIPE ** HDR] */
+        -: 1093:            case CONNECTION_STATE_OC_PIPE:
+        -: 1094:                /* Codes_S_R_S_CONNECTION_01_232: [OC_PIPE - HDR TCP Close for Write] */
+        -: 1095:            case CONNECTION_STATE_CLOSE_RCVD:
+        -: 1096:                /* Codes_S_R_S_CONNECTION_01_234: [CLOSE_RCVD * - TCP Close for Read] */
+        -: 1097:            case CONNECTION_STATE_END:
+        -: 1098:                /* Codes_S_R_S_CONNECTION_01_237: [END - - TCP Close] */
+    #####: 1099:                if (xio_close(connection->io, NULL, NULL) != 0)
+        -: 1100:                {
+    #####: 1101:                    LogError("xio_close failed");
+        -: 1102:                }
+    #####: 1103:                break;
+        -: 1104:            }
+    #####: 1105:        }
+        -: 1106:    }
+    #####: 1107:}
+        -: 1108:
+    #####: 1109:static void frame_codec_error(void* context)
+        -: 1110:{
+        -: 1111:    /* Bug: some error handling should happen here
+        -: 1112:    Filed: uAMQP: frame_codec error and amqp_frame_codec_error should handle the errors */
+    #####: 1113:    LogError("A frame_codec_error occured");
+        -: 1114:    (void)context;
+    #####: 1115:}
+        -: 1116:
+    #####: 1117:static void amqp_frame_codec_error(void* context)
+        -: 1118:{
+        -: 1119:    /* Bug: some error handling should happen here
+        -: 1120:    Filed: uAMQP: frame_codec error and amqp_frame_codec_error should handle the errors */
+    #####: 1121:    LogError("An amqp_frame_codec_error occured");
+        -: 1122:    (void)context;
+    #####: 1123:}
+        -: 1124:
+        -: 1125:/* Codes_S_R_S_CONNECTION_01_001: [connection_create shall open a new connection to a specified host/port.] */
+        6: 1126:CONNECTION_HANDLE connection_create(XIO_HANDLE xio, const char* hostname, const char* container_id, ON_NEW_ENDPOINT on_new_endpoint, void* callback_context)
+        -: 1127:{
+        6: 1128:    return connection_create2(xio, hostname, container_id, on_new_endpoint, callback_context, NULL, NULL, NULL, NULL);
+        -: 1129:}
+        -: 1130:
+        -: 1131:/* Codes_S_R_S_CONNECTION_01_001: [connection_create shall open a new connection to a specified host/port.] */
+        -: 1132:/* Codes_S_R_S_CONNECTION_22_002: [connection_create shall allow registering connections state and io error callbacks.] */
+        6: 1133:CONNECTION_HANDLE connection_create2(XIO_HANDLE xio, const char* hostname, const char* container_id, ON_NEW_ENDPOINT on_new_endpoint, void* callback_context, ON_CONNECTION_STATE_CHANGED on_connection_state_changed, void* on_connection_state_changed_context, ON_IO_ERROR on_io_error, void* on_io_error_context)
+        -: 1134:{
+        -: 1135:    CONNECTION_HANDLE connection;
+        -: 1136:
+        6: 1137:    if ((xio == NULL) ||
+        -: 1138:        (container_id == NULL))
+        -: 1139:    {
+        -: 1140:        /* Codes_S_R_S_CONNECTION_01_071: [If xio or container_id is NULL, connection_create shall return NULL.] */
+    #####: 1141:        LogError("Bad arguments: xio = %p, container_id = %p",
+        -: 1142:            xio, container_id);
+    #####: 1143:        connection = NULL;
+        -: 1144:    }
+        -: 1145:    else
+        -: 1146:    {
+        6: 1147:        connection = (CONNECTION_HANDLE)malloc(sizeof(CONNECTION_INSTANCE));
+        -: 1148:        /* Codes_S_R_S_CONNECTION_01_081: [If allocating the memory for the connection fails then connection_create shall return NULL.] */
+        6: 1149:        if (connection == NULL)
+        -: 1150:        {
+    #####: 1151:            LogError("Cannot allocate memory for connection");
+        -: 1152:        }
+        -: 1153:        else
+        -: 1154:        {
+        6: 1155:            connection->io = xio;
+        -: 1156:
+        -: 1157:            /* Codes_S_R_S_CONNECTION_01_082: [connection_create shall allocate a new frame_codec instance to be used for frame encoding/decoding.] */
+        6: 1158:            connection->frame_codec = frame_codec_create(frame_codec_error, connection);
+        6: 1159:            if (connection->frame_codec == NULL)
+        -: 1160:            {
+        -: 1161:                /* Codes_S_R_S_CONNECTION_01_083: [If frame_codec_create fails then connection_create shall return NULL.] */
+    #####: 1162:                LogError("Cannot create frame_codec");
+    #####: 1163:                free(connection);
+    #####: 1164:                connection = NULL;
+        -: 1165:            }
+        -: 1166:            else
+        -: 1167:            {
+        6: 1168:                connection->amqp_frame_codec = amqp_frame_codec_create(connection->frame_codec, on_amqp_frame_received, on_empty_amqp_frame_received, amqp_frame_codec_error, connection);
+        6: 1169:                if (connection->amqp_frame_codec == NULL)
+        -: 1170:                {
+        -: 1171:                    /* Codes_S_R_S_CONNECTION_01_108: [If amqp_frame_codec_create fails, connection_create shall return NULL.] */
+    #####: 1172:                    LogError("Cannot create amqp_frame_codec");
+    #####: 1173:                    frame_codec_destroy(connection->frame_codec);
+    #####: 1174:                    free(connection);
+    #####: 1175:                    connection = NULL;
+        -: 1176:                }
+        -: 1177:                else
+        -: 1178:                {
+        6: 1179:                    if (hostname != NULL)
+        -: 1180:                    {
+        6: 1181:                        size_t hostname_length = strlen(hostname);
+        6: 1182:                        connection->host_name = (char*)malloc(hostname_length + 1);
+        6: 1183:                        if (connection->host_name == NULL)
+        -: 1184:                        {
+        -: 1185:                            /* Codes_S_R_S_CONNECTION_01_081: [If allocating the memory for the connection fails then connection_create shall return NULL.] */
+    #####: 1186:                            LogError("Cannot allocate memory for host name");
+    #####: 1187:                            amqp_frame_codec_destroy(connection->amqp_frame_codec);
+    #####: 1188:                            frame_codec_destroy(connection->frame_codec);
+    #####: 1189:                            free(connection);
+    #####: 1190:                            connection = NULL;
+        -: 1191:                        }
+        -: 1192:                        else
+        -: 1193:                        {
+        6: 1194:                            (void)memcpy(connection->host_name, hostname, hostname_length + 1);
+        -: 1195:                        }
+        -: 1196:                    }
+        -: 1197:                    else
+        -: 1198:                    {
+    #####: 1199:                        connection->host_name = NULL;
+        -: 1200:                    }
+        -: 1201:
+        6: 1202:                    if (connection != NULL)
+        -: 1203:                    {
+        6: 1204:                        size_t container_id_length = strlen(container_id);
+        6: 1205:                        connection->container_id = (char*)malloc(container_id_length + 1);
+        6: 1206:                        if (connection->container_id == NULL)
+        -: 1207:                        {
+        -: 1208:                            /* Codes_S_R_S_CONNECTION_01_081: [If allocating the memory for the connection fails then connection_create shall return NULL.] */
+    #####: 1209:                            LogError("Cannot allocate memory for container_id");
+    #####: 1210:                            free(connection->host_name);
+    #####: 1211:                            amqp_frame_codec_destroy(connection->amqp_frame_codec);
+    #####: 1212:                            frame_codec_destroy(connection->frame_codec);
+    #####: 1213:                            free(connection);
+    #####: 1214:                            connection = NULL;
+        -: 1215:                        }
+        -: 1216:                        else
+        -: 1217:                        {
+        6: 1218:                            connection->tick_counter = tickcounter_create();
+        6: 1219:                            if (connection->tick_counter == NULL)
+        -: 1220:                            {
+    #####: 1221:                                LogError("Cannot create tick counter");
+    #####: 1222:                                free(connection->container_id);
+    #####: 1223:                                free(connection->host_name);
+    #####: 1224:                                amqp_frame_codec_destroy(connection->amqp_frame_codec);
+    #####: 1225:                                frame_codec_destroy(connection->frame_codec);
+    #####: 1226:                                free(connection);
+    #####: 1227:                                connection = NULL;
+        -: 1228:                            }
+        -: 1229:                            else
+        -: 1230:                            {
+        6: 1231:                                (void)memcpy(connection->container_id, container_id, container_id_length + 1);
+        -: 1232:
+        -: 1233:                                /* Codes_S_R_S_CONNECTION_01_173: [<field name="max-frame-size" type="uint" default="4294967295"/>] */
+        6: 1234:                                connection->max_frame_size = 4294967295u;
+        -: 1235:                                /* Codes: [<field name="channel-max" type="ushort" default="65535"/>] */
+        6: 1236:                                connection->channel_max = 65535;
+        -: 1237:
+        -: 1238:                                /* Codes_S_R_S_CONNECTION_01_175: [<field name="idle-time-out" type="milliseconds"/>] */
+        -: 1239:                                /* Codes_S_R_S_CONNECTION_01_192: [A value of zero is the same as if it was not set (null).] */
+        6: 1240:                                connection->idle_timeout = 0;
+        6: 1241:                                connection->remote_idle_timeout = 0;
+        6: 1242:                                connection->remote_idle_timeout_send_frame_millisecond = 0;
+        6: 1243:                                connection->idle_timeout_empty_frame_send_ratio = 0.5;
+        -: 1244:
+        6: 1245:                                connection->endpoint_count = 0;
+        6: 1246:                                connection->endpoints = NULL;
+        6: 1247:                                connection->header_bytes_received = 0;
+        6: 1248:                                connection->is_remote_frame_received = 0;
+        6: 1249:                                connection->properties = NULL;
+        -: 1250:
+        6: 1251:                                connection->is_underlying_io_open = 0;
+        6: 1252:                                connection->remote_max_frame_size = 512;
+        6: 1253:                                connection->is_trace_on = 0;
+        -: 1254:
+        -: 1255:                                /* Mark that settings have not yet been set by the user */
+        6: 1256:                                connection->idle_timeout_specified = 0;
+        -: 1257:
+        6: 1258:                                connection->on_new_endpoint = on_new_endpoint;
+        6: 1259:                                connection->on_new_endpoint_callback_context = callback_context;
+        -: 1260:
+        6: 1261:                                connection->on_connection_close_received_event_subscription.on_connection_close_received = NULL;
+        6: 1262:                                connection->on_connection_close_received_event_subscription.context = NULL;
+        -: 1263:
+        6: 1264:                                connection->on_io_error = on_io_error;
+        6: 1265:                                connection->on_io_error_callback_context = on_io_error_context;
+        6: 1266:                                connection->on_connection_state_changed = on_connection_state_changed;
+        6: 1267:                                connection->on_connection_state_changed_callback_context = on_connection_state_changed_context;
+        -: 1268:
+        6: 1269:                                if (tickcounter_get_current_ms(connection->tick_counter, &connection->last_frame_received_time) != 0)
+        -: 1270:                                {
+    #####: 1271:                                    LogError("Could not retrieve time for last frame received time");
+    #####: 1272:                                    tickcounter_destroy(connection->tick_counter);
+    #####: 1273:                                    free(connection->container_id);
+    #####: 1274:                                    free(connection->host_name);
+    #####: 1275:                                    amqp_frame_codec_destroy(connection->amqp_frame_codec);
+    #####: 1276:                                    frame_codec_destroy(connection->frame_codec);
+    #####: 1277:                                    free(connection);
+    #####: 1278:                                    connection = NULL;
+        -: 1279:                                }
+        -: 1280:                                else
+        -: 1281:                                {
+        6: 1282:                                    connection->last_frame_sent_time = connection->last_frame_received_time;
+        -: 1283:
+        -: 1284:                                    /* Codes_S_R_S_CONNECTION_01_072: [When connection_create succeeds, the state of the connection shall be CONNECTION_STATE_START.] */
+        6: 1285:                                    connection_set_state(connection, CONNECTION_STATE_START);
+        -: 1286:                                }
+        -: 1287:                            }
+        -: 1288:                        }
+        -: 1289:                    }
+        -: 1290:                }
+        -: 1291:            }
+        -: 1292:        }
+        -: 1293:    }
+        -: 1294:
+        6: 1295:    return connection;
+        -: 1296:}
+        -: 1297:
+        6: 1298:void connection_destroy(CONNECTION_HANDLE connection)
+        -: 1299:{
+        -: 1300:    /* Codes_S_R_S_CONNECTION_01_079: [If handle is NULL, connection_destroy shall do nothing.] */
+        6: 1301:    if (connection == NULL)
+        -: 1302:    {
+    #####: 1303:        LogError("NULL connection");
+        -: 1304:    }
+        -: 1305:    else
+        -: 1306:    {
+        -: 1307:        /* Codes_S_R_S_CONNECTION_01_073: [connection_destroy shall free all resources associated with a connection.] */
+        6: 1308:        if (connection->is_underlying_io_open)
+        -: 1309:        {
+    #####: 1310:            (void)connection_close(connection, NULL, NULL, NULL);
+        -: 1311:        }
+        -: 1312:
+        6: 1313:        amqp_frame_codec_destroy(connection->amqp_frame_codec);
+        6: 1314:        frame_codec_destroy(connection->frame_codec);
+        6: 1315:        tickcounter_destroy(connection->tick_counter);
+        6: 1316:        if (connection->properties != NULL)
+        -: 1317:        {
+    #####: 1318:            amqpvalue_destroy(connection->properties);
+        -: 1319:        }
+        -: 1320:
+        6: 1321:        free(connection->host_name);
+        6: 1322:        free(connection->container_id);
+        -: 1323:
+        -: 1324:        /* Codes_S_R_S_CONNECTION_01_074: [connection_destroy shall close the socket connection.] */
+        6: 1325:        free(connection);
+        -: 1326:    }
+        6: 1327:}
+        -: 1328:
+        9: 1329:int connection_open(CONNECTION_HANDLE connection)
+        -: 1330:{
+        -: 1331:    int result;
+        -: 1332:
+        9: 1333:    if (connection == NULL)
+        -: 1334:    {
+    #####: 1335:        LogError("NULL connection");
+    #####: 1336:        result = MU_FAILURE;
+        -: 1337:    }
+        -: 1338:    else
+        -: 1339:    {
+        9: 1340:        if (!connection->is_underlying_io_open)
+        -: 1341:        {
+        9: 1342:            if (xio_open(connection->io, connection_on_io_open_complete, connection, connection_on_bytes_received, connection, connection_on_io_error, connection) != 0)
+        -: 1343:            {
+        9: 1344:                LogError("Opening the underlying IO failed");
+        9: 1345:                connection_set_state(connection, CONNECTION_STATE_END);
+        9: 1346:                result = MU_FAILURE;
+        -: 1347:            }
+        -: 1348:            else
+        -: 1349:            {
+    #####: 1350:                connection->is_underlying_io_open = 1;
+        -: 1351:
+    #####: 1352:                connection_set_state(connection, CONNECTION_STATE_START);
+        -: 1353:
+    #####: 1354:                result = 0;
+        -: 1355:            }
+        -: 1356:        }
+        -: 1357:        else
+        -: 1358:        {
+    #####: 1359:            result = 0;
+        -: 1360:        }
+        -: 1361:    }
+        -: 1362:
+        9: 1363:    return result;
+        -: 1364:}
+        -: 1365:
+    #####: 1366:int connection_listen(CONNECTION_HANDLE connection)
+        -: 1367:{
+        -: 1368:    int result;
+        -: 1369:
+    #####: 1370:    if (connection == NULL)
+        -: 1371:    {
+    #####: 1372:        LogError("NULL connection");
+    #####: 1373:        result = MU_FAILURE;
+        -: 1374:    }
+        -: 1375:    else
+        -: 1376:    {
+    #####: 1377:        if (!connection->is_underlying_io_open)
+        -: 1378:        {
+    #####: 1379:            if (xio_open(connection->io, connection_on_io_open_complete, connection, connection_on_bytes_received, connection, connection_on_io_error, connection) != 0)
+        -: 1380:            {
+    #####: 1381:                LogError("Opening the underlying IO failed");
+    #####: 1382:                connection_set_state(connection, CONNECTION_STATE_END);
+    #####: 1383:                result = MU_FAILURE;
+        -: 1384:            }
+        -: 1385:            else
+        -: 1386:            {
+    #####: 1387:                connection->is_underlying_io_open = 1;
+        -: 1388:
+    #####: 1389:                connection_set_state(connection, CONNECTION_STATE_HDR_EXCH);
+        -: 1390:
+    #####: 1391:                result = 0;
+        -: 1392:            }
+        -: 1393:        }
+        -: 1394:        else
+        -: 1395:        {
+    #####: 1396:            result = 0;
+        -: 1397:        }
+        -: 1398:    }
+        -: 1399:
+    #####: 1400:    return result;
+        -: 1401:}
+        -: 1402:
+    #####: 1403:int connection_close(CONNECTION_HANDLE connection, const char* condition_value, const char* description, AMQP_VALUE info)
+        -: 1404:{
+        -: 1405:    int result;
+        -: 1406:
+    #####: 1407:    if (connection == NULL)
+        -: 1408:    {
+    #####: 1409:        LogError("NULL connection");
+    #####: 1410:        result = MU_FAILURE;
+        -: 1411:    }
+    #####: 1412:    else if ((info != NULL) &&
+    #####: 1413:        (amqpvalue_get_type(info) != AMQP_TYPE_MAP) &&
+    #####: 1414:        (amqpvalue_get_type(info) != AMQP_TYPE_NULL))
+        -: 1415:    {
+    #####: 1416:        LogError("Invalid info, expected a map");
+    #####: 1417:        result = MU_FAILURE;
+        -: 1418:    }
+        -: 1419:    else
+        -: 1420:    {
+    #####: 1421:        if (condition_value != NULL)
+        -: 1422:        {
+    #####: 1423:            close_connection_with_error(connection, condition_value, description, info);
+        -: 1424:        }
+        -: 1425:        else
+        -: 1426:        {
+    #####: 1427:            if (send_close_frame(connection, NULL) != 0)
+        -: 1428:            {
+    #####: 1429:                LogError("Sending CLOSE frame failed");
+        -: 1430:            }
+        -: 1431:
+    #####: 1432:            connection_set_state(connection, CONNECTION_STATE_END);
+        -: 1433:        }
+        -: 1434:
+    #####: 1435:        if (xio_close(connection->io, NULL, NULL) != 0)
+        -: 1436:        {
+    #####: 1437:            LogError("xio_close failed");
+        -: 1438:        }
+        -: 1439:
+    #####: 1440:        connection->is_underlying_io_open = 1;
+        -: 1441:
+    #####: 1442:        result = 0;
+        -: 1443:    }
+        -: 1444:
+    #####: 1445:    return result;
+        -: 1446:}
+        -: 1447:
+    #####: 1448:int connection_set_max_frame_size(CONNECTION_HANDLE connection, uint32_t max_frame_size)
+        -: 1449:{
+        -: 1450:    int result;
+        -: 1451:
+        -: 1452:    /* Codes_S_R_S_CONNECTION_01_163: [If connection is NULL, connection_set_max_frame_size shall fail and return a non-zero value.] */
+    #####: 1453:    if (connection == NULL)
+        -: 1454:    {
+    #####: 1455:        LogError("NULL connection");
+    #####: 1456:        result = MU_FAILURE;
+        -: 1457:    }
+        -: 1458:    /* Codes_S_R_S_CONNECTION_01_150: [If the max_frame_size is invalid then connection_set_max_frame_size shall fail and return a non-zero value.] */
+        -: 1459:    /* Codes_S_R_S_CONNECTION_01_167: [Both peers MUST accept frames of up to 512 (MIN-MAX-FRAME-SIZE) octets.] */
+    #####: 1460:    else if (max_frame_size < 512)
+        -: 1461:    {
+    #####: 1462:        LogError("max_frame_size too small");
+    #####: 1463:        result = MU_FAILURE;
+        -: 1464:    }
+        -: 1465:    else
+        -: 1466:    {
+        -: 1467:        /* Codes_S_R_S_CONNECTION_01_157: [If connection_set_max_frame_size is called after the initial Open frame has been sent, it shall fail and return a non-zero value.] */
+    #####: 1468:        if (connection->connection_state != CONNECTION_STATE_START)
+        -: 1469:        {
+    #####: 1470:            LogError("Connection already open");
+    #####: 1471:            result = MU_FAILURE;
+        -: 1472:        }
+        -: 1473:        else
+        -: 1474:        {
+        -: 1475:            /* Codes_S_R_S_CONNECTION_01_148: [connection_set_max_frame_size shall set the max_frame_size associated with a connection.] */
+        -: 1476:            /* Codes_S_R_S_CONNECTION_01_164: [If connection_set_max_frame_size fails, the previous max_frame_size setting shall be retained.] */
+    #####: 1477:            connection->max_frame_size = max_frame_size;
+        -: 1478:
+        -: 1479:            /* Codes_S_R_S_CONNECTION_01_149: [On success connection_set_max_frame_size shall return 0.] */
+    #####: 1480:            result = 0;
+        -: 1481:        }
+        -: 1482:    }
+        -: 1483:
+    #####: 1484:    return result;
+        -: 1485:}
+        -: 1486:
+    #####: 1487:int connection_get_max_frame_size(CONNECTION_HANDLE connection, uint32_t* max_frame_size)
+        -: 1488:{
+        -: 1489:    int result;
+        -: 1490:
+        -: 1491:    /* Codes_S_R_S_CONNECTION_01_170: [If connection or max_frame_size is NULL, connection_get_max_frame_size shall fail and return a non-zero value.] */
+    #####: 1492:    if ((connection == NULL) ||
+        -: 1493:        (max_frame_size == NULL))
+        -: 1494:    {
+    #####: 1495:        LogError("Bad arguments: connection = %p, max_frame_size = %p",
+        -: 1496:            connection, max_frame_size);
+    #####: 1497:        result = MU_FAILURE;
+        -: 1498:    }
+        -: 1499:    else
+        -: 1500:    {
+        -: 1501:        /* Codes_S_R_S_CONNECTION_01_168: [connection_get_max_frame_size shall return in the max_frame_size argument the current max frame size setting.] */
+    #####: 1502:        *max_frame_size = connection->max_frame_size;
+        -: 1503:
+        -: 1504:        /* Codes_S_R_S_CONNECTION_01_169: [On success, connection_get_max_frame_size shall return 0.] */
+    #####: 1505:        result = 0;
+        -: 1506:    }
+        -: 1507:
+    #####: 1508:    return result;
+        -: 1509:}
+        -: 1510:
+    #####: 1511:int connection_set_channel_max(CONNECTION_HANDLE connection, uint16_t channel_max)
+        -: 1512:{
+        -: 1513:    int result;
+        -: 1514:
+        -: 1515:    /* Codes_S_R_S_CONNECTION_01_181: [If connection is NULL then connection_set_channel_max shall fail and return a non-zero value.] */
+    #####: 1516:    if (connection == NULL)
+        -: 1517:    {
+    #####: 1518:        LogError("NULL connection");
+    #####: 1519:        result = MU_FAILURE;
+        -: 1520:    }
+        -: 1521:    else
+        -: 1522:    {
+        -: 1523:        /* Codes_S_R_S_CONNECTION_01_156: [If connection_set_channel_max is called after the initial Open frame has been sent, it shall fail and return a non-zero value.] */
+    #####: 1524:        if (connection->connection_state != CONNECTION_STATE_START)
+        -: 1525:        {
+    #####: 1526:            LogError("Connection already open");
+    #####: 1527:            result = MU_FAILURE;
+        -: 1528:        }
+        -: 1529:        else
+        -: 1530:        {
+        -: 1531:            /* Codes_S_R_S_CONNECTION_01_153: [connection_set_channel_max shall set the channel_max associated with a connection.] */
+        -: 1532:            /* Codes_S_R_S_CONNECTION_01_165: [If connection_set_channel_max fails, the previous channel_max setting shall be retained.] */
+    #####: 1533:            connection->channel_max = channel_max;
+        -: 1534:
+        -: 1535:            /* Codes_S_R_S_CONNECTION_01_154: [On success connection_set_channel_max shall return 0.] */
+    #####: 1536:            result = 0;
+        -: 1537:        }
+        -: 1538:    }
+        -: 1539:
+    #####: 1540:    return result;
+        -: 1541:}
+        -: 1542:
+    #####: 1543:int connection_get_channel_max(CONNECTION_HANDLE connection, uint16_t* channel_max)
+        -: 1544:{
+        -: 1545:    int result;
+        -: 1546:
+        -: 1547:    /* Codes_S_R_S_CONNECTION_01_184: [If connection or channel_max is NULL, connection_get_channel_max shall fail and return a non-zero value.] */
+    #####: 1548:    if ((connection == NULL) ||
+        -: 1549:        (channel_max == NULL))
+        -: 1550:    {
+    #####: 1551:        LogError("Bad arguments: connection = %p, channel_max = %p",
+        -: 1552:            connection, channel_max);
+    #####: 1553:        result = MU_FAILURE;
+        -: 1554:    }
+        -: 1555:    else
+        -: 1556:    {
+        -: 1557:        /* Codes_S_R_S_CONNECTION_01_182: [connection_get_channel_max shall return in the channel_max argument the current channel_max setting.] */
+    #####: 1558:        *channel_max = connection->channel_max;
+        -: 1559:
+        -: 1560:        /* Codes_S_R_S_CONNECTION_01_183: [On success, connection_get_channel_max shall return 0.] */
+    #####: 1561:        result = 0;
+        -: 1562:    }
+        -: 1563:
+    #####: 1564:    return result;
+        -: 1565:}
+        -: 1566:
+    #####: 1567:int connection_set_idle_timeout(CONNECTION_HANDLE connection, milliseconds idle_timeout)
+        -: 1568:{
+        -: 1569:    int result;
+        -: 1570:
+        -: 1571:    /* Codes_S_R_S_CONNECTION_01_191: [If connection is NULL, connection_set_idle_timeout shall fail and return a non-zero value.] */
+    #####: 1572:    if (connection == NULL)
+        -: 1573:    {
+    #####: 1574:        LogError("NULL connection");
+    #####: 1575:        result = MU_FAILURE;
+        -: 1576:    }
+        -: 1577:    else
+        -: 1578:    {
+        -: 1579:        /* Codes_S_R_S_CONNECTION_01_158: [If connection_set_idle_timeout is called after the initial Open frame has been sent, it shall fail and return a non-zero value.] */
+    #####: 1580:        if (connection->connection_state != CONNECTION_STATE_START)
+        -: 1581:        {
+    #####: 1582:            LogError("Connection already open");
+    #####: 1583:            result = MU_FAILURE;
+        -: 1584:        }
+        -: 1585:        else
+        -: 1586:        {
+        -: 1587:            /* Codes_S_R_S_CONNECTION_01_159: [connection_set_idle_timeout shall set the idle_timeout associated with a connection.] */
+        -: 1588:            /* Codes_S_R_S_CONNECTION_01_166: [If connection_set_idle_timeout fails, the previous idle_timeout setting shall be retained.] */
+    #####: 1589:            connection->idle_timeout = idle_timeout;
+    #####: 1590:            connection->idle_timeout_specified = true;
+        -: 1591:
+        -: 1592:            /* Codes_S_R_S_CONNECTION_01_160: [On success connection_set_idle_timeout shall return 0.] */
+    #####: 1593:            result = 0;
+        -: 1594:        }
+        -: 1595:    }
+        -: 1596:
+    #####: 1597:    return result;
+        -: 1598:}
+        -: 1599:
+    #####: 1600:int connection_get_idle_timeout(CONNECTION_HANDLE connection, milliseconds* idle_timeout)
+        -: 1601:{
+        -: 1602:    int result;
+        -: 1603:
+        -: 1604:    /* Codes_S_R_S_CONNECTION_01_190: [If connection or idle_timeout is NULL, connection_get_idle_timeout shall fail and return a non-zero value.] */
+    #####: 1605:    if ((connection == NULL) ||
+        -: 1606:        (idle_timeout == NULL))
+        -: 1607:    {
+    #####: 1608:        LogError("Bad arguments: connection = %p, idle_timeout = %p",
+        -: 1609:            connection, idle_timeout);
+    #####: 1610:        result = MU_FAILURE;
+        -: 1611:    }
+        -: 1612:    else
+        -: 1613:    {
+        -: 1614:        /* Codes_S_R_S_CONNECTION_01_188: [connection_get_idle_timeout shall return in the idle_timeout argument the current idle_timeout setting.] */
+    #####: 1615:        *idle_timeout = connection->idle_timeout;
+        -: 1616:
+        -: 1617:        /* Codes_S_R_S_CONNECTION_01_189: [On success, connection_get_idle_timeout shall return 0.] */
+    #####: 1618:        result = 0;
+        -: 1619:    }
+        -: 1620:
+    #####: 1621:    return result;
+        -: 1622:}
+        -: 1623:
+    #####: 1624:int connection_set_properties(CONNECTION_HANDLE connection, fields properties)
+        -: 1625:{
+        -: 1626:    int result;
+        -: 1627:
+        -: 1628:    /* Codes_S_R_S_CONNECTION_01_261: [If connection is NULL, connection_set_properties shall fail and return a non-zero value.] */
+    #####: 1629:    if (connection == NULL)
+        -: 1630:    {
+    #####: 1631:        LogError("NULL connection");
+    #####: 1632:        result = MU_FAILURE;
+        -: 1633:    }
+        -: 1634:    else
+        -: 1635:    {
+        -: 1636:        /* Codes_S_R_S_CONNECTION_01_262: [If connection_set_properties is called after the initial Open frame has been sent, it shall fail and return a non-zero value.] */
+    #####: 1637:        if (connection->connection_state != CONNECTION_STATE_START)
+        -: 1638:        {
+    #####: 1639:            LogError("Connection already open");
+    #####: 1640:            result = MU_FAILURE;
+        -: 1641:        }
+        -: 1642:        else
+        -: 1643:        {
+    #####: 1644:            if (properties == NULL)
+        -: 1645:            {
+        -: 1646:                /* Codes_S_R_S_CONNECTION_01_263: [ If `properties` is NULL, the previously stored properties associated with `connection` shall be freed. ]*/
+    #####: 1647:                if (connection->properties != NULL)
+        -: 1648:                {
+    #####: 1649:                    fields_destroy(connection->properties);
+    #####: 1650:                    connection->properties = NULL;
+        -: 1651:                }
+        -: 1652:
+        -: 1653:                /* Codes_S_R_S_CONNECTION_01_264: [ On success it shall return 0. ]*/
+    #####: 1654:                result = 0;
+        -: 1655:            }
+        -: 1656:            else
+        -: 1657:            {
+        -: 1658:                fields new_properties;
+        -: 1659:
+        -: 1660:                /* Codes_S_R_S_CONNECTION_01_265: [ `connection_set_properties` shall copy the contents of `properties` as the properties contents for the connection instance identified by `connection`. ]*/
+        -: 1661:                /* Codes_S_R_S_CONNECTION_01_266: [ Cloning the properties shall be done by calling `fields_clone`. ]*/
+    #####: 1662:                new_properties = fields_clone(properties);
+    #####: 1663:                if (new_properties == NULL)
+        -: 1664:                {
+        -: 1665:                    /* Codes_S_R_S_CONNECTION_01_267: [ If `fields_clone` fails, `connection_set_properties` shall fail and return a non-zero value. ]*/
+    #####: 1666:                    LogError("Cannot clone connection properties");
+    #####: 1667:                    result = MU_FAILURE;
+        -: 1668:                }
+        -: 1669:                else
+        -: 1670:                {
+        -: 1671:                    /* Codes_S_R_S_CONNECTION_01_268: [ If setting the properties fails, the previous value shall be preserved. ]*/
+        -: 1672:                    /* Only do the free of the previous value if we could clone the new one*/
+    #####: 1673:                    if (connection->properties != NULL)
+        -: 1674:                    {
+    #####: 1675:                        fields_destroy(connection->properties);
+        -: 1676:                    }
+        -: 1677:
+    #####: 1678:                    connection->properties = new_properties;
+        -: 1679:
+        -: 1680:                    /* Codes_S_R_S_CONNECTION_01_264: [ On success it shall return 0. ]*/
+    #####: 1681:                    result = 0;
+        -: 1682:                }
+        -: 1683:            }
+        -: 1684:        }
+        -: 1685:    }
+        -: 1686:
+    #####: 1687:    return result;
+        -: 1688:}
+        -: 1689:
+    #####: 1690:int connection_get_properties(CONNECTION_HANDLE connection, fields* properties)
+        -: 1691:{
+        -: 1692:    int result;
+        -: 1693:
+        -: 1694:    /* Codes_S_R_S_CONNECTION_01_269: [If connection or properties is NULL, connection_get_properties shall fail and return a non-zero value.] */
+    #####: 1695:    if ((connection == NULL) ||
+        -: 1696:        (properties == NULL))
+        -: 1697:    {
+    #####: 1698:        LogError("Bad arguments: connection = %p, properties = %p",
+        -: 1699:            connection, properties);
+    #####: 1700:        result = MU_FAILURE;
+        -: 1701:    }
+        -: 1702:    else
+        -: 1703:    {
+    #####: 1704:        if (connection->properties == NULL)
+        -: 1705:        {
+        -: 1706:            /* Codes_S_R_S_CONNECTION_01_270: [ If no properties have been set, `connection_get_properties` shall set `properties` to NULL. ]*/
+    #####: 1707:            *properties = NULL;
+        -: 1708:
+        -: 1709:            /* Codes_S_R_S_CONNECTION_01_271: [On success, connection_get_properties shall return 0.] */
+    #####: 1710:            result = 0;
+        -: 1711:        }
+        -: 1712:        else
+        -: 1713:        {
+        -: 1714:            /* Codes_S_R_S_CONNECTION_01_272: [connection_get_properties shall return in the properties argument the current properties setting.] */
+        -: 1715:            /* Codes_S_R_S_CONNECTION_01_273: [ Cloning the properties shall be done by calling `fields_clone`. ]*/
+    #####: 1716:            *properties = fields_clone(connection->properties);
+    #####: 1717:            if (*properties == NULL)
+        -: 1718:            {
+        -: 1719:                /* Codes_S_R_S_CONNECTION_01_274: [ If `fields_clone` fails, `connection_get_properties` shall fail and return a non-zero value. ]*/
+    #####: 1720:                LogError("Cannot clone properties");
+    #####: 1721:                result = MU_FAILURE;
+        -: 1722:            }
+        -: 1723:            else
+        -: 1724:            {
+        -: 1725:                /* Codes_S_R_S_CONNECTION_01_271: [On success, connection_get_properties shall return 0.] */
+    #####: 1726:                result = 0;
+        -: 1727:            }
+        -: 1728:        }
+        -: 1729:    }
+        -: 1730:
+    #####: 1731:    return result;
+        -: 1732:}
+        -: 1733:
+    #####: 1734:int connection_get_remote_max_frame_size(CONNECTION_HANDLE connection, uint32_t* remote_max_frame_size)
+        -: 1735:{
+        -: 1736:    int result;
+        -: 1737:
+    #####: 1738:    if ((connection == NULL) ||
+        -: 1739:        (remote_max_frame_size == NULL))
+        -: 1740:    {
+    #####: 1741:        LogError("Bad arguments: connection = %p, remote_max_frame_size = %p",
+        -: 1742:            connection, remote_max_frame_size);
+    #####: 1743:        result = MU_FAILURE;
+        -: 1744:    }
+        -: 1745:    else
+        -: 1746:    {
+    #####: 1747:        *remote_max_frame_size = connection->remote_max_frame_size;
+        -: 1748:
+    #####: 1749:        result = 0;
+        -: 1750:    }
+        -: 1751:
+    #####: 1752:    return result;
+        -: 1753:}
+        -: 1754:
+    #####: 1755:uint64_t connection_handle_deadlines(CONNECTION_HANDLE connection)
+        -: 1756:{
+    #####: 1757:    uint64_t local_deadline = (uint64_t)-1;
+    #####: 1758:    uint64_t remote_deadline = (uint64_t)-1;
+        -: 1759:
+    #####: 1760:    if (connection == NULL)
+        -: 1761:    {
+    #####: 1762:        LogError("NULL connection");
+        -: 1763:    }
+        -: 1764:    else
+        -: 1765:    {
+        -: 1766:        tickcounter_ms_t current_ms;
+        -: 1767:
+    #####: 1768:        if (tickcounter_get_current_ms(connection->tick_counter, &current_ms) != 0)
+        -: 1769:        {
+    #####: 1770:            LogError("Could not get tick counter value");
+    #####: 1771:            close_connection_with_error(connection, "amqp:internal-error", "Could not get tick count", NULL);
+        -: 1772:        }
+        -: 1773:        else
+        -: 1774:        {
+    #####: 1775:            if (connection->idle_timeout_specified && (connection->idle_timeout != 0))
+        -: 1776:            {
+        -: 1777:                /* Calculate time until configured idle timeout expires */
+        -: 1778:
+    #####: 1779:                uint64_t time_since_last_received = current_ms - connection->last_frame_received_time;
+    #####: 1780:                if (time_since_last_received < connection->idle_timeout)
+        -: 1781:                {
+    #####: 1782:                    local_deadline = connection->idle_timeout - time_since_last_received;
+        -: 1783:                }
+        -: 1784:                else
+        -: 1785:                {
+    #####: 1786:                    local_deadline = 0;
+        -: 1787:
+        -: 1788:                    /* close connection */
+    #####: 1789:                    close_connection_with_error(connection, "amqp:internal-error", "No frame received for the idle timeout", NULL);
+        -: 1790:                }
+        -: 1791:            }
+        -: 1792:
+    #####: 1793:            if (local_deadline != 0 && connection->remote_idle_timeout != 0)
+        -: 1794:            {
+        -: 1795:                /* Calculate time until remote idle timeout expires */
+        -: 1796:
+    #####: 1797:                uint64_t remote_idle_timeout = connection->remote_idle_timeout_send_frame_millisecond;
+    #####: 1798:                uint64_t time_since_last_sent = current_ms - connection->last_frame_sent_time;
+        -: 1799:
+    #####: 1800:                if (time_since_last_sent < remote_idle_timeout)
+        -: 1801:                {
+    #####: 1802:                    remote_deadline = remote_idle_timeout - time_since_last_sent;
+        -: 1803:                }
+        -: 1804:                else
+        -: 1805:                {
+    #####: 1806:                    connection->on_send_complete = NULL;
+    #####: 1807:                    if (amqp_frame_codec_encode_empty_frame(connection->amqp_frame_codec, 0, on_bytes_encoded, connection) != 0)
+        -: 1808:                    {
+    #####: 1809:                        LogError("Encoding the empty frame failed");
+        -: 1810:                        /* close connection */
+    #####: 1811:                        close_connection_with_error(connection, "amqp:internal-error", "Cannot send empty frame", NULL);
+        -: 1812:                    }
+        -: 1813:                    else
+        -: 1814:                    {
+    #####: 1815:                        if (connection->is_trace_on == 1)
+        -: 1816:                        {
+    #####: 1817:                            LOG(AZ_LOG_TRACE, LOG_LINE, "-> Empty frame");
+        -: 1818:                        }
+        -: 1819:
+    #####: 1820:                        connection->last_frame_sent_time = current_ms;
+        -: 1821:
+    #####: 1822:                        remote_deadline = remote_idle_timeout;
+        -: 1823:                    }
+        -: 1824:                }
+        -: 1825:            }
+        -: 1826:        }
+        -: 1827:    }
+        -: 1828:
+        -: 1829:    /* Return the shorter of each deadline, or 0 to indicate connection closed */
+    #####: 1830:    return local_deadline > remote_deadline ? remote_deadline : local_deadline;
+        -: 1831:}
+        -: 1832:
+    #####: 1833:void connection_dowork(CONNECTION_HANDLE connection)
+        -: 1834:{
+        -: 1835:    /* Codes_S_R_S_CONNECTION_01_078: [If handle is NULL, connection_dowork shall do nothing.] */
+    #####: 1836:    if (connection == NULL)
+        -: 1837:    {
+    #####: 1838:        LogError("NULL connection");
+        -: 1839:    }
+        -: 1840:    else
+        -: 1841:    {
+    #####: 1842:        if (connection_handle_deadlines(connection) > 0)
+        -: 1843:        {
+        -: 1844:            /* Codes_S_R_S_CONNECTION_01_076: [connection_dowork shall schedule the underlying IO interface to do its work by calling xio_dowork.] */
+    #####: 1845:            xio_dowork(connection->io);
+        -: 1846:        }
+        -: 1847:    }
+    #####: 1848:}
+        -: 1849:
+        6: 1850:ENDPOINT_HANDLE connection_create_endpoint(CONNECTION_HANDLE connection)
+        -: 1851:{
+        -: 1852:    ENDPOINT_HANDLE result;
+        -: 1853:
+        -: 1854:    /* Codes_S_R_S_CONNECTION_01_113: [If connection, on_endpoint_frame_received or on_connection_state_changed is NULL, connection_create_endpoint shall fail and return NULL.] */
+        -: 1855:    /* Codes_S_R_S_CONNECTION_01_193: [The context argument shall be allowed to be NULL.] */
+        6: 1856:    if (connection == NULL)
+        -: 1857:    {
+    #####: 1858:        LogError("NULL connection");
+    #####: 1859:        result = NULL;
+        -: 1860:    }
+        -: 1861:    else
+        -: 1862:    {
+        -: 1863:        /* Codes_S_R_S_CONNECTION_01_115: [If no more endpoints can be created due to all channels being used, connection_create_endpoint shall fail and return NULL.] */
+        6: 1864:        if (connection->endpoint_count >= connection->channel_max)
+        -: 1865:        {
+    #####: 1866:            result = NULL;
+        -: 1867:        }
+        -: 1868:        else
+        -: 1869:        {
+        6: 1870:            uint32_t i = 0;
+        -: 1871:
+        -: 1872:            /* Codes_S_R_S_CONNECTION_01_128: [The lowest number outgoing channel shall be associated with the newly created endpoint.] */
+       6*: 1873:            for (i = 0; i < connection->endpoint_count; i++)
+        -: 1874:            {
+    #####: 1875:                if (connection->endpoints[i]->outgoing_channel > i)
+        -: 1876:                {
+        -: 1877:                    /* found a gap in the sorted endpoint array */
+    #####: 1878:                    break;
+        -: 1879:                }
+        -: 1880:            }
+        -: 1881:
+        -: 1882:            /* Codes_S_R_S_CONNECTION_01_127: [On success, connection_create_endpoint shall return a non-NULL handle to the newly created endpoint.] */
+        6: 1883:            result = (ENDPOINT_HANDLE)malloc(sizeof(ENDPOINT_INSTANCE));
+        -: 1884:            /* Codes_S_R_S_CONNECTION_01_196: [If memory cannot be allocated for the new endpoint, connection_create_endpoint shall fail and return NULL.] */
+        6: 1885:            if (result == NULL)
+        -: 1886:            {
+    #####: 1887:                LogError("Cannot allocate memory for endpoint");
+        -: 1888:            }
+        -: 1889:            else
+        -: 1890:            {
+        -: 1891:                ENDPOINT_HANDLE* new_endpoints;
+        -: 1892:
+        6: 1893:                result->on_endpoint_frame_received = NULL;
+        6: 1894:                result->on_connection_state_changed = NULL;
+        6: 1895:                result->callback_context = NULL;
+        6: 1896:                result->outgoing_channel = (uint16_t)i;
+        6: 1897:                result->connection = connection;
+        -: 1898:
+        -: 1899:                /* Codes_S_R_S_CONNECTION_01_197: [The newly created endpoint shall be added to the endpoints list, so that it can be tracked.] */
+        6: 1900:                new_endpoints = (ENDPOINT_HANDLE*)realloc(connection->endpoints, sizeof(ENDPOINT_HANDLE) * (connection->endpoint_count + 1));
+        6: 1901:                if (new_endpoints == NULL)
+        -: 1902:                {
+        -: 1903:                    /* Tests_S_R_S_CONNECTION_01_198: [If adding the endpoint to the endpoints list tracked by the connection fails, connection_create_endpoint shall fail and return NULL.] */
+    #####: 1904:                    LogError("Cannot reallocate memory for connection endpoints");
+    #####: 1905:                    free(result);
+    #####: 1906:                    result = NULL;
+        -: 1907:                }
+        -: 1908:                else
+        -: 1909:                {
+        6: 1910:                    connection->endpoints = new_endpoints;
+        -: 1911:
+        6: 1912:                    if (i < connection->endpoint_count)
+        -: 1913:                    {
+    #####: 1914:                        (void)memmove(&connection->endpoints[i + 1], &connection->endpoints[i], sizeof(ENDPOINT_INSTANCE*) * (connection->endpoint_count - i));
+        -: 1915:                    }
+        -: 1916:
+        6: 1917:                    connection->endpoints[i] = result;
+        6: 1918:                    connection->endpoint_count++;
+        -: 1919:
+        -: 1920:                    /* Codes_S_R_S_CONNECTION_01_112: [connection_create_endpoint shall create a new endpoint that can be used by a session.] */
+        -: 1921:                }
+        -: 1922:            }
+        -: 1923:        }
+        -: 1924:    }
+        -: 1925:
+        6: 1926:    return result;
+        -: 1927:}
+        -: 1928:
+        9: 1929:int connection_start_endpoint(ENDPOINT_HANDLE endpoint, ON_ENDPOINT_FRAME_RECEIVED on_endpoint_frame_received, ON_CONNECTION_STATE_CHANGED on_connection_state_changed, void* context)
+        -: 1930:{
+        -: 1931:    int result;
+        -: 1932:
+        9: 1933:    if ((endpoint == NULL) ||
+        9: 1934:        (on_endpoint_frame_received == NULL) ||
+        -: 1935:        (on_connection_state_changed == NULL))
+        -: 1936:    {
+    #####: 1937:        LogError("Bad arguments: endpoint = %p, on_endpoint_frame_received = %p, on_connection_state_changed = %p",
+        -: 1938:            endpoint, on_endpoint_frame_received, on_connection_state_changed);
+    #####: 1939:        result = MU_FAILURE;
+        -: 1940:    }
+        -: 1941:    else
+        -: 1942:    {
+        9: 1943:        endpoint->on_endpoint_frame_received = on_endpoint_frame_received;
+        9: 1944:        endpoint->on_connection_state_changed = on_connection_state_changed;
+        9: 1945:        endpoint->callback_context = context;
+        -: 1946:
+        9: 1947:        result = 0;
+        -: 1948:    }
+        -: 1949:
+        9: 1950:    return result;
+        -: 1951:}
+        -: 1952:
+    #####: 1953:int connection_endpoint_get_incoming_channel(ENDPOINT_HANDLE endpoint, uint16_t* incoming_channel)
+        -: 1954:{
+        -: 1955:    int result;
+        -: 1956:
+    #####: 1957:    if ((endpoint == NULL) ||
+        -: 1958:        (incoming_channel == NULL))
+        -: 1959:    {
+    #####: 1960:        LogError("Bad arguments: endpoint = %p, incoming_channel = %p",
+        -: 1961:            endpoint, incoming_channel);
+    #####: 1962:        result = MU_FAILURE;
+        -: 1963:    }
+        -: 1964:    else
+        -: 1965:    {
+    #####: 1966:        *incoming_channel = endpoint->incoming_channel;
+    #####: 1967:        result = 0;
+        -: 1968:    }
+        -: 1969:
+    #####: 1970:    return result;
+        -: 1971:}
+        -: 1972:
+        -: 1973:/* Codes_S_R_S_CONNECTION_01_129: [connection_destroy_endpoint shall free all resources associated with an endpoint created by connection_create_endpoint.] */
+        6: 1974:void connection_destroy_endpoint(ENDPOINT_HANDLE endpoint)
+        -: 1975:{
+        6: 1976:    if (endpoint == NULL)
+        -: 1977:    {
+    #####: 1978:        LogError("NULL endpoint");
+        -: 1979:    }
+        -: 1980:    else
+        -: 1981:    {
+        6: 1982:        CONNECTION_HANDLE connection = (CONNECTION_HANDLE)endpoint->connection;
+        -: 1983:        size_t i;
+        -: 1984:
+       6*: 1985:        for (i = 0; i < connection->endpoint_count; i++)
+        -: 1986:        {
+        6: 1987:            if (connection->endpoints[i] == endpoint)
+        -: 1988:            {
+        6: 1989:                break;
+        -: 1990:            }
+        -: 1991:        }
+        -: 1992:
+        -: 1993:        /* Codes_S_R_S_CONNECTION_01_130: [The outgoing channel associated with the endpoint shall be released by removing the endpoint from the endpoint list.] */
+        -: 1994:        /* Codes_S_R_S_CONNECTION_01_131: [Any incoming channel number associated with the endpoint shall be released.] */
+        6: 1995:        if (i < connection->endpoint_count)
+        -: 1996:        {
+        -: 1997:            // endpoint found
+        6: 1998:            if (connection->endpoint_count == 1)
+        -: 1999:            {
+        6: 2000:                free(connection->endpoints);
+        6: 2001:                connection->endpoints = NULL;
+        6: 2002:                connection->endpoint_count = 0;
+        -: 2003:            }
+        -: 2004:            else
+        -: 2005:            {
+        -: 2006:                ENDPOINT_HANDLE* new_endpoints;
+        -: 2007:
+    #####: 2008:                if ((connection->endpoint_count - i - 1) > 0)
+        -: 2009:                {
+    #####: 2010:                    (void)memmove(connection->endpoints + i, connection->endpoints + i + 1, sizeof(ENDPOINT_HANDLE) * (connection->endpoint_count - i - 1));
+        -: 2011:                }
+        -: 2012:
+    #####: 2013:                new_endpoints = (ENDPOINT_HANDLE*)realloc(connection->endpoints, (connection->endpoint_count - 1) * sizeof(ENDPOINT_HANDLE));
+    #####: 2014:                if (new_endpoints != NULL)
+        -: 2015:                {
+    #####: 2016:                    connection->endpoints = new_endpoints;
+        -: 2017:                }
+        -: 2018:
+    #####: 2019:                connection->endpoint_count--;
+        -: 2020:            }
+        -: 2021:        }
+        -: 2022:
+        6: 2023:        free(endpoint);
+        -: 2024:    }
+        6: 2025:}
+        -: 2026:
+        -: 2027:/* Codes_S_R_S_CONNECTION_01_247: [connection_encode_frame shall send a frame for a certain endpoint.] */
+    #####: 2028:int connection_encode_frame(ENDPOINT_HANDLE endpoint, AMQP_VALUE performative, PAYLOAD* payloads, size_t payload_count, ON_SEND_COMPLETE on_send_complete, void* callback_context)
+        -: 2029:{
+        -: 2030:    int result;
+        -: 2031:
+        -: 2032:    /* Codes_S_R_S_CONNECTION_01_249: [If endpoint or performative are NULL, connection_encode_frame shall fail and return a non-zero value.] */
+    #####: 2033:    if ((endpoint == NULL) ||
+        -: 2034:        (performative == NULL))
+        -: 2035:    {
+    #####: 2036:        LogError("Bad arguments: endpoint = %p, performative = %p",
+        -: 2037:            endpoint, performative);
+    #####: 2038:        result = MU_FAILURE;
+        -: 2039:    }
+        -: 2040:    else
+        -: 2041:    {
+    #####: 2042:        CONNECTION_HANDLE connection = (CONNECTION_HANDLE)endpoint->connection;
+    #####: 2043:        AMQP_FRAME_CODEC_HANDLE amqp_frame_codec = connection->amqp_frame_codec;
+        -: 2044:
+        -: 2045:        /* Codes_S_R_S_CONNECTION_01_254: [If connection_encode_frame is called before the connection is in the OPENED state, connection_encode_frame shall fail and return a non-zero value.] */
+    #####: 2046:        if (connection->connection_state != CONNECTION_STATE_OPENED)
+        -: 2047:        {
+    #####: 2048:            LogError("Connection not open");
+    #####: 2049:            result = MU_FAILURE;
+        -: 2050:        }
+        -: 2051:        else
+        -: 2052:        {
+        -: 2053:            /* Codes_S_R_S_CONNECTION_01_255: [The payload size shall be computed based on all the payload chunks passed as argument in payloads.] */
+        -: 2054:            /* Codes_S_R_S_CONNECTION_01_250: [connection_encode_frame shall initiate the frame send by calling amqp_frame_codec_begin_encode_frame.] */
+        -: 2055:            /* Codes_S_R_S_CONNECTION_01_251: [The channel number passed to amqp_frame_codec_begin_encode_frame shall be the outgoing channel number associated with the endpoint by connection_create_endpoint.] */
+        -: 2056:            /* Codes_S_R_S_CONNECTION_01_252: [The performative passed to amqp_frame_codec_begin_encode_frame shall be the performative argument of connection_encode_frame.] */
+    #####: 2057:            connection->on_send_complete = on_send_complete;
+    #####: 2058:            connection->on_send_complete_callback_context = callback_context;
+    #####: 2059:            if (amqp_frame_codec_encode_frame(amqp_frame_codec, endpoint->outgoing_channel, performative, payloads, payload_count, on_bytes_encoded, connection) != 0)
+        -: 2060:            {
+        -: 2061:                /* Codes_S_R_S_CONNECTION_01_253: [If amqp_frame_codec_begin_encode_frame or amqp_frame_codec_encode_payload_bytes fails, then connection_encode_frame shall fail and return a non-zero value.] */
+    #####: 2062:                LogError("Encoding AMQP frame failed");
+    #####: 2063:                result = MU_FAILURE;
+        -: 2064:            }
+        -: 2065:            else
+        -: 2066:            {
+    #####: 2067:                if (connection->is_trace_on == 1)
+        -: 2068:                {
+    #####: 2069:                    log_outgoing_frame(performative);
+        -: 2070:                }
+        -: 2071:
+    #####: 2072:                if (tickcounter_get_current_ms(connection->tick_counter, &connection->last_frame_sent_time) != 0)
+        -: 2073:                {
+    #####: 2074:                    LogError("Getting tick counter value failed");
+    #####: 2075:                    result = MU_FAILURE;
+        -: 2076:                }
+        -: 2077:                else
+        -: 2078:                {
+        -: 2079:                    /* Codes_S_R_S_CONNECTION_01_248: [On success it shall return 0.] */
+    #####: 2080:                    result = 0;
+        -: 2081:                }
+        -: 2082:            }
+        -: 2083:        }
+        -: 2084:    }
+        -: 2085:
+    #####: 2086:    return result;
+        -: 2087:}
+        -: 2088:
+        2: 2089:void connection_set_trace(CONNECTION_HANDLE connection, bool trace_on)
+        -: 2090:{
+        -: 2091:    /* Codes_S_R_S_CONNECTION_07_002: [If connection is NULL then connection_set_trace shall do nothing.] */
+        2: 2092:    if (connection == NULL)
+        -: 2093:    {
+    #####: 2094:        LogError("NULL connection");
+        -: 2095:    }
+        -: 2096:    else
+        -: 2097:    {
+        -: 2098:        /* Codes_S_R_S_CONNECTION_07_001: [connection_set_trace shall set the ability to turn on and off trace logging.] */
+        2: 2099:        connection->is_trace_on = trace_on ? 1 : 0;
+        -: 2100:    }
+        2: 2101:}
+        -: 2102:
+    #####: 2103:int connection_set_remote_idle_timeout_empty_frame_send_ratio(CONNECTION_HANDLE connection, double idle_timeout_empty_frame_send_ratio)
+        -: 2104:{
+        -: 2105:    int result;
+        -: 2106:
+    #####: 2107:    if ((connection == NULL) ||
+    #####: 2108:        (idle_timeout_empty_frame_send_ratio <= 0.0) ||
+        -: 2109:        (idle_timeout_empty_frame_send_ratio > 1.0))
+        -: 2110:    {
+    #####: 2111:        LogError("Bad arguments: connection = %p, idle_timeout_empty_frame_send_ratio = %f",
+        -: 2112:            connection, idle_timeout_empty_frame_send_ratio);
+    #####: 2113:        result = MU_FAILURE;
+        -: 2114:    }
+        -: 2115:    else
+        -: 2116:    {
+    #####: 2117:        connection->idle_timeout_empty_frame_send_ratio = idle_timeout_empty_frame_send_ratio;
+    #####: 2118:        result = 0;
+        -: 2119:    }
+        -: 2120:
+    #####: 2121:    return result;
+        -: 2122:}
+        -: 2123:
+    #####: 2124:ON_CONNECTION_CLOSED_EVENT_SUBSCRIPTION_HANDLE connection_subscribe_on_connection_close_received(CONNECTION_HANDLE connection, ON_CONNECTION_CLOSE_RECEIVED on_connection_close_received, void* context)
+        -: 2125:{
+        -: 2126:    ON_CONNECTION_CLOSED_EVENT_SUBSCRIPTION_HANDLE result;
+        -: 2127:
+        -: 2128:    /* Codes_S_R_S_CONNECTION_01_279: [ `context` shall be allowed to be NULL. ]*/
+        -: 2129:
+        -: 2130:    /* Codes_S_R_S_CONNECTION_01_277: [ If `connection` is NULL, `connection_subscribe_on_connection_close_received` shall fail and return NULL. ]*/
+    #####: 2131:    if ((connection == NULL) ||
+        -: 2132:        /* Codes_S_R_S_CONNECTION_01_278: [ If `on_connection_close_received` is NULL, `connection_subscribe_on_connection_close_received` shall fail and return NULL. ]*/
+        -: 2133:        (on_connection_close_received == NULL))
+        -: 2134:    {
+    #####: 2135:        LogError("Invalid arguments: connection = %p, on_connection_close_received = %p, context = %p",
+        -: 2136:            connection, on_connection_close_received, context);
+    #####: 2137:        result = NULL;
+        -: 2138:    }
+        -: 2139:    else
+        -: 2140:    {
+    #####: 2141:        if (connection->on_connection_close_received_event_subscription.on_connection_close_received != NULL)
+        -: 2142:        {
+        -: 2143:            /* Codes_S_R_S_CONNECTION_01_280: [ Only one subscription shall be allowed per connection, if a subsequent second even subscription is done while a subscription is active, `connection_subscribe_on_connection_close_received` shall fail and return NULL. ]*/
+    #####: 2144:            LogError("Already subscribed for on_connection_close_received events");
+    #####: 2145:            result = NULL;
+        -: 2146:        }
+        -: 2147:        else
+        -: 2148:        {
+        -: 2149:            /* Codes_S_R_S_CONNECTION_01_275: [ `connection_subscribe_on_connection_close_received` shall register the `on_connection_close_received` handler to be triggered whenever a CLOSE performative is received.. ]*/
+    #####: 2150:            connection->on_connection_close_received_event_subscription.on_connection_close_received = on_connection_close_received;
+    #####: 2151:            connection->on_connection_close_received_event_subscription.context = context;
+        -: 2152:
+        -: 2153:            /* Codes_S_R_S_CONNECTION_01_276: [ On success, `connection_subscribe_on_connection_close_received` shall return a non-NULL handle to the event subcription. ]*/
+    #####: 2154:            result = &connection->on_connection_close_received_event_subscription;
+        -: 2155:        }
+        -: 2156:    }
+        -: 2157:
+    #####: 2158:    return result;
+        -: 2159:}
+        -: 2160:
+    #####: 2161:void connection_unsubscribe_on_connection_close_received(ON_CONNECTION_CLOSED_EVENT_SUBSCRIPTION_HANDLE event_subscription)
+        -: 2162:{
+    #####: 2163:    if (event_subscription == NULL)
+        -: 2164:    {
+    #####: 2165:        LogError("NULL event_subscription");
+        -: 2166:    }
+        -: 2167:    else
+        -: 2168:    {
+        -: 2169:        /* Codes_S_R_S_CONNECTION_01_281: [ `connection_unsubscribe_on_connection_close_received` shall remove the subscription for the connection closed event that was made by calling `connection_subscribe_on_connection_close_received`. ]*/
+    #####: 2170:        event_subscription->on_connection_close_received = NULL;
+    #####: 2171:        event_subscription->context = NULL;
+        -: 2172:    }
+    #####: 2173:}

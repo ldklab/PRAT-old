@@ -1,0 +1,348 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/sastoken.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include <string.h>
+        -:    7:#include "azure_c_shared_utility/gballoc.h"
+        -:    8:#include "azure_c_shared_utility/sastoken.h"
+        -:    9:#include "azure_c_shared_utility/urlencode.h"
+        -:   10:#include "azure_c_shared_utility/hmacsha256.h"
+        -:   11:#include "azure_c_shared_utility/azure_base64.h"
+        -:   12:#include "azure_c_shared_utility/agenttime.h"
+        -:   13:#include "azure_c_shared_utility/strings.h"
+        -:   14:#include "azure_c_shared_utility/buffer_.h"
+        -:   15:#include "azure_c_shared_utility/xlogging.h"
+        -:   16:#include "azure_c_shared_utility/crt_abstractions.h"
+        -:   17:
+    #####:   18:static double getExpiryValue(const char* expiryASCII)
+        -:   19:{
+    #####:   20:    double value = 0;
+    #####:   21:    size_t i = 0;
+    #####:   22:    for (i = 0; expiryASCII[i] != '\0'; i++)
+        -:   23:    {
+    #####:   24:        if (expiryASCII[i] >= '0' && expiryASCII[i] <= '9')
+        -:   25:        {
+    #####:   26:            value = value * 10 + (double)(expiryASCII[i] - '0');
+        -:   27:        }
+        -:   28:        else
+        -:   29:        {
+    #####:   30:            value = 0;
+    #####:   31:            break;
+        -:   32:        }
+        -:   33:    }
+    #####:   34:    return value;
+        -:   35:}
+        -:   36:
+    #####:   37:bool SASToken_Validate(STRING_HANDLE sasToken)
+        -:   38:{
+        -:   39:    bool result;
+        -:   40:    /*Codes_SRS_SASTOKEN_25_025: [**SASToken_Validate shall get the SASToken value by invoking STRING_c_str on the handle.**]***/
+    #####:   41:    const char* sasTokenArray = STRING_c_str(sasToken);
+        -:   42:
+        -:   43:    /* Codes_SRS_SASTOKEN_25_024: [**If handle is NULL then SASToken_Validate shall return false.**] */
+        -:   44:    /* Codes_SRS_SASTOKEN_25_026: [**If STRING_c_str on handle return NULL then SASToken_Validate shall return false.**] */
+    #####:   45:    if (sasToken == NULL || sasTokenArray == NULL)
+        -:   46:    {
+    #####:   47:        result = false;
+        -:   48:    }
+        -:   49:    else
+        -:   50:    {
+    #####:   51:        int seStart = -1, seStop = -1;
+    #####:   52:        int srStart = -1, srStop = -1;
+    #####:   53:        int sigStart = -1, sigStop = -1;
+    #####:   54:        int tokenLength = (int)STRING_length(sasToken);
+        -:   55:        int i;
+    #####:   56:        for (i = 0; i < tokenLength; i++)
+        -:   57:        {
+    #####:   58:            if (sasTokenArray[i] == 's' && sasTokenArray[i + 1] == 'e' && sasTokenArray[i + 2] == '=') // Look for se=
+        -:   59:            {
+    #####:   60:                seStart = i + 3;
+    #####:   61:                if (srStart > 0 && srStop < 0)
+        -:   62:                {
+    #####:   63:                    if (sasTokenArray[i - 1] != '&' && sasTokenArray[i - 1] == ' ') // look for either & or space
+    #####:   64:                        srStop = i - 1;
+    #####:   65:                    else if (sasTokenArray[i - 1] == '&')
+    #####:   66:                        srStop = i - 2;
+        -:   67:                    else
+    #####:   68:                        seStart = -1; // as the format is not either "&se=" or " se="
+        -:   69:                }
+    #####:   70:                else if (sigStart > 0 && sigStop < 0)
+        -:   71:                {
+    #####:   72:                    if (sasTokenArray[i - 1] != '&' && sasTokenArray[i - 1] == ' ')
+    #####:   73:                        sigStop = i - 1;
+    #####:   74:                    else if (sasTokenArray[i - 1] == '&')
+    #####:   75:                        sigStop = i - 2;
+        -:   76:                    else
+    #####:   77:                        seStart = -1;
+        -:   78:                }
+        -:   79:            }
+    #####:   80:            else if (sasTokenArray[i] == 's' && sasTokenArray[i + 1] == 'r' && sasTokenArray[i + 2] == '=') // Look for sr=
+        -:   81:            {
+    #####:   82:                srStart = i + 3;
+    #####:   83:                if (seStart > 0 && seStop < 0)
+        -:   84:                {
+    #####:   85:                    if (sasTokenArray[i - 1] != '&' && sasTokenArray[i - 1] == ' ')
+    #####:   86:                        seStop = i - 1;
+    #####:   87:                    else if (sasTokenArray[i - 1] == '&')
+    #####:   88:                        seStop = i - 2;
+        -:   89:                    else
+    #####:   90:                        srStart = -1;
+        -:   91:                }
+    #####:   92:                else if (sigStart > 0 && sigStop < 0)
+        -:   93:                {
+    #####:   94:                    if (sasTokenArray[i - 1] != '&' && sasTokenArray[i - 1] == ' ')
+    #####:   95:                        sigStop = i - 1;
+    #####:   96:                    else if (sasTokenArray[i - 1] == '&')
+    #####:   97:                        sigStop = i - 2;
+        -:   98:                    else
+    #####:   99:                        srStart = -1;
+        -:  100:                }
+        -:  101:            }
+    #####:  102:            else if (sasTokenArray[i] == 's' && sasTokenArray[i + 1] == 'i' && sasTokenArray[i + 2] == 'g' && sasTokenArray[i + 3] == '=') // Look for sig=
+        -:  103:            {
+    #####:  104:                sigStart = i + 4;
+    #####:  105:                if (srStart > 0 && srStop < 0)
+        -:  106:                {
+    #####:  107:                    if (sasTokenArray[i - 1] != '&' && sasTokenArray[i - 1] == ' ')
+    #####:  108:                        srStop = i - 1;
+    #####:  109:                    else if (sasTokenArray[i - 1] == '&')
+    #####:  110:                        srStop = i - 2;
+        -:  111:                    else
+    #####:  112:                        sigStart = -1;
+        -:  113:                }
+    #####:  114:                else if (seStart > 0 && seStop < 0)
+        -:  115:                {
+    #####:  116:                    if (sasTokenArray[i - 1] != '&' && sasTokenArray[i - 1] == ' ')
+    #####:  117:                        seStop = i - 1;
+    #####:  118:                    else if (sasTokenArray[i - 1] == '&')
+    #####:  119:                        seStop = i - 2;
+        -:  120:                    else
+    #####:  121:                        sigStart = -1;
+        -:  122:                }
+        -:  123:            }
+        -:  124:        }
+        -:  125:
+        -:  126:        /*Codes_SRS_SASTOKEN_25_027: [**If SASTOKEN does not obey the SASToken format then SASToken_Validate shall return false.**]***/
+        -:  127:        /*Codes_SRS_SASTOKEN_25_028: [**SASToken_validate shall check for the presence of sr, se and sig from the token and return false if not found**]***/
+    #####:  128:        if (seStart < 0 || srStart < 0 || sigStart < 0)
+        -:  129:        {
+    #####:  130:            result = false;
+        -:  131:        }
+        -:  132:        else
+        -:  133:        {
+    #####:  134:            if (seStop < 0)
+        -:  135:            {
+    #####:  136:                seStop = tokenLength;
+        -:  137:            }
+    #####:  138:            else if (srStop < 0)
+        -:  139:            {
+    #####:  140:                srStop = tokenLength;
+        -:  141:            }
+    #####:  142:            else if (sigStop < 0)
+        -:  143:            {
+    #####:  144:                sigStop = tokenLength;
+        -:  145:            }
+        -:  146:
+    #####:  147:            if ((seStop <= seStart) ||
+    #####:  148:                (srStop <= srStart) ||
+        -:  149:                (sigStop <= sigStart))
+        -:  150:            {
+    #####:  151:                result = false;
+        -:  152:            }
+        -:  153:            else
+        -:  154:            {
+    #####:  155:                char* expiryASCII = (char*)malloc(seStop - seStart + 1);
+        -:  156:                /*Codes_SRS_SASTOKEN_25_031: [**If malloc fails during validation then SASToken_Validate shall return false.**]***/
+    #####:  157:                if (expiryASCII == NULL)
+        -:  158:                {
+    #####:  159:                    result = false;
+        -:  160:                }
+        -:  161:                else
+        -:  162:                {
+        -:  163:                    double expiry;
+        -:  164:                    // Add the Null terminator here
+    #####:  165:                    memset(expiryASCII, 0, seStop - seStart + 1);
+    #####:  166:                    for (i = seStart; i < seStop; i++)
+        -:  167:                    {
+        -:  168:                        // The se contains the expiration values, if a & token is encountered then
+        -:  169:                        // the se field is complete.
+    #####:  170:                        if (sasTokenArray[i] == '&')
+        -:  171:                        {
+    #####:  172:                            break;
+        -:  173:                        }
+    #####:  174:                        expiryASCII[i - seStart] = sasTokenArray[i];
+        -:  175:                    }
+    #####:  176:                    expiry = getExpiryValue(expiryASCII);
+        -:  177:                    /*Codes_SRS_SASTOKEN_25_029: [**SASToken_validate shall check for expiry time from token and if token has expired then would return false **]***/
+    #####:  178:                    if (expiry <= 0)
+        -:  179:                    {
+    #####:  180:                        result = false;
+        -:  181:                    }
+        -:  182:                    else
+        -:  183:                    {
+    #####:  184:                        double secSinceEpoch = get_difftime(get_time(NULL), (time_t)0);
+    #####:  185:                        if (expiry < secSinceEpoch)
+        -:  186:                        {
+        -:  187:                            /*Codes_SRS_SASTOKEN_25_029: [**SASToken_validate shall check for expiry time from token and if token has expired then would return false **]***/
+    #####:  188:                            result = false;
+        -:  189:                        }
+        -:  190:                        else
+        -:  191:                        {
+        -:  192:                            /*Codes_SRS_SASTOKEN_25_030: [**SASToken_validate shall return true only if the format is obeyed and the token has not yet expired **]***/
+    #####:  193:                            result = true;
+        -:  194:                        }
+        -:  195:                    }
+    #####:  196:                    free(expiryASCII);
+        -:  197:                }
+        -:  198:            }
+        -:  199:        }
+        -:  200:    }
+        -:  201:
+    #####:  202:    return result;
+        -:  203:}
+        -:  204:
+        2:  205:static STRING_HANDLE construct_sas_token(const char* key, const char* scope, const char* keyname, size_t expiry)
+        -:  206:{
+        -:  207:    STRING_HANDLE result;
+        -:  208:
+        2:  209:    char tokenExpirationTime[32] = { 0 };
+        -:  210:
+        -:  211:    BUFFER_HANDLE decodedKey;
+        -:  212:
+        -:  213:    /*Codes_SRS_SASTOKEN_06_029: [The key parameter is decoded from base64.]*/
+        2:  214:    if ((decodedKey = Azure_Base64_Decode(key)) == NULL)
+        -:  215:    {
+        -:  216:        /*Codes_SRS_SASTOKEN_06_030: [If there is an error in the decoding then SASToken_Create shall return NULL.]*/
+        1:  217:        LogError("Unable to decode the key for generating the SAS.");
+        1:  218:        result = NULL;
+        -:  219:    }
+        -:  220:    else
+        -:  221:    {
+        -:  222:        /*Codes_SRS_SASTOKEN_06_026: [If the conversion to string form fails for any reason then SASToken_Create shall return NULL.]*/
+        1:  223:        if (size_tToString(tokenExpirationTime, sizeof(tokenExpirationTime), expiry) != 0)
+        -:  224:        {
+    #####:  225:            LogError("For some reason converting seconds to a string failed.  No SAS can be generated.");
+    #####:  226:            result = NULL;
+        -:  227:        }
+        -:  228:        else
+        -:  229:        {
+        1:  230:            STRING_HANDLE toBeHashed = NULL;
+        1:  231:            BUFFER_HANDLE hash = NULL;
+        2:  232:            if (((hash = BUFFER_new()) == NULL) ||
+        2:  233:                ((toBeHashed = STRING_new()) == NULL) ||
+        1:  234:                ((result = STRING_new()) == NULL))
+        -:  235:            {
+    #####:  236:                LogError("Unable to allocate memory to prepare SAS token.");
+    #####:  237:                result = NULL;
+        -:  238:            }
+        -:  239:            else
+        -:  240:            {
+        -:  241:                /*Codes_SRS_SASTOKEN_06_009: [The scope is the basis for creating a STRING_HANDLE.]*/
+        -:  242:                /*Codes_SRS_SASTOKEN_06_010: [A "\n" is appended to that string.]*/
+        -:  243:                /*Codes_SRS_SASTOKEN_06_011: [tokenExpirationTime is appended to that string.]*/
+        2:  244:                if ((STRING_concat(toBeHashed, scope) != 0) ||
+        2:  245:                    (STRING_concat(toBeHashed, "\n") != 0) ||
+        1:  246:                    (STRING_concat(toBeHashed, tokenExpirationTime) != 0))
+        -:  247:                {
+    #####:  248:                    LogError("Unable to build the input to the HMAC to prepare SAS token.");
+    #####:  249:                    STRING_delete(result);
+    #####:  250:                    result = NULL;
+        -:  251:                }
+        -:  252:                else
+        -:  253:                {
+        1:  254:                    STRING_HANDLE base64Signature = NULL;
+        1:  255:                    STRING_HANDLE urlEncodedSignature = NULL;
+        1:  256:                    size_t inLen = STRING_length(toBeHashed);
+        1:  257:                    const unsigned char* inBuf = (const unsigned char*)STRING_c_str(toBeHashed);
+        1:  258:                    size_t outLen = BUFFER_length(decodedKey);
+        1:  259:                    unsigned char* outBuf = BUFFER_u_char(decodedKey);
+        -:  260:                    /*Codes_SRS_SASTOKEN_06_013: [If an error is returned from the HMAC256 function then NULL is returned from SASToken_Create.]*/
+        -:  261:                    /*Codes_SRS_SASTOKEN_06_012: [An HMAC256 hash is calculated using the decodedKey, over toBeHashed.]*/
+        -:  262:                    /*Codes_SRS_SASTOKEN_06_014: [If there are any errors from the following operations then NULL shall be returned.]*/
+        -:  263:                    /*Codes_SRS_SASTOKEN_06_015: [The hash is base 64 encoded.]*/
+        -:  264:                    /*Codes_SRS_SASTOKEN_06_028: [base64Signature shall be url encoded.]*/
+        -:  265:                    /*Codes_SRS_SASTOKEN_06_016: [The string "SharedAccessSignature sr=" is the first part of the result of SASToken_Create.]*/
+        -:  266:                    /*Codes_SRS_SASTOKEN_06_017: [The scope parameter is appended to result.]*/
+        -:  267:                    /*Codes_SRS_SASTOKEN_06_018: [The string "&sig=" is appended to result.]*/
+        -:  268:                    /*Codes_SRS_SASTOKEN_06_019: [The string urlEncodedSignature shall be appended to result.]*/
+        -:  269:                    /*Codes_SRS_SASTOKEN_06_020: [The string "&se=" shall be appended to result.]*/
+        -:  270:                    /*Codes_SRS_SASTOKEN_06_021: [tokenExpirationTime is appended to result.]*/
+        -:  271:                    /*Codes_SRS_SASTOKEN_06_022: [If keyName is non-NULL, the string "&skn=" is appended to result.]*/
+        -:  272:                    /*Codes_SRS_SASTOKEN_06_023: [If keyName is non-NULL, the argument keyName is appended to result.]*/
+        2:  273:                    if ((HMACSHA256_ComputeHash(outBuf, outLen, inBuf, inLen, hash) != HMACSHA256_OK) ||
+        2:  274:                        ((base64Signature = Azure_Base64_Encode(hash)) == NULL) ||
+        2:  275:                        ((urlEncodedSignature = URL_Encode(base64Signature)) == NULL) ||
+        2:  276:                        (STRING_copy(result, "SharedAccessSignature sr=") != 0) ||
+        2:  277:                        (STRING_concat(result, scope) != 0) ||
+        2:  278:                        (STRING_concat(result, "&sig=") != 0) ||
+        2:  279:                        (STRING_concat_with_STRING(result, urlEncodedSignature) != 0) ||
+        2:  280:                        (STRING_concat(result, "&se=") != 0) ||
+        2:  281:                        (STRING_concat(result, tokenExpirationTime) != 0) ||
+        1:  282:                        ((keyname != NULL) && (STRING_concat(result, "&skn=") != 0)) ||
+        1:  283:                        ((keyname != NULL) && (STRING_concat(result, keyname) != 0)))
+        -:  284:                    {
+    #####:  285:                        LogError("Unable to build the SAS token.");
+    #####:  286:                        STRING_delete(result);
+    #####:  287:                        result = NULL;
+        -:  288:                    }
+        -:  289:                    else
+        -:  290:                    {
+        -:  291:                        /* everything OK */
+        -:  292:                    }
+        1:  293:                    STRING_delete(base64Signature);
+        1:  294:                    STRING_delete(urlEncodedSignature);
+        -:  295:                }
+        -:  296:            }
+        1:  297:            STRING_delete(toBeHashed);
+        1:  298:            BUFFER_delete(hash);
+        -:  299:        }
+        1:  300:        BUFFER_delete(decodedKey);
+        -:  301:    }
+        2:  302:    return result;
+        -:  303:}
+        -:  304:
+        2:  305:STRING_HANDLE SASToken_Create(STRING_HANDLE key, STRING_HANDLE scope, STRING_HANDLE keyName, size_t expiry)
+        -:  306:{
+        -:  307:    STRING_HANDLE result;
+        -:  308:
+        -:  309:    /*Codes_SRS_SASTOKEN_06_001: [If key is NULL then SASToken_Create shall return NULL.]*/
+        -:  310:    /*Codes_SRS_SASTOKEN_06_003: [If scope is NULL then SASToken_Create shall return NULL.]*/
+        -:  311:    /*Codes_SRS_SASTOKEN_06_007: [keyName is optional and can be set to NULL.]*/
+        2:  312:    if ((key == NULL) ||
+        -:  313:        (scope == NULL))
+        -:  314:    {
+    #####:  315:        LogError("Invalid Parameter to SASToken_Create. handle key: %p, handle scope: %p, handle keyName: %p", key, scope, keyName);
+    #####:  316:        result = NULL;
+        -:  317:    }
+        -:  318:    else
+        -:  319:    {
+        2:  320:        const char* string_key = STRING_c_str(key);
+        2:  321:        const char* string_scope = STRING_c_str(scope);
+        2:  322:        const char* string_name = STRING_c_str(keyName);
+        2:  323:        result = construct_sas_token(string_key, string_scope, string_name, expiry);
+        -:  324:    }
+        2:  325:    return result;
+        -:  326:}
+        -:  327:
+    #####:  328:STRING_HANDLE SASToken_CreateString(const char* key, const char* scope, const char* keyName, size_t expiry)
+        -:  329:{
+        -:  330:    STRING_HANDLE result;
+        -:  331:
+        -:  332:    /*Codes_SRS_SASTOKEN_06_001: [If key is NULL then SASToken_Create shall return NULL.]*/
+        -:  333:    /*Codes_SRS_SASTOKEN_06_003: [If scope is NULL then SASToken_Create shall return NULL.]*/
+        -:  334:    /*Codes_SRS_SASTOKEN_06_007: [keyName is optional and can be set to NULL.]*/
+    #####:  335:    if ((key == NULL) ||
+        -:  336:        (scope == NULL))
+        -:  337:    {
+    #####:  338:        LogError("Invalid Parameter to SASToken_Create. handle key: %p, handle scope: %p, handle keyName: %p", key, scope, keyName);
+    #####:  339:        result = NULL;
+        -:  340:    }
+        -:  341:    else
+        -:  342:    {
+    #####:  343:        result = construct_sas_token(key, scope, keyName, expiry);
+        -:  344:    }
+    #####:  345:    return result;
+        -:  346:}

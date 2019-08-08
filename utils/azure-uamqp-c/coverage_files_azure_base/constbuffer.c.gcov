@@ -1,0 +1,352 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/constbuffer.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include <stdbool.h>
+        -:    6:#include "azure_macro_utils/macro_utils.h"
+        -:    7:#include "azure_c_shared_utility/gballoc.h"
+        -:    8:#include "azure_c_shared_utility/xlogging.h"
+        -:    9:#include "azure_c_shared_utility/refcount.h"
+        -:   10:
+        -:   11:#include "azure_c_shared_utility/constbuffer.h"
+        -:   12:
+        -:   13:#define CONSTBUFFER_TYPE_VALUES \
+        -:   14:    CONSTBUFFER_TYPE_COPIED, \
+        -:   15:    CONSTBUFFER_TYPE_MEMORY_MOVED, \
+        -:   16:    CONSTBUFFER_TYPE_WITH_CUSTOM_FREE, \
+        -:   17:    CONSTBUFFER_TYPE_FROM_OFFSET_AND_SIZE
+        -:   18:
+        -:   19:MU_DEFINE_ENUM(CONSTBUFFER_TYPE, CONSTBUFFER_TYPE_VALUES)
+        -:   20:
+        -:   21:typedef struct CONSTBUFFER_HANDLE_DATA_TAG
+        -:   22:{
+        -:   23:    CONSTBUFFER alias;
+        -:   24:    COUNT_TYPE count;
+        -:   25:    CONSTBUFFER_TYPE buffer_type;
+        -:   26:    CONSTBUFFER_CUSTOM_FREE_FUNC custom_free_func;
+        -:   27:    void* custom_free_func_context;
+        -:   28:    CONSTBUFFER_HANDLE originalHandle; /*where the CONSTBUFFER_TYPE_FROM_OFFSET_AND_SIZE was build from*/
+        -:   29:} CONSTBUFFER_HANDLE_DATA;
+        -:   30:
+    #####:   31:static CONSTBUFFER_HANDLE CONSTBUFFER_Create_Internal(const unsigned char* source, size_t size)
+        -:   32:{
+        -:   33:    CONSTBUFFER_HANDLE result;
+        -:   34:    /*Codes_SRS_CONSTBUFFER_02_005: [The non-NULL handle returned by CONSTBUFFER_Create shall have its ref count set to "1".]*/
+        -:   35:    /*Codes_SRS_CONSTBUFFER_02_010: [The non-NULL handle returned by CONSTBUFFER_CreateFromBuffer shall have its ref count set to "1".]*/
+    #####:   36:    result = (CONSTBUFFER_HANDLE)malloc(sizeof(CONSTBUFFER_HANDLE_DATA) + size);
+    #####:   37:    if (result == NULL)
+        -:   38:    {
+        -:   39:        /*Codes_SRS_CONSTBUFFER_02_003: [If creating the copy fails then CONSTBUFFER_Create shall return NULL.]*/
+        -:   40:        /*Codes_SRS_CONSTBUFFER_02_008: [If copying the content fails, then CONSTBUFFER_CreateFromBuffer shall fail and return NULL.] */
+    #####:   41:        LogError("unable to malloc");
+        -:   42:        /*return as is*/
+        -:   43:    }
+        -:   44:    else
+        -:   45:    {
+    #####:   46:        INIT_REF_VAR(result->count);
+        -:   47:
+        -:   48:        /*Codes_SRS_CONSTBUFFER_02_002: [Otherwise, CONSTBUFFER_Create shall create a copy of the memory area pointed to by source having size bytes.]*/
+    #####:   49:        result->alias.size = size;
+    #####:   50:        if (size == 0)
+        -:   51:        {
+    #####:   52:            result->alias.buffer = NULL;
+        -:   53:        }
+        -:   54:        else
+        -:   55:        {
+    #####:   56:            unsigned char* temp = (unsigned char*)(result + 1);
+        -:   57:            /*Codes_SRS_CONSTBUFFER_02_004: [Otherwise CONSTBUFFER_Create shall return a non-NULL handle.]*/
+        -:   58:            /*Codes_SRS_CONSTBUFFER_02_007: [Otherwise, CONSTBUFFER_CreateFromBuffer shall copy the content of buffer.]*/
+        -:   59:            /*Codes_SRS_CONSTBUFFER_02_009: [Otherwise, CONSTBUFFER_CreateFromBuffer shall return a non-NULL handle.]*/
+    #####:   60:            (void)memcpy(temp, source, size);
+    #####:   61:            result->alias.buffer = temp;
+        -:   62:        }
+        -:   63:
+    #####:   64:        result->buffer_type = CONSTBUFFER_TYPE_COPIED;
+        -:   65:    }
+    #####:   66:    return result;
+        -:   67:}
+        -:   68:
+    #####:   69:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_HANDLE, CONSTBUFFER_Create, const unsigned char*, source, size_t, size)
+        -:   70:{
+        -:   71:    CONSTBUFFER_HANDLE result;
+        -:   72:    /*Codes_SRS_CONSTBUFFER_02_001: [If source is NULL and size is different than 0 then CONSTBUFFER_Create shall fail and return NULL.]*/
+    #####:   73:    if (
+    #####:   74:        (source == NULL) &&
+        -:   75:        (size != 0)
+        -:   76:        )
+        -:   77:    {
+    #####:   78:        LogError("invalid arguments passes to CONSTBUFFER_Create");
+    #####:   79:        result = NULL;
+        -:   80:    }
+        -:   81:    else
+        -:   82:    {
+    #####:   83:        result = CONSTBUFFER_Create_Internal(source, size);
+        -:   84:    }
+    #####:   85:    return result;
+        -:   86:}
+        -:   87:
+        -:   88:/*this creates a new constbuffer from an existing BUFFER_HANDLE*/
+    #####:   89:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_HANDLE, CONSTBUFFER_CreateFromBuffer, BUFFER_HANDLE, buffer)
+        -:   90:{
+        -:   91:    CONSTBUFFER_HANDLE result;
+        -:   92:    /*Codes_SRS_CONSTBUFFER_02_006: [If buffer is NULL then CONSTBUFFER_CreateFromBuffer shall fail and return NULL.]*/
+    #####:   93:    if (buffer == NULL)
+        -:   94:    {
+    #####:   95:        LogError("invalid arg passed to CONSTBUFFER_CreateFromBuffer");
+    #####:   96:        result = NULL;
+        -:   97:    }
+        -:   98:    else
+        -:   99:    {
+    #####:  100:        size_t length = BUFFER_length(buffer);
+    #####:  101:        unsigned char* rawBuffer = BUFFER_u_char(buffer);
+    #####:  102:        result = CONSTBUFFER_Create_Internal(rawBuffer, length);
+        -:  103:    }
+    #####:  104:    return result;
+        -:  105:}
+        -:  106:
+    #####:  107:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_HANDLE, CONSTBUFFER_CreateWithMoveMemory, unsigned char*, source, size_t, size)
+        -:  108:{
+        -:  109:    CONSTBUFFER_HANDLE result;
+        -:  110:
+        -:  111:    /* Codes_SRS_CONSTBUFFER_01_001: [ If source is NULL and size is different than 0 then CONSTBUFFER_Create shall fail and return NULL. ]*/
+    #####:  112:    if ((source == NULL) && (size > 0))
+        -:  113:    {
+    #####:  114:        LogError("Invalid arguments: unsigned char* source=%p, size_t size=%u", source, (unsigned int)size);
+    #####:  115:        result = NULL;
+        -:  116:    }
+        -:  117:    else
+        -:  118:    {
+    #####:  119:        result = (CONSTBUFFER_HANDLE)malloc(sizeof(CONSTBUFFER_HANDLE_DATA));
+    #####:  120:        if (result == NULL)
+        -:  121:        {
+        -:  122:            /* Codes_SRS_CONSTBUFFER_01_005: [ If any error occurs, CONSTBUFFER_CreateWithMoveMemory shall fail and return NULL. ]*/
+    #####:  123:            LogError("malloc failed");
+        -:  124:        }
+        -:  125:        else
+        -:  126:        {
+        -:  127:            /* Codes_SRS_CONSTBUFFER_01_004: [ If source is non-NULL and size is 0, the source pointer shall be owned (and freed) by the newly created instance of const buffer. ]*/
+        -:  128:            /* Codes_SRS_CONSTBUFFER_01_002: [ CONSTBUFFER_CreateWithMoveMemory shall store the source and size and return a non-NULL handle to the newly created const buffer. ]*/
+    #####:  129:            result->alias.buffer = source;
+    #####:  130:            result->alias.size = size;
+    #####:  131:            result->buffer_type = CONSTBUFFER_TYPE_MEMORY_MOVED;
+        -:  132:
+        -:  133:            /* Codes_SRS_CONSTBUFFER_01_003: [ The non-NULL handle returned by CONSTBUFFER_CreateWithMoveMemory shall have its ref count set to "1". ]*/
+    #####:  134:            INIT_REF_VAR(result->count);
+        -:  135:        }
+        -:  136:    }
+        -:  137:
+    #####:  138:    return result;
+        -:  139:}
+        -:  140:
+    #####:  141:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_HANDLE, CONSTBUFFER_CreateWithCustomFree, const unsigned char*, source, size_t, size, CONSTBUFFER_CUSTOM_FREE_FUNC, customFreeFunc, void*, customFreeFuncContext)
+        -:  142:{
+        -:  143:    CONSTBUFFER_HANDLE result;
+        -:  144:
+        -:  145:    /* Codes_SRS_CONSTBUFFER_01_014: [ customFreeFuncContext shall be allowed to be NULL. ]*/
+        -:  146:
+    #####:  147:    if (
+        -:  148:        /* Codes_SRS_CONSTBUFFER_01_006: [ If source is NULL and size is different than 0 then CONSTBUFFER_CreateWithCustomFree shall fail and return NULL. ]*/
+    #####:  149:        ((source == NULL) && (size > 0)) ||
+        -:  150:        /* Codes_SRS_CONSTBUFFER_01_013: [ If customFreeFunc is NULL, CONSTBUFFER_CreateWithCustomFree shall fail and return NULL. ]*/
+        -:  151:        (customFreeFunc == NULL)
+        -:  152:        )
+        -:  153:    {
+    #####:  154:        LogError("Invalid arguments: unsigned char* source=%p, size_t size=%u, customFreeFunc=%p, customFreeFuncContext=%p",
+        -:  155:            source, (unsigned int)size, customFreeFunc, customFreeFuncContext);
+    #####:  156:        result = NULL;
+        -:  157:    }
+        -:  158:    else
+        -:  159:    {
+    #####:  160:        result = (CONSTBUFFER_HANDLE)malloc(sizeof(CONSTBUFFER_HANDLE_DATA));
+    #####:  161:        if (result == NULL)
+        -:  162:        {
+        -:  163:            /* Codes_SRS_CONSTBUFFER_01_011: [ If any error occurs, CONSTBUFFER_CreateWithMoveMemory shall fail and return NULL. ]*/
+    #####:  164:            LogError("malloc failed");
+        -:  165:        }
+        -:  166:        else
+        -:  167:        {
+        -:  168:            /* Codes_SRS_CONSTBUFFER_01_007: [ If source is non-NULL and size is 0, the source pointer shall be owned (and freed) by the newly created instance of const buffer. ]*/
+        -:  169:            /* Codes_SRS_CONSTBUFFER_01_008: [ CONSTBUFFER_CreateWithCustomFree shall store the source and size and return a non-NULL handle to the newly created const buffer. ]*/
+    #####:  170:            result->alias.buffer = source;
+    #####:  171:            result->alias.size = size;
+    #####:  172:            result->buffer_type = CONSTBUFFER_TYPE_WITH_CUSTOM_FREE;
+        -:  173:
+        -:  174:            /* Codes_SRS_CONSTBUFFER_01_009: [ CONSTBUFFER_CreateWithCustomFree shall store customFreeFunc and customFreeFuncContext in order to use them to free the memory when the CONST buffer resources are freed. ]*/
+    #####:  175:            result->custom_free_func = customFreeFunc;
+    #####:  176:            result->custom_free_func_context = customFreeFuncContext;
+        -:  177:
+        -:  178:            /* Codes_SRS_CONSTBUFFER_01_010: [ The non-NULL handle returned by CONSTBUFFER_CreateWithCustomFree shall have its ref count set to 1. ]*/
+    #####:  179:            INIT_REF_VAR(result->count);
+        -:  180:        }
+        -:  181:    }
+        -:  182:
+    #####:  183:    return result;
+        -:  184:}
+        -:  185:
+    #####:  186:IMPLEMENT_MOCKABLE_FUNCTION(, CONSTBUFFER_HANDLE, CONSTBUFFER_CreateFromOffsetAndSize, CONSTBUFFER_HANDLE, handle, size_t, offset, size_t, size)
+        -:  187:{
+        -:  188:    CONSTBUFFER_HANDLE result;
+        -:  189:
+    #####:  190:    if (
+        -:  191:        /*Codes_SRS_CONSTBUFFER_02_025: [ If handle is NULL then CONSTBUFFER_CreateFromOffsetAndSize shall fail and return NULL. ]*/
+    #####:  192:        (handle == NULL) ||
+        -:  193:        /*Codes_SRS_CONSTBUFFER_02_026: [ If offset is greater than or equal to handles's size then CONSTBUFFER_CreateFromOffsetAndSize shall fail and return NULL. ]*/
+    #####:  194:        (offset > handle->alias.size) ||
+        -:  195:        /*Codes_SRS_CONSTBUFFER_02_032: [ If there are any failures then CONSTBUFFER_CreateFromOffsetAndSize shall fail and return NULL. ]*/
+    #####:  196:        (offset > SIZE_MAX - size) ||
+        -:  197:        /*Codes_SRS_CONSTBUFFER_02_027: [ If offset + size exceed handles's size then CONSTBUFFER_CreateFromOffsetAndSize shall fail and return NULL. ]*/
+    #####:  198:        (offset + size > handle->alias.size)
+        -:  199:        )
+        -:  200:    {
+    #####:  201:        LogError("invalid arguments CONSTBUFFER_HANDLE handle=%p, size_t offset=%zu, size_t size=%zu",
+        -:  202:            handle, offset, size);
+    #####:  203:        result = NULL;
+        -:  204:    }
+        -:  205:    else
+        -:  206:    {
+        -:  207:        /*Codes_SRS_CONSTBUFFER_02_028: [ CONSTBUFFER_CreateFromOffsetAndSize shall allocate memory for a new CONSTBUFFER_HANDLE's content. ]*/
+    #####:  208:        result = (CONSTBUFFER_HANDLE)malloc(sizeof(CONSTBUFFER_HANDLE_DATA));
+    #####:  209:        if (result == NULL)
+        -:  210:        {
+        -:  211:            /*Codes_SRS_CONSTBUFFER_02_032: [ If there are any failures then CONSTBUFFER_CreateFromOffsetAndSize shall fail and return NULL. ]*/
+    #####:  212:            LogError("failure in malloc(sizeof(CONSTBUFFER_HANDLE_DATA)=%zu)", sizeof(CONSTBUFFER_HANDLE_DATA));
+        -:  213:            /*return as is*/
+        -:  214:        }
+        -:  215:        else
+        -:  216:        {
+    #####:  217:            result->buffer_type = CONSTBUFFER_TYPE_FROM_OFFSET_AND_SIZE;
+    #####:  218:            result->alias.buffer = handle->alias.buffer+offset;
+    #####:  219:            result->alias.size = size;
+        -:  220:
+        -:  221:            /*Codes_SRS_CONSTBUFFER_02_030: [ CONSTBUFFER_CreateFromOffsetAndSize shall increment the reference count of handle. ]*/
+    #####:  222:            INC_REF_VAR(handle->count);
+    #####:  223:            result->originalHandle = handle;
+        -:  224:
+        -:  225:            /*Codes_SRS_CONSTBUFFER_02_029: [ CONSTBUFFER_CreateFromOffsetAndSize shall set the ref count of the newly created CONSTBUFFER_HANDLE to the initial value. ]*/
+    #####:  226:            INIT_REF_VAR(result->count);
+        -:  227:
+        -:  228:            /*Codes_SRS_CONSTBUFFER_02_031: [ CONSTBUFFER_CreateFromOffsetAndSize shall succeed and return a non-NULL value. ]*/
+        -:  229:        }
+        -:  230:    }
+    #####:  231:    return result;
+        -:  232:}
+        -:  233:
+    #####:  234:IMPLEMENT_MOCKABLE_FUNCTION(, void, CONSTBUFFER_IncRef, CONSTBUFFER_HANDLE, constbufferHandle)
+        -:  235:{
+    #####:  236:    if (constbufferHandle == NULL)
+        -:  237:    {
+        -:  238:        /*Codes_SRS_CONSTBUFFER_02_013: [If constbufferHandle is NULL then CONSTBUFFER_IncRef shall return.]*/
+    #####:  239:        LogError("Invalid arguments: CONSTBUFFER_HANDLE constbufferHandle=%p", constbufferHandle);
+        -:  240:    }
+        -:  241:    else
+        -:  242:    {
+        -:  243:        /*Codes_SRS_CONSTBUFFER_02_014: [Otherwise, CONSTBUFFER_IncRef shall increment the reference count.]*/
+    #####:  244:        INC_REF_VAR(constbufferHandle->count);
+        -:  245:    }
+    #####:  246:}
+        -:  247:
+    #####:  248:IMPLEMENT_MOCKABLE_FUNCTION(, const CONSTBUFFER*, CONSTBUFFER_GetContent, CONSTBUFFER_HANDLE, constbufferHandle)
+        -:  249:{
+        -:  250:    const CONSTBUFFER* result;
+    #####:  251:    if (constbufferHandle == NULL)
+        -:  252:    {
+        -:  253:        /*Codes_SRS_CONSTBUFFER_02_011: [If constbufferHandle is NULL then CONSTBUFFER_GetContent shall return NULL.]*/
+    #####:  254:        result = NULL;
+    #####:  255:        LogError("invalid arg");
+        -:  256:    }
+        -:  257:    else
+        -:  258:    {
+        -:  259:        /*Codes_SRS_CONSTBUFFER_02_012: [Otherwise, CONSTBUFFER_GetContent shall return a const CONSTBUFFER* that matches byte by byte the original bytes used to created the const buffer and has the same length.]*/
+    #####:  260:        result = &(constbufferHandle->alias);
+        -:  261:    }
+    #####:  262:    return result;
+        -:  263:}
+        -:  264:
+    #####:  265:static void CONSTBUFFER_DecRef_internal(CONSTBUFFER_HANDLE constbufferHandle)
+        -:  266:{
+        -:  267:    /*Codes_SRS_CONSTBUFFER_02_016: [Otherwise, CONSTBUFFER_DecRef shall decrement the refcount on the constbufferHandle handle.]*/
+    #####:  268:    if (DEC_REF_VAR(constbufferHandle->count) == DEC_RETURN_ZERO)
+        -:  269:    {
+    #####:  270:        if (constbufferHandle->buffer_type == CONSTBUFFER_TYPE_MEMORY_MOVED)
+        -:  271:        {
+    #####:  272:            free((void*)constbufferHandle->alias.buffer);
+        -:  273:        }
+    #####:  274:        else if (constbufferHandle->buffer_type == CONSTBUFFER_TYPE_WITH_CUSTOM_FREE)
+        -:  275:        {
+        -:  276:            /* Codes_SRS_CONSTBUFFER_01_012: [ If the buffer was created by calling CONSTBUFFER_CreateWithCustomFree, the customFreeFunc function shall be called to free the memory, while passed customFreeFuncContext as argument. ]*/
+    #####:  277:            constbufferHandle->custom_free_func(constbufferHandle->custom_free_func_context);
+        -:  278:        }
+        -:  279:        /*Codes_SRS_CONSTBUFFER_02_024: [ If the constbufferHandle was created by calling CONSTBUFFER_CreateFromOffsetAndSize then CONSTBUFFER_DecRef shall decrement the ref count of the original handle passed to CONSTBUFFER_CreateFromOffsetAndSize. ]*/
+    #####:  280:        else if (constbufferHandle->buffer_type == CONSTBUFFER_TYPE_FROM_OFFSET_AND_SIZE)
+        -:  281:        {
+    #####:  282:            CONSTBUFFER_DecRef_internal(constbufferHandle->originalHandle);
+        -:  283:        }
+        -:  284:
+        -:  285:        /*Codes_SRS_CONSTBUFFER_02_017: [If the refcount reaches zero, then CONSTBUFFER_DecRef shall deallocate all resources used by the CONSTBUFFER_HANDLE.]*/
+    #####:  286:        free(constbufferHandle);
+        -:  287:    }
+    #####:  288:}
+        -:  289:
+    #####:  290:IMPLEMENT_MOCKABLE_FUNCTION(, void, CONSTBUFFER_DecRef, CONSTBUFFER_HANDLE, constbufferHandle)
+        -:  291:{
+    #####:  292:    if (constbufferHandle == NULL)
+        -:  293:    {
+        -:  294:        /*Codes_SRS_CONSTBUFFER_02_015: [If constbufferHandle is NULL then CONSTBUFFER_DecRef shall do nothing.]*/
+    #####:  295:        LogError("Invalid arguments: CONSTBUFFER_HANDLE constbufferHandle=%p", constbufferHandle);
+        -:  296:    }
+        -:  297:    else
+        -:  298:    {
+    #####:  299:        CONSTBUFFER_DecRef_internal(constbufferHandle);
+        -:  300:    }
+    #####:  301:}
+        -:  302:
+        -:  303:
+    #####:  304:IMPLEMENT_MOCKABLE_FUNCTION(, bool, CONSTBUFFER_HANDLE_contain_same, CONSTBUFFER_HANDLE, left, CONSTBUFFER_HANDLE, right)
+        -:  305:{
+        -:  306:    bool result;
+    #####:  307:    if (left == NULL)
+        -:  308:    {
+    #####:  309:        if (right == NULL)
+        -:  310:        {
+        -:  311:            /*Codes_SRS_CONSTBUFFER_02_018: [ If left is NULL and right is NULL then CONSTBUFFER_HANDLE_contain_same shall return true. ]*/
+    #####:  312:            result = true;
+        -:  313:        }
+        -:  314:        else
+        -:  315:        {
+        -:  316:            /*Codes_SRS_CONSTBUFFER_02_019: [ If left is NULL and right is not NULL then CONSTBUFFER_HANDLE_contain_same shall return false. ]*/
+    #####:  317:            result = false;
+        -:  318:        }
+        -:  319:    }
+        -:  320:    else
+        -:  321:    {
+    #####:  322:        if (right == NULL)
+        -:  323:        {
+        -:  324:            /*Codes_SRS_CONSTBUFFER_02_020: [ If left is not NULL and right is NULL then CONSTBUFFER_HANDLE_contain_same shall return false. ]*/
+    #####:  325:            result = false;
+        -:  326:        }
+        -:  327:        else
+        -:  328:        {
+    #####:  329:            if (left->alias.size != right->alias.size)
+        -:  330:            {
+        -:  331:                /*Codes_SRS_CONSTBUFFER_02_021: [ If left's size is different than right's size then CONSTBUFFER_HANDLE_contain_same shall return false. ]*/
+    #####:  332:                result = false;
+        -:  333:            }
+        -:  334:            else
+        -:  335:            {
+    #####:  336:                if (memcmp(left->alias.buffer, right->alias.buffer, left->alias.size) != 0)
+        -:  337:                {
+        -:  338:                    /*Codes_SRS_CONSTBUFFER_02_022: [ If left's buffer is contains different bytes than rights's buffer then CONSTBUFFER_HANDLE_contain_same shall return false. ]*/
+    #####:  339:                    result = false;
+        -:  340:                }
+        -:  341:                else
+        -:  342:                {
+        -:  343:                    /*Codes_SRS_CONSTBUFFER_02_023: [ CONSTBUFFER_HANDLE_contain_same shall return true. ]*/
+    #####:  344:                    result = true;
+        -:  345:                }
+        -:  346:            }
+        -:  347:        }
+        -:  348:    }
+    #####:  349:    return result;
+        -:  350:}

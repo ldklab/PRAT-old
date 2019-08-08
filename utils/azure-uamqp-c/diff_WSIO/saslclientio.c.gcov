@@ -1,0 +1,246 @@
+2c2
+<         -:    0:Programs:101
+---
+>         -:    0:Programs:82
+93c93
+<         2:   91:static void indicate_open_complete(SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance, IO_OPEN_RESULT open_result)
+---
+>     #####:   91:static void indicate_open_complete(SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance, IO_OPEN_RESULT open_result)
+95c95
+<         2:   93:    if (sasl_client_io_instance->on_io_open_complete != NULL)
+---
+>     #####:   93:    if (sasl_client_io_instance->on_io_open_complete != NULL)
+97c97
+<         2:   95:        sasl_client_io_instance->on_io_open_complete(sasl_client_io_instance->on_io_open_complete_context, open_result);
+---
+>     #####:   95:        sasl_client_io_instance->on_io_open_complete(sasl_client_io_instance->on_io_open_complete_context, open_result);
+99c99
+<         2:   97:}
+---
+>     #####:   97:}
+131c131
+<         6:  129:static void handle_error(SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance)
+---
+>         4:  129:static void handle_error(SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance)
+133c133
+<         6:  131:    switch (sasl_client_io_instance->io_state)
+---
+>         4:  131:    switch (sasl_client_io_instance->io_state)
+139c139
+<         6:  137:    case IO_STATE_OPENING_UNDERLYING_IO:
+---
+>         4:  137:    case IO_STATE_OPENING_UNDERLYING_IO:
+141c141
+<         6:  139:        if (xio_close(sasl_client_io_instance->underlying_io, on_underlying_io_close_complete, sasl_client_io_instance) != 0)
+---
+>         4:  139:        if (xio_close(sasl_client_io_instance->underlying_io, on_underlying_io_close_complete, sasl_client_io_instance) != 0)
+143,144c143,144
+<         2:  141:            sasl_client_io_instance->io_state = IO_STATE_NOT_OPEN;
+<         2:  142:            indicate_open_complete(sasl_client_io_instance, IO_OPEN_ERROR);
+---
+>     #####:  141:            sasl_client_io_instance->io_state = IO_STATE_NOT_OPEN;
+>     #####:  142:            indicate_open_complete(sasl_client_io_instance, IO_OPEN_ERROR);
+146c146
+<         6:  144:        break;
+---
+>         4:  144:        break;
+153c153
+<         6:  151:}
+---
+>         4:  151:}
+187c187
+<         6:  185:static void on_underlying_io_open_complete(void* context, IO_OPEN_RESULT open_result)
+---
+>         4:  185:static void on_underlying_io_open_complete(void* context, IO_OPEN_RESULT open_result)
+189c189
+<         6:  187:    SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance = (SASL_CLIENT_IO_INSTANCE*)context;
+---
+>         4:  187:    SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance = (SASL_CLIENT_IO_INSTANCE*)context;
+191c191
+<         6:  189:    switch (sasl_client_io_instance->io_state)
+---
+>         4:  189:    switch (sasl_client_io_instance->io_state)
+204,205c204,205
+<         6:  202:    case IO_STATE_OPENING_UNDERLYING_IO:
+<         6:  203:        if (open_result == IO_OPEN_OK)
+---
+>         4:  202:    case IO_STATE_OPENING_UNDERLYING_IO:
+>         4:  203:        if (open_result == IO_OPEN_OK)
+231c231
+<         6:  229:            handle_error(sasl_client_io_instance);
+---
+>         4:  229:            handle_error(sasl_client_io_instance);
+234c234
+<         6:  232:        break;
+---
+>         4:  232:        break;
+236c236
+<         6:  234:}
+---
+>         4:  234:}
+962c962
+<         5:  960:CONCRETE_IO_HANDLE saslclientio_create(void* io_create_parameters)
+---
+>         4:  960:CONCRETE_IO_HANDLE saslclientio_create(void* io_create_parameters)
+964c964
+<         5:  962:    SASLCLIENTIO_CONFIG* sasl_client_io_config = (SASLCLIENTIO_CONFIG*)io_create_parameters;
+---
+>         4:  962:    SASLCLIENTIO_CONFIG* sasl_client_io_config = (SASLCLIENTIO_CONFIG*)io_create_parameters;
+968c968
+<         5:  966:    if (sasl_client_io_config == NULL)
+---
+>         4:  966:    if (sasl_client_io_config == NULL)
+974,975c974,975
+<         5:  972:    else if ((sasl_client_io_config->underlying_io == NULL) ||
+<         5:  973:        (sasl_client_io_config->sasl_mechanism == NULL))
+---
+>         4:  972:    else if ((sasl_client_io_config->underlying_io == NULL) ||
+>         4:  973:        (sasl_client_io_config->sasl_mechanism == NULL))
+983,984c983,984
+<         5:  981:        result = (SASL_CLIENT_IO_INSTANCE*)malloc(sizeof(SASL_CLIENT_IO_INSTANCE));
+<         5:  982:        if (result == NULL)
+---
+>         4:  981:        result = (SASL_CLIENT_IO_INSTANCE*)malloc(sizeof(SASL_CLIENT_IO_INSTANCE));
+>         4:  982:        if (result == NULL)
+991c991
+<         5:  989:            result->underlying_io = sasl_client_io_config->underlying_io;
+---
+>         4:  989:            result->underlying_io = sasl_client_io_config->underlying_io;
+993,994c993,994
+<         5:  991:            result->frame_codec = frame_codec_create(on_frame_codec_error, result);
+<         5:  992:            if (result->frame_codec == NULL)
+---
+>         4:  991:            result->frame_codec = frame_codec_create(on_frame_codec_error, result);
+>         4:  992:            if (result->frame_codec == NULL)
+1004,1005c1004,1005
+<         5: 1002:                result->sasl_frame_codec = sasl_frame_codec_create(result->frame_codec, on_sasl_frame_received_callback, on_sasl_frame_codec_error, result);
+<         5: 1003:                if (result->sasl_frame_codec == NULL)
+---
+>         4: 1002:                result->sasl_frame_codec = sasl_frame_codec_create(result->frame_codec, on_sasl_frame_received_callback, on_sasl_frame_codec_error, result);
+>         4: 1003:                if (result->sasl_frame_codec == NULL)
+1016,1024c1016,1024
+<         5: 1014:                    result->on_bytes_received = NULL;
+<         5: 1015:                    result->on_io_open_complete = NULL;
+<         5: 1016:                    result->on_io_error = NULL;
+<         5: 1017:                    result->on_io_close_complete = NULL;
+<         5: 1018:                    result->on_bytes_received_context = NULL;
+<         5: 1019:                    result->on_io_open_complete_context = NULL;
+<         5: 1020:                    result->on_io_close_complete_context = NULL;
+<         5: 1021:                    result->on_io_error_context = NULL;
+<         5: 1022:                    result->sasl_mechanism = sasl_client_io_config->sasl_mechanism;
+---
+>         4: 1014:                    result->on_bytes_received = NULL;
+>         4: 1015:                    result->on_io_open_complete = NULL;
+>         4: 1016:                    result->on_io_error = NULL;
+>         4: 1017:                    result->on_io_close_complete = NULL;
+>         4: 1018:                    result->on_bytes_received_context = NULL;
+>         4: 1019:                    result->on_io_open_complete_context = NULL;
+>         4: 1020:                    result->on_io_close_complete_context = NULL;
+>         4: 1021:                    result->on_io_error_context = NULL;
+>         4: 1022:                    result->sasl_mechanism = sasl_client_io_config->sasl_mechanism;
+1026c1026
+<         5: 1024:                    result->io_state = IO_STATE_NOT_OPEN;
+---
+>         4: 1024:                    result->io_state = IO_STATE_NOT_OPEN;
+1032c1032
+<         5: 1030:    return result;
+---
+>         4: 1030:    return result;
+1035c1035
+<         4: 1033:void saslclientio_destroy(CONCRETE_IO_HANDLE sasl_client_io)
+---
+>         3: 1033:void saslclientio_destroy(CONCRETE_IO_HANDLE sasl_client_io)
+1037c1037
+<         4: 1035:    if (sasl_client_io == NULL)
+---
+>         3: 1035:    if (sasl_client_io == NULL)
+1044c1044
+<         4: 1042:        SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance = (SASL_CLIENT_IO_INSTANCE*)sasl_client_io;
+---
+>         3: 1042:        SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance = (SASL_CLIENT_IO_INSTANCE*)sasl_client_io;
+1048c1048
+<         4: 1046:        sasl_frame_codec_destroy(sasl_client_io_instance->sasl_frame_codec);
+---
+>         3: 1046:        sasl_frame_codec_destroy(sasl_client_io_instance->sasl_frame_codec);
+1051,1052c1051,1052
+<         4: 1049:        frame_codec_destroy(sasl_client_io_instance->frame_codec);
+<         4: 1050:        free(sasl_client_io);
+---
+>         3: 1049:        frame_codec_destroy(sasl_client_io_instance->frame_codec);
+>         3: 1050:        free(sasl_client_io);
+1054c1054
+<         4: 1052:}
+---
+>         3: 1052:}
+1056c1056
+<         8: 1054:int saslclientio_open_async(CONCRETE_IO_HANDLE sasl_client_io, ON_IO_OPEN_COMPLETE on_io_open_complete, void* on_io_open_complete_context, ON_BYTES_RECEIVED on_bytes_received, void* on_bytes_received_context, ON_IO_ERROR on_io_error, void* on_io_error_context)
+---
+>         6: 1054:int saslclientio_open_async(CONCRETE_IO_HANDLE sasl_client_io, ON_IO_OPEN_COMPLETE on_io_open_complete, void* on_io_open_complete_context, ON_BYTES_RECEIVED on_bytes_received, void* on_bytes_received_context, ON_IO_ERROR on_io_error, void* on_io_error_context)
+1058c1058
+<         8: 1056:    int result = 0;
+---
+>         6: 1056:    int result = 0;
+1060,1062c1060,1062
+<         8: 1058:    if ((sasl_client_io == NULL) ||
+<         8: 1059:        (on_io_open_complete == NULL) ||
+<         8: 1060:        (on_bytes_received == NULL) ||
+---
+>         6: 1058:    if ((sasl_client_io == NULL) ||
+>         6: 1059:        (on_io_open_complete == NULL) ||
+>         6: 1060:        (on_bytes_received == NULL) ||
+1072c1072
+<         8: 1070:        SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance = (SASL_CLIENT_IO_INSTANCE*)sasl_client_io;
+---
+>         6: 1070:        SASL_CLIENT_IO_INSTANCE* sasl_client_io_instance = (SASL_CLIENT_IO_INSTANCE*)sasl_client_io;
+1074c1074
+<         8: 1072:        if (sasl_client_io_instance->io_state != IO_STATE_NOT_OPEN)
+---
+>         6: 1072:        if (sasl_client_io_instance->io_state != IO_STATE_NOT_OPEN)
+1081,1092c1081,1092
+<         6: 1079:            sasl_client_io_instance->on_bytes_received = on_bytes_received;
+<         6: 1080:            sasl_client_io_instance->on_io_open_complete = on_io_open_complete;
+<         6: 1081:            sasl_client_io_instance->on_io_error = on_io_error;
+<         6: 1082:            sasl_client_io_instance->on_bytes_received_context = on_bytes_received_context;
+<         6: 1083:            sasl_client_io_instance->on_io_open_complete_context = on_io_open_complete_context;
+<         6: 1084:            sasl_client_io_instance->on_io_error_context = on_io_error_context;
+<         6: 1085:            sasl_client_io_instance->sasl_header_exchange_state = SASL_HEADER_EXCHANGE_IDLE;
+<         6: 1086:            sasl_client_io_instance->sasl_client_negotiation_state = SASL_CLIENT_NEGOTIATION_NOT_STARTED;
+<         6: 1087:            sasl_client_io_instance->header_bytes_received = 0;
+<         6: 1088:            sasl_client_io_instance->io_state = IO_STATE_OPENING_UNDERLYING_IO;
+<         6: 1089:            sasl_client_io_instance->is_trace_on = 0;
+<         6: 1090:            sasl_client_io_instance->is_trace_on_set = 0;
+---
+>         4: 1079:            sasl_client_io_instance->on_bytes_received = on_bytes_received;
+>         4: 1080:            sasl_client_io_instance->on_io_open_complete = on_io_open_complete;
+>         4: 1081:            sasl_client_io_instance->on_io_error = on_io_error;
+>         4: 1082:            sasl_client_io_instance->on_bytes_received_context = on_bytes_received_context;
+>         4: 1083:            sasl_client_io_instance->on_io_open_complete_context = on_io_open_complete_context;
+>         4: 1084:            sasl_client_io_instance->on_io_error_context = on_io_error_context;
+>         4: 1085:            sasl_client_io_instance->sasl_header_exchange_state = SASL_HEADER_EXCHANGE_IDLE;
+>         4: 1086:            sasl_client_io_instance->sasl_client_negotiation_state = SASL_CLIENT_NEGOTIATION_NOT_STARTED;
+>         4: 1087:            sasl_client_io_instance->header_bytes_received = 0;
+>         4: 1088:            sasl_client_io_instance->io_state = IO_STATE_OPENING_UNDERLYING_IO;
+>         4: 1089:            sasl_client_io_instance->is_trace_on = 0;
+>         4: 1090:            sasl_client_io_instance->is_trace_on_set = 0;
+1096c1096
+<         6: 1094:            if (xio_open(sasl_client_io_instance->underlying_io, on_underlying_io_open_complete, sasl_client_io_instance, on_underlying_io_bytes_received, sasl_client_io_instance, on_underlying_io_error, sasl_client_io_instance) != 0)
+---
+>         4: 1094:            if (xio_open(sasl_client_io_instance->underlying_io, on_underlying_io_open_complete, sasl_client_io_instance, on_underlying_io_bytes_received, sasl_client_io_instance, on_underlying_io_error, sasl_client_io_instance) != 0)
+1099,1100c1099,1100
+<         6: 1097:                LogError("xio_open failed");
+<         6: 1098:                result = MU_FAILURE;
+---
+>         4: 1097:                LogError("xio_open failed");
+>         4: 1098:                result = MU_FAILURE;
+1110c1110
+<         8: 1108:    return result;
+---
+>         6: 1108:    return result;
+1346c1346
+<         5: 1344:const IO_INTERFACE_DESCRIPTION* saslclientio_get_interface_description(void)
+---
+>         4: 1344:const IO_INTERFACE_DESCRIPTION* saslclientio_get_interface_description(void)
+1348c1348
+<         5: 1346:    return &sasl_client_io_interface_description;
+---
+>         4: 1346:    return &sasl_client_io_interface_description;

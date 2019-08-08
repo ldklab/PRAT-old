@@ -1,0 +1,24 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+27c27
+<         -:   25:        LogError("Cannot allocate memory for async operation");
+---
+>     #####:   25:        LogError("Cannot allocate memory for async operation");
+33c33
+<         -:   31:        LogError("Context size too small");
+---
+>     #####:   31:        LogError("Context size too small");
+42c42
+<         -:   40:            LogError("Cannot allocate memory for async operation");
+---
+>     #####:   40:            LogError("Cannot allocate memory for async operation");
+59c59
+<         -:   57:        LogError("NULL async_operation");
+---
+>     #####:   57:        LogError("NULL async_operation");
+74c74
+<         -:   72:        LogError("NULL async_operation");
+---
+>     #####:   72:        LogError("NULL async_operation");

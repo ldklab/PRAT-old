@@ -1,0 +1,64 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+48c48
+<         -:   29:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:   29:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+57c57
+<         -:   38:            LOG_CONSTMAP_ERROR(CONSTMAP_ERROR);
+---
+>     #####:   38:            LOG_CONSTMAP_ERROR(CONSTMAP_ERROR);
+72c72
+<         -:   53:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:   53:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+92c92
+<         -:   73:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:   73:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+130c130
+<         -:  111:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:  111:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+148c148
+<         -:  129:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:  129:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+154c154
+<         -:  135:            LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:  135:            LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+164c164
+<         -:  145:                LOG_CONSTMAP_ERROR(ConstMap_ErrorConvert(mapResult));
+---
+>     #####:  145:                LOG_CONSTMAP_ERROR(ConstMap_ErrorConvert(mapResult));
+177c177
+<         -:  158:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:  158:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+183c183
+<         -:  164:            LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:  164:            LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+189c189
+<         -:  170:            if (mapResult != MAP_OK)
+---
+>     #####:  170:            if (mapResult != MAP_OK)
+192c192
+<         -:  173:                LOG_CONSTMAP_ERROR(ConstMap_ErrorConvert(mapResult));
+---
+>     #####:  173:                LOG_CONSTMAP_ERROR(ConstMap_ErrorConvert(mapResult));
+206c206
+<         -:  187:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:  187:        LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+213c213
+<         -:  194:            LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+---
+>     #####:  194:            LOG_CONSTMAP_ERROR(CONSTMAP_INVALIDARG);
+232c232
+<         -:  213:        LOG_CONSTMAP_ERROR(result);
+---
+>     #####:  213:        LOG_CONSTMAP_ERROR(result);

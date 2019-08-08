@@ -1,0 +1,304 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/xio.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include "azure_c_shared_utility/gballoc.h"
+        -:    6:#include "azure_c_shared_utility/optimize_size.h"
+        -:    7:#include "azure_c_shared_utility/xio.h"
+        -:    8:#include "azure_c_shared_utility/xlogging.h"
+        -:    9:
+        -:   10:static const char* CONCRETE_OPTIONS = "concreteOptions";
+        -:   11:
+        -:   12:typedef struct XIO_INSTANCE_TAG
+        -:   13:{
+        -:   14:    const IO_INTERFACE_DESCRIPTION* io_interface_description;
+        -:   15:    CONCRETE_IO_HANDLE concrete_xio_handle;
+        -:   16:} XIO_INSTANCE;
+        -:   17:
+       17:   18:XIO_HANDLE xio_create(const IO_INTERFACE_DESCRIPTION* io_interface_description, const void* xio_create_parameters)
+        -:   19:{
+        -:   20:    XIO_INSTANCE* xio_instance;
+        -:   21:    /* Codes_SRS_XIO_01_003: [If the argument io_interface_description is NULL, xio_create shall return NULL.] */
+       17:   22:    if ((io_interface_description == NULL) ||
+        -:   23:        /* Codes_SRS_XIO_01_004: [If any io_interface_description member is NULL, xio_create shall return NULL.] */
+       17:   24:        (io_interface_description->concrete_io_retrieveoptions == NULL) ||
+       17:   25:        (io_interface_description->concrete_io_create == NULL) ||
+       17:   26:        (io_interface_description->concrete_io_destroy == NULL) ||
+       17:   27:        (io_interface_description->concrete_io_open == NULL) ||
+       17:   28:        (io_interface_description->concrete_io_close == NULL) ||
+       17:   29:        (io_interface_description->concrete_io_send == NULL) ||
+       17:   30:        (io_interface_description->concrete_io_dowork == NULL) ||
+       17:   31:        (io_interface_description->concrete_io_setoption == NULL))
+        -:   32:    {
+    #####:   33:        xio_instance = NULL;
+        -:   34:    }
+        -:   35:    else
+        -:   36:    {
+       17:   37:        xio_instance = (XIO_INSTANCE*)malloc(sizeof(XIO_INSTANCE));
+        -:   38:
+        -:   39:        /* Codes_SRS_XIO_01_017: [If allocating the memory needed for the IO interface fails then xio_create shall return NULL.] */
+       17:   40:        if (xio_instance != NULL)
+        -:   41:        {
+        -:   42:            /* Codes_SRS_XIO_01_001: [xio_create shall return on success a non-NULL handle to a new IO interface.] */
+       17:   43:            xio_instance->io_interface_description = io_interface_description;
+        -:   44:
+        -:   45:            /* Codes_SRS_XIO_01_002: [In order to instantiate the concrete IO implementation the function concrete_io_create from the io_interface_description shall be called, passing the xio_create_parameters argument.] */
+       17:   46:            xio_instance->concrete_xio_handle = xio_instance->io_interface_description->concrete_io_create((void*)xio_create_parameters);
+        -:   47:
+        -:   48:            /* Codes_SRS_XIO_01_016: [If the underlying concrete_io_create call fails, xio_create shall return NULL.] */
+       17:   49:            if (xio_instance->concrete_xio_handle == NULL)
+        -:   50:            {
+    #####:   51:                free(xio_instance);
+    #####:   52:                xio_instance = NULL;
+        -:   53:            }
+        -:   54:        }
+        -:   55:    }
+       17:   56:    return (XIO_HANDLE)xio_instance;
+        -:   57:}
+        -:   58:
+       14:   59:void xio_destroy(XIO_HANDLE xio)
+        -:   60:{
+        -:   61:    /* Codes_SRS_XIO_01_007: [If the argument io is NULL, xio_destroy shall do nothing.] */
+       14:   62:    if (xio != NULL)
+        -:   63:    {
+       14:   64:        XIO_INSTANCE* xio_instance = (XIO_INSTANCE*)xio;
+        -:   65:
+        -:   66:        /* Codes_SRS_XIO_01_006: [xio_destroy shall also call the concrete_io_destroy function that is member of the io_interface_description argument passed to xio_create, while passing as argument to concrete_io_destroy the result of the underlying concrete_io_create handle that was called as part of the xio_create call.] */
+       14:   67:        xio_instance->io_interface_description->concrete_io_destroy(xio_instance->concrete_xio_handle);
+        -:   68:
+        -:   69:        /* Codes_SRS_XIO_01_005: [xio_destroy shall free all resources associated with the IO handle.] */
+       14:   70:        free(xio_instance);
+        -:   71:    }
+       14:   72:}
+        -:   73:
+       23:   74:int xio_open(XIO_HANDLE xio, ON_IO_OPEN_COMPLETE on_io_open_complete, void* on_io_open_complete_context, ON_BYTES_RECEIVED on_bytes_received, void* on_bytes_received_context, ON_IO_ERROR on_io_error, void* on_io_error_context)
+        -:   75:{
+        -:   76:    int result;
+        -:   77:
+       23:   78:    if (xio == NULL)
+        -:   79:    {
+        -:   80:        /* Codes_SRS_XIO_01_021: [If handle is NULL, xio_open shall return a non-zero value.] */
+    #####:   81:        result = MU_FAILURE;
+        -:   82:    }
+        -:   83:    else
+        -:   84:    {
+       23:   85:        XIO_INSTANCE* xio_instance = (XIO_INSTANCE*)xio;
+        -:   86:
+        -:   87:        /* Codes_SRS_XIO_01_019: [xio_open shall call the specific concrete_xio_open function specified in xio_create, passing callback function and context arguments for three events: open completed, bytes received, and IO error.] */
+       23:   88:        if (xio_instance->io_interface_description->concrete_io_open(xio_instance->concrete_xio_handle, on_io_open_complete, on_io_open_complete_context, on_bytes_received, on_bytes_received_context, on_io_error, on_io_error_context) != 0)
+        -:   89:        {
+        -:   90:            /* Codes_SRS_XIO_01_022: [If the underlying concrete_io_open fails, xio_open shall return a non-zero value.] */
+       23:   91:            result = MU_FAILURE;
+        -:   92:        }
+        -:   93:        else
+        -:   94:        {
+        -:   95:            /* Codes_SRS_XIO_01_020: [On success, xio_open shall return 0.] */
+    #####:   96:            result = 0;
+        -:   97:        }
+        -:   98:    }
+        -:   99:
+       23:  100:    return result;
+        -:  101:}
+        -:  102:
+       10:  103:int xio_close(XIO_HANDLE xio, ON_IO_CLOSE_COMPLETE on_io_close_complete, void* callback_context)
+        -:  104:{
+        -:  105:    int result;
+        -:  106:
+       10:  107:    if (xio == NULL)
+        -:  108:    {
+        -:  109:        /* Codes_SRS_XIO_01_025: [If handle is NULL, xio_close shall return a non-zero value.] */
+    #####:  110:        result = MU_FAILURE;
+        -:  111:    }
+        -:  112:    else
+        -:  113:    {
+       10:  114:        XIO_INSTANCE* xio_instance = (XIO_INSTANCE*)xio;
+        -:  115:
+        -:  116:        /* Codes_SRS_XIO_01_023: [xio_close shall call the specific concrete_io_close function specified in xio_create.] */
+       10:  117:        if (xio_instance->io_interface_description->concrete_io_close(xio_instance->concrete_xio_handle, on_io_close_complete, callback_context) != 0)
+        -:  118:        {
+        -:  119:            /* Codes_SRS_XIO_01_026: [If the underlying concrete_io_close fails, xio_close shall return a non-zero value.] */
+        2:  120:            result = MU_FAILURE;
+        -:  121:        }
+        -:  122:        else
+        -:  123:        {
+        -:  124:            /* Codes_SRS_XIO_01_024: [On success, xio_close shall return 0.] */
+        8:  125:            result = 0;
+        -:  126:        }
+        -:  127:    }
+        -:  128:
+       10:  129:    return result;
+        -:  130:}
+        -:  131:
+    #####:  132:int xio_send(XIO_HANDLE xio, const void* buffer, size_t size, ON_SEND_COMPLETE on_send_complete, void* callback_context)
+        -:  133:{
+        -:  134:    int result;
+        -:  135:
+        -:  136:    /* Codes_SRS_XIO_01_011: [No error check shall be performed on buffer and size.] */
+        -:  137:    /* Codes_SRS_XIO_01_010: [If handle is NULL, xio_send shall return a non-zero value.] */
+    #####:  138:    if (xio == NULL)
+        -:  139:    {
+    #####:  140:        result = MU_FAILURE;
+        -:  141:    }
+        -:  142:    else
+        -:  143:    {
+    #####:  144:        XIO_INSTANCE* xio_instance = (XIO_INSTANCE*)xio;
+        -:  145:
+        -:  146:        /* Codes_SRS_XIO_01_008: [xio_send shall pass the sequence of bytes pointed to by buffer to the concrete IO implementation specified in xio_create, by calling the concrete_io_send function while passing down the buffer and size arguments to it.] */
+        -:  147:        /* Codes_SRS_XIO_01_009: [On success, xio_send shall return 0.] */
+        -:  148:        /* Codes_SRS_XIO_01_015: [If the underlying concrete_io_send fails, xio_send shall return a non-zero value.] */
+        -:  149:        /* Codes_SRS_XIO_01_027: [xio_send shall pass to the concrete_io_send function the on_send_complete and callback_context arguments.] */
+    #####:  150:        result = xio_instance->io_interface_description->concrete_io_send(xio_instance->concrete_xio_handle, buffer, size, on_send_complete, callback_context);
+        -:  151:    }
+        -:  152:
+    #####:  153:    return result;
+        -:  154:}
+        -:  155:
+    #####:  156:void xio_dowork(XIO_HANDLE xio)
+        -:  157:{
+        -:  158:    /* Codes_SRS_XIO_01_018: [When the handle argument is NULL, xio_dowork shall do nothing.] */
+    #####:  159:    if (xio != NULL)
+        -:  160:    {
+    #####:  161:        XIO_INSTANCE* xio_instance = (XIO_INSTANCE*)xio;
+        -:  162:
+        -:  163:        /* Codes_SRS_XIO_01_012: [xio_dowork shall call the concrete XIO implementation specified in xio_create, by calling the concrete_io_dowork function.] */
+    #####:  164:        xio_instance->io_interface_description->concrete_io_dowork(xio_instance->concrete_xio_handle);
+        -:  165:    }
+    #####:  166:}
+        -:  167:
+        2:  168:int xio_setoption(XIO_HANDLE xio, const char* optionName, const void* value)
+        -:  169:{
+        -:  170:    int result;
+        -:  171:
+        -:  172:    /* Codes_SRS_XIO_03_030: [If the xio argument or the optionName argument is NULL, xio_setoption shall return a non-zero value.] */
+        2:  173:    if (xio == NULL || optionName == NULL)
+        -:  174:    {
+    #####:  175:        result = MU_FAILURE;
+        -:  176:    }
+        -:  177:    else
+        -:  178:    {
+        2:  179:        XIO_INSTANCE* xio_instance = (XIO_INSTANCE*)xio;
+        -:  180:
+        2:  181:        if (strcmp(CONCRETE_OPTIONS, optionName) == 0)
+        -:  182:        {
+        -:  183:            /*then value is a pointer to OPTIONHANDLER_HANDLE*/
+    #####:  184:            if (OptionHandler_FeedOptions((OPTIONHANDLER_HANDLE)value, xio_instance->concrete_xio_handle) != OPTIONHANDLER_OK)
+        -:  185:            {
+    #####:  186:                LogError("unable to OptionHandler_FeedOptions");
+    #####:  187:                result = MU_FAILURE;
+        -:  188:            }
+        -:  189:            else
+        -:  190:            {
+    #####:  191:                result = 0;
+        -:  192:            }
+        -:  193:        }
+        -:  194:        else /*passthrough*/
+        -:  195:        {
+        -:  196:            /* Codes_SRS_XIO_003_028: [xio_setoption shall pass the optionName and value to the concrete IO implementation specified in xio_create by invoking the concrete_xio_setoption function.] */
+        -:  197:            /* Codes_SRS_XIO_03_029: [xio_setoption shall return 0 upon success.] */
+        -:  198:            /* Codes_SRS_XIO_03_031: [If the underlying concrete_xio_setoption fails, xio_setOption shall return a non-zero value.] */
+        2:  199:            result = xio_instance->io_interface_description->concrete_io_setoption(xio_instance->concrete_xio_handle, optionName, value);
+        -:  200:        }
+        -:  201:    }
+        -:  202:
+        2:  203:    return result;
+        -:  204:}
+        -:  205:
+    #####:  206:static void* xio_CloneOption(const char* name, const void* value)
+        -:  207:{
+        -:  208:    void *result;
+    #####:  209:    if (
+    #####:  210:        (name == NULL) ||
+        -:  211:        (value == NULL)
+        -:  212:        )
+        -:  213:    {
+    #####:  214:        LogError("invalid argument detected: const char* name=%p, const void* value=%p", name, value);
+    #####:  215:        result = NULL;
+        -:  216:    }
+        -:  217:    else
+        -:  218:    {
+    #####:  219:        if (strcmp(name, CONCRETE_OPTIONS) == 0)
+        -:  220:        {
+    #####:  221:            result = (void*)value;
+        -:  222:        }
+        -:  223:        else
+        -:  224:        {
+    #####:  225:            LogError("unknown option: %s", name);
+    #####:  226:            result = NULL;
+        -:  227:        }
+        -:  228:    }
+    #####:  229:    return result;
+        -:  230:}
+        -:  231:
+        -:  232:
+    #####:  233:static void xio_DestroyOption(const char* name, const void* value)
+        -:  234:{
+    #####:  235:    if (
+    #####:  236:        (name == NULL) ||
+        -:  237:        (value == NULL)
+        -:  238:        )
+        -:  239:    {
+    #####:  240:        LogError("invalid argument detected: const char* name=%p, const void* value=%p", name, value);
+        -:  241:    }
+        -:  242:    else
+        -:  243:    {
+    #####:  244:        if (strcmp(name, CONCRETE_OPTIONS) == 0)
+        -:  245:        {
+    #####:  246:            OptionHandler_Destroy((OPTIONHANDLER_HANDLE)value);
+        -:  247:        }
+        -:  248:        else
+        -:  249:        {
+    #####:  250:            LogError("unknown option: %s", name);
+        -:  251:        }
+        -:  252:    }
+    #####:  253:}
+        -:  254:
+    #####:  255:OPTIONHANDLER_HANDLE xio_retrieveoptions(XIO_HANDLE xio)
+        -:  256:{
+        -:  257:    OPTIONHANDLER_HANDLE result;
+        -:  258:
+    #####:  259:    if (xio == NULL)
+        -:  260:    {
+    #####:  261:        LogError("invalid argument detected: XIO_HANDLE xio=%p", xio);
+    #####:  262:        result = NULL;
+        -:  263:    }
+        -:  264:    else
+        -:  265:    {
+    #####:  266:        XIO_INSTANCE* xio_instance = (XIO_INSTANCE*)xio;
+        -:  267:        /*xio_retrieveoptions shall return a OPTIONHANDLER_HANDLE that has 1 option called "underlyingOptions" which is of type OPTIONHANDLER_HANDLE*/
+    #####:  268:        result = OptionHandler_Create(xio_CloneOption, xio_DestroyOption, (pfSetOption)xio_setoption);
+    #####:  269:        if (result == NULL)
+        -:  270:        {
+    #####:  271:            LogError("unable to OptionHandler_Create");
+        -:  272:            /*return as is*/
+        -:  273:        }
+        -:  274:        else
+        -:  275:        {
+    #####:  276:            OPTIONHANDLER_HANDLE concreteOptions = xio_instance->io_interface_description->concrete_io_retrieveoptions(xio_instance->concrete_xio_handle);
+    #####:  277:            if (concreteOptions == NULL)
+        -:  278:            {
+    #####:  279:                LogError("unable to concrete_io_retrieveoptions");
+    #####:  280:                OptionHandler_Destroy(result);
+    #####:  281:                result = NULL;
+        -:  282:            }
+        -:  283:            else
+        -:  284:            {
+    #####:  285:                if (OptionHandler_AddOption(result, CONCRETE_OPTIONS, concreteOptions) != OPTIONHANDLER_OK)
+        -:  286:                {
+    #####:  287:                    LogError("unable to OptionHandler_AddOption");
+    #####:  288:                    OptionHandler_Destroy(concreteOptions);
+    #####:  289:                    OptionHandler_Destroy(result);
+    #####:  290:                    result = NULL;
+        -:  291:                }
+        -:  292:                else
+        -:  293:                {
+        -:  294:                    /*all is fine*/
+        -:  295:                }
+        -:  296:            }
+        -:  297:        }
+        -:  298:    }
+        -:  299:
+    #####:  300:    return result;
+        -:  301:}
+        -:  302:

@@ -1,0 +1,109 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/doublylinkedlist.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include "azure_c_shared_utility/doublylinkedlist.h"
+        -:    5:
+        -:    6:void
+    #####:    7:DList_InitializeListHead(
+        -:    8:    PDLIST_ENTRY ListHead
+        -:    9:)
+        -:   10:{
+        -:   11:    /* Codes_SRS_DLIST_06_005: [DList_InitializeListHead will initialize the Flink & Blink to the address of the DLIST_ENTRY.] */
+    #####:   12:    ListHead->Flink = ListHead->Blink = ListHead;
+    #####:   13:    return;
+        -:   14:}
+        -:   15:
+        -:   16:int
+    #####:   17:DList_IsListEmpty(
+        -:   18:    const PDLIST_ENTRY ListHead
+        -:   19:)
+        -:   20:{
+        -:   21:    /* Codes_SRS_DLIST_06_003: [DList_IsListEmpty shall return a non-zero value if there are no DLIST_ENTRY's on this list other than the list head.] */
+        -:   22:    /* Codes_SRS_DLIST_06_004: [DList_IsListEmpty shall return 0 if there is one or more items in the list.] */
+    #####:   23:    return (ListHead->Flink == ListHead);
+        -:   24:}
+        -:   25:
+        -:   26:int
+    #####:   27:DList_RemoveEntryList(
+        -:   28:    PDLIST_ENTRY Entry
+        -:   29:)
+        -:   30:{
+        -:   31:    /* Codes_SRS_DLIST_06_008: [DList_RemoveEntryList shall remove a listEntry from whatever list it is properly part of.] */
+        -:   32:    /* Codes_SRS_DLIST_06_009: [The remaining list is properly formed.] */
+        -:   33:    /* Codes_SRS_DLIST_06_010: [DList_RemoveEntryList shall return non-zero if the remaining list is empty.] */
+        -:   34:    /* Codes_SRS_DLIST_06_011: [DList_RemoveEntryList shall return zero if the remaining list is NOT empty.] */
+        -:   35:    PDLIST_ENTRY Blink;
+        -:   36:    PDLIST_ENTRY Flink;
+        -:   37:
+    #####:   38:    Flink = Entry->Flink;
+    #####:   39:    Blink = Entry->Blink;
+    #####:   40:    Blink->Flink = Flink;
+    #####:   41:    Flink->Blink = Blink;
+    #####:   42:    return (Flink == Blink);
+        -:   43:}
+        -:   44:
+        -:   45:PDLIST_ENTRY
+    #####:   46:DList_RemoveHeadList(
+        -:   47:    PDLIST_ENTRY ListHead
+        -:   48:)
+        -:   49:{
+        -:   50:    /* Codes_SRS_DLIST_06_012: [DList_RemoveHeadList removes the oldest entry from the list defined by the listHead parameter and returns a pointer to that entry.] */
+        -:   51:    /* Codes_SRS_DLIST_06_013: [DList_RemoveHeadList shall return listHead if that's the only item in the list.] */
+        -:   52:
+        -:   53:    PDLIST_ENTRY Flink;
+        -:   54:    PDLIST_ENTRY Entry;
+        -:   55:
+    #####:   56:    Entry = ListHead->Flink;
+    #####:   57:    Flink = Entry->Flink;
+    #####:   58:    ListHead->Flink = Flink;
+    #####:   59:    Flink->Blink = ListHead;
+    #####:   60:    return Entry;
+        -:   61:}
+        -:   62:
+        -:   63:
+        -:   64:
+        -:   65:void
+    #####:   66:DList_InsertTailList(
+        -:   67:    PDLIST_ENTRY ListHead,
+        -:   68:    PDLIST_ENTRY Entry
+        -:   69:)
+        -:   70:{
+        -:   71:    PDLIST_ENTRY Blink;
+        -:   72:
+        -:   73:    /* Codes_SRS_DLIST_06_006: [DListInsertTailList shall place the DLIST_ENTRY at the end of the list defined by the listHead parameter.] */
+    #####:   74:    Blink = ListHead->Blink;
+    #####:   75:    Entry->Flink = ListHead;
+    #####:   76:    Entry->Blink = Blink;
+    #####:   77:    Blink->Flink = Entry;
+    #####:   78:    ListHead->Blink = Entry;
+    #####:   79:    return;
+        -:   80:}
+        -:   81:
+        -:   82:
+        -:   83:void
+    #####:   84:DList_AppendTailList(
+        -:   85:    PDLIST_ENTRY ListHead,
+        -:   86:    PDLIST_ENTRY ListToAppend
+        -:   87:)
+        -:   88:{
+        -:   89:    /* Codes_SRS_DLIST_06_007: [DList_AppendTailList shall place the list defined by listToAppend at the end of the list defined by the listHead parameter.] */
+    #####:   90:    PDLIST_ENTRY ListEnd = ListHead->Blink;
+        -:   91:
+    #####:   92:    ListHead->Blink->Flink = ListToAppend;
+    #####:   93:    ListHead->Blink = ListToAppend->Blink;
+    #####:   94:    ListToAppend->Blink->Flink = ListHead;
+    #####:   95:    ListToAppend->Blink = ListEnd;
+    #####:   96:    return;
+        -:   97:}
+        -:   98:
+        -:   99:
+        -:  100:/*Codes_SRS_DLIST_02_002: [DList_InsertHeadList inserts a singular entry in the list having as head listHead after "head".]*/
+    #####:  101:void DList_InsertHeadList(PDLIST_ENTRY listHead, PDLIST_ENTRY entry)
+        -:  102:{
+    #####:  103:    entry->Blink = listHead;
+    #####:  104:    entry->Flink = listHead->Flink;
+    #####:  105:    listHead->Flink->Blink = entry;
+    #####:  106:    listHead->Flink = entry;
+    #####:  107:}

@@ -1,0 +1,118 @@
+2c2
+<         -:    0:Programs:101
+---
+>         -:    0:Programs:82
+29c29
+<         8:   27:static void set_message_receiver_state(MESSAGE_RECEIVER_INSTANCE* message_receiver, MESSAGE_RECEIVER_STATE new_state)
+---
+>         6:   27:static void set_message_receiver_state(MESSAGE_RECEIVER_INSTANCE* message_receiver, MESSAGE_RECEIVER_STATE new_state)
+31,33c31,33
+<         8:   29:    MESSAGE_RECEIVER_STATE previous_state = message_receiver->message_receiver_state;
+<         8:   30:    message_receiver->message_receiver_state = new_state;
+<         8:   31:    if (message_receiver->on_message_receiver_state_changed != NULL)
+---
+>         6:   29:    MESSAGE_RECEIVER_STATE previous_state = message_receiver->message_receiver_state;
+>         6:   30:    message_receiver->message_receiver_state = new_state;
+>         6:   31:    if (message_receiver->on_message_receiver_state_changed != NULL)
+35c35
+<         6:   33:        message_receiver->on_message_receiver_state_changed(message_receiver->on_message_receiver_state_changed_context, new_state, previous_state);
+---
+>         4:   33:        message_receiver->on_message_receiver_state_changed(message_receiver->on_message_receiver_state_changed_context, new_state, previous_state);
+37c37
+<         8:   35:}
+---
+>         6:   35:}
+317c317
+<         4:  315:MESSAGE_RECEIVER_HANDLE messagereceiver_create(LINK_HANDLE link, ON_MESSAGE_RECEIVER_STATE_CHANGED on_message_receiver_state_changed, void* context)
+---
+>         3:  315:MESSAGE_RECEIVER_HANDLE messagereceiver_create(LINK_HANDLE link, ON_MESSAGE_RECEIVER_STATE_CHANGED on_message_receiver_state_changed, void* context)
+319,320c319,320
+<         4:  317:    MESSAGE_RECEIVER_INSTANCE* message_receiver = (MESSAGE_RECEIVER_INSTANCE*)malloc(sizeof(MESSAGE_RECEIVER_INSTANCE));
+<         4:  318:    if (message_receiver == NULL)
+---
+>         3:  317:    MESSAGE_RECEIVER_INSTANCE* message_receiver = (MESSAGE_RECEIVER_INSTANCE*)malloc(sizeof(MESSAGE_RECEIVER_INSTANCE));
+>         3:  318:    if (message_receiver == NULL)
+326,329c326,329
+<         4:  324:        message_receiver->link = link;
+<         4:  325:        message_receiver->on_message_receiver_state_changed = on_message_receiver_state_changed;
+<         4:  326:        message_receiver->on_message_receiver_state_changed_context = context;
+<         4:  327:        message_receiver->message_receiver_state = MESSAGE_RECEIVER_STATE_IDLE;
+---
+>         3:  324:        message_receiver->link = link;
+>         3:  325:        message_receiver->on_message_receiver_state_changed = on_message_receiver_state_changed;
+>         3:  326:        message_receiver->on_message_receiver_state_changed_context = context;
+>         3:  327:        message_receiver->message_receiver_state = MESSAGE_RECEIVER_STATE_IDLE;
+332c332
+<         4:  330:    return message_receiver;
+---
+>         3:  330:    return message_receiver;
+335c335
+<         4:  333:void messagereceiver_destroy(MESSAGE_RECEIVER_HANDLE message_receiver)
+---
+>         3:  333:void messagereceiver_destroy(MESSAGE_RECEIVER_HANDLE message_receiver)
+337c337
+<         4:  335:    if (message_receiver == NULL)
+---
+>         3:  335:    if (message_receiver == NULL)
+343,344c343,344
+<         4:  341:        (void)messagereceiver_close(message_receiver);
+<         4:  342:        free(message_receiver);
+---
+>         3:  341:        (void)messagereceiver_close(message_receiver);
+>         3:  342:        free(message_receiver);
+346c346
+<         4:  344:}
+---
+>         3:  344:}
+348c348
+<         4:  346:int messagereceiver_open(MESSAGE_RECEIVER_HANDLE message_receiver, ON_MESSAGE_RECEIVED on_message_received, void* callback_context)
+---
+>         3:  346:int messagereceiver_open(MESSAGE_RECEIVER_HANDLE message_receiver, ON_MESSAGE_RECEIVED on_message_received, void* callback_context)
+352c352
+<         4:  350:    if (message_receiver == NULL)
+---
+>         3:  350:    if (message_receiver == NULL)
+359c359
+<         4:  357:        if (message_receiver->message_receiver_state == MESSAGE_RECEIVER_STATE_IDLE)
+---
+>         3:  357:        if (message_receiver->message_receiver_state == MESSAGE_RECEIVER_STATE_IDLE)
+361,362c361,362
+<         4:  359:            set_message_receiver_state(message_receiver, MESSAGE_RECEIVER_STATE_OPENING);
+<         4:  360:            if (link_attach(message_receiver->link, on_transfer_received, on_link_state_changed, NULL, message_receiver) != 0)
+---
+>         3:  359:            set_message_receiver_state(message_receiver, MESSAGE_RECEIVER_STATE_OPENING);
+>         3:  360:            if (link_attach(message_receiver->link, on_transfer_received, on_link_state_changed, NULL, message_receiver) != 0)
+364,366c364,366
+<         4:  362:                LogError("Link attach failed");
+<         4:  363:                result = MU_FAILURE;
+<         4:  364:                set_message_receiver_state(message_receiver, MESSAGE_RECEIVER_STATE_ERROR);
+---
+>         3:  362:                LogError("Link attach failed");
+>         3:  363:                result = MU_FAILURE;
+>         3:  364:                set_message_receiver_state(message_receiver, MESSAGE_RECEIVER_STATE_ERROR);
+382c382
+<         4:  380:    return result;
+---
+>         3:  380:    return result;
+385c385
+<         4:  383:int messagereceiver_close(MESSAGE_RECEIVER_HANDLE message_receiver)
+---
+>         3:  383:int messagereceiver_close(MESSAGE_RECEIVER_HANDLE message_receiver)
+389c389
+<         4:  387:    if (message_receiver == NULL)
+---
+>         3:  387:    if (message_receiver == NULL)
+396,397c396,397
+<         4:  394:        if ((message_receiver->message_receiver_state == MESSAGE_RECEIVER_STATE_OPENING) ||
+<         4:  395:            (message_receiver->message_receiver_state == MESSAGE_RECEIVER_STATE_OPEN))
+---
+>         3:  394:        if ((message_receiver->message_receiver_state == MESSAGE_RECEIVER_STATE_OPENING) ||
+>         3:  395:            (message_receiver->message_receiver_state == MESSAGE_RECEIVER_STATE_OPEN))
+414c414
+<         4:  412:            result = 0;
+---
+>         3:  412:            result = 0;
+418c418
+<         4:  416:    return result;
+---
+>         3:  416:    return result;

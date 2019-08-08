@@ -1,0 +1,626 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/sha224.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:/*************************** sha224-256.c ***************************/
+        -:    5:/********************* See RFC 4634 for details *********************/
+        -:    6:/*
+        -:    7:* Description:
+        -:    8:*   This file implements the Secure Hash Signature Standard
+        -:    9:*   algorithms as defined in the National Institute of Standards
+        -:   10:*   and Technology Federal Information Processing Standards
+        -:   11:*   Publication (FIPS PUB) 180-1 published on April 17, 1995, 180-2
+        -:   12:*   published on August 1, 2002, and the FIPS PUB 180-2 Change
+        -:   13:*   Notice published on February 28, 2004.
+        -:   14:*
+        -:   15:*   A combined document showing all algorithms is available at
+        -:   16:*       http://csrc.nist.gov/publications/fips/
+        -:   17:*       fips180-2/fips180-2withchangenotice.pdf
+        -:   18:*
+        -:   19:*   The SHA-224 and SHA-256 algorithms produce 224-bit and 256-bit
+        -:   20:*   message digests for a given data stream. It should take about
+        -:   21:*   2**n steps to find a message with the same digest as a given
+        -:   22:*   message and 2**(n/2) to find any two messages with the same
+        -:   23:*   digest, when n is the digest size in bits. Therefore, this
+        -:   24:*   algorithm can serve as a means of providing a
+        -:   25:*   "fingerprint" for a message.
+        -:   26:*
+        -:   27:* Portability Issues:
+        -:   28:*   SHA-224 and SHA-256 are defined in terms of 32-bit "words".
+        -:   29:*   This code uses <stdint.h> (included via "sha.h") to define 32
+        -:   30:*   and 8 bit unsigned integer types. If your C compiler does not
+        -:   31:*   support 32 bit unsigned integers, this code is not
+        -:   32:*   appropriate.
+        -:   33:*
+        -:   34:* Caveats:
+        -:   35:*   SHA-224 and SHA-256 are designed to work with messages less
+        -:   36:*   than 2^64 bits long. This implementation uses SHA224/256Input()
+        -:   37:*   to hash the bits that are a multiple of the size of an 8-bit
+        -:   38:*   character, and then uses SHA224/256FinalBits() to hash the
+        -:   39:*   final few bits of the input.
+        -:   40:*/
+        -:   41:
+        -:   42:#include <stdlib.h>
+        -:   43:#include <stdint.h>
+        -:   44:
+        -:   45:#include "azure_c_shared_utility/sha.h"
+        -:   46:#include "azure_c_shared_utility/sha-private.h"
+        -:   47:/* Define the SHA shift, rotate left and rotate right macro */
+        -:   48:#define SHA256_SHR(bits,word)      ((word) >> (bits))
+        -:   49:#define SHA256_ROTL(bits,word)                         \
+        -:   50:  (((word) << (bits)) | ((word) >> (32-(bits))))
+        -:   51:#define SHA256_ROTR(bits,word)                         \
+        -:   52:  (((word) >> (bits)) | ((word) << (32-(bits))))
+        -:   53:
+        -:   54:/* Define the SHA SIGMA and sigma macros */
+        -:   55:#define SHA256_SIGMA0(word)   \
+        -:   56:  (SHA256_ROTR( 2,word) ^ SHA256_ROTR(13,word) ^ SHA256_ROTR(22,word))
+        -:   57:#define SHA256_SIGMA1(word)   \
+        -:   58:  (SHA256_ROTR( 6,word) ^ SHA256_ROTR(11,word) ^ SHA256_ROTR(25,word))
+        -:   59:#define SHA256_sigma0(word)   \
+        -:   60:  (SHA256_ROTR( 7,word) ^ SHA256_ROTR(18,word) ^ SHA256_SHR( 3,word))
+        -:   61:#define SHA256_sigma1(word)   \
+        -:   62:  (SHA256_ROTR(17,word) ^ SHA256_ROTR(19,word) ^ SHA256_SHR(10,word))
+        -:   63:
+        -:   64:/*
+        -:   65:* add "length" to the length
+        -:   66:*/
+        -:   67:#define SHA224_256AddLength(context, length)               \
+        -:   68:  (addTemp = (context)->Length_Low, (context)->Corrupted = \
+        -:   69:    (((context)->Length_Low += (length)) < addTemp) &&     \
+        -:   70:    (++(context)->Length_High == 0) ? 1 : 0)
+        -:   71:
+        -:   72:/* Local Function Prototypes */
+        -:   73:static void SHA224_256Finalize(SHA256Context *context, uint8_t Pad_Byte);
+        -:   74:static void SHA224_256PadMessage(SHA256Context *context, uint8_t Pad_Byte);
+        -:   75:static void SHA224_256ProcessMessageBlock(SHA256Context *context);
+        -:   76:static int SHA224_256Reset(SHA256Context *context, uint32_t *H0);
+        -:   77:static int SHA224_256ResultN(SHA256Context *context, uint8_t Message_Digest[], int HashSize);
+        -:   78:
+        -:   79:/* Initial Hash Values: FIPS-180-2 Change Notice 1 */
+        -:   80:static uint32_t SHA224_H0[SHA256HashSize / 4] = {
+        -:   81:    0xC1059ED8, 0x367CD507, 0x3070DD17, 0xF70E5939,
+        -:   82:    0xFFC00B31, 0x68581511, 0x64F98FA7, 0xBEFA4FA4
+        -:   83:};
+        -:   84:
+        -:   85:/* Initial Hash Values: FIPS-180-2 section 5.3.2 */
+        -:   86:static uint32_t SHA256_H0[SHA256HashSize / 4] = {
+        -:   87:    0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A,
+        -:   88:    0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19
+        -:   89:};
+        -:   90:
+        -:   91:/*
+        -:   92:* SHA224Reset
+        -:   93:*
+        -:   94:* Description:
+        -:   95:*   This function will initialize the SHA384Context in preparation
+        -:   96:*   for computing a new SHA224 message digest.
+        -:   97:*
+        -:   98:* Parameters:
+        -:   99:*   context: [in/out]
+        -:  100:*     The context to reset.
+        -:  101:*
+        -:  102:* Returns:
+        -:  103:*   sha Error Code.
+        -:  104:*/
+    #####:  105:int SHA224Reset(SHA224Context *context)
+        -:  106:{
+    #####:  107:    return SHA224_256Reset(context, SHA224_H0);
+        -:  108:}
+        -:  109:
+        -:  110:/*
+        -:  111:* SHA224Input
+        -:  112:*
+        -:  113:* Description:
+        -:  114:*   This function accepts an array of octets as the next portion
+        -:  115:*   of the message.
+        -:  116:*
+        -:  117:* Parameters:
+        -:  118:*   context: [in/out]
+        -:  119:*     The SHA context to update
+        -:  120:*   message_array: [in]
+        -:  121:*     An array of characters representing the next portion of
+        -:  122:*     the message.
+        -:  123:*   length: [in]
+        -:  124:*     The length of the message in message_array
+        -:  125:*
+        -:  126:* Returns:
+        -:  127:*   sha Error Code.
+        -:  128:*
+        -:  129:*/
+    #####:  130:int SHA224Input(SHA224Context *context, const uint8_t *message_array, unsigned int length)
+        -:  131:{
+    #####:  132:    return SHA256Input(context, message_array, length);
+        -:  133:}
+        -:  134:
+        -:  135:/*
+        -:  136:* SHA224FinalBits
+        -:  137:*
+        -:  138:* Description:
+        -:  139:*   This function will add in any final bits of the message.
+        -:  140:*
+        -:  141:* Parameters:
+        -:  142:*   context: [in/out]
+        -:  143:*     The SHA context to update
+        -:  144:*   message_bits: [in]
+        -:  145:*     The final bits of the message, in the upper portion of the
+        -:  146:*     byte. (Use 0b###00000 instead of 0b00000### to input the
+        -:  147:*     three bits ###.)
+        -:  148:*   length: [in]
+        -:  149:*     The number of bits in message_bits, between 1 and 7.
+        -:  150:*
+        -:  151:* Returns:
+        -:  152:*   sha Error Code.
+        -:  153:*/
+    #####:  154:int SHA224FinalBits(SHA224Context *context, const uint8_t message_bits, unsigned int length)
+        -:  155:{
+    #####:  156:    return SHA256FinalBits(context, message_bits, length);
+        -:  157:}
+        -:  158:
+        -:  159:/*
+        -:  160:* SHA224Result
+        -:  161:*
+        -:  162:* Description:
+        -:  163:*   This function will return the 224-bit message
+        -:  164:*   digest into the Message_Digest array provided by the caller.
+        -:  165:*   NOTE: The first octet of hash is stored in the 0th element,
+        -:  166:*      the last octet of hash in the 28th element.
+        -:  167:*
+        -:  168:* Parameters:
+        -:  169:*   context: [in/out]
+        -:  170:*     The context to use to calculate the SHA hash.
+        -:  171:*   Message_Digest: [out]
+        -:  172:*     Where the digest is returned.
+        -:  173:*
+        -:  174:* Returns:
+        -:  175:*   sha Error Code.
+        -:  176:*/
+    #####:  177:int SHA224Result(SHA224Context *context, uint8_t Message_Digest[SHA224HashSize])
+        -:  178:{
+    #####:  179:    return SHA224_256ResultN(context, Message_Digest, SHA224HashSize);
+        -:  180:}
+        -:  181:
+        -:  182:/*
+        -:  183:* SHA256Reset
+        -:  184:*
+        -:  185:* Description:
+        -:  186:*   This function will initialize the SHA256Context in preparation
+        -:  187:*   for computing a new SHA256 message digest.
+        -:  188:*
+        -:  189:* Parameters:
+        -:  190:*   context: [in/out]
+        -:  191:*     The context to reset.
+        -:  192:*
+        -:  193:* Returns:
+        -:  194:*   sha Error Code.
+        -:  195:*/
+        2:  196:int SHA256Reset(SHA256Context *context)
+        -:  197:{
+        2:  198:    return SHA224_256Reset(context, SHA256_H0);
+        -:  199:}
+        -:  200:
+        -:  201:/*
+        -:  202:* SHA256Input
+        -:  203:*
+        -:  204:* Description:
+        -:  205:*   This function accepts an array of octets as the next portion
+        -:  206:*   of the message.
+        -:  207:*
+        -:  208:* Parameters:
+        -:  209:*   context: [in/out]
+        -:  210:*     The SHA context to update
+        -:  211:*   message_array: [in]
+        -:  212:*     An array of characters representing the next portion of
+        -:  213:*     the message.
+        -:  214:*   length: [in]
+        -:  215:*     The length of the message in message_array
+        -:  216:*
+        -:  217:* Returns:
+        -:  218:*   sha Error Code.
+        -:  219:*/
+        4:  220:int SHA256Input(SHA256Context *context, const uint8_t *message_array, unsigned int length)
+        -:  221:{
+        -:  222:    int result;
+        -:  223:    uint32_t addTemp;
+        4:  224:    if (!length)
+        -:  225:    {
+    #####:  226:        result = shaSuccess;
+        -:  227:    }
+        4:  228:    else if (!context || !message_array)
+        -:  229:    {
+    #####:  230:        result = shaNull;
+        -:  231:    }
+        4:  232:    else if (context->Computed)
+        -:  233:    {
+    #####:  234:        result = context->Corrupted = shaStateError;
+        -:  235:    }
+        4:  236:    else if (context->Corrupted)
+        -:  237:    {
+    #####:  238:        result = context->Corrupted;
+        -:  239:    }
+        -:  240:    else
+        -:  241:    {
+      400:  242:        while (length-- && !context->Corrupted)
+        -:  243:        {
+      396:  244:            context->Message_Block[context->Message_Block_Index++] = (*message_array & 0xFF);
+        -:  245:
+     396*:  246:            if (!SHA224_256AddLength(context, 8) && (context->Message_Block_Index == SHA256_Message_Block_Size))
+        -:  247:            {
+        5:  248:                SHA224_256ProcessMessageBlock(context);
+        -:  249:            }
+      396:  250:            message_array++;
+        -:  251:        }
+        4:  252:        result = shaSuccess;
+        -:  253:    }
+        4:  254:    return result;
+        -:  255:}
+        -:  256:
+        -:  257:/*
+        -:  258:* SHA256FinalBits
+        -:  259:*
+        -:  260:* Description:
+        -:  261:*   This function will add in any final bits of the message.
+        -:  262:*
+        -:  263:* Parameters:
+        -:  264:*   context: [in/out]
+        -:  265:*     The SHA context to update
+        -:  266:*   message_bits: [in]
+        -:  267:*     The final bits of the message, in the upper portion of the
+        -:  268:*     byte. (Use 0b###00000 instead of 0b00000### to input the
+        -:  269:*     three bits ###.)
+        -:  270:*   length: [in]
+        -:  271:*     The number of bits in message_bits, between 1 and 7.
+        -:  272:*
+        -:  273:* Returns:
+        -:  274:*   sha Error Code.
+        -:  275:*/
+    #####:  276:int SHA256FinalBits(SHA256Context *context, const uint8_t message_bits, unsigned int length)
+        -:  277:{
+        -:  278:    int result;
+        -:  279:    uint32_t addTemp;
+    #####:  280:    uint8_t masks[8] = {
+        -:  281:        /* 0 0b00000000 */ 0x00, /* 1 0b10000000 */ 0x80,
+        -:  282:        /* 2 0b11000000 */ 0xC0, /* 3 0b11100000 */ 0xE0,
+        -:  283:        /* 4 0b11110000 */ 0xF0, /* 5 0b11111000 */ 0xF8,
+        -:  284:        /* 6 0b11111100 */ 0xFC, /* 7 0b11111110 */ 0xFE
+        -:  285:    };
+        -:  286:
+    #####:  287:    uint8_t markbit[8] = {
+        -:  288:        /* 0 0b10000000 */ 0x80, /* 1 0b01000000 */ 0x40,
+        -:  289:        /* 2 0b00100000 */ 0x20, /* 3 0b00010000 */ 0x10,
+        -:  290:        /* 4 0b00001000 */ 0x08, /* 5 0b00000100 */ 0x04,
+        -:  291:        /* 6 0b00000010 */ 0x02, /* 7 0b00000001 */ 0x01
+        -:  292:    };
+        -:  293:
+    #####:  294:    if (!length)
+        -:  295:    {
+    #####:  296:        result = shaSuccess;
+        -:  297:    }
+    #####:  298:    else if (!context)
+        -:  299:    {
+    #####:  300:        result = shaNull;
+        -:  301:    }
+    #####:  302:    else if ((context->Computed) || (length >= 8) || (length == 0))
+        -:  303:    {
+    #####:  304:        result = context->Corrupted = shaStateError;
+        -:  305:    }
+    #####:  306:    else if (context->Corrupted)
+        -:  307:    {
+    #####:  308:        result = context->Corrupted;
+        -:  309:    }
+        -:  310:    else
+        -:  311:    {
+    #####:  312:        SHA224_256AddLength(context, length);
+    #####:  313:        SHA224_256Finalize(context, (uint8_t)((message_bits & masks[length]) | markbit[length]));
+    #####:  314:        result = shaSuccess;
+        -:  315:    }
+    #####:  316:    return result;
+        -:  317:}
+        -:  318:
+        -:  319:/*
+        -:  320:* SHA256Result
+        -:  321:*
+        -:  322:* Description:
+        -:  323:*   This function will return the 256-bit message
+        -:  324:*   digest into the Message_Digest array provided by the caller.
+        -:  325:*   NOTE: The first octet of hash is stored in the 0th element,
+        -:  326:*      the last octet of hash in the 32nd element.
+        -:  327:*
+        -:  328:* Parameters:
+        -:  329:*   context: [in/out]
+        -:  330:*     The context to use to calculate the SHA hash.
+        -:  331:*   Message_Digest: [out]
+        -:  332:*     Where the digest is returned.
+        -:  333:*
+        -:  334:* Returns:
+        -:  335:*   sha Error Code.
+        -:  336:*/
+        2:  337:int SHA256Result(SHA256Context *context, uint8_t Message_Digest[SHA256HashSize])
+        -:  338:{
+        2:  339:    return SHA224_256ResultN(context, Message_Digest, SHA256HashSize);
+        -:  340:}
+        -:  341:
+        -:  342:/*
+        -:  343:* SHA224_256Finalize
+        -:  344:*
+        -:  345:* Description:
+        -:  346:*   This helper function finishes off the digest calculations.
+        -:  347:*
+        -:  348:* Parameters:
+        -:  349:*   context: [in/out]
+        -:  350:*     The SHA context to update
+        -:  351:*   Pad_Byte: [in]
+        -:  352:*     The last byte to add to the digest before the 0-padding
+        -:  353:*     and length. This will contain the last bits of the message
+        -:  354:*     followed by another single bit. If the message was an
+        -:  355:*     exact multiple of 8-bits long, Pad_Byte will be 0x80.
+        -:  356:*
+        -:  357:* Returns:
+        -:  358:*   sha Error Code.
+        -:  359:*/
+        2:  360:static void SHA224_256Finalize(SHA256Context *context, uint8_t Pad_Byte)
+        -:  361:{
+        -:  362:    int i;
+        2:  363:    SHA224_256PadMessage(context, Pad_Byte);
+        -:  364:    /* message may be sensitive, so clear it out */
+      130:  365:    for (i = 0; i < SHA256_Message_Block_Size; ++i)
+        -:  366:    {
+      128:  367:        context->Message_Block[i] = 0;
+        -:  368:    }
+        2:  369:    context->Length_Low = 0;  /* and clear length */
+        2:  370:    context->Length_High = 0;
+        2:  371:    context->Computed = 1;
+        2:  372:}
+        -:  373:
+        -:  374:/*
+        -:  375:* SHA224_256PadMessage
+        -:  376:*
+        -:  377:* Description:
+        -:  378:*   According to the standard, the message must be padded to an
+        -:  379:*   even 512 bits. The first padding bit must be a '1'. The
+        -:  380:*   last 64 bits represent the length of the original message.
+        -:  381:*   All bits in between should be 0. This helper function will pad
+        -:  382:*   the message according to those rules by filling the
+        -:  383:*   Message_Block array accordingly. When it returns, it can be
+        -:  384:*   assumed that the message digest has been computed.
+        -:  385:*
+        -:  386:* Parameters:
+        -:  387:*   context: [in/out]
+        -:  388:*     The context to pad
+        -:  389:*   Pad_Byte: [in]
+        -:  390:*     The last byte to add to the digest before the 0-padding
+        -:  391:*     and length. This will contain the last bits of the message
+        -:  392:*     followed by another single bit. If the message was an
+        -:  393:*     exact multiple of 8-bits long, Pad_Byte will be 0x80.
+        -:  394:*
+        -:  395:* Returns:
+        -:  396:*   Nothing.
+        -:  397:*/
+        2:  398:static void SHA224_256PadMessage(SHA256Context *context, uint8_t Pad_Byte)
+        -:  399:{
+        -:  400:    /*
+        -:  401:    * Check to see if the current message block is too small to hold
+        -:  402:    * the initial padding bits and length. If so, we will pad the
+        -:  403:    * block, process it, and then continue padding into a second
+        -:  404:    * block.
+        -:  405:    */
+        2:  406:    if (context->Message_Block_Index >= (SHA256_Message_Block_Size - 8))
+        -:  407:    {
+    #####:  408:        context->Message_Block[context->Message_Block_Index++] = Pad_Byte;
+    #####:  409:        while (context->Message_Block_Index < SHA256_Message_Block_Size)
+        -:  410:        {
+    #####:  411:            context->Message_Block[context->Message_Block_Index++] = 0;
+        -:  412:        }
+    #####:  413:        SHA224_256ProcessMessageBlock(context);
+        -:  414:    }
+        -:  415:    else
+        -:  416:    {
+        2:  417:        context->Message_Block[context->Message_Block_Index++] = Pad_Byte;
+        -:  418:    }
+        -:  419:
+       36:  420:    while (context->Message_Block_Index < (SHA256_Message_Block_Size - 8))
+        -:  421:    {
+       34:  422:        context->Message_Block[context->Message_Block_Index++] = 0;
+        -:  423:    }
+        -:  424:
+        -:  425:    /*
+        -:  426:    * Store the message length as the last 8 octets
+        -:  427:    */
+        2:  428:    context->Message_Block[56] = (uint8_t)(context->Length_High >> 24);
+        2:  429:    context->Message_Block[57] = (uint8_t)(context->Length_High >> 16);
+        2:  430:    context->Message_Block[58] = (uint8_t)(context->Length_High >> 8);
+        2:  431:    context->Message_Block[59] = (uint8_t)(context->Length_High);
+        2:  432:    context->Message_Block[60] = (uint8_t)(context->Length_Low >> 24);
+        2:  433:    context->Message_Block[61] = (uint8_t)(context->Length_Low >> 16);
+        2:  434:    context->Message_Block[62] = (uint8_t)(context->Length_Low >> 8);
+        2:  435:    context->Message_Block[63] = (uint8_t)(context->Length_Low);
+        -:  436:
+        2:  437:    SHA224_256ProcessMessageBlock(context);
+        2:  438:}
+        -:  439:
+        -:  440:/*
+        -:  441:* SHA224_256ProcessMessageBlock
+        -:  442:*
+        -:  443:* Description:
+        -:  444:*   This function will process the next 512 bits of the message
+        -:  445:*   stored in the Message_Block array.
+        -:  446:*
+        -:  447:* Parameters:
+        -:  448:*   context: [in/out]
+        -:  449:*     The SHA context to update
+        -:  450:*
+        -:  451:* Returns:
+        -:  452:*   Nothing.
+        -:  453:*
+        -:  454:* Comments:
+        -:  455:*   Many of the variable names in this code, especially the
+        -:  456:*   single character names, were used because those were the
+        -:  457:*   names used in the publication.
+        -:  458:*/
+        7:  459:static void SHA224_256ProcessMessageBlock(SHA256Context *context)
+        -:  460:{
+        -:  461:    /* Constants defined in FIPS-180-2, section 4.2.2 */
+        -:  462:    static const uint32_t K[64] = {
+        -:  463:        0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b,
+        -:  464:        0x59f111f1, 0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01,
+        -:  465:        0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7,
+        -:  466:        0xc19bf174, 0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc,
+        -:  467:        0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da, 0x983e5152,
+        -:  468:        0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147,
+        -:  469:        0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc,
+        -:  470:        0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+        -:  471:        0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819,
+        -:  472:        0xd6990624, 0xf40e3585, 0x106aa070, 0x19a4c116, 0x1e376c08,
+        -:  473:        0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f,
+        -:  474:        0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
+        -:  475:        0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+        -:  476:    };
+        -:  477:    int        t, t4;                   /* Loop counter */
+        -:  478:    uint32_t   temp1, temp2;            /* Temporary word value */
+        -:  479:    uint32_t   W[64];                   /* Word sequence */
+        -:  480:    uint32_t   A, B, C, D, E, F, G, H;  /* Word buffers */
+        -:  481:
+        -:  482:    /*
+        -:  483:    * Initialize the first 16 words in the array W
+        -:  484:    */
+      119:  485:    for (t = t4 = 0; t < 16; t++, t4 += 4)
+        -:  486:    {
+      336:  487:        W[t] = (((uint32_t)context->Message_Block[t4]) << 24) |
+      224:  488:            (((uint32_t)context->Message_Block[t4 + 1]) << 16) |
+      224:  489:            (((uint32_t)context->Message_Block[t4 + 2]) << 8) |
+      112:  490:            (((uint32_t)context->Message_Block[t4 + 3]));
+        -:  491:    }
+      343:  492:    for (t = 16; t < 64; t++)
+        -:  493:    {
+     1008:  494:        W[t] = SHA256_sigma1(W[t - 2]) + W[t - 7] +
+      336:  495:            SHA256_sigma0(W[t - 15]) + W[t - 16];
+        -:  496:    }
+        7:  497:    A = context->Intermediate_Hash[0];
+        7:  498:    B = context->Intermediate_Hash[1];
+        7:  499:    C = context->Intermediate_Hash[2];
+        7:  500:    D = context->Intermediate_Hash[3];
+        7:  501:    E = context->Intermediate_Hash[4];
+        7:  502:    F = context->Intermediate_Hash[5];
+        7:  503:    G = context->Intermediate_Hash[6];
+        7:  504:    H = context->Intermediate_Hash[7];
+        -:  505:
+      455:  506:    for (t = 0; t < 64; t++)
+        -:  507:    {
+      448:  508:        temp1 = H + SHA256_SIGMA1(E) + SHA_Ch(E, F, G) + K[t] + W[t];
+      448:  509:        temp2 = SHA256_SIGMA0(A) + SHA_Maj(A, B, C);
+      448:  510:        H = G;
+      448:  511:        G = F;
+      448:  512:        F = E;
+      448:  513:        E = D + temp1;
+      448:  514:        D = C;
+      448:  515:        C = B;
+      448:  516:        B = A;
+      448:  517:        A = temp1 + temp2;
+        -:  518:    }
+        -:  519:
+        7:  520:    context->Intermediate_Hash[0] += A;
+        7:  521:    context->Intermediate_Hash[1] += B;
+        7:  522:    context->Intermediate_Hash[2] += C;
+        7:  523:    context->Intermediate_Hash[3] += D;
+        7:  524:    context->Intermediate_Hash[4] += E;
+        7:  525:    context->Intermediate_Hash[5] += F;
+        7:  526:    context->Intermediate_Hash[6] += G;
+        7:  527:    context->Intermediate_Hash[7] += H;
+        -:  528:
+        7:  529:    context->Message_Block_Index = 0;
+        7:  530:}
+        -:  531:
+        -:  532:/*
+        -:  533:* SHA224_256Reset
+        -:  534:*
+        -:  535:* Description:
+        -:  536:*   This helper function will initialize the SHA256Context in
+        -:  537:*   preparation for computing a new SHA256 message digest.
+        -:  538:*
+        -:  539:* Parameters:
+        -:  540:*   context: [in/out]
+        -:  541:*     The context to reset.
+        -:  542:*   H0
+        -:  543:*     The initial hash value to use.
+        -:  544:*
+        -:  545:* Returns:
+        -:  546:*   sha Error Code.
+        -:  547:*/
+        2:  548:static int SHA224_256Reset(SHA256Context *context, uint32_t *H0)
+        -:  549:{
+        -:  550:    int result;
+        2:  551:    if (!context)
+        -:  552:    {
+    #####:  553:        result = shaNull;
+        -:  554:    }
+        -:  555:    else
+        -:  556:    {
+        2:  557:        context->Length_Low = 0;
+        2:  558:        context->Length_High = 0;
+        2:  559:        context->Message_Block_Index = 0;
+        -:  560:
+        2:  561:        context->Intermediate_Hash[0] = H0[0];
+        2:  562:        context->Intermediate_Hash[1] = H0[1];
+        2:  563:        context->Intermediate_Hash[2] = H0[2];
+        2:  564:        context->Intermediate_Hash[3] = H0[3];
+        2:  565:        context->Intermediate_Hash[4] = H0[4];
+        2:  566:        context->Intermediate_Hash[5] = H0[5];
+        2:  567:        context->Intermediate_Hash[6] = H0[6];
+        2:  568:        context->Intermediate_Hash[7] = H0[7];
+        -:  569:
+        2:  570:        context->Computed = 0;
+        2:  571:        context->Corrupted = 0;
+        2:  572:        result = shaSuccess;
+        -:  573:    }
+        2:  574:    return result;
+        -:  575:}
+        -:  576:
+        -:  577:/*
+        -:  578:* SHA224_256ResultN
+        -:  579:*
+        -:  580:* Description:
+        -:  581:*   This helper function will return the 224-bit or 256-bit message
+        -:  582:*   digest into the Message_Digest array provided by the caller.
+        -:  583:*   NOTE: The first octet of hash is stored in the 0th element,
+        -:  584:*      the last octet of hash in the 28th/32nd element.
+        -:  585:*
+        -:  586:* Parameters:
+        -:  587:*   context: [in/out]
+        -:  588:*     The context to use to calculate the SHA hash.
+        -:  589:*   Message_Digest: [out]
+        -:  590:*     Where the digest is returned.
+        -:  591:*   HashSize: [in]
+        -:  592:*     The size of the hash, either 28 or 32.
+        -:  593:*
+        -:  594:* Returns:
+        -:  595:*   sha Error Code.
+        -:  596:*/
+        2:  597:static int SHA224_256ResultN(SHA256Context *context, uint8_t Message_Digest[], int HashSize)
+        -:  598:{
+        -:  599:    int result;
+        -:  600:    int i;
+        -:  601:
+        2:  602:    if (!context || !Message_Digest)
+        -:  603:    {
+    #####:  604:        result = shaNull;
+        -:  605:    }
+        2:  606:    else if (context->Corrupted)
+        -:  607:    {
+    #####:  608:        result = context->Corrupted;
+        -:  609:    }
+        -:  610:    else
+        -:  611:    {
+        2:  612:        if (!context->Computed)
+        -:  613:        {
+        2:  614:            SHA224_256Finalize(context, 0x80);
+        -:  615:        }
+       66:  616:        for (i = 0; i < HashSize; ++i)
+        -:  617:        {
+       64:  618:            Message_Digest[i] = (uint8_t)(context->Intermediate_Hash[i >> 2] >> 8 * (3 - (i & 0x03)));
+        -:  619:        }
+        2:  620:        result = shaSuccess;
+        -:  621:    }
+        2:  622:    return result;
+        -:  623:}
+        -:  624:

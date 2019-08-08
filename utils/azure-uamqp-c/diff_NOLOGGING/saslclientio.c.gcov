@@ -1,0 +1,360 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+171c171
+<         -:  169:        LogError("Sending SASL header failed");
+---
+>     #####:  169:        LogError("Sending SASL header failed");
+178c178
+<         -:  176:            LOG(AZ_LOG_TRACE, LOG_LINE, "-> Header (AMQP 3.1.0.0)");
+---
+>     #####:  176:            LOG(AZ_LOG_TRACE, LOG_LINE, "-> Header (AMQP 3.1.0.0)");
+194c194
+<         -:  192:        LogError("Open complete received in unexpected state");
+---
+>     #####:  192:        LogError("Open complete received in unexpected state");
+245c245
+<         -:  243:        LogError("Error callback received in unexpected state");
+---
+>     #####:  243:        LogError("Error callback received in unexpected state");
+267c267
+<         -:  265:static const char* get_frame_type_as_string(AMQP_VALUE descriptor)
+---
+>     #####:  265:static const char* get_frame_type_as_string(AMQP_VALUE descriptor)
+271c271
+<         -:  269:    if (is_sasl_mechanisms_type_by_descriptor(descriptor))
+---
+>     #####:  269:    if (is_sasl_mechanisms_type_by_descriptor(descriptor))
+273c273
+<         -:  271:        result = "[SASL MECHANISMS]";
+---
+>     #####:  271:        result = "[SASL MECHANISMS]";
+275c275
+<         -:  273:    else if (is_sasl_init_type_by_descriptor(descriptor))
+---
+>     #####:  273:    else if (is_sasl_init_type_by_descriptor(descriptor))
+277c277
+<         -:  275:        result = "[SASL INIT]";
+---
+>     #####:  275:        result = "[SASL INIT]";
+279c279
+<         -:  277:    else if (is_sasl_challenge_type_by_descriptor(descriptor))
+---
+>     #####:  277:    else if (is_sasl_challenge_type_by_descriptor(descriptor))
+281c281
+<         -:  279:        result = "[SASL CHALLENGE]";
+---
+>     #####:  279:        result = "[SASL CHALLENGE]";
+283c283
+<         -:  281:    else if (is_sasl_response_type_by_descriptor(descriptor))
+---
+>     #####:  281:    else if (is_sasl_response_type_by_descriptor(descriptor))
+285c285
+<         -:  283:        result = "[SASL RESPONSE]";
+---
+>     #####:  283:        result = "[SASL RESPONSE]";
+287c287
+<         -:  285:    else if (is_sasl_outcome_type_by_descriptor(descriptor))
+---
+>     #####:  285:    else if (is_sasl_outcome_type_by_descriptor(descriptor))
+289c289
+<         -:  287:        result = "[SASL OUTCOME]";
+---
+>     #####:  287:        result = "[SASL OUTCOME]";
+293c293
+<         -:  291:        result = "[Unknown]";
+---
+>     #####:  291:        result = "[Unknown]";
+296c296
+<         -:  294:    return result;
+---
+>     #####:  294:    return result;
+305c305
+<         -:  303:    if (xlogging_get_log_function() != NULL)
+---
+>     #####:  303:    if (xlogging_get_log_function() != NULL)
+307,308c307,308
+<         -:  305:        AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+<         -:  306:        if (descriptor != NULL)
+---
+>     #####:  305:        AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+>     #####:  306:        if (descriptor != NULL)
+311,315c311,315
+<         -:  309:            LOG(AZ_LOG_TRACE, 0, "<- ");
+<         -:  310:            LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+<         -:  311:            performative_as_string = NULL;
+<         -:  312:            LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+<         -:  313:            if (performative_as_string != NULL)
+---
+>     #####:  309:            LOG(AZ_LOG_TRACE, 0, "<- ");
+>     #####:  310:            LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+>     #####:  311:            performative_as_string = NULL;
+>     #####:  312:            LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+>     #####:  313:            if (performative_as_string != NULL)
+317c317
+<         -:  315:                free(performative_as_string);
+---
+>     #####:  315:                free(performative_as_string);
+329c329
+<         -:  327:    if (xlogging_get_log_function() != NULL)
+---
+>     #####:  327:    if (xlogging_get_log_function() != NULL)
+331,332c331,332
+<         -:  329:        AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+<         -:  330:        if (descriptor != NULL)
+---
+>     #####:  329:        AMQP_VALUE descriptor = amqpvalue_get_inplace_descriptor(performative);
+>     #####:  330:        if (descriptor != NULL)
+335,339c335,339
+<         -:  333:            LOG(AZ_LOG_TRACE, 0, "-> ");
+<         -:  334:            LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+<         -:  335:            performative_as_string = NULL;
+<         -:  336:            LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+<         -:  337:            if (performative_as_string != NULL)
+---
+>     #####:  333:            LOG(AZ_LOG_TRACE, 0, "-> ");
+>     #####:  334:            LOG(AZ_LOG_TRACE, 0, "%s", (char*)get_frame_type_as_string(descriptor));
+>     #####:  335:            performative_as_string = NULL;
+>     #####:  336:            LOG(AZ_LOG_TRACE, LOG_LINE, "%s", (performative_as_string = amqpvalue_to_string(performative)));
+>     #####:  337:            if (performative_as_string != NULL)
+341c341
+<         -:  339:                free(performative_as_string);
+---
+>     #####:  339:                free(performative_as_string);
+355c355
+<         -:  353:        LogError("Byte being received in unexpected state: %s", MU_ENUM_TO_STRING(SASL_HEADER_EXCHANGE_STATE, sasl_client_io_instance->sasl_header_exchange_state));
+---
+>     #####:  353:        LogError("Byte being received in unexpected state: %s", MU_ENUM_TO_STRING(SASL_HEADER_EXCHANGE_STATE, sasl_client_io_instance->sasl_header_exchange_state));
+363c363
+<         -:  361:            LogError("Byte being received in unexpected state: %s", MU_ENUM_TO_STRING(SASL_CLIENT_NEGOTIATION_STATE, SASL_CLIENT_NEGOTIATION_ERROR));
+---
+>     #####:  361:            LogError("Byte being received in unexpected state: %s", MU_ENUM_TO_STRING(SASL_CLIENT_NEGOTIATION_STATE, SASL_CLIENT_NEGOTIATION_ERROR));
+394c394
+<         -:  392:            LogError("Mismatched SASL header");
+---
+>     #####:  392:            LogError("Mismatched SASL header");
+404c404
+<         -:  402:                    LOG(AZ_LOG_TRACE, LOG_LINE, "<- Header (AMQP 3.1.0.0)");
+---
+>     #####:  402:                    LOG(AZ_LOG_TRACE, LOG_LINE, "<- Header (AMQP 3.1.0.0)");
+410c410
+<         -:  408:                    LogError("Invalid SASL header exchange state: %s", MU_ENUM_TO_STRING(SASL_HEADER_EXCHANGE_STATE, sasl_client_io_instance->sasl_header_exchange_state));
+---
+>     #####:  408:                    LogError("Invalid SASL header exchange state: %s", MU_ENUM_TO_STRING(SASL_HEADER_EXCHANGE_STATE, sasl_client_io_instance->sasl_header_exchange_state));
+425c425
+<         -:  423:                        LogError("Could not send SASL header");
+---
+>     #####:  423:                        LogError("Could not send SASL header");
+456c456
+<         -:  454:        LogError("Bad buffer received from the underlying IO, buffer = %p, size = %u",
+---
+>     #####:  454:        LogError("Bad buffer received from the underlying IO, buffer = %p, size = %u",
+512c512
+<         -:  510:        LogError("xio_send failed");
+---
+>     #####:  510:        LogError("xio_send failed");
+532c532
+<         -:  530:        LogError("Could not create sasl_init");
+---
+>     #####:  530:        LogError("Could not create sasl_init");
+541c541
+<         -:  539:            LogError("Could not get SASL init bytes");
+---
+>     #####:  539:            LogError("Could not get SASL init bytes");
+554c554
+<         -:  552:                LogError("Could not set initial response");
+---
+>     #####:  552:                LogError("Could not set initial response");
+563c563
+<         -:  561:                    LogError("Could not create SASL init");
+---
+>     #####:  561:                    LogError("Could not create SASL init");
+572c572
+<         -:  570:                        LogError("Could not encode SASL init value");
+---
+>     #####:  570:                        LogError("Could not encode SASL init value");
+610c610
+<         -:  608:        LogError("Could not create SASL response");
+---
+>     #####:  608:        LogError("Could not create SASL response");
+618c618
+<         -:  616:            LogError("Could not create SASL response AMQP value");
+---
+>     #####:  616:            LogError("Could not create SASL response AMQP value");
+626c626
+<         -:  624:                LogError("Could not encode SASL response in the frame");
+---
+>     #####:  624:                LogError("Could not encode SASL response in the frame");
+656c656
+<         -:  654:        LogError("SASL frame received while in state %d", (int)sasl_client_io_instance->io_state);
+---
+>     #####:  654:        LogError("SASL frame received while in state %d", (int)sasl_client_io_instance->io_state);
+678c678
+<         -:  676:                LogError("Could not obtain SASL frame descriptor");
+---
+>     #####:  676:                LogError("Could not obtain SASL frame descriptor");
+696c696
+<         -:  694:                        LogError("SASL mechanisms frame received in %s state", MU_ENUM_TO_STRING(SASL_CLIENT_NEGOTIATION_STATE, sasl_client_io_instance->sasl_client_negotiation_state));
+---
+>     #####:  694:                        LogError("SASL mechanisms frame received in %s state", MU_ENUM_TO_STRING(SASL_CLIENT_NEGOTIATION_STATE, sasl_client_io_instance->sasl_client_negotiation_state));
+707c707
+<         -:  705:                            LogError("Could not get SASL mechanisms");
+---
+>     #####:  705:                            LogError("Could not get SASL mechanisms");
+720c720
+<         -:  718:                                LogError("Invalid SASL mechanisms list");
+---
+>     #####:  718:                                LogError("Invalid SASL mechanisms list");
+729c729
+<         -:  727:                                    LogError("Cannot get the mechanism name");
+---
+>     #####:  727:                                    LogError("Cannot get the mechanism name");
+742c742
+<         -:  740:                                            LogError("Cannot get SASL mechanisms array item for index %u", (unsigned int)i);
+---
+>     #####:  740:                                            LogError("Cannot get SASL mechanisms array item for index %u", (unsigned int)i);
+750c750
+<         -:  748:                                                LogError("Error getting server SASL mechanism from array item");
+---
+>     #####:  748:                                                LogError("Error getting server SASL mechanism from array item");
+769c769
+<         -:  767:                                        LogError("Could not find desired SASL mechanism in the list presented by server");
+---
+>     #####:  767:                                        LogError("Could not find desired SASL mechanism in the list presented by server");
+782c782
+<         -:  780:                                            LogError("Could not send SASL init");
+---
+>     #####:  780:                                            LogError("Could not send SASL init");
+809c809
+<         -:  807:                        LogError("SASL challenge received in a bad state: %s", MU_ENUM_TO_STRING(SASL_CLIENT_NEGOTIATION_STATE, sasl_client_io_instance->sasl_client_negotiation_state));
+---
+>     #####:  807:                        LogError("SASL challenge received in a bad state: %s", MU_ENUM_TO_STRING(SASL_CLIENT_NEGOTIATION_STATE, sasl_client_io_instance->sasl_client_negotiation_state));
+819c819
+<         -:  817:                            LogError("Cannot get SASL challenge values");
+---
+>     #####:  817:                            LogError("Cannot get SASL challenge values");
+833c833
+<         -:  831:                                LogError("Cannot get SASL challenge binary value");
+---
+>     #####:  831:                                LogError("Cannot get SASL challenge binary value");
+851c851
+<         -:  849:                                    LogError("SASL Challenge failed");
+---
+>     #####:  849:                                    LogError("SASL Challenge failed");
+857c857
+<         -:  855:                                    LogError("Cannot send SASL reponse");
+---
+>     #####:  855:                                    LogError("Cannot send SASL reponse");
+874c874
+<         -:  872:                        LogError("SASL outcome received in a bad state: %s", MU_ENUM_TO_STRING(SASL_CLIENT_NEGOTIATION_STATE, sasl_client_io_instance->sasl_client_negotiation_state));
+---
+>     #####:  872:                        LogError("SASL outcome received in a bad state: %s", MU_ENUM_TO_STRING(SASL_CLIENT_NEGOTIATION_STATE, sasl_client_io_instance->sasl_client_negotiation_state));
+885c885
+<         -:  883:                            LogError("Cannot get SASL outcome");
+---
+>     #####:  883:                            LogError("Cannot get SASL outcome");
+895c895
+<         -:  893:                                LogError("Cannot get SASL outcome code");
+---
+>     #####:  893:                                LogError("Cannot get SASL outcome code");
+911c911
+<         -:  909:                                    LogError("SASL handshake failed with code %02X", (unsigned char)sasl_code);
+---
+>     #####:  909:                                    LogError("SASL handshake failed with code %02X", (unsigned char)sasl_code);
+932c932
+<         -:  930:                    LogError("Bad SASL frame");
+---
+>     #####:  930:                    LogError("Bad SASL frame");
+947c947
+<         -:  945:    LogError("Error encoding frame (on_frame_codec_error)");
+---
+>     #####:  945:    LogError("Error encoding frame (on_frame_codec_error)");
+958c958
+<         -:  956:    LogError("Error encoding SASL frame (on_sasl_frame_codec_error)");
+---
+>     #####:  956:    LogError("Error encoding SASL frame (on_sasl_frame_codec_error)");
+970c970
+<         -:  968:        LogError("NULL io_create_parameters");
+---
+>     #####:  968:        LogError("NULL io_create_parameters");
+977c977
+<         -:  975:        LogError("Bad parameters: underlying_io = %p, sasl_mechanism = %p",
+---
+>     #####:  975:        LogError("Bad parameters: underlying_io = %p, sasl_mechanism = %p",
+987c987
+<         -:  985:            LogError("Cannot allocate sasl client IO instance");
+---
+>     #####:  985:            LogError("Cannot allocate sasl client IO instance");
+997c997
+<         -:  995:                LogError("frame_codec_create failed");
+---
+>     #####:  995:                LogError("frame_codec_create failed");
+1008c1008
+<         -: 1006:                    LogError("sasl_frame_codec_create failed");
+---
+>     #####: 1006:                    LogError("sasl_frame_codec_create failed");
+1040c1040
+<         -: 1038:        LogError("NULL sasl_client_io");
+---
+>     #####: 1038:        LogError("NULL sasl_client_io");
+1066c1066
+<         -: 1064:        LogError("Bad arguments: sasl_client_io = %p, on_io_open_complete = %p, on_bytes_received = %p, on_io_error = %p",
+---
+>     #####: 1064:        LogError("Bad arguments: sasl_client_io = %p, on_io_open_complete = %p, on_bytes_received = %p, on_io_error = %p",
+1076c1076
+<         -: 1074:            LogError("Open called while already OPEN");
+---
+>         2: 1074:            LogError("Open called while already OPEN");
+1099c1099
+<         -: 1097:                LogError("xio_open failed");
+---
+>         6: 1097:                LogError("xio_open failed");
+1120c1120
+<         -: 1118:        LogError("NULL saslclientio_close");
+---
+>     #####: 1118:        LogError("NULL saslclientio_close");
+1132c1132
+<         -: 1130:            LogError("saslclientio_close called while not open");
+---
+>     #####: 1130:            LogError("saslclientio_close called while not open");
+1146c1146
+<         -: 1144:                LogError("xio_close failed");
+---
+>     #####: 1144:                LogError("xio_close failed");
+1172c1172
+<         -: 1170:        LogError("Bad arguments: sasl_client_io = %p, buffer = %p, size = %u",
+---
+>     #####: 1170:        LogError("Bad arguments: sasl_client_io = %p, buffer = %p, size = %u",
+1183c1183
+<         -: 1181:            LogError("send called while not open");
+---
+>     #####: 1181:            LogError("send called while not open");
+1192c1192
+<         -: 1190:                LogError("xio_send failed");
+---
+>     #####: 1190:                LogError("xio_send failed");
+1211c1211
+<         -: 1209:        LogError("NULL sasl_client_io");
+---
+>     #####: 1209:        LogError("NULL sasl_client_io");
+1234c1234
+<         -: 1232:        LogError("Bad arguments: sasl_client_io = %p, option_name = %p",
+---
+>     #####: 1232:        LogError("Bad arguments: sasl_client_io = %p, option_name = %p",
+1244c1244
+<         -: 1242:            LogError("NULL underlying_io");
+---
+>     #####: 1242:            LogError("NULL underlying_io");
+1262c1262
+<         -: 1260:                LogError("Error executing xio_setoption");
+---
+>     #####: 1260:                LogError("Error executing xio_setoption");
+1307c1307
+<         -: 1305:            LogError("unable to OptionHandler_Create");
+---
+>     #####: 1305:            LogError("unable to OptionHandler_Create");
+1322c1322
+<         -: 1320:                    LogError("unable to add logtrace option");
+---
+>     #####: 1320:                    LogError("unable to add logtrace option");

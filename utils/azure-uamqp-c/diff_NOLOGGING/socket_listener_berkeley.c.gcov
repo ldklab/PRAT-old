@@ -1,0 +1,32 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+54c54
+<         -:   52:        LogError("NULL socket_listener");
+---
+>     #####:   52:        LogError("NULL socket_listener");
+64c64
+<         -:   62:            LogError("Creating socket failed");
+---
+>     #####:   62:            LogError("Creating socket failed");
+82c82
+<         -:   80:                LogError("Failure: fcntl failure.");
+---
+>     #####:   80:                LogError("Failure: fcntl failure.");
+89c89
+<         -:   87:                LogError("bind socket failed");
+---
+>     #####:   87:                LogError("bind socket failed");
+98c98
+<         -:   96:                    LogError("listen on socket failed");
+---
+>     #####:   96:                    LogError("listen on socket failed");
+120c120
+<         -:  118:        LogError("NULL socket_listener");
+---
+>     #####:  118:        LogError("NULL socket_listener");
+151c151
+<         -:  149:                LogError("Failure: fcntl failure on accepted socket.");
+---
+>     #####:  149:                LogError("Failure: fcntl failure on accepted socket.");

@@ -1,0 +1,28 @@
+22c22
+<        39:   20:        result = 'A' + (char)val;
+---
+>        34:   20:        result = 'A' + (char)val;
+24c24
+<        44:   22:    else if (val < 52)
+---
+>        49:   22:    else if (val < 52)
+26c26
+<        26:   24:        result = 'a' + ((char)val - 26);
+---
+>        39:   24:        result = 'a' + ((char)val - 26);
+28c28
+<        18:   26:    else if (val < 62)
+---
+>        10:   26:    else if (val < 62)
+30c30
+<        14:   28:        result = '0' + ((char)val - 52);
+---
+>         8:   28:        result = '0' + ((char)val - 52);
+32c32
+<         4:   30:    else if (val == 62)
+---
+>         2:   30:    else if (val == 62)
+34c34
+<         3:   32:        result = '+';
+---
+>         1:   32:        result = '+';

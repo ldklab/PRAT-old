@@ -1,0 +1,226 @@
+2c2
+<         -:    0:Programs:101
+---
+>         -:    0:Programs:82
+38c38
+<         5:   36:MESSAGE_BODY_TYPE internal_get_body_type(MESSAGE_HANDLE message)
+---
+>         4:   36:MESSAGE_BODY_TYPE internal_get_body_type(MESSAGE_HANDLE message)
+42c42
+<         5:   40:    if (message->body_amqp_value != NULL)
+---
+>         4:   40:    if (message->body_amqp_value != NULL)
+46c46
+<         5:   44:    else if (message->body_amqp_data_count > 0)
+---
+>         4:   44:    else if (message->body_amqp_data_count > 0)
+50c50
+<         5:   48:    else if (message->body_amqp_sequence_count > 0)
+---
+>         4:   48:    else if (message->body_amqp_sequence_count > 0)
+56c56
+<         5:   54:        result = MESSAGE_BODY_TYPE_NONE;
+---
+>         4:   54:        result = MESSAGE_BODY_TYPE_NONE;
+59c59
+<         5:   57:    return result;
+---
+>         4:   57:    return result;
+62c62
+<         3:   60:static void free_all_body_data_items(MESSAGE_HANDLE message)
+---
+>         2:   60:static void free_all_body_data_items(MESSAGE_HANDLE message)
+66c66
+<         6:   64:    for (i = 0; i < message->body_amqp_data_count; i++)
+---
+>         4:   64:    for (i = 0; i < message->body_amqp_data_count; i++)
+68c68
+<         3:   66:        if (message->body_amqp_data_items[i].body_data_section_bytes != NULL)
+---
+>         2:   66:        if (message->body_amqp_data_items[i].body_data_section_bytes != NULL)
+70c70
+<         3:   68:            free(message->body_amqp_data_items[i].body_data_section_bytes);
+---
+>         2:   68:            free(message->body_amqp_data_items[i].body_data_section_bytes);
+74c74
+<         3:   72:    if (message->body_amqp_data_items != NULL)
+---
+>         2:   72:    if (message->body_amqp_data_items != NULL)
+76c76
+<         3:   74:        free(message->body_amqp_data_items);
+---
+>         2:   74:        free(message->body_amqp_data_items);
+78,80c78,80
+<         3:   76:    message->body_amqp_data_count = 0;
+<         3:   77:    message->body_amqp_data_items = NULL;
+<         3:   78:}
+---
+>         2:   76:    message->body_amqp_data_count = 0;
+>         2:   77:    message->body_amqp_data_items = NULL;
+>         2:   78:}
+82c82
+<         3:   80:static void free_all_body_sequence_items(MESSAGE_HANDLE message)
+---
+>         2:   80:static void free_all_body_sequence_items(MESSAGE_HANDLE message)
+86c86
+<        3*:   84:    for (i = 0; i < message->body_amqp_sequence_count; i++)
+---
+>        2*:   84:    for (i = 0; i < message->body_amqp_sequence_count; i++)
+95c95
+<         3:   93:    if (message->body_amqp_sequence_items != NULL)
+---
+>         2:   93:    if (message->body_amqp_sequence_items != NULL)
+99,101c99,101
+<         3:   97:    message->body_amqp_sequence_count = 0;
+<         3:   98:    message->body_amqp_sequence_items = NULL;
+<         3:   99:}
+---
+>         2:   97:    message->body_amqp_sequence_count = 0;
+>         2:   98:    message->body_amqp_sequence_items = NULL;
+>         2:   99:}
+103c103
+<         5:  101:MESSAGE_HANDLE message_create(void)
+---
+>         4:  101:MESSAGE_HANDLE message_create(void)
+105,106c105,106
+<         5:  103:    MESSAGE_HANDLE result = (MESSAGE_HANDLE)malloc(sizeof(MESSAGE_INSTANCE));
+<         5:  104:    if (result == NULL)
+---
+>         4:  103:    MESSAGE_HANDLE result = (MESSAGE_HANDLE)malloc(sizeof(MESSAGE_INSTANCE));
+>         4:  104:    if (result == NULL)
+113,123c113,123
+<         5:  111:        result->header = NULL;
+<         5:  112:        result->delivery_annotations = NULL;
+<         5:  113:        result->message_annotations = NULL;
+<         5:  114:        result->properties = NULL;
+<         5:  115:        result->application_properties = NULL;
+<         5:  116:        result->footer = NULL;
+<         5:  117:        result->body_amqp_data_items = NULL;
+<         5:  118:        result->body_amqp_data_count = 0;
+<         5:  119:        result->body_amqp_value = NULL;
+<         5:  120:        result->body_amqp_sequence_items = NULL;
+<         5:  121:        result->body_amqp_sequence_count = 0;
+---
+>         4:  111:        result->header = NULL;
+>         4:  112:        result->delivery_annotations = NULL;
+>         4:  113:        result->message_annotations = NULL;
+>         4:  114:        result->properties = NULL;
+>         4:  115:        result->application_properties = NULL;
+>         4:  116:        result->footer = NULL;
+>         4:  117:        result->body_amqp_data_items = NULL;
+>         4:  118:        result->body_amqp_data_count = 0;
+>         4:  119:        result->body_amqp_value = NULL;
+>         4:  120:        result->body_amqp_sequence_items = NULL;
+>         4:  121:        result->body_amqp_sequence_count = 0;
+126c126
+<         5:  124:        result->message_format = 0;
+---
+>         4:  124:        result->message_format = 0;
+130c130
+<         5:  128:    return result;
+---
+>         4:  128:    return result;
+328c328
+<         3:  326:void message_destroy(MESSAGE_HANDLE message)
+---
+>         2:  326:void message_destroy(MESSAGE_HANDLE message)
+330c330
+<         3:  328:    if (message == NULL)
+---
+>         2:  328:    if (message == NULL)
+338c338
+<         3:  336:        if (message->header != NULL)
+---
+>         2:  336:        if (message->header != NULL)
+344c344
+<         3:  342:        if (message->delivery_annotations != NULL)
+---
+>         2:  342:        if (message->delivery_annotations != NULL)
+350c350
+<         3:  348:        if (message->message_annotations != NULL)
+---
+>         2:  348:        if (message->message_annotations != NULL)
+356c356
+<         3:  354:        if (message->properties != NULL)
+---
+>         2:  354:        if (message->properties != NULL)
+362c362
+<         3:  360:        if (message->application_properties != NULL)
+---
+>         2:  360:        if (message->application_properties != NULL)
+368c368
+<         3:  366:        if (message->footer != NULL)
+---
+>         2:  366:        if (message->footer != NULL)
+374c374
+<         3:  372:        if (message->body_amqp_value != NULL)
+---
+>         2:  372:        if (message->body_amqp_value != NULL)
+381c381
+<         3:  379:        free_all_body_data_items(message);
+---
+>         2:  379:        free_all_body_data_items(message);
+384,385c384,385
+<         3:  382:        free_all_body_sequence_items(message);
+<         3:  383:        free(message);
+---
+>         2:  382:        free_all_body_sequence_items(message);
+>         2:  383:        free(message);
+387c387
+<         3:  385:}
+---
+>         2:  385:}
+995c995
+<         5:  993:int message_add_body_amqp_data(MESSAGE_HANDLE message, BINARY_DATA amqp_data)
+---
+>         4:  993:int message_add_body_amqp_data(MESSAGE_HANDLE message, BINARY_DATA amqp_data)
+1000c1000
+<         5:  998:    if ((message == NULL) ||
+---
+>         4:  998:    if ((message == NULL) ||
+1002c1002
+<        5*: 1000:        ((amqp_data.bytes == NULL) &&
+---
+>        4*: 1000:        ((amqp_data.bytes == NULL) &&
+1011,1012c1011,1012
+<         5: 1009:        MESSAGE_BODY_TYPE body_type = internal_get_body_type(message);
+<         5: 1010:        if ((body_type == MESSAGE_BODY_TYPE_SEQUENCE) ||
+---
+>         4: 1009:        MESSAGE_BODY_TYPE body_type = internal_get_body_type(message);
+>         4: 1010:        if ((body_type == MESSAGE_BODY_TYPE_SEQUENCE) ||
+1022,1023c1022,1023
+<         5: 1020:            BODY_AMQP_DATA* new_body_amqp_data_items = (BODY_AMQP_DATA*)realloc(message->body_amqp_data_items, sizeof(BODY_AMQP_DATA) * (message->body_amqp_data_count + 1));
+<         5: 1021:            if (new_body_amqp_data_items == NULL)
+---
+>         4: 1020:            BODY_AMQP_DATA* new_body_amqp_data_items = (BODY_AMQP_DATA*)realloc(message->body_amqp_data_items, sizeof(BODY_AMQP_DATA) * (message->body_amqp_data_count + 1));
+>         4: 1021:            if (new_body_amqp_data_items == NULL)
+1031c1031
+<         5: 1029:                message->body_amqp_data_items = new_body_amqp_data_items;
+---
+>         4: 1029:                message->body_amqp_data_items = new_body_amqp_data_items;
+1033c1033
+<         5: 1031:                if (amqp_data.length == 0)
+---
+>         4: 1031:                if (amqp_data.length == 0)
+1044,1045c1044,1045
+<         5: 1042:                    message->body_amqp_data_items[message->body_amqp_data_count].body_data_section_bytes = (unsigned char*)malloc(amqp_data.length);
+<         5: 1043:                    if (message->body_amqp_data_items[message->body_amqp_data_count].body_data_section_bytes == NULL)
+---
+>         4: 1042:                    message->body_amqp_data_items[message->body_amqp_data_count].body_data_section_bytes = (unsigned char*)malloc(amqp_data.length);
+>         4: 1043:                    if (message->body_amqp_data_items[message->body_amqp_data_count].body_data_section_bytes == NULL)
+1053,1055c1053,1055
+<         5: 1051:                        message->body_amqp_data_items[message->body_amqp_data_count].body_data_section_length = amqp_data.length;
+<         5: 1052:                        (void)memcpy(message->body_amqp_data_items[message->body_amqp_data_count].body_data_section_bytes, amqp_data.bytes, amqp_data.length);
+<         5: 1053:                        message->body_amqp_data_count++;
+---
+>         4: 1051:                        message->body_amqp_data_items[message->body_amqp_data_count].body_data_section_length = amqp_data.length;
+>         4: 1052:                        (void)memcpy(message->body_amqp_data_items[message->body_amqp_data_count].body_data_section_bytes, amqp_data.bytes, amqp_data.length);
+>         4: 1053:                        message->body_amqp_data_count++;
+1058c1058
+<         5: 1056:                        result = 0;
+---
+>         4: 1056:                        result = 0;
+1065c1065
+<         5: 1063:    return result;
+---
+>         4: 1063:    return result;

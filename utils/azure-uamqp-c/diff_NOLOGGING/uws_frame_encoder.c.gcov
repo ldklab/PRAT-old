@@ -1,0 +1,28 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+23c23
+<         -:   21:        LogError("Bad reserved value: 0x%02x", reserved);
+---
+>     #####:   21:        LogError("Bad reserved value: 0x%02x", reserved);
+29c29
+<         -:   27:        LogError("Invalid opcode: 0x%02x", opcode);
+---
+>     #####:   27:        LogError("Invalid opcode: 0x%02x", opcode);
+36c36
+<         -:   34:        LogError("Invalid arguments: NULL payload and length=%u", (unsigned int)length);
+---
+>     #####:   34:        LogError("Invalid arguments: NULL payload and length=%u", (unsigned int)length);
+50c50
+<         -:   48:            LogError("Cannot create new buffer");
+---
+>     #####:   48:            LogError("Cannot create new buffer");
+76c76
+<         -:   74:                LogError("Cannot allocate memory for encoded frame");
+---
+>     #####:   74:                LogError("Cannot allocate memory for encoded frame");
+87c87
+<         -:   85:                    LogError("Cannot get encoded buffer pointer");
+---
+>     #####:   85:                    LogError("Cannot get encoded buffer pointer");

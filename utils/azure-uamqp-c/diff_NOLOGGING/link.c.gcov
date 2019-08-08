@@ -1,0 +1,376 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+123c123
+<         -:  121:        LogError("NULL flow performative");
+---
+>     #####:  121:        LogError("NULL flow performative");
+130c130
+<         -:  128:            LogError("Cannot set link credit on flow performative");
+---
+>     #####:  128:            LogError("Cannot set link credit on flow performative");
+135c135
+<         -:  133:            LogError("Cannot set handle on flow performative");
+---
+>     #####:  133:            LogError("Cannot set handle on flow performative");
+140c140
+<         -:  138:            LogError("Cannot set delivery count on flow performative");
+---
+>     #####:  138:            LogError("Cannot set delivery count on flow performative");
+147c147
+<         -:  145:                LogError("Sending flow frame failed in session send");
+---
+>     #####:  145:                LogError("Sending flow frame failed in session send");
+169c169
+<         -:  167:        LogError("NULL disposition performative");
+---
+>     #####:  167:        LogError("NULL disposition performative");
+176c176
+<         -:  174:            LogError("Failed setting last on disposition performative");
+---
+>     #####:  174:            LogError("Failed setting last on disposition performative");
+181c181
+<         -:  179:            LogError("Failed setting settled on disposition performative");
+---
+>     #####:  179:            LogError("Failed setting settled on disposition performative");
+186c186
+<         -:  184:            LogError("Failed setting state on disposition performative");
+---
+>     #####:  184:            LogError("Failed setting state on disposition performative");
+193c193
+<         -:  191:                LogError("Sending disposition failed in session send");
+---
+>     #####:  191:                LogError("Sending disposition failed in session send");
+216c216
+<         -:  214:        LogError("NULL detach performative");
+---
+>     #####:  214:        LogError("NULL detach performative");
+224c224
+<         -:  222:            LogError("Failed setting error on detach frame");
+---
+>     #####:  222:            LogError("Failed setting error on detach frame");
+230c230
+<         -:  228:            LogError("Failed setting closed field on detach frame");
+---
+>     #####:  228:            LogError("Failed setting closed field on detach frame");
+237c237
+<         -:  235:                LogError("Sending detach frame failed in session send");
+---
+>     #####:  235:                LogError("Sending detach frame failed in session send");
+265c265
+<         -:  263:        LogError("NULL attach performative");
+---
+>     #####:  263:        LogError("NULL attach performative");
+288c288
+<         -:  286:                LogError("Cannot set attach initial delivery count");
+---
+>     #####:  286:                LogError("Cannot set attach initial delivery count");
+297c297
+<         -:  295:                LogError("Cannot set max message size");
+---
+>     #####:  295:                LogError("Cannot set max message size");
+302c302
+<         -:  300:                LogError("Sending attach failed in session send");
+---
+>     #####:  300:                LogError("Sending attach failed in session send");
+328c328
+<         -:  326:            LogError("Cannot get attach performative");
+---
+>     #####:  326:            LogError("Cannot get attach performative");
+335c335
+<         -:  333:                LogError("Cannot get initial delivery count");
+---
+>     #####:  333:                LogError("Cannot get initial delivery count");
+343c343
+<         -:  341:                    LogError("Could not retrieve peer_max_message_size from attach frame");
+---
+>     #####:  341:                    LogError("Could not retrieve peer_max_message_size from attach frame");
+378c378
+<         -:  376:            LogError("Cannot get flow performative");
+---
+>     #####:  376:            LogError("Cannot get flow performative");
+389c389
+<         -:  387:                    LogError("Cannot get link credit");
+---
+>     #####:  387:                    LogError("Cannot get link credit");
+395c395
+<         -:  393:                    LogError("Cannot get delivery count");
+---
+>     #####:  393:                    LogError("Cannot get delivery count");
+419c419
+<         -:  417:                LogError("Cannot get transfer performative");
+---
+>     #####:  417:                LogError("Cannot get transfer performative");
+445c445
+<         -:  443:                        LogError("Could not get the delivery Id from the transfer performative");
+---
+>     #####:  443:                        LogError("Could not get the delivery Id from the transfer performative");
+458c458
+<         -:  456:                            LogError("Could not allocate memory for the received payload");
+---
+>     #####:  456:                            LogError("Could not allocate memory for the received payload");
+498c498
+<         -:  496:                                LogError("Cannot send disposition frame");
+---
+>     #####:  496:                                LogError("Cannot send disposition frame");
+515c515
+<         -:  513:            LogError("Cannot get disposition performative");
+---
+>     #####:  513:            LogError("Cannot get disposition performative");
+524c524
+<         -:  522:                LogError("Cannot get first field");
+---
+>     #####:  522:                LogError("Cannot get first field");
+549c549
+<         -:  547:                            LogError("Cannot obtain pending delivery");
+---
+>     #####:  547:                            LogError("Cannot obtain pending delivery");
+565c565
+<         -:  563:                                        LogError("Cannot remove pending delivery");
+---
+>     #####:  563:                                        LogError("Cannot remove pending delivery");
+591c591
+<         -:  589:            LogError("Cannot get detach performative");
+---
+>     #####:  589:            LogError("Cannot get detach performative");
+606c606
+<         -:  604:                    LogError("Failed sending detach frame");
+---
+>     #####:  604:                    LogError("Failed sending detach frame");
+618c618
+<         -:  616:                    LogError("Failed sending attach frame");
+---
+>     #####:  616:                    LogError("Failed sending attach frame");
+623c623
+<         -:  621:                    LogError("Failed sending detach frame");
+---
+>     #####:  621:                    LogError("Failed sending detach frame");
+709c709
+<         -:  707:        LogError("Cannot create link");
+---
+>     #####:  707:        LogError("Cannot create link");
+739c739
+<         -:  737:            LogError("Cannot create tick counter for link");
+---
+>     #####:  737:            LogError("Cannot create tick counter for link");
+748c748
+<         -:  746:                LogError("Cannot create pending deliveries list");
+---
+>     #####:  746:                LogError("Cannot create pending deliveries list");
+759c759
+<         -:  757:                    LogError("Cannot allocate memory for link name");
+---
+>     #####:  757:                    LogError("Cannot allocate memory for link name");
+775c775
+<         -:  773:                        LogError("Cannot create link endpoint");
+---
+>     #####:  773:                        LogError("Cannot create link endpoint");
+795c795
+<         -:  793:        LogError("Cannot create link");
+---
+>     #####:  793:        LogError("Cannot create link");
+833c833
+<         -:  831:            LogError("Cannot create tick counter for link");
+---
+>     #####:  831:            LogError("Cannot create tick counter for link");
+842c842
+<         -:  840:                LogError("Cannot create pending deliveries list");
+---
+>     #####:  840:                LogError("Cannot create pending deliveries list");
+853c853
+<         -:  851:                    LogError("Cannot allocate memory for link name");
+---
+>     #####:  851:                    LogError("Cannot allocate memory for link name");
+877c877
+<         -:  875:        LogError("NULL link");
+---
+>     #####:  875:        LogError("NULL link");
+915c915
+<         -:  913:        LogError("NULL link");
+---
+>     #####:  913:        LogError("NULL link");
+934c934
+<         -:  932:        LogError("Bad arguments: link = %p, snd_settle_mode = %p",
+---
+>     #####:  932:        LogError("Bad arguments: link = %p, snd_settle_mode = %p",
+954c954
+<         -:  952:        LogError("NULL link");
+---
+>     #####:  952:        LogError("NULL link");
+973c973
+<         -:  971:        LogError("Bad arguments: link = %p, rcv_settle_mode = %p",
+---
+>     #####:  971:        LogError("Bad arguments: link = %p, rcv_settle_mode = %p",
+992c992
+<         -:  990:        LogError("NULL link");
+---
+>     #####:  990:        LogError("NULL link");
+1011c1011
+<         -: 1009:        LogError("Bad arguments: link = %p, initial_delivery_count = %p",
+---
+>     #####: 1009:        LogError("Bad arguments: link = %p, initial_delivery_count = %p",
+1030c1030
+<         -: 1028:        LogError("NULL link");
+---
+>     #####: 1028:        LogError("NULL link");
+1049c1049
+<         -: 1047:        LogError("Bad arguments: link = %p, max_message_size = %p",
+---
+>     #####: 1047:        LogError("Bad arguments: link = %p, max_message_size = %p",
+1069c1069
+<         -: 1067:        LogError("Bad arguments: link = %p, peer_max_message_size = %p",
+---
+>     #####: 1067:        LogError("Bad arguments: link = %p, peer_max_message_size = %p",
+1076c1076
+<         -: 1074:        LogError("Attempting to read peer max message size before it was received");
+---
+>     #####: 1074:        LogError("Attempting to read peer max message size before it was received");
+1094c1094
+<         -: 1092:        LogError("NULL link");
+---
+>     #####: 1092:        LogError("NULL link");
+1102c1102
+<         -: 1100:            LogError("Failed cloning attach properties");
+---
+>     #####: 1100:            LogError("Failed cloning attach properties");
+1137c1137
+<         -: 1135:        LogError("NULL link");
+---
+>     #####: 1135:        LogError("NULL link");
+1142c1142
+<         -: 1140:        LogError("Already attached");
+---
+>     #####: 1140:        LogError("Already attached");
+1156c1156
+<         -: 1154:                LogError("Begin session failed");
+---
+>         9: 1154:                LogError("Begin session failed");
+1165c1165
+<         -: 1163:                    LogError("Binding link endpoint to session failed");
+---
+>     #####: 1163:                    LogError("Binding link endpoint to session failed");
+1195c1195
+<         -: 1193:        LogError("NULL link");
+---
+>     #####: 1193:        LogError("NULL link");
+1211c1211
+<         -: 1209:                LogInfo("Cannot create error for detach, detaching without error anyhow");
+---
+>     #####: 1209:                LogInfo("Cannot create error for detach, detaching without error anyhow");
+1219c1219
+<         -: 1217:                        LogInfo("Cannot set error description on detach error, detaching anyhow");
+---
+>     #####: 1217:                        LogInfo("Cannot set error description on detach error, detaching anyhow");
+1227c1227
+<         -: 1225:                        LogInfo("Cannot set info map on detach error, detaching anyhow");
+---
+>     #####: 1225:                        LogInfo("Cannot set info map on detach error, detaching anyhow");
+1244c1244
+<         -: 1242:                LogError("Sending detach frame failed");
+---
+>     #####: 1242:                LogError("Sending detach frame failed");
+1258c1258
+<         -: 1256:                LogError("Sending detach frame failed");
+---
+>     #####: 1256:                LogError("Sending detach frame failed");
+1332c1332
+<         -: 1330:        LogError("Invalid arguments: link = %p, link_transfer_error = %p",
+---
+>     #####: 1330:        LogError("Invalid arguments: link = %p, link_transfer_error = %p",
+1340c1340
+<         -: 1338:            LogError("Link is not a sender link");
+---
+>     #####: 1338:            LogError("Link is not a sender link");
+1346c1346
+<         -: 1344:            LogError("Link is not attached");
+---
+>     #####: 1344:            LogError("Link is not attached");
+1360c1360
+<         -: 1358:                LogError("Error creating async operation");
+---
+>     #####: 1358:                LogError("Error creating async operation");
+1368c1368
+<         -: 1366:                    LogError("Error creating transfer");
+---
+>     #####: 1366:                    LogError("Error creating transfer");
+1396c1396
+<         -: 1394:                        LogError("Failed setting delivery tag");
+---
+>     #####: 1394:                        LogError("Failed setting delivery tag");
+1403c1403
+<         -: 1401:                        LogError("Failed setting message format");
+---
+>     #####: 1401:                        LogError("Failed setting message format");
+1410c1410
+<         -: 1408:                        LogError("Failed setting settled flag");
+---
+>     #####: 1408:                        LogError("Failed setting settled flag");
+1420c1420
+<         -: 1418:                            LogError("Failed creating transfer performative AMQP value");
+---
+>     #####: 1418:                            LogError("Failed creating transfer performative AMQP value");
+1430c1430
+<         -: 1428:                                LogError("Failed getting pending delivery");
+---
+>     #####: 1428:                                LogError("Failed getting pending delivery");
+1439c1439
+<         -: 1437:                                    LogError("Failed getting current tick");
+---
+>     #####: 1437:                                    LogError("Failed getting current tick");
+1455c1455
+<         -: 1453:                                        LogError("Failed adding delivery to list");
+---
+>     #####: 1453:                                        LogError("Failed adding delivery to list");
+1467c1467
+<         -: 1465:                                            LogError("Failed session send transfer");
+---
+>     #####: 1465:                                            LogError("Failed session send transfer");
+1470c1470
+<         -: 1468:                                                LogError("Error removing pending delivery from the list");
+---
+>     #####: 1468:                                                LogError("Error removing pending delivery from the list");
+1480c1480
+<         -: 1478:                                            LogError("Failed session send transfer");
+---
+>     #####: 1478:                                            LogError("Failed session send transfer");
+1483c1483
+<         -: 1481:                                                LogError("Error removing pending delivery from the list");
+---
+>     #####: 1481:                                                LogError("Error removing pending delivery from the list");
+1519c1519
+<         -: 1517:        LogError("NULL link");
+---
+>     #####: 1517:        LogError("NULL link");
+1537c1537
+<         -: 1535:        LogError("NULL link");
+---
+>     #####: 1535:        LogError("NULL link");
+1562c1562
+<         -: 1560:            LogError("Cannot send disposition frame");
+---
+>     #####: 1560:            LogError("Cannot send disposition frame");
+1574c1574
+<         -: 1572:        LogError("NULL link");
+---
+>     #####: 1572:        LogError("NULL link");
+1582c1582
+<         -: 1580:            LogError("Cannot get tick counter value");
+---
+>     #####: 1580:            LogError("Cannot get tick counter value");
+1604c1604
+<         -: 1602:                        LogError("Cannot remove item from list");
+---
+>     #####: 1602:                        LogError("Cannot remove item from list");
+1623c1623
+<         -: 1621:        LogError("Invalid arguments: link = %p, on_link_detach_received = %p, context = %p",
+---
+>     #####: 1621:        LogError("Invalid arguments: link = %p, on_link_detach_received = %p, context = %p",
+1631c1631
+<         -: 1629:            LogError("Already subscribed for on_link_detach_received events");
+---
+>     #####: 1629:            LogError("Already subscribed for on_link_detach_received events");
+1650c1650
+<         -: 1648:        LogError("NULL event_subscription");
+---
+>     #####: 1648:        LogError("NULL event_subscription");

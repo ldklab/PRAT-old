@@ -1,0 +1,264 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+109c109
+<         -:  107:        LogError("Cannot allocate memory for message");
+---
+>     #####:  107:        LogError("Cannot allocate memory for message");
+140c140
+<         -:  138:        LogError("NULL source_message");
+---
+>     #####:  138:        LogError("NULL source_message");
+150c150
+<         -:  148:            LogError("Cannot clone message");
+---
+>     #####:  148:            LogError("Cannot clone message");
+163c163
+<         -:  161:                    LogError("Cannot clone message header");
+---
+>     #####:  161:                    LogError("Cannot clone message header");
+176c176
+<         -:  174:                    LogError("Cannot clone delivery annotations");
+---
+>     #####:  174:                    LogError("Cannot clone delivery annotations");
+189c189
+<         -:  187:                    LogError("Cannot clone message annotations");
+---
+>     #####:  187:                    LogError("Cannot clone message annotations");
+202c202
+<         -:  200:                    LogError("Cannot clone message properties");
+---
+>     #####:  200:                    LogError("Cannot clone message properties");
+215c215
+<         -:  213:                    LogError("Cannot clone application annotations");
+---
+>     #####:  213:                    LogError("Cannot clone application annotations");
+228c228
+<         -:  226:                    LogError("Cannot clone message footer");
+---
+>     #####:  226:                    LogError("Cannot clone message footer");
+242c242
+<         -:  240:                    LogError("Cannot allocate memory for body data sections");
+---
+>     #####:  240:                    LogError("Cannot allocate memory for body data sections");
+256c256
+<         -:  254:                            LogError("Cannot allocate memory for body data section %u", (unsigned int)i);
+---
+>     #####:  254:                            LogError("Cannot allocate memory for body data section %u", (unsigned int)i);
+283c283
+<         -:  281:                    LogError("Cannot allocate memory for body AMQP sequences");
+---
+>     #####:  281:                    LogError("Cannot allocate memory for body AMQP sequences");
+295c295
+<         -:  293:                            LogError("Cannot clone AMQP sequence %u", (unsigned int)i);
+---
+>     #####:  293:                            LogError("Cannot clone AMQP sequence %u", (unsigned int)i);
+317c317
+<         -:  315:                    LogError("Cannot clone body AMQP value");
+---
+>     #####:  315:                    LogError("Cannot clone body AMQP value");
+333c333
+<         -:  331:        LogError("NULL message");
+---
+>     #####:  331:        LogError("NULL message");
+396c396
+<         -:  394:        LogError("NULL message");
+---
+>     #####:  394:        LogError("NULL message");
+423c423
+<         -:  421:                LogError("Cannot clone message header");
+---
+>     #####:  421:                LogError("Cannot clone message header");
+454c454
+<         -:  452:        LogError("Bad arguments: message = %p, header = %p",
+---
+>     #####:  452:        LogError("Bad arguments: message = %p, header = %p",
+476c476
+<         -:  474:                LogError("Cannot clone message header");
+---
+>     #####:  474:                LogError("Cannot clone message header");
+497c497
+<         -:  495:        LogError("NULL message");
+---
+>     #####:  495:        LogError("NULL message");
+524c524
+<         -:  522:                LogError("Cannot clone delivery annotations");
+---
+>     #####:  522:                LogError("Cannot clone delivery annotations");
+555c555
+<         -:  553:        LogError("Bad arguments: message = %p, annotations = %p",
+---
+>     #####:  553:        LogError("Bad arguments: message = %p, annotations = %p",
+577c577
+<         -:  575:                LogError("Cannot clone delivery annotations");
+---
+>     #####:  575:                LogError("Cannot clone delivery annotations");
+598c598
+<         -:  596:        LogError("NULL message");
+---
+>     #####:  596:        LogError("NULL message");
+625c625
+<         -:  623:                LogError("Cannot clone message annotations");
+---
+>     #####:  623:                LogError("Cannot clone message annotations");
+656c656
+<         -:  654:        LogError("Bad arguments: message = %p, message_annotations = %p",
+---
+>     #####:  654:        LogError("Bad arguments: message = %p, message_annotations = %p",
+678c678
+<         -:  676:                LogError("Cannot clone message annotations");
+---
+>     #####:  676:                LogError("Cannot clone message annotations");
+699c699
+<         -:  697:        LogError("NULL message");
+---
+>     #####:  697:        LogError("NULL message");
+726c726
+<         -:  724:                LogError("Cannot clone message properties");
+---
+>     #####:  724:                LogError("Cannot clone message properties");
+757c757
+<         -:  755:        LogError("Bad arguments: message = %p, properties = %p",
+---
+>     #####:  755:        LogError("Bad arguments: message = %p, properties = %p",
+779c779
+<         -:  777:                LogError("Cannot clone message properties");
+---
+>     #####:  777:                LogError("Cannot clone message properties");
+800c800
+<         -:  798:        LogError("NULL message");
+---
+>     #####:  798:        LogError("NULL message");
+827c827
+<         -:  825:                LogError("Cannot clone application properties");
+---
+>     #####:  825:                LogError("Cannot clone application properties");
+858c858
+<         -:  856:        LogError("Bad arguments: message = %p, application_properties = %p",
+---
+>     #####:  856:        LogError("Bad arguments: message = %p, application_properties = %p",
+880c880
+<         -:  878:                LogError("Cannot clone application properties");
+---
+>     #####:  878:                LogError("Cannot clone application properties");
+901c901
+<         -:  899:        LogError("NULL message");
+---
+>     #####:  899:        LogError("NULL message");
+928c928
+<         -:  926:                LogError("Cannot clone message footer");
+---
+>     #####:  926:                LogError("Cannot clone message footer");
+959c959
+<         -:  957:        LogError("Bad arguments: message = %p, footer = %p",
+---
+>     #####:  957:        LogError("Bad arguments: message = %p, footer = %p",
+981c981
+<         -:  979:                LogError("Cannot clone message footer");
+---
+>     #####:  979:                LogError("Cannot clone message footer");
+1005c1005
+<         -: 1003:        LogError("Bad arguments: message = %p, bytes = %p, length = %u",
+---
+>     #####: 1003:        LogError("Bad arguments: message = %p, bytes = %p, length = %u",
+1016c1016
+<         -: 1014:            LogError("Body type already set");
+---
+>     #####: 1014:            LogError("Body type already set");
+1026c1026
+<         -: 1024:                LogError("Cannot allocate memory for body AMQP data items");
+---
+>     #####: 1024:                LogError("Cannot allocate memory for body AMQP data items");
+1048c1048
+<         -: 1046:                        LogError("Cannot allocate memory for body AMQP data to be added");
+---
+>     #####: 1046:                        LogError("Cannot allocate memory for body AMQP data to be added");
+1076c1076
+<         -: 1074:        LogError("Bad arguments: message = %p, amqp_data = %p",
+---
+>     #####: 1074:        LogError("Bad arguments: message = %p, amqp_data = %p",
+1086c1086
+<         -: 1084:            LogError("Body type is not AMQP data");
+---
+>     #####: 1084:            LogError("Body type is not AMQP data");
+1092c1092
+<         -: 1090:            LogError("Index too high for AMQP data (%lu), number of AMQP data entries is %lu",
+---
+>     #####: 1090:            LogError("Index too high for AMQP data (%lu), number of AMQP data entries is %lu",
+1118c1118
+<         -: 1116:        LogError("Bad arguments: message = %p, count = %p",
+---
+>     #####: 1116:        LogError("Bad arguments: message = %p, count = %p",
+1128c1128
+<         -: 1126:            LogError("Body type is not AMQP data");
+---
+>     #####: 1126:            LogError("Body type is not AMQP data");
+1152c1152
+<         -: 1150:        LogError("Bad arguments: message = %p, body_amqp_value = %p",
+---
+>     #####: 1150:        LogError("Bad arguments: message = %p, body_amqp_value = %p",
+1163c1163
+<         -: 1161:            LogError("Body is already set to another body type");
+---
+>     #####: 1161:            LogError("Body is already set to another body type");
+1172c1172
+<         -: 1170:                LogError("Cannot clone body AMQP value");
+---
+>     #####: 1170:                LogError("Cannot clone body AMQP value");
+1204c1204
+<         -: 1202:        LogError("Bad arguments: message = %p, body_amqp_value = %p",
+---
+>     #####: 1202:        LogError("Bad arguments: message = %p, body_amqp_value = %p",
+1214c1214
+<         -: 1212:            LogError("Body is not of type AMQP value");
+---
+>     #####: 1212:            LogError("Body is not of type AMQP value");
+1238c1238
+<         -: 1236:        LogError("Bad arguments: message = %p, sequence_list = %p",
+---
+>     #####: 1236:        LogError("Bad arguments: message = %p, sequence_list = %p",
+1249c1249
+<         -: 1247:            LogError("Body is already set to another body type");
+---
+>     #####: 1247:            LogError("Body is already set to another body type");
+1258c1258
+<         -: 1256:                LogError("Cannot allocate enough memory for sequence items");
+---
+>     #####: 1256:                LogError("Cannot allocate enough memory for sequence items");
+1271c1271
+<         -: 1269:                    LogError("Cloning sequence failed");
+---
+>     #####: 1269:                    LogError("Cloning sequence failed");
+1297c1297
+<         -: 1295:        LogError("Bad arguments: message = %p, sequence = %p",
+---
+>     #####: 1295:        LogError("Bad arguments: message = %p, sequence = %p",
+1307c1307
+<         -: 1305:            LogError("Body is not of type SEQUENCE");
+---
+>     #####: 1305:            LogError("Body is not of type SEQUENCE");
+1315c1315
+<         -: 1313:                LogError("Index too high for AMQP sequence (%lu), maximum is %lu",
+---
+>     #####: 1313:                LogError("Index too high for AMQP sequence (%lu), maximum is %lu",
+1341c1341
+<         -: 1339:        LogError("Bad arguments: message = %p, count = %p",
+---
+>     #####: 1339:        LogError("Bad arguments: message = %p, count = %p",
+1351c1351
+<         -: 1349:            LogError("Body is not of type SEQUENCE");
+---
+>     #####: 1349:            LogError("Body is not of type SEQUENCE");
+1375c1375
+<         -: 1373:        LogError("Bad arguments: message = %p, body_type = %p",
+---
+>     #####: 1373:        LogError("Bad arguments: message = %p, body_type = %p",
+1414c1414
+<         -: 1412:        LogError("NULL message");
+---
+>     #####: 1412:        LogError("NULL message");
+1437c1437
+<         -: 1435:        LogError("Bad arguments: message = %p, message_format = %p",
+---
+>     #####: 1435:        LogError("Bad arguments: message = %p, message_format = %p",

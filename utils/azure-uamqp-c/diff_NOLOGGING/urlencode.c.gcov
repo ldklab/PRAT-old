@@ -1,0 +1,104 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+60,61c60,61
+<       173:   58:        buffer[0] = (char)charVal;
+<       173:   59:        size = 1;
+---
+>       171:   58:        buffer[0] = (char)charVal;
+>       171:   59:        size = 1;
+67,68c67,68
+<        34:   65:        unsigned char bigNibbleVal = charVal >> 4;
+<        34:   66:        unsigned char littleNibbleVal = charVal & 0x0F;
+---
+>        36:   65:        unsigned char bigNibbleVal = charVal >> 4;
+>        36:   66:        unsigned char littleNibbleVal = charVal & 0x0F;
+70c70
+<        34:   68:        if (bigNibbleVal >= 0x0C)
+---
+>        36:   68:        if (bigNibbleVal >= 0x0C)
+75,76c75,76
+<       34*:   73:        bigNibbleStr = NIBBLE_TO_STRING(bigNibbleVal);
+<        34:   74:        littleNibbleStr = NIBBLE_TO_STRING(littleNibbleVal);
+---
+>       36*:   73:        bigNibbleStr = NIBBLE_TO_STRING(bigNibbleVal);
+>        36:   74:        littleNibbleStr = NIBBLE_TO_STRING(littleNibbleVal);
+78c78
+<        34:   76:        buffer[0] = '%';
+---
+>        36:   76:        buffer[0] = '%';
+80c80
+<        34:   78:        if (charVal < 0x80)
+---
+>        36:   78:        if (charVal < 0x80)
+82,84c82,84
+<        34:   80:            buffer[1] = bigNibbleStr;
+<        34:   81:            buffer[2] = littleNibbleStr;
+<        34:   82:            size = 3;
+---
+>        36:   80:            buffer[1] = bigNibbleStr;
+>        36:   81:            buffer[2] = littleNibbleStr;
+>        36:   82:            size = 3;
+113c113
+<         -:  111:        LogError("Null encoded string");
+---
+>     #####:  111:        LogError("Null encoded string");
+131,132c131,132
+<         -:  129:                    LogError("Incomplete or invalid percent encoding");
+<         -:  130:                    break;
+---
+>     #####:  129:                    LogError("Incomplete or invalid percent encoding");
+>     #####:  130:                    break;
+136,137c136,137
+<         -:  134:                    LogError("Out of range of characters accepted by this decoder");
+<         -:  135:                    break;
+---
+>     #####:  134:                    LogError("Out of range of characters accepted by this decoder");
+>     #####:  135:                    break;
+147,148c147,148
+<         -:  145:                LogError("Unprintable value in encoded string");
+<         -:  146:                break;
+---
+>     #####:  145:                LogError("Unprintable value in encoded string");
+>     #####:  146:                break;
+206c206
+<       173:  204:        size = 1;
+---
+>       171:  204:        size = 1;
+210c210
+<        34:  208:        if (charVal < 0x80)
+---
+>        36:  208:        if (charVal < 0x80)
+212c212
+<        34:  210:            size = 3;
+---
+>        36:  210:            size = 3;
+241c241
+<         -:  239:        LogError("URL_Encode:: MALLOC failure on encode.");
+---
+>     #####:  239:        LogError("URL_Encode:: MALLOC failure on encode.");
+256c256
+<         -:  254:            LogError("URL_Encode:: MALLOC failure on encode.");
+---
+>     #####:  254:            LogError("URL_Encode:: MALLOC failure on encode.");
+284c284
+<         -:  282:        LogError("URL_Encode:: NULL input");
+---
+>     #####:  282:        LogError("URL_Encode:: NULL input");
+321c321
+<         -:  319:        LogError("URL_Decode:: NULL input");
+---
+>     #####:  319:        LogError("URL_Decode:: NULL input");
+332c332
+<         -:  330:            LogError("URL_Decode:: Invalid input string");
+---
+>     #####:  330:            LogError("URL_Decode:: Invalid input string");
+337c337
+<         -:  335:            LogError("URL_Decode:: MALLOC failure on decode.");
+---
+>     #####:  335:            LogError("URL_Decode:: MALLOC failure on decode.");
+346c346
+<         -:  344:                LogError("URL_Decode:: MALLOC failure on decode");
+---
+>     #####:  344:                LogError("URL_Decode:: MALLOC failure on decode");

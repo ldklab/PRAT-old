@@ -1,0 +1,292 @@
+2c2
+<         -:    0:Programs:101
+---
+>         -:    0:Programs:82
+77c77
+<        12:   75:static void set_link_state(LINK_INSTANCE* link_instance, LINK_STATE link_state)
+---
+>         9:   75:static void set_link_state(LINK_INSTANCE* link_instance, LINK_STATE link_state)
+79,80c79,80
+<        12:   77:    link_instance->previous_link_state = link_instance->link_state;
+<        12:   78:    link_instance->link_state = link_state;
+---
+>         9:   77:    link_instance->previous_link_state = link_instance->link_state;
+>         9:   78:    link_instance->link_state = link_state;
+82c82
+<        12:   80:    if (link_instance->on_link_state_changed != NULL)
+---
+>         9:   80:    if (link_instance->on_link_state_changed != NULL)
+86c86
+<        12:   84:}
+---
+>         9:   84:}
+88c88
+<        12:   86:static void remove_all_pending_deliveries(LINK_INSTANCE* link, bool indicate_settled)
+---
+>         9:   86:static void remove_all_pending_deliveries(LINK_INSTANCE* link, bool indicate_settled)
+90c90
+<        12:   88:    if (link->pending_deliveries != NULL)
+---
+>         9:   88:    if (link->pending_deliveries != NULL)
+92,93c92,93
+<        12:   90:        LIST_ITEM_HANDLE item = singlylinkedlist_get_head_item(link->pending_deliveries);
+<        12:   91:        while (item != NULL)
+---
+>         9:   90:        LIST_ITEM_HANDLE item = singlylinkedlist_get_head_item(link->pending_deliveries);
+>         9:   91:        while (item != NULL)
+111,112c111,112
+<        12:  109:        singlylinkedlist_destroy(link->pending_deliveries);
+<        12:  110:        link->pending_deliveries = NULL;
+---
+>         9:  109:        singlylinkedlist_destroy(link->pending_deliveries);
+>         9:  110:        link->pending_deliveries = NULL;
+114c114
+<        12:  112:}
+---
+>         9:  112:}
+704c704
+<        12:  702:LINK_HANDLE link_create(SESSION_HANDLE session, const char* name, role role, AMQP_VALUE source, AMQP_VALUE target)
+---
+>         9:  702:LINK_HANDLE link_create(SESSION_HANDLE session, const char* name, role role, AMQP_VALUE source, AMQP_VALUE target)
+706,707c706,707
+<        12:  704:    LINK_INSTANCE* result = (LINK_INSTANCE*)malloc(sizeof(LINK_INSTANCE));
+<        12:  705:    if (result == NULL)
+---
+>         9:  704:    LINK_INSTANCE* result = (LINK_INSTANCE*)malloc(sizeof(LINK_INSTANCE));
+>         9:  705:    if (result == NULL)
+713,734c713,734
+<        12:  711:        result->link_state = LINK_STATE_DETACHED;
+<        12:  712:        result->previous_link_state = LINK_STATE_DETACHED;
+<        12:  713:        result->role = role;
+<        12:  714:        result->source = amqpvalue_clone(source);
+<        12:  715:        result->target = amqpvalue_clone(target);
+<        12:  716:        result->session = session;
+<        12:  717:        result->handle = 0;
+<        12:  718:        result->snd_settle_mode = sender_settle_mode_unsettled;
+<        12:  719:        result->rcv_settle_mode = receiver_settle_mode_first;
+<        12:  720:        result->delivery_count = 0;
+<        12:  721:        result->initial_delivery_count = 0;
+<        12:  722:        result->max_message_size = 0;
+<        12:  723:        result->max_link_credit = DEFAULT_LINK_CREDIT;
+<        12:  724:        result->peer_max_message_size = 0;
+<        12:  725:        result->is_underlying_session_begun = false;
+<        12:  726:        result->is_closed = false;
+<        12:  727:        result->attach_properties = NULL;
+<        12:  728:        result->received_payload = NULL;
+<        12:  729:        result->received_payload_size = 0;
+<        12:  730:        result->received_delivery_id = 0;
+<        12:  731:        result->on_link_detach_received_event_subscription.on_link_detach_received = NULL;
+<        12:  732:        result->on_link_detach_received_event_subscription.context = NULL;
+---
+>         9:  711:        result->link_state = LINK_STATE_DETACHED;
+>         9:  712:        result->previous_link_state = LINK_STATE_DETACHED;
+>         9:  713:        result->role = role;
+>         9:  714:        result->source = amqpvalue_clone(source);
+>         9:  715:        result->target = amqpvalue_clone(target);
+>         9:  716:        result->session = session;
+>         9:  717:        result->handle = 0;
+>         9:  718:        result->snd_settle_mode = sender_settle_mode_unsettled;
+>         9:  719:        result->rcv_settle_mode = receiver_settle_mode_first;
+>         9:  720:        result->delivery_count = 0;
+>         9:  721:        result->initial_delivery_count = 0;
+>         9:  722:        result->max_message_size = 0;
+>         9:  723:        result->max_link_credit = DEFAULT_LINK_CREDIT;
+>         9:  724:        result->peer_max_message_size = 0;
+>         9:  725:        result->is_underlying_session_begun = false;
+>         9:  726:        result->is_closed = false;
+>         9:  727:        result->attach_properties = NULL;
+>         9:  728:        result->received_payload = NULL;
+>         9:  729:        result->received_payload_size = 0;
+>         9:  730:        result->received_delivery_id = 0;
+>         9:  731:        result->on_link_detach_received_event_subscription.on_link_detach_received = NULL;
+>         9:  732:        result->on_link_detach_received_event_subscription.context = NULL;
+736,737c736,737
+<        12:  734:        result->tick_counter = tickcounter_create();
+<        12:  735:        if (result->tick_counter == NULL)
+---
+>         9:  734:        result->tick_counter = tickcounter_create();
+>         9:  735:        if (result->tick_counter == NULL)
+745,746c745,746
+<        12:  743:            result->pending_deliveries = singlylinkedlist_create();
+<        12:  744:            if (result->pending_deliveries == NULL)
+---
+>         9:  743:            result->pending_deliveries = singlylinkedlist_create();
+>         9:  744:            if (result->pending_deliveries == NULL)
+755,757c755,757
+<        12:  753:                size_t name_length = strlen(name);
+<        12:  754:                result->name = (char*)malloc(name_length + 1);
+<        12:  755:                if (result->name == NULL)
+---
+>         9:  753:                size_t name_length = strlen(name);
+>         9:  754:                result->name = (char*)malloc(name_length + 1);
+>         9:  755:                if (result->name == NULL)
+767,769c767,769
+<        12:  765:                    result->on_link_state_changed = NULL;
+<        12:  766:                    result->callback_context = NULL;
+<        12:  767:                    set_link_state(result, LINK_STATE_DETACHED);
+---
+>         9:  765:                    result->on_link_state_changed = NULL;
+>         9:  766:                    result->callback_context = NULL;
+>         9:  767:                    set_link_state(result, LINK_STATE_DETACHED);
+771,773c771,773
+<        12:  769:                    (void)memcpy(result->name, name, name_length + 1);
+<        12:  770:                    result->link_endpoint = session_create_link_endpoint(session, name);
+<        12:  771:                    if (result->link_endpoint == NULL)
+---
+>         9:  769:                    (void)memcpy(result->name, name, name_length + 1);
+>         9:  770:                    result->link_endpoint = session_create_link_endpoint(session, name);
+>         9:  771:                    if (result->link_endpoint == NULL)
+787c787
+<        12:  785:    return result;
+---
+>         9:  785:    return result;
+873c873
+<        12:  871:void link_destroy(LINK_HANDLE link)
+---
+>         9:  871:void link_destroy(LINK_HANDLE link)
+875c875
+<        12:  873:    if (link == NULL)
+---
+>         9:  873:    if (link == NULL)
+881,882c881,882
+<        12:  879:        remove_all_pending_deliveries((LINK_INSTANCE*)link, false);
+<        12:  880:        tickcounter_destroy(link->tick_counter);
+---
+>         9:  879:        remove_all_pending_deliveries((LINK_INSTANCE*)link, false);
+>         9:  880:        tickcounter_destroy(link->tick_counter);
+884,888c884,888
+<        12:  882:        link->on_link_state_changed = NULL;
+<        12:  883:        (void)link_detach(link, true, NULL, NULL, NULL);
+<        12:  884:        session_destroy_link_endpoint(link->link_endpoint);
+<        12:  885:        amqpvalue_destroy(link->source);
+<        12:  886:        amqpvalue_destroy(link->target);
+---
+>         9:  882:        link->on_link_state_changed = NULL;
+>         9:  883:        (void)link_detach(link, true, NULL, NULL, NULL);
+>         9:  884:        session_destroy_link_endpoint(link->link_endpoint);
+>         9:  885:        amqpvalue_destroy(link->source);
+>         9:  886:        amqpvalue_destroy(link->target);
+890c890
+<        12:  888:        if (link->name != NULL)
+---
+>         9:  888:        if (link->name != NULL)
+892c892
+<        12:  890:            free(link->name);
+---
+>         9:  890:            free(link->name);
+895c895
+<        12:  893:        if (link->attach_properties != NULL)
+---
+>         9:  893:        if (link->attach_properties != NULL)
+900c900
+<        12:  898:        if (link->received_payload != NULL)
+---
+>         9:  898:        if (link->received_payload != NULL)
+905c905
+<        12:  903:        free(link);
+---
+>         9:  903:        free(link);
+907c907
+<        12:  905:}
+---
+>         9:  905:}
+1024c1024
+<         5: 1022:int link_set_max_message_size(LINK_HANDLE link, uint64_t max_message_size)
+---
+>         4: 1022:int link_set_max_message_size(LINK_HANDLE link, uint64_t max_message_size)
+1028c1028
+<         5: 1026:    if (link == NULL)
+---
+>         4: 1026:    if (link == NULL)
+1035,1036c1035,1036
+<         5: 1033:        link->max_message_size = max_message_size;
+<         5: 1034:        result = 0;
+---
+>         4: 1033:        link->max_message_size = max_message_size;
+>         4: 1034:        result = 0;
+1039c1039
+<         5: 1037:    return result;
+---
+>         4: 1037:    return result;
+1131c1131
+<         9: 1129:int link_attach(LINK_HANDLE link, ON_TRANSFER_RECEIVED on_transfer_received, ON_LINK_STATE_CHANGED on_link_state_changed, ON_LINK_FLOW_ON on_link_flow_on, void* callback_context)
+---
+>         7: 1129:int link_attach(LINK_HANDLE link, ON_TRANSFER_RECEIVED on_transfer_received, ON_LINK_STATE_CHANGED on_link_state_changed, ON_LINK_FLOW_ON on_link_flow_on, void* callback_context)
+1135c1135
+<         9: 1133:    if (link == NULL)
+---
+>         7: 1133:    if (link == NULL)
+1140c1140
+<         9: 1138:    else if (link->is_closed)
+---
+>         7: 1138:    else if (link->is_closed)
+1147c1147
+<         9: 1145:        if (!link->is_underlying_session_begun)
+---
+>         7: 1145:        if (!link->is_underlying_session_begun)
+1149,1152c1149,1152
+<         9: 1147:            link->on_link_state_changed = on_link_state_changed;
+<         9: 1148:            link->on_transfer_received = on_transfer_received;
+<         9: 1149:            link->on_link_flow_on = on_link_flow_on;
+<         9: 1150:            link->callback_context = callback_context;
+---
+>         7: 1147:            link->on_link_state_changed = on_link_state_changed;
+>         7: 1148:            link->on_transfer_received = on_transfer_received;
+>         7: 1149:            link->on_link_flow_on = on_link_flow_on;
+>         7: 1150:            link->callback_context = callback_context;
+1154c1154
+<         9: 1152:            if (session_begin(link->session) != 0)
+---
+>         7: 1152:            if (session_begin(link->session) != 0)
+1156,1157c1156,1157
+<         9: 1154:                LogError("Begin session failed");
+<         9: 1155:                result = MU_FAILURE;
+---
+>         7: 1154:                LogError("Begin session failed");
+>         7: 1155:                result = MU_FAILURE;
+1182c1182
+<         9: 1180:    return result;
+---
+>         7: 1180:    return result;
+1185c1185
+<        12: 1183:int link_detach(LINK_HANDLE link, bool close, const char* error_condition, const char* error_description, AMQP_VALUE info)
+---
+>         9: 1183:int link_detach(LINK_HANDLE link, bool close, const char* error_condition, const char* error_description, AMQP_VALUE info)
+1193c1193
+<        12: 1191:    if (link == NULL)
+---
+>         9: 1191:    if (link == NULL)
+1198c1198
+<        12: 1196:    else if (link->is_closed)
+---
+>         9: 1196:    else if (link->is_closed)
+1206c1206
+<        12: 1204:        if (error_condition != NULL)
+---
+>         9: 1204:        if (error_condition != NULL)
+1234c1234
+<        12: 1232:            error = NULL;
+---
+>         9: 1232:            error = NULL;
+1237c1237
+<        12: 1235:        switch (link->link_state)
+---
+>         9: 1235:        switch (link->link_state)
+1268c1268
+<        12: 1266:        case LINK_STATE_DETACHED:
+---
+>         9: 1266:        case LINK_STATE_DETACHED:
+1270,1271c1270,1271
+<        12: 1268:            result = 0;
+<        12: 1269:            break;
+---
+>         9: 1268:            result = 0;
+>         9: 1269:            break;
+1280c1280
+<        12: 1278:        if (error != NULL)
+---
+>         9: 1278:        if (error != NULL)
+1286c1286
+<        12: 1284:    return result;
+---
+>         9: 1284:    return result;

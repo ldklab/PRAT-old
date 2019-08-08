@@ -1,0 +1,48 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+24c24
+<         -:   22:        LogError("Error constructing connection String");
+---
+>     #####:   22:        LogError("Error constructing connection String");
+45c45
+<         -:   43:        LogError("NULL connection string passed to tokenizer.");
+---
+>     #####:   43:        LogError("NULL connection string passed to tokenizer.");
+56c56
+<         -:   54:            LogError("Error creating STRING tokenizer.");
+---
+>     #####:   54:            LogError("Error creating STRING tokenizer.");
+66c66
+<         -:   64:                LogError("Error creating key token STRING.");
+---
+>     #####:   64:                LogError("Error creating key token STRING.");
+75c75
+<         -:   73:                    LogError("Error creating value token STRING.");
+---
+>     #####:   73:                    LogError("Error creating value token STRING.");
+83c83
+<         -:   81:                        LogError("Error creating Map.");
+---
+>     #####:   81:                        LogError("Error creating Map.");
+99c99
+<         -:   97:                                LogError("Error reading value token from the connection string.");
+---
+>     #####:   97:                                LogError("Error reading value token from the connection string.");
+111c111
+<         -:  109:                                    LogError("The key token is NULL or empty.");
+---
+>     #####:  109:                                    LogError("The key token is NULL or empty.");
+121c121
+<         -:  119:                                        LogError("Could not get C string for value token.");
+---
+>     #####:  119:                                        LogError("Could not get C string for value token.");
+130c130
+<         -:  128:                                            LogError("Could not add the key/value pair to the result map.");
+---
+>     #####:  128:                                            LogError("Could not add the key/value pair to the result map.");
+138c138
+<         -:  136:                                LogError("Error parsing connection string.");
+---
+>     #####:  136:                                LogError("Error parsing connection string.");

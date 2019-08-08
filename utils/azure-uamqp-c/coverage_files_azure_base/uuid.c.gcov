@@ -1,0 +1,169 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/uuid.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdlib.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include "azure_c_shared_utility/gballoc.h"
+        -:    7:#include "azure_c_shared_utility/uuid.h"
+        -:    8:#include "azure_c_shared_utility/uniqueid.h"
+        -:    9:#include "azure_c_shared_utility/optimize_size.h"
+        -:   10:#include "azure_c_shared_utility/xlogging.h"
+        -:   11:
+        -:   12:#define UUID_STRING_LENGTH          36
+        -:   13:#define UUID_STRING_SIZE            (UUID_STRING_LENGTH + 1)
+        -:   14:#define __SUCCESS__                 0
+        -:   15:#define UUID_FORMAT_STRING          "%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x"
+        -:   16:
+    #####:   17:int UUID_from_string(const char* uuid_string, UUID_T* uuid)
+        -:   18:{
+        -:   19:    int result;
+        -:   20:
+        -:   21:    // Codes_SRS_UUID_09_007: [ If uuid_string or uuid are NULL, UUID_from_string shall return a non-zero value ]
+    #####:   22:    if (uuid_string == NULL || uuid == NULL)
+        -:   23:    {
+    #####:   24:        LogError("Invalid argument (uuid_string=%p, uuid=%p)", uuid_string, uuid);
+    #####:   25:        result = MU_FAILURE;
+        -:   26:    }
+        -:   27:    else
+        -:   28:    {
+    #####:   29:        size_t uuid_string_length = strlen(uuid_string);
+        -:   30:
+    #####:   31:        if (uuid_string_length != UUID_STRING_LENGTH)
+        -:   32:        {
+    #####:   33:            LogError("Unexpected size for an UUID string (%lu)", (unsigned long)uuid_string_length);
+    #####:   34:            result = MU_FAILURE;
+        -:   35:        }
+        -:   36:        else
+        -:   37:        {
+        -:   38:            // Codes_SRS_UUID_09_008: [ Each pair of digits in uuid_string, excluding dashes, shall be read as a single HEX value and saved on the respective position in uuid ]
+        -:   39:            size_t i, j;
+        -:   40:            char* uuid_bytes;
+        -:   41:
+    #####:   42:            uuid_bytes = (char *)uuid;
+        -:   43:            // Codes_SRS_UUID_09_010: [ If no failures occur, UUID_from_string shall return zero ]
+    #####:   44:            result = __SUCCESS__;
+        -:   45:
+    #####:   46:            for (i = 0, j = 0; i < uuid_string_length; )
+        -:   47:            {
+    #####:   48:                if (uuid_string[i] == '-')
+        -:   49:                {
+    #####:   50:                    i++;
+        -:   51:                }
+        -:   52:                else
+        -:   53:                {
+    #####:   54:                    char double_hex_digit[3] = { 0, 0, 0 };
+        -:   55:
+    #####:   56:                    (void)memcpy(double_hex_digit, uuid_string + i, 2);
+        -:   57:
+    #####:   58:                    if (sscanf(double_hex_digit, "%02hhx", uuid_bytes + j) != 1)
+        -:   59:                    {
+        -:   60:                        // Codes_SRS_UUID_09_009: [ If uuid fails to be generated, UUID_from_string shall return a non-zero value ]
+    #####:   61:                        LogError("Failed decoding UUID string (%lu)", (unsigned long)i);
+    #####:   62:                        result = MU_FAILURE;
+    #####:   63:                        break;
+        -:   64:                    }
+        -:   65:                    else
+        -:   66:                    {
+    #####:   67:                        i += 2;
+    #####:   68:                        j++;
+        -:   69:                    }
+        -:   70:                }
+        -:   71:            }
+        -:   72:        }
+        -:   73:    }
+        -:   74:
+    #####:   75:    return result;
+        -:   76:}
+        -:   77:
+    #####:   78:char* UUID_to_string(const UUID_T* uuid)
+        -:   79:{
+        -:   80:    char* result;
+        -:   81:
+        -:   82:    // Codes_SRS_UUID_09_011: [ If uuid is NULL, UUID_to_string shall return a non-zero value ]
+    #####:   83:    if (uuid == NULL)
+        -:   84:    {
+    #####:   85:        LogError("Invalid argument (uuid is NULL)");
+    #####:   86:        result = NULL;
+        -:   87:    }
+        -:   88:    // Codes_SRS_UUID_09_012: [ UUID_to_string shall allocate a valid UUID string (uuid_string) as per RFC 4122 ]
+    #####:   89:    else if ((result = (char*)malloc(sizeof(char) * UUID_STRING_SIZE)) == NULL)
+        -:   90:    {
+        -:   91:        // Codes_SRS_UUID_09_013: [ If uuid_string fails to be allocated, UUID_to_string shall return NULL ]
+    #####:   92:        LogError("Failed allocating UUID string");
+        -:   93:    }
+        -:   94:    else
+        -:   95:    {
+        -:   96:        unsigned char* uuid_bytes;
+        -:   97:        int number_of_chars_written;
+        -:   98:
+    #####:   99:        uuid_bytes = (unsigned char*)uuid;
+        -:  100:
+        -:  101:        // Codes_SRS_UUID_09_014: [ Each character in uuid shall be written in the respective positions of uuid_string as a 2-digit HEX value ]  
+    #####:  102:        number_of_chars_written = sprintf(result, "%" PRI_UUID,
+    #####:  103:            UUID_FORMAT_VALUES(uuid_bytes));
+        -:  104:
+    #####:  105:        if (number_of_chars_written != UUID_STRING_LENGTH)
+        -:  106:        {
+        -:  107:            // Tests_SRS_UUID_09_015: [ If uuid_string fails to be set, UUID_to_string shall return NULL ]
+    #####:  108:            LogError("Failed encoding UUID string");
+    #####:  109:            free(result);
+    #####:  110:            result = NULL;
+        -:  111:        }
+        -:  112:    }
+        -:  113:
+        -:  114:    // Codes_SRS_UUID_09_016: [ If no failures occur, UUID_to_string shall return uuid_string ]
+    #####:  115:    return result;
+        -:  116:}
+        -:  117:
+    #####:  118:int UUID_generate(UUID_T* uuid)
+        -:  119:{
+        -:  120:    int result;
+        -:  121:
+        -:  122:    // Codes_SRS_UUID_09_001: [ If uuid is NULL, UUID_generate shall return a non-zero value ]
+    #####:  123:    if (uuid == NULL)
+        -:  124:    {
+    #####:  125:        LogError("Invalid argument (uuid is NULL)");
+    #####:  126:        result = MU_FAILURE;
+        -:  127:    }
+        -:  128:    else
+        -:  129:    {
+        -:  130:        char* uuid_string;
+        -:  131:
+    #####:  132:        if ((uuid_string = (char*)malloc(sizeof(char) * UUID_STRING_SIZE)) == NULL)
+        -:  133:        {
+        -:  134:            // Codes_SRS_UUID_09_003: [ If the UUID string fails to be obtained, UUID_generate shall fail and return a non-zero value ]
+    #####:  135:            LogError("Failed allocating UUID string");
+    #####:  136:            result = MU_FAILURE;
+        -:  137:        }
+        -:  138:        else
+        -:  139:        {
+    #####:  140:            (void)memset(uuid_string, 0, sizeof(char) * UUID_STRING_SIZE);
+        -:  141:
+        -:  142:            // Codes_SRS_UUID_09_002: [ UUID_generate shall obtain an UUID string from UniqueId_Generate ]
+    #####:  143:            if (UniqueId_Generate(uuid_string, UUID_STRING_SIZE) != UNIQUEID_OK)
+        -:  144:            {
+        -:  145:                // Codes_SRS_UUID_09_003: [ If the UUID string fails to be obtained, UUID_generate shall fail and return a non-zero value ]
+    #####:  146:                LogError("Failed generating UUID");
+    #####:  147:                result = MU_FAILURE;
+        -:  148:            }
+        -:  149:            // Codes_SRS_UUID_09_004: [ The UUID string shall be parsed into an UUID_T type (16 unsigned char array) and filled in uuid ]
+    #####:  150:            else if (UUID_from_string(uuid_string, uuid) != 0)
+        -:  151:            {
+        -:  152:                // Codes_SRS_UUID_09_005: [ If uuid fails to be set, UUID_generate shall fail and return a non-zero value ]
+    #####:  153:                LogError("Failed parsing UUID string");
+    #####:  154:                result = MU_FAILURE;
+        -:  155:            }
+        -:  156:            else
+        -:  157:            {
+        -:  158:                // Codes_SRS_UUID_09_006: [ If no failures occur, UUID_generate shall return zero ]
+    #####:  159:                result = __SUCCESS__;
+        -:  160:            }
+        -:  161:
+    #####:  162:            free(uuid_string);
+        -:  163:        }
+        -:  164:    }
+        -:  165:
+    #####:  166:    return result;
+        -:  167:}

@@ -1,0 +1,147 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/xlogging.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include "azure_c_shared_utility/xlogging.h"
+        -:    5:#include "azure_c_shared_utility/consolelogger.h"
+        -:    6:
+        -:    7:#ifndef NO_LOGGING
+        -:    8:
+        -:    9:#ifdef WIN32
+        -:   10:#include "windows.h"
+        -:   11:#endif // WIN32
+        -:   12:
+        -:   13:
+        -:   14:LOGGER_LOG global_log_function = consolelogger_log;
+        -:   15:
+    #####:   16:void xlogging_set_log_function(LOGGER_LOG log_function)
+        -:   17:{
+    #####:   18:    global_log_function = log_function;
+    #####:   19:}
+        -:   20:
+       79:   21:LOGGER_LOG xlogging_get_log_function(void)
+        -:   22:{
+       79:   23:    return global_log_function;
+        -:   24:}
+        -:   25:
+        -:   26:#if (defined(_MSC_VER))
+        -:   27:
+        -:   28:LOGGER_LOG_GETLASTERROR global_log_function_GetLastError = consolelogger_log_with_GetLastError;
+        -:   29:
+        -:   30:void xlogging_set_log_function_GetLastError(LOGGER_LOG_GETLASTERROR log_function_GetLastError)
+        -:   31:{
+        -:   32:    global_log_function_GetLastError = log_function_GetLastError;
+        -:   33:}
+        -:   34:
+        -:   35:LOGGER_LOG_GETLASTERROR xlogging_get_log_function_GetLastError(void)
+        -:   36:{
+        -:   37:    return global_log_function_GetLastError;
+        -:   38:}
+        -:   39:#endif
+        -:   40:
+        -:   41:/* Print up to 16 bytes per line. */
+        -:   42:#define LINE_SIZE 16
+        -:   43:
+        -:   44:/* Return the printable char for the provided value. */
+        -:   45:#define PRINTABLE(c)         ((c >= ' ') && (c <= '~')) ? (char)c : '.'
+        -:   46:
+        -:   47:/* Convert the lower nibble of the provided byte to a hexadecimal printable char. */
+        -:   48:#define HEX_STR(c)           (((c) & 0xF) < 0xA) ? (char)(((c) & 0xF) + '0') : (char)(((c) & 0xF) - 0xA + 'A')
+        -:   49:
+    #####:   50:void LogBinary(const char* comment, const void* data, size_t size)
+        -:   51:{
+        -:   52:    char charBuf[LINE_SIZE + 1];
+        -:   53:    char hexBuf[LINE_SIZE * 3 + 1];
+    #####:   54:    size_t countbuf = 0;
+    #####:   55:    size_t i = 0;
+    #####:   56:    const unsigned char* bufAsChar = (const unsigned char*)data;
+    #####:   57:    const unsigned char* startPos = bufAsChar;
+        -:   58:
+    #####:   59:    LOG(AZ_LOG_TRACE, LOG_LINE, "%s     %lu bytes", comment, (unsigned long)size);
+        -:   60:
+        -:   61:    /* Print the whole buffer. */
+    #####:   62:    for (i = 0; i < size; i++)
+        -:   63:    {
+        -:   64:        /* Store the printable value of the char in the charBuf to print. */
+    #####:   65:        charBuf[countbuf] = PRINTABLE(*bufAsChar);
+        -:   66:
+        -:   67:        /* Convert the high nibble to a printable hexadecimal value. */
+    #####:   68:        hexBuf[countbuf * 3] = HEX_STR(*bufAsChar >> 4);
+        -:   69:
+        -:   70:        /* Convert the low nibble to a printable hexadecimal value. */
+    #####:   71:        hexBuf[countbuf * 3 + 1] = HEX_STR(*bufAsChar);
+        -:   72:
+    #####:   73:        hexBuf[countbuf * 3 + 2] = ' ';
+        -:   74:
+    #####:   75:        countbuf++;
+    #####:   76:        bufAsChar++;
+        -:   77:        /* If the line is full, print it to start another one. */
+    #####:   78:        if (countbuf == LINE_SIZE)
+        -:   79:        {
+    #####:   80:            charBuf[countbuf] = '\0';
+    #####:   81:            hexBuf[countbuf * 3] = '\0';
+    #####:   82:            LOG(AZ_LOG_TRACE, LOG_LINE, "%p: %s    %s", startPos, hexBuf, charBuf);
+    #####:   83:            countbuf = 0;
+    #####:   84:            startPos = bufAsChar;
+        -:   85:        }
+        -:   86:    }
+        -:   87:
+        -:   88:    /* If the last line does not fit the line size. */
+    #####:   89:    if (countbuf > 0)
+        -:   90:    {
+        -:   91:        /* Close the charBuf string. */
+    #####:   92:        charBuf[countbuf] = '\0';
+        -:   93:
+        -:   94:        /* Fill the hexBuf with spaces to keep the charBuf alignment. */
+    #####:   95:        while ((countbuf++) < LINE_SIZE - 1)
+        -:   96:        {
+    #####:   97:            hexBuf[countbuf * 3] = ' ';
+    #####:   98:            hexBuf[countbuf * 3 + 1] = ' ';
+    #####:   99:            hexBuf[countbuf * 3 + 2] = ' ';
+        -:  100:        }
+    #####:  101:        hexBuf[countbuf * 3] = '\0';
+        -:  102:
+        -:  103:        /* Print the last line. */
+    #####:  104:        LOG(AZ_LOG_TRACE, LOG_LINE, "%p: %s    %s", startPos, hexBuf, charBuf);
+        -:  105:    }
+    #####:  106:}
+        -:  107:
+        -:  108:#ifdef WIN32
+        -:  109:
+        -:  110:void xlogging_LogErrorWinHTTPWithGetLastErrorAsStringFormatter(int errorMessageID)
+        -:  111:{
+        -:  112:    char messageBuffer[MESSAGE_BUFFER_SIZE];
+        -:  113:    if (errorMessageID == 0)
+        -:  114:    {
+        -:  115:        LogError("GetLastError() returned 0. Make sure you are calling this right after the code that failed. ");
+        -:  116:    }
+        -:  117:    else
+        -:  118:    {
+        -:  119:        int size = FormatMessage(FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_IGNORE_INSERTS,
+        -:  120:            GetModuleHandle("WinHttp"), errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), messageBuffer, MESSAGE_BUFFER_SIZE, NULL);
+        -:  121:        if (size == 0)
+        -:  122:        {
+        -:  123:            size = FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, errorMessageID, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), messageBuffer, MESSAGE_BUFFER_SIZE, NULL);
+        -:  124:            if (size == 0)
+        -:  125:            {
+        -:  126:                LogError("GetLastError Code: %d. ", errorMessageID);
+        -:  127:            }
+        -:  128:            else
+        -:  129:            {
+        -:  130:                LogError("GetLastError: %s.", messageBuffer);
+        -:  131:            }
+        -:  132:        }
+        -:  133:        else
+        -:  134:        {
+        -:  135:            LogError("GetLastError: %s.", messageBuffer);
+        -:  136:        }
+        -:  137:    }
+        -:  138:}
+        -:  139:#endif // WIN32
+        -:  140:
+        -:  141:
+        -:  142:#endif // NO_LOGGING
+        -:  143:
+        -:  144:
+        -:  145:

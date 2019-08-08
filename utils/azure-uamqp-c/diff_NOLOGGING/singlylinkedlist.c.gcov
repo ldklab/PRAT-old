@@ -1,0 +1,44 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+67c67
+<         -:   65:        LogError("Invalid argument (list=%p, item=%p)", list, item);
+---
+>     #####:   65:        LogError("Invalid argument (list=%p, item=%p)", list, item);
+110c110
+<         -:  108:        LogError("Invalid argument (list=%p, item=%p)", list, item);
+---
+>     #####:  108:        LogError("Invalid argument (list=%p, item=%p)", list, item);
+168c168
+<         -:  166:        LogError("Invalid argument (list=NULL)");
+---
+>     #####:  166:        LogError("Invalid argument (list=NULL)");
+189c189
+<         -:  187:        LogError("Invalid argument (list is NULL)");
+---
+>     #####:  187:        LogError("Invalid argument (list is NULL)");
+208c208
+<         -:  206:        LogError("Invalid argument (item_handle is NULL)");
+---
+>     #####:  206:        LogError("Invalid argument (item_handle is NULL)");
+228c228
+<         -:  226:        LogError("Invalid argument (list=%p, match_function=%p)", list, match_function);
+---
+>     #####:  226:        LogError("Invalid argument (list=%p, match_function=%p)", list, match_function);
+273c273
+<         -:  271:        LogError("Invalid argument (list=%p, condition_function=%p)", list, condition_function);
+---
+>     #####:  271:        LogError("Invalid argument (list=%p, condition_function=%p)", list, condition_function);
+340c340
+<         -:  338:        LogError("Invalid argument (list=%p, action_function=%p)", list, action_function);
+---
+>     #####:  338:        LogError("Invalid argument (list=%p, action_function=%p)", list, action_function);
+378c378
+<         -:  376:        LogError("Invalid argument SINGLYLINKEDLIST_HANDLE list=%p", list);
+---
+>     #####:  376:        LogError("Invalid argument SINGLYLINKEDLIST_HANDLE list=%p", list);
+388c388
+<         -:  386:            LogError("failure in malloc");
+---
+>     #####:  386:            LogError("failure in malloc");

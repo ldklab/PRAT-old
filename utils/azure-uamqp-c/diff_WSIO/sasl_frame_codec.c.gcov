@@ -1,0 +1,72 @@
+2c2
+<         -:    0:Programs:101
+---
+>         -:    0:Programs:82
+155c155
+<         5:  153:SASL_FRAME_CODEC_HANDLE sasl_frame_codec_create(FRAME_CODEC_HANDLE frame_codec, ON_SASL_FRAME_RECEIVED on_sasl_frame_received, ON_SASL_FRAME_CODEC_ERROR on_sasl_frame_codec_error, void* callback_context)
+---
+>         4:  153:SASL_FRAME_CODEC_HANDLE sasl_frame_codec_create(FRAME_CODEC_HANDLE frame_codec, ON_SASL_FRAME_RECEIVED on_sasl_frame_received, ON_SASL_FRAME_CODEC_ERROR on_sasl_frame_codec_error, void* callback_context)
+160,161c160,161
+<         5:  158:    if ((frame_codec == NULL) ||
+<         5:  159:        (on_sasl_frame_received == NULL) ||
+---
+>         4:  158:    if ((frame_codec == NULL) ||
+>         4:  159:        (on_sasl_frame_received == NULL) ||
+171,172c171,172
+<         5:  169:        result = (SASL_FRAME_CODEC_INSTANCE*)malloc(sizeof(SASL_FRAME_CODEC_INSTANCE));
+<         5:  170:        if (result == NULL)
+---
+>         4:  169:        result = (SASL_FRAME_CODEC_INSTANCE*)malloc(sizeof(SASL_FRAME_CODEC_INSTANCE));
+>         4:  170:        if (result == NULL)
+178,182c178,182
+<         5:  176:            result->frame_codec = frame_codec;
+<         5:  177:            result->on_sasl_frame_received = on_sasl_frame_received;
+<         5:  178:            result->on_sasl_frame_codec_error = on_sasl_frame_codec_error;
+<         5:  179:            result->callback_context = callback_context;
+<         5:  180:            result->decode_state = SASL_FRAME_DECODE_FRAME;
+---
+>         4:  176:            result->frame_codec = frame_codec;
+>         4:  177:            result->on_sasl_frame_received = on_sasl_frame_received;
+>         4:  178:            result->on_sasl_frame_codec_error = on_sasl_frame_codec_error;
+>         4:  179:            result->callback_context = callback_context;
+>         4:  180:            result->decode_state = SASL_FRAME_DECODE_FRAME;
+185,186c185,186
+<         5:  183:            result->decoder = amqpvalue_decoder_create(amqp_value_decoded, result);
+<         5:  184:            if (result->decoder == NULL)
+---
+>         4:  183:            result->decoder = amqpvalue_decoder_create(amqp_value_decoded, result);
+>         4:  184:            if (result->decoder == NULL)
+197c197
+<         5:  195:                if (frame_codec_subscribe(frame_codec, FRAME_TYPE_SASL, frame_received, result) != 0)
+---
+>         4:  195:                if (frame_codec_subscribe(frame_codec, FRAME_TYPE_SASL, frame_received, result) != 0)
+209c209
+<         5:  207:    return result;
+---
+>         4:  207:    return result;
+212c212
+<         4:  210:void sasl_frame_codec_destroy(SASL_FRAME_CODEC_HANDLE sasl_frame_codec)
+---
+>         3:  210:void sasl_frame_codec_destroy(SASL_FRAME_CODEC_HANDLE sasl_frame_codec)
+215c215
+<         4:  213:    if (sasl_frame_codec == NULL)
+---
+>         3:  213:    if (sasl_frame_codec == NULL)
+222c222
+<         4:  220:        SASL_FRAME_CODEC_INSTANCE* sasl_frame_codec_instance = (SASL_FRAME_CODEC_INSTANCE*)sasl_frame_codec;
+---
+>         3:  220:        SASL_FRAME_CODEC_INSTANCE* sasl_frame_codec_instance = (SASL_FRAME_CODEC_INSTANCE*)sasl_frame_codec;
+225c225
+<         4:  223:        (void)frame_codec_unsubscribe(sasl_frame_codec_instance->frame_codec, FRAME_TYPE_SASL);
+---
+>         3:  223:        (void)frame_codec_unsubscribe(sasl_frame_codec_instance->frame_codec, FRAME_TYPE_SASL);
+228,229c228,229
+<         4:  226:        amqpvalue_decoder_destroy(sasl_frame_codec_instance->decoder);
+<         4:  227:        free(sasl_frame_codec_instance);
+---
+>         3:  226:        amqpvalue_decoder_destroy(sasl_frame_codec_instance->decoder);
+>         3:  227:        free(sasl_frame_codec_instance);
+231c231
+<         4:  229:}
+---
+>         3:  229:}

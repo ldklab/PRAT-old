@@ -1,0 +1,224 @@
+2c2
+<         -:    0:Programs:80
+---
+>         -:    0:Programs:55
+24c24
+<        37:   22:SINGLYLINKEDLIST_HANDLE singlylinkedlist_create(void)
+---
+>        27:   22:SINGLYLINKEDLIST_HANDLE singlylinkedlist_create(void)
+29,30c29,30
+<        37:   27:    result = (LIST_INSTANCE*)malloc(sizeof(LIST_INSTANCE));
+<        37:   28:    if (result != NULL)
+---
+>        27:   27:    result = (LIST_INSTANCE*)malloc(sizeof(LIST_INSTANCE));
+>        27:   28:    if (result != NULL)
+33,34c33,34
+<        37:   31:        result->head = NULL;
+<        37:   32:        result->tail = NULL;
+---
+>        27:   31:        result->head = NULL;
+>        27:   32:        result->tail = NULL;
+37c37
+<        37:   35:    return result;
+---
+>        27:   35:    return result;
+40c40
+<        35:   38:void singlylinkedlist_destroy(SINGLYLINKEDLIST_HANDLE list)
+---
+>        25:   38:void singlylinkedlist_destroy(SINGLYLINKEDLIST_HANDLE list)
+43c43
+<        35:   41:    if (list != NULL)
+---
+>        25:   41:    if (list != NULL)
+45c45
+<        35:   43:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+---
+>        25:   43:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+47c47
+<        35:   45:        while (list_instance->head != NULL)
+---
+>        25:   45:        while (list_instance->head != NULL)
+55c55
+<        35:   53:        free(list_instance);
+---
+>        25:   53:        free(list_instance);
+57c57
+<        35:   55:}
+---
+>        25:   55:}
+59c59
+<        11:   57:LIST_ITEM_HANDLE singlylinkedlist_add(SINGLYLINKEDLIST_HANDLE list, const void* item)
+---
+>         9:   57:LIST_ITEM_HANDLE singlylinkedlist_add(SINGLYLINKEDLIST_HANDLE list, const void* item)
+64c64
+<        11:   62:    if ((list == NULL) ||
+---
+>         9:   62:    if ((list == NULL) ||
+72,73c72,73
+<        11:   70:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+<        11:   71:        result = (LIST_ITEM_INSTANCE*)malloc(sizeof(LIST_ITEM_INSTANCE));
+---
+>         9:   70:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+>         9:   71:        result = (LIST_ITEM_INSTANCE*)malloc(sizeof(LIST_ITEM_INSTANCE));
+75c75
+<        11:   73:        if (result == NULL)
+---
+>         9:   73:        if (result == NULL)
+83,84c83,84
+<        11:   81:            result->next = NULL;
+<        11:   82:            result->item = item;
+---
+>         9:   81:            result->next = NULL;
+>         9:   82:            result->item = item;
+86c86
+<        11:   84:            if (list_instance->head == NULL)
+---
+>         9:   84:            if (list_instance->head == NULL)
+88,89c88,89
+<        11:   86:                list_instance->head = result;
+<        11:   87:                list_instance->tail = result;
+---
+>         9:   86:                list_instance->head = result;
+>         9:   87:                list_instance->tail = result;
+99c99
+<        11:   97:    return result;
+---
+>         9:   97:    return result;
+102c102
+<        10:  100:int singlylinkedlist_remove(SINGLYLINKEDLIST_HANDLE list, LIST_ITEM_HANDLE item)
+---
+>         8:  100:int singlylinkedlist_remove(SINGLYLINKEDLIST_HANDLE list, LIST_ITEM_HANDLE item)
+107c107
+<        10:  105:    if ((list == NULL) ||
+---
+>         8:  105:    if ((list == NULL) ||
+115,117c115,117
+<        10:  113:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+<        10:  114:        LIST_ITEM_INSTANCE* current_item = list_instance->head;
+<        10:  115:        LIST_ITEM_INSTANCE* previous_item = NULL;
+---
+>         8:  113:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+>         8:  114:        LIST_ITEM_INSTANCE* current_item = list_instance->head;
+>         8:  115:        LIST_ITEM_INSTANCE* previous_item = NULL;
+119c119
+<        10:  117:        while (current_item != NULL)
+---
+>         8:  117:        while (current_item != NULL)
+121c121
+<        10:  119:            if (current_item == item)
+---
+>         8:  119:            if (current_item == item)
+123c123
+<        10:  121:                if (previous_item != NULL)
+---
+>         8:  121:                if (previous_item != NULL)
+129c129
+<        10:  127:                    list_instance->head = (LIST_ITEM_INSTANCE*)current_item->next;
+---
+>         8:  127:                    list_instance->head = (LIST_ITEM_INSTANCE*)current_item->next;
+132c132
+<        10:  130:                if (current_item == list_instance->tail)
+---
+>         8:  130:                if (current_item == list_instance->tail)
+134c134
+<        10:  132:                    list_instance->tail = previous_item;
+---
+>         8:  132:                    list_instance->tail = previous_item;
+137c137
+<        10:  135:                free(current_item);
+---
+>         8:  135:                free(current_item);
+139c139
+<        10:  137:                break;
+---
+>         8:  137:                break;
+146c146
+<        10:  144:        if (current_item == NULL)
+---
+>         8:  144:        if (current_item == NULL)
+154c154
+<        10:  152:            result = 0;
+---
+>         8:  152:            result = 0;
+158c158
+<        10:  156:    return result;
+---
+>         8:  156:    return result;
+161c161
+<        20:  159:LIST_ITEM_HANDLE singlylinkedlist_get_head_item(SINGLYLINKEDLIST_HANDLE list)
+---
+>        15:  159:LIST_ITEM_HANDLE singlylinkedlist_get_head_item(SINGLYLINKEDLIST_HANDLE list)
+165c165
+<        20:  163:    if (list == NULL)
+---
+>        15:  163:    if (list == NULL)
+173c173
+<        20:  171:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+---
+>        15:  171:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+177c177
+<        20:  175:        result = list_instance->head;
+---
+>        15:  175:        result = list_instance->head;
+180c180
+<        20:  178:    return result;
+---
+>        15:  178:    return result;
+202c202
+<        20:  200:const void* singlylinkedlist_item_get_value(LIST_ITEM_HANDLE item_handle)
+---
+>        16:  200:const void* singlylinkedlist_item_get_value(LIST_ITEM_HANDLE item_handle)
+206c206
+<        20:  204:    if (item_handle == NULL)
+---
+>        16:  204:    if (item_handle == NULL)
+215c215
+<        20:  213:        result = ((LIST_ITEM_INSTANCE*)item_handle)->item;
+---
+>        16:  213:        result = ((LIST_ITEM_INSTANCE*)item_handle)->item;
+218c218
+<        20:  216:    return result;
+---
+>        16:  216:    return result;
+221c221
+<        21:  219:LIST_ITEM_HANDLE singlylinkedlist_find(SINGLYLINKEDLIST_HANDLE list, LIST_MATCH_FUNCTION match_function, const void* match_context)
+---
+>        17:  219:LIST_ITEM_HANDLE singlylinkedlist_find(SINGLYLINKEDLIST_HANDLE list, LIST_MATCH_FUNCTION match_function, const void* match_context)
+225c225
+<        21:  223:    if ((list == NULL) ||
+---
+>        17:  223:    if ((list == NULL) ||
+234,235c234,235
+<        21:  232:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+<        21:  233:        LIST_ITEM_INSTANCE* current = list_instance->head;
+---
+>        17:  232:        LIST_INSTANCE* list_instance = (LIST_INSTANCE*)list;
+>        17:  233:        LIST_ITEM_INSTANCE* current = list_instance->head;
+238c238
+<        21:  236:        while (current != NULL)
+---
+>        17:  236:        while (current != NULL)
+242c242
+<        10:  240:            if (match_function((LIST_ITEM_HANDLE)current, match_context) == true)
+---
+>         8:  240:            if (match_function((LIST_ITEM_HANDLE)current, match_context) == true)
+245c245
+<        10:  243:                break;
+---
+>         8:  243:                break;
+252c252
+<        21:  250:        if (current == NULL)
+---
+>        17:  250:        if (current == NULL)
+255c255
+<        11:  253:            result = NULL;
+---
+>         9:  253:            result = NULL;
+259c259
+<        10:  257:            result = current;
+---
+>         8:  257:            result = current;
+263c263
+<        21:  261:    return result;
+---
+>        17:  261:    return result;

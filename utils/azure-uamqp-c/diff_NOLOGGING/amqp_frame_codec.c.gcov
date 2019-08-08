@@ -1,0 +1,68 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+154c154
+<         -:  152:        LogError("Bad arguments: frame_codec = %p, frame_received_callback = %p, empty_frame_received_callback = %p, amqp_frame_codec_error_callback = %p",
+---
+>     #####:  152:        LogError("Bad arguments: frame_codec = %p, frame_received_callback = %p, empty_frame_received_callback = %p, amqp_frame_codec_error_callback = %p",
+164c164
+<         -:  162:            LogError("Could not allocate memory for AMQP frame codec");
+---
+>     #####:  162:            LogError("Could not allocate memory for AMQP frame codec");
+180c180
+<         -:  178:                LogError("Could not create AMQP decoder");
+---
+>     #####:  178:                LogError("Could not create AMQP decoder");
+190c190
+<         -:  188:                    LogError("Could not subscribe for received AMQP frames");
+---
+>     #####:  188:                    LogError("Could not subscribe for received AMQP frames");
+207c207
+<         -:  205:        LogError("NULL amqp_frame_codec");
+---
+>     #####:  205:        LogError("NULL amqp_frame_codec");
+231c231
+<         -:  229:        LogError("Bad arguments: amqp_frame_codec = %p, performative = %p, on_bytes_encoded = %p",
+---
+>     #####:  229:        LogError("Bad arguments: amqp_frame_codec = %p, performative = %p, on_bytes_encoded = %p",
+244c244
+<         -:  242:            LogError("Getting the descriptor failed");
+---
+>     #####:  242:            LogError("Getting the descriptor failed");
+250c250
+<         -:  248:            LogError("Getting the descriptor ulong failed");
+---
+>     #####:  248:            LogError("Getting the descriptor ulong failed");
+258c258
+<         -:  256:            LogError("Bad arguments: amqp_frame_codec = %p, performative = %p, on_bytes_encoded = %p",
+---
+>     #####:  256:            LogError("Bad arguments: amqp_frame_codec = %p, performative = %p, on_bytes_encoded = %p",
+266c266
+<         -:  264:            LogError("Getting the encoded size failed");
+---
+>     #####:  264:            LogError("Getting the encoded size failed");
+274c274
+<         -:  272:                LogError("Could not allocate performative bytes");
+---
+>     #####:  272:                LogError("Could not allocate performative bytes");
+282c282
+<         -:  280:                    LogError("Could not allocate frame payloads");
+---
+>     #####:  280:                    LogError("Could not allocate frame payloads");
+299c299
+<         -:  297:                        LogError("amqpvalue_encode failed");
+---
+>     #####:  297:                        LogError("amqpvalue_encode failed");
+315c315
+<         -:  313:                            LogError("frame_codec_encode_frame failed");
+---
+>     #####:  313:                            LogError("frame_codec_encode_frame failed");
+345c345
+<         -:  343:        LogError("NULL amqp_frame_codec");
+---
+>     #####:  343:        LogError("NULL amqp_frame_codec");
+359c359
+<         -:  357:            LogError("frame_codec_encode_frame failed when encoding empty frame");
+---
+>     #####:  357:            LogError("frame_codec_encode_frame failed when encoding empty frame");

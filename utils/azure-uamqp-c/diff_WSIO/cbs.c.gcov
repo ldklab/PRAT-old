@@ -1,0 +1,162 @@
+2c2
+<         -:    0:Programs:101
+---
+>         -:    0:Programs:82
+86c86
+<         3:   84:static void on_underlying_amqp_management_open_complete(void* context, AMQP_MANAGEMENT_OPEN_RESULT open_result)
+---
+>         2:   84:static void on_underlying_amqp_management_open_complete(void* context, AMQP_MANAGEMENT_OPEN_RESULT open_result)
+88c88
+<         3:   86:    if (context == NULL)
+---
+>         2:   86:    if (context == NULL)
+95c95
+<         3:   93:        CBS_HANDLE cbs = (CBS_HANDLE)context;
+---
+>         2:   93:        CBS_HANDLE cbs = (CBS_HANDLE)context;
+97c97
+<         3:   95:        switch (cbs->cbs_state)
+---
+>         2:   95:        switch (cbs->cbs_state)
+115c115
+<         3:  113:        case CBS_STATE_OPENING:
+---
+>         2:  113:        case CBS_STATE_OPENING:
+123c123
+<         3:  121:                cbs->cbs_state = CBS_STATE_CLOSED;
+---
+>         2:  121:                cbs->cbs_state = CBS_STATE_CLOSED;
+125c125
+<         3:  123:                (void)amqp_management_close(cbs->amqp_management);
+---
+>         2:  123:                (void)amqp_management_close(cbs->amqp_management);
+127,128c127,128
+<         3:  125:                cbs->on_cbs_open_complete(cbs->on_cbs_open_complete_context, CBS_OPEN_ERROR);
+<         3:  126:                break;
+---
+>         2:  125:                cbs->on_cbs_open_complete(cbs->on_cbs_open_complete_context, CBS_OPEN_ERROR);
+>         2:  126:                break;
+144c144
+<         3:  142:            break;
+---
+>         2:  142:            break;
+148c148
+<         3:  146:}
+---
+>         2:  146:}
+259c259
+<         3:  257:CBS_HANDLE cbs_create(SESSION_HANDLE session)
+---
+>         2:  257:CBS_HANDLE cbs_create(SESSION_HANDLE session)
+263c263
+<         3:  261:    if (session == NULL)
+---
+>         2:  261:    if (session == NULL)
+271,272c271,272
+<         3:  269:        cbs = (CBS_INSTANCE*)malloc(sizeof(CBS_INSTANCE));
+<         3:  270:        if (cbs == NULL)
+---
+>         2:  269:        cbs = (CBS_INSTANCE*)malloc(sizeof(CBS_INSTANCE));
+>         2:  270:        if (cbs == NULL)
+280,281c280,281
+<         3:  278:            cbs->pending_operations = singlylinkedlist_create();
+<         3:  279:            if (cbs->pending_operations == NULL)
+---
+>         2:  278:            cbs->pending_operations = singlylinkedlist_create();
+>         2:  279:            if (cbs->pending_operations == NULL)
+291,292c291,292
+<         3:  289:                cbs->amqp_management = amqp_management_create(session, "$cbs");
+<         3:  290:                if (cbs->amqp_management == NULL)
+---
+>         2:  289:                cbs->amqp_management = amqp_management_create(session, "$cbs");
+>         2:  290:                if (cbs->amqp_management == NULL)
+299c299
+<         3:  297:                    if (amqp_management_set_override_status_code_key_name(cbs->amqp_management, "status-code") != 0)
+---
+>         2:  297:                    if (amqp_management_set_override_status_code_key_name(cbs->amqp_management, "status-code") != 0)
+307c307
+<         3:  305:                        if (amqp_management_set_override_status_description_key_name(cbs->amqp_management, "status-description") != 0)
+---
+>         2:  305:                        if (amqp_management_set_override_status_description_key_name(cbs->amqp_management, "status-description") != 0)
+315c315
+<         3:  313:                            cbs->cbs_state = CBS_STATE_CLOSED;
+---
+>         2:  313:                            cbs->cbs_state = CBS_STATE_CLOSED;
+317c317
+<         3:  315:                            goto all_ok;
+---
+>         2:  315:                            goto all_ok;
+332,333c332,333
+<         3:  330:all_ok:
+<         3:  331:    return cbs;
+---
+>         2:  330:all_ok:
+>         2:  331:    return cbs;
+336c336
+<         3:  334:void cbs_destroy(CBS_HANDLE cbs)
+---
+>         2:  334:void cbs_destroy(CBS_HANDLE cbs)
+338c338
+<         3:  336:    if (cbs == NULL)
+---
+>         2:  336:    if (cbs == NULL)
+348c348
+<         3:  346:        if (cbs->cbs_state != CBS_STATE_CLOSED)
+---
+>         2:  346:        if (cbs->cbs_state != CBS_STATE_CLOSED)
+355c355
+<         3:  353:        amqp_management_destroy(cbs->amqp_management);
+---
+>         2:  353:        amqp_management_destroy(cbs->amqp_management);
+358c358
+<         3:  356:        while ((first_pending_operation = singlylinkedlist_get_head_item(cbs->pending_operations)) != NULL)
+---
+>         2:  356:        while ((first_pending_operation = singlylinkedlist_get_head_item(cbs->pending_operations)) != NULL)
+371,372c371,372
+<         3:  369:        singlylinkedlist_destroy(cbs->pending_operations);
+<         3:  370:        free(cbs);
+---
+>         2:  369:        singlylinkedlist_destroy(cbs->pending_operations);
+>         2:  370:        free(cbs);
+374c374
+<         3:  372:}
+---
+>         2:  372:}
+376c376
+<         3:  374:int cbs_open_async(CBS_HANDLE cbs, ON_CBS_OPEN_COMPLETE on_cbs_open_complete, void* on_cbs_open_complete_context, ON_CBS_ERROR on_cbs_error, void* on_cbs_error_context)
+---
+>         2:  374:int cbs_open_async(CBS_HANDLE cbs, ON_CBS_OPEN_COMPLETE on_cbs_open_complete, void* on_cbs_open_complete_context, ON_CBS_ERROR on_cbs_error, void* on_cbs_error_context)
+381,382c381,382
+<         3:  379:    if ((cbs == NULL) ||
+<         3:  380:        (on_cbs_open_complete == NULL) ||
+---
+>         2:  379:    if ((cbs == NULL) ||
+>         2:  380:        (on_cbs_open_complete == NULL) ||
+390c390
+<         3:  388:    else if (cbs->cbs_state != CBS_STATE_CLOSED)
+---
+>         2:  388:    else if (cbs->cbs_state != CBS_STATE_CLOSED)
+399,403c399,403
+<         3:  397:        cbs->cbs_state = CBS_STATE_OPENING;
+<         3:  398:        cbs->on_cbs_open_complete = on_cbs_open_complete;
+<         3:  399:        cbs->on_cbs_open_complete_context = on_cbs_open_complete_context;
+<         3:  400:        cbs->on_cbs_error = on_cbs_error;
+<         3:  401:        cbs->on_cbs_error_context = on_cbs_error_context;
+---
+>         2:  397:        cbs->cbs_state = CBS_STATE_OPENING;
+>         2:  398:        cbs->on_cbs_open_complete = on_cbs_open_complete;
+>         2:  399:        cbs->on_cbs_open_complete_context = on_cbs_open_complete_context;
+>         2:  400:        cbs->on_cbs_error = on_cbs_error;
+>         2:  401:        cbs->on_cbs_error_context = on_cbs_error_context;
+406c406
+<         3:  404:        if (amqp_management_open_async(cbs->amqp_management, on_underlying_amqp_management_open_complete, cbs, on_underlying_amqp_management_error, cbs) != 0)
+---
+>         2:  404:        if (amqp_management_open_async(cbs->amqp_management, on_underlying_amqp_management_open_complete, cbs, on_underlying_amqp_management_error, cbs) != 0)
+409c409
+<         3:  407:            result = MU_FAILURE;
+---
+>         2:  407:            result = MU_FAILURE;
+418c418
+<         3:  416:    return result;
+---
+>         2:  416:    return result;

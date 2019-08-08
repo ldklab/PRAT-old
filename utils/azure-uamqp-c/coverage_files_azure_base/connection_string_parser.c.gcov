@@ -1,0 +1,236 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/connection_string_parser.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:#include <stdbool.h>
+        -:    5:#include "azure_c_shared_utility/connection_string_parser.h"
+        -:    6:#include "azure_c_shared_utility/map.h"
+        -:    7:#include "azure_c_shared_utility/strings.h"
+        -:    8:#include "azure_c_shared_utility/string_tokenizer.h"
+        -:    9:#include "azure_c_shared_utility/optimize_size.h"
+        -:   10:#include "azure_c_shared_utility/xlogging.h"
+        -:   11:
+        -:   12:
+    #####:   13:MAP_HANDLE connectionstringparser_parse_from_char(const char* connection_string)
+        -:   14:{
+        -:   15:    MAP_HANDLE result;
+    #####:   16:    STRING_HANDLE connString = NULL;
+        -:   17:
+        -:   18:    /* Codes_SRS_CONNECTIONSTRINGPARSER_21_020: [connectionstringparser_parse_from_char shall create a STRING_HANDLE from the connection_string passed in as argument and parse it using the connectionstringparser_parse.]*/
+    #####:   19:    if ((connString = STRING_construct(connection_string)) == NULL)
+        -:   20:    {
+        -:   21:        /* Codes_SRS_CONNECTIONSTRINGPARSER_21_021: [If connectionstringparser_parse_from_char get error creating a STRING_HANDLE, it shall return NULL.]*/
+    #####:   22:        LogError("Error constructing connection String");
+    #####:   23:        result = NULL;
+        -:   24:    }
+        -:   25:    else
+        -:   26:    {
+    #####:   27:        result = connectionstringparser_parse(connString);
+    #####:   28:        STRING_delete(connString);
+        -:   29:    }
+        -:   30:
+    #####:   31:    return result;
+        -:   32:}
+        -:   33:
+        -:   34:/* Codes_SRS_CONNECTIONSTRINGPARSER_01_001: [connectionstringparser_parse shall parse all key value pairs from the connection_string passed in as argument and return a new map that holds the key/value pairs.] */
+    #####:   35:MAP_HANDLE connectionstringparser_parse(STRING_HANDLE connection_string)
+        -:   36:{
+        -:   37:    MAP_HANDLE result;
+        -:   38:
+    #####:   39:    if (connection_string == NULL)
+        -:   40:    {
+        -:   41:        /* Codes_SRS_CONNECTIONSTRINGPARSER_01_002: [If connection_string is NULL then connectionstringparser_parse shall fail and return NULL.] */
+    #####:   42:        result = NULL;
+    #####:   43:        LogError("NULL connection string passed to tokenizer.");
+        -:   44:    }
+        -:   45:    else
+        -:   46:    {
+        -:   47:        /* Codes_SRS_CONNECTIONSTRINGPARSER_01_003: [connectionstringparser_parse shall create a STRING tokenizer to be used for parsing the connection string, by calling STRING_TOKENIZER_create.] */
+        -:   48:        /* Codes_SRS_CONNECTIONSTRINGPARSER_01_004: [connectionstringparser_parse shall start scanning at the beginning of the connection string.] */
+    #####:   49:        STRING_TOKENIZER_HANDLE tokenizer = STRING_TOKENIZER_create(connection_string);
+    #####:   50:        if (tokenizer == NULL)
+        -:   51:        {
+        -:   52:            /* Codes_SRS_CONNECTIONSTRINGPARSER_01_015: [If STRING_TOKENIZER_create fails, connectionstringparser_parse shall fail and return NULL.] */
+    #####:   53:            result = NULL;
+    #####:   54:            LogError("Error creating STRING tokenizer.");
+        -:   55:        }
+        -:   56:        else
+        -:   57:        {
+        -:   58:            /* Codes_SRS_CONNECTIONSTRINGPARSER_01_016: [2 STRINGs shall be allocated in order to hold the to be parsed key and value tokens.] */
+    #####:   59:            STRING_HANDLE token_key_string = STRING_new();
+    #####:   60:            if (token_key_string == NULL)
+        -:   61:            {
+        -:   62:                /* Codes_SRS_CONNECTIONSTRINGPARSER_01_017: [If allocating the STRINGs fails connectionstringparser_parse shall fail and return NULL.] */
+    #####:   63:                result = NULL;
+    #####:   64:                LogError("Error creating key token STRING.");
+        -:   65:            }
+        -:   66:            else
+        -:   67:            {
+    #####:   68:                STRING_HANDLE token_value_string = STRING_new();
+    #####:   69:                if (token_value_string == NULL)
+        -:   70:                {
+        -:   71:                    /* Codes_SRS_CONNECTIONSTRINGPARSER_01_017: [If allocating the STRINGs fails connectionstringparser_parse shall fail and return NULL.] */
+    #####:   72:                    result = NULL;
+    #####:   73:                    LogError("Error creating value token STRING.");
+        -:   74:                }
+        -:   75:                else
+        -:   76:                {
+    #####:   77:                    result = Map_Create(NULL);
+    #####:   78:                    if (result == NULL)
+        -:   79:                    {
+        -:   80:                        /* Codes_SRS_CONNECTIONSTRINGPARSER_01_018: [If creating the result map fails, then connectionstringparser_parse shall return NULL.] */
+    #####:   81:                        LogError("Error creating Map.");
+        -:   82:                    }
+        -:   83:                    else
+        -:   84:                    {
+        -:   85:                        /* Codes_SRS_CONNECTIONSTRINGPARSER_01_005: [The following actions shall be repeated until parsing is complete:] */
+        -:   86:                        /* Codes_SRS_CONNECTIONSTRINGPARSER_01_006: [connectionstringparser_parse shall find a token (the key of the key/value pair) delimited by the = character, by calling STRING_TOKENIZER_get_next_token.] */
+        -:   87:                        /* Codes_SRS_CONNECTIONSTRINGPARSER_01_007: [If STRING_TOKENIZER_get_next_token fails, parsing shall be considered complete.] */
+    #####:   88:                        while (STRING_TOKENIZER_get_next_token(tokenizer, token_key_string, "=") == 0)
+        -:   89:                        {
+    #####:   90:                            bool is_error = false;
+        -:   91:
+        -:   92:                            /* Codes_SRS_CONNECTIONSTRINGPARSER_01_008: [connectionstringparser_parse shall find a token (the value of the key/value pair) delimited by the ; character, by calling STRING_TOKENIZER_get_next_token.] */
+    #####:   93:                            if (STRING_TOKENIZER_get_next_token(tokenizer, token_value_string, ";") != 0)
+        -:   94:                            {
+        -:   95:                                /* Codes_SRS_CONNECTIONSTRINGPARSER_01_009: [If STRING_TOKENIZER_get_next_token fails, connectionstringparser_parse shall fail and return NULL (freeing the allocated result map).] */
+    #####:   96:                                is_error = true;
+    #####:   97:                                LogError("Error reading value token from the connection string.");
+        -:   98:                            }
+        -:   99:                            else
+        -:  100:                            {
+        -:  101:                                /* Codes_SRS_CONNECTIONSTRINGPARSER_01_011: [The C strings for the key and value shall be extracted from the previously parsed STRINGs by using STRING_c_str.] */
+    #####:  102:                                const char* token = STRING_c_str(token_key_string);
+        -:  103:                                /* Codes_SRS_CONNECTIONSTRINGPARSER_01_013: [If STRING_c_str fails then connectionstringparser_parse shall fail and return NULL (freeing the allocated result map).] */
+    #####:  104:                                if ((token == NULL) ||
+        -:  105:                                    /* Codes_SRS_CONNECTIONSTRINGPARSER_01_019: [If the key length is zero then connectionstringparser_parse shall fail and return NULL (freeing the allocated result map).] */
+    #####:  106:                                    (strlen(token) == 0))
+        -:  107:                                {
+    #####:  108:                                    is_error = true;
+    #####:  109:                                    LogError("The key token is NULL or empty.");
+        -:  110:                                }
+        -:  111:                                else
+        -:  112:                                {
+        -:  113:                                    /* Codes_SRS_CONNECTIONSTRINGPARSER_01_011: [The C strings for the key and value shall be extracted from the previously parsed STRINGs by using STRING_c_str.] */
+    #####:  114:                                    const char* value = STRING_c_str(token_value_string);
+    #####:  115:                                    if (value == NULL)
+        -:  116:                                    {
+        -:  117:                                        /* Codes_SRS_CONNECTIONSTRINGPARSER_01_013: [If STRING_c_str fails then connectionstringparser_parse shall fail and return NULL (freeing the allocated result map).] */
+    #####:  118:                                        is_error = true;
+    #####:  119:                                        LogError("Could not get C string for value token.");
+        -:  120:                                    }
+        -:  121:                                    else
+        -:  122:                                    {
+        -:  123:                                        /* Codes_SRS_CONNECTIONSTRINGPARSER_01_010: [The key and value shall be added to the result map by using Map_Add.] */
+    #####:  124:                                        if (Map_Add(result, token, value) != 0)
+        -:  125:                                        {
+        -:  126:                                            /* Codes_SRS_CONNECTIONSTRINGPARSER_01_012: [If Map_Add fails connectionstringparser_parse shall fail and return NULL (freeing the allocated result map).] */
+    #####:  127:                                            is_error = true;
+    #####:  128:                                            LogError("Could not add the key/value pair to the result map.");
+        -:  129:                                        }
+        -:  130:                                    }
+        -:  131:                                }
+        -:  132:                            }
+        -:  133:
+    #####:  134:                            if (is_error)
+        -:  135:                            {
+    #####:  136:                                LogError("Error parsing connection string.");
+    #####:  137:                                Map_Destroy(result);
+    #####:  138:                                result = NULL;
+    #####:  139:                                break;
+        -:  140:                            }
+        -:  141:                        }
+        -:  142:                    }
+        -:  143:
+    #####:  144:                    STRING_delete(token_value_string);
+        -:  145:                }
+        -:  146:
+    #####:  147:                STRING_delete(token_key_string);
+        -:  148:            }
+        -:  149:
+        -:  150:            /* Codes_SRS_CONNECTIONSTRINGPARSER_01_014: [After the parsing is complete the previously allocated STRINGs and STRING tokenizer shall be freed by calling STRING_TOKENIZER_destroy.] */
+    #####:  151:            STRING_TOKENIZER_destroy(tokenizer);
+        -:  152:        }
+        -:  153:    }
+        -:  154:
+    #####:  155:    return result;
+        -:  156:}
+        -:  157:
+        -:  158:/* Codes_SRS_CONNECTIONSTRINGPARSER_21_022: [connectionstringparser_splitHostName_from_char shall split the provided hostName in name and suffix.]*/
+    #####:  159:int connectionstringparser_splitHostName_from_char(const char* hostName, STRING_HANDLE nameString, STRING_HANDLE suffixString)
+        -:  160:{
+        -:  161:    int result;
+    #####:  162:    const char* runHostName = hostName;
+        -:  163:
+    #####:  164:    if ((hostName == NULL) || ((*hostName) == '\0') || ((*hostName) == '.') || (nameString == NULL) || (suffixString == NULL))
+        -:  165:    {
+        -:  166:        /* Codes_SRS_CONNECTIONSTRINGPARSER_21_026: [If the hostName is NULL, connectionstringparser_splitHostName_from_char shall return MU_FAILURE.]*/
+        -:  167:        /* Codes_SRS_CONNECTIONSTRINGPARSER_21_027: [If the hostName is an empty string, connectionstringparser_splitHostName_from_char shall return MU_FAILURE.]*/
+        -:  168:        /* Codes_SRS_CONNECTIONSTRINGPARSER_21_028: [If the nameString is NULL, connectionstringparser_splitHostName_from_char shall return MU_FAILURE.]*/
+        -:  169:        /* Codes_SRS_CONNECTIONSTRINGPARSER_21_029: [If the suffixString is NULL, connectionstringparser_splitHostName_from_char shall return MU_FAILURE.]*/
+        -:  170:        /* Codes_SRS_CONNECTIONSTRINGPARSER_21_030: [If the hostName is not a valid host name, connectionstringparser_splitHostName_from_char shall return MU_FAILURE.]*/
+    #####:  171:        result = MU_FAILURE;
+        -:  172:    }
+        -:  173:    else
+        -:  174:    {
+    #####:  175:        while ((*runHostName) != '\0')
+        -:  176:        {
+    #####:  177:            if ((*runHostName) == '.')
+        -:  178:            {
+        -:  179:                /* Codes_SRS_CONNECTIONSTRINGPARSER_21_023: [connectionstringparser_splitHostName_from_char shall copy all characters, from the beginning of the hostName to the first . to the nameString.]*/
+        -:  180:                /* Codes_SRS_CONNECTIONSTRINGPARSER_21_024: [connectionstringparser_splitHostName_from_char shall copy all characters, from the first . to the end of the hostName, to the suffixString.]*/
+    #####:  181:                runHostName++;
+    #####:  182:                break;
+        -:  183:            }
+    #####:  184:            runHostName++;
+        -:  185:        }
+        -:  186:
+    #####:  187:        if ((*runHostName) == '\0')
+        -:  188:        {
+        -:  189:            /* Codes_SRS_CONNECTIONSTRINGPARSER_21_030: [If the hostName is not a valid host name, connectionstringparser_splitHostName_from_char shall return MU_FAILURE.]*/
+    #####:  190:            result = MU_FAILURE;
+        -:  191:        }
+        -:  192:        else
+        -:  193:        {
+        -:  194:            /* Codes_SRS_CONNECTIONSTRINGPARSER_21_023: [connectionstringparser_splitHostName_from_char shall copy all characters, from the beginning of the hostName to the first . to the nameString.]*/
+    #####:  195:            if (STRING_copy_n(nameString, hostName, runHostName - hostName - 1) != 0)
+        -:  196:            {
+        -:  197:                /* Codes_SRS_CONNECTIONSTRINGPARSER_21_031: [If connectionstringparser_splitHostName_from_char get error copying the name to the nameString, it shall return MU_FAILURE.]*/
+    #####:  198:                result = MU_FAILURE;
+        -:  199:            }
+        -:  200:            /* Codes_SRS_CONNECTIONSTRINGPARSER_21_024: [connectionstringparser_splitHostName_from_char shall copy all characters, from the first . to the end of the hostName, to the suffixString.]*/
+    #####:  201:            else if (STRING_copy(suffixString, runHostName) != 0)
+        -:  202:            {
+        -:  203:                /* Codes_SRS_CONNECTIONSTRINGPARSER_21_032: [If connectionstringparser_splitHostName_from_char get error copying the suffix to the suffixString, it shall return MU_FAILURE.]*/
+    #####:  204:                result = MU_FAILURE;
+        -:  205:            }
+        -:  206:            else
+        -:  207:            {
+        -:  208:                /* Codes_SRS_CONNECTIONSTRINGPARSER_21_025: [If connectionstringparser_splitHostName_from_char get success splitting the hostName, it shall return 0.]*/
+    #####:  209:                result = 0;
+        -:  210:            }
+        -:  211:        }
+        -:  212:    }
+        -:  213:
+    #####:  214:    return result;
+        -:  215:}
+        -:  216:
+        -:  217:
+    #####:  218:int connectionstringparser_splitHostName(STRING_HANDLE hostNameString, STRING_HANDLE nameString, STRING_HANDLE suffixString)
+        -:  219:{
+        -:  220:    int result;
+        -:  221:
+    #####:  222:    if (hostNameString == NULL)
+        -:  223:    {
+        -:  224:        /* Codes_SRS_CONNECTIONSTRINGPARSER_21_034: [If the hostNameString is NULL, connectionstringparser_splitHostName shall return MU_FAILURE.]*/
+    #####:  225:        result = MU_FAILURE;
+        -:  226:    }
+        -:  227:    else
+        -:  228:    {
+        -:  229:        /* Codes_SRS_CONNECTIONSTRINGPARSER_21_033: [connectionstringparser_splitHostName shall convert the hostNameString to a connection_string passed in as argument, and call connectionstringparser_splitHostName_from_char.]*/
+    #####:  230:        result = connectionstringparser_splitHostName_from_char(STRING_c_str(hostNameString), nameString, suffixString);
+        -:  231:    }
+        -:  232:
+    #####:  233:    return result;
+        -:  234:}

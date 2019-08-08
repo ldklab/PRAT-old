@@ -1,0 +1,76 @@
+2c2
+<         -:    0:Programs:80
+---
+>         -:    0:Programs:55
+196c196
+<        15:  194:int strcpy_s(char* dst, size_t dstSizeInBytes, const char* src)
+---
+>         8:  194:int strcpy_s(char* dst, size_t dstSizeInBytes, const char* src)
+201c201
+<        15:  199:    if (dst == NULL)
+---
+>         8:  199:    if (dst == NULL)
+206c206
+<        15:  204:    else if (src == NULL)
+---
+>         8:  204:    else if (src == NULL)
+212c212
+<        15:  210:    else if (dstSizeInBytes == 0)
+---
+>         8:  210:    else if (dstSizeInBytes == 0)
+219c219
+<        15:  217:        size_t neededBuffer = strlen(src);
+---
+>         8:  217:        size_t neededBuffer = strlen(src);
+221c221
+<        15:  219:        if (neededBuffer + 1 > dstSizeInBytes)
+---
+>         8:  219:        if (neededBuffer + 1 > dstSizeInBytes)
+228c228
+<        15:  226:            (void)memcpy(dst, src, neededBuffer + 1);
+---
+>         8:  226:            (void)memcpy(dst, src, neededBuffer + 1);
+230c230
+<        15:  228:            result = 0;
+---
+>         8:  228:            result = 0;
+234c234
+<        15:  232:    return result;
+---
+>         8:  232:    return result;
+698c698
+<        15:  696:int mallocAndStrcpy_s(char** destination, const char* source)
+---
+>         8:  696:int mallocAndStrcpy_s(char** destination, const char* source)
+703c703
+<        15:  701:    if ((destination == NULL) || (source == NULL))
+---
+>         8:  701:    if ((destination == NULL) || (source == NULL))
+710,711c710,711
+<        15:  708:        size_t l = strlen(source);
+<        15:  709:        char* temp = (char*)malloc(l + 1);
+---
+>         8:  708:        size_t l = strlen(source);
+>         8:  709:        char* temp = (char*)malloc(l + 1);
+714c714
+<        15:  712:        if (temp == NULL)
+---
+>         8:  712:        if (temp == NULL)
+720c720
+<        15:  718:            *destination = temp;
+---
+>         8:  718:            *destination = temp;
+722,723c722,723
+<        15:  720:            copied_result = strcpy_s(*destination, l + 1, source);
+<        15:  721:            if (copied_result < 0) /*strcpy_s error*/
+---
+>         8:  720:            copied_result = strcpy_s(*destination, l + 1, source);
+>         8:  721:            if (copied_result < 0) /*strcpy_s error*/
+732c732
+<        15:  730:                result = 0;
+---
+>         8:  730:                result = 0;
+736c736
+<        15:  734:    return result;
+---
+>         8:  734:    return result;

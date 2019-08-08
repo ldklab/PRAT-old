@@ -1,0 +1,28 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+27c27
+<         -:   25:    if (result == NULL)
+---
+>     #####:   25:    if (result == NULL)
+30c30
+<         -:   28:        LogError("Cannot allocate memory for SASL anonymous instance");
+---
+>     #####:   28:        LogError("Cannot allocate memory for SASL anonymous instance");
+41c41
+<         -:   39:        LogError("NULL sasl_mechanism_concrete_handle");
+---
+>     #####:   39:        LogError("NULL sasl_mechanism_concrete_handle");
+58c58
+<         -:   56:        LogError("Bad arguments: sasl_mechanism_concrete_handle = %p, init_bytes = %p",
+---
+>     #####:   56:        LogError("Bad arguments: sasl_mechanism_concrete_handle = %p, init_bytes = %p",
+83c83
+<         -:   81:        LogError("NULL sasl_mechanism");
+---
+>     #####:   81:        LogError("NULL sasl_mechanism");
+105c105
+<         -:  103:        LogError("Bad arguments: concrete_sasl_mechanism = %p, response_bytes = %p",
+---
+>     #####:  103:        LogError("Bad arguments: concrete_sasl_mechanism = %p, response_bytes = %p",

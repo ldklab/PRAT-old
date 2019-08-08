@@ -1,0 +1,46 @@
+117c117
+<        24:  115:static void session_set_state(SESSION_INSTANCE* session_instance, SESSION_STATE session_state)
+---
+>        18:  115:static void session_set_state(SESSION_INSTANCE* session_instance, SESSION_STATE session_state)
+121,122c121,122
+<        24:  119:    session_instance->previous_session_state = session_instance->session_state;
+<        24:  120:    session_instance->session_state = session_state;
+---
+>        18:  119:    session_instance->previous_session_state = session_instance->session_state;
+>        18:  120:    session_instance->session_state = session_state;
+124c124
+<        60:  122:    for (i = 0; i < session_instance->link_endpoint_count; i++)
+---
+>        42:  122:    for (i = 0; i < session_instance->link_endpoint_count; i++)
+126c126
+<        36:  124:        if (session_instance->link_endpoints[i]->on_session_state_changed != NULL)
+---
+>        24:  124:        if (session_instance->link_endpoints[i]->on_session_state_changed != NULL)
+134c134
+<        24:  132:}
+---
+>        18:  132:}
+358c358
+<        18:  356:static void on_connection_state_changed(void* context, CONNECTION_STATE new_connection_state, CONNECTION_STATE previous_connection_state)
+---
+>        12:  356:static void on_connection_state_changed(void* context, CONNECTION_STATE new_connection_state, CONNECTION_STATE previous_connection_state)
+360c360
+<        18:  358:    SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)context;
+---
+>        12:  358:    SESSION_INSTANCE* session_instance = (SESSION_INSTANCE*)context;
+363c363
+<       18*:  361:    if ((new_connection_state == CONNECTION_STATE_OPENED) && (previous_connection_state != CONNECTION_STATE_OPENED) && (session_instance->session_state == SESSION_STATE_UNMAPPED))
+---
+>       12*:  361:    if ((new_connection_state == CONNECTION_STATE_OPENED) && (previous_connection_state != CONNECTION_STATE_OPENED) && (session_instance->session_state == SESSION_STATE_UNMAPPED))
+371c371
+<        18:  369:    else if ((new_connection_state == CONNECTION_STATE_CLOSE_RCVD) || (new_connection_state == CONNECTION_STATE_END))
+---
+>        12:  369:    else if ((new_connection_state == CONNECTION_STATE_CLOSE_RCVD) || (new_connection_state == CONNECTION_STATE_END))
+373c373
+<        18:  371:        session_set_state(session_instance, SESSION_STATE_DISCARDING);
+---
+>        12:  371:        session_set_state(session_instance, SESSION_STATE_DISCARDING);
+380c380
+<        18:  378:}
+---
+>        12:  378:}

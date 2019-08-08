@@ -1,0 +1,174 @@
+2c2
+<         -:    0:Programs:101
+---
+>         -:    0:Programs:82
+59c59
+<        10:   57:static bool find_subscription_by_frame_type(LIST_ITEM_HANDLE list_item, const void* match_context)
+---
+>         8:   57:static bool find_subscription_by_frame_type(LIST_ITEM_HANDLE list_item, const void* match_context)
+62c62
+<        10:   60:    SUBSCRIPTION* subscription = (SUBSCRIPTION*)singlylinkedlist_item_get_value(list_item);
+---
+>         8:   60:    SUBSCRIPTION* subscription = (SUBSCRIPTION*)singlylinkedlist_item_get_value(list_item);
+64c64
+<        10:   62:    if (subscription == NULL)
+---
+>         8:   62:    if (subscription == NULL)
+71c71
+<        10:   69:        result = subscription->frame_type == *((uint8_t*)match_context) ? true : false;
+---
+>         8:   69:        result = subscription->frame_type == *((uint8_t*)match_context) ? true : false;
+74c74
+<        10:   72:    return result;
+---
+>         8:   72:    return result;
+77c77
+<        11:   75:FRAME_CODEC_HANDLE frame_codec_create(ON_FRAME_CODEC_ERROR on_frame_codec_error, void* callback_context)
+---
+>         9:   75:FRAME_CODEC_HANDLE frame_codec_create(ON_FRAME_CODEC_ERROR on_frame_codec_error, void* callback_context)
+83c83
+<        11:   81:    if (on_frame_codec_error == NULL)
+---
+>         9:   81:    if (on_frame_codec_error == NULL)
+90c90
+<        11:   88:        result = (FRAME_CODEC_INSTANCE*)malloc(sizeof(FRAME_CODEC_INSTANCE));
+---
+>         9:   88:        result = (FRAME_CODEC_INSTANCE*)malloc(sizeof(FRAME_CODEC_INSTANCE));
+92c92
+<        11:   90:        if (result == NULL)
+---
+>         9:   90:        if (result == NULL)
+99,105c99,105
+<        11:   97:            result->receive_frame_state = RECEIVE_FRAME_STATE_FRAME_SIZE;
+<        11:   98:            result->on_frame_codec_error = on_frame_codec_error;
+<        11:   99:            result->on_frame_codec_error_callback_context = callback_context;
+<        11:  100:            result->receive_frame_pos = 0;
+<        11:  101:            result->receive_frame_size = 0;
+<        11:  102:            result->receive_frame_bytes = NULL;
+<        11:  103:            result->subscription_list = singlylinkedlist_create();
+---
+>         9:   97:            result->receive_frame_state = RECEIVE_FRAME_STATE_FRAME_SIZE;
+>         9:   98:            result->on_frame_codec_error = on_frame_codec_error;
+>         9:   99:            result->on_frame_codec_error_callback_context = callback_context;
+>         9:  100:            result->receive_frame_pos = 0;
+>         9:  101:            result->receive_frame_size = 0;
+>         9:  102:            result->receive_frame_bytes = NULL;
+>         9:  103:            result->subscription_list = singlylinkedlist_create();
+108c108
+<        11:  106:            result->max_frame_size = 512;
+---
+>         9:  106:            result->max_frame_size = 512;
+112c112
+<        11:  110:    return result;
+---
+>         9:  110:    return result;
+115c115
+<        10:  113:void frame_codec_destroy(FRAME_CODEC_HANDLE frame_codec)
+---
+>         8:  113:void frame_codec_destroy(FRAME_CODEC_HANDLE frame_codec)
+118c118
+<        10:  116:    if (frame_codec == NULL)
+---
+>         8:  116:    if (frame_codec == NULL)
+124c124
+<        10:  122:        FRAME_CODEC_INSTANCE* frame_codec_data = (FRAME_CODEC_INSTANCE*)frame_codec;
+---
+>         8:  122:        FRAME_CODEC_INSTANCE* frame_codec_data = (FRAME_CODEC_INSTANCE*)frame_codec;
+126,127c126,127
+<        10:  124:        singlylinkedlist_destroy(frame_codec_data->subscription_list);
+<        10:  125:        if (frame_codec_data->receive_frame_bytes != NULL)
+---
+>         8:  124:        singlylinkedlist_destroy(frame_codec_data->subscription_list);
+>         8:  125:        if (frame_codec_data->receive_frame_bytes != NULL)
+133c133
+<        10:  131:        free(frame_codec);
+---
+>         8:  131:        free(frame_codec);
+135c135
+<        10:  133:}
+---
+>         8:  133:}
+431c431
+<        11:  429:int frame_codec_subscribe(FRAME_CODEC_HANDLE frame_codec, uint8_t type, ON_FRAME_RECEIVED on_frame_received, void* callback_context)
+---
+>         9:  429:int frame_codec_subscribe(FRAME_CODEC_HANDLE frame_codec, uint8_t type, ON_FRAME_RECEIVED on_frame_received, void* callback_context)
+436c436
+<        11:  434:    if ((frame_codec == NULL) ||
+---
+>         9:  434:    if ((frame_codec == NULL) ||
+445c445
+<        11:  443:        FRAME_CODEC_INSTANCE* frame_codec_data = (FRAME_CODEC_INSTANCE*)frame_codec;
+---
+>         9:  443:        FRAME_CODEC_INSTANCE* frame_codec_data = (FRAME_CODEC_INSTANCE*)frame_codec;
+450,451c450,451
+<        11:  448:        LIST_ITEM_HANDLE list_item = singlylinkedlist_find(frame_codec_data->subscription_list, find_subscription_by_frame_type, &type);
+<        11:  449:        if (list_item != NULL)
+---
+>         9:  448:        LIST_ITEM_HANDLE list_item = singlylinkedlist_find(frame_codec_data->subscription_list, find_subscription_by_frame_type, &type);
+>         9:  449:        if (list_item != NULL)
+473c473
+<        11:  471:            subscription = (SUBSCRIPTION*)malloc(sizeof(SUBSCRIPTION));
+---
+>         9:  471:            subscription = (SUBSCRIPTION*)malloc(sizeof(SUBSCRIPTION));
+475c475
+<        11:  473:            if (subscription == NULL)
+---
+>         9:  473:            if (subscription == NULL)
+482,484c482,484
+<        11:  480:                subscription->on_frame_received = on_frame_received;
+<        11:  481:                subscription->callback_context = callback_context;
+<        11:  482:                subscription->frame_type = type;
+---
+>         9:  480:                subscription->on_frame_received = on_frame_received;
+>         9:  481:                subscription->callback_context = callback_context;
+>         9:  482:                subscription->frame_type = type;
+487c487
+<        11:  485:                if (singlylinkedlist_add(frame_codec_data->subscription_list, subscription) == NULL)
+---
+>         9:  485:                if (singlylinkedlist_add(frame_codec_data->subscription_list, subscription) == NULL)
+496c496
+<        11:  494:                    result = 0;
+---
+>         9:  494:                    result = 0;
+502c502
+<        11:  500:    return result;
+---
+>         9:  500:    return result;
+505c505
+<        10:  503:int frame_codec_unsubscribe(FRAME_CODEC_HANDLE frame_codec, uint8_t type)
+---
+>         8:  503:int frame_codec_unsubscribe(FRAME_CODEC_HANDLE frame_codec, uint8_t type)
+510c510
+<        10:  508:    if (frame_codec == NULL)
+---
+>         8:  508:    if (frame_codec == NULL)
+517,518c517,518
+<        10:  515:        FRAME_CODEC_INSTANCE* frame_codec_data = (FRAME_CODEC_INSTANCE*)frame_codec;
+<        10:  516:        LIST_ITEM_HANDLE list_item = singlylinkedlist_find(frame_codec_data->subscription_list, find_subscription_by_frame_type, &type);
+---
+>         8:  515:        FRAME_CODEC_INSTANCE* frame_codec_data = (FRAME_CODEC_INSTANCE*)frame_codec;
+>         8:  516:        LIST_ITEM_HANDLE list_item = singlylinkedlist_find(frame_codec_data->subscription_list, find_subscription_by_frame_type, &type);
+520c520
+<        10:  518:        if (list_item == NULL)
+---
+>         8:  518:        if (list_item == NULL)
+529,530c529,530
+<        10:  527:            SUBSCRIPTION* subscription = (SUBSCRIPTION*)singlylinkedlist_item_get_value(list_item);
+<        10:  528:            if (subscription == NULL)
+---
+>         8:  527:            SUBSCRIPTION* subscription = (SUBSCRIPTION*)singlylinkedlist_item_get_value(list_item);
+>         8:  528:            if (subscription == NULL)
+538,539c538,539
+<        10:  536:                free(subscription);
+<        10:  537:                if (singlylinkedlist_remove(frame_codec_data->subscription_list, list_item) != 0)
+---
+>         8:  536:                free(subscription);
+>         8:  537:                if (singlylinkedlist_remove(frame_codec_data->subscription_list, list_item) != 0)
+548c548
+<        10:  546:                    result = 0;
+---
+>         8:  546:                    result = 0;
+554c554
+<        10:  552:    return result;
+---
+>         8:  552:    return result;

@@ -1,0 +1,40 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+26c26
+<         -:   24:        LogError("NULL config");
+---
+>     #####:   24:        LogError("NULL config");
+38c38
+<         -:   36:            LogError("Bad configuration: authcid = %p, passwd = %p",
+---
+>     #####:   36:            LogError("Bad configuration: authcid = %p, passwd = %p",
+55c55
+<         -:   53:                LogError("Bad configuration: authcid length = %u, passwd length = %u",
+---
+>     #####:   53:                LogError("Bad configuration: authcid length = %u, passwd length = %u",
+66c66
+<         -:   64:                    LogError("Cannot allocate memory for SASL plain instance");
+---
+>     #####:   64:                    LogError("Cannot allocate memory for SASL plain instance");
+75c75
+<         -:   73:                        LogError("Cannot allocate init bytes");
+---
+>     #####:   73:                        LogError("Cannot allocate init bytes");
+112c112
+<         -:  110:        LogError("NULL sasl_mechanism_concrete_handle");
+---
+>     #####:  110:        LogError("NULL sasl_mechanism_concrete_handle");
+135c135
+<         -:  133:        LogError("Bad arguments: sasl_mechanism_concrete_handle = %p, init_bytes = %p",
+---
+>     #####:  133:        LogError("Bad arguments: sasl_mechanism_concrete_handle = %p, init_bytes = %p",
+161c161
+<         -:  159:        LogError("NULL sasl_mechanism");
+---
+>     #####:  159:        LogError("NULL sasl_mechanism");
+183c183
+<         -:  181:        LogError("Bad arguments: concrete_sasl_mechanism = %p, response_bytes = %p",
+---
+>     #####:  181:        LogError("Bad arguments: concrete_sasl_mechanism = %p, response_bytes = %p",

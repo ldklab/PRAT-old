@@ -1,0 +1,252 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+43c43
+<         -:   41:        LogError("Cannot allocate memory for the new string");
+---
+>     #####:   41:        LogError("Cannot allocate memory for the new string");
+66c66
+<         -:   64:            LogError("Unknown AMQP type");
+---
+>     #####:   64:            LogError("Unknown AMQP type");
+73c73
+<         -:   71:                LogError("Failure building amqp value string");
+---
+>     #####:   71:                LogError("Failure building amqp value string");
+83c83
+<         -:   81:                LogError("Failure getting bool value");
+---
+>     #####:   81:                LogError("Failure getting bool value");
+89c89
+<         -:   87:                LogError("Failure building amqp value string");
+---
+>     #####:   87:                LogError("Failure building amqp value string");
+101c101
+<         -:   99:                LogError("Failure getting ubyte value");
+---
+>     #####:   99:                LogError("Failure getting ubyte value");
+108c108
+<         -:  106:                LogError("Failure building amqp value string");
+---
+>     #####:  106:                LogError("Failure building amqp value string");
+120c120
+<         -:  118:                LogError("Failure getting ushort value");
+---
+>     #####:  118:                LogError("Failure getting ushort value");
+127c127
+<         -:  125:                LogError("Failure building amqp value string");
+---
+>     #####:  125:                LogError("Failure building amqp value string");
+139c139
+<         -:  137:                LogError("Failure getting uint value");
+---
+>     #####:  137:                LogError("Failure getting uint value");
+146c146
+<         -:  144:                LogError("Failure building amqp value string");
+---
+>     #####:  144:                LogError("Failure building amqp value string");
+158c158
+<         -:  156:                LogError("Failure getting ulong value");
+---
+>     #####:  156:                LogError("Failure getting ulong value");
+165c165
+<         -:  163:                LogError("Failure building amqp value string");
+---
+>     #####:  163:                LogError("Failure building amqp value string");
+177c177
+<         -:  175:                LogError("Failure getting byte value");
+---
+>     #####:  175:                LogError("Failure getting byte value");
+184c184
+<         -:  182:                LogError("Failure building amqp value string");
+---
+>     #####:  182:                LogError("Failure building amqp value string");
+196c196
+<         -:  194:                LogError("Failure getting short value");
+---
+>     #####:  194:                LogError("Failure getting short value");
+203c203
+<         -:  201:                LogError("Failure building amqp value string");
+---
+>     #####:  201:                LogError("Failure building amqp value string");
+215c215
+<         -:  213:                LogError("Failure getting int value");
+---
+>     #####:  213:                LogError("Failure getting int value");
+222c222
+<         -:  220:                LogError("Failure building amqp value string");
+---
+>     #####:  220:                LogError("Failure building amqp value string");
+234c234
+<         -:  232:                LogError("Failure getting long value");
+---
+>     #####:  232:                LogError("Failure getting long value");
+241c241
+<         -:  239:                LogError("Failure building amqp value string");
+---
+>     #####:  239:                LogError("Failure building amqp value string");
+252c252
+<         -:  250:                LogError("Failure getting float value");
+---
+>     #####:  250:                LogError("Failure getting float value");
+262c262
+<         -:  260:                    LogError("Failure building amqp value string");
+---
+>     #####:  260:                    LogError("Failure building amqp value string");
+274c274
+<         -:  272:                LogError("Failure getting double value");
+---
+>     #####:  272:                LogError("Failure getting double value");
+284c284
+<         -:  282:                    LogError("Failure building amqp value string");
+---
+>     #####:  282:                    LogError("Failure building amqp value string");
+296c296
+<         -:  294:                LogError("Failure getting char value");
+---
+>     #####:  294:                LogError("Failure getting char value");
+306c306
+<         -:  304:                    LogError("Failure building amqp value string");
+---
+>     #####:  304:                    LogError("Failure building amqp value string");
+319c319
+<         -:  317:                LogError("Failure getting timestamp value");
+---
+>     #####:  317:                LogError("Failure getting timestamp value");
+326c326
+<         -:  324:                LogError("Failure building amqp value string");
+---
+>     #####:  324:                LogError("Failure building amqp value string");
+337c337
+<         -:  335:                LogError("Failure getting uuid value");
+---
+>     #####:  335:                LogError("Failure getting uuid value");
+346c346
+<         -:  344:                    LogError("Failure getting UUID stringified value");
+---
+>     #####:  344:                    LogError("Failure getting UUID stringified value");
+354c354
+<         -:  352:                        LogError("Failure building amqp value string");
+---
+>     #####:  352:                        LogError("Failure building amqp value string");
+371c371
+<         -:  369:                LogError("Failure getting binary value");
+---
+>     #####:  369:                LogError("Failure getting binary value");
+379c379
+<         -:  377:                    LogError("Failure building amqp value string");
+---
+>     #####:  377:                    LogError("Failure building amqp value string");
+400c400
+<         -:  398:                        LogError("Failure building amqp value string");
+---
+>     #####:  398:                        LogError("Failure building amqp value string");
+413c413
+<         -:  411:                LogError("Failure getting string value");
+---
+>     #####:  411:                LogError("Failure getting string value");
+421c421
+<         -:  419:                    LogError("Failure building amqp value string");
+---
+>     #####:  419:                    LogError("Failure building amqp value string");
+433c433
+<         -:  431:                LogError("Failure getting symbol value");
+---
+>     #####:  431:                LogError("Failure getting symbol value");
+441c441
+<         -:  439:                    LogError("Failure building amqp value string");
+---
+>     #####:  439:                    LogError("Failure building amqp value string");
+453c453
+<         -:  451:                LogError("Failure getting list item count value");
+---
+>     #####:  451:                LogError("Failure getting list item count value");
+459c459
+<         -:  457:                LogError("Failure building amqp value string");
+---
+>     #####:  457:                LogError("Failure building amqp value string");
+471c471
+<         -:  469:                        LogError("Failure getting item %u from list", (unsigned int)i);
+---
+>     #####:  469:                        LogError("Failure getting item %u from list", (unsigned int)i);
+479c479
+<         -:  477:                            LogError("Failure converting item %u to string", (unsigned int)i);
+---
+>     #####:  477:                            LogError("Failure converting item %u to string", (unsigned int)i);
+488c488
+<         -:  486:                                LogError("Failure building amqp value string");
+---
+>     #####:  486:                                LogError("Failure building amqp value string");
+509c509
+<         -:  507:                    LogError("Failure building amqp value string");
+---
+>     #####:  507:                    LogError("Failure building amqp value string");
+521c521
+<         -:  519:                LogError("Failure getting map pair count");
+---
+>     #####:  519:                LogError("Failure getting map pair count");
+527c527
+<         -:  525:                LogError("Failure building amqp value string");
+---
+>     #####:  525:                LogError("Failure building amqp value string");
+540c540
+<         -:  538:                        LogError("Failure getting key/value pair index %u", (unsigned int)i);
+---
+>     #####:  538:                        LogError("Failure getting key/value pair index %u", (unsigned int)i);
+548c548
+<         -:  546:                            LogError("Failure getting stringified key value for index %u", (unsigned int)i);
+---
+>     #####:  546:                            LogError("Failure getting stringified key value for index %u", (unsigned int)i);
+558c558
+<         -:  556:                                LogError("Failure getting stringified value for index %u", (unsigned int)i);
+---
+>     #####:  556:                                LogError("Failure getting stringified value for index %u", (unsigned int)i);
+573c573
+<         -:  571:                                    LogError("Failure building amqp value string");
+---
+>     #####:  571:                                    LogError("Failure building amqp value string");
+600c600
+<         -:  598:                    LogError("Failure building amqp value string");
+---
+>     #####:  598:                    LogError("Failure building amqp value string");
+612c612
+<         -:  610:                LogError("Failure getting array item count");
+---
+>     #####:  610:                LogError("Failure getting array item count");
+618c618
+<         -:  616:                LogError("Failure building amqp value string");
+---
+>     #####:  616:                LogError("Failure building amqp value string");
+630c630
+<         -:  628:                        LogError("Failure getting array item for index %u", (unsigned int)i);
+---
+>     #####:  628:                        LogError("Failure getting array item for index %u", (unsigned int)i);
+638c638
+<         -:  636:                            LogError("Failure getting stringified array item value for index %u", (unsigned int)i);
+---
+>     #####:  636:                            LogError("Failure getting stringified array item value for index %u", (unsigned int)i);
+647c647
+<         -:  645:                                LogError("Failure building amqp value string");
+---
+>     #####:  645:                                LogError("Failure building amqp value string");
+668c668
+<         -:  666:                    LogError("Failure building amqp value string");
+---
+>     #####:  666:                    LogError("Failure building amqp value string");
+681c681
+<         -:  679:                LogError("Failure getting described value");
+---
+>     #####:  679:                LogError("Failure getting described value");
+689c689
+<         -:  687:                    LogError("Failure building amqp value string");
+---
+>     #####:  687:                    LogError("Failure building amqp value string");
+698c698
+<         -:  696:                        LogError("Failure getting stringified described value");
+---
+>     #####:  696:                        LogError("Failure getting stringified described value");
+706c706
+<         -:  704:                            LogError("Failure building amqp value string");
+---
+>     #####:  704:                            LogError("Failure building amqp value string");

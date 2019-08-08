@@ -1,0 +1,128 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+20c20
+<         -:   18:        LogError("NULL source");
+---
+>     #####:   18:        LogError("NULL source");
+28c28
+<         -:   26:            LogError("Cannot create address AMQP string");
+---
+>     #####:   26:            LogError("Cannot create address AMQP string");
+35c35
+<         -:   33:                LogError("Cannot set address on source");
+---
+>     #####:   33:                LogError("Cannot set address on source");
+41c41
+<         -:   39:                if (result == NULL)
+---
+>         9:   39:                if (result == NULL)
+43c43
+<         -:   41:                    LogError("Cannot create source");
+---
+>     #####:   41:                    LogError("Cannot create source");
+67c67
+<         -:   65:        LogError("NULL target");
+---
+>     #####:   65:        LogError("NULL target");
+75c75
+<         -:   73:            LogError("Cannot create address AMQP string");
+---
+>     #####:   73:            LogError("Cannot create address AMQP string");
+82c82
+<         -:   80:                LogError("Cannot set address on target");
+---
+>     #####:   80:                LogError("Cannot set address on target");
+88c88
+<         -:   86:                if (result == NULL)
+---
+>         9:   86:                if (result == NULL)
+90c90
+<         -:   88:                    LogError("Cannot create target");
+---
+>     #####:   88:                    LogError("Cannot create target");
+113c113
+<         -:  111:        LogError("Cannot create RECEIVED delivery state handle");
+---
+>     #####:  111:        LogError("Cannot create RECEIVED delivery state handle");
+119c119
+<         -:  117:        if (result == NULL)
+---
+>     #####:  117:        if (result == NULL)
+121c121
+<         -:  119:            LogError("Cannot create RECEIVED delivery state AMQP value");
+---
+>     #####:  119:            LogError("Cannot create RECEIVED delivery state AMQP value");
+140c140
+<         -:  138:        LogError("Cannot create ACCEPTED delivery state handle");
+---
+>     #####:  138:        LogError("Cannot create ACCEPTED delivery state handle");
+146c146
+<         -:  144:        if (result == NULL)
+---
+>     #####:  144:        if (result == NULL)
+148c148
+<         -:  146:            LogError("Cannot create ACCEPTED delivery state AMQP value");
+---
+>     #####:  146:            LogError("Cannot create ACCEPTED delivery state AMQP value");
+167c167
+<         -:  165:        LogError("Cannot create REJECTED delivery state handle");
+---
+>     #####:  165:        LogError("Cannot create REJECTED delivery state handle");
+180c180
+<         -:  178:                LogError("Cannot create error AMQP value for REJECTED state");
+---
+>     #####:  178:                LogError("Cannot create error AMQP value for REJECTED state");
+188c188
+<         -:  186:                    LogError("Cannot set error description on error AMQP value for REJECTED state");
+---
+>     #####:  186:                    LogError("Cannot set error description on error AMQP value for REJECTED state");
+195c195
+<         -:  193:                        LogError("Cannot set error on REJECTED state handle");
+---
+>     #####:  193:                        LogError("Cannot set error on REJECTED state handle");
+211c211
+<         -:  209:            if (result == NULL)
+---
+>     #####:  209:            if (result == NULL)
+213c213
+<         -:  211:                LogError("Cannot create REJECTED delivery state AMQP value");
+---
+>     #####:  211:                LogError("Cannot create REJECTED delivery state AMQP value");
+233c233
+<         -:  231:        LogError("Cannot create RELEASED delivery state handle");
+---
+>     #####:  231:        LogError("Cannot create RELEASED delivery state handle");
+239c239
+<         -:  237:        if (result == NULL)
+---
+>     #####:  237:        if (result == NULL)
+241c241
+<         -:  239:            LogError("Cannot create RELEASED delivery state AMQP value");
+---
+>     #####:  239:            LogError("Cannot create RELEASED delivery state AMQP value");
+260c260
+<         -:  258:        LogError("Cannot create MODIFIED delivery state handle");
+---
+>     #####:  258:        LogError("Cannot create MODIFIED delivery state handle");
+267c267
+<         -:  265:            LogError("Cannot set delivery failed on MODIFIED delivery state");
+---
+>     #####:  265:            LogError("Cannot set delivery failed on MODIFIED delivery state");
+272c272
+<         -:  270:            LogError("Cannot set undeliverable here on MODIFIED delivery state");
+---
+>     #####:  270:            LogError("Cannot set undeliverable here on MODIFIED delivery state");
+277c277
+<         -:  275:            LogError("Cannot set message annotations on MODIFIED delivery state");
+---
+>     #####:  275:            LogError("Cannot set message annotations on MODIFIED delivery state");
+283c283
+<         -:  281:            if (result == NULL)
+---
+>     #####:  281:            if (result == NULL)
+285c285
+<         -:  283:                LogError("Cannot create MODIFIED delivery state AMQP value");
+---
+>     #####:  283:                LogError("Cannot create MODIFIED delivery state AMQP value");

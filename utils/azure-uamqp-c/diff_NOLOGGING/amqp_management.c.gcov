@@ -1,0 +1,268 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+70c70
+<         -:   68:        LogError("NULL context in on_message_received");
+---
+>     #####:   68:        LogError("NULL context in on_message_received");
+82c82
+<         -:   80:            LogError("Could not retrieve application properties");
+---
+>     #####:   80:            LogError("Could not retrieve application properties");
+95c95
+<         -:   93:                LogError("Could not retrieve message properties");
+---
+>     #####:   93:                LogError("Could not retrieve message properties");
+114c114
+<         -:  112:                    LogError("Could not retrieve correlation Id");
+---
+>     #####:  112:                    LogError("Could not retrieve correlation Id");
+124c124
+<         -:  122:                        LogError("Could not retrieve correlation Id ulong value");
+---
+>     #####:  122:                        LogError("Could not retrieve correlation Id ulong value");
+137c137
+<         -:  135:                            LogError("Could not retrieve application property map");
+---
+>     #####:  135:                            LogError("Could not retrieve application property map");
+150c150
+<         -:  148:                                LogError("Could not create status-code amqp value");
+---
+>     #####:  148:                                LogError("Could not create status-code amqp value");
+162c162
+<         -:  160:                                    LogError("Could not retrieve status code from application properties");
+---
+>     #####:  160:                                    LogError("Could not retrieve status code from application properties");
+174c174
+<         -:  172:                                        LogError("Could not retrieve status code int value");
+---
+>     #####:  172:                                        LogError("Could not retrieve status code int value");
+187c187
+<         -:  185:                                            LogError("Could not create status-description amqp value");
+---
+>     #####:  185:                                            LogError("Could not create status-description amqp value");
+224c224
+<         -:  222:                                                    LogError("Could not create status-description amqp value");
+---
+>     #####:  222:                                                    LogError("Could not create status-description amqp value");
+261c261
+<         -:  259:                                                            LogError("Cannot remove pending operation");
+---
+>     #####:  259:                                                            LogError("Cannot remove pending operation");
+291c291
+<         -:  289:                                                    LogError("Could not match AMQP management response to request");
+---
+>     #####:  289:                                                    LogError("Could not match AMQP management response to request");
+344c344
+<         -:  342:        LogError("NULL context");
+---
+>     #####:  342:        LogError("NULL context");
+367c367
+<         -:  365:                LogError("Cannot remove pending operation");
+---
+>     #####:  365:                LogError("Cannot remove pending operation");
+384c384
+<         -:  382:        LogError("on_message_sender_state_changed called with NULL context");
+---
+>     #####:  382:        LogError("on_message_sender_state_changed called with NULL context");
+483c483
+<         -:  481:        LogError("on_message_receiver_state_changed called with NULL context");
+---
+>     #####:  481:        LogError("on_message_receiver_state_changed called with NULL context");
+566c566
+<         -:  564:        LogError("Could not retrieve message properties");
+---
+>     #####:  564:        LogError("Could not retrieve message properties");
+580c580
+<         -:  578:            LogError("Could not create message properties");
+---
+>     #####:  578:            LogError("Could not create message properties");
+590c590
+<         -:  588:                LogError("Could not create message id value");
+---
+>     #####:  588:                LogError("Could not create message id value");
+599c599
+<         -:  597:                    LogError("Could not set message Id on the properties");
+---
+>     #####:  597:                    LogError("Could not set message Id on the properties");
+606c606
+<         -:  604:                    LogError("Could not set message properties");
+---
+>     #####:  604:                    LogError("Could not set message properties");
+634c634
+<         -:  632:        LogError("Could not create key value for %s", key);
+---
+>     #####:  632:        LogError("Could not create key value for %s", key);
+644c644
+<         -:  642:            LogError("Could not create value for key %s", key);
+---
+>     #####:  642:            LogError("Could not create value for key %s", key);
+653c653
+<         -:  651:                LogError("Could not set the value in the map for key %s", key);
+---
+>     #####:  651:                LogError("Could not set the value in the map for key %s", key);
+676c676
+<         -:  674:        LogError("Cannot copy status code key name");
+---
+>     #####:  674:        LogError("Cannot copy status code key name");
+699c699
+<         -:  697:        LogError("Cannot copy status description key name");
+---
+>     #####:  697:        LogError("Cannot copy status description key name");
+724c724
+<         -:  722:        LogError("Bad arguments: session = %p, management_node = %p", session, management_node);
+---
+>     #####:  722:        LogError("Bad arguments: session = %p, management_node = %p", session, management_node);
+730c730
+<         -:  728:        LogError("Empty string management node");
+---
+>     #####:  728:        LogError("Empty string management node");
+740c740
+<         -:  738:            LogError("Cannot allocate memory for AMQP management handle");
+---
+>     #####:  738:            LogError("Cannot allocate memory for AMQP management handle");
+759c759
+<         -:  757:                LogError("Cannot create pending operations list");
+---
+>     #####:  757:                LogError("Cannot create pending operations list");
+766c766
+<         -:  764:                    LogError("Cannot set status code key name");
+---
+>     #####:  764:                    LogError("Cannot set status code key name");
+773c773
+<         -:  771:                        LogError("Cannot set status description key name");
+---
+>     #####:  771:                        LogError("Cannot set status description key name");
+782c782
+<         -:  780:                            LogError("Failed creating source AMQP value");
+---
+>     #####:  780:                            LogError("Failed creating source AMQP value");
+791c791
+<         -:  789:                                LogError("Failed creating target AMQP value");
+---
+>     #####:  789:                                LogError("Failed creating target AMQP value");
+801c801
+<         -:  799:                                    LogError("Failed allocating memory for sender link name");
+---
+>     #####:  799:                                    LogError("Failed allocating memory for sender link name");
+814c814
+<         -:  812:                                        LogError("Failed allocating memory for receiver link name");
+---
+>     #####:  812:                                        LogError("Failed allocating memory for receiver link name");
+831c831
+<         -:  829:                                            LogError("Failed creating sender link");
+---
+>     #####:  829:                                            LogError("Failed creating sender link");
+845c845
+<         -:  843:                                                LogError("Failed creating receiver link");
+---
+>     #####:  843:                                                LogError("Failed creating receiver link");
+854c854
+<         -:  852:                                                    LogError("Failed creating message sender");
+---
+>     #####:  852:                                                    LogError("Failed creating message sender");
+863c863
+<         -:  861:                                                        LogError("Failed creating message receiver");
+---
+>     #####:  861:                                                        LogError("Failed creating message receiver");
+923c923
+<         -:  921:        LogError("NULL amqp_management");
+---
+>     #####:  921:        LogError("NULL amqp_management");
+958c958
+<         -:  956:        LogError("Bad arguments: amqp_management = %p, on_amqp_management_open_complete = %p, on_amqp_management_error = %p",
+---
+>     #####:  956:        LogError("Bad arguments: amqp_management = %p, on_amqp_management_open_complete = %p, on_amqp_management_error = %p",
+967c967
+<         -:  965:        LogError("AMQP management instance already OPEN");
+---
+>     #####:  965:        LogError("AMQP management instance already OPEN");
+983c983
+<         -:  981:            LogError("Failed opening message receiver");
+---
+>         3:  981:            LogError("Failed opening message receiver");
+993c993
+<         -:  991:                LogError("Failed opening message sender");
+---
+>     #####:  991:                LogError("Failed opening message sender");
+1016c1016
+<         -: 1014:        LogError("NULL amqp_management");
+---
+>     #####: 1014:        LogError("NULL amqp_management");
+1022c1022
+<         -: 1020:        LogError("AMQP management instance not open");
+---
+>         3: 1020:        LogError("AMQP management instance not open");
+1043c1043
+<         -: 1041:            LogError("messagesender_close failed");
+---
+>     #####: 1041:            LogError("messagesender_close failed");
+1050c1050
+<         -: 1048:            LogError("messagereceiver_close failed");
+---
+>     #####: 1048:            LogError("messagereceiver_close failed");
+1061c1061
+<         -: 1059:                    LogError("Cannot obtain pending operation");
+---
+>     #####: 1059:                    LogError("Cannot obtain pending operation");
+1072c1072
+<         -: 1070:                    LogError("Cannot remove item");
+---
+>     #####: 1070:                    LogError("Cannot remove item");
+1098c1098
+<         -: 1096:        LogError("Bad arguments: amqp_management = %p, operation = %p, type = %p",
+---
+>     #####: 1096:        LogError("Bad arguments: amqp_management = %p, operation = %p, type = %p",
+1107c1107
+<         -: 1105:        LogError("amqp_management_execute_operation_async called while not open or in error");
+---
+>     #####: 1105:        LogError("amqp_management_execute_operation_async called while not open or in error");
+1124c1124
+<         -: 1122:            if (cloned_message == NULL)
+---
+>     #####: 1122:            if (cloned_message == NULL)
+1126c1126
+<         -: 1124:                LogError("Could not clone message");
+---
+>     #####: 1124:                LogError("Could not clone message");
+1140c1140
+<         -: 1138:                LogError("Could not get application properties");
+---
+>     #####: 1138:                LogError("Could not get application properties");
+1151c1151
+<         -: 1149:                        LogError("Could not create application properties");
+---
+>     #####: 1149:                        LogError("Could not create application properties");
+1180c1180
+<         -: 1178:                            LogError("Could not set application properties");
+---
+>     #####: 1178:                            LogError("Could not set application properties");
+1207c1207
+<         -: 1205:                                    LogError("Could not add the operation to the pending operations list.");
+---
+>     #####: 1205:                                    LogError("Could not add the operation to the pending operations list.");
+1218c1218
+<         -: 1216:                                        LogError("Could not send request message");
+---
+>     #####: 1216:                                        LogError("Could not send request message");
+1252c1252
+<         -: 1250:        LogError("NULL amqp_management");
+---
+>     #####: 1250:        LogError("NULL amqp_management");
+1272c1272
+<         -: 1270:        LogError("Bad arguments: amqp_management = %p, override_status_code_key_name = %s",
+---
+>     #####: 1270:        LogError("Bad arguments: amqp_management = %p, override_status_code_key_name = %s",
+1284c1284
+<         -: 1282:            LogError("Cannot set status code key name");
+---
+>     #####: 1282:            LogError("Cannot set status code key name");
+1306c1306
+<         -: 1304:        LogError("Bad arguments: amqp_management = %p, override_status_description_key_name = %s",
+---
+>     #####: 1304:        LogError("Bad arguments: amqp_management = %p, override_status_description_key_name = %s",
+1319c1319
+<         -: 1317:            LogError("Cannot set status description key name");
+---
+>     #####: 1317:            LogError("Cannot set status description key name");

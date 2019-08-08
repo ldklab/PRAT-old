@@ -1,0 +1,64 @@
+2c2
+<         -:    0:Programs:62
+---
+>         -:    0:Programs:80
+31c31
+<         -:   29:        LogError("Failed to allocate array for delimiters lengths");
+---
+>     #####:   29:        LogError("Failed to allocate array for delimiters lengths");
+41c41
+<         -:   39:                LogError("Invalid argument (delimiter %lu is NULL)", (unsigned long)i);
+---
+>     #####:   39:                LogError("Invalid argument (delimiter %lu is NULL)", (unsigned long)i);
+71c71
+<         -:   69:            LogError("Failed to get delimiters lengths");
+---
+>     #####:   69:            LogError("Failed to get delimiters lengths");
+157c157
+<         -:  155:        LogError("Invalid argument (source=%p, delimiters=%p, n_delims=%lu)", source, delimiters, (unsigned long)n_delims);
+---
+>     #####:  155:        LogError("Invalid argument (source=%p, delimiters=%p, n_delims=%lu)", source, delimiters, (unsigned long)n_delims);
+166c166
+<         -:  164:            LogError("Failed allocating STRING_TOKEN");
+---
+>     #####:  164:            LogError("Failed allocating STRING_TOKEN");
+176c176
+<         -:  174:                LogError("Failed to get first token");
+---
+>     #####:  174:                LogError("Failed to get first token");
+194c194
+<         -:  192:        LogError("Invalid argument (token=%p, delimiters=%p, n_delims=%lu)", token, delimiters, (unsigned long)n_delims);
+---
+>     #####:  192:        LogError("Invalid argument (token=%p, delimiters=%p, n_delims=%lu)", token, delimiters, (unsigned long)n_delims);
+218c218
+<         -:  216:        LogError("Invalig argument (token is NULL)");
+---
+>     #####:  216:        LogError("Invalig argument (token is NULL)");
+247c247
+<         -:  245:        LogError("Invalig argument (token is NULL)");
+---
+>     #####:  245:        LogError("Invalig argument (token is NULL)");
+274c274
+<         -:  272:        LogError("Invalig argument (token is NULL)");
+---
+>     #####:  272:        LogError("Invalig argument (token is NULL)");
+293c293
+<         -:  291:        LogError("Invalid argument (source=%p, delimiters=%p, n_delims=%lu, tokens=%p, token_count=%p)", source, delimiters, (unsigned long)n_delims, tokens, token_count);
+---
+>     #####:  291:        LogError("Invalid argument (source=%p, delimiters=%p, n_delims=%lu, tokens=%p, token_count=%p)", source, delimiters, (unsigned long)n_delims, tokens, token_count);
+320c320
+<         -:  318:                    LogError("Unexpected token value (%p) or length (%lu)", tokenValue, (unsigned long)tokenLength);
+---
+>     #####:  318:                    LogError("Unexpected token value (%p) or length (%lu)", tokenValue, (unsigned long)tokenLength);
+334c334
+<         -:  332:                        LogError("Failed re-allocating the token array");
+---
+>     #####:  332:                        LogError("Failed re-allocating the token array");
+349c349
+<         -:  347:                            LogError("Failed copying token into array");
+---
+>     #####:  347:                            LogError("Failed copying token into array");
+385c385
+<         -:  383:        LogError("Invalig argument (token is NULL)");
+---
+>     #####:  383:        LogError("Invalig argument (token is NULL)");

@@ -1,0 +1,442 @@
+        -:    0:Source:/home/ryan/TARGETS/azure-uamqp-c/deps/azure-c-shared-utility/src/sha1.c
+        -:    0:Programs:80
+        -:    1:// Copyright (c) Microsoft. All rights reserved.
+        -:    2:// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+        -:    3:
+        -:    4:/**************************** sha1.c ****************************/
+        -:    5:/******************** See RFC 4634 for details ******************/
+        -:    6:/*
+        -:    7:*  Description:
+        -:    8:*      This file implements the Secure Hash Signature Standard
+        -:    9:*      algorithms as defined in the National Institute of Standards
+        -:   10:*      and Technology Federal Information Processing Standards
+        -:   11:*      Publication (FIPS PUB) 180-1 published on April 17, 1995, 180-2
+        -:   12:*      published on August 1, 2002, and the FIPS PUB 180-2 Change
+        -:   13:*      Notice published on February 28, 2004.
+        -:   14:*
+        -:   15:*      A combined document showing all algorithms is available at
+        -:   16:*              http://csrc.nist.gov/publications/fips/
+        -:   17:*              fips180-2/fips180-2withchangenotice.pdf
+        -:   18:*
+        -:   19:*      The SHA-1 algorithm produces a 160-bit message digest for a
+        -:   20:*      given data stream.  It should take about 2**n steps to find a
+        -:   21:*      message with the same digest as a given message and
+        -:   22:*      2**(n/2) to find any two messages with the same digest,
+        -:   23:*      when n is the digest size in bits.  Therefore, this
+        -:   24:*      algorithm can serve as a means of providing a
+        -:   25:*      "fingerprint" for a message.
+        -:   26:*
+        -:   27:*  Portability Issues:
+        -:   28:*      SHA-1 is defined in terms of 32-bit "words".  This code
+        -:   29:*      uses <stdint.h> (included via "sha.h") to define 32 and 8
+        -:   30:*      bit unsigned integer types.  If your C compiler does not
+        -:   31:*      support 32 bit unsigned integers, this code is not
+        -:   32:*      appropriate.
+        -:   33:*
+        -:   34:*  Caveats:
+        -:   35:*      SHA-1 is designed to work with messages less than 2^64 bits
+        -:   36:*      long. This implementation uses SHA1Input() to hash the bits
+        -:   37:*      that are a multiple of the size of an 8-bit character, and then
+        -:   38:*      uses SHA1FinalBits() to hash the final few bits of the input.
+        -:   39:*/
+        -:   40:
+        -:   41:#include <stdlib.h>
+        -:   42:#include "azure_c_shared_utility/gballoc.h"
+        -:   43:
+        -:   44:#include "azure_c_shared_utility/sha.h"
+        -:   45:#include "azure_c_shared_utility/sha-private.h"
+        -:   46:
+        -:   47:/*
+        -:   48:*  Define the SHA1 circular left shift macro
+        -:   49:*/
+        -:   50:#define SHA1_ROTL(bits,word) \
+        -:   51:                (((word) << (bits)) | ((word) >> (32-(bits))))
+        -:   52:
+        -:   53:/*
+        -:   54:* add "length" to the length
+        -:   55:*/
+        -:   56:#define SHA1AddLength(context, length)                     \
+        -:   57:    (addTemp = (context)->Length_Low,                      \
+        -:   58:     (context)->Corrupted =                                \
+        -:   59:        (((context)->Length_Low += (length)) < addTemp) && \
+        -:   60:        (++(context)->Length_High == 0) ? 1 : 0)
+        -:   61:
+        -:   62:/* Local Function Prototypes */
+        -:   63:static void SHA1Finalize(SHA1Context *context, uint8_t Pad_Byte);
+        -:   64:static void SHA1PadMessage(SHA1Context *, uint8_t Pad_Byte);
+        -:   65:static void SHA1ProcessMessageBlock(SHA1Context *);
+        -:   66:
+        -:   67:/*
+        -:   68:*  SHA1Reset
+        -:   69:*
+        -:   70:*  Description:
+        -:   71:*      This function will initialize the SHA1Context in preparation
+        -:   72:*      for computing a new SHA1 message digest.
+        -:   73:*
+        -:   74:*  Parameters:
+        -:   75:*      context: [in/out]
+        -:   76:*          The context to reset.
+        -:   77:*
+        -:   78:*  Returns:
+        -:   79:*      sha Error Code.
+        -:   80:*
+        -:   81:*/
+    #####:   82:int SHA1Reset(SHA1Context *context)
+        -:   83:{
+    #####:   84:    if (!context)
+    #####:   85:        return shaNull;
+        -:   86:
+    #####:   87:    context->Length_Low = 0;
+    #####:   88:    context->Length_High = 0;
+    #####:   89:    context->Message_Block_Index = 0;
+        -:   90:
+        -:   91:
+        -:   92:    /* Initial Hash Values: FIPS-180-2 section 5.3.1 */
+    #####:   93:    context->Intermediate_Hash[0] = 0x67452301;
+    #####:   94:    context->Intermediate_Hash[1] = 0xEFCDAB89;
+    #####:   95:    context->Intermediate_Hash[2] = 0x98BADCFE;
+    #####:   96:    context->Intermediate_Hash[3] = 0x10325476;
+    #####:   97:    context->Intermediate_Hash[4] = 0xC3D2E1F0;
+        -:   98:
+    #####:   99:    context->Computed = 0;
+    #####:  100:    context->Corrupted = 0;
+        -:  101:
+    #####:  102:    return shaSuccess;
+        -:  103:}
+        -:  104:
+        -:  105:/*
+        -:  106:*  SHA1Input
+        -:  107:*
+        -:  108:*  Description:
+        -:  109:*      This function accepts an array of octets as the next portion
+        -:  110:*      of the message.
+        -:  111:*
+        -:  112:*  Parameters:
+        -:  113:*      context: [in/out]
+        -:  114:*          The SHA context to update
+        -:  115:*      message_array: [in]
+        -:  116:*          An array of characters representing the next portion of
+        -:  117:*          the message.
+        -:  118:*      length: [in]
+        -:  119:*          The length of the message in message_array
+        -:  120:*
+        -:  121:*  Returns:
+        -:  122:*      sha Error Code.
+        -:  123:*
+        -:  124:*/
+    #####:  125:int SHA1Input(SHA1Context *context,
+        -:  126:    const uint8_t *message_array, unsigned length)
+        -:  127:{
+        -:  128:    uint32_t addTemp;
+    #####:  129:    if (!length)
+    #####:  130:        return shaSuccess;
+        -:  131:
+    #####:  132:    if (!context || !message_array)
+    #####:  133:        return shaNull;
+        -:  134:
+    #####:  135:    if (context->Computed) {
+    #####:  136:        context->Corrupted = shaStateError;
+    #####:  137:        return shaStateError;
+        -:  138:    }
+        -:  139:
+    #####:  140:    if (context->Corrupted)
+    #####:  141:        return context->Corrupted;
+        -:  142:
+    #####:  143:    while (length-- && !context->Corrupted) {
+    #####:  144:        context->Message_Block[context->Message_Block_Index++] =
+    #####:  145:            (*message_array & 0xFF);
+        -:  146:
+    #####:  147:        if (!SHA1AddLength(context, 8) &&
+    #####:  148:            (context->Message_Block_Index == SHA1_Message_Block_Size))
+    #####:  149:            SHA1ProcessMessageBlock(context);
+        -:  150:
+    #####:  151:        message_array++;
+        -:  152:    }
+        -:  153:
+    #####:  154:    return shaSuccess;
+        -:  155:}
+        -:  156:
+        -:  157:/*
+        -:  158:* SHA1FinalBits
+        -:  159:*
+        -:  160:* Description:
+        -:  161:*   This function will add in any final bits of the message.
+        -:  162:*
+        -:  163:* Parameters:
+        -:  164:*   context: [in/out]
+        -:  165:*     The SHA context to update
+        -:  166:*   message_bits: [in]
+        -:  167:*     The final bits of the message, in the upper portion of the
+        -:  168:*     byte. (Use 0b###00000 instead of 0b00000### to input the
+        -:  169:*     three bits ###.)
+        -:  170:*   length: [in]
+        -:  171:*     The number of bits in message_bits, between 1 and 7.
+        -:  172:*
+        -:  173:* Returns:
+        -:  174:*   sha Error Code.
+        -:  175:*/
+    #####:  176:int SHA1FinalBits(SHA1Context *context, const uint8_t message_bits,
+        -:  177:    unsigned int length)
+        -:  178:{
+        -:  179:    uint32_t addTemp;
+        -:  180:
+    #####:  181:    uint8_t masks[8] = {
+        -:  182:        /* 0 0b00000000 */ 0x00, /* 1 0b10000000 */ 0x80,
+        -:  183:        /* 2 0b11000000 */ 0xC0, /* 3 0b11100000 */ 0xE0,
+        -:  184:        /* 4 0b11110000 */ 0xF0, /* 5 0b11111000 */ 0xF8,
+        -:  185:        /* 6 0b11111100 */ 0xFC, /* 7 0b11111110 */ 0xFE
+        -:  186:    };
+    #####:  187:    uint8_t markbit[8] = {
+        -:  188:        /* 0 0b10000000 */ 0x80, /* 1 0b01000000 */ 0x40,
+        -:  189:        /* 2 0b00100000 */ 0x20, /* 3 0b00010000 */ 0x10,
+        -:  190:        /* 4 0b00001000 */ 0x08, /* 5 0b00000100 */ 0x04,
+        -:  191:        /* 6 0b00000010 */ 0x02, /* 7 0b00000001 */ 0x01
+        -:  192:    };
+        -:  193:
+    #####:  194:    if (!length)
+    #####:  195:        return shaSuccess;
+        -:  196:
+    #####:  197:    if (!context)
+    #####:  198:        return shaNull;
+        -:  199:
+    #####:  200:    if (context->Computed || (length >= 8) || (length == 0)) {
+    #####:  201:        context->Corrupted = shaStateError;
+    #####:  202:        return shaStateError;
+        -:  203:    }
+        -:  204:
+    #####:  205:    if (context->Corrupted)
+    #####:  206:        return context->Corrupted;
+        -:  207:
+    #####:  208:    SHA1AddLength(context, length);
+    #####:  209:    SHA1Finalize(context,
+    #####:  210:        (uint8_t)((message_bits & masks[length]) | markbit[length]));
+        -:  211:
+    #####:  212:    return shaSuccess;
+        -:  213:}
+        -:  214:
+        -:  215:/*
+        -:  216:* SHA1Result
+        -:  217:*
+        -:  218:* Description:
+        -:  219:*   This function will return the 160-bit message digest into the
+        -:  220:*   Message_Digest array provided by the caller.
+        -:  221:*   NOTE: The first octet of hash is stored in the 0th element,
+        -:  222:*      the last octet of hash in the 19th element.
+        -:  223:*
+        -:  224:* Parameters:
+        -:  225:*   context: [in/out]
+        -:  226:*     The context to use to calculate the SHA-1 hash.
+        -:  227:*   Message_Digest: [out]
+        -:  228:*     Where the digest is returned.
+        -:  229:*
+        -:  230:* Returns:
+        -:  231:*   sha Error Code.
+        -:  232:*
+        -:  233:*/
+    #####:  234:int SHA1Result(SHA1Context *context,
+        -:  235:    uint8_t Message_Digest[SHA1HashSize])
+        -:  236:{
+        -:  237:    int i;
+        -:  238:
+    #####:  239:    if (!context || !Message_Digest)
+    #####:  240:        return shaNull;
+        -:  241:
+    #####:  242:    if (context->Corrupted)
+    #####:  243:        return context->Corrupted;
+        -:  244:
+    #####:  245:    if (!context->Computed)
+    #####:  246:        SHA1Finalize(context, 0x80);
+        -:  247:
+    #####:  248:    for (i = 0; i < SHA1HashSize; ++i)
+    #####:  249:        Message_Digest[i] = (uint8_t)(context->Intermediate_Hash[i >> 2]
+    #####:  250:        >> 8 * (3 - (i & 0x03)));
+        -:  251:
+    #####:  252:    return shaSuccess;
+        -:  253:}
+        -:  254:
+        -:  255:/*
+        -:  256:* SHA1Finalize
+        -:  257:*
+        -:  258:* Description:
+        -:  259:*   This helper function finishes off the digest calculations.
+        -:  260:*
+        -:  261:* Parameters:
+        -:  262:*   context: [in/out]
+        -:  263:*     The SHA context to update
+        -:  264:*   Pad_Byte: [in]
+        -:  265:*     The last byte to add to the digest before the 0-padding
+        -:  266:*     and length. This will contain the last bits of the message
+        -:  267:*     followed by another single bit. If the message was an
+        -:  268:*     exact multiple of 8-bits long, Pad_Byte will be 0x80.
+        -:  269:*
+        -:  270:* Returns:
+        -:  271:*   sha Error Code.
+        -:  272:*
+        -:  273:*/
+    #####:  274:static void SHA1Finalize(SHA1Context *context, uint8_t Pad_Byte)
+        -:  275:{
+        -:  276:    int i;
+    #####:  277:    SHA1PadMessage(context, Pad_Byte);
+        -:  278:    /* message may be sensitive, clear it out */
+    #####:  279:    for (i = 0; i < SHA1_Message_Block_Size; ++i)
+    #####:  280:        context->Message_Block[i] = 0;
+    #####:  281:    context->Length_Low = 0;  /* and clear length */
+    #####:  282:    context->Length_High = 0;
+    #####:  283:    context->Computed = 1;
+    #####:  284:}
+        -:  285:
+        -:  286:/*
+        -:  287:* SHA1PadMessage
+        -:  288:*
+        -:  289:* Description:
+        -:  290:*   According to the standard, the message must be padded to an
+        -:  291:*   even 512 bits. The first padding bit must be a '1'. The last
+        -:  292:*   64 bits represent the length of the original message. All bits
+        -:  293:*   in between should be 0. This helper function will pad the
+        -:  294:*   message according to those rules by filling the Message_Block
+        -:  295:*   array accordingly. When it returns, it can be assumed that the
+        -:  296:*   message digest has been computed.
+        -:  297:*
+        -:  298:* Parameters:
+        -:  299:*   context: [in/out]
+        -:  300:*     The context to pad
+        -:  301:*   Pad_Byte: [in]
+        -:  302:*     The last byte to add to the digest before the 0-padding
+        -:  303:*     and length. This will contain the last bits of the message
+        -:  304:*     followed by another single bit. If the message was an
+        -:  305:*     exact multiple of 8-bits long, Pad_Byte will be 0x80.
+        -:  306:*
+        -:  307:* Returns:
+        -:  308:*   Nothing.
+        -:  309:*/
+    #####:  310:static void SHA1PadMessage(SHA1Context *context, uint8_t Pad_Byte)
+        -:  311:{
+        -:  312:    /*
+        -:  313:    * Check to see if the current message block is too small to hold
+        -:  314:    * the initial padding bits and length. If so, we will pad the
+        -:  315:    * block, process it, and then continue padding into a second
+        -:  316:    * block.
+        -:  317:    */
+    #####:  318:    if (context->Message_Block_Index >= (SHA1_Message_Block_Size - 8)) {
+    #####:  319:        context->Message_Block[context->Message_Block_Index++] = Pad_Byte;
+    #####:  320:        while (context->Message_Block_Index < SHA1_Message_Block_Size)
+    #####:  321:            context->Message_Block[context->Message_Block_Index++] = 0;
+        -:  322:
+    #####:  323:        SHA1ProcessMessageBlock(context);
+        -:  324:    }
+        -:  325:    else
+    #####:  326:        context->Message_Block[context->Message_Block_Index++] = Pad_Byte;
+        -:  327:
+    #####:  328:    while (context->Message_Block_Index < (SHA1_Message_Block_Size - 8))
+    #####:  329:        context->Message_Block[context->Message_Block_Index++] = 0;
+        -:  330:
+        -:  331:    /*
+        -:  332:    * Store the message length as the last 8 octets
+        -:  333:    */
+    #####:  334:    context->Message_Block[56] = (uint8_t)(context->Length_High >> 24);
+    #####:  335:    context->Message_Block[57] = (uint8_t)(context->Length_High >> 16);
+        -:  336:
+    #####:  337:    context->Message_Block[58] = (uint8_t)(context->Length_High >> 8);
+    #####:  338:    context->Message_Block[59] = (uint8_t)(context->Length_High);
+    #####:  339:    context->Message_Block[60] = (uint8_t)(context->Length_Low >> 24);
+    #####:  340:    context->Message_Block[61] = (uint8_t)(context->Length_Low >> 16);
+    #####:  341:    context->Message_Block[62] = (uint8_t)(context->Length_Low >> 8);
+    #####:  342:    context->Message_Block[63] = (uint8_t)(context->Length_Low);
+        -:  343:
+    #####:  344:    SHA1ProcessMessageBlock(context);
+    #####:  345:}
+        -:  346:
+        -:  347:/*
+        -:  348:* SHA1ProcessMessageBlock
+        -:  349:*
+        -:  350:* Description:
+        -:  351:*   This helper function will process the next 512 bits of the
+        -:  352:*   message stored in the Message_Block array.
+        -:  353:*
+        -:  354:* Parameters:
+        -:  355:*   None.
+        -:  356:*
+        -:  357:* Returns:
+        -:  358:*   Nothing.
+        -:  359:*
+        -:  360:* Comments:
+        -:  361:*   Many of the variable names in this code, especially the
+        -:  362:*   single character names, were used because those were the
+        -:  363:*   names used in the publication.
+        -:  364:*/
+    #####:  365:static void SHA1ProcessMessageBlock(SHA1Context *context)
+        -:  366:{
+        -:  367:    /* Constants defined in FIPS-180-2, section 4.2.1 */
+        -:  368:    const uint32_t K[4] = {
+        -:  369:        0x5A827999, 0x6ED9EBA1, 0x8F1BBCDC, 0xCA62C1D6
+        -:  370:    };
+        -:  371:    int        t;               /* Loop counter */
+        -:  372:    uint32_t   temp;            /* Temporary word value */
+        -:  373:    uint32_t   W[80];           /* Word sequence */
+        -:  374:    uint32_t   A, B, C, D, E;   /* Word buffers */
+        -:  375:
+        -:  376:    /*
+        -:  377:    * Initialize the first 16 words in the array W
+        -:  378:    */
+    #####:  379:    for (t = 0; t < 16; t++) {
+    #####:  380:        W[t] = ((uint32_t)context->Message_Block[t * 4]) << 24;
+    #####:  381:        W[t] |= ((uint32_t)context->Message_Block[t * 4 + 1]) << 16;
+    #####:  382:        W[t] |= ((uint32_t)context->Message_Block[t * 4 + 2]) << 8;
+    #####:  383:        W[t] |= ((uint32_t)context->Message_Block[t * 4 + 3]);
+        -:  384:    }
+        -:  385:
+    #####:  386:    for (t = 16; t < 80; t++)
+    #####:  387:        W[t] = SHA1_ROTL(1, W[t - 3] ^ W[t - 8] ^ W[t - 14] ^ W[t - 16]);
+        -:  388:
+    #####:  389:    A = context->Intermediate_Hash[0];
+    #####:  390:    B = context->Intermediate_Hash[1];
+    #####:  391:    C = context->Intermediate_Hash[2];
+    #####:  392:    D = context->Intermediate_Hash[3];
+    #####:  393:    E = context->Intermediate_Hash[4];
+        -:  394:
+    #####:  395:    for (t = 0; t < 20; t++) {
+    #####:  396:        temp = SHA1_ROTL(5, A) + SHA_Ch(B, C, D) + E + W[t] + K[0];
+    #####:  397:        E = D;
+    #####:  398:        D = C;
+    #####:  399:        C = SHA1_ROTL(30, B);
+    #####:  400:        B = A;
+    #####:  401:        A = temp;
+        -:  402:    }
+        -:  403:
+    #####:  404:    for (t = 20; t < 40; t++) {
+    #####:  405:        temp = SHA1_ROTL(5, A) + SHA_Parity(B, C, D) + E + W[t] + K[1];
+    #####:  406:        E = D;
+    #####:  407:        D = C;
+    #####:  408:        C = SHA1_ROTL(30, B);
+    #####:  409:        B = A;
+    #####:  410:        A = temp;
+        -:  411:    }
+        -:  412:
+    #####:  413:    for (t = 40; t < 60; t++) {
+    #####:  414:        temp = SHA1_ROTL(5, A) + SHA_Maj(B, C, D) + E + W[t] + K[2];
+    #####:  415:        E = D;
+    #####:  416:        D = C;
+    #####:  417:        C = SHA1_ROTL(30, B);
+    #####:  418:        B = A;
+    #####:  419:        A = temp;
+        -:  420:    }
+        -:  421:
+    #####:  422:    for (t = 60; t < 80; t++) {
+    #####:  423:        temp = SHA1_ROTL(5, A) + SHA_Parity(B, C, D) + E + W[t] + K[3];
+    #####:  424:        E = D;
+    #####:  425:        D = C;
+    #####:  426:        C = SHA1_ROTL(30, B);
+    #####:  427:        B = A;
+    #####:  428:        A = temp;
+        -:  429:    }
+        -:  430:
+    #####:  431:    context->Intermediate_Hash[0] += A;
+    #####:  432:    context->Intermediate_Hash[1] += B;
+    #####:  433:    context->Intermediate_Hash[2] += C;
+        -:  434:
+    #####:  435:    context->Intermediate_Hash[3] += D;
+    #####:  436:    context->Intermediate_Hash[4] += E;
+        -:  437:
+    #####:  438:    context->Message_Block_Index = 0;
+    #####:  439:}
+        -:  440:

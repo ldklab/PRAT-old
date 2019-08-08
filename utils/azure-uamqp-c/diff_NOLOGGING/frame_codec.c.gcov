@@ -1,0 +1,100 @@
+2c2
+<         -:    0:Programs:95
+---
+>         -:    0:Programs:101
+66c66
+<         -:   64:        LogError("Could not get subscription information from the list item");
+---
+>     #####:   64:        LogError("Could not get subscription information from the list item");
+85c85
+<         -:   83:        LogError("NULL on_frame_codec_error");
+---
+>     #####:   83:        LogError("NULL on_frame_codec_error");
+94c94
+<         -:   92:            LogError("Could not allocate frame codec");
+---
+>     #####:   92:            LogError("Could not allocate frame codec");
+120c120
+<         -:  118:        LogError("NULL frame_codec");
+---
+>     #####:  118:        LogError("NULL frame_codec");
+149c149
+<         -:  147:        LogError("Bad arguments: frame_codec = %p, max_frame_size = %" PRIu32,
+---
+>     #####:  147:        LogError("Bad arguments: frame_codec = %p, max_frame_size = %" PRIu32,
+157c157
+<         -:  155:        LogError("Frame codec in error state");
+---
+>     #####:  155:        LogError("Frame codec in error state");
+191c191
+<         -:  189:        LogError("Bad arguments: frame_codec = %p, buffer = %p, size = %u",
+---
+>     #####:  189:        LogError("Bad arguments: frame_codec = %p, buffer = %p, size = %u",
+206c206
+<         -:  204:                LogError("Frame codec is in error state");
+---
+>     #####:  204:                LogError("Frame codec is in error state");
+230c230
+<         -:  228:                        LogError("Received frame size is too big");
+---
+>     #####:  228:                        LogError("Received frame size is too big");
+263c263
+<         -:  261:                    LogError("Malformed frame received");
+---
+>     #####:  261:                    LogError("Malformed frame received");
+318c318
+<         -:  316:                            LogError("Cannot allocate memort for frame bytes");
+---
+>     #####:  316:                            LogError("Cannot allocate memort for frame bytes");
+439c439
+<         -:  437:        LogError("Bad arguments: frame_codec = %p, on_frame_received = %p",
+---
+>     #####:  437:        LogError("Bad arguments: frame_codec = %p, on_frame_received = %p",
+457c457
+<         -:  455:                LogError("Cannot retrieve subscription information from the list for type %u", (unsigned int)type);
+---
+>     #####:  455:                LogError("Cannot retrieve subscription information from the list for type %u", (unsigned int)type);
+477c477
+<         -:  475:                LogError("Cannot allocate memory for new subscription");
+---
+>     #####:  475:                LogError("Cannot allocate memory for new subscription");
+490c490
+<         -:  488:                    LogError("Cannot add subscription to list");
+---
+>     #####:  488:                    LogError("Cannot add subscription to list");
+512c512
+<         -:  510:        LogError("NULL frame_codec");
+---
+>     #####:  510:        LogError("NULL frame_codec");
+524c524
+<         -:  522:            LogError("Cannot find subscription for type %u", (unsigned int)type);
+---
+>     #####:  522:            LogError("Cannot find subscription for type %u", (unsigned int)type);
+533c533
+<         -:  531:                LogError("singlylinkedlist_item_get_value failed when unsubscribing");
+---
+>     #####:  531:                LogError("singlylinkedlist_item_get_value failed when unsubscribing");
+542c542
+<         -:  540:                    LogError("Cannot remove subscription from list");
+---
+>     #####:  540:                    LogError("Cannot remove subscription from list");
+571c571
+<         -:  569:        LogError("Bad arguments: frame_codec = %p, on_bytes_encoded = %p, type_specific_size = %u, type_specific_bytes = %p",
+---
+>     #####:  569:        LogError("Bad arguments: frame_codec = %p, on_bytes_encoded = %p, type_specific_size = %u, type_specific_bytes = %p",
+578c578
+<         -:  576:        LogError("NULL payloads argument with non-zero payload count");
+---
+>     #####:  576:        LogError("NULL payloads argument with non-zero payload count");
+610c610
+<         -:  608:            LogError("Bad payload entry");
+---
+>     #####:  608:            LogError("Bad payload entry");
+621c621
+<         -:  619:                LogError("Encoded frame size exceeds the maximum allowed frame size");
+---
+>     #####:  619:                LogError("Encoded frame size exceeds the maximum allowed frame size");
+631c631
+<         -:  629:                    LogError("Cannot allocate memory for frame");
+---
+>     #####:  629:                    LogError("Cannot allocate memory for frame");

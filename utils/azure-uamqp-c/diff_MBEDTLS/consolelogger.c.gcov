@@ -1,0 +1,48 @@
+203c203
+<        81:  201:void consolelogger_log(LOG_CATEGORY log_category, const char* file, const char* func, int line, unsigned int options, const char* format, ...)
+---
+>        79:  201:void consolelogger_log(LOG_CATEGORY log_category, const char* file, const char* func, int line, unsigned int options, const char* format, ...)
+207c207
+<        81:  205:    va_start(args, format);
+---
+>        79:  205:    va_start(args, format);
+209c209
+<        81:  207:    t = time(NULL);
+---
+>        79:  207:    t = time(NULL);
+211c211
+<        81:  209:    switch (log_category)
+---
+>        79:  209:    switch (log_category)
+213,218c213,218
+<     #####:  211:    case AZ_LOG_INFO:
+<     #####:  212:        (void)printf("Info: ");
+<     #####:  213:        break;
+<        81:  214:    case AZ_LOG_ERROR:
+<        81:  215:        (void)printf("Error: Time:%.24s File:%s Func:%s Line:%d ", ctime(&t), file, func, line);
+<        81:  216:        break;
+---
+>         4:  211:    case AZ_LOG_INFO:
+>         4:  212:        (void)printf("Info: ");
+>         4:  213:        break;
+>        75:  214:    case AZ_LOG_ERROR:
+>        75:  215:        (void)printf("Error: Time:%.24s File:%s Func:%s Line:%d ", ctime(&t), file, func, line);
+>        75:  216:        break;
+223,224c223,224
+<        81:  221:    (void)vprintf(format, args);
+<        81:  222:    va_end(args);
+---
+>        79:  221:    (void)vprintf(format, args);
+>        79:  222:    va_end(args);
+227c227
+<        81:  225:    if (options & LOG_LINE)
+---
+>        79:  225:    if (options & LOG_LINE)
+229c229
+<        81:  227:        (void)printf("\r\n");
+---
+>        79:  227:        (void)printf("\r\n");
+231c231
+<        81:  229:}
+---
+>        79:  229:}
