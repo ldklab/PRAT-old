@@ -1,0 +1,248 @@
+298c298
+<     #####:  103:	int i;
+---
+>         -:  103:	int i;
+304,307c304,307
+<     #####:  109:	if(context->bridge){
+<     #####:  110:		for(i=0; i<db->bridge_count; i++){
+<     #####:  111:			if(db->bridges[i] == context){
+<     #####:  112:				db->bridges[i] = NULL;
+---
+>         -:  109:	if(context->bridge){
+>         -:  110:		for(i=0; i<db->bridge_count; i++){
+>         -:  111:			if(db->bridges[i] == context){
+>         -:  112:				db->bridges[i] = NULL;
+310,311c310,311
+<     #####:  115:		mosquitto__free(context->bridge->local_clientid);
+<     #####:  116:		context->bridge->local_clientid = NULL;
+---
+>         -:  115:		mosquitto__free(context->bridge->local_clientid);
+>         -:  116:		context->bridge->local_clientid = NULL;
+313,314c313,314
+<     #####:  118:		mosquitto__free(context->bridge->local_username);
+<     #####:  119:		context->bridge->local_username = NULL;
+---
+>         -:  118:		mosquitto__free(context->bridge->local_username);
+>         -:  119:		context->bridge->local_username = NULL;
+316,317c316,317
+<     #####:  121:		mosquitto__free(context->bridge->local_password);
+<     #####:  122:		context->bridge->local_password = NULL;
+---
+>         -:  121:		mosquitto__free(context->bridge->local_password);
+>         -:  122:		context->bridge->local_password = NULL;
+319,320c319,320
+<     #####:  124:		if(context->bridge->remote_clientid != context->id){
+<     #####:  125:			mosquitto__free(context->bridge->remote_clientid);
+---
+>         -:  124:		if(context->bridge->remote_clientid != context->id){
+>         -:  125:			mosquitto__free(context->bridge->remote_clientid);
+322c322
+<     #####:  127:		context->bridge->remote_clientid = NULL;
+---
+>         -:  127:		context->bridge->remote_clientid = NULL;
+324,325c324,325
+<     #####:  129:		if(context->bridge->remote_username != context->username){
+<     #####:  130:			mosquitto__free(context->bridge->remote_username);
+---
+>         -:  129:		if(context->bridge->remote_username != context->username){
+>         -:  130:			mosquitto__free(context->bridge->remote_username);
+327c327
+<     #####:  132:		context->bridge->remote_username = NULL;
+---
+>         -:  132:		context->bridge->remote_username = NULL;
+329,330c329,330
+<     #####:  134:		if(context->bridge->remote_password != context->password){
+<     #####:  135:			mosquitto__free(context->bridge->remote_password);
+---
+>         -:  134:		if(context->bridge->remote_password != context->password){
+>         -:  135:			mosquitto__free(context->bridge->remote_password);
+332c332
+<     #####:  137:		context->bridge->remote_password = NULL;
+---
+>         -:  137:		context->bridge->remote_password = NULL;
+411c411
+<     #####:  103:	int i;
+---
+>         -:  103:	int i;
+417,420c417,420
+<     #####:  109:	if(context->bridge){
+<     #####:  110:		for(i=0; i<db->bridge_count; i++){
+<     #####:  111:			if(db->bridges[i] == context){
+<     #####:  112:				db->bridges[i] = NULL;
+---
+>         -:  109:	if(context->bridge){
+>         -:  110:		for(i=0; i<db->bridge_count; i++){
+>         -:  111:			if(db->bridges[i] == context){
+>         -:  112:				db->bridges[i] = NULL;
+423,424c423,424
+<     #####:  115:		mosquitto__free(context->bridge->local_clientid);
+<     #####:  116:		context->bridge->local_clientid = NULL;
+---
+>         -:  115:		mosquitto__free(context->bridge->local_clientid);
+>         -:  116:		context->bridge->local_clientid = NULL;
+426,427c426,427
+<     #####:  118:		mosquitto__free(context->bridge->local_username);
+<     #####:  119:		context->bridge->local_username = NULL;
+---
+>         -:  118:		mosquitto__free(context->bridge->local_username);
+>         -:  119:		context->bridge->local_username = NULL;
+429,430c429,430
+<     #####:  121:		mosquitto__free(context->bridge->local_password);
+<     #####:  122:		context->bridge->local_password = NULL;
+---
+>         -:  121:		mosquitto__free(context->bridge->local_password);
+>         -:  122:		context->bridge->local_password = NULL;
+432,433c432,433
+<     #####:  124:		if(context->bridge->remote_clientid != context->id){
+<     #####:  125:			mosquitto__free(context->bridge->remote_clientid);
+---
+>         -:  124:		if(context->bridge->remote_clientid != context->id){
+>         -:  125:			mosquitto__free(context->bridge->remote_clientid);
+435c435
+<     #####:  127:		context->bridge->remote_clientid = NULL;
+---
+>         -:  127:		context->bridge->remote_clientid = NULL;
+437,438c437,438
+<     #####:  129:		if(context->bridge->remote_username != context->username){
+<     #####:  130:			mosquitto__free(context->bridge->remote_username);
+---
+>         -:  129:		if(context->bridge->remote_username != context->username){
+>         -:  130:			mosquitto__free(context->bridge->remote_username);
+440c440
+<     #####:  132:		context->bridge->remote_username = NULL;
+---
+>         -:  132:		context->bridge->remote_username = NULL;
+442,443c442,443
+<     #####:  134:		if(context->bridge->remote_password != context->password){
+<     #####:  135:			mosquitto__free(context->bridge->remote_password);
+---
+>         -:  134:		if(context->bridge->remote_password != context->password){
+>         -:  135:			mosquitto__free(context->bridge->remote_password);
+445c445
+<     #####:  137:		context->bridge->remote_password = NULL;
+---
+>         -:  137:		context->bridge->remote_password = NULL;
+524c524
+<     #####:  103:	int i;
+---
+>         -:  103:	int i;
+530,533c530,533
+<     #####:  109:	if(context->bridge){
+<     #####:  110:		for(i=0; i<db->bridge_count; i++){
+<     #####:  111:			if(db->bridges[i] == context){
+<     #####:  112:				db->bridges[i] = NULL;
+---
+>         -:  109:	if(context->bridge){
+>         -:  110:		for(i=0; i<db->bridge_count; i++){
+>         -:  111:			if(db->bridges[i] == context){
+>         -:  112:				db->bridges[i] = NULL;
+536,537c536,537
+<     #####:  115:		mosquitto__free(context->bridge->local_clientid);
+<     #####:  116:		context->bridge->local_clientid = NULL;
+---
+>         -:  115:		mosquitto__free(context->bridge->local_clientid);
+>         -:  116:		context->bridge->local_clientid = NULL;
+539,540c539,540
+<     #####:  118:		mosquitto__free(context->bridge->local_username);
+<     #####:  119:		context->bridge->local_username = NULL;
+---
+>         -:  118:		mosquitto__free(context->bridge->local_username);
+>         -:  119:		context->bridge->local_username = NULL;
+542,543c542,543
+<     #####:  121:		mosquitto__free(context->bridge->local_password);
+<     #####:  122:		context->bridge->local_password = NULL;
+---
+>         -:  121:		mosquitto__free(context->bridge->local_password);
+>         -:  122:		context->bridge->local_password = NULL;
+545,546c545,546
+<     #####:  124:		if(context->bridge->remote_clientid != context->id){
+<     #####:  125:			mosquitto__free(context->bridge->remote_clientid);
+---
+>         -:  124:		if(context->bridge->remote_clientid != context->id){
+>         -:  125:			mosquitto__free(context->bridge->remote_clientid);
+548c548
+<     #####:  127:		context->bridge->remote_clientid = NULL;
+---
+>         -:  127:		context->bridge->remote_clientid = NULL;
+550,551c550,551
+<     #####:  129:		if(context->bridge->remote_username != context->username){
+<     #####:  130:			mosquitto__free(context->bridge->remote_username);
+---
+>         -:  129:		if(context->bridge->remote_username != context->username){
+>         -:  130:			mosquitto__free(context->bridge->remote_username);
+553c553
+<     #####:  132:		context->bridge->remote_username = NULL;
+---
+>         -:  132:		context->bridge->remote_username = NULL;
+555,556c555,556
+<     #####:  134:		if(context->bridge->remote_password != context->password){
+<     #####:  135:			mosquitto__free(context->bridge->remote_password);
+---
+>         -:  134:		if(context->bridge->remote_password != context->password){
+>         -:  135:			mosquitto__free(context->bridge->remote_password);
+558c558
+<     #####:  137:		context->bridge->remote_password = NULL;
+---
+>         -:  137:		context->bridge->remote_password = NULL;
+637c637
+<     #####:  103:	int i;
+---
+>         -:  103:	int i;
+643,646c643,646
+<     #####:  109:	if(context->bridge){
+<     #####:  110:		for(i=0; i<db->bridge_count; i++){
+<     #####:  111:			if(db->bridges[i] == context){
+<     #####:  112:				db->bridges[i] = NULL;
+---
+>         -:  109:	if(context->bridge){
+>         -:  110:		for(i=0; i<db->bridge_count; i++){
+>         -:  111:			if(db->bridges[i] == context){
+>         -:  112:				db->bridges[i] = NULL;
+649,650c649,650
+<     #####:  115:		mosquitto__free(context->bridge->local_clientid);
+<     #####:  116:		context->bridge->local_clientid = NULL;
+---
+>         -:  115:		mosquitto__free(context->bridge->local_clientid);
+>         -:  116:		context->bridge->local_clientid = NULL;
+652,653c652,653
+<     #####:  118:		mosquitto__free(context->bridge->local_username);
+<     #####:  119:		context->bridge->local_username = NULL;
+---
+>         -:  118:		mosquitto__free(context->bridge->local_username);
+>         -:  119:		context->bridge->local_username = NULL;
+655,656c655,656
+<     #####:  121:		mosquitto__free(context->bridge->local_password);
+<     #####:  122:		context->bridge->local_password = NULL;
+---
+>         -:  121:		mosquitto__free(context->bridge->local_password);
+>         -:  122:		context->bridge->local_password = NULL;
+658,659c658,659
+<     #####:  124:		if(context->bridge->remote_clientid != context->id){
+<     #####:  125:			mosquitto__free(context->bridge->remote_clientid);
+---
+>         -:  124:		if(context->bridge->remote_clientid != context->id){
+>         -:  125:			mosquitto__free(context->bridge->remote_clientid);
+661c661
+<     #####:  127:		context->bridge->remote_clientid = NULL;
+---
+>         -:  127:		context->bridge->remote_clientid = NULL;
+663,664c663,664
+<     #####:  129:		if(context->bridge->remote_username != context->username){
+<     #####:  130:			mosquitto__free(context->bridge->remote_username);
+---
+>         -:  129:		if(context->bridge->remote_username != context->username){
+>         -:  130:			mosquitto__free(context->bridge->remote_username);
+666c666
+<     #####:  132:		context->bridge->remote_username = NULL;
+---
+>         -:  132:		context->bridge->remote_username = NULL;
+668,669c668,669
+<     #####:  134:		if(context->bridge->remote_password != context->password){
+<     #####:  135:			mosquitto__free(context->bridge->remote_password);
+---
+>         -:  134:		if(context->bridge->remote_password != context->password){
+>         -:  135:			mosquitto__free(context->bridge->remote_password);
+671c671
+<     #####:  137:		context->bridge->remote_password = NULL;
+---
+>         -:  137:		context->bridge->remote_password = NULL;

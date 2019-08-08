@@ -1,0 +1,768 @@
+132,134c132,134
+<     #####:  130:	int rc;
+<     #####:  131:	int err;
+<     #####:  132:	socklen_t len;
+---
+>         -:  130:	int rc;
+>         -:  131:	int err;
+>         -:  132:	socklen_t len;
+185,194c185,194
+<     #####:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+<     #####:  184:		if(context->bridge){
+<     #####:  185:			ev.data.fd = context->sock;
+<     #####:  186:			ev.events = EPOLLIN;
+<     #####:  187:			context->events = EPOLLIN;
+<     #####:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+<     #####:  190:				(void)close(db->epollfd);
+<     #####:  191:				db->epollfd = 0;
+<     #####:  192:				return MOSQ_ERR_UNKNOWN;
+---
+>         -:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+>         -:  184:		if(context->bridge){
+>         -:  185:			ev.data.fd = context->sock;
+>         -:  186:			ev.events = EPOLLIN;
+>         -:  187:			context->events = EPOLLIN;
+>         -:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+>         -:  190:				(void)close(db->epollfd);
+>         -:  191:				db->epollfd = 0;
+>         -:  192:				return MOSQ_ERR_UNKNOWN;
+235,240c235,240
+<     #####:  233:				if(context->bridge){
+<     #####:  234:					mosquitto__check_keepalive(db, context);
+<     #####:  235:					if(context->bridge->round_robin == false
+<     #####:  236:							&& context->bridge->cur_address != 0
+<     #####:  237:							&& context->bridge->primary_retry
+<     #####:  238:							&& now > context->bridge->primary_retry){
+---
+>         -:  233:				if(context->bridge){
+>         -:  234:					mosquitto__check_keepalive(db, context);
+>         -:  235:					if(context->bridge->round_robin == false
+>         -:  236:							&& context->bridge->cur_address != 0
+>         -:  237:							&& context->bridge->primary_retry
+>         -:  238:							&& now > context->bridge->primary_retry){
+242,244c242,244
+<     #####:  240:						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+<     #####:  241:							rc = net__try_connect(context, context->bridge->addresses[0].address,
+<     #####:  242:									context->bridge->addresses[0].port,
+---
+>         -:  240:						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+>         -:  241:							rc = net__try_connect(context, context->bridge->addresses[0].address,
+>         -:  242:									context->bridge->addresses[0].port,
+247,252c247,252
+<     #####:  245:							if(rc == 0){
+<     #####:  246:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  247:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  248:								context->bridge->primary_retry = 0;
+<     #####:  249:								net__socket_close(db, context);
+<     #####:  250:								context->bridge->cur_address = 0;
+---
+>         -:  245:							if(rc == 0){
+>         -:  246:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  247:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  248:								context->bridge->primary_retry = 0;
+>         -:  249:								net__socket_close(db, context);
+>         -:  250:								context->bridge->cur_address = 0;
+255,262c255,262
+<     #####:  253:							len = sizeof(int);
+<     #####:  254:							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+<     #####:  255:								if(err == 0){
+<     #####:  256:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  257:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  258:									context->bridge->primary_retry = 0;
+<     #####:  259:									net__socket_close(db, context);
+<     #####:  260:									context->bridge->cur_address = context->bridge->address_count-1;
+---
+>         -:  253:							len = sizeof(int);
+>         -:  254:							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+>         -:  255:								if(err == 0){
+>         -:  256:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  257:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  258:									context->bridge->primary_retry = 0;
+>         -:  259:									net__socket_close(db, context);
+>         -:  260:									context->bridge->cur_address = context->bridge->address_count-1;
+264,266c264,266
+<     #####:  262:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  263:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  264:									context->bridge->primary_retry = now+5;
+---
+>         -:  262:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  263:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  264:									context->bridge->primary_retry = now+5;
+269,271c269,271
+<     #####:  267:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  268:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  269:								context->bridge->primary_retry = now+5;
+---
+>         -:  267:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  268:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  269:								context->bridge->primary_retry = now+5;
+341,342c341,342
+<     #####:  339:		for(i=0; i<db->bridge_count; i++){
+<     #####:  340:			if(!db->bridges[i]) continue;
+---
+>         -:  339:		for(i=0; i<db->bridge_count; i++){
+>         -:  340:			if(!db->bridges[i]) continue;
+344c344
+<     #####:  342:			context = db->bridges[i];
+---
+>         -:  342:			context = db->bridges[i];
+346,348c346,348
+<     #####:  344:			if(context->sock == INVALID_SOCKET){
+<     #####:  345:				if(time_count > 0){
+<     #####:  346:					time_count--;
+---
+>         -:  344:			if(context->sock == INVALID_SOCKET){
+>         -:  345:				if(time_count > 0){
+>         -:  346:					time_count--;
+350,351c350,351
+<     #####:  348:					time_count = 1000;
+<     #####:  349:					now = mosquitto_time();
+---
+>         -:  348:					time_count = 1000;
+>         -:  349:					now = mosquitto_time();
+354,358c354,358
+<     #####:  352:				if(!context->bridge->restart_t){
+<     #####:  353:					context->bridge->restart_t = now+context->bridge->restart_timeout;
+<     #####:  354:					context->bridge->cur_address++;
+<     #####:  355:					if(context->bridge->cur_address == context->bridge->address_count){
+<     #####:  356:						context->bridge->cur_address = 0;
+---
+>         -:  352:				if(!context->bridge->restart_t){
+>         -:  353:					context->bridge->restart_t = now+context->bridge->restart_timeout;
+>         -:  354:					context->bridge->cur_address++;
+>         -:  355:					if(context->bridge->cur_address == context->bridge->address_count){
+>         -:  356:						context->bridge->cur_address = 0;
+361,362c361,362
+<     #####:  359:					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+<     #####:  360:							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+---
+>         -:  359:					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+>         -:  360:							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+432,436c432,436
+<     #####:  430:							rc = bridge__connect(db, context);
+<     #####:  431:							context->bridge->restart_t = 0;
+<     #####:  432:							if(rc == MOSQ_ERR_SUCCESS){
+<     #####:  433:								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+<     #####:  434:									context->bridge->primary_retry = now + 5;
+---
+>         -:  430:							rc = bridge__connect(db, context);
+>         -:  431:							context->bridge->restart_t = 0;
+>         -:  432:							if(rc == MOSQ_ERR_SUCCESS){
+>         -:  433:								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+>         -:  434:									context->bridge->primary_retry = now + 5;
+439,442c439,442
+<     #####:  437:								ev.data.fd = context->sock;
+<     #####:  438:								ev.events = EPOLLIN;
+<     #####:  439:								if(context->current_out_packet){
+<     #####:  440:									ev.events |= EPOLLOUT;
+---
+>         -:  437:								ev.data.fd = context->sock;
+>         -:  438:								ev.events = EPOLLIN;
+>         -:  439:								if(context->current_out_packet){
+>         -:  440:									ev.events |= EPOLLOUT;
+444,446c444,446
+<     #####:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+<     #####:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+---
+>         -:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+>         -:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+449c449
+<     #####:  447:									context->events = ev.events;
+---
+>         -:  447:									context->events = ev.events;
+462,464c462,464
+<     #####:  460:								context->bridge->cur_address++;
+<     #####:  461:								if(context->bridge->cur_address == context->bridge->address_count){
+<     #####:  462:									context->bridge->cur_address = 0;
+---
+>         -:  460:								context->bridge->cur_address++;
+>         -:  461:								if(context->bridge->cur_address == context->bridge->address_count){
+>         -:  462:									context->bridge->cur_address = 0;
+648,650c648,650
+<     #####:  130:	int rc;
+<     #####:  131:	int err;
+<     #####:  132:	socklen_t len;
+---
+>         -:  130:	int rc;
+>         -:  131:	int err;
+>         -:  132:	socklen_t len;
+701,710c701,710
+<     #####:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+<     #####:  184:		if(context->bridge){
+<     #####:  185:			ev.data.fd = context->sock;
+<     #####:  186:			ev.events = EPOLLIN;
+<     #####:  187:			context->events = EPOLLIN;
+<     #####:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+<     #####:  190:				(void)close(db->epollfd);
+<     #####:  191:				db->epollfd = 0;
+<     #####:  192:				return MOSQ_ERR_UNKNOWN;
+---
+>         -:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+>         -:  184:		if(context->bridge){
+>         -:  185:			ev.data.fd = context->sock;
+>         -:  186:			ev.events = EPOLLIN;
+>         -:  187:			context->events = EPOLLIN;
+>         -:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+>         -:  190:				(void)close(db->epollfd);
+>         -:  191:				db->epollfd = 0;
+>         -:  192:				return MOSQ_ERR_UNKNOWN;
+751,756c751,756
+<     #####:  233:				if(context->bridge){
+<     #####:  234:					mosquitto__check_keepalive(db, context);
+<     #####:  235:					if(context->bridge->round_robin == false
+<     #####:  236:							&& context->bridge->cur_address != 0
+<     #####:  237:							&& context->bridge->primary_retry
+<     #####:  238:							&& now > context->bridge->primary_retry){
+---
+>         -:  233:				if(context->bridge){
+>         -:  234:					mosquitto__check_keepalive(db, context);
+>         -:  235:					if(context->bridge->round_robin == false
+>         -:  236:							&& context->bridge->cur_address != 0
+>         -:  237:							&& context->bridge->primary_retry
+>         -:  238:							&& now > context->bridge->primary_retry){
+758,760c758,760
+<     #####:  240:						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+<     #####:  241:							rc = net__try_connect(context, context->bridge->addresses[0].address,
+<     #####:  242:									context->bridge->addresses[0].port,
+---
+>         -:  240:						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+>         -:  241:							rc = net__try_connect(context, context->bridge->addresses[0].address,
+>         -:  242:									context->bridge->addresses[0].port,
+763,768c763,768
+<     #####:  245:							if(rc == 0){
+<     #####:  246:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  247:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  248:								context->bridge->primary_retry = 0;
+<     #####:  249:								net__socket_close(db, context);
+<     #####:  250:								context->bridge->cur_address = 0;
+---
+>         -:  245:							if(rc == 0){
+>         -:  246:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  247:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  248:								context->bridge->primary_retry = 0;
+>         -:  249:								net__socket_close(db, context);
+>         -:  250:								context->bridge->cur_address = 0;
+771,778c771,778
+<     #####:  253:							len = sizeof(int);
+<     #####:  254:							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+<     #####:  255:								if(err == 0){
+<     #####:  256:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  257:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  258:									context->bridge->primary_retry = 0;
+<     #####:  259:									net__socket_close(db, context);
+<     #####:  260:									context->bridge->cur_address = context->bridge->address_count-1;
+---
+>         -:  253:							len = sizeof(int);
+>         -:  254:							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+>         -:  255:								if(err == 0){
+>         -:  256:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  257:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  258:									context->bridge->primary_retry = 0;
+>         -:  259:									net__socket_close(db, context);
+>         -:  260:									context->bridge->cur_address = context->bridge->address_count-1;
+780,782c780,782
+<     #####:  262:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  263:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  264:									context->bridge->primary_retry = now+5;
+---
+>         -:  262:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  263:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  264:									context->bridge->primary_retry = now+5;
+785,787c785,787
+<     #####:  267:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  268:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  269:								context->bridge->primary_retry = now+5;
+---
+>         -:  267:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  268:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  269:								context->bridge->primary_retry = now+5;
+857,858c857,858
+<     #####:  339:		for(i=0; i<db->bridge_count; i++){
+<     #####:  340:			if(!db->bridges[i]) continue;
+---
+>         -:  339:		for(i=0; i<db->bridge_count; i++){
+>         -:  340:			if(!db->bridges[i]) continue;
+860c860
+<     #####:  342:			context = db->bridges[i];
+---
+>         -:  342:			context = db->bridges[i];
+862,864c862,864
+<     #####:  344:			if(context->sock == INVALID_SOCKET){
+<     #####:  345:				if(time_count > 0){
+<     #####:  346:					time_count--;
+---
+>         -:  344:			if(context->sock == INVALID_SOCKET){
+>         -:  345:				if(time_count > 0){
+>         -:  346:					time_count--;
+866,867c866,867
+<     #####:  348:					time_count = 1000;
+<     #####:  349:					now = mosquitto_time();
+---
+>         -:  348:					time_count = 1000;
+>         -:  349:					now = mosquitto_time();
+870,874c870,874
+<     #####:  352:				if(!context->bridge->restart_t){
+<     #####:  353:					context->bridge->restart_t = now+context->bridge->restart_timeout;
+<     #####:  354:					context->bridge->cur_address++;
+<     #####:  355:					if(context->bridge->cur_address == context->bridge->address_count){
+<     #####:  356:						context->bridge->cur_address = 0;
+---
+>         -:  352:				if(!context->bridge->restart_t){
+>         -:  353:					context->bridge->restart_t = now+context->bridge->restart_timeout;
+>         -:  354:					context->bridge->cur_address++;
+>         -:  355:					if(context->bridge->cur_address == context->bridge->address_count){
+>         -:  356:						context->bridge->cur_address = 0;
+877,878c877,878
+<     #####:  359:					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+<     #####:  360:							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+---
+>         -:  359:					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+>         -:  360:							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+948,952c948,952
+<     #####:  430:							rc = bridge__connect(db, context);
+<     #####:  431:							context->bridge->restart_t = 0;
+<     #####:  432:							if(rc == MOSQ_ERR_SUCCESS){
+<     #####:  433:								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+<     #####:  434:									context->bridge->primary_retry = now + 5;
+---
+>         -:  430:							rc = bridge__connect(db, context);
+>         -:  431:							context->bridge->restart_t = 0;
+>         -:  432:							if(rc == MOSQ_ERR_SUCCESS){
+>         -:  433:								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+>         -:  434:									context->bridge->primary_retry = now + 5;
+955,958c955,958
+<     #####:  437:								ev.data.fd = context->sock;
+<     #####:  438:								ev.events = EPOLLIN;
+<     #####:  439:								if(context->current_out_packet){
+<     #####:  440:									ev.events |= EPOLLOUT;
+---
+>         -:  437:								ev.data.fd = context->sock;
+>         -:  438:								ev.events = EPOLLIN;
+>         -:  439:								if(context->current_out_packet){
+>         -:  440:									ev.events |= EPOLLOUT;
+960,962c960,962
+<     #####:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+<     #####:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+---
+>         -:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+>         -:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+965c965
+<     #####:  447:									context->events = ev.events;
+---
+>         -:  447:									context->events = ev.events;
+978,980c978,980
+<     #####:  460:								context->bridge->cur_address++;
+<     #####:  461:								if(context->bridge->cur_address == context->bridge->address_count){
+<     #####:  462:									context->bridge->cur_address = 0;
+---
+>         -:  460:								context->bridge->cur_address++;
+>         -:  461:								if(context->bridge->cur_address == context->bridge->address_count){
+>         -:  462:									context->bridge->cur_address = 0;
+1164,1166c1164,1166
+<     #####:  130:	int rc;
+<     #####:  131:	int err;
+<     #####:  132:	socklen_t len;
+---
+>         -:  130:	int rc;
+>         -:  131:	int err;
+>         -:  132:	socklen_t len;
+1217,1226c1217,1226
+<     #####:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+<     #####:  184:		if(context->bridge){
+<     #####:  185:			ev.data.fd = context->sock;
+<     #####:  186:			ev.events = EPOLLIN;
+<     #####:  187:			context->events = EPOLLIN;
+<     #####:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+<     #####:  190:				(void)close(db->epollfd);
+<     #####:  191:				db->epollfd = 0;
+<     #####:  192:				return MOSQ_ERR_UNKNOWN;
+---
+>         -:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+>         -:  184:		if(context->bridge){
+>         -:  185:			ev.data.fd = context->sock;
+>         -:  186:			ev.events = EPOLLIN;
+>         -:  187:			context->events = EPOLLIN;
+>         -:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+>         -:  190:				(void)close(db->epollfd);
+>         -:  191:				db->epollfd = 0;
+>         -:  192:				return MOSQ_ERR_UNKNOWN;
+1267,1272c1267,1272
+<     #####:  233:				if(context->bridge){
+<     #####:  234:					mosquitto__check_keepalive(db, context);
+<     #####:  235:					if(context->bridge->round_robin == false
+<     #####:  236:							&& context->bridge->cur_address != 0
+<     #####:  237:							&& context->bridge->primary_retry
+<     #####:  238:							&& now > context->bridge->primary_retry){
+---
+>         -:  233:				if(context->bridge){
+>         -:  234:					mosquitto__check_keepalive(db, context);
+>         -:  235:					if(context->bridge->round_robin == false
+>         -:  236:							&& context->bridge->cur_address != 0
+>         -:  237:							&& context->bridge->primary_retry
+>         -:  238:							&& now > context->bridge->primary_retry){
+1274,1276c1274,1276
+<     #####:  240:						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+<     #####:  241:							rc = net__try_connect(context, context->bridge->addresses[0].address,
+<     #####:  242:									context->bridge->addresses[0].port,
+---
+>         -:  240:						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+>         -:  241:							rc = net__try_connect(context, context->bridge->addresses[0].address,
+>         -:  242:									context->bridge->addresses[0].port,
+1279,1284c1279,1284
+<     #####:  245:							if(rc == 0){
+<     #####:  246:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  247:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  248:								context->bridge->primary_retry = 0;
+<     #####:  249:								net__socket_close(db, context);
+<     #####:  250:								context->bridge->cur_address = 0;
+---
+>         -:  245:							if(rc == 0){
+>         -:  246:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  247:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  248:								context->bridge->primary_retry = 0;
+>         -:  249:								net__socket_close(db, context);
+>         -:  250:								context->bridge->cur_address = 0;
+1287,1294c1287,1294
+<     #####:  253:							len = sizeof(int);
+<     #####:  254:							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+<     #####:  255:								if(err == 0){
+<     #####:  256:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  257:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  258:									context->bridge->primary_retry = 0;
+<     #####:  259:									net__socket_close(db, context);
+<     #####:  260:									context->bridge->cur_address = context->bridge->address_count-1;
+---
+>         -:  253:							len = sizeof(int);
+>         -:  254:							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+>         -:  255:								if(err == 0){
+>         -:  256:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  257:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  258:									context->bridge->primary_retry = 0;
+>         -:  259:									net__socket_close(db, context);
+>         -:  260:									context->bridge->cur_address = context->bridge->address_count-1;
+1296,1298c1296,1298
+<     #####:  262:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  263:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  264:									context->bridge->primary_retry = now+5;
+---
+>         -:  262:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  263:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  264:									context->bridge->primary_retry = now+5;
+1301,1303c1301,1303
+<     #####:  267:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  268:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  269:								context->bridge->primary_retry = now+5;
+---
+>         -:  267:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  268:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  269:								context->bridge->primary_retry = now+5;
+1373,1374c1373,1374
+<     #####:  339:		for(i=0; i<db->bridge_count; i++){
+<     #####:  340:			if(!db->bridges[i]) continue;
+---
+>         -:  339:		for(i=0; i<db->bridge_count; i++){
+>         -:  340:			if(!db->bridges[i]) continue;
+1376c1376
+<     #####:  342:			context = db->bridges[i];
+---
+>         -:  342:			context = db->bridges[i];
+1378,1380c1378,1380
+<     #####:  344:			if(context->sock == INVALID_SOCKET){
+<     #####:  345:				if(time_count > 0){
+<     #####:  346:					time_count--;
+---
+>         -:  344:			if(context->sock == INVALID_SOCKET){
+>         -:  345:				if(time_count > 0){
+>         -:  346:					time_count--;
+1382,1383c1382,1383
+<     #####:  348:					time_count = 1000;
+<     #####:  349:					now = mosquitto_time();
+---
+>         -:  348:					time_count = 1000;
+>         -:  349:					now = mosquitto_time();
+1386,1390c1386,1390
+<     #####:  352:				if(!context->bridge->restart_t){
+<     #####:  353:					context->bridge->restart_t = now+context->bridge->restart_timeout;
+<     #####:  354:					context->bridge->cur_address++;
+<     #####:  355:					if(context->bridge->cur_address == context->bridge->address_count){
+<     #####:  356:						context->bridge->cur_address = 0;
+---
+>         -:  352:				if(!context->bridge->restart_t){
+>         -:  353:					context->bridge->restart_t = now+context->bridge->restart_timeout;
+>         -:  354:					context->bridge->cur_address++;
+>         -:  355:					if(context->bridge->cur_address == context->bridge->address_count){
+>         -:  356:						context->bridge->cur_address = 0;
+1393,1394c1393,1394
+<     #####:  359:					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+<     #####:  360:							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+---
+>         -:  359:					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+>         -:  360:							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+1464,1468c1464,1468
+<     #####:  430:							rc = bridge__connect(db, context);
+<     #####:  431:							context->bridge->restart_t = 0;
+<     #####:  432:							if(rc == MOSQ_ERR_SUCCESS){
+<     #####:  433:								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+<     #####:  434:									context->bridge->primary_retry = now + 5;
+---
+>         -:  430:							rc = bridge__connect(db, context);
+>         -:  431:							context->bridge->restart_t = 0;
+>         -:  432:							if(rc == MOSQ_ERR_SUCCESS){
+>         -:  433:								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+>         -:  434:									context->bridge->primary_retry = now + 5;
+1471,1474c1471,1474
+<     #####:  437:								ev.data.fd = context->sock;
+<     #####:  438:								ev.events = EPOLLIN;
+<     #####:  439:								if(context->current_out_packet){
+<     #####:  440:									ev.events |= EPOLLOUT;
+---
+>         -:  437:								ev.data.fd = context->sock;
+>         -:  438:								ev.events = EPOLLIN;
+>         -:  439:								if(context->current_out_packet){
+>         -:  440:									ev.events |= EPOLLOUT;
+1476,1478c1476,1478
+<     #####:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+<     #####:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+---
+>         -:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+>         -:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+1481c1481
+<     #####:  447:									context->events = ev.events;
+---
+>         -:  447:									context->events = ev.events;
+1494,1496c1494,1496
+<     #####:  460:								context->bridge->cur_address++;
+<     #####:  461:								if(context->bridge->cur_address == context->bridge->address_count){
+<     #####:  462:									context->bridge->cur_address = 0;
+---
+>         -:  460:								context->bridge->cur_address++;
+>         -:  461:								if(context->bridge->cur_address == context->bridge->address_count){
+>         -:  462:									context->bridge->cur_address = 0;
+1680,1682c1680,1682
+<     #####:  130:	int rc;
+<     #####:  131:	int err;
+<     #####:  132:	socklen_t len;
+---
+>         -:  130:	int rc;
+>         -:  131:	int err;
+>         -:  132:	socklen_t len;
+1733,1742c1733,1742
+<     #####:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+<     #####:  184:		if(context->bridge){
+<     #####:  185:			ev.data.fd = context->sock;
+<     #####:  186:			ev.events = EPOLLIN;
+<     #####:  187:			context->events = EPOLLIN;
+<     #####:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+<     #####:  190:				(void)close(db->epollfd);
+<     #####:  191:				db->epollfd = 0;
+<     #####:  192:				return MOSQ_ERR_UNKNOWN;
+---
+>         -:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+>         -:  184:		if(context->bridge){
+>         -:  185:			ev.data.fd = context->sock;
+>         -:  186:			ev.events = EPOLLIN;
+>         -:  187:			context->events = EPOLLIN;
+>         -:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+>         -:  190:				(void)close(db->epollfd);
+>         -:  191:				db->epollfd = 0;
+>         -:  192:				return MOSQ_ERR_UNKNOWN;
+1783,1788c1783,1788
+<     #####:  233:				if(context->bridge){
+<     #####:  234:					mosquitto__check_keepalive(db, context);
+<     #####:  235:					if(context->bridge->round_robin == false
+<     #####:  236:							&& context->bridge->cur_address != 0
+<     #####:  237:							&& context->bridge->primary_retry
+<     #####:  238:							&& now > context->bridge->primary_retry){
+---
+>         -:  233:				if(context->bridge){
+>         -:  234:					mosquitto__check_keepalive(db, context);
+>         -:  235:					if(context->bridge->round_robin == false
+>         -:  236:							&& context->bridge->cur_address != 0
+>         -:  237:							&& context->bridge->primary_retry
+>         -:  238:							&& now > context->bridge->primary_retry){
+1790,1792c1790,1792
+<     #####:  240:						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+<     #####:  241:							rc = net__try_connect(context, context->bridge->addresses[0].address,
+<     #####:  242:									context->bridge->addresses[0].port,
+---
+>         -:  240:						if(context->bridge->primary_retry_sock == INVALID_SOCKET){
+>         -:  241:							rc = net__try_connect(context, context->bridge->addresses[0].address,
+>         -:  242:									context->bridge->addresses[0].port,
+1795,1800c1795,1800
+<     #####:  245:							if(rc == 0){
+<     #####:  246:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  247:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  248:								context->bridge->primary_retry = 0;
+<     #####:  249:								net__socket_close(db, context);
+<     #####:  250:								context->bridge->cur_address = 0;
+---
+>         -:  245:							if(rc == 0){
+>         -:  246:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  247:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  248:								context->bridge->primary_retry = 0;
+>         -:  249:								net__socket_close(db, context);
+>         -:  250:								context->bridge->cur_address = 0;
+1803,1810c1803,1810
+<     #####:  253:							len = sizeof(int);
+<     #####:  254:							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+<     #####:  255:								if(err == 0){
+<     #####:  256:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  257:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  258:									context->bridge->primary_retry = 0;
+<     #####:  259:									net__socket_close(db, context);
+<     #####:  260:									context->bridge->cur_address = context->bridge->address_count-1;
+---
+>         -:  253:							len = sizeof(int);
+>         -:  254:							if(!getsockopt(context->bridge->primary_retry_sock, SOL_SOCKET, SO_ERROR, (char *)&err, &len)){
+>         -:  255:								if(err == 0){
+>         -:  256:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  257:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  258:									context->bridge->primary_retry = 0;
+>         -:  259:									net__socket_close(db, context);
+>         -:  260:									context->bridge->cur_address = context->bridge->address_count-1;
+1812,1814c1812,1814
+<     #####:  262:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  263:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  264:									context->bridge->primary_retry = now+5;
+---
+>         -:  262:									COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  263:									context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  264:									context->bridge->primary_retry = now+5;
+1817,1819c1817,1819
+<     #####:  267:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+<     #####:  268:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+<     #####:  269:								context->bridge->primary_retry = now+5;
+---
+>         -:  267:								COMPAT_CLOSE(context->bridge->primary_retry_sock);
+>         -:  268:								context->bridge->primary_retry_sock = INVALID_SOCKET;
+>         -:  269:								context->bridge->primary_retry = now+5;
+1889,1890c1889,1890
+<     #####:  339:		for(i=0; i<db->bridge_count; i++){
+<     #####:  340:			if(!db->bridges[i]) continue;
+---
+>         -:  339:		for(i=0; i<db->bridge_count; i++){
+>         -:  340:			if(!db->bridges[i]) continue;
+1892c1892
+<     #####:  342:			context = db->bridges[i];
+---
+>         -:  342:			context = db->bridges[i];
+1894,1896c1894,1896
+<     #####:  344:			if(context->sock == INVALID_SOCKET){
+<     #####:  345:				if(time_count > 0){
+<     #####:  346:					time_count--;
+---
+>         -:  344:			if(context->sock == INVALID_SOCKET){
+>         -:  345:				if(time_count > 0){
+>         -:  346:					time_count--;
+1898,1899c1898,1899
+<     #####:  348:					time_count = 1000;
+<     #####:  349:					now = mosquitto_time();
+---
+>         -:  348:					time_count = 1000;
+>         -:  349:					now = mosquitto_time();
+1902,1906c1902,1906
+<     #####:  352:				if(!context->bridge->restart_t){
+<     #####:  353:					context->bridge->restart_t = now+context->bridge->restart_timeout;
+<     #####:  354:					context->bridge->cur_address++;
+<     #####:  355:					if(context->bridge->cur_address == context->bridge->address_count){
+<     #####:  356:						context->bridge->cur_address = 0;
+---
+>         -:  352:				if(!context->bridge->restart_t){
+>         -:  353:					context->bridge->restart_t = now+context->bridge->restart_timeout;
+>         -:  354:					context->bridge->cur_address++;
+>         -:  355:					if(context->bridge->cur_address == context->bridge->address_count){
+>         -:  356:						context->bridge->cur_address = 0;
+1909,1910c1909,1910
+<     #####:  359:					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+<     #####:  360:							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+---
+>         -:  359:					if((context->bridge->start_type == bst_lazy && context->bridge->lazy_reconnect)
+>         -:  360:							|| (context->bridge->start_type == bst_automatic && now > context->bridge->restart_t)){
+1980,1984c1980,1984
+<     #####:  430:							rc = bridge__connect(db, context);
+<     #####:  431:							context->bridge->restart_t = 0;
+<     #####:  432:							if(rc == MOSQ_ERR_SUCCESS){
+<     #####:  433:								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+<     #####:  434:									context->bridge->primary_retry = now + 5;
+---
+>         -:  430:							rc = bridge__connect(db, context);
+>         -:  431:							context->bridge->restart_t = 0;
+>         -:  432:							if(rc == MOSQ_ERR_SUCCESS){
+>         -:  433:								if(context->bridge->round_robin == false && context->bridge->cur_address != 0){
+>         -:  434:									context->bridge->primary_retry = now + 5;
+1987,1990c1987,1990
+<     #####:  437:								ev.data.fd = context->sock;
+<     #####:  438:								ev.events = EPOLLIN;
+<     #####:  439:								if(context->current_out_packet){
+<     #####:  440:									ev.events |= EPOLLOUT;
+---
+>         -:  437:								ev.data.fd = context->sock;
+>         -:  438:								ev.events = EPOLLIN;
+>         -:  439:								if(context->current_out_packet){
+>         -:  440:									ev.events |= EPOLLOUT;
+1992,1994c1992,1994
+<     #####:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+<     #####:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+---
+>         -:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+>         -:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+1997c1997
+<     #####:  447:									context->events = ev.events;
+---
+>         -:  447:									context->events = ev.events;
+2010,2012c2010,2012
+<     #####:  460:								context->bridge->cur_address++;
+<     #####:  461:								if(context->bridge->cur_address == context->bridge->address_count){
+<     #####:  462:									context->bridge->cur_address = 0;
+---
+>         -:  460:								context->bridge->cur_address++;
+>         -:  461:								if(context->bridge->cur_address == context->bridge->address_count){
+>         -:  462:									context->bridge->cur_address = 0;
+2223c2223
+<     #####:  672:		if(context->clean_session && !context->bridge){
+---
+>         -:  672:		if(context->clean_session && !context->bridge){
+2225c2225
+<         -:  674:		if(context->clean_session){
+---
+>     #####:  674:		if(context->clean_session){
+2292c2292
+<     #####:  672:		if(context->clean_session && !context->bridge){
+---
+>         -:  672:		if(context->clean_session && !context->bridge){
+2294c2294
+<         -:  674:		if(context->clean_session){
+---
+>     #####:  674:		if(context->clean_session){
+2361c2361
+<     #####:  672:		if(context->clean_session && !context->bridge){
+---
+>         -:  672:		if(context->clean_session && !context->bridge){
+2363c2363
+<         -:  674:		if(context->clean_session){
+---
+>     #####:  674:		if(context->clean_session){
+2430c2430
+<     #####:  672:		if(context->clean_session && !context->bridge){
+---
+>         -:  672:		if(context->clean_session && !context->bridge){
+2432c2432
+<         -:  674:		if(context->clean_session){
+---
+>     #####:  674:		if(context->clean_session){

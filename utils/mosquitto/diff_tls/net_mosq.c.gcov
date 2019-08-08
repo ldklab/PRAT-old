@@ -1,0 +1,1369 @@
+93,95c93,95
+<     #####:   91:	SSL_load_error_strings();
+<     #####:   92:	SSL_library_init();
+<     #####:   93:	OpenSSL_add_all_algorithms();
+---
+>         -:   91:	SSL_load_error_strings();
+>         -:   92:	SSL_library_init();
+>         -:   93:	OpenSSL_add_all_algorithms();
+97,98c97,98
+<     #####:   95:	if(tls_ex_index_mosq == -1){
+<     #####:   96:		tls_ex_index_mosq = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+---
+>         -:   95:	if(tls_ex_index_mosq == -1){
+>         -:   96:		tls_ex_index_mosq = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+120,122c120,122
+<     #####:   91:	SSL_load_error_strings();
+<     #####:   92:	SSL_library_init();
+<     #####:   93:	OpenSSL_add_all_algorithms();
+---
+>         -:   91:	SSL_load_error_strings();
+>         -:   92:	SSL_library_init();
+>         -:   93:	OpenSSL_add_all_algorithms();
+124,125c124,125
+<     #####:   95:	if(tls_ex_index_mosq == -1){
+<     #####:   96:		tls_ex_index_mosq = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+---
+>         -:   95:	if(tls_ex_index_mosq == -1){
+>         -:   96:		tls_ex_index_mosq = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+147,149c147,149
+<     #####:   91:	SSL_load_error_strings();
+<     #####:   92:	SSL_library_init();
+<     #####:   93:	OpenSSL_add_all_algorithms();
+---
+>         -:   91:	SSL_load_error_strings();
+>         -:   92:	SSL_library_init();
+>         -:   93:	OpenSSL_add_all_algorithms();
+151,152c151,152
+<     #####:   95:	if(tls_ex_index_mosq == -1){
+<     #####:   96:		tls_ex_index_mosq = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+---
+>         -:   95:	if(tls_ex_index_mosq == -1){
+>         -:   96:		tls_ex_index_mosq = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+163,166c163,166
+<     #####:  106:	CRYPTO_cleanup_all_ex_data();
+<     #####:  107:	ERR_free_strings();
+<     #####:  108:	ERR_remove_state(0);
+<     #####:  109:	EVP_cleanup();
+---
+>         -:  106:	CRYPTO_cleanup_all_ex_data();
+>         -:  107:	ERR_free_strings();
+>         -:  108:	ERR_remove_state(0);
+>         -:  109:	EVP_cleanup();
+169c169
+<     #####:  112:	ENGINE_cleanup();
+---
+>         -:  112:	ENGINE_cleanup();
+173c173
+<     #####:  116:	CONF_modules_unload(1);
+---
+>         -:  116:	CONF_modules_unload(1);
+190,193c190,193
+<     #####:  106:	CRYPTO_cleanup_all_ex_data();
+<     #####:  107:	ERR_free_strings();
+<     #####:  108:	ERR_remove_state(0);
+<     #####:  109:	EVP_cleanup();
+---
+>         -:  106:	CRYPTO_cleanup_all_ex_data();
+>         -:  107:	ERR_free_strings();
+>         -:  108:	ERR_remove_state(0);
+>         -:  109:	EVP_cleanup();
+196c196
+<     #####:  112:	ENGINE_cleanup();
+---
+>         -:  112:	ENGINE_cleanup();
+200c200
+<     #####:  116:	CONF_modules_unload(1);
+---
+>         -:  116:	CONF_modules_unload(1);
+217,220c217,220
+<     #####:  106:	CRYPTO_cleanup_all_ex_data();
+<     #####:  107:	ERR_free_strings();
+<     #####:  108:	ERR_remove_state(0);
+<     #####:  109:	EVP_cleanup();
+---
+>         -:  106:	CRYPTO_cleanup_all_ex_data();
+>         -:  107:	ERR_free_strings();
+>         -:  108:	ERR_remove_state(0);
+>         -:  109:	EVP_cleanup();
+223c223
+<     #####:  112:	ENGINE_cleanup();
+---
+>         -:  112:	ENGINE_cleanup();
+227c227
+<     #####:  116:	CONF_modules_unload(1);
+---
+>         -:  116:	CONF_modules_unload(1);
+259,262c259,262
+<     #####:  147:		if(mosq->ssl){
+<     #####:  148:			SSL_shutdown(mosq->ssl);
+<     #####:  149:			SSL_free(mosq->ssl);
+<     #####:  150:			mosq->ssl = NULL;
+---
+>         -:  147:		if(mosq->ssl){
+>         -:  148:			SSL_shutdown(mosq->ssl);
+>         -:  149:			SSL_free(mosq->ssl);
+>         -:  150:			mosq->ssl = NULL;
+309,312c309,312
+<     #####:  147:		if(mosq->ssl){
+<     #####:  148:			SSL_shutdown(mosq->ssl);
+<     #####:  149:			SSL_free(mosq->ssl);
+<     #####:  150:			mosq->ssl = NULL;
+---
+>         -:  147:		if(mosq->ssl){
+>         -:  148:			SSL_shutdown(mosq->ssl);
+>         -:  149:			SSL_free(mosq->ssl);
+>         -:  150:			mosq->ssl = NULL;
+359,362c359,362
+<     #####:  147:		if(mosq->ssl){
+<     #####:  148:			SSL_shutdown(mosq->ssl);
+<     #####:  149:			SSL_free(mosq->ssl);
+<     #####:  150:			mosq->ssl = NULL;
+---
+>         -:  147:		if(mosq->ssl){
+>         -:  148:			SSL_shutdown(mosq->ssl);
+>         -:  149:			SSL_free(mosq->ssl);
+>         -:  150:			mosq->ssl = NULL;
+398c398
+<     #####:  185:static unsigned int psk_client_callback(SSL *ssl, const char *hint,
+---
+>         -:  185:static unsigned int psk_client_callback(SSL *ssl, const char *hint,
+402,403c402,403
+<     #####:  189:	struct mosquitto *mosq;
+<     #####:  190:	int len;
+---
+>         -:  189:	struct mosquitto *mosq;
+>         -:  190:	int len;
+405,406c405,406
+<     #####:  192:	mosq = SSL_get_ex_data(ssl, tls_ex_index_mosq);
+<     #####:  193:	if(!mosq) return 0;
+---
+>         -:  192:	mosq = SSL_get_ex_data(ssl, tls_ex_index_mosq);
+>         -:  193:	if(!mosq) return 0;
+408c408
+<     #####:  195:	snprintf(identity, max_identity_len, "%s", mosq->tls_psk_identity);
+---
+>         -:  195:	snprintf(identity, max_identity_len, "%s", mosq->tls_psk_identity);
+410,412c410,412
+<     #####:  197:	len = mosquitto__hex2bin(mosq->tls_psk, psk, max_psk_len);
+<     #####:  198:	if (len < 0) return 0;
+<     #####:  199:	return len;
+---
+>         -:  197:	len = mosquitto__hex2bin(mosq->tls_psk, psk, max_psk_len);
+>         -:  198:	if (len < 0) return 0;
+>         -:  199:	return len;
+414,450d413
+< ------------------
+< psk_client_callback:
+<     #####:  185:static unsigned int psk_client_callback(SSL *ssl, const char *hint,
+<         -:  186:		char *identity, unsigned int max_identity_len,
+<         -:  187:		unsigned char *psk, unsigned int max_psk_len)
+<         -:  188:{
+<     #####:  189:	struct mosquitto *mosq;
+<     #####:  190:	int len;
+<         -:  191:
+<     #####:  192:	mosq = SSL_get_ex_data(ssl, tls_ex_index_mosq);
+<     #####:  193:	if(!mosq) return 0;
+<         -:  194:
+<     #####:  195:	snprintf(identity, max_identity_len, "%s", mosq->tls_psk_identity);
+<         -:  196:
+<     #####:  197:	len = mosquitto__hex2bin(mosq->tls_psk, psk, max_psk_len);
+<     #####:  198:	if (len < 0) return 0;
+<     #####:  199:	return len;
+<         -:  200:}
+< ------------------
+< psk_client_callback:
+<     #####:  185:static unsigned int psk_client_callback(SSL *ssl, const char *hint,
+<         -:  186:		char *identity, unsigned int max_identity_len,
+<         -:  187:		unsigned char *psk, unsigned int max_psk_len)
+<         -:  188:{
+<     #####:  189:	struct mosquitto *mosq;
+<     #####:  190:	int len;
+<         -:  191:
+<     #####:  192:	mosq = SSL_get_ex_data(ssl, tls_ex_index_mosq);
+<     #####:  193:	if(!mosq) return 0;
+<         -:  194:
+<     #####:  195:	snprintf(identity, max_identity_len, "%s", mosq->tls_psk_identity);
+<         -:  196:
+<     #####:  197:	len = mosquitto__hex2bin(mosq->tls_psk, psk, max_psk_len);
+<     #####:  198:	if (len < 0) return 0;
+<     #####:  199:	return len;
+<         -:  200:}
+< ------------------
+854,867c817
+<     #####:  409:void net__print_ssl_error(struct mosquitto *mosq)
+<         -:  410:{
+<     #####:  411:	char ebuf[256];
+<     #####:  412:	unsigned long e;
+<         -:  413:
+<     #####:  414:	e = ERR_get_error();
+<     #####:  415:	while(e){
+<     #####:  416:		log__printf(mosq, MOSQ_LOG_ERR, "OpenSSL Error: %s", ERR_error_string(e, ebuf));
+<     #####:  417:		e = ERR_get_error();
+<         -:  418:	}
+<     #####:  419:}
+< ------------------
+< net__print_ssl_error:
+<     #####:  409:void net__print_ssl_error(struct mosquitto *mosq)
+---
+>         -:  409:void net__print_ssl_error(struct mosquitto *mosq)
+869,870c819,820
+<     #####:  411:	char ebuf[256];
+<     #####:  412:	unsigned long e;
+---
+>         -:  411:	char ebuf[256];
+>         -:  412:	unsigned long e;
+872,875c822,825
+<     #####:  414:	e = ERR_get_error();
+<     #####:  415:	while(e){
+<     #####:  416:		log__printf(mosq, MOSQ_LOG_ERR, "OpenSSL Error: %s", ERR_error_string(e, ebuf));
+<     #####:  417:		e = ERR_get_error();
+---
+>         -:  414:	e = ERR_get_error();
+>         -:  415:	while(e){
+>         -:  416:		log__printf(mosq, MOSQ_LOG_ERR, "OpenSSL Error: %s", ERR_error_string(e, ebuf));
+>         -:  417:		e = ERR_get_error();
+877,891c827
+<     #####:  419:}
+< ------------------
+< net__print_ssl_error:
+<     #####:  409:void net__print_ssl_error(struct mosquitto *mosq)
+<         -:  410:{
+<     #####:  411:	char ebuf[256];
+<     #####:  412:	unsigned long e;
+<         -:  413:
+<     #####:  414:	e = ERR_get_error();
+<     #####:  415:	while(e){
+<     #####:  416:		log__printf(mosq, MOSQ_LOG_ERR, "OpenSSL Error: %s", ERR_error_string(e, ebuf));
+<     #####:  417:		e = ERR_get_error();
+<         -:  418:	}
+<     #####:  419:}
+< ------------------
+---
+>         -:  419:}
+894c830
+<     #####:  422:int net__socket_connect_tls(struct mosquitto *mosq)
+---
+>         -:  422:int net__socket_connect_tls(struct mosquitto *mosq)
+896c832
+<     #####:  424:	int ret, err;
+---
+>         -:  424:	int ret, err;
+898,904c834,840
+<     #####:  426:	ERR_clear_error();
+<     #####:  427:	ret = SSL_connect(mosq->ssl);
+<     #####:  428:	if(ret != 1) {
+<     #####:  429:		err = SSL_get_error(mosq->ssl, ret);
+<     #####:  430:		if (err == SSL_ERROR_SYSCALL) {
+<     #####:  431:			mosq->want_connect = true;
+<     #####:  432:			return MOSQ_ERR_SUCCESS;
+---
+>         -:  426:	ERR_clear_error();
+>         -:  427:	ret = SSL_connect(mosq->ssl);
+>         -:  428:	if(ret != 1) {
+>         -:  429:		err = SSL_get_error(mosq->ssl, ret);
+>         -:  430:		if (err == SSL_ERROR_SYSCALL) {
+>         -:  431:			mosq->want_connect = true;
+>         -:  432:			return MOSQ_ERR_SUCCESS;
+906,907c842,843
+<     #####:  434:		if(err == SSL_ERROR_WANT_READ){
+<     #####:  435:			mosq->want_connect = true;
+---
+>         -:  434:		if(err == SSL_ERROR_WANT_READ){
+>         -:  435:			mosq->want_connect = true;
+909,911c845,847
+<     #####:  437:		}else if(err == SSL_ERROR_WANT_WRITE){
+<     #####:  438:			mosq->want_write = true;
+<     #####:  439:			mosq->want_connect = true;
+---
+>         -:  437:		}else if(err == SSL_ERROR_WANT_WRITE){
+>         -:  438:			mosq->want_write = true;
+>         -:  439:			mosq->want_connect = true;
+913c849
+<     #####:  441:			net__print_ssl_error(mosq);
+---
+>         -:  441:			net__print_ssl_error(mosq);
+915,918c851,854
+<     #####:  443:			COMPAT_CLOSE(mosq->sock);
+<     #####:  444:			mosq->sock = INVALID_SOCKET;
+<     #####:  445:			net__print_ssl_error(mosq);
+<     #####:  446:			return MOSQ_ERR_TLS;
+---
+>         -:  443:			COMPAT_CLOSE(mosq->sock);
+>         -:  444:			mosq->sock = INVALID_SOCKET;
+>         -:  445:			net__print_ssl_error(mosq);
+>         -:  446:			return MOSQ_ERR_TLS;
+921c857
+<     #####:  449:		mosq->want_connect = false;
+---
+>         -:  449:		mosq->want_connect = false;
+925,991d860
+< ------------------
+< net__socket_connect_tls:
+<     #####:  422:int net__socket_connect_tls(struct mosquitto *mosq)
+<         -:  423:{
+<     #####:  424:	int ret, err;
+<         -:  425:
+<     #####:  426:	ERR_clear_error();
+<     #####:  427:	ret = SSL_connect(mosq->ssl);
+<     #####:  428:	if(ret != 1) {
+<     #####:  429:		err = SSL_get_error(mosq->ssl, ret);
+<     #####:  430:		if (err == SSL_ERROR_SYSCALL) {
+<     #####:  431:			mosq->want_connect = true;
+<     #####:  432:			return MOSQ_ERR_SUCCESS;
+<         -:  433:		}
+<     #####:  434:		if(err == SSL_ERROR_WANT_READ){
+<     #####:  435:			mosq->want_connect = true;
+<         -:  436:			/* We always try to read anyway */
+<     #####:  437:		}else if(err == SSL_ERROR_WANT_WRITE){
+<     #####:  438:			mosq->want_write = true;
+<     #####:  439:			mosq->want_connect = true;
+<         -:  440:		}else{
+<     #####:  441:			net__print_ssl_error(mosq);
+<         -:  442:
+<     #####:  443:			COMPAT_CLOSE(mosq->sock);
+<     #####:  444:			mosq->sock = INVALID_SOCKET;
+<     #####:  445:			net__print_ssl_error(mosq);
+<     #####:  446:			return MOSQ_ERR_TLS;
+<         -:  447:		}
+<         -:  448:	}else{
+<     #####:  449:		mosq->want_connect = false;
+<         -:  450:	}
+<         -:  451:	return MOSQ_ERR_SUCCESS;
+<         -:  452:}
+< ------------------
+< net__socket_connect_tls:
+<     #####:  422:int net__socket_connect_tls(struct mosquitto *mosq)
+<         -:  423:{
+<     #####:  424:	int ret, err;
+<         -:  425:
+<     #####:  426:	ERR_clear_error();
+<     #####:  427:	ret = SSL_connect(mosq->ssl);
+<     #####:  428:	if(ret != 1) {
+<     #####:  429:		err = SSL_get_error(mosq->ssl, ret);
+<     #####:  430:		if (err == SSL_ERROR_SYSCALL) {
+<     #####:  431:			mosq->want_connect = true;
+<     #####:  432:			return MOSQ_ERR_SUCCESS;
+<         -:  433:		}
+<     #####:  434:		if(err == SSL_ERROR_WANT_READ){
+<     #####:  435:			mosq->want_connect = true;
+<         -:  436:			/* We always try to read anyway */
+<     #####:  437:		}else if(err == SSL_ERROR_WANT_WRITE){
+<     #####:  438:			mosq->want_write = true;
+<     #####:  439:			mosq->want_connect = true;
+<         -:  440:		}else{
+<     #####:  441:			net__print_ssl_error(mosq);
+<         -:  442:
+<     #####:  443:			COMPAT_CLOSE(mosq->sock);
+<     #####:  444:			mosq->sock = INVALID_SOCKET;
+<     #####:  445:			net__print_ssl_error(mosq);
+<     #####:  446:			return MOSQ_ERR_TLS;
+<         -:  447:		}
+<         -:  448:	}else{
+<     #####:  449:		mosq->want_connect = false;
+<         -:  450:	}
+<         -:  451:	return MOSQ_ERR_SUCCESS;
+<         -:  452:}
+< ------------------
+996,1145c865
+<     #####:  457:static int net__init_ssl_ctx(struct mosquitto *mosq)
+<         -:  458:{
+<     #####:  459:	int ret;
+<         -:  460:
+<     #####:  461:	if(mosq->ssl_ctx){
+<     #####:  462:		if(!mosq->ssl_ctx_defaults){
+<         -:  463:			return MOSQ_ERR_SUCCESS;
+<     #####:  464:		}else if(!mosq->tls_cafile && !mosq->tls_capath && !mosq->tls_psk){
+<     #####:  465:			log__printf(mosq, MOSQ_LOG_ERR, "Error: MOSQ_OPT_SSL_CTX_WITH_DEFAULTS used without specifying cafile, capath or psk.");
+<     #####:  466:			return MOSQ_ERR_INVAL;
+<         -:  467:		}
+<         -:  468:	}
+<         -:  469:
+<         -:  470:	/* Apply default SSL_CTX settings. This is only used if MOSQ_OPT_SSL_CTX
+<         -:  471:	 * has not been set, or if both of MOSQ_OPT_SSL_CTX and
+<         -:  472:	 * MOSQ_OPT_SSL_CTX_WITH_DEFAULTS are set. */
+<     #####:  473:	if(mosq->tls_cafile || mosq->tls_capath || mosq->tls_psk){
+<     #####:  474:		if(!mosq->ssl_ctx){
+<         -:  475:#if OPENSSL_VERSION_NUMBER < 0x10100000L
+<         -:  476:			mosq->ssl_ctx = SSL_CTX_new(SSLv23_client_method());
+<         -:  477:#else
+<     #####:  478:			mosq->ssl_ctx = SSL_CTX_new(TLS_client_method());
+<         -:  479:#endif
+<         -:  480:
+<     #####:  481:			if(!mosq->ssl_ctx){
+<     #####:  482:				log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to create TLS context.");
+<     #####:  483:				COMPAT_CLOSE(mosq->sock);
+<     #####:  484:				mosq->sock = INVALID_SOCKET;
+<     #####:  485:				net__print_ssl_error(mosq);
+<     #####:  486:				return MOSQ_ERR_TLS;
+<         -:  487:			}
+<         -:  488:		}
+<         -:  489:
+<     #####:  490:		if(!mosq->tls_version){
+<     #####:  491:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3);
+<     #####:  492:		}else if(!strcmp(mosq->tls_version, "tlsv1.2")){
+<     #####:  493:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_1 | SSL_OP_NO_TLSv1);
+<     #####:  494:		}else if(!strcmp(mosq->tls_version, "tlsv1.1")){
+<     #####:  495:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1);
+<     #####:  496:		}else if(!strcmp(mosq->tls_version, "tlsv1")){
+<     #####:  497:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1_1);
+<         -:  498:		}else{
+<     #####:  499:			log__printf(mosq, MOSQ_LOG_ERR, "Error: Protocol %s not supported.", mosq->tls_version);
+<     #####:  500:			COMPAT_CLOSE(mosq->sock);
+<     #####:  501:			mosq->sock = INVALID_SOCKET;
+<     #####:  502:			return MOSQ_ERR_INVAL;
+<         -:  503:		}
+<         -:  504:
+<         -:  505:		/* Disable compression */
+<     #####:  506:		SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_COMPRESSION);
+<         -:  507:
+<         -:  508:#ifdef SSL_MODE_RELEASE_BUFFERS
+<         -:  509:			/* Use even less memory per SSL connection. */
+<     #####:  510:			SSL_CTX_set_mode(mosq->ssl_ctx, SSL_MODE_RELEASE_BUFFERS);
+<         -:  511:#endif
+<         -:  512:
+<     #####:  513:		if(mosq->tls_ciphers){
+<     #####:  514:			ret = SSL_CTX_set_cipher_list(mosq->ssl_ctx, mosq->tls_ciphers);
+<     #####:  515:			if(ret == 0){
+<     #####:  516:				log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", mosq->tls_ciphers);
+<     #####:  517:				COMPAT_CLOSE(mosq->sock);
+<     #####:  518:				mosq->sock = INVALID_SOCKET;
+<     #####:  519:				net__print_ssl_error(mosq);
+<     #####:  520:				return MOSQ_ERR_TLS;
+<         -:  521:			}
+<         -:  522:		}
+<     #####:  523:		if(mosq->tls_cafile || mosq->tls_capath){
+<     #####:  524:			ret = SSL_CTX_load_verify_locations(mosq->ssl_ctx, mosq->tls_cafile, mosq->tls_capath);
+<     #####:  525:			if(ret == 0){
+<         -:  526:#ifdef WITH_BROKER
+<     #####:  527:				if(mosq->tls_cafile && mosq->tls_capath){
+<     #####:  528:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_cafile \"%s\" and bridge_capath \"%s\".", mosq->tls_cafile, mosq->tls_capath);
+<     #####:  529:				}else if(mosq->tls_cafile){
+<     #####:  530:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_cafile \"%s\".", mosq->tls_cafile);
+<         -:  531:				}else{
+<     #####:  532:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_capath \"%s\".", mosq->tls_capath);
+<         -:  533:				}
+<         -:  534:#else
+<         -:  535:				if(mosq->tls_cafile && mosq->tls_capath){
+<         -:  536:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check cafile \"%s\" and capath \"%s\".", mosq->tls_cafile, mosq->tls_capath);
+<         -:  537:				}else if(mosq->tls_cafile){
+<         -:  538:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check cafile \"%s\".", mosq->tls_cafile);
+<         -:  539:				}else{
+<         -:  540:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check capath \"%s\".", mosq->tls_capath);
+<         -:  541:				}
+<         -:  542:#endif
+<     #####:  543:				COMPAT_CLOSE(mosq->sock);
+<     #####:  544:				mosq->sock = INVALID_SOCKET;
+<     #####:  545:				net__print_ssl_error(mosq);
+<     #####:  546:				return MOSQ_ERR_TLS;
+<         -:  547:			}
+<     #####:  548:			if(mosq->tls_cert_reqs == 0){
+<     #####:  549:				SSL_CTX_set_verify(mosq->ssl_ctx, SSL_VERIFY_NONE, NULL);
+<         -:  550:			}else{
+<     #####:  551:				SSL_CTX_set_verify(mosq->ssl_ctx, SSL_VERIFY_PEER, mosquitto__server_certificate_verify);
+<         -:  552:			}
+<         -:  553:
+<     #####:  554:			if(mosq->tls_pw_callback){
+<     #####:  555:				SSL_CTX_set_default_passwd_cb(mosq->ssl_ctx, mosq->tls_pw_callback);
+<     #####:  556:				SSL_CTX_set_default_passwd_cb_userdata(mosq->ssl_ctx, mosq);
+<         -:  557:			}
+<         -:  558:
+<     #####:  559:			if(mosq->tls_certfile){
+<     #####:  560:				ret = SSL_CTX_use_certificate_chain_file(mosq->ssl_ctx, mosq->tls_certfile);
+<     #####:  561:				if(ret != 1){
+<         -:  562:#ifdef WITH_BROKER
+<     #####:  563:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client certificate, check bridge_certfile \"%s\".", mosq->tls_certfile);
+<         -:  564:#else
+<         -:  565:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client certificate \"%s\".", mosq->tls_certfile);
+<         -:  566:#endif
+<     #####:  567:					COMPAT_CLOSE(mosq->sock);
+<     #####:  568:					mosq->sock = INVALID_SOCKET;
+<     #####:  569:					net__print_ssl_error(mosq);
+<     #####:  570:					return MOSQ_ERR_TLS;
+<         -:  571:				}
+<         -:  572:			}
+<     #####:  573:			if(mosq->tls_keyfile){
+<     #####:  574:				ret = SSL_CTX_use_PrivateKey_file(mosq->ssl_ctx, mosq->tls_keyfile, SSL_FILETYPE_PEM);
+<     #####:  575:				if(ret != 1){
+<         -:  576:#ifdef WITH_BROKER
+<     #####:  577:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client key file, check bridge_keyfile \"%s\".", mosq->tls_keyfile);
+<         -:  578:#else
+<         -:  579:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client key file \"%s\".", mosq->tls_keyfile);
+<         -:  580:#endif
+<     #####:  581:					COMPAT_CLOSE(mosq->sock);
+<     #####:  582:					mosq->sock = INVALID_SOCKET;
+<     #####:  583:					net__print_ssl_error(mosq);
+<     #####:  584:					return MOSQ_ERR_TLS;
+<         -:  585:				}
+<     #####:  586:				ret = SSL_CTX_check_private_key(mosq->ssl_ctx);
+<     #####:  587:				if(ret != 1){
+<     #####:  588:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Client certificate/key are inconsistent.");
+<     #####:  589:					COMPAT_CLOSE(mosq->sock);
+<     #####:  590:					mosq->sock = INVALID_SOCKET;
+<     #####:  591:					net__print_ssl_error(mosq);
+<     #####:  592:					return MOSQ_ERR_TLS;
+<         -:  593:				}
+<         -:  594:			}
+<         -:  595:#ifdef FINAL_WITH_TLS_PSK
+<     #####:  596:		}else if(mosq->tls_psk){
+<     #####:  597:			SSL_CTX_set_psk_client_callback(mosq->ssl_ctx, psk_client_callback);
+<         -:  598:#endif
+<         -:  599:		}
+<         -:  600:	}
+<         -:  601:
+<         -:  602:	return MOSQ_ERR_SUCCESS;
+<         -:  603:}
+< ------------------
+< net__init_ssl_ctx:
+<     #####:  457:static int net__init_ssl_ctx(struct mosquitto *mosq)
+---
+>         -:  457:static int net__init_ssl_ctx(struct mosquitto *mosq)
+1147c867
+<     #####:  459:	int ret;
+---
+>         -:  459:	int ret;
+1149,1150c869,870
+<     #####:  461:	if(mosq->ssl_ctx){
+<     #####:  462:		if(!mosq->ssl_ctx_defaults){
+---
+>         -:  461:	if(mosq->ssl_ctx){
+>         -:  462:		if(!mosq->ssl_ctx_defaults){
+1152,1154c872,874
+<     #####:  464:		}else if(!mosq->tls_cafile && !mosq->tls_capath && !mosq->tls_psk){
+<     #####:  465:			log__printf(mosq, MOSQ_LOG_ERR, "Error: MOSQ_OPT_SSL_CTX_WITH_DEFAULTS used without specifying cafile, capath or psk.");
+<     #####:  466:			return MOSQ_ERR_INVAL;
+---
+>         -:  464:		}else if(!mosq->tls_cafile && !mosq->tls_capath && !mosq->tls_psk){
+>         -:  465:			log__printf(mosq, MOSQ_LOG_ERR, "Error: MOSQ_OPT_SSL_CTX_WITH_DEFAULTS used without specifying cafile, capath or psk.");
+>         -:  466:			return MOSQ_ERR_INVAL;
+1161,1162c881,882
+<     #####:  473:	if(mosq->tls_cafile || mosq->tls_capath || mosq->tls_psk){
+<     #####:  474:		if(!mosq->ssl_ctx){
+---
+>         -:  473:	if(mosq->tls_cafile || mosq->tls_capath || mosq->tls_psk){
+>         -:  474:		if(!mosq->ssl_ctx){
+1166c886
+<     #####:  478:			mosq->ssl_ctx = SSL_CTX_new(TLS_client_method());
+---
+>         -:  478:			mosq->ssl_ctx = SSL_CTX_new(TLS_client_method());
+1169,1174c889,894
+<     #####:  481:			if(!mosq->ssl_ctx){
+<     #####:  482:				log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to create TLS context.");
+<     #####:  483:				COMPAT_CLOSE(mosq->sock);
+<     #####:  484:				mosq->sock = INVALID_SOCKET;
+<     #####:  485:				net__print_ssl_error(mosq);
+<     #####:  486:				return MOSQ_ERR_TLS;
+---
+>         -:  481:			if(!mosq->ssl_ctx){
+>         -:  482:				log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to create TLS context.");
+>         -:  483:				COMPAT_CLOSE(mosq->sock);
+>         -:  484:				mosq->sock = INVALID_SOCKET;
+>         -:  485:				net__print_ssl_error(mosq);
+>         -:  486:				return MOSQ_ERR_TLS;
+1178,1185c898,905
+<     #####:  490:		if(!mosq->tls_version){
+<     #####:  491:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3);
+<     #####:  492:		}else if(!strcmp(mosq->tls_version, "tlsv1.2")){
+<     #####:  493:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_1 | SSL_OP_NO_TLSv1);
+<     #####:  494:		}else if(!strcmp(mosq->tls_version, "tlsv1.1")){
+<     #####:  495:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1);
+<     #####:  496:		}else if(!strcmp(mosq->tls_version, "tlsv1")){
+<     #####:  497:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1_1);
+---
+>         -:  490:		if(!mosq->tls_version){
+>         -:  491:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3);
+>         -:  492:		}else if(!strcmp(mosq->tls_version, "tlsv1.2")){
+>         -:  493:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_1 | SSL_OP_NO_TLSv1);
+>         -:  494:		}else if(!strcmp(mosq->tls_version, "tlsv1.1")){
+>         -:  495:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1);
+>         -:  496:		}else if(!strcmp(mosq->tls_version, "tlsv1")){
+>         -:  497:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1_1);
+1187,1190c907,910
+<     #####:  499:			log__printf(mosq, MOSQ_LOG_ERR, "Error: Protocol %s not supported.", mosq->tls_version);
+<     #####:  500:			COMPAT_CLOSE(mosq->sock);
+<     #####:  501:			mosq->sock = INVALID_SOCKET;
+<     #####:  502:			return MOSQ_ERR_INVAL;
+---
+>         -:  499:			log__printf(mosq, MOSQ_LOG_ERR, "Error: Protocol %s not supported.", mosq->tls_version);
+>         -:  500:			COMPAT_CLOSE(mosq->sock);
+>         -:  501:			mosq->sock = INVALID_SOCKET;
+>         -:  502:			return MOSQ_ERR_INVAL;
+1194c914
+<     #####:  506:		SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_COMPRESSION);
+---
+>         -:  506:		SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_COMPRESSION);
+1198c918
+<     #####:  510:			SSL_CTX_set_mode(mosq->ssl_ctx, SSL_MODE_RELEASE_BUFFERS);
+---
+>         -:  510:			SSL_CTX_set_mode(mosq->ssl_ctx, SSL_MODE_RELEASE_BUFFERS);
+1201,1208c921,928
+<     #####:  513:		if(mosq->tls_ciphers){
+<     #####:  514:			ret = SSL_CTX_set_cipher_list(mosq->ssl_ctx, mosq->tls_ciphers);
+<     #####:  515:			if(ret == 0){
+<     #####:  516:				log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", mosq->tls_ciphers);
+<     #####:  517:				COMPAT_CLOSE(mosq->sock);
+<     #####:  518:				mosq->sock = INVALID_SOCKET;
+<     #####:  519:				net__print_ssl_error(mosq);
+<     #####:  520:				return MOSQ_ERR_TLS;
+---
+>         -:  513:		if(mosq->tls_ciphers){
+>         -:  514:			ret = SSL_CTX_set_cipher_list(mosq->ssl_ctx, mosq->tls_ciphers);
+>         -:  515:			if(ret == 0){
+>         -:  516:				log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", mosq->tls_ciphers);
+>         -:  517:				COMPAT_CLOSE(mosq->sock);
+>         -:  518:				mosq->sock = INVALID_SOCKET;
+>         -:  519:				net__print_ssl_error(mosq);
+>         -:  520:				return MOSQ_ERR_TLS;
+1211,1213c931,933
+<     #####:  523:		if(mosq->tls_cafile || mosq->tls_capath){
+<     #####:  524:			ret = SSL_CTX_load_verify_locations(mosq->ssl_ctx, mosq->tls_cafile, mosq->tls_capath);
+<     #####:  525:			if(ret == 0){
+---
+>         -:  523:		if(mosq->tls_cafile || mosq->tls_capath){
+>         -:  524:			ret = SSL_CTX_load_verify_locations(mosq->ssl_ctx, mosq->tls_cafile, mosq->tls_capath);
+>         -:  525:			if(ret == 0){
+1215,1218c935,938
+<     #####:  527:				if(mosq->tls_cafile && mosq->tls_capath){
+<     #####:  528:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_cafile \"%s\" and bridge_capath \"%s\".", mosq->tls_cafile, mosq->tls_capath);
+<     #####:  529:				}else if(mosq->tls_cafile){
+<     #####:  530:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_cafile \"%s\".", mosq->tls_cafile);
+---
+>         -:  527:				if(mosq->tls_cafile && mosq->tls_capath){
+>         -:  528:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_cafile \"%s\" and bridge_capath \"%s\".", mosq->tls_cafile, mosq->tls_capath);
+>         -:  529:				}else if(mosq->tls_cafile){
+>         -:  530:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_cafile \"%s\".", mosq->tls_cafile);
+1220c940
+<     #####:  532:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_capath \"%s\".", mosq->tls_capath);
+---
+>         -:  532:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_capath \"%s\".", mosq->tls_capath);
+1231,1234c951,954
+<     #####:  543:				COMPAT_CLOSE(mosq->sock);
+<     #####:  544:				mosq->sock = INVALID_SOCKET;
+<     #####:  545:				net__print_ssl_error(mosq);
+<     #####:  546:				return MOSQ_ERR_TLS;
+---
+>         -:  543:				COMPAT_CLOSE(mosq->sock);
+>         -:  544:				mosq->sock = INVALID_SOCKET;
+>         -:  545:				net__print_ssl_error(mosq);
+>         -:  546:				return MOSQ_ERR_TLS;
+1236,1237c956,957
+<     #####:  548:			if(mosq->tls_cert_reqs == 0){
+<     #####:  549:				SSL_CTX_set_verify(mosq->ssl_ctx, SSL_VERIFY_NONE, NULL);
+---
+>         -:  548:			if(mosq->tls_cert_reqs == 0){
+>         -:  549:				SSL_CTX_set_verify(mosq->ssl_ctx, SSL_VERIFY_NONE, NULL);
+1239c959
+<     #####:  551:				SSL_CTX_set_verify(mosq->ssl_ctx, SSL_VERIFY_PEER, mosquitto__server_certificate_verify);
+---
+>         -:  551:				SSL_CTX_set_verify(mosq->ssl_ctx, SSL_VERIFY_PEER, mosquitto__server_certificate_verify);
+1242,1244c962,964
+<     #####:  554:			if(mosq->tls_pw_callback){
+<     #####:  555:				SSL_CTX_set_default_passwd_cb(mosq->ssl_ctx, mosq->tls_pw_callback);
+<     #####:  556:				SSL_CTX_set_default_passwd_cb_userdata(mosq->ssl_ctx, mosq);
+---
+>         -:  554:			if(mosq->tls_pw_callback){
+>         -:  555:				SSL_CTX_set_default_passwd_cb(mosq->ssl_ctx, mosq->tls_pw_callback);
+>         -:  556:				SSL_CTX_set_default_passwd_cb_userdata(mosq->ssl_ctx, mosq);
+1247,1249c967,969
+<     #####:  559:			if(mosq->tls_certfile){
+<     #####:  560:				ret = SSL_CTX_use_certificate_chain_file(mosq->ssl_ctx, mosq->tls_certfile);
+<     #####:  561:				if(ret != 1){
+---
+>         -:  559:			if(mosq->tls_certfile){
+>         -:  560:				ret = SSL_CTX_use_certificate_chain_file(mosq->ssl_ctx, mosq->tls_certfile);
+>         -:  561:				if(ret != 1){
+1251c971
+<     #####:  563:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client certificate, check bridge_certfile \"%s\".", mosq->tls_certfile);
+---
+>         -:  563:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client certificate, check bridge_certfile \"%s\".", mosq->tls_certfile);
+1255,1258c975,978
+<     #####:  567:					COMPAT_CLOSE(mosq->sock);
+<     #####:  568:					mosq->sock = INVALID_SOCKET;
+<     #####:  569:					net__print_ssl_error(mosq);
+<     #####:  570:					return MOSQ_ERR_TLS;
+---
+>         -:  567:					COMPAT_CLOSE(mosq->sock);
+>         -:  568:					mosq->sock = INVALID_SOCKET;
+>         -:  569:					net__print_ssl_error(mosq);
+>         -:  570:					return MOSQ_ERR_TLS;
+1261,1263c981,983
+<     #####:  573:			if(mosq->tls_keyfile){
+<     #####:  574:				ret = SSL_CTX_use_PrivateKey_file(mosq->ssl_ctx, mosq->tls_keyfile, SSL_FILETYPE_PEM);
+<     #####:  575:				if(ret != 1){
+---
+>         -:  573:			if(mosq->tls_keyfile){
+>         -:  574:				ret = SSL_CTX_use_PrivateKey_file(mosq->ssl_ctx, mosq->tls_keyfile, SSL_FILETYPE_PEM);
+>         -:  575:				if(ret != 1){
+1265c985
+<     #####:  577:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client key file, check bridge_keyfile \"%s\".", mosq->tls_keyfile);
+---
+>         -:  577:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client key file, check bridge_keyfile \"%s\".", mosq->tls_keyfile);
+1269,1272c989,992
+<     #####:  581:					COMPAT_CLOSE(mosq->sock);
+<     #####:  582:					mosq->sock = INVALID_SOCKET;
+<     #####:  583:					net__print_ssl_error(mosq);
+<     #####:  584:					return MOSQ_ERR_TLS;
+---
+>         -:  581:					COMPAT_CLOSE(mosq->sock);
+>         -:  582:					mosq->sock = INVALID_SOCKET;
+>         -:  583:					net__print_ssl_error(mosq);
+>         -:  584:					return MOSQ_ERR_TLS;
+1274,1280c994,1000
+<     #####:  586:				ret = SSL_CTX_check_private_key(mosq->ssl_ctx);
+<     #####:  587:				if(ret != 1){
+<     #####:  588:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Client certificate/key are inconsistent.");
+<     #####:  589:					COMPAT_CLOSE(mosq->sock);
+<     #####:  590:					mosq->sock = INVALID_SOCKET;
+<     #####:  591:					net__print_ssl_error(mosq);
+<     #####:  592:					return MOSQ_ERR_TLS;
+---
+>         -:  586:				ret = SSL_CTX_check_private_key(mosq->ssl_ctx);
+>         -:  587:				if(ret != 1){
+>         -:  588:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Client certificate/key are inconsistent.");
+>         -:  589:					COMPAT_CLOSE(mosq->sock);
+>         -:  590:					mosq->sock = INVALID_SOCKET;
+>         -:  591:					net__print_ssl_error(mosq);
+>         -:  592:					return MOSQ_ERR_TLS;
+1284,1285c1004,1005
+<     #####:  596:		}else if(mosq->tls_psk){
+<     #####:  597:			SSL_CTX_set_psk_client_callback(mosq->ssl_ctx, psk_client_callback);
+---
+>         -:  596:		}else if(mosq->tls_psk){
+>         -:  597:			SSL_CTX_set_psk_client_callback(mosq->ssl_ctx, psk_client_callback);
+1292,1441d1011
+< ------------------
+< net__init_ssl_ctx:
+<     #####:  457:static int net__init_ssl_ctx(struct mosquitto *mosq)
+<         -:  458:{
+<     #####:  459:	int ret;
+<         -:  460:
+<     #####:  461:	if(mosq->ssl_ctx){
+<     #####:  462:		if(!mosq->ssl_ctx_defaults){
+<         -:  463:			return MOSQ_ERR_SUCCESS;
+<     #####:  464:		}else if(!mosq->tls_cafile && !mosq->tls_capath && !mosq->tls_psk){
+<     #####:  465:			log__printf(mosq, MOSQ_LOG_ERR, "Error: MOSQ_OPT_SSL_CTX_WITH_DEFAULTS used without specifying cafile, capath or psk.");
+<     #####:  466:			return MOSQ_ERR_INVAL;
+<         -:  467:		}
+<         -:  468:	}
+<         -:  469:
+<         -:  470:	/* Apply default SSL_CTX settings. This is only used if MOSQ_OPT_SSL_CTX
+<         -:  471:	 * has not been set, or if both of MOSQ_OPT_SSL_CTX and
+<         -:  472:	 * MOSQ_OPT_SSL_CTX_WITH_DEFAULTS are set. */
+<     #####:  473:	if(mosq->tls_cafile || mosq->tls_capath || mosq->tls_psk){
+<     #####:  474:		if(!mosq->ssl_ctx){
+<         -:  475:#if OPENSSL_VERSION_NUMBER < 0x10100000L
+<         -:  476:			mosq->ssl_ctx = SSL_CTX_new(SSLv23_client_method());
+<         -:  477:#else
+<     #####:  478:			mosq->ssl_ctx = SSL_CTX_new(TLS_client_method());
+<         -:  479:#endif
+<         -:  480:
+<     #####:  481:			if(!mosq->ssl_ctx){
+<     #####:  482:				log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to create TLS context.");
+<     #####:  483:				COMPAT_CLOSE(mosq->sock);
+<     #####:  484:				mosq->sock = INVALID_SOCKET;
+<     #####:  485:				net__print_ssl_error(mosq);
+<     #####:  486:				return MOSQ_ERR_TLS;
+<         -:  487:			}
+<         -:  488:		}
+<         -:  489:
+<     #####:  490:		if(!mosq->tls_version){
+<     #####:  491:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3);
+<     #####:  492:		}else if(!strcmp(mosq->tls_version, "tlsv1.2")){
+<     #####:  493:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_1 | SSL_OP_NO_TLSv1);
+<     #####:  494:		}else if(!strcmp(mosq->tls_version, "tlsv1.1")){
+<     #####:  495:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1);
+<     #####:  496:		}else if(!strcmp(mosq->tls_version, "tlsv1")){
+<     #####:  497:			SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1_1);
+<         -:  498:		}else{
+<     #####:  499:			log__printf(mosq, MOSQ_LOG_ERR, "Error: Protocol %s not supported.", mosq->tls_version);
+<     #####:  500:			COMPAT_CLOSE(mosq->sock);
+<     #####:  501:			mosq->sock = INVALID_SOCKET;
+<     #####:  502:			return MOSQ_ERR_INVAL;
+<         -:  503:		}
+<         -:  504:
+<         -:  505:		/* Disable compression */
+<     #####:  506:		SSL_CTX_set_options(mosq->ssl_ctx, SSL_OP_NO_COMPRESSION);
+<         -:  507:
+<         -:  508:#ifdef SSL_MODE_RELEASE_BUFFERS
+<         -:  509:			/* Use even less memory per SSL connection. */
+<     #####:  510:			SSL_CTX_set_mode(mosq->ssl_ctx, SSL_MODE_RELEASE_BUFFERS);
+<         -:  511:#endif
+<         -:  512:
+<     #####:  513:		if(mosq->tls_ciphers){
+<     #####:  514:			ret = SSL_CTX_set_cipher_list(mosq->ssl_ctx, mosq->tls_ciphers);
+<     #####:  515:			if(ret == 0){
+<     #####:  516:				log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", mosq->tls_ciphers);
+<     #####:  517:				COMPAT_CLOSE(mosq->sock);
+<     #####:  518:				mosq->sock = INVALID_SOCKET;
+<     #####:  519:				net__print_ssl_error(mosq);
+<     #####:  520:				return MOSQ_ERR_TLS;
+<         -:  521:			}
+<         -:  522:		}
+<     #####:  523:		if(mosq->tls_cafile || mosq->tls_capath){
+<     #####:  524:			ret = SSL_CTX_load_verify_locations(mosq->ssl_ctx, mosq->tls_cafile, mosq->tls_capath);
+<     #####:  525:			if(ret == 0){
+<         -:  526:#ifdef WITH_BROKER
+<     #####:  527:				if(mosq->tls_cafile && mosq->tls_capath){
+<     #####:  528:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_cafile \"%s\" and bridge_capath \"%s\".", mosq->tls_cafile, mosq->tls_capath);
+<     #####:  529:				}else if(mosq->tls_cafile){
+<     #####:  530:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_cafile \"%s\".", mosq->tls_cafile);
+<         -:  531:				}else{
+<     #####:  532:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check bridge_capath \"%s\".", mosq->tls_capath);
+<         -:  533:				}
+<         -:  534:#else
+<         -:  535:				if(mosq->tls_cafile && mosq->tls_capath){
+<         -:  536:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check cafile \"%s\" and capath \"%s\".", mosq->tls_cafile, mosq->tls_capath);
+<         -:  537:				}else if(mosq->tls_cafile){
+<         -:  538:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check cafile \"%s\".", mosq->tls_cafile);
+<         -:  539:				}else{
+<         -:  540:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load CA certificates, check capath \"%s\".", mosq->tls_capath);
+<         -:  541:				}
+<         -:  542:#endif
+<     #####:  543:				COMPAT_CLOSE(mosq->sock);
+<     #####:  544:				mosq->sock = INVALID_SOCKET;
+<     #####:  545:				net__print_ssl_error(mosq);
+<     #####:  546:				return MOSQ_ERR_TLS;
+<         -:  547:			}
+<     #####:  548:			if(mosq->tls_cert_reqs == 0){
+<     #####:  549:				SSL_CTX_set_verify(mosq->ssl_ctx, SSL_VERIFY_NONE, NULL);
+<         -:  550:			}else{
+<     #####:  551:				SSL_CTX_set_verify(mosq->ssl_ctx, SSL_VERIFY_PEER, mosquitto__server_certificate_verify);
+<         -:  552:			}
+<         -:  553:
+<     #####:  554:			if(mosq->tls_pw_callback){
+<     #####:  555:				SSL_CTX_set_default_passwd_cb(mosq->ssl_ctx, mosq->tls_pw_callback);
+<     #####:  556:				SSL_CTX_set_default_passwd_cb_userdata(mosq->ssl_ctx, mosq);
+<         -:  557:			}
+<         -:  558:
+<     #####:  559:			if(mosq->tls_certfile){
+<     #####:  560:				ret = SSL_CTX_use_certificate_chain_file(mosq->ssl_ctx, mosq->tls_certfile);
+<     #####:  561:				if(ret != 1){
+<         -:  562:#ifdef WITH_BROKER
+<     #####:  563:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client certificate, check bridge_certfile \"%s\".", mosq->tls_certfile);
+<         -:  564:#else
+<         -:  565:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client certificate \"%s\".", mosq->tls_certfile);
+<         -:  566:#endif
+<     #####:  567:					COMPAT_CLOSE(mosq->sock);
+<     #####:  568:					mosq->sock = INVALID_SOCKET;
+<     #####:  569:					net__print_ssl_error(mosq);
+<     #####:  570:					return MOSQ_ERR_TLS;
+<         -:  571:				}
+<         -:  572:			}
+<     #####:  573:			if(mosq->tls_keyfile){
+<     #####:  574:				ret = SSL_CTX_use_PrivateKey_file(mosq->ssl_ctx, mosq->tls_keyfile, SSL_FILETYPE_PEM);
+<     #####:  575:				if(ret != 1){
+<         -:  576:#ifdef WITH_BROKER
+<     #####:  577:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client key file, check bridge_keyfile \"%s\".", mosq->tls_keyfile);
+<         -:  578:#else
+<         -:  579:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Unable to load client key file \"%s\".", mosq->tls_keyfile);
+<         -:  580:#endif
+<     #####:  581:					COMPAT_CLOSE(mosq->sock);
+<     #####:  582:					mosq->sock = INVALID_SOCKET;
+<     #####:  583:					net__print_ssl_error(mosq);
+<     #####:  584:					return MOSQ_ERR_TLS;
+<         -:  585:				}
+<     #####:  586:				ret = SSL_CTX_check_private_key(mosq->ssl_ctx);
+<     #####:  587:				if(ret != 1){
+<     #####:  588:					log__printf(mosq, MOSQ_LOG_ERR, "Error: Client certificate/key are inconsistent.");
+<     #####:  589:					COMPAT_CLOSE(mosq->sock);
+<     #####:  590:					mosq->sock = INVALID_SOCKET;
+<     #####:  591:					net__print_ssl_error(mosq);
+<     #####:  592:					return MOSQ_ERR_TLS;
+<         -:  593:				}
+<         -:  594:			}
+<         -:  595:#ifdef FINAL_WITH_TLS_PSK
+<     #####:  596:		}else if(mosq->tls_psk){
+<     #####:  597:			SSL_CTX_set_psk_client_callback(mosq->ssl_ctx, psk_client_callback);
+<         -:  598:#endif
+<         -:  599:		}
+<         -:  600:	}
+<         -:  601:
+<         -:  602:	return MOSQ_ERR_SUCCESS;
+<         -:  603:}
+< ------------------
+1448c1018
+<     #####:  610:	BIO *bio;
+---
+>         -:  610:	BIO *bio;
+1450,1451c1020,1021
+<     #####:  612:	int rc = net__init_ssl_ctx(mosq);
+<     #####:  613:	if(rc) return rc;
+---
+>         -:  612:	int rc = net__init_ssl_ctx(mosq);
+>         -:  613:	if(rc) return rc;
+1453,1455c1023,1025
+<     #####:  615:	if(mosq->ssl_ctx){
+<     #####:  616:		if(mosq->ssl){
+<     #####:  617:			SSL_free(mosq->ssl);
+---
+>         -:  615:	if(mosq->ssl_ctx){
+>         -:  616:		if(mosq->ssl){
+>         -:  617:			SSL_free(mosq->ssl);
+1457,1462c1027,1032
+<     #####:  619:		mosq->ssl = SSL_new(mosq->ssl_ctx);
+<     #####:  620:		if(!mosq->ssl){
+<     #####:  621:			COMPAT_CLOSE(mosq->sock);
+<     #####:  622:			mosq->sock = INVALID_SOCKET;
+<     #####:  623:			net__print_ssl_error(mosq);
+<     #####:  624:			return MOSQ_ERR_TLS;
+---
+>         -:  619:		mosq->ssl = SSL_new(mosq->ssl_ctx);
+>         -:  620:		if(!mosq->ssl){
+>         -:  621:			COMPAT_CLOSE(mosq->sock);
+>         -:  622:			mosq->sock = INVALID_SOCKET;
+>         -:  623:			net__print_ssl_error(mosq);
+>         -:  624:			return MOSQ_ERR_TLS;
+1465,1471c1035,1041
+<     #####:  627:		SSL_set_ex_data(mosq->ssl, tls_ex_index_mosq, mosq);
+<     #####:  628:		bio = BIO_new_socket(mosq->sock, BIO_NOCLOSE);
+<     #####:  629:		if(!bio){
+<     #####:  630:			COMPAT_CLOSE(mosq->sock);
+<     #####:  631:			mosq->sock = INVALID_SOCKET;
+<     #####:  632:			net__print_ssl_error(mosq);
+<     #####:  633:			return MOSQ_ERR_TLS;
+---
+>         -:  627:		SSL_set_ex_data(mosq->ssl, tls_ex_index_mosq, mosq);
+>         -:  628:		bio = BIO_new_socket(mosq->sock, BIO_NOCLOSE);
+>         -:  629:		if(!bio){
+>         -:  630:			COMPAT_CLOSE(mosq->sock);
+>         -:  631:			mosq->sock = INVALID_SOCKET;
+>         -:  632:			net__print_ssl_error(mosq);
+>         -:  633:			return MOSQ_ERR_TLS;
+1473c1043
+<     #####:  635:		SSL_set_bio(mosq->ssl, bio, bio);
+---
+>         -:  635:		SSL_set_bio(mosq->ssl, bio, bio);
+1478,1481c1048,1051
+<     #####:  640:		if(SSL_set_tlsext_host_name(mosq->ssl, host) != 1) {
+<     #####:  641:			COMPAT_CLOSE(mosq->sock);
+<     #####:  642:			mosq->sock = INVALID_SOCKET;
+<     #####:  643:			return MOSQ_ERR_TLS;
+---
+>         -:  640:		if(SSL_set_tlsext_host_name(mosq->ssl, host) != 1) {
+>         -:  641:			COMPAT_CLOSE(mosq->sock);
+>         -:  642:			mosq->sock = INVALID_SOCKET;
+>         -:  643:			return MOSQ_ERR_TLS;
+1484,1485c1054,1055
+<     #####:  646:		if(net__socket_connect_tls(mosq)){
+<     #####:  647:			return MOSQ_ERR_TLS;
+---
+>         -:  646:		if(net__socket_connect_tls(mosq)){
+>         -:  647:			return MOSQ_ERR_TLS;
+1490c1060
+<         -:  652:	return MOSQ_ERR_SUCCESS;
+---
+>     #####:  652:	return MOSQ_ERR_SUCCESS;
+1497c1067
+<     #####:  610:	BIO *bio;
+---
+>         -:  610:	BIO *bio;
+1499,1500c1069,1070
+<     #####:  612:	int rc = net__init_ssl_ctx(mosq);
+<     #####:  613:	if(rc) return rc;
+---
+>         -:  612:	int rc = net__init_ssl_ctx(mosq);
+>         -:  613:	if(rc) return rc;
+1502,1504c1072,1074
+<     #####:  615:	if(mosq->ssl_ctx){
+<     #####:  616:		if(mosq->ssl){
+<     #####:  617:			SSL_free(mosq->ssl);
+---
+>         -:  615:	if(mosq->ssl_ctx){
+>         -:  616:		if(mosq->ssl){
+>         -:  617:			SSL_free(mosq->ssl);
+1506,1511c1076,1081
+<     #####:  619:		mosq->ssl = SSL_new(mosq->ssl_ctx);
+<     #####:  620:		if(!mosq->ssl){
+<     #####:  621:			COMPAT_CLOSE(mosq->sock);
+<     #####:  622:			mosq->sock = INVALID_SOCKET;
+<     #####:  623:			net__print_ssl_error(mosq);
+<     #####:  624:			return MOSQ_ERR_TLS;
+---
+>         -:  619:		mosq->ssl = SSL_new(mosq->ssl_ctx);
+>         -:  620:		if(!mosq->ssl){
+>         -:  621:			COMPAT_CLOSE(mosq->sock);
+>         -:  622:			mosq->sock = INVALID_SOCKET;
+>         -:  623:			net__print_ssl_error(mosq);
+>         -:  624:			return MOSQ_ERR_TLS;
+1514,1520c1084,1090
+<     #####:  627:		SSL_set_ex_data(mosq->ssl, tls_ex_index_mosq, mosq);
+<     #####:  628:		bio = BIO_new_socket(mosq->sock, BIO_NOCLOSE);
+<     #####:  629:		if(!bio){
+<     #####:  630:			COMPAT_CLOSE(mosq->sock);
+<     #####:  631:			mosq->sock = INVALID_SOCKET;
+<     #####:  632:			net__print_ssl_error(mosq);
+<     #####:  633:			return MOSQ_ERR_TLS;
+---
+>         -:  627:		SSL_set_ex_data(mosq->ssl, tls_ex_index_mosq, mosq);
+>         -:  628:		bio = BIO_new_socket(mosq->sock, BIO_NOCLOSE);
+>         -:  629:		if(!bio){
+>         -:  630:			COMPAT_CLOSE(mosq->sock);
+>         -:  631:			mosq->sock = INVALID_SOCKET;
+>         -:  632:			net__print_ssl_error(mosq);
+>         -:  633:			return MOSQ_ERR_TLS;
+1522c1092
+<     #####:  635:		SSL_set_bio(mosq->ssl, bio, bio);
+---
+>         -:  635:		SSL_set_bio(mosq->ssl, bio, bio);
+1527,1530c1097,1100
+<     #####:  640:		if(SSL_set_tlsext_host_name(mosq->ssl, host) != 1) {
+<     #####:  641:			COMPAT_CLOSE(mosq->sock);
+<     #####:  642:			mosq->sock = INVALID_SOCKET;
+<     #####:  643:			return MOSQ_ERR_TLS;
+---
+>         -:  640:		if(SSL_set_tlsext_host_name(mosq->ssl, host) != 1) {
+>         -:  641:			COMPAT_CLOSE(mosq->sock);
+>         -:  642:			mosq->sock = INVALID_SOCKET;
+>         -:  643:			return MOSQ_ERR_TLS;
+1533,1534c1103,1104
+<     #####:  646:		if(net__socket_connect_tls(mosq)){
+<     #####:  647:			return MOSQ_ERR_TLS;
+---
+>         -:  646:		if(net__socket_connect_tls(mosq)){
+>         -:  647:			return MOSQ_ERR_TLS;
+1539c1109
+<         -:  652:	return MOSQ_ERR_SUCCESS;
+---
+>     #####:  652:	return MOSQ_ERR_SUCCESS;
+1546c1116
+<     #####:  610:	BIO *bio;
+---
+>         -:  610:	BIO *bio;
+1548,1549c1118,1119
+<     #####:  612:	int rc = net__init_ssl_ctx(mosq);
+<     #####:  613:	if(rc) return rc;
+---
+>         -:  612:	int rc = net__init_ssl_ctx(mosq);
+>         -:  613:	if(rc) return rc;
+1551,1553c1121,1123
+<     #####:  615:	if(mosq->ssl_ctx){
+<     #####:  616:		if(mosq->ssl){
+<     #####:  617:			SSL_free(mosq->ssl);
+---
+>         -:  615:	if(mosq->ssl_ctx){
+>         -:  616:		if(mosq->ssl){
+>         -:  617:			SSL_free(mosq->ssl);
+1555,1560c1125,1130
+<     #####:  619:		mosq->ssl = SSL_new(mosq->ssl_ctx);
+<     #####:  620:		if(!mosq->ssl){
+<     #####:  621:			COMPAT_CLOSE(mosq->sock);
+<     #####:  622:			mosq->sock = INVALID_SOCKET;
+<     #####:  623:			net__print_ssl_error(mosq);
+<     #####:  624:			return MOSQ_ERR_TLS;
+---
+>         -:  619:		mosq->ssl = SSL_new(mosq->ssl_ctx);
+>         -:  620:		if(!mosq->ssl){
+>         -:  621:			COMPAT_CLOSE(mosq->sock);
+>         -:  622:			mosq->sock = INVALID_SOCKET;
+>         -:  623:			net__print_ssl_error(mosq);
+>         -:  624:			return MOSQ_ERR_TLS;
+1563,1569c1133,1139
+<     #####:  627:		SSL_set_ex_data(mosq->ssl, tls_ex_index_mosq, mosq);
+<     #####:  628:		bio = BIO_new_socket(mosq->sock, BIO_NOCLOSE);
+<     #####:  629:		if(!bio){
+<     #####:  630:			COMPAT_CLOSE(mosq->sock);
+<     #####:  631:			mosq->sock = INVALID_SOCKET;
+<     #####:  632:			net__print_ssl_error(mosq);
+<     #####:  633:			return MOSQ_ERR_TLS;
+---
+>         -:  627:		SSL_set_ex_data(mosq->ssl, tls_ex_index_mosq, mosq);
+>         -:  628:		bio = BIO_new_socket(mosq->sock, BIO_NOCLOSE);
+>         -:  629:		if(!bio){
+>         -:  630:			COMPAT_CLOSE(mosq->sock);
+>         -:  631:			mosq->sock = INVALID_SOCKET;
+>         -:  632:			net__print_ssl_error(mosq);
+>         -:  633:			return MOSQ_ERR_TLS;
+1571c1141
+<     #####:  635:		SSL_set_bio(mosq->ssl, bio, bio);
+---
+>         -:  635:		SSL_set_bio(mosq->ssl, bio, bio);
+1576,1579c1146,1149
+<     #####:  640:		if(SSL_set_tlsext_host_name(mosq->ssl, host) != 1) {
+<     #####:  641:			COMPAT_CLOSE(mosq->sock);
+<     #####:  642:			mosq->sock = INVALID_SOCKET;
+<     #####:  643:			return MOSQ_ERR_TLS;
+---
+>         -:  640:		if(SSL_set_tlsext_host_name(mosq->ssl, host) != 1) {
+>         -:  641:			COMPAT_CLOSE(mosq->sock);
+>         -:  642:			mosq->sock = INVALID_SOCKET;
+>         -:  643:			return MOSQ_ERR_TLS;
+1582,1583c1152,1153
+<     #####:  646:		if(net__socket_connect_tls(mosq)){
+<     #####:  647:			return MOSQ_ERR_TLS;
+---
+>         -:  646:		if(net__socket_connect_tls(mosq)){
+>         -:  647:			return MOSQ_ERR_TLS;
+1588c1158
+<         -:  652:	return MOSQ_ERR_SUCCESS;
+---
+>     #####:  652:	return MOSQ_ERR_SUCCESS;
+1613c1183
+<         -:  676:	return MOSQ_ERR_SUCCESS;
+---
+>     #####:  676:	return MOSQ_ERR_SUCCESS;
+1637c1207
+<         -:  676:	return MOSQ_ERR_SUCCESS;
+---
+>     #####:  676:	return MOSQ_ERR_SUCCESS;
+1661c1231
+<         -:  676:	return MOSQ_ERR_SUCCESS;
+---
+>     #####:  676:	return MOSQ_ERR_SUCCESS;
+1669,1670c1239,1240
+<     #####:  683:	int ret;
+<     #####:  684:	int err;
+---
+>         -:  683:	int ret;
+>         -:  684:	int err;
+1675,1686c1245,1256
+<     #####:  689:	if(mosq->ssl){
+<     #####:  690:		ERR_clear_error();
+<     #####:  691:		ret = SSL_read(mosq->ssl, buf, count);
+<     #####:  692:		if(ret <= 0){
+<     #####:  693:			err = SSL_get_error(mosq->ssl, ret);
+<     #####:  694:			if(err == SSL_ERROR_WANT_READ){
+<     #####:  695:				ret = -1;
+<     #####:  696:				errno = EAGAIN;
+<     #####:  697:			}else if(err == SSL_ERROR_WANT_WRITE){
+<     #####:  698:				ret = -1;
+<     #####:  699:				mosq->want_write = true;
+<     #####:  700:				errno = EAGAIN;
+---
+>         -:  689:	if(mosq->ssl){
+>         -:  690:		ERR_clear_error();
+>         -:  691:		ret = SSL_read(mosq->ssl, buf, count);
+>         -:  692:		if(ret <= 0){
+>         -:  693:			err = SSL_get_error(mosq->ssl, ret);
+>         -:  694:			if(err == SSL_ERROR_WANT_READ){
+>         -:  695:				ret = -1;
+>         -:  696:				errno = EAGAIN;
+>         -:  697:			}else if(err == SSL_ERROR_WANT_WRITE){
+>         -:  698:				ret = -1;
+>         -:  699:				mosq->want_write = true;
+>         -:  700:				errno = EAGAIN;
+1688,1689c1258,1259
+<     #####:  702:				net__print_ssl_error(mosq);
+<     #####:  703:				errno = EPROTO;
+---
+>         -:  702:				net__print_ssl_error(mosq);
+>         -:  703:				errno = EPROTO;
+1695c1265
+<     #####:  709:		return (ssize_t )ret;
+---
+>         -:  709:		return (ssize_t )ret;
+1716,1717c1286,1287
+<     #####:  683:	int ret;
+<     #####:  684:	int err;
+---
+>         -:  683:	int ret;
+>         -:  684:	int err;
+1722,1733c1292,1303
+<     #####:  689:	if(mosq->ssl){
+<     #####:  690:		ERR_clear_error();
+<     #####:  691:		ret = SSL_read(mosq->ssl, buf, count);
+<     #####:  692:		if(ret <= 0){
+<     #####:  693:			err = SSL_get_error(mosq->ssl, ret);
+<     #####:  694:			if(err == SSL_ERROR_WANT_READ){
+<     #####:  695:				ret = -1;
+<     #####:  696:				errno = EAGAIN;
+<     #####:  697:			}else if(err == SSL_ERROR_WANT_WRITE){
+<     #####:  698:				ret = -1;
+<     #####:  699:				mosq->want_write = true;
+<     #####:  700:				errno = EAGAIN;
+---
+>         -:  689:	if(mosq->ssl){
+>         -:  690:		ERR_clear_error();
+>         -:  691:		ret = SSL_read(mosq->ssl, buf, count);
+>         -:  692:		if(ret <= 0){
+>         -:  693:			err = SSL_get_error(mosq->ssl, ret);
+>         -:  694:			if(err == SSL_ERROR_WANT_READ){
+>         -:  695:				ret = -1;
+>         -:  696:				errno = EAGAIN;
+>         -:  697:			}else if(err == SSL_ERROR_WANT_WRITE){
+>         -:  698:				ret = -1;
+>         -:  699:				mosq->want_write = true;
+>         -:  700:				errno = EAGAIN;
+1735,1736c1305,1306
+<     #####:  702:				net__print_ssl_error(mosq);
+<     #####:  703:				errno = EPROTO;
+---
+>         -:  702:				net__print_ssl_error(mosq);
+>         -:  703:				errno = EPROTO;
+1742c1312
+<     #####:  709:		return (ssize_t )ret;
+---
+>         -:  709:		return (ssize_t )ret;
+1763,1764c1333,1334
+<     #####:  683:	int ret;
+<     #####:  684:	int err;
+---
+>         -:  683:	int ret;
+>         -:  684:	int err;
+1769,1780c1339,1350
+<     #####:  689:	if(mosq->ssl){
+<     #####:  690:		ERR_clear_error();
+<     #####:  691:		ret = SSL_read(mosq->ssl, buf, count);
+<     #####:  692:		if(ret <= 0){
+<     #####:  693:			err = SSL_get_error(mosq->ssl, ret);
+<     #####:  694:			if(err == SSL_ERROR_WANT_READ){
+<     #####:  695:				ret = -1;
+<     #####:  696:				errno = EAGAIN;
+<     #####:  697:			}else if(err == SSL_ERROR_WANT_WRITE){
+<     #####:  698:				ret = -1;
+<     #####:  699:				mosq->want_write = true;
+<     #####:  700:				errno = EAGAIN;
+---
+>         -:  689:	if(mosq->ssl){
+>         -:  690:		ERR_clear_error();
+>         -:  691:		ret = SSL_read(mosq->ssl, buf, count);
+>         -:  692:		if(ret <= 0){
+>         -:  693:			err = SSL_get_error(mosq->ssl, ret);
+>         -:  694:			if(err == SSL_ERROR_WANT_READ){
+>         -:  695:				ret = -1;
+>         -:  696:				errno = EAGAIN;
+>         -:  697:			}else if(err == SSL_ERROR_WANT_WRITE){
+>         -:  698:				ret = -1;
+>         -:  699:				mosq->want_write = true;
+>         -:  700:				errno = EAGAIN;
+1782,1783c1352,1353
+<     #####:  702:				net__print_ssl_error(mosq);
+<     #####:  703:				errno = EPROTO;
+---
+>         -:  702:				net__print_ssl_error(mosq);
+>         -:  703:				errno = EPROTO;
+1789c1359
+<     #####:  709:		return (ssize_t )ret;
+---
+>         -:  709:		return (ssize_t )ret;
+1810,1811c1380,1381
+<     #####:  729:	int ret;
+<     #####:  730:	int err;
+---
+>         -:  729:	int ret;
+>         -:  730:	int err;
+1817,1829c1387,1399
+<     #####:  736:	if(mosq->ssl){
+<     #####:  737:		mosq->want_write = false;
+<     #####:  738:		ERR_clear_error();
+<     #####:  739:		ret = SSL_write(mosq->ssl, buf, count);
+<     #####:  740:		if(ret < 0){
+<     #####:  741:			err = SSL_get_error(mosq->ssl, ret);
+<     #####:  742:			if(err == SSL_ERROR_WANT_READ){
+<     #####:  743:				ret = -1;
+<     #####:  744:				errno = EAGAIN;
+<     #####:  745:			}else if(err == SSL_ERROR_WANT_WRITE){
+<     #####:  746:				ret = -1;
+<     #####:  747:				mosq->want_write = true;
+<     #####:  748:				errno = EAGAIN;
+---
+>         -:  736:	if(mosq->ssl){
+>         -:  737:		mosq->want_write = false;
+>         -:  738:		ERR_clear_error();
+>         -:  739:		ret = SSL_write(mosq->ssl, buf, count);
+>         -:  740:		if(ret < 0){
+>         -:  741:			err = SSL_get_error(mosq->ssl, ret);
+>         -:  742:			if(err == SSL_ERROR_WANT_READ){
+>         -:  743:				ret = -1;
+>         -:  744:				errno = EAGAIN;
+>         -:  745:			}else if(err == SSL_ERROR_WANT_WRITE){
+>         -:  746:				ret = -1;
+>         -:  747:				mosq->want_write = true;
+>         -:  748:				errno = EAGAIN;
+1831,1832c1401,1402
+<     #####:  750:				net__print_ssl_error(mosq);
+<     #####:  751:				errno = EPROTO;
+---
+>         -:  750:				net__print_ssl_error(mosq);
+>         -:  751:				errno = EPROTO;
+1838c1408
+<     #####:  757:		return (ssize_t )ret;
+---
+>         -:  757:		return (ssize_t )ret;
+1858,1859c1428,1429
+<     #####:  729:	int ret;
+<     #####:  730:	int err;
+---
+>         -:  729:	int ret;
+>         -:  730:	int err;
+1865,1877c1435,1447
+<     #####:  736:	if(mosq->ssl){
+<     #####:  737:		mosq->want_write = false;
+<     #####:  738:		ERR_clear_error();
+<     #####:  739:		ret = SSL_write(mosq->ssl, buf, count);
+<     #####:  740:		if(ret < 0){
+<     #####:  741:			err = SSL_get_error(mosq->ssl, ret);
+<     #####:  742:			if(err == SSL_ERROR_WANT_READ){
+<     #####:  743:				ret = -1;
+<     #####:  744:				errno = EAGAIN;
+<     #####:  745:			}else if(err == SSL_ERROR_WANT_WRITE){
+<     #####:  746:				ret = -1;
+<     #####:  747:				mosq->want_write = true;
+<     #####:  748:				errno = EAGAIN;
+---
+>         -:  736:	if(mosq->ssl){
+>         -:  737:		mosq->want_write = false;
+>         -:  738:		ERR_clear_error();
+>         -:  739:		ret = SSL_write(mosq->ssl, buf, count);
+>         -:  740:		if(ret < 0){
+>         -:  741:			err = SSL_get_error(mosq->ssl, ret);
+>         -:  742:			if(err == SSL_ERROR_WANT_READ){
+>         -:  743:				ret = -1;
+>         -:  744:				errno = EAGAIN;
+>         -:  745:			}else if(err == SSL_ERROR_WANT_WRITE){
+>         -:  746:				ret = -1;
+>         -:  747:				mosq->want_write = true;
+>         -:  748:				errno = EAGAIN;
+1879,1880c1449,1450
+<     #####:  750:				net__print_ssl_error(mosq);
+<     #####:  751:				errno = EPROTO;
+---
+>         -:  750:				net__print_ssl_error(mosq);
+>         -:  751:				errno = EPROTO;
+1886c1456
+<     #####:  757:		return (ssize_t )ret;
+---
+>         -:  757:		return (ssize_t )ret;
+1906,1907c1476,1477
+<     #####:  729:	int ret;
+<     #####:  730:	int err;
+---
+>         -:  729:	int ret;
+>         -:  730:	int err;
+1913,1925c1483,1495
+<     #####:  736:	if(mosq->ssl){
+<     #####:  737:		mosq->want_write = false;
+<     #####:  738:		ERR_clear_error();
+<     #####:  739:		ret = SSL_write(mosq->ssl, buf, count);
+<     #####:  740:		if(ret < 0){
+<     #####:  741:			err = SSL_get_error(mosq->ssl, ret);
+<     #####:  742:			if(err == SSL_ERROR_WANT_READ){
+<     #####:  743:				ret = -1;
+<     #####:  744:				errno = EAGAIN;
+<     #####:  745:			}else if(err == SSL_ERROR_WANT_WRITE){
+<     #####:  746:				ret = -1;
+<     #####:  747:				mosq->want_write = true;
+<     #####:  748:				errno = EAGAIN;
+---
+>         -:  736:	if(mosq->ssl){
+>         -:  737:		mosq->want_write = false;
+>         -:  738:		ERR_clear_error();
+>         -:  739:		ret = SSL_write(mosq->ssl, buf, count);
+>         -:  740:		if(ret < 0){
+>         -:  741:			err = SSL_get_error(mosq->ssl, ret);
+>         -:  742:			if(err == SSL_ERROR_WANT_READ){
+>         -:  743:				ret = -1;
+>         -:  744:				errno = EAGAIN;
+>         -:  745:			}else if(err == SSL_ERROR_WANT_WRITE){
+>         -:  746:				ret = -1;
+>         -:  747:				mosq->want_write = true;
+>         -:  748:				errno = EAGAIN;
+1927,1928c1497,1498
+<     #####:  750:				net__print_ssl_error(mosq);
+<     #####:  751:				errno = EPROTO;
+---
+>         -:  750:				net__print_ssl_error(mosq);
+>         -:  751:				errno = EPROTO;
+1934c1504
+<     #####:  757:		return (ssize_t )ret;
+---
+>         -:  757:		return (ssize_t )ret;

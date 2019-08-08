@@ -1,0 +1,276 @@
+46,51c46,51
+<     #####:   44:	int i;
+<     #####:   45:	struct mosquitto__bridge_topic *cur_topic;
+<     #####:   46:	bool match;
+<     #####:   47:	int rc;
+<     #####:   48:	char *mapped_topic = NULL;
+<     #####:   49:	char *topic_temp = NULL;
+---
+>         -:   44:	int i;
+>         -:   45:	struct mosquitto__bridge_topic *cur_topic;
+>         -:   46:	bool match;
+>         -:   47:	int rc;
+>         -:   48:	char *mapped_topic = NULL;
+>         -:   49:	char *topic_temp = NULL;
+74,78c74,78
+<     #####:   72:	if(mosq->bridge && mosq->bridge->topics && mosq->bridge->topic_remapping){
+<     #####:   73:		for(i=0; i<mosq->bridge->topic_count; i++){
+<     #####:   74:			cur_topic = &mosq->bridge->topics[i];
+<     #####:   75:			if((cur_topic->direction == bd_both || cur_topic->direction == bd_out)
+<     #####:   76:					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+---
+>         -:   72:	if(mosq->bridge && mosq->bridge->topics && mosq->bridge->topic_remapping){
+>         -:   73:		for(i=0; i<mosq->bridge->topic_count; i++){
+>         -:   74:			cur_topic = &mosq->bridge->topics[i];
+>         -:   75:			if((cur_topic->direction == bd_both || cur_topic->direction == bd_out)
+>         -:   76:					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+81,83c81,83
+<     #####:   79:				rc = mosquitto_topic_matches_sub(cur_topic->local_topic, topic, &match);
+<     #####:   80:				if(rc){
+<     #####:   81:					return rc;
+---
+>         -:   79:				rc = mosquitto_topic_matches_sub(cur_topic->local_topic, topic, &match);
+>         -:   80:				if(rc){
+>         -:   81:					return rc;
+85,88c85,88
+<     #####:   83:				if(match){
+<     #####:   84:					mapped_topic = mosquitto__strdup(topic);
+<     #####:   85:					if(!mapped_topic) return MOSQ_ERR_NOMEM;
+<     #####:   86:					if(cur_topic->local_prefix){
+---
+>         -:   83:				if(match){
+>         -:   84:					mapped_topic = mosquitto__strdup(topic);
+>         -:   85:					if(!mapped_topic) return MOSQ_ERR_NOMEM;
+>         -:   86:					if(cur_topic->local_prefix){
+90,93c90,93
+<     #####:   88:						if(!strncmp(cur_topic->local_prefix, mapped_topic, strlen(cur_topic->local_prefix))){
+<     #####:   89:							topic_temp = mosquitto__strdup(mapped_topic+strlen(cur_topic->local_prefix));
+<     #####:   90:							mosquitto__free(mapped_topic);
+<     #####:   91:							if(!topic_temp){
+---
+>         -:   88:						if(!strncmp(cur_topic->local_prefix, mapped_topic, strlen(cur_topic->local_prefix))){
+>         -:   89:							topic_temp = mosquitto__strdup(mapped_topic+strlen(cur_topic->local_prefix));
+>         -:   90:							mosquitto__free(mapped_topic);
+>         -:   91:							if(!topic_temp){
+100c100
+<     #####:   98:					if(cur_topic->remote_prefix){
+---
+>         -:   98:					if(cur_topic->remote_prefix){
+102,106c102,106
+<     #####:  100:						len = strlen(mapped_topic) + strlen(cur_topic->remote_prefix)+1;
+<     #####:  101:						topic_temp = mosquitto__malloc(len+1);
+<     #####:  102:						if(!topic_temp){
+<     #####:  103:							mosquitto__free(mapped_topic);
+<     #####:  104:							return MOSQ_ERR_NOMEM;
+---
+>         -:  100:						len = strlen(mapped_topic) + strlen(cur_topic->remote_prefix)+1;
+>         -:  101:						topic_temp = mosquitto__malloc(len+1);
+>         -:  102:						if(!topic_temp){
+>         -:  103:							mosquitto__free(mapped_topic);
+>         -:  104:							return MOSQ_ERR_NOMEM;
+108,111c108,111
+<     #####:  106:						snprintf(topic_temp, len, "%s%s", cur_topic->remote_prefix, mapped_topic);
+<     #####:  107:						topic_temp[len] = '\0';
+<     #####:  108:						mosquitto__free(mapped_topic);
+<     #####:  109:						mapped_topic = topic_temp;
+---
+>         -:  106:						snprintf(topic_temp, len, "%s%s", cur_topic->remote_prefix, mapped_topic);
+>         -:  107:						topic_temp[len] = '\0';
+>         -:  108:						mosquitto__free(mapped_topic);
+>         -:  109:						mapped_topic = topic_temp;
+113,117c113,117
+<     #####:  111:					log__printf(NULL, MOSQ_LOG_DEBUG, "Sending PUBLISH to %s (d%d, q%d, r%d, m%d, '%s', ... (%ld bytes))", mosq->id, dup, qos, retain, mid, mapped_topic, (long)payloadlen);
+<     #####:  112:					G_PUB_BYTES_SENT_INC(payloadlen);
+<     #####:  113:					rc =  send__real_publish(mosq, mid, mapped_topic, payloadlen, payload, qos, retain, dup);
+<     #####:  114:					mosquitto__free(mapped_topic);
+<     #####:  115:					return rc;
+---
+>         -:  111:					log__printf(NULL, MOSQ_LOG_DEBUG, "Sending PUBLISH to %s (d%d, q%d, r%d, m%d, '%s', ... (%ld bytes))", mosq->id, dup, qos, retain, mid, mapped_topic, (long)payloadlen);
+>         -:  112:					G_PUB_BYTES_SENT_INC(payloadlen);
+>         -:  113:					rc =  send__real_publish(mosq, mid, mapped_topic, payloadlen, payload, qos, retain, dup);
+>         -:  114:					mosquitto__free(mapped_topic);
+>         -:  115:					return rc;
+138,143c138,143
+<     #####:   44:	int i;
+<     #####:   45:	struct mosquitto__bridge_topic *cur_topic;
+<     #####:   46:	bool match;
+<     #####:   47:	int rc;
+<     #####:   48:	char *mapped_topic = NULL;
+<     #####:   49:	char *topic_temp = NULL;
+---
+>         -:   44:	int i;
+>         -:   45:	struct mosquitto__bridge_topic *cur_topic;
+>         -:   46:	bool match;
+>         -:   47:	int rc;
+>         -:   48:	char *mapped_topic = NULL;
+>         -:   49:	char *topic_temp = NULL;
+166,170c166,170
+<     #####:   72:	if(mosq->bridge && mosq->bridge->topics && mosq->bridge->topic_remapping){
+<     #####:   73:		for(i=0; i<mosq->bridge->topic_count; i++){
+<     #####:   74:			cur_topic = &mosq->bridge->topics[i];
+<     #####:   75:			if((cur_topic->direction == bd_both || cur_topic->direction == bd_out)
+<     #####:   76:					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+---
+>         -:   72:	if(mosq->bridge && mosq->bridge->topics && mosq->bridge->topic_remapping){
+>         -:   73:		for(i=0; i<mosq->bridge->topic_count; i++){
+>         -:   74:			cur_topic = &mosq->bridge->topics[i];
+>         -:   75:			if((cur_topic->direction == bd_both || cur_topic->direction == bd_out)
+>         -:   76:					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+173,175c173,175
+<     #####:   79:				rc = mosquitto_topic_matches_sub(cur_topic->local_topic, topic, &match);
+<     #####:   80:				if(rc){
+<     #####:   81:					return rc;
+---
+>         -:   79:				rc = mosquitto_topic_matches_sub(cur_topic->local_topic, topic, &match);
+>         -:   80:				if(rc){
+>         -:   81:					return rc;
+177,180c177,180
+<     #####:   83:				if(match){
+<     #####:   84:					mapped_topic = mosquitto__strdup(topic);
+<     #####:   85:					if(!mapped_topic) return MOSQ_ERR_NOMEM;
+<     #####:   86:					if(cur_topic->local_prefix){
+---
+>         -:   83:				if(match){
+>         -:   84:					mapped_topic = mosquitto__strdup(topic);
+>         -:   85:					if(!mapped_topic) return MOSQ_ERR_NOMEM;
+>         -:   86:					if(cur_topic->local_prefix){
+182,185c182,185
+<     #####:   88:						if(!strncmp(cur_topic->local_prefix, mapped_topic, strlen(cur_topic->local_prefix))){
+<     #####:   89:							topic_temp = mosquitto__strdup(mapped_topic+strlen(cur_topic->local_prefix));
+<     #####:   90:							mosquitto__free(mapped_topic);
+<     #####:   91:							if(!topic_temp){
+---
+>         -:   88:						if(!strncmp(cur_topic->local_prefix, mapped_topic, strlen(cur_topic->local_prefix))){
+>         -:   89:							topic_temp = mosquitto__strdup(mapped_topic+strlen(cur_topic->local_prefix));
+>         -:   90:							mosquitto__free(mapped_topic);
+>         -:   91:							if(!topic_temp){
+192c192
+<     #####:   98:					if(cur_topic->remote_prefix){
+---
+>         -:   98:					if(cur_topic->remote_prefix){
+194,198c194,198
+<     #####:  100:						len = strlen(mapped_topic) + strlen(cur_topic->remote_prefix)+1;
+<     #####:  101:						topic_temp = mosquitto__malloc(len+1);
+<     #####:  102:						if(!topic_temp){
+<     #####:  103:							mosquitto__free(mapped_topic);
+<     #####:  104:							return MOSQ_ERR_NOMEM;
+---
+>         -:  100:						len = strlen(mapped_topic) + strlen(cur_topic->remote_prefix)+1;
+>         -:  101:						topic_temp = mosquitto__malloc(len+1);
+>         -:  102:						if(!topic_temp){
+>         -:  103:							mosquitto__free(mapped_topic);
+>         -:  104:							return MOSQ_ERR_NOMEM;
+200,203c200,203
+<     #####:  106:						snprintf(topic_temp, len, "%s%s", cur_topic->remote_prefix, mapped_topic);
+<     #####:  107:						topic_temp[len] = '\0';
+<     #####:  108:						mosquitto__free(mapped_topic);
+<     #####:  109:						mapped_topic = topic_temp;
+---
+>         -:  106:						snprintf(topic_temp, len, "%s%s", cur_topic->remote_prefix, mapped_topic);
+>         -:  107:						topic_temp[len] = '\0';
+>         -:  108:						mosquitto__free(mapped_topic);
+>         -:  109:						mapped_topic = topic_temp;
+205,209c205,209
+<     #####:  111:					log__printf(NULL, MOSQ_LOG_DEBUG, "Sending PUBLISH to %s (d%d, q%d, r%d, m%d, '%s', ... (%ld bytes))", mosq->id, dup, qos, retain, mid, mapped_topic, (long)payloadlen);
+<     #####:  112:					G_PUB_BYTES_SENT_INC(payloadlen);
+<     #####:  113:					rc =  send__real_publish(mosq, mid, mapped_topic, payloadlen, payload, qos, retain, dup);
+<     #####:  114:					mosquitto__free(mapped_topic);
+<     #####:  115:					return rc;
+---
+>         -:  111:					log__printf(NULL, MOSQ_LOG_DEBUG, "Sending PUBLISH to %s (d%d, q%d, r%d, m%d, '%s', ... (%ld bytes))", mosq->id, dup, qos, retain, mid, mapped_topic, (long)payloadlen);
+>         -:  112:					G_PUB_BYTES_SENT_INC(payloadlen);
+>         -:  113:					rc =  send__real_publish(mosq, mid, mapped_topic, payloadlen, payload, qos, retain, dup);
+>         -:  114:					mosquitto__free(mapped_topic);
+>         -:  115:					return rc;
+230,235c230,235
+<     #####:   44:	int i;
+<     #####:   45:	struct mosquitto__bridge_topic *cur_topic;
+<     #####:   46:	bool match;
+<     #####:   47:	int rc;
+<     #####:   48:	char *mapped_topic = NULL;
+<     #####:   49:	char *topic_temp = NULL;
+---
+>         -:   44:	int i;
+>         -:   45:	struct mosquitto__bridge_topic *cur_topic;
+>         -:   46:	bool match;
+>         -:   47:	int rc;
+>         -:   48:	char *mapped_topic = NULL;
+>         -:   49:	char *topic_temp = NULL;
+258,262c258,262
+<     #####:   72:	if(mosq->bridge && mosq->bridge->topics && mosq->bridge->topic_remapping){
+<     #####:   73:		for(i=0; i<mosq->bridge->topic_count; i++){
+<     #####:   74:			cur_topic = &mosq->bridge->topics[i];
+<     #####:   75:			if((cur_topic->direction == bd_both || cur_topic->direction == bd_out)
+<     #####:   76:					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+---
+>         -:   72:	if(mosq->bridge && mosq->bridge->topics && mosq->bridge->topic_remapping){
+>         -:   73:		for(i=0; i<mosq->bridge->topic_count; i++){
+>         -:   74:			cur_topic = &mosq->bridge->topics[i];
+>         -:   75:			if((cur_topic->direction == bd_both || cur_topic->direction == bd_out)
+>         -:   76:					&& (cur_topic->remote_prefix || cur_topic->local_prefix)){
+265,267c265,267
+<     #####:   79:				rc = mosquitto_topic_matches_sub(cur_topic->local_topic, topic, &match);
+<     #####:   80:				if(rc){
+<     #####:   81:					return rc;
+---
+>         -:   79:				rc = mosquitto_topic_matches_sub(cur_topic->local_topic, topic, &match);
+>         -:   80:				if(rc){
+>         -:   81:					return rc;
+269,272c269,272
+<     #####:   83:				if(match){
+<     #####:   84:					mapped_topic = mosquitto__strdup(topic);
+<     #####:   85:					if(!mapped_topic) return MOSQ_ERR_NOMEM;
+<     #####:   86:					if(cur_topic->local_prefix){
+---
+>         -:   83:				if(match){
+>         -:   84:					mapped_topic = mosquitto__strdup(topic);
+>         -:   85:					if(!mapped_topic) return MOSQ_ERR_NOMEM;
+>         -:   86:					if(cur_topic->local_prefix){
+274,277c274,277
+<     #####:   88:						if(!strncmp(cur_topic->local_prefix, mapped_topic, strlen(cur_topic->local_prefix))){
+<     #####:   89:							topic_temp = mosquitto__strdup(mapped_topic+strlen(cur_topic->local_prefix));
+<     #####:   90:							mosquitto__free(mapped_topic);
+<     #####:   91:							if(!topic_temp){
+---
+>         -:   88:						if(!strncmp(cur_topic->local_prefix, mapped_topic, strlen(cur_topic->local_prefix))){
+>         -:   89:							topic_temp = mosquitto__strdup(mapped_topic+strlen(cur_topic->local_prefix));
+>         -:   90:							mosquitto__free(mapped_topic);
+>         -:   91:							if(!topic_temp){
+284c284
+<     #####:   98:					if(cur_topic->remote_prefix){
+---
+>         -:   98:					if(cur_topic->remote_prefix){
+286,290c286,290
+<     #####:  100:						len = strlen(mapped_topic) + strlen(cur_topic->remote_prefix)+1;
+<     #####:  101:						topic_temp = mosquitto__malloc(len+1);
+<     #####:  102:						if(!topic_temp){
+<     #####:  103:							mosquitto__free(mapped_topic);
+<     #####:  104:							return MOSQ_ERR_NOMEM;
+---
+>         -:  100:						len = strlen(mapped_topic) + strlen(cur_topic->remote_prefix)+1;
+>         -:  101:						topic_temp = mosquitto__malloc(len+1);
+>         -:  102:						if(!topic_temp){
+>         -:  103:							mosquitto__free(mapped_topic);
+>         -:  104:							return MOSQ_ERR_NOMEM;
+292,295c292,295
+<     #####:  106:						snprintf(topic_temp, len, "%s%s", cur_topic->remote_prefix, mapped_topic);
+<     #####:  107:						topic_temp[len] = '\0';
+<     #####:  108:						mosquitto__free(mapped_topic);
+<     #####:  109:						mapped_topic = topic_temp;
+---
+>         -:  106:						snprintf(topic_temp, len, "%s%s", cur_topic->remote_prefix, mapped_topic);
+>         -:  107:						topic_temp[len] = '\0';
+>         -:  108:						mosquitto__free(mapped_topic);
+>         -:  109:						mapped_topic = topic_temp;
+297,301c297,301
+<     #####:  111:					log__printf(NULL, MOSQ_LOG_DEBUG, "Sending PUBLISH to %s (d%d, q%d, r%d, m%d, '%s', ... (%ld bytes))", mosq->id, dup, qos, retain, mid, mapped_topic, (long)payloadlen);
+<     #####:  112:					G_PUB_BYTES_SENT_INC(payloadlen);
+<     #####:  113:					rc =  send__real_publish(mosq, mid, mapped_topic, payloadlen, payload, qos, retain, dup);
+<     #####:  114:					mosquitto__free(mapped_topic);
+<     #####:  115:					return rc;
+---
+>         -:  111:					log__printf(NULL, MOSQ_LOG_DEBUG, "Sending PUBLISH to %s (d%d, q%d, r%d, m%d, '%s', ... (%ld bytes))", mosq->id, dup, qos, retain, mid, mapped_topic, (long)payloadlen);
+>         -:  112:					G_PUB_BYTES_SENT_INC(payloadlen);
+>         -:  113:					rc =  send__real_publish(mosq, mid, mapped_topic, payloadlen, payload, qos, retain, dup);
+>         -:  114:					mosquitto__free(mapped_topic);
+>         -:  115:					return rc;

@@ -1,0 +1,30 @@
+2500c2500
+<     #####:  741:		if(events & EPOLLOUT ||
+---
+>         -:  741:		if(events & EPOLLOUT ||
+2504,2505c2504,2505
+<     #####:  745:				context->want_write ||
+<     #####:  746:				(context->ssl && context->state == mosq_cs_new)){
+---
+>         -:  745:				context->want_write ||
+>         -:  746:				(context->ssl && context->state == mosq_cs_new)){
+2508c2508
+<         -:  749:		if(events & EPOLLOUT){
+---
+>     #####:  749:		if(events & EPOLLOUT){
+2559c2559
+<     #####:  800:		if(events & EPOLLIN ||
+---
+>         -:  800:		if(events & EPOLLIN ||
+2563c2563
+<     #####:  804:				(context->ssl && context->state == mosq_cs_new)){
+---
+>         -:  804:				(context->ssl && context->state == mosq_cs_new)){
+2566c2566
+<         -:  807:		if(events & EPOLLIN){
+---
+>     #####:  807:		if(events & EPOLLIN){
+2576c2576
+<     #####:  817:			}while(SSL_DATA_PENDING(context));
+---
+>         -:  817:			}while(SSL_DATA_PENDING(context));

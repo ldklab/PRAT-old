@@ -1,0 +1,22 @@
+830,833c830,833
+<     #####:  360:	for(i=0; i<config.bridge_count; i++){
+<     #####:  361:		if(bridge__new(&int_db, &(config.bridges[i]))){
+<     #####:  362:			log__printf(NULL, MOSQ_LOG_WARNING, "Warning: Unable to connect to bridge %s.", 
+<     #####:  363:					config.bridges[i].name);
+---
+>         -:  360:	for(i=0; i<config.bridge_count; i++){
+>         -:  361:		if(bridge__new(&int_db, &(config.bridges[i]))){
+>         -:  362:			log__printf(NULL, MOSQ_LOG_WARNING, "Warning: Unable to connect to bridge %s.", 
+>         -:  363:					config.bridges[i].name);
+880,882c880,882
+<     #####:  410:	for(i=0; i<int_db.bridge_count; i++){
+<     #####:  411:		if(int_db.bridges[i]){
+<     #####:  412:			context__cleanup(&int_db, int_db.bridges[i], true);
+---
+>         -:  410:	for(i=0; i<int_db.bridge_count; i++){
+>         -:  411:		if(int_db.bridges[i]){
+>         -:  412:			context__cleanup(&int_db, int_db.bridges[i], true);
+885c885
+<     #####:  415:	mosquitto__free(int_db.bridges);
+---
+>         -:  415:	mosquitto__free(int_db.bridges);

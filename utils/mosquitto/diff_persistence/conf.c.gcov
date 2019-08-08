@@ -1,0 +1,136 @@
+2117c2117
+<     #####:  591:	int len;
+---
+>         -:  591:	int len;
+2190,2193c2190,2193
+<     #####:  664:	if(config->persistence){
+<     #####:  665:		if(!config->persistence_file){
+<     #####:  666:			config->persistence_file = mosquitto__strdup("mosquitto.db");
+<     #####:  667:			if(!config->persistence_file) return MOSQ_ERR_NOMEM;
+---
+>         -:  664:	if(config->persistence){
+>         -:  665:		if(!config->persistence_file){
+>         -:  666:			config->persistence_file = mosquitto__strdup("mosquitto.db");
+>         -:  667:			if(!config->persistence_file) return MOSQ_ERR_NOMEM;
+2195,2200c2195,2200
+<     #####:  669:		mosquitto__free(config->persistence_filepath);
+<     #####:  670:		if(config->persistence_location && strlen(config->persistence_location)){
+<     #####:  671:			len = strlen(config->persistence_location) + strlen(config->persistence_file) + 1;
+<     #####:  672:			config->persistence_filepath = mosquitto__malloc(len);
+<     #####:  673:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+<     #####:  674:			snprintf(config->persistence_filepath, len, "%s%s", config->persistence_location, config->persistence_file);
+---
+>         -:  669:		mosquitto__free(config->persistence_filepath);
+>         -:  670:		if(config->persistence_location && strlen(config->persistence_location)){
+>         -:  671:			len = strlen(config->persistence_location) + strlen(config->persistence_file) + 1;
+>         -:  672:			config->persistence_filepath = mosquitto__malloc(len);
+>         -:  673:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+>         -:  674:			snprintf(config->persistence_filepath, len, "%s%s", config->persistence_location, config->persistence_file);
+2202,2203c2202,2203
+<     #####:  676:			config->persistence_filepath = mosquitto__strdup(config->persistence_file);
+<     #####:  677:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+---
+>         -:  676:			config->persistence_filepath = mosquitto__strdup(config->persistence_file);
+>         -:  677:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+2253c2253
+<     #####:  591:	int len;
+---
+>         -:  591:	int len;
+2326,2329c2326,2329
+<     #####:  664:	if(config->persistence){
+<     #####:  665:		if(!config->persistence_file){
+<     #####:  666:			config->persistence_file = mosquitto__strdup("mosquitto.db");
+<     #####:  667:			if(!config->persistence_file) return MOSQ_ERR_NOMEM;
+---
+>         -:  664:	if(config->persistence){
+>         -:  665:		if(!config->persistence_file){
+>         -:  666:			config->persistence_file = mosquitto__strdup("mosquitto.db");
+>         -:  667:			if(!config->persistence_file) return MOSQ_ERR_NOMEM;
+2331,2336c2331,2336
+<     #####:  669:		mosquitto__free(config->persistence_filepath);
+<     #####:  670:		if(config->persistence_location && strlen(config->persistence_location)){
+<     #####:  671:			len = strlen(config->persistence_location) + strlen(config->persistence_file) + 1;
+<     #####:  672:			config->persistence_filepath = mosquitto__malloc(len);
+<     #####:  673:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+<     #####:  674:			snprintf(config->persistence_filepath, len, "%s%s", config->persistence_location, config->persistence_file);
+---
+>         -:  669:		mosquitto__free(config->persistence_filepath);
+>         -:  670:		if(config->persistence_location && strlen(config->persistence_location)){
+>         -:  671:			len = strlen(config->persistence_location) + strlen(config->persistence_file) + 1;
+>         -:  672:			config->persistence_filepath = mosquitto__malloc(len);
+>         -:  673:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+>         -:  674:			snprintf(config->persistence_filepath, len, "%s%s", config->persistence_location, config->persistence_file);
+2338,2339c2338,2339
+<     #####:  676:			config->persistence_filepath = mosquitto__strdup(config->persistence_file);
+<     #####:  677:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+---
+>         -:  676:			config->persistence_filepath = mosquitto__strdup(config->persistence_file);
+>         -:  677:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+2389c2389
+<     #####:  591:	int len;
+---
+>         -:  591:	int len;
+2462,2465c2462,2465
+<     #####:  664:	if(config->persistence){
+<     #####:  665:		if(!config->persistence_file){
+<     #####:  666:			config->persistence_file = mosquitto__strdup("mosquitto.db");
+<     #####:  667:			if(!config->persistence_file) return MOSQ_ERR_NOMEM;
+---
+>         -:  664:	if(config->persistence){
+>         -:  665:		if(!config->persistence_file){
+>         -:  666:			config->persistence_file = mosquitto__strdup("mosquitto.db");
+>         -:  667:			if(!config->persistence_file) return MOSQ_ERR_NOMEM;
+2467,2472c2467,2472
+<     #####:  669:		mosquitto__free(config->persistence_filepath);
+<     #####:  670:		if(config->persistence_location && strlen(config->persistence_location)){
+<     #####:  671:			len = strlen(config->persistence_location) + strlen(config->persistence_file) + 1;
+<     #####:  672:			config->persistence_filepath = mosquitto__malloc(len);
+<     #####:  673:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+<     #####:  674:			snprintf(config->persistence_filepath, len, "%s%s", config->persistence_location, config->persistence_file);
+---
+>         -:  669:		mosquitto__free(config->persistence_filepath);
+>         -:  670:		if(config->persistence_location && strlen(config->persistence_location)){
+>         -:  671:			len = strlen(config->persistence_location) + strlen(config->persistence_file) + 1;
+>         -:  672:			config->persistence_filepath = mosquitto__malloc(len);
+>         -:  673:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+>         -:  674:			snprintf(config->persistence_filepath, len, "%s%s", config->persistence_location, config->persistence_file);
+2474,2475c2474,2475
+<     #####:  676:			config->persistence_filepath = mosquitto__strdup(config->persistence_file);
+<     #####:  677:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+---
+>         -:  676:			config->persistence_filepath = mosquitto__strdup(config->persistence_file);
+>         -:  677:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+2525c2525
+<     #####:  591:	int len;
+---
+>         -:  591:	int len;
+2598,2601c2598,2601
+<     #####:  664:	if(config->persistence){
+<     #####:  665:		if(!config->persistence_file){
+<     #####:  666:			config->persistence_file = mosquitto__strdup("mosquitto.db");
+<     #####:  667:			if(!config->persistence_file) return MOSQ_ERR_NOMEM;
+---
+>         -:  664:	if(config->persistence){
+>         -:  665:		if(!config->persistence_file){
+>         -:  666:			config->persistence_file = mosquitto__strdup("mosquitto.db");
+>         -:  667:			if(!config->persistence_file) return MOSQ_ERR_NOMEM;
+2603,2608c2603,2608
+<     #####:  669:		mosquitto__free(config->persistence_filepath);
+<     #####:  670:		if(config->persistence_location && strlen(config->persistence_location)){
+<     #####:  671:			len = strlen(config->persistence_location) + strlen(config->persistence_file) + 1;
+<     #####:  672:			config->persistence_filepath = mosquitto__malloc(len);
+<     #####:  673:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+<     #####:  674:			snprintf(config->persistence_filepath, len, "%s%s", config->persistence_location, config->persistence_file);
+---
+>         -:  669:		mosquitto__free(config->persistence_filepath);
+>         -:  670:		if(config->persistence_location && strlen(config->persistence_location)){
+>         -:  671:			len = strlen(config->persistence_location) + strlen(config->persistence_file) + 1;
+>         -:  672:			config->persistence_filepath = mosquitto__malloc(len);
+>         -:  673:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+>         -:  674:			snprintf(config->persistence_filepath, len, "%s%s", config->persistence_location, config->persistence_file);
+2610,2611c2610,2611
+<     #####:  676:			config->persistence_filepath = mosquitto__strdup(config->persistence_file);
+<     #####:  677:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;
+---
+>         -:  676:			config->persistence_filepath = mosquitto__strdup(config->persistence_file);
+>         -:  677:			if(!config->persistence_filepath) return MOSQ_ERR_NOMEM;

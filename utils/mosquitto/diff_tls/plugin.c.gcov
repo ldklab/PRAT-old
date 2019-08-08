@@ -1,0 +1,40 @@
+132,133c132,133
+<     #####:   54:	if(client->ssl){
+<     #####:   55:		return SSL_get_peer_certificate(client->ssl);
+---
+>         -:   54:	if(client->ssl){
+>         -:   55:		return SSL_get_peer_certificate(client->ssl);
+138c138
+<         -:   60:	return NULL;
+---
+>     #####:   60:	return NULL;
+146,147c146,147
+<     #####:   54:	if(client->ssl){
+<     #####:   55:		return SSL_get_peer_certificate(client->ssl);
+---
+>         -:   54:	if(client->ssl){
+>         -:   55:		return SSL_get_peer_certificate(client->ssl);
+152c152
+<         -:   60:	return NULL;
+---
+>     #####:   60:	return NULL;
+160,161c160,161
+<     #####:   54:	if(client->ssl){
+<     #####:   55:		return SSL_get_peer_certificate(client->ssl);
+---
+>         -:   54:	if(client->ssl){
+>         -:   55:		return SSL_get_peer_certificate(client->ssl);
+166c166
+<         -:   60:	return NULL;
+---
+>     #####:   60:	return NULL;
+174,175c174,175
+<     #####:   54:	if(client->ssl){
+<     #####:   55:		return SSL_get_peer_certificate(client->ssl);
+---
+>         -:   54:	if(client->ssl){
+>         -:   55:		return SSL_get_peer_certificate(client->ssl);
+180c180
+<         -:   60:	return NULL;
+---
+>     #####:   60:	return NULL;

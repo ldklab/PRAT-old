@@ -1,0 +1,1574 @@
+213,216c213,216
+<     #####:  106:	BIO *bio;
+<     #####:  107:	int rc;
+<     #####:  108:	char ebuf[256];
+<     #####:  109:	unsigned long e;
+---
+>         -:  106:	BIO *bio;
+>         -:  107:	int rc;
+>         -:  108:	char ebuf[256];
+>         -:  109:	unsigned long e;
+308,315c308,315
+<     #####:  201:	for(i=0; i<db->config->listener_count; i++){
+<     #####:  202:		for(j=0; j<db->config->listeners[i].sock_count; j++){
+<     #####:  203:			if(db->config->listeners[i].socks[j] == listensock){
+<     #####:  204:				if(db->config->listeners[i].ssl_ctx){
+<     #####:  205:					new_context->ssl = SSL_new(db->config->listeners[i].ssl_ctx);
+<     #####:  206:					if(!new_context->ssl){
+<     #####:  207:						context__cleanup(db, new_context, true);
+<     #####:  208:						return -1;
+---
+>         -:  201:	for(i=0; i<db->config->listener_count; i++){
+>         -:  202:		for(j=0; j<db->config->listeners[i].sock_count; j++){
+>         -:  203:			if(db->config->listeners[i].socks[j] == listensock){
+>         -:  204:				if(db->config->listeners[i].ssl_ctx){
+>         -:  205:					new_context->ssl = SSL_new(db->config->listeners[i].ssl_ctx);
+>         -:  206:					if(!new_context->ssl){
+>         -:  207:						context__cleanup(db, new_context, true);
+>         -:  208:						return -1;
+317,326c317,326
+<     #####:  210:					SSL_set_ex_data(new_context->ssl, tls_ex_index_context, new_context);
+<     #####:  211:					SSL_set_ex_data(new_context->ssl, tls_ex_index_listener, &db->config->listeners[i]);
+<     #####:  212:					new_context->want_write = true;
+<     #####:  213:					bio = BIO_new_socket(new_sock, BIO_NOCLOSE);
+<     #####:  214:					SSL_set_bio(new_context->ssl, bio, bio);
+<     #####:  215:					ERR_clear_error();
+<     #####:  216:					rc = SSL_accept(new_context->ssl);
+<     #####:  217:					if(rc != 1){
+<     #####:  218:						rc = SSL_get_error(new_context->ssl, rc);
+<     #####:  219:						if(rc == SSL_ERROR_WANT_READ){
+---
+>         -:  210:					SSL_set_ex_data(new_context->ssl, tls_ex_index_context, new_context);
+>         -:  211:					SSL_set_ex_data(new_context->ssl, tls_ex_index_listener, &db->config->listeners[i]);
+>         -:  212:					new_context->want_write = true;
+>         -:  213:					bio = BIO_new_socket(new_sock, BIO_NOCLOSE);
+>         -:  214:					SSL_set_bio(new_context->ssl, bio, bio);
+>         -:  215:					ERR_clear_error();
+>         -:  216:					rc = SSL_accept(new_context->ssl);
+>         -:  217:					if(rc != 1){
+>         -:  218:						rc = SSL_get_error(new_context->ssl, rc);
+>         -:  219:						if(rc == SSL_ERROR_WANT_READ){
+328,329c328,329
+<     #####:  221:						}else if(rc == SSL_ERROR_WANT_WRITE){
+<     #####:  222:							new_context->want_write = true;
+---
+>         -:  221:						}else if(rc == SSL_ERROR_WANT_WRITE){
+>         -:  222:							new_context->want_write = true;
+331,334c331,334
+<     #####:  224:							if(db->config->connection_messages == true){
+<     #####:  225:								e = ERR_get_error();
+<     #####:  226:								while(e){
+<     #####:  227:									log__printf(NULL, MOSQ_LOG_NOTICE,
+---
+>         -:  224:							if(db->config->connection_messages == true){
+>         -:  225:								e = ERR_get_error();
+>         -:  226:								while(e){
+>         -:  227:									log__printf(NULL, MOSQ_LOG_NOTICE,
+337c337
+<     #####:  230:									e = ERR_get_error();
+---
+>         -:  230:									e = ERR_get_error();
+340,341c340,341
+<     #####:  233:							context__cleanup(db, new_context, true);
+<     #####:  234:							return -1;
+---
+>         -:  233:							context__cleanup(db, new_context, true);
+>         -:  234:							return -1;
+365,368c365,368
+<     #####:  106:	BIO *bio;
+<     #####:  107:	int rc;
+<     #####:  108:	char ebuf[256];
+<     #####:  109:	unsigned long e;
+---
+>         -:  106:	BIO *bio;
+>         -:  107:	int rc;
+>         -:  108:	char ebuf[256];
+>         -:  109:	unsigned long e;
+460,467c460,467
+<     #####:  201:	for(i=0; i<db->config->listener_count; i++){
+<     #####:  202:		for(j=0; j<db->config->listeners[i].sock_count; j++){
+<     #####:  203:			if(db->config->listeners[i].socks[j] == listensock){
+<     #####:  204:				if(db->config->listeners[i].ssl_ctx){
+<     #####:  205:					new_context->ssl = SSL_new(db->config->listeners[i].ssl_ctx);
+<     #####:  206:					if(!new_context->ssl){
+<     #####:  207:						context__cleanup(db, new_context, true);
+<     #####:  208:						return -1;
+---
+>         -:  201:	for(i=0; i<db->config->listener_count; i++){
+>         -:  202:		for(j=0; j<db->config->listeners[i].sock_count; j++){
+>         -:  203:			if(db->config->listeners[i].socks[j] == listensock){
+>         -:  204:				if(db->config->listeners[i].ssl_ctx){
+>         -:  205:					new_context->ssl = SSL_new(db->config->listeners[i].ssl_ctx);
+>         -:  206:					if(!new_context->ssl){
+>         -:  207:						context__cleanup(db, new_context, true);
+>         -:  208:						return -1;
+469,478c469,478
+<     #####:  210:					SSL_set_ex_data(new_context->ssl, tls_ex_index_context, new_context);
+<     #####:  211:					SSL_set_ex_data(new_context->ssl, tls_ex_index_listener, &db->config->listeners[i]);
+<     #####:  212:					new_context->want_write = true;
+<     #####:  213:					bio = BIO_new_socket(new_sock, BIO_NOCLOSE);
+<     #####:  214:					SSL_set_bio(new_context->ssl, bio, bio);
+<     #####:  215:					ERR_clear_error();
+<     #####:  216:					rc = SSL_accept(new_context->ssl);
+<     #####:  217:					if(rc != 1){
+<     #####:  218:						rc = SSL_get_error(new_context->ssl, rc);
+<     #####:  219:						if(rc == SSL_ERROR_WANT_READ){
+---
+>         -:  210:					SSL_set_ex_data(new_context->ssl, tls_ex_index_context, new_context);
+>         -:  211:					SSL_set_ex_data(new_context->ssl, tls_ex_index_listener, &db->config->listeners[i]);
+>         -:  212:					new_context->want_write = true;
+>         -:  213:					bio = BIO_new_socket(new_sock, BIO_NOCLOSE);
+>         -:  214:					SSL_set_bio(new_context->ssl, bio, bio);
+>         -:  215:					ERR_clear_error();
+>         -:  216:					rc = SSL_accept(new_context->ssl);
+>         -:  217:					if(rc != 1){
+>         -:  218:						rc = SSL_get_error(new_context->ssl, rc);
+>         -:  219:						if(rc == SSL_ERROR_WANT_READ){
+480,481c480,481
+<     #####:  221:						}else if(rc == SSL_ERROR_WANT_WRITE){
+<     #####:  222:							new_context->want_write = true;
+---
+>         -:  221:						}else if(rc == SSL_ERROR_WANT_WRITE){
+>         -:  222:							new_context->want_write = true;
+483,486c483,486
+<     #####:  224:							if(db->config->connection_messages == true){
+<     #####:  225:								e = ERR_get_error();
+<     #####:  226:								while(e){
+<     #####:  227:									log__printf(NULL, MOSQ_LOG_NOTICE,
+---
+>         -:  224:							if(db->config->connection_messages == true){
+>         -:  225:								e = ERR_get_error();
+>         -:  226:								while(e){
+>         -:  227:									log__printf(NULL, MOSQ_LOG_NOTICE,
+489c489
+<     #####:  230:									e = ERR_get_error();
+---
+>         -:  230:									e = ERR_get_error();
+492,493c492,493
+<     #####:  233:							context__cleanup(db, new_context, true);
+<     #####:  234:							return -1;
+---
+>         -:  233:							context__cleanup(db, new_context, true);
+>         -:  234:							return -1;
+517,520c517,520
+<     #####:  106:	BIO *bio;
+<     #####:  107:	int rc;
+<     #####:  108:	char ebuf[256];
+<     #####:  109:	unsigned long e;
+---
+>         -:  106:	BIO *bio;
+>         -:  107:	int rc;
+>         -:  108:	char ebuf[256];
+>         -:  109:	unsigned long e;
+612,619c612,619
+<     #####:  201:	for(i=0; i<db->config->listener_count; i++){
+<     #####:  202:		for(j=0; j<db->config->listeners[i].sock_count; j++){
+<     #####:  203:			if(db->config->listeners[i].socks[j] == listensock){
+<     #####:  204:				if(db->config->listeners[i].ssl_ctx){
+<     #####:  205:					new_context->ssl = SSL_new(db->config->listeners[i].ssl_ctx);
+<     #####:  206:					if(!new_context->ssl){
+<     #####:  207:						context__cleanup(db, new_context, true);
+<     #####:  208:						return -1;
+---
+>         -:  201:	for(i=0; i<db->config->listener_count; i++){
+>         -:  202:		for(j=0; j<db->config->listeners[i].sock_count; j++){
+>         -:  203:			if(db->config->listeners[i].socks[j] == listensock){
+>         -:  204:				if(db->config->listeners[i].ssl_ctx){
+>         -:  205:					new_context->ssl = SSL_new(db->config->listeners[i].ssl_ctx);
+>         -:  206:					if(!new_context->ssl){
+>         -:  207:						context__cleanup(db, new_context, true);
+>         -:  208:						return -1;
+621,630c621,630
+<     #####:  210:					SSL_set_ex_data(new_context->ssl, tls_ex_index_context, new_context);
+<     #####:  211:					SSL_set_ex_data(new_context->ssl, tls_ex_index_listener, &db->config->listeners[i]);
+<     #####:  212:					new_context->want_write = true;
+<     #####:  213:					bio = BIO_new_socket(new_sock, BIO_NOCLOSE);
+<     #####:  214:					SSL_set_bio(new_context->ssl, bio, bio);
+<     #####:  215:					ERR_clear_error();
+<     #####:  216:					rc = SSL_accept(new_context->ssl);
+<     #####:  217:					if(rc != 1){
+<     #####:  218:						rc = SSL_get_error(new_context->ssl, rc);
+<     #####:  219:						if(rc == SSL_ERROR_WANT_READ){
+---
+>         -:  210:					SSL_set_ex_data(new_context->ssl, tls_ex_index_context, new_context);
+>         -:  211:					SSL_set_ex_data(new_context->ssl, tls_ex_index_listener, &db->config->listeners[i]);
+>         -:  212:					new_context->want_write = true;
+>         -:  213:					bio = BIO_new_socket(new_sock, BIO_NOCLOSE);
+>         -:  214:					SSL_set_bio(new_context->ssl, bio, bio);
+>         -:  215:					ERR_clear_error();
+>         -:  216:					rc = SSL_accept(new_context->ssl);
+>         -:  217:					if(rc != 1){
+>         -:  218:						rc = SSL_get_error(new_context->ssl, rc);
+>         -:  219:						if(rc == SSL_ERROR_WANT_READ){
+632,633c632,633
+<     #####:  221:						}else if(rc == SSL_ERROR_WANT_WRITE){
+<     #####:  222:							new_context->want_write = true;
+---
+>         -:  221:						}else if(rc == SSL_ERROR_WANT_WRITE){
+>         -:  222:							new_context->want_write = true;
+635,638c635,638
+<     #####:  224:							if(db->config->connection_messages == true){
+<     #####:  225:								e = ERR_get_error();
+<     #####:  226:								while(e){
+<     #####:  227:									log__printf(NULL, MOSQ_LOG_NOTICE,
+---
+>         -:  224:							if(db->config->connection_messages == true){
+>         -:  225:								e = ERR_get_error();
+>         -:  226:								while(e){
+>         -:  227:									log__printf(NULL, MOSQ_LOG_NOTICE,
+641c641
+<     #####:  230:									e = ERR_get_error();
+---
+>         -:  230:									e = ERR_get_error();
+644,645c644,645
+<     #####:  233:							context__cleanup(db, new_context, true);
+<     #####:  234:							return -1;
+---
+>         -:  233:							context__cleanup(db, new_context, true);
+>         -:  234:							return -1;
+669,672c669,672
+<     #####:  106:	BIO *bio;
+<     #####:  107:	int rc;
+<     #####:  108:	char ebuf[256];
+<     #####:  109:	unsigned long e;
+---
+>         -:  106:	BIO *bio;
+>         -:  107:	int rc;
+>         -:  108:	char ebuf[256];
+>         -:  109:	unsigned long e;
+764,771c764,771
+<     #####:  201:	for(i=0; i<db->config->listener_count; i++){
+<     #####:  202:		for(j=0; j<db->config->listeners[i].sock_count; j++){
+<     #####:  203:			if(db->config->listeners[i].socks[j] == listensock){
+<     #####:  204:				if(db->config->listeners[i].ssl_ctx){
+<     #####:  205:					new_context->ssl = SSL_new(db->config->listeners[i].ssl_ctx);
+<     #####:  206:					if(!new_context->ssl){
+<     #####:  207:						context__cleanup(db, new_context, true);
+<     #####:  208:						return -1;
+---
+>         -:  201:	for(i=0; i<db->config->listener_count; i++){
+>         -:  202:		for(j=0; j<db->config->listeners[i].sock_count; j++){
+>         -:  203:			if(db->config->listeners[i].socks[j] == listensock){
+>         -:  204:				if(db->config->listeners[i].ssl_ctx){
+>         -:  205:					new_context->ssl = SSL_new(db->config->listeners[i].ssl_ctx);
+>         -:  206:					if(!new_context->ssl){
+>         -:  207:						context__cleanup(db, new_context, true);
+>         -:  208:						return -1;
+773,782c773,782
+<     #####:  210:					SSL_set_ex_data(new_context->ssl, tls_ex_index_context, new_context);
+<     #####:  211:					SSL_set_ex_data(new_context->ssl, tls_ex_index_listener, &db->config->listeners[i]);
+<     #####:  212:					new_context->want_write = true;
+<     #####:  213:					bio = BIO_new_socket(new_sock, BIO_NOCLOSE);
+<     #####:  214:					SSL_set_bio(new_context->ssl, bio, bio);
+<     #####:  215:					ERR_clear_error();
+<     #####:  216:					rc = SSL_accept(new_context->ssl);
+<     #####:  217:					if(rc != 1){
+<     #####:  218:						rc = SSL_get_error(new_context->ssl, rc);
+<     #####:  219:						if(rc == SSL_ERROR_WANT_READ){
+---
+>         -:  210:					SSL_set_ex_data(new_context->ssl, tls_ex_index_context, new_context);
+>         -:  211:					SSL_set_ex_data(new_context->ssl, tls_ex_index_listener, &db->config->listeners[i]);
+>         -:  212:					new_context->want_write = true;
+>         -:  213:					bio = BIO_new_socket(new_sock, BIO_NOCLOSE);
+>         -:  214:					SSL_set_bio(new_context->ssl, bio, bio);
+>         -:  215:					ERR_clear_error();
+>         -:  216:					rc = SSL_accept(new_context->ssl);
+>         -:  217:					if(rc != 1){
+>         -:  218:						rc = SSL_get_error(new_context->ssl, rc);
+>         -:  219:						if(rc == SSL_ERROR_WANT_READ){
+784,785c784,785
+<     #####:  221:						}else if(rc == SSL_ERROR_WANT_WRITE){
+<     #####:  222:							new_context->want_write = true;
+---
+>         -:  221:						}else if(rc == SSL_ERROR_WANT_WRITE){
+>         -:  222:							new_context->want_write = true;
+787,790c787,790
+<     #####:  224:							if(db->config->connection_messages == true){
+<     #####:  225:								e = ERR_get_error();
+<     #####:  226:								while(e){
+<     #####:  227:									log__printf(NULL, MOSQ_LOG_NOTICE,
+---
+>         -:  224:							if(db->config->connection_messages == true){
+>         -:  225:								e = ERR_get_error();
+>         -:  226:								while(e){
+>         -:  227:									log__printf(NULL, MOSQ_LOG_NOTICE,
+793c793
+<     #####:  230:									e = ERR_get_error();
+---
+>         -:  230:									e = ERR_get_error();
+796,797c796,797
+<     #####:  233:							context__cleanup(db, new_context, true);
+<     #####:  234:							return -1;
+---
+>         -:  233:							context__cleanup(db, new_context, true);
+>         -:  234:							return -1;
+815c815
+<     #####:  251:static int client_certificate_verify(int preverify_ok, X509_STORE_CTX *ctx)
+---
+>         -:  251:static int client_certificate_verify(int preverify_ok, X509_STORE_CTX *ctx)
+818c818
+<     #####:  254:	return preverify_ok;
+---
+>         -:  254:	return preverify_ok;
+820,841d819
+< ------------------
+< client_certificate_verify:
+<     #####:  251:static int client_certificate_verify(int preverify_ok, X509_STORE_CTX *ctx)
+<         -:  252:{
+<         -:  253:	/* Preverify should check expiry, revocation. */
+<     #####:  254:	return preverify_ok;
+<         -:  255:}
+< ------------------
+< client_certificate_verify:
+<     #####:  251:static int client_certificate_verify(int preverify_ok, X509_STORE_CTX *ctx)
+<         -:  252:{
+<         -:  253:	/* Preverify should check expiry, revocation. */
+<     #####:  254:	return preverify_ok;
+<         -:  255:}
+< ------------------
+< client_certificate_verify:
+<     #####:  251:static int client_certificate_verify(int preverify_ok, X509_STORE_CTX *ctx)
+<         -:  252:{
+<         -:  253:	/* Preverify should check expiry, revocation. */
+<     #####:  254:	return preverify_ok;
+<         -:  255:}
+< ------------------
+845,995c823
+<     #####:  259:static unsigned int psk_server_callback(SSL *ssl, const char *identity, unsigned char *psk, unsigned int max_psk_len)
+<         -:  260:{
+<     #####:  261:	struct mosquitto_db *db;
+<     #####:  262:	struct mosquitto *context;
+<     #####:  263:	struct mosquitto__listener *listener;
+<     #####:  264:	char *psk_key = NULL;
+<     #####:  265:	int len;
+<     #####:  266:	const char *psk_hint;
+<         -:  267:
+<     #####:  268:	if(!identity) return 0;
+<         -:  269:
+<     #####:  270:	db = mosquitto__get_db();
+<         -:  271:
+<     #####:  272:	context = SSL_get_ex_data(ssl, tls_ex_index_context);
+<     #####:  273:	if(!context) return 0;
+<         -:  274:
+<     #####:  275:	listener = SSL_get_ex_data(ssl, tls_ex_index_listener);
+<     #####:  276:	if(!listener) return 0;
+<         -:  277:
+<     #####:  278:	psk_hint = listener->psk_hint;
+<         -:  279:
+<         -:  280:	/* The hex to BN conversion results in the length halving, so we can pass
+<         -:  281:	 * max_psk_len*2 as the max hex key here. */
+<     #####:  282:	psk_key = mosquitto__calloc(1, max_psk_len*2 + 1);
+<     #####:  283:	if(!psk_key) return 0;
+<         -:  284:
+<     #####:  285:	if(mosquitto_psk_key_get(db, context, psk_hint, identity, psk_key, max_psk_len*2) != MOSQ_ERR_SUCCESS){
+<     #####:  286:		mosquitto__free(psk_key);
+<     #####:  287:		return 0;
+<         -:  288:	}
+<         -:  289:
+<     #####:  290:	len = mosquitto__hex2bin(psk_key, psk, max_psk_len);
+<     #####:  291:	if (len < 0){
+<     #####:  292:		mosquitto__free(psk_key);
+<     #####:  293:		return 0;
+<         -:  294:	}
+<         -:  295:
+<     #####:  296:	if(listener->use_identity_as_username){
+<     #####:  297:		context->username = mosquitto__strdup(identity);
+<     #####:  298:		if(!context->username){
+<     #####:  299:			mosquitto__free(psk_key);
+<     #####:  300:			return 0;
+<         -:  301:		}
+<         -:  302:	}
+<         -:  303:
+<     #####:  304:	mosquitto__free(psk_key);
+<     #####:  305:	return len;
+<         -:  306:}
+< ------------------
+< psk_server_callback:
+<     #####:  259:static unsigned int psk_server_callback(SSL *ssl, const char *identity, unsigned char *psk, unsigned int max_psk_len)
+<         -:  260:{
+<     #####:  261:	struct mosquitto_db *db;
+<     #####:  262:	struct mosquitto *context;
+<     #####:  263:	struct mosquitto__listener *listener;
+<     #####:  264:	char *psk_key = NULL;
+<     #####:  265:	int len;
+<     #####:  266:	const char *psk_hint;
+<         -:  267:
+<     #####:  268:	if(!identity) return 0;
+<         -:  269:
+<     #####:  270:	db = mosquitto__get_db();
+<         -:  271:
+<     #####:  272:	context = SSL_get_ex_data(ssl, tls_ex_index_context);
+<     #####:  273:	if(!context) return 0;
+<         -:  274:
+<     #####:  275:	listener = SSL_get_ex_data(ssl, tls_ex_index_listener);
+<     #####:  276:	if(!listener) return 0;
+<         -:  277:
+<     #####:  278:	psk_hint = listener->psk_hint;
+<         -:  279:
+<         -:  280:	/* The hex to BN conversion results in the length halving, so we can pass
+<         -:  281:	 * max_psk_len*2 as the max hex key here. */
+<     #####:  282:	psk_key = mosquitto__calloc(1, max_psk_len*2 + 1);
+<     #####:  283:	if(!psk_key) return 0;
+<         -:  284:
+<     #####:  285:	if(mosquitto_psk_key_get(db, context, psk_hint, identity, psk_key, max_psk_len*2) != MOSQ_ERR_SUCCESS){
+<     #####:  286:		mosquitto__free(psk_key);
+<     #####:  287:		return 0;
+<         -:  288:	}
+<         -:  289:
+<     #####:  290:	len = mosquitto__hex2bin(psk_key, psk, max_psk_len);
+<     #####:  291:	if (len < 0){
+<     #####:  292:		mosquitto__free(psk_key);
+<     #####:  293:		return 0;
+<         -:  294:	}
+<         -:  295:
+<     #####:  296:	if(listener->use_identity_as_username){
+<     #####:  297:		context->username = mosquitto__strdup(identity);
+<     #####:  298:		if(!context->username){
+<     #####:  299:			mosquitto__free(psk_key);
+<     #####:  300:			return 0;
+<         -:  301:		}
+<         -:  302:	}
+<         -:  303:
+<     #####:  304:	mosquitto__free(psk_key);
+<     #####:  305:	return len;
+<         -:  306:}
+< ------------------
+< psk_server_callback:
+<     #####:  259:static unsigned int psk_server_callback(SSL *ssl, const char *identity, unsigned char *psk, unsigned int max_psk_len)
+<         -:  260:{
+<     #####:  261:	struct mosquitto_db *db;
+<     #####:  262:	struct mosquitto *context;
+<     #####:  263:	struct mosquitto__listener *listener;
+<     #####:  264:	char *psk_key = NULL;
+<     #####:  265:	int len;
+<     #####:  266:	const char *psk_hint;
+<         -:  267:
+<     #####:  268:	if(!identity) return 0;
+<         -:  269:
+<     #####:  270:	db = mosquitto__get_db();
+<         -:  271:
+<     #####:  272:	context = SSL_get_ex_data(ssl, tls_ex_index_context);
+<     #####:  273:	if(!context) return 0;
+<         -:  274:
+<     #####:  275:	listener = SSL_get_ex_data(ssl, tls_ex_index_listener);
+<     #####:  276:	if(!listener) return 0;
+<         -:  277:
+<     #####:  278:	psk_hint = listener->psk_hint;
+<         -:  279:
+<         -:  280:	/* The hex to BN conversion results in the length halving, so we can pass
+<         -:  281:	 * max_psk_len*2 as the max hex key here. */
+<     #####:  282:	psk_key = mosquitto__calloc(1, max_psk_len*2 + 1);
+<     #####:  283:	if(!psk_key) return 0;
+<         -:  284:
+<     #####:  285:	if(mosquitto_psk_key_get(db, context, psk_hint, identity, psk_key, max_psk_len*2) != MOSQ_ERR_SUCCESS){
+<     #####:  286:		mosquitto__free(psk_key);
+<     #####:  287:		return 0;
+<         -:  288:	}
+<         -:  289:
+<     #####:  290:	len = mosquitto__hex2bin(psk_key, psk, max_psk_len);
+<     #####:  291:	if (len < 0){
+<     #####:  292:		mosquitto__free(psk_key);
+<     #####:  293:		return 0;
+<         -:  294:	}
+<         -:  295:
+<     #####:  296:	if(listener->use_identity_as_username){
+<     #####:  297:		context->username = mosquitto__strdup(identity);
+<     #####:  298:		if(!context->username){
+<     #####:  299:			mosquitto__free(psk_key);
+<     #####:  300:			return 0;
+<         -:  301:		}
+<         -:  302:	}
+<         -:  303:
+<     #####:  304:	mosquitto__free(psk_key);
+<     #####:  305:	return len;
+<         -:  306:}
+< ------------------
+< psk_server_callback:
+<     #####:  259:static unsigned int psk_server_callback(SSL *ssl, const char *identity, unsigned char *psk, unsigned int max_psk_len)
+---
+>         -:  259:static unsigned int psk_server_callback(SSL *ssl, const char *identity, unsigned char *psk, unsigned int max_psk_len)
+997,1002c825,830
+<     #####:  261:	struct mosquitto_db *db;
+<     #####:  262:	struct mosquitto *context;
+<     #####:  263:	struct mosquitto__listener *listener;
+<     #####:  264:	char *psk_key = NULL;
+<     #####:  265:	int len;
+<     #####:  266:	const char *psk_hint;
+---
+>         -:  261:	struct mosquitto_db *db;
+>         -:  262:	struct mosquitto *context;
+>         -:  263:	struct mosquitto__listener *listener;
+>         -:  264:	char *psk_key = NULL;
+>         -:  265:	int len;
+>         -:  266:	const char *psk_hint;
+1004c832
+<     #####:  268:	if(!identity) return 0;
+---
+>         -:  268:	if(!identity) return 0;
+1006c834
+<     #####:  270:	db = mosquitto__get_db();
+---
+>         -:  270:	db = mosquitto__get_db();
+1008,1009c836,837
+<     #####:  272:	context = SSL_get_ex_data(ssl, tls_ex_index_context);
+<     #####:  273:	if(!context) return 0;
+---
+>         -:  272:	context = SSL_get_ex_data(ssl, tls_ex_index_context);
+>         -:  273:	if(!context) return 0;
+1011,1012c839,840
+<     #####:  275:	listener = SSL_get_ex_data(ssl, tls_ex_index_listener);
+<     #####:  276:	if(!listener) return 0;
+---
+>         -:  275:	listener = SSL_get_ex_data(ssl, tls_ex_index_listener);
+>         -:  276:	if(!listener) return 0;
+1014c842
+<     #####:  278:	psk_hint = listener->psk_hint;
+---
+>         -:  278:	psk_hint = listener->psk_hint;
+1018,1019c846,847
+<     #####:  282:	psk_key = mosquitto__calloc(1, max_psk_len*2 + 1);
+<     #####:  283:	if(!psk_key) return 0;
+---
+>         -:  282:	psk_key = mosquitto__calloc(1, max_psk_len*2 + 1);
+>         -:  283:	if(!psk_key) return 0;
+1021,1023c849,851
+<     #####:  285:	if(mosquitto_psk_key_get(db, context, psk_hint, identity, psk_key, max_psk_len*2) != MOSQ_ERR_SUCCESS){
+<     #####:  286:		mosquitto__free(psk_key);
+<     #####:  287:		return 0;
+---
+>         -:  285:	if(mosquitto_psk_key_get(db, context, psk_hint, identity, psk_key, max_psk_len*2) != MOSQ_ERR_SUCCESS){
+>         -:  286:		mosquitto__free(psk_key);
+>         -:  287:		return 0;
+1026,1029c854,857
+<     #####:  290:	len = mosquitto__hex2bin(psk_key, psk, max_psk_len);
+<     #####:  291:	if (len < 0){
+<     #####:  292:		mosquitto__free(psk_key);
+<     #####:  293:		return 0;
+---
+>         -:  290:	len = mosquitto__hex2bin(psk_key, psk, max_psk_len);
+>         -:  291:	if (len < 0){
+>         -:  292:		mosquitto__free(psk_key);
+>         -:  293:		return 0;
+1032,1036c860,864
+<     #####:  296:	if(listener->use_identity_as_username){
+<     #####:  297:		context->username = mosquitto__strdup(identity);
+<     #####:  298:		if(!context->username){
+<     #####:  299:			mosquitto__free(psk_key);
+<     #####:  300:			return 0;
+---
+>         -:  296:	if(listener->use_identity_as_username){
+>         -:  297:		context->username = mosquitto__strdup(identity);
+>         -:  298:		if(!context->username){
+>         -:  299:			mosquitto__free(psk_key);
+>         -:  300:			return 0;
+1040,1041c868,869
+<     #####:  304:	mosquitto__free(psk_key);
+<     #####:  305:	return len;
+---
+>         -:  304:	mosquitto__free(psk_key);
+>         -:  305:	return len;
+1043d870
+< ------------------
+1047c874
+<     #####:  310:static int mosquitto__tls_server_ctx(struct mosquitto__listener *listener)
+---
+>         -:  310:static int mosquitto__tls_server_ctx(struct mosquitto__listener *listener)
+1049,1050c876,877
+<     #####:  312:	char buf[256];
+<     #####:  313:	int rc;
+---
+>         -:  312:	char buf[256];
+>         -:  313:	int rc;
+1056c883
+<     #####:  319:	listener->ssl_ctx = SSL_CTX_new(TLS_server_method());
+---
+>         -:  319:	listener->ssl_ctx = SSL_CTX_new(TLS_server_method());
+1059,1061c886,888
+<     #####:  322:	if(!listener->ssl_ctx){
+<     #####:  323:		log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to create TLS context.");
+<     #####:  324:		return 1;
+---
+>         -:  322:	if(!listener->ssl_ctx){
+>         -:  323:		log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to create TLS context.");
+>         -:  324:		return 1;
+1064,1071c891,898
+<     #####:  327:	if(listener->tls_version == NULL){
+<     #####:  328:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3);
+<     #####:  329:	}else if(!strcmp(listener->tls_version, "tlsv1.2")){
+<     #####:  330:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_1 | SSL_OP_NO_TLSv1);
+<     #####:  331:	}else if(!strcmp(listener->tls_version, "tlsv1.1")){
+<     #####:  332:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1);
+<     #####:  333:	}else if(!strcmp(listener->tls_version, "tlsv1")){
+<     #####:  334:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1_1);
+---
+>         -:  327:	if(listener->tls_version == NULL){
+>         -:  328:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3);
+>         -:  329:	}else if(!strcmp(listener->tls_version, "tlsv1.2")){
+>         -:  330:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_1 | SSL_OP_NO_TLSv1);
+>         -:  331:	}else if(!strcmp(listener->tls_version, "tlsv1.1")){
+>         -:  332:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1);
+>         -:  333:	}else if(!strcmp(listener->tls_version, "tlsv1")){
+>         -:  334:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1_1);
+1076c903
+<     #####:  339:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_COMPRESSION);
+---
+>         -:  339:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_COMPRESSION);
+1080c907
+<     #####:  343:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_CIPHER_SERVER_PREFERENCE);
+---
+>         -:  343:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_CIPHER_SERVER_PREFERENCE);
+1085c912
+<     #####:  348:	SSL_CTX_set_mode(listener->ssl_ctx, SSL_MODE_RELEASE_BUFFERS);
+---
+>         -:  348:	SSL_CTX_set_mode(listener->ssl_ctx, SSL_MODE_RELEASE_BUFFERS);
+1094,1095c921,922
+<     #####:  357:	snprintf(buf, 256, "mosquitto-%d", listener->port);
+<     #####:  358:	SSL_CTX_set_session_id_context(listener->ssl_ctx, (unsigned char *)buf, strlen(buf));
+---
+>         -:  357:	snprintf(buf, 256, "mosquitto-%d", listener->port);
+>         -:  358:	SSL_CTX_set_session_id_context(listener->ssl_ctx, (unsigned char *)buf, strlen(buf));
+1097,1101c924,928
+<     #####:  360:	if(listener->ciphers){
+<     #####:  361:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, listener->ciphers);
+<     #####:  362:		if(rc == 0){
+<     #####:  363:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+<     #####:  364:			return 1;
+---
+>         -:  360:	if(listener->ciphers){
+>         -:  361:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, listener->ciphers);
+>         -:  362:		if(rc == 0){
+>         -:  363:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+>         -:  364:			return 1;
+1104,1107c931,934
+<     #####:  367:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, "DEFAULT:!aNULL:!eNULL:!LOW:!EXPORT:!SSLv2:@STRENGTH");
+<     #####:  368:		if(rc == 0){
+<     #####:  369:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+<     #####:  370:			return 1;
+---
+>         -:  367:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, "DEFAULT:!aNULL:!eNULL:!LOW:!EXPORT:!SSLv2:@STRENGTH");
+>         -:  368:		if(rc == 0){
+>         -:  369:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+>         -:  370:			return 1;
+1112,1313d938
+< ------------------
+< mosquitto__tls_server_ctx:
+<     #####:  310:static int mosquitto__tls_server_ctx(struct mosquitto__listener *listener)
+<         -:  311:{
+<     #####:  312:	char buf[256];
+<     #####:  313:	int rc;
+<         -:  314:
+<         -:  315:
+<         -:  316:#if OPENSSL_VERSION_NUMBER < 0x10100000L
+<         -:  317:	listener->ssl_ctx = SSL_CTX_new(SSLv23_server_method());
+<         -:  318:#else
+<     #####:  319:	listener->ssl_ctx = SSL_CTX_new(TLS_server_method());
+<         -:  320:#endif
+<         -:  321:
+<     #####:  322:	if(!listener->ssl_ctx){
+<     #####:  323:		log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to create TLS context.");
+<     #####:  324:		return 1;
+<         -:  325:	}
+<         -:  326:
+<     #####:  327:	if(listener->tls_version == NULL){
+<     #####:  328:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3);
+<     #####:  329:	}else if(!strcmp(listener->tls_version, "tlsv1.2")){
+<     #####:  330:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_1 | SSL_OP_NO_TLSv1);
+<     #####:  331:	}else if(!strcmp(listener->tls_version, "tlsv1.1")){
+<     #####:  332:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1);
+<     #####:  333:	}else if(!strcmp(listener->tls_version, "tlsv1")){
+<     #####:  334:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1_1);
+<         -:  335:	}
+<         -:  336:
+<         -:  337:#ifdef SSL_OP_NO_COMPRESSION
+<         -:  338:	/* Disable compression */
+<     #####:  339:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_COMPRESSION);
+<         -:  340:#endif
+<         -:  341:#ifdef SSL_OP_CIPHER_SERVER_PREFERENCE
+<         -:  342:	/* Server chooses cipher */
+<     #####:  343:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_CIPHER_SERVER_PREFERENCE);
+<         -:  344:#endif
+<         -:  345:
+<         -:  346:#ifdef SSL_MODE_RELEASE_BUFFERS
+<         -:  347:	/* Use even less memory per SSL connection. */
+<     #####:  348:	SSL_CTX_set_mode(listener->ssl_ctx, SSL_MODE_RELEASE_BUFFERS);
+<         -:  349:#endif
+<         -:  350:
+<         -:  351:#ifdef WITH_EC
+<         -:  352:#if OPENSSL_VERSION_NUMBER >= 0x10002000L && OPENSSL_VERSION_NUMBER < 0x10100000L
+<         -:  353:	SSL_CTX_set_ecdh_auto(listener->ssl_ctx, 1);
+<         -:  354:#endif
+<         -:  355:#endif
+<         -:  356:
+<     #####:  357:	snprintf(buf, 256, "mosquitto-%d", listener->port);
+<     #####:  358:	SSL_CTX_set_session_id_context(listener->ssl_ctx, (unsigned char *)buf, strlen(buf));
+<         -:  359:
+<     #####:  360:	if(listener->ciphers){
+<     #####:  361:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, listener->ciphers);
+<     #####:  362:		if(rc == 0){
+<     #####:  363:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+<     #####:  364:			return 1;
+<         -:  365:		}
+<         -:  366:	}else{
+<     #####:  367:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, "DEFAULT:!aNULL:!eNULL:!LOW:!EXPORT:!SSLv2:@STRENGTH");
+<     #####:  368:		if(rc == 0){
+<     #####:  369:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+<     #####:  370:			return 1;
+<         -:  371:		}
+<         -:  372:	}
+<         -:  373:	return MOSQ_ERR_SUCCESS;
+<         -:  374:}
+< ------------------
+< mosquitto__tls_server_ctx:
+<     #####:  310:static int mosquitto__tls_server_ctx(struct mosquitto__listener *listener)
+<         -:  311:{
+<     #####:  312:	char buf[256];
+<     #####:  313:	int rc;
+<         -:  314:
+<         -:  315:
+<         -:  316:#if OPENSSL_VERSION_NUMBER < 0x10100000L
+<         -:  317:	listener->ssl_ctx = SSL_CTX_new(SSLv23_server_method());
+<         -:  318:#else
+<     #####:  319:	listener->ssl_ctx = SSL_CTX_new(TLS_server_method());
+<         -:  320:#endif
+<         -:  321:
+<     #####:  322:	if(!listener->ssl_ctx){
+<     #####:  323:		log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to create TLS context.");
+<     #####:  324:		return 1;
+<         -:  325:	}
+<         -:  326:
+<     #####:  327:	if(listener->tls_version == NULL){
+<     #####:  328:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3);
+<     #####:  329:	}else if(!strcmp(listener->tls_version, "tlsv1.2")){
+<     #####:  330:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_1 | SSL_OP_NO_TLSv1);
+<     #####:  331:	}else if(!strcmp(listener->tls_version, "tlsv1.1")){
+<     #####:  332:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1);
+<     #####:  333:	}else if(!strcmp(listener->tls_version, "tlsv1")){
+<     #####:  334:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1_1);
+<         -:  335:	}
+<         -:  336:
+<         -:  337:#ifdef SSL_OP_NO_COMPRESSION
+<         -:  338:	/* Disable compression */
+<     #####:  339:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_COMPRESSION);
+<         -:  340:#endif
+<         -:  341:#ifdef SSL_OP_CIPHER_SERVER_PREFERENCE
+<         -:  342:	/* Server chooses cipher */
+<     #####:  343:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_CIPHER_SERVER_PREFERENCE);
+<         -:  344:#endif
+<         -:  345:
+<         -:  346:#ifdef SSL_MODE_RELEASE_BUFFERS
+<         -:  347:	/* Use even less memory per SSL connection. */
+<     #####:  348:	SSL_CTX_set_mode(listener->ssl_ctx, SSL_MODE_RELEASE_BUFFERS);
+<         -:  349:#endif
+<         -:  350:
+<         -:  351:#ifdef WITH_EC
+<         -:  352:#if OPENSSL_VERSION_NUMBER >= 0x10002000L && OPENSSL_VERSION_NUMBER < 0x10100000L
+<         -:  353:	SSL_CTX_set_ecdh_auto(listener->ssl_ctx, 1);
+<         -:  354:#endif
+<         -:  355:#endif
+<         -:  356:
+<     #####:  357:	snprintf(buf, 256, "mosquitto-%d", listener->port);
+<     #####:  358:	SSL_CTX_set_session_id_context(listener->ssl_ctx, (unsigned char *)buf, strlen(buf));
+<         -:  359:
+<     #####:  360:	if(listener->ciphers){
+<     #####:  361:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, listener->ciphers);
+<     #####:  362:		if(rc == 0){
+<     #####:  363:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+<     #####:  364:			return 1;
+<         -:  365:		}
+<         -:  366:	}else{
+<     #####:  367:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, "DEFAULT:!aNULL:!eNULL:!LOW:!EXPORT:!SSLv2:@STRENGTH");
+<     #####:  368:		if(rc == 0){
+<     #####:  369:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+<     #####:  370:			return 1;
+<         -:  371:		}
+<         -:  372:	}
+<         -:  373:	return MOSQ_ERR_SUCCESS;
+<         -:  374:}
+< ------------------
+< mosquitto__tls_server_ctx:
+<     #####:  310:static int mosquitto__tls_server_ctx(struct mosquitto__listener *listener)
+<         -:  311:{
+<     #####:  312:	char buf[256];
+<     #####:  313:	int rc;
+<         -:  314:
+<         -:  315:
+<         -:  316:#if OPENSSL_VERSION_NUMBER < 0x10100000L
+<         -:  317:	listener->ssl_ctx = SSL_CTX_new(SSLv23_server_method());
+<         -:  318:#else
+<     #####:  319:	listener->ssl_ctx = SSL_CTX_new(TLS_server_method());
+<         -:  320:#endif
+<         -:  321:
+<     #####:  322:	if(!listener->ssl_ctx){
+<     #####:  323:		log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to create TLS context.");
+<     #####:  324:		return 1;
+<         -:  325:	}
+<         -:  326:
+<     #####:  327:	if(listener->tls_version == NULL){
+<     #####:  328:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3);
+<     #####:  329:	}else if(!strcmp(listener->tls_version, "tlsv1.2")){
+<     #####:  330:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_1 | SSL_OP_NO_TLSv1);
+<     #####:  331:	}else if(!strcmp(listener->tls_version, "tlsv1.1")){
+<     #####:  332:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1);
+<     #####:  333:	}else if(!strcmp(listener->tls_version, "tlsv1")){
+<     #####:  334:		SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1_2 | SSL_OP_NO_TLSv1_1);
+<         -:  335:	}
+<         -:  336:
+<         -:  337:#ifdef SSL_OP_NO_COMPRESSION
+<         -:  338:	/* Disable compression */
+<     #####:  339:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_NO_COMPRESSION);
+<         -:  340:#endif
+<         -:  341:#ifdef SSL_OP_CIPHER_SERVER_PREFERENCE
+<         -:  342:	/* Server chooses cipher */
+<     #####:  343:	SSL_CTX_set_options(listener->ssl_ctx, SSL_OP_CIPHER_SERVER_PREFERENCE);
+<         -:  344:#endif
+<         -:  345:
+<         -:  346:#ifdef SSL_MODE_RELEASE_BUFFERS
+<         -:  347:	/* Use even less memory per SSL connection. */
+<     #####:  348:	SSL_CTX_set_mode(listener->ssl_ctx, SSL_MODE_RELEASE_BUFFERS);
+<         -:  349:#endif
+<         -:  350:
+<         -:  351:#ifdef WITH_EC
+<         -:  352:#if OPENSSL_VERSION_NUMBER >= 0x10002000L && OPENSSL_VERSION_NUMBER < 0x10100000L
+<         -:  353:	SSL_CTX_set_ecdh_auto(listener->ssl_ctx, 1);
+<         -:  354:#endif
+<         -:  355:#endif
+<         -:  356:
+<     #####:  357:	snprintf(buf, 256, "mosquitto-%d", listener->port);
+<     #####:  358:	SSL_CTX_set_session_id_context(listener->ssl_ctx, (unsigned char *)buf, strlen(buf));
+<         -:  359:
+<     #####:  360:	if(listener->ciphers){
+<     #####:  361:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, listener->ciphers);
+<     #####:  362:		if(rc == 0){
+<     #####:  363:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+<     #####:  364:			return 1;
+<         -:  365:		}
+<         -:  366:	}else{
+<     #####:  367:		rc = SSL_CTX_set_cipher_list(listener->ssl_ctx, "DEFAULT:!aNULL:!eNULL:!LOW:!EXPORT:!SSLv2:@STRENGTH");
+<     #####:  368:		if(rc == 0){
+<     #####:  369:			log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS ciphers. Check cipher list \"%s\".", listener->ciphers);
+<     #####:  370:			return 1;
+<         -:  371:		}
+<         -:  372:	}
+<         -:  373:	return MOSQ_ERR_SUCCESS;
+<         -:  374:}
+< ------------------
+1332,1334c957,959
+<     #####:  393:	int rc;
+<     #####:  394:	X509_STORE *store;
+<     #####:  395:	X509_LOOKUP *lookup;
+---
+>         -:  393:	int rc;
+>         -:  394:	X509_STORE *store;
+>         -:  395:	X509_LOOKUP *lookup;
+1404,1407c1029,1032
+<     #####:  465:		if((listener->cafile || listener->capath) && listener->certfile && listener->keyfile){
+<     #####:  466:			if(mosquitto__tls_server_ctx(listener)){
+<     #####:  467:				COMPAT_CLOSE(sock);
+<     #####:  468:				return 1;
+---
+>         -:  465:		if((listener->cafile || listener->capath) && listener->certfile && listener->keyfile){
+>         -:  466:			if(mosquitto__tls_server_ctx(listener)){
+>         -:  467:				COMPAT_CLOSE(sock);
+>         -:  468:				return 1;
+1410,1415c1035,1040
+<     #####:  471:			rc = SSL_CTX_load_verify_locations(listener->ssl_ctx, listener->cafile, listener->capath);
+<     #####:  472:			if(rc == 0){
+<     #####:  473:				if(listener->cafile && listener->capath){
+<     #####:  474:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\" and capath \"%s\".", listener->cafile, listener->capath);
+<     #####:  475:				}else if(listener->cafile){
+<     #####:  476:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\".", listener->cafile);
+---
+>         -:  471:			rc = SSL_CTX_load_verify_locations(listener->ssl_ctx, listener->cafile, listener->capath);
+>         -:  472:			if(rc == 0){
+>         -:  473:				if(listener->cafile && listener->capath){
+>         -:  474:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\" and capath \"%s\".", listener->cafile, listener->capath);
+>         -:  475:				}else if(listener->cafile){
+>         -:  476:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\".", listener->cafile);
+1417c1042
+<     #####:  478:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check capath \"%s\".", listener->capath);
+---
+>         -:  478:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check capath \"%s\".", listener->capath);
+1419,1421c1044,1046
+<     #####:  480:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  481:				COMPAT_CLOSE(sock);
+<     #####:  482:				return 1;
+---
+>         -:  480:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  481:				COMPAT_CLOSE(sock);
+>         -:  482:				return 1;
+1424,1425c1049,1050
+<     #####:  485:			if(listener->require_certificate){
+<     #####:  486:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, client_certificate_verify);
+---
+>         -:  485:			if(listener->require_certificate){
+>         -:  486:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, client_certificate_verify);
+1427c1052
+<     #####:  488:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_NONE, client_certificate_verify);
+---
+>         -:  488:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_NONE, client_certificate_verify);
+1429,1434c1054,1059
+<     #####:  490:			rc = SSL_CTX_use_certificate_chain_file(listener->ssl_ctx, listener->certfile);
+<     #####:  491:			if(rc != 1){
+<     #####:  492:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server certificate \"%s\". Check certfile.", listener->certfile);
+<     #####:  493:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  494:				COMPAT_CLOSE(sock);
+<     #####:  495:				return 1;
+---
+>         -:  490:			rc = SSL_CTX_use_certificate_chain_file(listener->ssl_ctx, listener->certfile);
+>         -:  491:			if(rc != 1){
+>         -:  492:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server certificate \"%s\". Check certfile.", listener->certfile);
+>         -:  493:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  494:				COMPAT_CLOSE(sock);
+>         -:  495:				return 1;
+1436,1441c1061,1066
+<     #####:  497:			rc = SSL_CTX_use_PrivateKey_file(listener->ssl_ctx, listener->keyfile, SSL_FILETYPE_PEM);
+<     #####:  498:			if(rc != 1){
+<     #####:  499:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server key file \"%s\". Check keyfile.", listener->keyfile);
+<     #####:  500:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  501:				COMPAT_CLOSE(sock);
+<     #####:  502:				return 1;
+---
+>         -:  497:			rc = SSL_CTX_use_PrivateKey_file(listener->ssl_ctx, listener->keyfile, SSL_FILETYPE_PEM);
+>         -:  498:			if(rc != 1){
+>         -:  499:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server key file \"%s\". Check keyfile.", listener->keyfile);
+>         -:  500:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  501:				COMPAT_CLOSE(sock);
+>         -:  502:				return 1;
+1443,1448c1068,1073
+<     #####:  504:			rc = SSL_CTX_check_private_key(listener->ssl_ctx);
+<     #####:  505:			if(rc != 1){
+<     #####:  506:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Server certificate/key are inconsistent.");
+<     #####:  507:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  508:				COMPAT_CLOSE(sock);
+<     #####:  509:				return 1;
+---
+>         -:  504:			rc = SSL_CTX_check_private_key(listener->ssl_ctx);
+>         -:  505:			if(rc != 1){
+>         -:  506:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Server certificate/key are inconsistent.");
+>         -:  507:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  508:				COMPAT_CLOSE(sock);
+>         -:  509:				return 1;
+1451,1457c1076,1082
+<     #####:  512:			if(listener->crlfile){
+<     #####:  513:				store = SSL_CTX_get_cert_store(listener->ssl_ctx);
+<     #####:  514:				if(!store){
+<     #####:  515:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to obtain TLS store.");
+<     #####:  516:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  517:					COMPAT_CLOSE(sock);
+<     #####:  518:					return 1;
+---
+>         -:  512:			if(listener->crlfile){
+>         -:  513:				store = SSL_CTX_get_cert_store(listener->ssl_ctx);
+>         -:  514:				if(!store){
+>         -:  515:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to obtain TLS store.");
+>         -:  516:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  517:					COMPAT_CLOSE(sock);
+>         -:  518:					return 1;
+1459,1465c1084,1090
+<     #####:  520:				lookup = X509_STORE_add_lookup(store, X509_LOOKUP_file());
+<     #####:  521:				rc = X509_load_crl_file(lookup, listener->crlfile, X509_FILETYPE_PEM);
+<     #####:  522:				if(rc != 1){
+<     #####:  523:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load certificate revocation file \"%s\". Check crlfile.", listener->crlfile);
+<     #####:  524:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  525:					COMPAT_CLOSE(sock);
+<     #####:  526:					return 1;
+---
+>         -:  520:				lookup = X509_STORE_add_lookup(store, X509_LOOKUP_file());
+>         -:  521:				rc = X509_load_crl_file(lookup, listener->crlfile, X509_FILETYPE_PEM);
+>         -:  522:				if(rc != 1){
+>         -:  523:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load certificate revocation file \"%s\". Check crlfile.", listener->crlfile);
+>         -:  524:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  525:					COMPAT_CLOSE(sock);
+>         -:  526:					return 1;
+1467c1092
+<     #####:  528:				X509_STORE_set_flags(store, X509_V_FLAG_CRL_CHECK);
+---
+>         -:  528:				X509_STORE_set_flags(store, X509_V_FLAG_CRL_CHECK);
+1471,1473c1096,1098
+<     #####:  532:		}else if(listener->psk_hint){
+<     #####:  533:			if(tls_ex_index_context == -1){
+<     #####:  534:				tls_ex_index_context = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+---
+>         -:  532:		}else if(listener->psk_hint){
+>         -:  533:			if(tls_ex_index_context == -1){
+>         -:  534:				tls_ex_index_context = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+1475,1476c1100,1101
+<     #####:  536:			if(tls_ex_index_listener == -1){
+<     #####:  537:				tls_ex_index_listener = SSL_get_ex_new_index(0, "listener", NULL, NULL, NULL);
+---
+>         -:  536:			if(tls_ex_index_listener == -1){
+>         -:  537:				tls_ex_index_listener = SSL_get_ex_new_index(0, "listener", NULL, NULL, NULL);
+1479,1481c1104,1106
+<     #####:  540:			if(mosquitto__tls_server_ctx(listener)){
+<     #####:  541:				COMPAT_CLOSE(sock);
+<     #####:  542:				return 1;
+---
+>         -:  540:			if(mosquitto__tls_server_ctx(listener)){
+>         -:  541:				COMPAT_CLOSE(sock);
+>         -:  542:				return 1;
+1483,1490c1108,1115
+<     #####:  544:			SSL_CTX_set_psk_server_callback(listener->ssl_ctx, psk_server_callback);
+<     #####:  545:			if(listener->psk_hint){
+<     #####:  546:				rc = SSL_CTX_use_psk_identity_hint(listener->ssl_ctx, listener->psk_hint);
+<     #####:  547:				if(rc == 0){
+<     #####:  548:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS PSK hint.");
+<     #####:  549:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  550:					COMPAT_CLOSE(sock);
+<     #####:  551:					return 1;
+---
+>         -:  544:			SSL_CTX_set_psk_server_callback(listener->ssl_ctx, psk_server_callback);
+>         -:  545:			if(listener->psk_hint){
+>         -:  546:				rc = SSL_CTX_use_psk_identity_hint(listener->ssl_ctx, listener->psk_hint);
+>         -:  547:				if(rc == 0){
+>         -:  548:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS PSK hint.");
+>         -:  549:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  550:					COMPAT_CLOSE(sock);
+>         -:  551:					return 1;
+1496c1121
+<     #####:  557:		return 0;
+---
+>         -:  557:		return 0;
+1498c1123
+<         -:  559:		return 1;
+---
+>     #####:  559:		return 1;
+1515,1517c1140,1142
+<     #####:  393:	int rc;
+<     #####:  394:	X509_STORE *store;
+<     #####:  395:	X509_LOOKUP *lookup;
+---
+>         -:  393:	int rc;
+>         -:  394:	X509_STORE *store;
+>         -:  395:	X509_LOOKUP *lookup;
+1587,1590c1212,1215
+<     #####:  465:		if((listener->cafile || listener->capath) && listener->certfile && listener->keyfile){
+<     #####:  466:			if(mosquitto__tls_server_ctx(listener)){
+<     #####:  467:				COMPAT_CLOSE(sock);
+<     #####:  468:				return 1;
+---
+>         -:  465:		if((listener->cafile || listener->capath) && listener->certfile && listener->keyfile){
+>         -:  466:			if(mosquitto__tls_server_ctx(listener)){
+>         -:  467:				COMPAT_CLOSE(sock);
+>         -:  468:				return 1;
+1593,1598c1218,1223
+<     #####:  471:			rc = SSL_CTX_load_verify_locations(listener->ssl_ctx, listener->cafile, listener->capath);
+<     #####:  472:			if(rc == 0){
+<     #####:  473:				if(listener->cafile && listener->capath){
+<     #####:  474:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\" and capath \"%s\".", listener->cafile, listener->capath);
+<     #####:  475:				}else if(listener->cafile){
+<     #####:  476:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\".", listener->cafile);
+---
+>         -:  471:			rc = SSL_CTX_load_verify_locations(listener->ssl_ctx, listener->cafile, listener->capath);
+>         -:  472:			if(rc == 0){
+>         -:  473:				if(listener->cafile && listener->capath){
+>         -:  474:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\" and capath \"%s\".", listener->cafile, listener->capath);
+>         -:  475:				}else if(listener->cafile){
+>         -:  476:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\".", listener->cafile);
+1600c1225
+<     #####:  478:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check capath \"%s\".", listener->capath);
+---
+>         -:  478:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check capath \"%s\".", listener->capath);
+1602,1604c1227,1229
+<     #####:  480:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  481:				COMPAT_CLOSE(sock);
+<     #####:  482:				return 1;
+---
+>         -:  480:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  481:				COMPAT_CLOSE(sock);
+>         -:  482:				return 1;
+1607,1608c1232,1233
+<     #####:  485:			if(listener->require_certificate){
+<     #####:  486:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, client_certificate_verify);
+---
+>         -:  485:			if(listener->require_certificate){
+>         -:  486:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, client_certificate_verify);
+1610c1235
+<     #####:  488:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_NONE, client_certificate_verify);
+---
+>         -:  488:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_NONE, client_certificate_verify);
+1612,1617c1237,1242
+<     #####:  490:			rc = SSL_CTX_use_certificate_chain_file(listener->ssl_ctx, listener->certfile);
+<     #####:  491:			if(rc != 1){
+<     #####:  492:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server certificate \"%s\". Check certfile.", listener->certfile);
+<     #####:  493:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  494:				COMPAT_CLOSE(sock);
+<     #####:  495:				return 1;
+---
+>         -:  490:			rc = SSL_CTX_use_certificate_chain_file(listener->ssl_ctx, listener->certfile);
+>         -:  491:			if(rc != 1){
+>         -:  492:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server certificate \"%s\". Check certfile.", listener->certfile);
+>         -:  493:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  494:				COMPAT_CLOSE(sock);
+>         -:  495:				return 1;
+1619,1624c1244,1249
+<     #####:  497:			rc = SSL_CTX_use_PrivateKey_file(listener->ssl_ctx, listener->keyfile, SSL_FILETYPE_PEM);
+<     #####:  498:			if(rc != 1){
+<     #####:  499:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server key file \"%s\". Check keyfile.", listener->keyfile);
+<     #####:  500:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  501:				COMPAT_CLOSE(sock);
+<     #####:  502:				return 1;
+---
+>         -:  497:			rc = SSL_CTX_use_PrivateKey_file(listener->ssl_ctx, listener->keyfile, SSL_FILETYPE_PEM);
+>         -:  498:			if(rc != 1){
+>         -:  499:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server key file \"%s\". Check keyfile.", listener->keyfile);
+>         -:  500:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  501:				COMPAT_CLOSE(sock);
+>         -:  502:				return 1;
+1626,1631c1251,1256
+<     #####:  504:			rc = SSL_CTX_check_private_key(listener->ssl_ctx);
+<     #####:  505:			if(rc != 1){
+<     #####:  506:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Server certificate/key are inconsistent.");
+<     #####:  507:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  508:				COMPAT_CLOSE(sock);
+<     #####:  509:				return 1;
+---
+>         -:  504:			rc = SSL_CTX_check_private_key(listener->ssl_ctx);
+>         -:  505:			if(rc != 1){
+>         -:  506:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Server certificate/key are inconsistent.");
+>         -:  507:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  508:				COMPAT_CLOSE(sock);
+>         -:  509:				return 1;
+1634,1640c1259,1265
+<     #####:  512:			if(listener->crlfile){
+<     #####:  513:				store = SSL_CTX_get_cert_store(listener->ssl_ctx);
+<     #####:  514:				if(!store){
+<     #####:  515:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to obtain TLS store.");
+<     #####:  516:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  517:					COMPAT_CLOSE(sock);
+<     #####:  518:					return 1;
+---
+>         -:  512:			if(listener->crlfile){
+>         -:  513:				store = SSL_CTX_get_cert_store(listener->ssl_ctx);
+>         -:  514:				if(!store){
+>         -:  515:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to obtain TLS store.");
+>         -:  516:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  517:					COMPAT_CLOSE(sock);
+>         -:  518:					return 1;
+1642,1648c1267,1273
+<     #####:  520:				lookup = X509_STORE_add_lookup(store, X509_LOOKUP_file());
+<     #####:  521:				rc = X509_load_crl_file(lookup, listener->crlfile, X509_FILETYPE_PEM);
+<     #####:  522:				if(rc != 1){
+<     #####:  523:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load certificate revocation file \"%s\". Check crlfile.", listener->crlfile);
+<     #####:  524:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  525:					COMPAT_CLOSE(sock);
+<     #####:  526:					return 1;
+---
+>         -:  520:				lookup = X509_STORE_add_lookup(store, X509_LOOKUP_file());
+>         -:  521:				rc = X509_load_crl_file(lookup, listener->crlfile, X509_FILETYPE_PEM);
+>         -:  522:				if(rc != 1){
+>         -:  523:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load certificate revocation file \"%s\". Check crlfile.", listener->crlfile);
+>         -:  524:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  525:					COMPAT_CLOSE(sock);
+>         -:  526:					return 1;
+1650c1275
+<     #####:  528:				X509_STORE_set_flags(store, X509_V_FLAG_CRL_CHECK);
+---
+>         -:  528:				X509_STORE_set_flags(store, X509_V_FLAG_CRL_CHECK);
+1654,1656c1279,1281
+<     #####:  532:		}else if(listener->psk_hint){
+<     #####:  533:			if(tls_ex_index_context == -1){
+<     #####:  534:				tls_ex_index_context = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+---
+>         -:  532:		}else if(listener->psk_hint){
+>         -:  533:			if(tls_ex_index_context == -1){
+>         -:  534:				tls_ex_index_context = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+1658,1659c1283,1284
+<     #####:  536:			if(tls_ex_index_listener == -1){
+<     #####:  537:				tls_ex_index_listener = SSL_get_ex_new_index(0, "listener", NULL, NULL, NULL);
+---
+>         -:  536:			if(tls_ex_index_listener == -1){
+>         -:  537:				tls_ex_index_listener = SSL_get_ex_new_index(0, "listener", NULL, NULL, NULL);
+1662,1664c1287,1289
+<     #####:  540:			if(mosquitto__tls_server_ctx(listener)){
+<     #####:  541:				COMPAT_CLOSE(sock);
+<     #####:  542:				return 1;
+---
+>         -:  540:			if(mosquitto__tls_server_ctx(listener)){
+>         -:  541:				COMPAT_CLOSE(sock);
+>         -:  542:				return 1;
+1666,1673c1291,1298
+<     #####:  544:			SSL_CTX_set_psk_server_callback(listener->ssl_ctx, psk_server_callback);
+<     #####:  545:			if(listener->psk_hint){
+<     #####:  546:				rc = SSL_CTX_use_psk_identity_hint(listener->ssl_ctx, listener->psk_hint);
+<     #####:  547:				if(rc == 0){
+<     #####:  548:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS PSK hint.");
+<     #####:  549:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  550:					COMPAT_CLOSE(sock);
+<     #####:  551:					return 1;
+---
+>         -:  544:			SSL_CTX_set_psk_server_callback(listener->ssl_ctx, psk_server_callback);
+>         -:  545:			if(listener->psk_hint){
+>         -:  546:				rc = SSL_CTX_use_psk_identity_hint(listener->ssl_ctx, listener->psk_hint);
+>         -:  547:				if(rc == 0){
+>         -:  548:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS PSK hint.");
+>         -:  549:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  550:					COMPAT_CLOSE(sock);
+>         -:  551:					return 1;
+1679c1304
+<     #####:  557:		return 0;
+---
+>         -:  557:		return 0;
+1681c1306
+<         -:  559:		return 1;
+---
+>     #####:  559:		return 1;
+1698,1700c1323,1325
+<     #####:  393:	int rc;
+<     #####:  394:	X509_STORE *store;
+<     #####:  395:	X509_LOOKUP *lookup;
+---
+>         -:  393:	int rc;
+>         -:  394:	X509_STORE *store;
+>         -:  395:	X509_LOOKUP *lookup;
+1770,1773c1395,1398
+<     #####:  465:		if((listener->cafile || listener->capath) && listener->certfile && listener->keyfile){
+<     #####:  466:			if(mosquitto__tls_server_ctx(listener)){
+<     #####:  467:				COMPAT_CLOSE(sock);
+<     #####:  468:				return 1;
+---
+>         -:  465:		if((listener->cafile || listener->capath) && listener->certfile && listener->keyfile){
+>         -:  466:			if(mosquitto__tls_server_ctx(listener)){
+>         -:  467:				COMPAT_CLOSE(sock);
+>         -:  468:				return 1;
+1776,1781c1401,1406
+<     #####:  471:			rc = SSL_CTX_load_verify_locations(listener->ssl_ctx, listener->cafile, listener->capath);
+<     #####:  472:			if(rc == 0){
+<     #####:  473:				if(listener->cafile && listener->capath){
+<     #####:  474:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\" and capath \"%s\".", listener->cafile, listener->capath);
+<     #####:  475:				}else if(listener->cafile){
+<     #####:  476:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\".", listener->cafile);
+---
+>         -:  471:			rc = SSL_CTX_load_verify_locations(listener->ssl_ctx, listener->cafile, listener->capath);
+>         -:  472:			if(rc == 0){
+>         -:  473:				if(listener->cafile && listener->capath){
+>         -:  474:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\" and capath \"%s\".", listener->cafile, listener->capath);
+>         -:  475:				}else if(listener->cafile){
+>         -:  476:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\".", listener->cafile);
+1783c1408
+<     #####:  478:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check capath \"%s\".", listener->capath);
+---
+>         -:  478:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check capath \"%s\".", listener->capath);
+1785,1787c1410,1412
+<     #####:  480:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  481:				COMPAT_CLOSE(sock);
+<     #####:  482:				return 1;
+---
+>         -:  480:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  481:				COMPAT_CLOSE(sock);
+>         -:  482:				return 1;
+1790,1791c1415,1416
+<     #####:  485:			if(listener->require_certificate){
+<     #####:  486:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, client_certificate_verify);
+---
+>         -:  485:			if(listener->require_certificate){
+>         -:  486:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, client_certificate_verify);
+1793c1418
+<     #####:  488:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_NONE, client_certificate_verify);
+---
+>         -:  488:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_NONE, client_certificate_verify);
+1795,1800c1420,1425
+<     #####:  490:			rc = SSL_CTX_use_certificate_chain_file(listener->ssl_ctx, listener->certfile);
+<     #####:  491:			if(rc != 1){
+<     #####:  492:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server certificate \"%s\". Check certfile.", listener->certfile);
+<     #####:  493:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  494:				COMPAT_CLOSE(sock);
+<     #####:  495:				return 1;
+---
+>         -:  490:			rc = SSL_CTX_use_certificate_chain_file(listener->ssl_ctx, listener->certfile);
+>         -:  491:			if(rc != 1){
+>         -:  492:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server certificate \"%s\". Check certfile.", listener->certfile);
+>         -:  493:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  494:				COMPAT_CLOSE(sock);
+>         -:  495:				return 1;
+1802,1807c1427,1432
+<     #####:  497:			rc = SSL_CTX_use_PrivateKey_file(listener->ssl_ctx, listener->keyfile, SSL_FILETYPE_PEM);
+<     #####:  498:			if(rc != 1){
+<     #####:  499:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server key file \"%s\". Check keyfile.", listener->keyfile);
+<     #####:  500:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  501:				COMPAT_CLOSE(sock);
+<     #####:  502:				return 1;
+---
+>         -:  497:			rc = SSL_CTX_use_PrivateKey_file(listener->ssl_ctx, listener->keyfile, SSL_FILETYPE_PEM);
+>         -:  498:			if(rc != 1){
+>         -:  499:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server key file \"%s\". Check keyfile.", listener->keyfile);
+>         -:  500:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  501:				COMPAT_CLOSE(sock);
+>         -:  502:				return 1;
+1809,1814c1434,1439
+<     #####:  504:			rc = SSL_CTX_check_private_key(listener->ssl_ctx);
+<     #####:  505:			if(rc != 1){
+<     #####:  506:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Server certificate/key are inconsistent.");
+<     #####:  507:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  508:				COMPAT_CLOSE(sock);
+<     #####:  509:				return 1;
+---
+>         -:  504:			rc = SSL_CTX_check_private_key(listener->ssl_ctx);
+>         -:  505:			if(rc != 1){
+>         -:  506:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Server certificate/key are inconsistent.");
+>         -:  507:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  508:				COMPAT_CLOSE(sock);
+>         -:  509:				return 1;
+1817,1823c1442,1448
+<     #####:  512:			if(listener->crlfile){
+<     #####:  513:				store = SSL_CTX_get_cert_store(listener->ssl_ctx);
+<     #####:  514:				if(!store){
+<     #####:  515:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to obtain TLS store.");
+<     #####:  516:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  517:					COMPAT_CLOSE(sock);
+<     #####:  518:					return 1;
+---
+>         -:  512:			if(listener->crlfile){
+>         -:  513:				store = SSL_CTX_get_cert_store(listener->ssl_ctx);
+>         -:  514:				if(!store){
+>         -:  515:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to obtain TLS store.");
+>         -:  516:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  517:					COMPAT_CLOSE(sock);
+>         -:  518:					return 1;
+1825,1831c1450,1456
+<     #####:  520:				lookup = X509_STORE_add_lookup(store, X509_LOOKUP_file());
+<     #####:  521:				rc = X509_load_crl_file(lookup, listener->crlfile, X509_FILETYPE_PEM);
+<     #####:  522:				if(rc != 1){
+<     #####:  523:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load certificate revocation file \"%s\". Check crlfile.", listener->crlfile);
+<     #####:  524:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  525:					COMPAT_CLOSE(sock);
+<     #####:  526:					return 1;
+---
+>         -:  520:				lookup = X509_STORE_add_lookup(store, X509_LOOKUP_file());
+>         -:  521:				rc = X509_load_crl_file(lookup, listener->crlfile, X509_FILETYPE_PEM);
+>         -:  522:				if(rc != 1){
+>         -:  523:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load certificate revocation file \"%s\". Check crlfile.", listener->crlfile);
+>         -:  524:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  525:					COMPAT_CLOSE(sock);
+>         -:  526:					return 1;
+1833c1458
+<     #####:  528:				X509_STORE_set_flags(store, X509_V_FLAG_CRL_CHECK);
+---
+>         -:  528:				X509_STORE_set_flags(store, X509_V_FLAG_CRL_CHECK);
+1837,1839c1462,1464
+<     #####:  532:		}else if(listener->psk_hint){
+<     #####:  533:			if(tls_ex_index_context == -1){
+<     #####:  534:				tls_ex_index_context = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+---
+>         -:  532:		}else if(listener->psk_hint){
+>         -:  533:			if(tls_ex_index_context == -1){
+>         -:  534:				tls_ex_index_context = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+1841,1842c1466,1467
+<     #####:  536:			if(tls_ex_index_listener == -1){
+<     #####:  537:				tls_ex_index_listener = SSL_get_ex_new_index(0, "listener", NULL, NULL, NULL);
+---
+>         -:  536:			if(tls_ex_index_listener == -1){
+>         -:  537:				tls_ex_index_listener = SSL_get_ex_new_index(0, "listener", NULL, NULL, NULL);
+1845,1847c1470,1472
+<     #####:  540:			if(mosquitto__tls_server_ctx(listener)){
+<     #####:  541:				COMPAT_CLOSE(sock);
+<     #####:  542:				return 1;
+---
+>         -:  540:			if(mosquitto__tls_server_ctx(listener)){
+>         -:  541:				COMPAT_CLOSE(sock);
+>         -:  542:				return 1;
+1849,1856c1474,1481
+<     #####:  544:			SSL_CTX_set_psk_server_callback(listener->ssl_ctx, psk_server_callback);
+<     #####:  545:			if(listener->psk_hint){
+<     #####:  546:				rc = SSL_CTX_use_psk_identity_hint(listener->ssl_ctx, listener->psk_hint);
+<     #####:  547:				if(rc == 0){
+<     #####:  548:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS PSK hint.");
+<     #####:  549:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  550:					COMPAT_CLOSE(sock);
+<     #####:  551:					return 1;
+---
+>         -:  544:			SSL_CTX_set_psk_server_callback(listener->ssl_ctx, psk_server_callback);
+>         -:  545:			if(listener->psk_hint){
+>         -:  546:				rc = SSL_CTX_use_psk_identity_hint(listener->ssl_ctx, listener->psk_hint);
+>         -:  547:				if(rc == 0){
+>         -:  548:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS PSK hint.");
+>         -:  549:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  550:					COMPAT_CLOSE(sock);
+>         -:  551:					return 1;
+1862c1487
+<     #####:  557:		return 0;
+---
+>         -:  557:		return 0;
+1864c1489
+<         -:  559:		return 1;
+---
+>     #####:  559:		return 1;
+1881,1883c1506,1508
+<     #####:  393:	int rc;
+<     #####:  394:	X509_STORE *store;
+<     #####:  395:	X509_LOOKUP *lookup;
+---
+>         -:  393:	int rc;
+>         -:  394:	X509_STORE *store;
+>         -:  395:	X509_LOOKUP *lookup;
+1953,1956c1578,1581
+<     #####:  465:		if((listener->cafile || listener->capath) && listener->certfile && listener->keyfile){
+<     #####:  466:			if(mosquitto__tls_server_ctx(listener)){
+<     #####:  467:				COMPAT_CLOSE(sock);
+<     #####:  468:				return 1;
+---
+>         -:  465:		if((listener->cafile || listener->capath) && listener->certfile && listener->keyfile){
+>         -:  466:			if(mosquitto__tls_server_ctx(listener)){
+>         -:  467:				COMPAT_CLOSE(sock);
+>         -:  468:				return 1;
+1959,1964c1584,1589
+<     #####:  471:			rc = SSL_CTX_load_verify_locations(listener->ssl_ctx, listener->cafile, listener->capath);
+<     #####:  472:			if(rc == 0){
+<     #####:  473:				if(listener->cafile && listener->capath){
+<     #####:  474:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\" and capath \"%s\".", listener->cafile, listener->capath);
+<     #####:  475:				}else if(listener->cafile){
+<     #####:  476:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\".", listener->cafile);
+---
+>         -:  471:			rc = SSL_CTX_load_verify_locations(listener->ssl_ctx, listener->cafile, listener->capath);
+>         -:  472:			if(rc == 0){
+>         -:  473:				if(listener->cafile && listener->capath){
+>         -:  474:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\" and capath \"%s\".", listener->cafile, listener->capath);
+>         -:  475:				}else if(listener->cafile){
+>         -:  476:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check cafile \"%s\".", listener->cafile);
+1966c1591
+<     #####:  478:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check capath \"%s\".", listener->capath);
+---
+>         -:  478:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load CA certificates. Check capath \"%s\".", listener->capath);
+1968,1970c1593,1595
+<     #####:  480:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  481:				COMPAT_CLOSE(sock);
+<     #####:  482:				return 1;
+---
+>         -:  480:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  481:				COMPAT_CLOSE(sock);
+>         -:  482:				return 1;
+1973,1974c1598,1599
+<     #####:  485:			if(listener->require_certificate){
+<     #####:  486:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, client_certificate_verify);
+---
+>         -:  485:			if(listener->require_certificate){
+>         -:  486:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, client_certificate_verify);
+1976c1601
+<     #####:  488:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_NONE, client_certificate_verify);
+---
+>         -:  488:				SSL_CTX_set_verify(listener->ssl_ctx, SSL_VERIFY_NONE, client_certificate_verify);
+1978,1983c1603,1608
+<     #####:  490:			rc = SSL_CTX_use_certificate_chain_file(listener->ssl_ctx, listener->certfile);
+<     #####:  491:			if(rc != 1){
+<     #####:  492:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server certificate \"%s\". Check certfile.", listener->certfile);
+<     #####:  493:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  494:				COMPAT_CLOSE(sock);
+<     #####:  495:				return 1;
+---
+>         -:  490:			rc = SSL_CTX_use_certificate_chain_file(listener->ssl_ctx, listener->certfile);
+>         -:  491:			if(rc != 1){
+>         -:  492:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server certificate \"%s\". Check certfile.", listener->certfile);
+>         -:  493:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  494:				COMPAT_CLOSE(sock);
+>         -:  495:				return 1;
+1985,1990c1610,1615
+<     #####:  497:			rc = SSL_CTX_use_PrivateKey_file(listener->ssl_ctx, listener->keyfile, SSL_FILETYPE_PEM);
+<     #####:  498:			if(rc != 1){
+<     #####:  499:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server key file \"%s\". Check keyfile.", listener->keyfile);
+<     #####:  500:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  501:				COMPAT_CLOSE(sock);
+<     #####:  502:				return 1;
+---
+>         -:  497:			rc = SSL_CTX_use_PrivateKey_file(listener->ssl_ctx, listener->keyfile, SSL_FILETYPE_PEM);
+>         -:  498:			if(rc != 1){
+>         -:  499:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load server key file \"%s\". Check keyfile.", listener->keyfile);
+>         -:  500:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  501:				COMPAT_CLOSE(sock);
+>         -:  502:				return 1;
+1992,1997c1617,1622
+<     #####:  504:			rc = SSL_CTX_check_private_key(listener->ssl_ctx);
+<     #####:  505:			if(rc != 1){
+<     #####:  506:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Server certificate/key are inconsistent.");
+<     #####:  507:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  508:				COMPAT_CLOSE(sock);
+<     #####:  509:				return 1;
+---
+>         -:  504:			rc = SSL_CTX_check_private_key(listener->ssl_ctx);
+>         -:  505:			if(rc != 1){
+>         -:  506:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Server certificate/key are inconsistent.");
+>         -:  507:				net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  508:				COMPAT_CLOSE(sock);
+>         -:  509:				return 1;
+2000,2006c1625,1631
+<     #####:  512:			if(listener->crlfile){
+<     #####:  513:				store = SSL_CTX_get_cert_store(listener->ssl_ctx);
+<     #####:  514:				if(!store){
+<     #####:  515:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to obtain TLS store.");
+<     #####:  516:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  517:					COMPAT_CLOSE(sock);
+<     #####:  518:					return 1;
+---
+>         -:  512:			if(listener->crlfile){
+>         -:  513:				store = SSL_CTX_get_cert_store(listener->ssl_ctx);
+>         -:  514:				if(!store){
+>         -:  515:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to obtain TLS store.");
+>         -:  516:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  517:					COMPAT_CLOSE(sock);
+>         -:  518:					return 1;
+2008,2014c1633,1639
+<     #####:  520:				lookup = X509_STORE_add_lookup(store, X509_LOOKUP_file());
+<     #####:  521:				rc = X509_load_crl_file(lookup, listener->crlfile, X509_FILETYPE_PEM);
+<     #####:  522:				if(rc != 1){
+<     #####:  523:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load certificate revocation file \"%s\". Check crlfile.", listener->crlfile);
+<     #####:  524:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  525:					COMPAT_CLOSE(sock);
+<     #####:  526:					return 1;
+---
+>         -:  520:				lookup = X509_STORE_add_lookup(store, X509_LOOKUP_file());
+>         -:  521:				rc = X509_load_crl_file(lookup, listener->crlfile, X509_FILETYPE_PEM);
+>         -:  522:				if(rc != 1){
+>         -:  523:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to load certificate revocation file \"%s\". Check crlfile.", listener->crlfile);
+>         -:  524:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  525:					COMPAT_CLOSE(sock);
+>         -:  526:					return 1;
+2016c1641
+<     #####:  528:				X509_STORE_set_flags(store, X509_V_FLAG_CRL_CHECK);
+---
+>         -:  528:				X509_STORE_set_flags(store, X509_V_FLAG_CRL_CHECK);
+2020,2022c1645,1647
+<     #####:  532:		}else if(listener->psk_hint){
+<     #####:  533:			if(tls_ex_index_context == -1){
+<     #####:  534:				tls_ex_index_context = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+---
+>         -:  532:		}else if(listener->psk_hint){
+>         -:  533:			if(tls_ex_index_context == -1){
+>         -:  534:				tls_ex_index_context = SSL_get_ex_new_index(0, "client context", NULL, NULL, NULL);
+2024,2025c1649,1650
+<     #####:  536:			if(tls_ex_index_listener == -1){
+<     #####:  537:				tls_ex_index_listener = SSL_get_ex_new_index(0, "listener", NULL, NULL, NULL);
+---
+>         -:  536:			if(tls_ex_index_listener == -1){
+>         -:  537:				tls_ex_index_listener = SSL_get_ex_new_index(0, "listener", NULL, NULL, NULL);
+2028,2030c1653,1655
+<     #####:  540:			if(mosquitto__tls_server_ctx(listener)){
+<     #####:  541:				COMPAT_CLOSE(sock);
+<     #####:  542:				return 1;
+---
+>         -:  540:			if(mosquitto__tls_server_ctx(listener)){
+>         -:  541:				COMPAT_CLOSE(sock);
+>         -:  542:				return 1;
+2032,2039c1657,1664
+<     #####:  544:			SSL_CTX_set_psk_server_callback(listener->ssl_ctx, psk_server_callback);
+<     #####:  545:			if(listener->psk_hint){
+<     #####:  546:				rc = SSL_CTX_use_psk_identity_hint(listener->ssl_ctx, listener->psk_hint);
+<     #####:  547:				if(rc == 0){
+<     #####:  548:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS PSK hint.");
+<     #####:  549:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+<     #####:  550:					COMPAT_CLOSE(sock);
+<     #####:  551:					return 1;
+---
+>         -:  544:			SSL_CTX_set_psk_server_callback(listener->ssl_ctx, psk_server_callback);
+>         -:  545:			if(listener->psk_hint){
+>         -:  546:				rc = SSL_CTX_use_psk_identity_hint(listener->ssl_ctx, listener->psk_hint);
+>         -:  547:				if(rc == 0){
+>         -:  548:					log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to set TLS PSK hint.");
+>         -:  549:					net__print_error(MOSQ_LOG_ERR, "Error: %s");
+>         -:  550:					COMPAT_CLOSE(sock);
+>         -:  551:					return 1;
+2045c1670
+<     #####:  557:		return 0;
+---
+>         -:  557:		return 0;
+2047c1672
+<         -:  559:		return 1;
+---
+>     #####:  559:		return 1;

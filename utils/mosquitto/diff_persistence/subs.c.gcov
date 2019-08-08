@@ -1,0 +1,32 @@
+79c79
+<     #####:   77:		if(strncmp(topic, "$SYS", 4)){
+---
+>         -:   77:		if(strncmp(topic, "$SYS", 4)){
+82c82
+<     #####:   80:			db->persistence_changes++;
+---
+>         -:   80:			db->persistence_changes++;
+161c161
+<     #####:   77:		if(strncmp(topic, "$SYS", 4)){
+---
+>         -:   77:		if(strncmp(topic, "$SYS", 4)){
+164c164
+<     #####:   80:			db->persistence_changes++;
+---
+>         -:   80:			db->persistence_changes++;
+243c243
+<     #####:   77:		if(strncmp(topic, "$SYS", 4)){
+---
+>         -:   77:		if(strncmp(topic, "$SYS", 4)){
+246c246
+<     #####:   80:			db->persistence_changes++;
+---
+>         -:   80:			db->persistence_changes++;
+325c325
+<     #####:   77:		if(strncmp(topic, "$SYS", 4)){
+---
+>         -:   77:		if(strncmp(topic, "$SYS", 4)){
+328c328
+<     #####:   80:			db->persistence_changes++;
+---
+>         -:   80:			db->persistence_changes++;

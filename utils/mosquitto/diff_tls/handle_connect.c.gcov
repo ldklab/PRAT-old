@@ -1,0 +1,696 @@
+349,352c349,352
+<     #####:  132:	X509 *client_cert = NULL;
+<     #####:  133:	X509_NAME *name;
+<     #####:  134:	X509_NAME_ENTRY *name_entry;
+<     #####:  135:	ASN1_STRING *name_asn1 = NULL;
+---
+>         -:  132:	X509 *client_cert = NULL;
+>         -:  133:	X509_NAME *name;
+>         -:  134:	X509_NAME_ENTRY *name_entry;
+>         -:  135:	ASN1_STRING *name_asn1 = NULL;
+626c626
+<     #####:  409:	if(context->listener && context->listener->ssl_ctx && (context->listener->use_identity_as_username || context->listener->use_subject_as_username)){
+---
+>         -:  409:	if(context->listener && context->listener->ssl_ctx && (context->listener->use_identity_as_username || context->listener->use_subject_as_username)){
+628,631c628,631
+<     #####:  411:		mosquitto__free(username);
+<     #####:  412:		username = NULL;
+<     #####:  413:		mosquitto__free(password);
+<     #####:  414:		password = NULL;
+---
+>         -:  411:		mosquitto__free(username);
+>         -:  412:		username = NULL;
+>         -:  413:		mosquitto__free(password);
+>         -:  414:		password = NULL;
+633,636c633,636
+<     #####:  416:		if(!context->ssl){
+<     #####:  417:			send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  418:			rc = 1;
+<     #####:  419:			goto handle_connect_error;
+---
+>         -:  416:		if(!context->ssl){
+>         -:  417:			send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  418:			rc = 1;
+>         -:  419:			goto handle_connect_error;
+639c639
+<     #####:  422:		if(context->listener->psk_hint){
+---
+>         -:  422:		if(context->listener->psk_hint){
+641,644c641,644
+<     #####:  424:			if(!context->username){
+<     #####:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  426:				rc = 1;
+<     #####:  427:				goto handle_connect_error;
+---
+>         -:  424:			if(!context->username){
+>         -:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  426:				rc = 1;
+>         -:  427:				goto handle_connect_error;
+648,652c648,652
+<     #####:  431:			client_cert = SSL_get_peer_certificate(context->ssl);
+<     #####:  432:			if(!client_cert){
+<     #####:  433:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  434:				rc = 1;
+<     #####:  435:				goto handle_connect_error;
+---
+>         -:  431:			client_cert = SSL_get_peer_certificate(context->ssl);
+>         -:  432:			if(!client_cert){
+>         -:  433:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  434:				rc = 1;
+>         -:  435:				goto handle_connect_error;
+654,658c654,658
+<     #####:  437:			name = X509_get_subject_name(client_cert);
+<     #####:  438:			if(!name){
+<     #####:  439:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  440:				rc = 1;
+<     #####:  441:				goto handle_connect_error;
+---
+>         -:  437:			name = X509_get_subject_name(client_cert);
+>         -:  438:			if(!name){
+>         -:  439:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  440:				rc = 1;
+>         -:  441:				goto handle_connect_error;
+660,665c660,665
+<     #####:  443:			if (context->listener->use_identity_as_username) { //use_identity_as_username
+<     #####:  444:				i = X509_NAME_get_index_by_NID(name, NID_commonName, -1);
+<     #####:  445:				if(i == -1){
+<     #####:  446:					send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  447:					rc = 1;
+<     #####:  448:					goto handle_connect_error;
+---
+>         -:  443:			if (context->listener->use_identity_as_username) { //use_identity_as_username
+>         -:  444:				i = X509_NAME_get_index_by_NID(name, NID_commonName, -1);
+>         -:  445:				if(i == -1){
+>         -:  446:					send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  447:					rc = 1;
+>         -:  448:					goto handle_connect_error;
+667,673c667,673
+<     #####:  450:				name_entry = X509_NAME_get_entry(name, i);
+<     #####:  451:				if(name_entry){
+<     #####:  452:					name_asn1 = X509_NAME_ENTRY_get_data(name_entry);
+<     #####:  453:					if (name_asn1 == NULL) {
+<     #####:  454:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  455:						rc = 1;
+<     #####:  456:						goto handle_connect_error;
+---
+>         -:  450:				name_entry = X509_NAME_get_entry(name, i);
+>         -:  451:				if(name_entry){
+>         -:  452:					name_asn1 = X509_NAME_ENTRY_get_data(name_entry);
+>         -:  453:					if (name_asn1 == NULL) {
+>         -:  454:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  455:						rc = 1;
+>         -:  456:						goto handle_connect_error;
+678c678
+<     #####:  461:					context->username = mosquitto__strdup((char *) ASN1_STRING_get0_data(name_asn1));
+---
+>         -:  461:					context->username = mosquitto__strdup((char *) ASN1_STRING_get0_data(name_asn1));
+680,683c680,683
+<     #####:  463:					if(!context->username){
+<     #####:  464:						send__connack(context, 0, CONNACK_REFUSED_SERVER_UNAVAILABLE);
+<     #####:  465:						rc = MOSQ_ERR_NOMEM;
+<     #####:  466:						goto handle_connect_error;
+---
+>         -:  463:					if(!context->username){
+>         -:  464:						send__connack(context, 0, CONNACK_REFUSED_SERVER_UNAVAILABLE);
+>         -:  465:						rc = MOSQ_ERR_NOMEM;
+>         -:  466:						goto handle_connect_error;
+686,689c686,689
+<     #####:  469:					if ((size_t)ASN1_STRING_length(name_asn1) != strlen(context->username)) {
+<     #####:  470:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  471:						rc = 1;
+<     #####:  472:						goto handle_connect_error;
+---
+>         -:  469:					if ((size_t)ASN1_STRING_length(name_asn1) != strlen(context->username)) {
+>         -:  470:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  471:						rc = 1;
+>         -:  472:						goto handle_connect_error;
+693,701c693,701
+<     #####:  476:				BIO *subject_bio = BIO_new(BIO_s_mem());
+<     #####:  477:				X509_NAME_print_ex(subject_bio, X509_get_subject_name(client_cert), 0, XN_FLAG_RFC2253);
+<     #####:  478:				char *data_start = NULL;
+<     #####:  479:				long name_length = BIO_get_mem_data(subject_bio, &data_start);
+<     #####:  480:				char *subject = mosquitto__malloc(sizeof(char)*name_length+1);
+<     #####:  481:				if(!subject){
+<     #####:  482:					BIO_free(subject_bio);
+<     #####:  483:					rc = MOSQ_ERR_NOMEM;
+<     #####:  484:					goto handle_connect_error;
+---
+>         -:  476:				BIO *subject_bio = BIO_new(BIO_s_mem());
+>         -:  477:				X509_NAME_print_ex(subject_bio, X509_get_subject_name(client_cert), 0, XN_FLAG_RFC2253);
+>         -:  478:				char *data_start = NULL;
+>         -:  479:				long name_length = BIO_get_mem_data(subject_bio, &data_start);
+>         -:  480:				char *subject = mosquitto__malloc(sizeof(char)*name_length+1);
+>         -:  481:				if(!subject){
+>         -:  482:					BIO_free(subject_bio);
+>         -:  483:					rc = MOSQ_ERR_NOMEM;
+>         -:  484:					goto handle_connect_error;
+703,706c703,706
+<     #####:  486:				memcpy(subject, data_start, name_length);
+<     #####:  487:				subject[name_length] = '\0';
+<     #####:  488:				BIO_free(subject_bio);
+<     #####:  489:				context->username = subject;
+---
+>         -:  486:				memcpy(subject, data_start, name_length);
+>         -:  487:				subject[name_length] = '\0';
+>         -:  488:				BIO_free(subject_bio);
+>         -:  489:				context->username = subject;
+708c708
+<     #####:  491:			if(!context->username){
+---
+>         -:  491:			if(!context->username){
+712,713c712,713
+<     #####:  495:			X509_free(client_cert);
+<     #####:  496:			client_cert = NULL;
+---
+>         -:  495:			X509_free(client_cert);
+>         -:  496:			client_cert = NULL;
+901c901
+<     #####:  684:	if(client_cert) X509_free(client_cert);
+---
+>         -:  684:	if(client_cert) X509_free(client_cert);
+904c904
+<         -:  687:	return rc;
+---
+>     #####:  687:	return rc;
+929,932c929,932
+<     #####:  132:	X509 *client_cert = NULL;
+<     #####:  133:	X509_NAME *name;
+<     #####:  134:	X509_NAME_ENTRY *name_entry;
+<     #####:  135:	ASN1_STRING *name_asn1 = NULL;
+---
+>         -:  132:	X509 *client_cert = NULL;
+>         -:  133:	X509_NAME *name;
+>         -:  134:	X509_NAME_ENTRY *name_entry;
+>         -:  135:	ASN1_STRING *name_asn1 = NULL;
+1206c1206
+<     #####:  409:	if(context->listener && context->listener->ssl_ctx && (context->listener->use_identity_as_username || context->listener->use_subject_as_username)){
+---
+>         -:  409:	if(context->listener && context->listener->ssl_ctx && (context->listener->use_identity_as_username || context->listener->use_subject_as_username)){
+1208,1211c1208,1211
+<     #####:  411:		mosquitto__free(username);
+<     #####:  412:		username = NULL;
+<     #####:  413:		mosquitto__free(password);
+<     #####:  414:		password = NULL;
+---
+>         -:  411:		mosquitto__free(username);
+>         -:  412:		username = NULL;
+>         -:  413:		mosquitto__free(password);
+>         -:  414:		password = NULL;
+1213,1216c1213,1216
+<     #####:  416:		if(!context->ssl){
+<     #####:  417:			send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  418:			rc = 1;
+<     #####:  419:			goto handle_connect_error;
+---
+>         -:  416:		if(!context->ssl){
+>         -:  417:			send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  418:			rc = 1;
+>         -:  419:			goto handle_connect_error;
+1219c1219
+<     #####:  422:		if(context->listener->psk_hint){
+---
+>         -:  422:		if(context->listener->psk_hint){
+1221,1224c1221,1224
+<     #####:  424:			if(!context->username){
+<     #####:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  426:				rc = 1;
+<     #####:  427:				goto handle_connect_error;
+---
+>         -:  424:			if(!context->username){
+>         -:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  426:				rc = 1;
+>         -:  427:				goto handle_connect_error;
+1228,1232c1228,1232
+<     #####:  431:			client_cert = SSL_get_peer_certificate(context->ssl);
+<     #####:  432:			if(!client_cert){
+<     #####:  433:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  434:				rc = 1;
+<     #####:  435:				goto handle_connect_error;
+---
+>         -:  431:			client_cert = SSL_get_peer_certificate(context->ssl);
+>         -:  432:			if(!client_cert){
+>         -:  433:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  434:				rc = 1;
+>         -:  435:				goto handle_connect_error;
+1234,1238c1234,1238
+<     #####:  437:			name = X509_get_subject_name(client_cert);
+<     #####:  438:			if(!name){
+<     #####:  439:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  440:				rc = 1;
+<     #####:  441:				goto handle_connect_error;
+---
+>         -:  437:			name = X509_get_subject_name(client_cert);
+>         -:  438:			if(!name){
+>         -:  439:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  440:				rc = 1;
+>         -:  441:				goto handle_connect_error;
+1240,1245c1240,1245
+<     #####:  443:			if (context->listener->use_identity_as_username) { //use_identity_as_username
+<     #####:  444:				i = X509_NAME_get_index_by_NID(name, NID_commonName, -1);
+<     #####:  445:				if(i == -1){
+<     #####:  446:					send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  447:					rc = 1;
+<     #####:  448:					goto handle_connect_error;
+---
+>         -:  443:			if (context->listener->use_identity_as_username) { //use_identity_as_username
+>         -:  444:				i = X509_NAME_get_index_by_NID(name, NID_commonName, -1);
+>         -:  445:				if(i == -1){
+>         -:  446:					send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  447:					rc = 1;
+>         -:  448:					goto handle_connect_error;
+1247,1253c1247,1253
+<     #####:  450:				name_entry = X509_NAME_get_entry(name, i);
+<     #####:  451:				if(name_entry){
+<     #####:  452:					name_asn1 = X509_NAME_ENTRY_get_data(name_entry);
+<     #####:  453:					if (name_asn1 == NULL) {
+<     #####:  454:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  455:						rc = 1;
+<     #####:  456:						goto handle_connect_error;
+---
+>         -:  450:				name_entry = X509_NAME_get_entry(name, i);
+>         -:  451:				if(name_entry){
+>         -:  452:					name_asn1 = X509_NAME_ENTRY_get_data(name_entry);
+>         -:  453:					if (name_asn1 == NULL) {
+>         -:  454:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  455:						rc = 1;
+>         -:  456:						goto handle_connect_error;
+1258c1258
+<     #####:  461:					context->username = mosquitto__strdup((char *) ASN1_STRING_get0_data(name_asn1));
+---
+>         -:  461:					context->username = mosquitto__strdup((char *) ASN1_STRING_get0_data(name_asn1));
+1260,1263c1260,1263
+<     #####:  463:					if(!context->username){
+<     #####:  464:						send__connack(context, 0, CONNACK_REFUSED_SERVER_UNAVAILABLE);
+<     #####:  465:						rc = MOSQ_ERR_NOMEM;
+<     #####:  466:						goto handle_connect_error;
+---
+>         -:  463:					if(!context->username){
+>         -:  464:						send__connack(context, 0, CONNACK_REFUSED_SERVER_UNAVAILABLE);
+>         -:  465:						rc = MOSQ_ERR_NOMEM;
+>         -:  466:						goto handle_connect_error;
+1266,1269c1266,1269
+<     #####:  469:					if ((size_t)ASN1_STRING_length(name_asn1) != strlen(context->username)) {
+<     #####:  470:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  471:						rc = 1;
+<     #####:  472:						goto handle_connect_error;
+---
+>         -:  469:					if ((size_t)ASN1_STRING_length(name_asn1) != strlen(context->username)) {
+>         -:  470:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  471:						rc = 1;
+>         -:  472:						goto handle_connect_error;
+1273,1281c1273,1281
+<     #####:  476:				BIO *subject_bio = BIO_new(BIO_s_mem());
+<     #####:  477:				X509_NAME_print_ex(subject_bio, X509_get_subject_name(client_cert), 0, XN_FLAG_RFC2253);
+<     #####:  478:				char *data_start = NULL;
+<     #####:  479:				long name_length = BIO_get_mem_data(subject_bio, &data_start);
+<     #####:  480:				char *subject = mosquitto__malloc(sizeof(char)*name_length+1);
+<     #####:  481:				if(!subject){
+<     #####:  482:					BIO_free(subject_bio);
+<     #####:  483:					rc = MOSQ_ERR_NOMEM;
+<     #####:  484:					goto handle_connect_error;
+---
+>         -:  476:				BIO *subject_bio = BIO_new(BIO_s_mem());
+>         -:  477:				X509_NAME_print_ex(subject_bio, X509_get_subject_name(client_cert), 0, XN_FLAG_RFC2253);
+>         -:  478:				char *data_start = NULL;
+>         -:  479:				long name_length = BIO_get_mem_data(subject_bio, &data_start);
+>         -:  480:				char *subject = mosquitto__malloc(sizeof(char)*name_length+1);
+>         -:  481:				if(!subject){
+>         -:  482:					BIO_free(subject_bio);
+>         -:  483:					rc = MOSQ_ERR_NOMEM;
+>         -:  484:					goto handle_connect_error;
+1283,1286c1283,1286
+<     #####:  486:				memcpy(subject, data_start, name_length);
+<     #####:  487:				subject[name_length] = '\0';
+<     #####:  488:				BIO_free(subject_bio);
+<     #####:  489:				context->username = subject;
+---
+>         -:  486:				memcpy(subject, data_start, name_length);
+>         -:  487:				subject[name_length] = '\0';
+>         -:  488:				BIO_free(subject_bio);
+>         -:  489:				context->username = subject;
+1288c1288
+<     #####:  491:			if(!context->username){
+---
+>         -:  491:			if(!context->username){
+1292,1293c1292,1293
+<     #####:  495:			X509_free(client_cert);
+<     #####:  496:			client_cert = NULL;
+---
+>         -:  495:			X509_free(client_cert);
+>         -:  496:			client_cert = NULL;
+1481c1481
+<     #####:  684:	if(client_cert) X509_free(client_cert);
+---
+>         -:  684:	if(client_cert) X509_free(client_cert);
+1484c1484
+<         -:  687:	return rc;
+---
+>     #####:  687:	return rc;
+1509,1512c1509,1512
+<     #####:  132:	X509 *client_cert = NULL;
+<     #####:  133:	X509_NAME *name;
+<     #####:  134:	X509_NAME_ENTRY *name_entry;
+<     #####:  135:	ASN1_STRING *name_asn1 = NULL;
+---
+>         -:  132:	X509 *client_cert = NULL;
+>         -:  133:	X509_NAME *name;
+>         -:  134:	X509_NAME_ENTRY *name_entry;
+>         -:  135:	ASN1_STRING *name_asn1 = NULL;
+1786c1786
+<     #####:  409:	if(context->listener && context->listener->ssl_ctx && (context->listener->use_identity_as_username || context->listener->use_subject_as_username)){
+---
+>         -:  409:	if(context->listener && context->listener->ssl_ctx && (context->listener->use_identity_as_username || context->listener->use_subject_as_username)){
+1788,1791c1788,1791
+<     #####:  411:		mosquitto__free(username);
+<     #####:  412:		username = NULL;
+<     #####:  413:		mosquitto__free(password);
+<     #####:  414:		password = NULL;
+---
+>         -:  411:		mosquitto__free(username);
+>         -:  412:		username = NULL;
+>         -:  413:		mosquitto__free(password);
+>         -:  414:		password = NULL;
+1793,1796c1793,1796
+<     #####:  416:		if(!context->ssl){
+<     #####:  417:			send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  418:			rc = 1;
+<     #####:  419:			goto handle_connect_error;
+---
+>         -:  416:		if(!context->ssl){
+>         -:  417:			send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  418:			rc = 1;
+>         -:  419:			goto handle_connect_error;
+1799c1799
+<     #####:  422:		if(context->listener->psk_hint){
+---
+>         -:  422:		if(context->listener->psk_hint){
+1801,1804c1801,1804
+<     #####:  424:			if(!context->username){
+<     #####:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  426:				rc = 1;
+<     #####:  427:				goto handle_connect_error;
+---
+>         -:  424:			if(!context->username){
+>         -:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  426:				rc = 1;
+>         -:  427:				goto handle_connect_error;
+1808,1812c1808,1812
+<     #####:  431:			client_cert = SSL_get_peer_certificate(context->ssl);
+<     #####:  432:			if(!client_cert){
+<     #####:  433:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  434:				rc = 1;
+<     #####:  435:				goto handle_connect_error;
+---
+>         -:  431:			client_cert = SSL_get_peer_certificate(context->ssl);
+>         -:  432:			if(!client_cert){
+>         -:  433:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  434:				rc = 1;
+>         -:  435:				goto handle_connect_error;
+1814,1818c1814,1818
+<     #####:  437:			name = X509_get_subject_name(client_cert);
+<     #####:  438:			if(!name){
+<     #####:  439:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  440:				rc = 1;
+<     #####:  441:				goto handle_connect_error;
+---
+>         -:  437:			name = X509_get_subject_name(client_cert);
+>         -:  438:			if(!name){
+>         -:  439:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  440:				rc = 1;
+>         -:  441:				goto handle_connect_error;
+1820,1825c1820,1825
+<     #####:  443:			if (context->listener->use_identity_as_username) { //use_identity_as_username
+<     #####:  444:				i = X509_NAME_get_index_by_NID(name, NID_commonName, -1);
+<     #####:  445:				if(i == -1){
+<     #####:  446:					send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  447:					rc = 1;
+<     #####:  448:					goto handle_connect_error;
+---
+>         -:  443:			if (context->listener->use_identity_as_username) { //use_identity_as_username
+>         -:  444:				i = X509_NAME_get_index_by_NID(name, NID_commonName, -1);
+>         -:  445:				if(i == -1){
+>         -:  446:					send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  447:					rc = 1;
+>         -:  448:					goto handle_connect_error;
+1827,1833c1827,1833
+<     #####:  450:				name_entry = X509_NAME_get_entry(name, i);
+<     #####:  451:				if(name_entry){
+<     #####:  452:					name_asn1 = X509_NAME_ENTRY_get_data(name_entry);
+<     #####:  453:					if (name_asn1 == NULL) {
+<     #####:  454:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  455:						rc = 1;
+<     #####:  456:						goto handle_connect_error;
+---
+>         -:  450:				name_entry = X509_NAME_get_entry(name, i);
+>         -:  451:				if(name_entry){
+>         -:  452:					name_asn1 = X509_NAME_ENTRY_get_data(name_entry);
+>         -:  453:					if (name_asn1 == NULL) {
+>         -:  454:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  455:						rc = 1;
+>         -:  456:						goto handle_connect_error;
+1838c1838
+<     #####:  461:					context->username = mosquitto__strdup((char *) ASN1_STRING_get0_data(name_asn1));
+---
+>         -:  461:					context->username = mosquitto__strdup((char *) ASN1_STRING_get0_data(name_asn1));
+1840,1843c1840,1843
+<     #####:  463:					if(!context->username){
+<     #####:  464:						send__connack(context, 0, CONNACK_REFUSED_SERVER_UNAVAILABLE);
+<     #####:  465:						rc = MOSQ_ERR_NOMEM;
+<     #####:  466:						goto handle_connect_error;
+---
+>         -:  463:					if(!context->username){
+>         -:  464:						send__connack(context, 0, CONNACK_REFUSED_SERVER_UNAVAILABLE);
+>         -:  465:						rc = MOSQ_ERR_NOMEM;
+>         -:  466:						goto handle_connect_error;
+1846,1849c1846,1849
+<     #####:  469:					if ((size_t)ASN1_STRING_length(name_asn1) != strlen(context->username)) {
+<     #####:  470:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  471:						rc = 1;
+<     #####:  472:						goto handle_connect_error;
+---
+>         -:  469:					if ((size_t)ASN1_STRING_length(name_asn1) != strlen(context->username)) {
+>         -:  470:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  471:						rc = 1;
+>         -:  472:						goto handle_connect_error;
+1853,1861c1853,1861
+<     #####:  476:				BIO *subject_bio = BIO_new(BIO_s_mem());
+<     #####:  477:				X509_NAME_print_ex(subject_bio, X509_get_subject_name(client_cert), 0, XN_FLAG_RFC2253);
+<     #####:  478:				char *data_start = NULL;
+<     #####:  479:				long name_length = BIO_get_mem_data(subject_bio, &data_start);
+<     #####:  480:				char *subject = mosquitto__malloc(sizeof(char)*name_length+1);
+<     #####:  481:				if(!subject){
+<     #####:  482:					BIO_free(subject_bio);
+<     #####:  483:					rc = MOSQ_ERR_NOMEM;
+<     #####:  484:					goto handle_connect_error;
+---
+>         -:  476:				BIO *subject_bio = BIO_new(BIO_s_mem());
+>         -:  477:				X509_NAME_print_ex(subject_bio, X509_get_subject_name(client_cert), 0, XN_FLAG_RFC2253);
+>         -:  478:				char *data_start = NULL;
+>         -:  479:				long name_length = BIO_get_mem_data(subject_bio, &data_start);
+>         -:  480:				char *subject = mosquitto__malloc(sizeof(char)*name_length+1);
+>         -:  481:				if(!subject){
+>         -:  482:					BIO_free(subject_bio);
+>         -:  483:					rc = MOSQ_ERR_NOMEM;
+>         -:  484:					goto handle_connect_error;
+1863,1866c1863,1866
+<     #####:  486:				memcpy(subject, data_start, name_length);
+<     #####:  487:				subject[name_length] = '\0';
+<     #####:  488:				BIO_free(subject_bio);
+<     #####:  489:				context->username = subject;
+---
+>         -:  486:				memcpy(subject, data_start, name_length);
+>         -:  487:				subject[name_length] = '\0';
+>         -:  488:				BIO_free(subject_bio);
+>         -:  489:				context->username = subject;
+1868c1868
+<     #####:  491:			if(!context->username){
+---
+>         -:  491:			if(!context->username){
+1872,1873c1872,1873
+<     #####:  495:			X509_free(client_cert);
+<     #####:  496:			client_cert = NULL;
+---
+>         -:  495:			X509_free(client_cert);
+>         -:  496:			client_cert = NULL;
+2061c2061
+<     #####:  684:	if(client_cert) X509_free(client_cert);
+---
+>         -:  684:	if(client_cert) X509_free(client_cert);
+2064c2064
+<         -:  687:	return rc;
+---
+>     #####:  687:	return rc;
+2089,2092c2089,2092
+<     #####:  132:	X509 *client_cert = NULL;
+<     #####:  133:	X509_NAME *name;
+<     #####:  134:	X509_NAME_ENTRY *name_entry;
+<     #####:  135:	ASN1_STRING *name_asn1 = NULL;
+---
+>         -:  132:	X509 *client_cert = NULL;
+>         -:  133:	X509_NAME *name;
+>         -:  134:	X509_NAME_ENTRY *name_entry;
+>         -:  135:	ASN1_STRING *name_asn1 = NULL;
+2366c2366
+<     #####:  409:	if(context->listener && context->listener->ssl_ctx && (context->listener->use_identity_as_username || context->listener->use_subject_as_username)){
+---
+>         -:  409:	if(context->listener && context->listener->ssl_ctx && (context->listener->use_identity_as_username || context->listener->use_subject_as_username)){
+2368,2371c2368,2371
+<     #####:  411:		mosquitto__free(username);
+<     #####:  412:		username = NULL;
+<     #####:  413:		mosquitto__free(password);
+<     #####:  414:		password = NULL;
+---
+>         -:  411:		mosquitto__free(username);
+>         -:  412:		username = NULL;
+>         -:  413:		mosquitto__free(password);
+>         -:  414:		password = NULL;
+2373,2376c2373,2376
+<     #####:  416:		if(!context->ssl){
+<     #####:  417:			send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  418:			rc = 1;
+<     #####:  419:			goto handle_connect_error;
+---
+>         -:  416:		if(!context->ssl){
+>         -:  417:			send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  418:			rc = 1;
+>         -:  419:			goto handle_connect_error;
+2379c2379
+<     #####:  422:		if(context->listener->psk_hint){
+---
+>         -:  422:		if(context->listener->psk_hint){
+2381,2384c2381,2384
+<     #####:  424:			if(!context->username){
+<     #####:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  426:				rc = 1;
+<     #####:  427:				goto handle_connect_error;
+---
+>         -:  424:			if(!context->username){
+>         -:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  426:				rc = 1;
+>         -:  427:				goto handle_connect_error;
+2388,2392c2388,2392
+<     #####:  431:			client_cert = SSL_get_peer_certificate(context->ssl);
+<     #####:  432:			if(!client_cert){
+<     #####:  433:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  434:				rc = 1;
+<     #####:  435:				goto handle_connect_error;
+---
+>         -:  431:			client_cert = SSL_get_peer_certificate(context->ssl);
+>         -:  432:			if(!client_cert){
+>         -:  433:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  434:				rc = 1;
+>         -:  435:				goto handle_connect_error;
+2394,2398c2394,2398
+<     #####:  437:			name = X509_get_subject_name(client_cert);
+<     #####:  438:			if(!name){
+<     #####:  439:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  440:				rc = 1;
+<     #####:  441:				goto handle_connect_error;
+---
+>         -:  437:			name = X509_get_subject_name(client_cert);
+>         -:  438:			if(!name){
+>         -:  439:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  440:				rc = 1;
+>         -:  441:				goto handle_connect_error;
+2400,2405c2400,2405
+<     #####:  443:			if (context->listener->use_identity_as_username) { //use_identity_as_username
+<     #####:  444:				i = X509_NAME_get_index_by_NID(name, NID_commonName, -1);
+<     #####:  445:				if(i == -1){
+<     #####:  446:					send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  447:					rc = 1;
+<     #####:  448:					goto handle_connect_error;
+---
+>         -:  443:			if (context->listener->use_identity_as_username) { //use_identity_as_username
+>         -:  444:				i = X509_NAME_get_index_by_NID(name, NID_commonName, -1);
+>         -:  445:				if(i == -1){
+>         -:  446:					send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  447:					rc = 1;
+>         -:  448:					goto handle_connect_error;
+2407,2413c2407,2413
+<     #####:  450:				name_entry = X509_NAME_get_entry(name, i);
+<     #####:  451:				if(name_entry){
+<     #####:  452:					name_asn1 = X509_NAME_ENTRY_get_data(name_entry);
+<     #####:  453:					if (name_asn1 == NULL) {
+<     #####:  454:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  455:						rc = 1;
+<     #####:  456:						goto handle_connect_error;
+---
+>         -:  450:				name_entry = X509_NAME_get_entry(name, i);
+>         -:  451:				if(name_entry){
+>         -:  452:					name_asn1 = X509_NAME_ENTRY_get_data(name_entry);
+>         -:  453:					if (name_asn1 == NULL) {
+>         -:  454:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  455:						rc = 1;
+>         -:  456:						goto handle_connect_error;
+2418c2418
+<     #####:  461:					context->username = mosquitto__strdup((char *) ASN1_STRING_get0_data(name_asn1));
+---
+>         -:  461:					context->username = mosquitto__strdup((char *) ASN1_STRING_get0_data(name_asn1));
+2420,2423c2420,2423
+<     #####:  463:					if(!context->username){
+<     #####:  464:						send__connack(context, 0, CONNACK_REFUSED_SERVER_UNAVAILABLE);
+<     #####:  465:						rc = MOSQ_ERR_NOMEM;
+<     #####:  466:						goto handle_connect_error;
+---
+>         -:  463:					if(!context->username){
+>         -:  464:						send__connack(context, 0, CONNACK_REFUSED_SERVER_UNAVAILABLE);
+>         -:  465:						rc = MOSQ_ERR_NOMEM;
+>         -:  466:						goto handle_connect_error;
+2426,2429c2426,2429
+<     #####:  469:					if ((size_t)ASN1_STRING_length(name_asn1) != strlen(context->username)) {
+<     #####:  470:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  471:						rc = 1;
+<     #####:  472:						goto handle_connect_error;
+---
+>         -:  469:					if ((size_t)ASN1_STRING_length(name_asn1) != strlen(context->username)) {
+>         -:  470:						send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  471:						rc = 1;
+>         -:  472:						goto handle_connect_error;
+2433,2441c2433,2441
+<     #####:  476:				BIO *subject_bio = BIO_new(BIO_s_mem());
+<     #####:  477:				X509_NAME_print_ex(subject_bio, X509_get_subject_name(client_cert), 0, XN_FLAG_RFC2253);
+<     #####:  478:				char *data_start = NULL;
+<     #####:  479:				long name_length = BIO_get_mem_data(subject_bio, &data_start);
+<     #####:  480:				char *subject = mosquitto__malloc(sizeof(char)*name_length+1);
+<     #####:  481:				if(!subject){
+<     #####:  482:					BIO_free(subject_bio);
+<     #####:  483:					rc = MOSQ_ERR_NOMEM;
+<     #####:  484:					goto handle_connect_error;
+---
+>         -:  476:				BIO *subject_bio = BIO_new(BIO_s_mem());
+>         -:  477:				X509_NAME_print_ex(subject_bio, X509_get_subject_name(client_cert), 0, XN_FLAG_RFC2253);
+>         -:  478:				char *data_start = NULL;
+>         -:  479:				long name_length = BIO_get_mem_data(subject_bio, &data_start);
+>         -:  480:				char *subject = mosquitto__malloc(sizeof(char)*name_length+1);
+>         -:  481:				if(!subject){
+>         -:  482:					BIO_free(subject_bio);
+>         -:  483:					rc = MOSQ_ERR_NOMEM;
+>         -:  484:					goto handle_connect_error;
+2443,2446c2443,2446
+<     #####:  486:				memcpy(subject, data_start, name_length);
+<     #####:  487:				subject[name_length] = '\0';
+<     #####:  488:				BIO_free(subject_bio);
+<     #####:  489:				context->username = subject;
+---
+>         -:  486:				memcpy(subject, data_start, name_length);
+>         -:  487:				subject[name_length] = '\0';
+>         -:  488:				BIO_free(subject_bio);
+>         -:  489:				context->username = subject;
+2448c2448
+<     #####:  491:			if(!context->username){
+---
+>         -:  491:			if(!context->username){
+2452,2453c2452,2453
+<     #####:  495:			X509_free(client_cert);
+<     #####:  496:			client_cert = NULL;
+---
+>         -:  495:			X509_free(client_cert);
+>         -:  496:			client_cert = NULL;
+2641c2641
+<     #####:  684:	if(client_cert) X509_free(client_cert);
+---
+>         -:  684:	if(client_cert) X509_free(client_cert);
+2644c2644
+<         -:  687:	return rc;
+---
+>     #####:  687:	return rc;

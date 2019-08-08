@@ -1,0 +1,60 @@
+69,71c69,71
+<     #####:   67:	if(mosq->bridge && mosq->bridge->start_type == bst_lazy
+<     #####:   68:				&& mosq->sock != INVALID_SOCKET
+<     #####:   69:				&& now - mosq->next_msg_out - mosq->keepalive >= mosq->bridge->idle_timeout){
+---
+>         -:   67:	if(mosq->bridge && mosq->bridge->start_type == bst_lazy
+>         -:   68:				&& mosq->sock != INVALID_SOCKET
+>         -:   69:				&& now - mosq->next_msg_out - mosq->keepalive >= mosq->bridge->idle_timeout){
+73,75c73,75
+<     #####:   71:		log__printf(NULL, MOSQ_LOG_NOTICE, "Bridge connection %s has exceeded idle timeout, disconnecting.", mosq->id);
+<     #####:   72:		net__socket_close(db, mosq);
+<     #####:   73:		return MOSQ_ERR_SUCCESS;
+---
+>         -:   71:		log__printf(NULL, MOSQ_LOG_NOTICE, "Bridge connection %s has exceeded idle timeout, disconnecting.", mosq->id);
+>         -:   72:		net__socket_close(db, mosq);
+>         -:   73:		return MOSQ_ERR_SUCCESS;
+116c116
+<         -:  114:	return MOSQ_ERR_SUCCESS;
+---
+>     #####:  114:	return MOSQ_ERR_SUCCESS;
+135,137c135,137
+<     #####:   67:	if(mosq->bridge && mosq->bridge->start_type == bst_lazy
+<     #####:   68:				&& mosq->sock != INVALID_SOCKET
+<     #####:   69:				&& now - mosq->next_msg_out - mosq->keepalive >= mosq->bridge->idle_timeout){
+---
+>         -:   67:	if(mosq->bridge && mosq->bridge->start_type == bst_lazy
+>         -:   68:				&& mosq->sock != INVALID_SOCKET
+>         -:   69:				&& now - mosq->next_msg_out - mosq->keepalive >= mosq->bridge->idle_timeout){
+139,141c139,141
+<     #####:   71:		log__printf(NULL, MOSQ_LOG_NOTICE, "Bridge connection %s has exceeded idle timeout, disconnecting.", mosq->id);
+<     #####:   72:		net__socket_close(db, mosq);
+<     #####:   73:		return MOSQ_ERR_SUCCESS;
+---
+>         -:   71:		log__printf(NULL, MOSQ_LOG_NOTICE, "Bridge connection %s has exceeded idle timeout, disconnecting.", mosq->id);
+>         -:   72:		net__socket_close(db, mosq);
+>         -:   73:		return MOSQ_ERR_SUCCESS;
+182c182
+<         -:  114:	return MOSQ_ERR_SUCCESS;
+---
+>     #####:  114:	return MOSQ_ERR_SUCCESS;
+201,203c201,203
+<     #####:   67:	if(mosq->bridge && mosq->bridge->start_type == bst_lazy
+<     #####:   68:				&& mosq->sock != INVALID_SOCKET
+<     #####:   69:				&& now - mosq->next_msg_out - mosq->keepalive >= mosq->bridge->idle_timeout){
+---
+>         -:   67:	if(mosq->bridge && mosq->bridge->start_type == bst_lazy
+>         -:   68:				&& mosq->sock != INVALID_SOCKET
+>         -:   69:				&& now - mosq->next_msg_out - mosq->keepalive >= mosq->bridge->idle_timeout){
+205,207c205,207
+<     #####:   71:		log__printf(NULL, MOSQ_LOG_NOTICE, "Bridge connection %s has exceeded idle timeout, disconnecting.", mosq->id);
+<     #####:   72:		net__socket_close(db, mosq);
+<     #####:   73:		return MOSQ_ERR_SUCCESS;
+---
+>         -:   71:		log__printf(NULL, MOSQ_LOG_NOTICE, "Bridge connection %s has exceeded idle timeout, disconnecting.", mosq->id);
+>         -:   72:		net__socket_close(db, mosq);
+>         -:   73:		return MOSQ_ERR_SUCCESS;
+248c248
+<         -:  114:	return MOSQ_ERR_SUCCESS;
+---
+>     #####:  114:	return MOSQ_ERR_SUCCESS;

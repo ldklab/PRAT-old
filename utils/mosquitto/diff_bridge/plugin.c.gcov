@@ -1,0 +1,6 @@
+239,240c239,240
+<     #####:   80:	if(context->bridge){
+<     #####:   81:		return context->bridge->local_username;
+---
+>         -:   80:	if(context->bridge){
+>         -:   81:		return context->bridge->local_username;

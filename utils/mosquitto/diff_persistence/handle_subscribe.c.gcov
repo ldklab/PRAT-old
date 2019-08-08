@@ -1,0 +1,4 @@
+164c164
+<     #####:  162:	db->persistence_changes++;
+---
+>         -:  162:	db->persistence_changes++;
