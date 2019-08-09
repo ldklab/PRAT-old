@@ -1,0 +1,12 @@
+1c1
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Countdown_Time_T.cpp
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Countdown_Time_T.cpp
+3c3
+<         -:    1:// $Id$
+---
+>         -:    1:// $Id: Countdown_Time_T.cpp 2179 2013-05-28 22:16:51Z mesnierp $
+50c50
+<     #####:   48:          this->time_policy_ () - this->start_time_;
+---
+>         -:   48:          this->time_policy_ () - this->start_time_;

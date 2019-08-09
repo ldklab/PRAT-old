@@ -1,0 +1,20 @@
+2c2
+<         -:    0:Programs:3
+---
+>         -:    0:Programs:51
+420c420
+<         -:  418:ACE_String_Base<ACE_CHAR_T>::operator== (const ACE_CHAR_T *s) const
+---
+>     #####:  418:ACE_String_Base<ACE_CHAR_T>::operator== (const ACE_CHAR_T *s) const
+422,424c422,424
+<         -:  420:  size_t len = ACE_OS::strlen (s);
+<         -:  421:  return this->len_ == len &&
+<         -:  422:         ACE_OS::memcmp (this->rep_,
+---
+>     #####:  420:  size_t len = ACE_OS::strlen (s);
+>     #####:  421:  return this->len_ == len &&
+>     #####:  422:         ACE_OS::memcmp (this->rep_,
+426c426
+<         -:  424:                         len * sizeof (ACE_CHAR_T)) == 0;
+---
+>     #####:  424:                         len * sizeof (ACE_CHAR_T)) == 0;

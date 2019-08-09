@@ -1,0 +1,98 @@
+1c1
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Timer_Heap_T.cpp
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Timer_Heap_T.cpp
+3c3
+<         -:    1:// $Id$
+---
+>         -:    1:// $Id: Timer_Heap_T.cpp 2622 2015-08-13 18:30:00Z mitza $
+60,70d59
+< ------------------
+< _ZN25ACE_Timer_Heap_Iterator_TIP17ACE_Event_Handler39ACE_Event_Handler_Handle_Timeout_Upcall26ACE_Recursive_Thread_Mutex24ACE_FPointer_Time_PolicyED0Ev:
+<     #####:   55:ACE_Timer_Heap_Iterator_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::~ACE_Timer_Heap_Iterator_T (void)
+<         -:   56:{
+<     #####:   57:}
+< ------------------
+< _ZN25ACE_Timer_Heap_Iterator_TIP17ACE_Event_Handler39ACE_Event_Handler_Handle_Timeout_Upcall26ACE_Recursive_Thread_Mutex24ACE_FPointer_Time_PolicyED2Ev:
+<     #####:   55:ACE_Timer_Heap_Iterator_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::~ACE_Timer_Heap_Iterator_T (void)
+<         -:   56:{
+<     #####:   57:}
+< ------------------
+274,346d262
+< ------------------
+< _ZN16ACE_Timer_Heap_TIP17ACE_Event_Handler39ACE_Event_Handler_Handle_Timeout_Upcall26ACE_Recursive_Thread_Mutex24ACE_FPointer_Time_PolicyED0Ev:
+<     #####:  227:ACE_Timer_Heap_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::~ACE_Timer_Heap_T (void)
+<         -:  228:{
+<         -:  229:  ACE_TRACE ("ACE_Timer_Heap_T::~ACE_Timer_Heap_T");
+<         -:  230:
+<         -:  231:  delete iterator_;
+<         -:  232:
+<         -:  233:  this->close ();
+<         -:  234:
+<         -:  235:#if defined (ACE_HAS_ALLOC_HOOKS)
+<         -:  236:  if (this->heap_)
+<         -:  237:    (ACE_Allocator::instance ()->free (this->heap_));
+<         -:  238:#else
+<         -:  239:  delete [] this->heap_;
+<         -:  240:#endif /* ACE_HAS_ALLOC_HOOKS */
+<         -:  241:
+<         -:  242:#if defined (ACE_HAS_ALLOC_HOOKS)
+<         -:  243:  if (this->timer_ids_)
+<         -:  244:      (ACE_Allocator::instance ()->free (this->timer_ids_));
+<         -:  245:#else
+<         -:  246:  delete [] this->timer_ids_;
+<         -:  247:#endif /* ACE_HAS_ALLOC_HOOKS */
+<         -:  248:
+<         -:  249:  // clean up any preallocated timer nodes
+<         -:  250:  if (preallocated_nodes_ != 0)
+<         -:  251:    {
+<         -:  252:      ACE_Unbounded_Set_Iterator<ACE_Timer_Node_T<TYPE> *>
+<         -:  253:        set_iterator (this->preallocated_node_set_);
+<         -:  254:
+<         -:  255:      for (ACE_Timer_Node_T<TYPE> **entry = 0;
+<         -:  256:           set_iterator.next (entry) !=0;
+<         -:  257:           set_iterator.advance ())
+<         -:  258:        delete [] *entry;
+<         -:  259:    }
+<     #####:  260:}
+< ------------------
+< _ZN16ACE_Timer_Heap_TIP17ACE_Event_Handler39ACE_Event_Handler_Handle_Timeout_Upcall26ACE_Recursive_Thread_Mutex24ACE_FPointer_Time_PolicyED2Ev:
+<     #####:  227:ACE_Timer_Heap_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::~ACE_Timer_Heap_T (void)
+<         -:  228:{
+<         -:  229:  ACE_TRACE ("ACE_Timer_Heap_T::~ACE_Timer_Heap_T");
+<         -:  230:
+<     #####:  231:  delete iterator_;
+<         -:  232:
+<     #####:  233:  this->close ();
+<         -:  234:
+<         -:  235:#if defined (ACE_HAS_ALLOC_HOOKS)
+<         -:  236:  if (this->heap_)
+<         -:  237:    (ACE_Allocator::instance ()->free (this->heap_));
+<         -:  238:#else
+<     #####:  239:  delete [] this->heap_;
+<         -:  240:#endif /* ACE_HAS_ALLOC_HOOKS */
+<         -:  241:
+<         -:  242:#if defined (ACE_HAS_ALLOC_HOOKS)
+<         -:  243:  if (this->timer_ids_)
+<         -:  244:      (ACE_Allocator::instance ()->free (this->timer_ids_));
+<         -:  245:#else
+<     #####:  246:  delete [] this->timer_ids_;
+<         -:  247:#endif /* ACE_HAS_ALLOC_HOOKS */
+<         -:  248:
+<         -:  249:  // clean up any preallocated timer nodes
+<     #####:  250:  if (preallocated_nodes_ != 0)
+<         -:  251:    {
+<         -:  252:      ACE_Unbounded_Set_Iterator<ACE_Timer_Node_T<TYPE> *>
+<     #####:  253:        set_iterator (this->preallocated_node_set_);
+<         -:  254:
+<     #####:  255:      for (ACE_Timer_Node_T<TYPE> **entry = 0;
+<     #####:  256:           set_iterator.next (entry) !=0;
+<         -:  257:           set_iterator.advance ())
+<     #####:  258:        delete [] *entry;
+<         -:  259:    }
+<     #####:  260:}
+< ------------------
+737c653
+<     #####:  651:               current = current->get_next ())
+---
+>         -:  651:               current = current->get_next ())

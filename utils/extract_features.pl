@@ -62,7 +62,8 @@ sub parse_file {
 
 		# Look for '#####'.
 		foreach my $line (@lines) {
-			if ($line =~ /#{5}/) {
+			# Some idl files just return a lot of /*EOF*/.
+			if (($line =~ /#{5}/) && !($line =~ m/\/\*EOF\*\//)) {
 				print colored(['bright_cyan'], "$line");
 
 				# Save off file name + line num.

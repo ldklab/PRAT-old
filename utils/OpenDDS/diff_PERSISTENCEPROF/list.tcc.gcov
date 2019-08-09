@@ -1,0 +1,206 @@
+2c2
+<         -:    0:Programs:3
+---
+>         -:    0:Programs:51
+67c67
+<     #####:   65:    _List_base<_Tp, _Alloc>::
+---
+>         3:   65:    _List_base<_Tp, _Alloc>::
+71,72c71,72
+<     #####:   69:      __detail::_List_node_base* __cur = _M_impl._M_node._M_next;
+<     #####:   70:      while (__cur != &_M_impl._M_node)
+---
+>         3:   69:      __detail::_List_node_base* __cur = _M_impl._M_node._M_next;
+>         9:   70:      while (__cur != &_M_impl._M_node)
+74,76c74,76
+<     #####:   72:	  _Node* __tmp = static_cast<_Node*>(__cur);
+<     #####:   73:	  __cur = __tmp->_M_next;
+<     #####:   74:	  _Tp* __val = __tmp->_M_valptr();
+---
+>         3:   72:	  _Node* __tmp = static_cast<_Node*>(__cur);
+>         3:   73:	  __cur = __tmp->_M_next;
+>         3:   74:	  _Tp* __val = __tmp->_M_valptr();
+78c78
+<     #####:   76:	  _Node_alloc_traits::destroy(_M_get_Node_allocator(), __val);
+---
+>         3:   76:	  _Node_alloc_traits::destroy(_M_get_Node_allocator(), __val);
+82c82
+<     #####:   80:	  _M_put_node(__tmp);
+---
+>         3:   80:	  _M_put_node(__tmp);
+84c84
+<     #####:   82:    }
+---
+>         3:   82:    }
+90c90
+<         -:   88:      list<_Tp, _Alloc>::
+---
+>     #####:   88:      list<_Tp, _Alloc>::
+93,96c93,96
+<         -:   91:	_Node* __tmp = _M_create_node(std::forward<_Args>(__args)...);
+<         -:   92:	__tmp->_M_hook(__position._M_const_cast()._M_node);
+<         -:   93:	this->_M_inc_size(1);
+<         -:   94:	return iterator(__tmp);
+---
+>     #####:   91:	_Node* __tmp = _M_create_node(std::forward<_Args>(__args)...);
+>     #####:   92:	__tmp->_M_hook(__position._M_const_cast()._M_node);
+>     #####:   93:	this->_M_inc_size(1);
+>     #####:   94:	return iterator(__tmp);
+151c151
+<         -:  149:    list<_Tp, _Alloc>::
+---
+>     #####:  149:    list<_Tp, _Alloc>::
+158,160c158,160
+<         -:  156:      iterator __ret = iterator(__position._M_node->_M_next);
+<         -:  157:      _M_erase(__position._M_const_cast());
+<         -:  158:      return __ret;
+---
+>     #####:  156:      iterator __ret = iterator(__position._M_node->_M_next);
+>     #####:  157:      _M_erase(__position._M_const_cast());
+>     #####:  158:      return __ret;
+421c421
+<         -:  419:      list<_Tp, _Alloc>::
+---
+>     #####:  419:      list<_Tp, _Alloc>::
+430c430
+<         -:  428:	if (this != std::__addressof(__x))
+---
+>     #####:  428:	if (this != std::__addressof(__x))
+432c432
+<         -:  430:	    _M_check_equal_allocators(__x);
+---
+>     #####:  430:	    _M_check_equal_allocators(__x);
+434,438c434,438
+<         -:  432:	    iterator __first1 = begin();
+<         -:  433:	    iterator __last1 = end();
+<         -:  434:	    iterator __first2 = __x.begin();
+<         -:  435:	    iterator __last2 = __x.end();
+<         -:  436:	    const size_t __orig_size = __x.size();
+---
+>     #####:  432:	    iterator __first1 = begin();
+>     #####:  433:	    iterator __last1 = end();
+>     #####:  434:	    iterator __first2 = __x.begin();
+>     #####:  435:	    iterator __last2 = __x.end();
+>     #####:  436:	    const size_t __orig_size = __x.size();
+441,442c441,442
+<         -:  439:		while (__first1 != __last1 && __first2 != __last2)
+<         -:  440:		  if (__comp(*__first2, *__first1))
+---
+>     #####:  439:		while (__first1 != __last1 && __first2 != __last2)
+>     #####:  440:		  if (__comp(*__first2, *__first1))
+444,446c444,446
+<         -:  442:		      iterator __next = __first2;
+<         -:  443:		      _M_transfer(__first1, __first2, ++__next);
+<         -:  444:		      __first2 = __next;
+---
+>     #####:  442:		      iterator __next = __first2;
+>     #####:  443:		      _M_transfer(__first1, __first2, ++__next);
+>     #####:  444:		      __first2 = __next;
+449,451c449,451
+<         -:  447:		    ++__first1;
+<         -:  448:		if (__first2 != __last2)
+<         -:  449:		  _M_transfer(__last1, __first2, __last2);
+---
+>     #####:  447:		    ++__first1;
+>     #####:  448:		if (__first2 != __last2)
+>     #####:  449:		  _M_transfer(__last1, __first2, __last2);
+453,454c453,454
+<         -:  451:		this->_M_inc_size(__x._M_get_size());
+<         -:  452:		__x._M_set_size(0);
+---
+>     #####:  451:		this->_M_inc_size(__x._M_get_size());
+>     #####:  452:		__x._M_set_size(0);
+456c456
+<         -:  454:	    __catch(...)
+---
+>     =====:  454:	    __catch(...)
+458,461c458,461
+<         -:  456:		const size_t __dist = std::distance(__first2, __last2);
+<         -:  457:		this->_M_inc_size(__orig_size - __dist);
+<         -:  458:		__x._M_set_size(__dist);
+<         -:  459:		__throw_exception_again;
+---
+>     =====:  456:		const size_t __dist = std::distance(__first2, __last2);
+>     =====:  457:		this->_M_inc_size(__orig_size - __dist);
+>     =====:  458:		__x._M_set_size(__dist);
+>     =====:  459:		__throw_exception_again;
+464c464
+<         -:  462:      }
+---
+>     #####:  462:      }
+554c554
+<         -:  552:      list<_Tp, _Alloc>::
+---
+>         3:  552:      list<_Tp, _Alloc>::
+558,559c558,559
+<         -:  556:	if (this->_M_impl._M_node._M_next != &this->_M_impl._M_node
+<         -:  557:	    && this->_M_impl._M_node._M_next->_M_next != &this->_M_impl._M_node)
+---
+>         3:  556:	if (this->_M_impl._M_node._M_next != &this->_M_impl._M_node
+>         3:  557:	    && this->_M_impl._M_node._M_next->_M_next != &this->_M_impl._M_node)
+561,563c561,563
+<         -:  559:	    list __carry;
+<         -:  560:	    list __tmp[64];
+<         -:  561:	    list * __fill = __tmp;
+---
+>     #####:  559:	    list __carry;
+>     #####:  560:	    list __tmp[64];
+>     #####:  561:	    list * __fill = __tmp;
+567c567
+<         -:  565:		do
+---
+>     #####:  565:		do
+569c569
+<         -:  567:		    __carry.splice(__carry.begin(), *this, begin());
+---
+>     #####:  567:		    __carry.splice(__carry.begin(), *this, begin());
+571,572c571,572
+<         -:  569:		    for(__counter = __tmp;
+<         -:  570:			__counter != __fill && !__counter->empty();
+---
+>     #####:  569:		    for(__counter = __tmp;
+>     #####:  570:			__counter != __fill && !__counter->empty();
+575,576c575,576
+<         -:  573:			__counter->merge(__carry, __comp);
+<         -:  574:			__carry.swap(*__counter);
+---
+>     #####:  573:			__counter->merge(__carry, __comp);
+>     #####:  574:			__carry.swap(*__counter);
+578,580c578,580
+<         -:  576:		    __carry.swap(*__counter);
+<         -:  577:		    if (__counter == __fill)
+<         -:  578:		      ++__fill;
+---
+>     #####:  576:		    __carry.swap(*__counter);
+>     #####:  577:		    if (__counter == __fill)
+>     #####:  578:		      ++__fill;
+582c582
+<         -:  580:		while ( !empty() );
+---
+>     #####:  580:		while ( !empty() );
+584,586c584,586
+<         -:  582:		for (__counter = __tmp + 1; __counter != __fill; ++__counter)
+<         -:  583:		  __counter->merge(*(__counter - 1), __comp);
+<         -:  584:		swap(*(__fill - 1));
+---
+>     #####:  582:		for (__counter = __tmp + 1; __counter != __fill; ++__counter)
+>     #####:  583:		  __counter->merge(*(__counter - 1), __comp);
+>     #####:  584:		swap(*(__fill - 1));
+588c588
+<         -:  586:	    __catch(...)
+---
+>     =====:  586:	    __catch(...)
+590,593c590,593
+<         -:  588:		this->splice(this->end(), __carry);
+<         -:  589:		for (int __i = 0; __i < sizeof(__tmp)/sizeof(__tmp[0]); ++__i)
+<         -:  590:		  this->splice(this->end(), __tmp[__i]);
+<         -:  591:		__throw_exception_again;
+---
+>     =====:  588:		this->splice(this->end(), __carry);
+>     =====:  589:		for (int __i = 0; __i < sizeof(__tmp)/sizeof(__tmp[0]); ++__i)
+>     =====:  590:		  this->splice(this->end(), __tmp[__i]);
+>     =====:  591:		__throw_exception_again;
+596c596
+<         -:  594:      }
+---
+>         3:  594:      }
