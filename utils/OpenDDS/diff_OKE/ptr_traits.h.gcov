@@ -1,0 +1,71 @@
+1c1
+<         -:    0:Source:/usr/include/c++/8/bits/ptr_traits.h
+---
+>         -:    0:Source:/usr/include/c++/7/bits/ptr_traits.h
+5c5
+<         -:    3:// Copyright (C) 2011-2018 Free Software Foundation, Inc.
+---
+>         -:    3:// Copyright (C) 2011-2017 Free Software Foundation, Inc.
+151,205c151,156
+<         -:  149:  template<typename _Tp>
+<         -:  150:    constexpr _Tp*
+<         -:  151:    __to_address(_Tp* __ptr) noexcept
+<         -:  152:    {
+<         -:  153:      static_assert(!std::is_function<_Tp>::value, "not a function pointer");
+<         -:  154:      return __ptr;
+<         -:  155:    }
+<         -:  156:
+<         -:  157:#if __cplusplus <= 201703L
+<         -:  158:  template<typename _Ptr>
+<         -:  159:    constexpr typename std::pointer_traits<_Ptr>::element_type*
+<         -:  160:    __to_address(const _Ptr& __ptr)
+<         -:  161:    { return std::__to_address(__ptr.operator->()); }
+<         -:  162:#else
+<         -:  163:  template<typename _Ptr>
+<         -:  164:    constexpr auto
+<         -:  165:    __to_address(const _Ptr& __ptr) noexcept
+<         -:  166:    -> decltype(std::pointer_traits<_Ptr>::to_address(__ptr))
+<         -:  167:    { return std::pointer_traits<_Ptr>::to_address(__ptr); }
+<         -:  168:
+<         -:  169:  template<typename _Ptr, typename... _None>
+<         -:  170:    constexpr auto
+<         -:  171:    __to_address(const _Ptr& __ptr, _None...) noexcept
+<         -:  172:    { return std::__to_address(__ptr.operator->()); }
+<         -:  173:
+<         -:  174:  /**
+<         -:  175:   * @brief Obtain address referenced by a pointer to an object
+<         -:  176:   * @param __ptr A pointer to an object
+<         -:  177:   * @return @c __ptr
+<         -:  178:   * @ingroup pointer_abstractions
+<         -:  179:  */
+<         -:  180:  template<typename _Tp>
+<         -:  181:    constexpr _Tp*
+<         -:  182:    to_address(_Tp* __ptr) noexcept
+<         -:  183:    { return std::__to_address(__ptr); }
+<         -:  184:
+<         -:  185:  /**
+<         -:  186:   * @brief Obtain address referenced by a pointer to an object
+<         -:  187:   * @param __ptr A pointer to an object
+<         -:  188:   * @return @c pointer_traits<_Ptr>::to_address(__ptr) if that expression is
+<         -:  189:             well-formed, otherwise @c to_address(__ptr.operator->())
+<         -:  190:   * @ingroup pointer_abstractions
+<         -:  191:  */
+<         -:  192:  template<typename _Ptr>
+<         -:  193:    constexpr auto
+<         -:  194:    to_address(const _Ptr& __ptr) noexcept
+<         -:  195:    { return std::__to_address(__ptr); }
+<         -:  196:#endif // C++2a
+<         -:  197:
+<         -:  198:_GLIBCXX_END_NAMESPACE_VERSION
+<         -:  199:} // namespace std
+<         -:  200:
+<         -:  201:#endif
+<         -:  202:
+<         -:  203:#endif
+---
+>         -:  149:_GLIBCXX_END_NAMESPACE_VERSION
+>         -:  150:} // namespace std
+>         -:  151:
+>         -:  152:#endif
+>         -:  153:
+>         -:  154:#endif

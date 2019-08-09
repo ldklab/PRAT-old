@@ -1,0 +1,49 @@
+1,2c1,2
+<         -:    0:Source:/usr/include/c++/8/ext/type_traits.h
+<         -:    0:Programs:51
+---
+>         -:    0:Source:/usr/include/c++/7/ext/type_traits.h
+>         -:    0:Programs:69
+5c5
+<         -:    3:// Copyright (C) 2005-2018 Free Software Foundation, Inc.
+---
+>         -:    3:// Copyright (C) 2005-2017 Free Software Foundation, Inc.
+154,188c154,155
+<     #####:  152:    __is_null_pointer(_Type* __ptr)
+<     #####:  153:    { return __ptr == 0; }
+< ------------------
+< _ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_:
+<     #####:  152:    __is_null_pointer(_Type* __ptr)
+<     #####:  153:    { return __ptr == 0; }
+< ------------------
+< _ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_:
+<     #####:  152:    __is_null_pointer(_Type* __ptr)
+<     #####:  153:    { return __ptr == 0; }
+< ------------------
+< _ZN9__gnu_cxx17__is_null_pointerIcEEbPT_:
+<     #####:  152:    __is_null_pointer(_Type* __ptr)
+<     #####:  153:    { return __ptr == 0; }
+< ------------------
+< _ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_:
+<     #####:  152:    __is_null_pointer(_Type* __ptr)
+<     #####:  153:    { return __ptr == 0; }
+< ------------------
+< _ZN9__gnu_cxx17__is_null_pointerIcEEbPT_:
+<     #####:  152:    __is_null_pointer(_Type* __ptr)
+<     #####:  153:    { return __ptr == 0; }
+< ------------------
+< _ZN9__gnu_cxx17__is_null_pointerIcEEbPT_:
+<     #####:  152:    __is_null_pointer(_Type* __ptr)
+<     #####:  153:    { return __ptr == 0; }
+< ------------------
+< _ZN9__gnu_cxx17__is_null_pointerIcEEbPT_:
+<     #####:  152:    __is_null_pointer(_Type* __ptr)
+<     #####:  153:    { return __ptr == 0; }
+< ------------------
+< _ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_:
+<     #####:  152:    __is_null_pointer(_Type* __ptr)
+<     #####:  153:    { return __ptr == 0; }
+< ------------------
+---
+>       643:  152:    __is_null_pointer(_Type* __ptr)
+>       643:  153:    { return __ptr == 0; }

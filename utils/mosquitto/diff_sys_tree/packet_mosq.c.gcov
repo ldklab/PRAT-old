@@ -1,0 +1,32 @@
+291c291
+<     #####:  289:				G_BYTES_SENT_INC(write_length);
+---
+>         -:  289:				G_BYTES_SENT_INC(write_length);
+313,315c313,315
+<     #####:  311:		G_MSGS_SENT_INC(1);
+<     #####:  312:		if(((packet->command)&0xF6) == PUBLISH){
+<     #####:  313:			G_PUB_MSGS_SENT_INC(1);
+---
+>         -:  311:		G_MSGS_SENT_INC(1);
+>         -:  312:		if(((packet->command)&0xF6) == PUBLISH){
+>         -:  313:			G_PUB_MSGS_SENT_INC(1);
+421c421
+<     #####:  419:			G_BYTES_RECEIVED_INC(1);
+---
+>         -:  419:			G_BYTES_RECEIVED_INC(1);
+461c461
+<     #####:  459:				G_BYTES_RECEIVED_INC(1);
+---
+>         -:  459:				G_BYTES_RECEIVED_INC(1);
+494c494
+<     #####:  492:			G_BYTES_RECEIVED_INC(read_length);
+---
+>         -:  492:			G_BYTES_RECEIVED_INC(read_length);
+527,529c527,529
+<     #####:  525:	G_MSGS_RECEIVED_INC(1);
+<     #####:  526:	if(((mosq->in_packet.command)&0xF5) == PUBLISH){
+<     #####:  527:		G_PUB_MSGS_RECEIVED_INC(1);
+---
+>         -:  525:	G_MSGS_RECEIVED_INC(1);
+>         -:  526:	if(((mosq->in_packet.command)&0xF5) == PUBLISH){
+>         -:  527:		G_PUB_MSGS_RECEIVED_INC(1);

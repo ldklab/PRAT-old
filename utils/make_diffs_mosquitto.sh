@@ -24,7 +24,7 @@ if [ $? != 0 ] ; then echo "Failed to parse options. Exiting." >&2 ; exit 1 ; fi
 eval set -- "$OPTS"
 
 # Populate a list of features using some NLP technique later.
-featArr=("TLS" "THREADING" "DLT" "TLS_PSK" "PIC" "BRIDGE" "PERSISTENCE" "MEMORY_TRACKING" "SYS_TREE" "SYSTEMD" "SRV" "UUID" "WRAP" "WEBSOCKETS" "EC" "SOCKS" "EPOLL" "SHARED_LIBRARIES" "BUNDLED_DEPS")
+featArr=("INC_BRIDGE_SUPPORT" "INC_DB_UPGRADE" "INC_MEMTRACK" "USE_LIBWRAP" "WITH_TLS" "WITH_THREADING" "WITH_DLT" "WITH_TLS_PSK" "WITH_PIC" "WITH_BRIDGE" "WITH_PERSISTENCE" "WITH_MEMORY_TRACKING" "WITH_SYS_TREE" "WITH_SYSTEMD" "WITH_SRV" "WITH_UUID" "WITH_WRAP" "WITH_STATIC_WEBSOCKETS" "WITH_WEBSOCKETS" "WITH_EC" "WITH_SOCKS" "WITH_EPOLL" "WITH_SHARED_LIBRARIES" "WITH_BUNDLED_DEPS")
 
 # Initial values.
 DIR="."
@@ -45,9 +45,9 @@ done
 makeCovFiles() {
 	flag=$1
 	printf "Building project with ${CYAN} ${FEAT^^}=$flag${NC}\n"
-	printf "Running::${CYAN} make binary WITH_${FEAT^^}=$flag${NC}\n"
+	printf "Running::${CYAN} make binary ${FEAT^^}=$flag${NC}\n"
 	# Make the binary without the feature.
-	make binary WITH_${FEAT^^}=$flag || exit 1
+	make binary ${FEAT^^}=$flag || exit 1
 	resloveDeps || exit 1 # Do this here because we need the shared lib.
 	./src/mosquitto &
 	broker_pid=$!

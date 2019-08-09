@@ -1,0 +1,144 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Value_Traits_T.h
+<         -:    0:Programs:51
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Value_Traits_T.h
+>         -:    0:Programs:15
+11c11
+<         -:    9: * $Id$
+---
+>         -:    9: * $Id: Value_Traits_T.h 1861 2011-08-31 16:18:08Z mesnierp $
+44,79d43
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE16initialize_rangeEPS4_S6_:
+<     #####:   37:  inline static void initialize_range(
+<         -:   38:      value_type * begin, value_type * end)
+<         -:   39:  {
+<     #####:   40:    std::fill(begin, end, value_type ());
+<     #####:   41:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE16initialize_rangeEPS4_S6_:
+<     #####:   37:  inline static void initialize_range(
+<         -:   38:      value_type * begin, value_type * end)
+<         -:   39:  {
+<     #####:   40:    std::fill(begin, end, value_type ());
+<     #####:   41:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE16initialize_rangeEPS4_S6_:
+<     #####:   37:  inline static void initialize_range(
+<         -:   38:      value_type * begin, value_type * end)
+<         -:   39:  {
+<     #####:   40:    std::fill(begin, end, value_type ());
+<     #####:   41:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE16initialize_rangeEPS4_S6_:
+<     #####:   37:  inline static void initialize_range(
+<         -:   38:      value_type * begin, value_type * end)
+<         -:   39:  {
+<     #####:   40:    std::fill(begin, end, value_type ());
+<     #####:   41:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE16initialize_rangeEPS4_S6_:
+<     #####:   37:  inline static void initialize_range(
+<         -:   38:      value_type * begin, value_type * end)
+<         -:   39:  {
+<     #####:   40:    std::fill(begin, end, value_type ());
+<     #####:   41:  }
+< ------------------
+86,114d49
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE13release_rangeEPS4_S6_:
+<     #####:   43:  inline static void release_range(
+<         -:   44:      value_type *, value_type *)
+<         -:   45:  {
+<         -:   46:    // Noop for value sequences
+<     #####:   47:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE13release_rangeEPS4_S6_:
+<     #####:   43:  inline static void release_range(
+<         -:   44:      value_type *, value_type *)
+<         -:   45:  {
+<         -:   46:    // Noop for value sequences
+<     #####:   47:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE13release_rangeEPS4_S6_:
+<     #####:   43:  inline static void release_range(
+<         -:   44:      value_type *, value_type *)
+<         -:   45:  {
+<         -:   46:    // Noop for value sequences
+<     #####:   47:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE13release_rangeEPS4_S6_:
+<     #####:   43:  inline static void release_range(
+<         -:   44:      value_type *, value_type *)
+<         -:   45:  {
+<         -:   46:    // Noop for value sequences
+<     #####:   47:  }
+< ------------------
+123,158d57
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+<     #####:   51:  inline static void copy_range(
+<         -:   52:      value_type * begin, value_type * end, iter dst)
+<         -:   53:  {
+<     #####:   54:    std::copy(begin, end, dst);
+<     #####:   55:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+<     #####:   51:  inline static void copy_range(
+<         -:   52:      value_type * begin, value_type * end, iter dst)
+<         -:   53:  {
+<     #####:   54:    std::copy(begin, end, dst);
+<     #####:   55:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+<     #####:   51:  inline static void copy_range(
+<         -:   52:      value_type * begin, value_type * end, iter dst)
+<         -:   53:  {
+<     #####:   54:    std::copy(begin, end, dst);
+<     #####:   55:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+<     #####:   51:  inline static void copy_range(
+<         -:   52:      value_type * begin, value_type * end, iter dst)
+<         -:   53:  {
+<     #####:   54:    std::copy(begin, end, dst);
+<     #####:   55:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE10copy_rangeIPS4_EEvS7_S7_T_:
+<     #####:   51:  inline static void copy_range(
+<         -:   52:      value_type * begin, value_type * end, iter dst)
+<         -:   53:  {
+<     #####:   54:    std::copy(begin, end, dst);
+<     #####:   55:  }
+< ------------------
+167,195d65
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE15copy_swap_rangeIPS4_EEvS7_S7_T_:
+<     #####:   59:  inline static void copy_swap_range(
+<         -:   60:      value_type * begin, value_type * end, iter dst)
+<         -:   61:  {
+<     #####:   62:    copy_range(begin, end, dst);
+<     #####:   63:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS6GUID_tELb1EE15copy_swap_rangeIPS4_EEvS7_S7_T_:
+<     #####:   59:  inline static void copy_swap_range(
+<         -:   60:      value_type * begin, value_type * end, iter dst)
+<         -:   61:  {
+<     #####:   62:    copy_range(begin, end, dst);
+<     #####:   63:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE15copy_swap_rangeIPS4_EEvS7_S7_T_:
+<     #####:   59:  inline static void copy_swap_range(
+<         -:   60:      value_type * begin, value_type * end, iter dst)
+<         -:   61:  {
+<     #####:   62:    copy_range(begin, end, dst);
+<     #####:   63:  }
+< ------------------
+< _ZN3TAO7details12value_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE15copy_swap_rangeIPS4_EEvS7_S7_T_:
+<     #####:   59:  inline static void copy_swap_range(
+<         -:   60:      value_type * begin, value_type * end, iter dst)
+<         -:   61:  {
+<     #####:   62:    copy_range(begin, end, dst);
+<     #####:   63:  }
+< ------------------

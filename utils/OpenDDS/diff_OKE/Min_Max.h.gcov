@@ -1,0 +1,18 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Min_Max.h
+<         -:    0:Programs:70
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Min_Max.h
+>         -:    0:Programs:69
+9c9
+<         -:    7: *  $Id$
+---
+>         -:    7: *  $Id: Min_Max.h 14 2007-02-01 15:49:12Z mitza $
+39c39
+<      236*:   37:ace_max (const T &t1, const T &t2)
+---
+>        16:   37:ace_max (const T &t1, const T &t2)
+41c41
+<      236*:   39:  return t1 > t2 ? t1 : t2;
+---
+>        16:   39:  return t1 > t2 ? t1 : t2;

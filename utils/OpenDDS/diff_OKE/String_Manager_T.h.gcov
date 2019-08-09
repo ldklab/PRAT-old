@@ -1,0 +1,96 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Manager_T.h
+<         -:    0:Programs:51
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Manager_T.h
+>         -:    0:Programs:3
+9c9
+<         -:    7: *  $Id$
+---
+>         -:    7: *  $Id: String_Manager_T.h 935 2008-12-10 21:47:27Z mitza $
+49,59d48
+< ------------------
+< _ZN3TAO16String_Manager_TIcEC2Ev:
+<     #####:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
+<         -:   45:  {
+<     #####:   46:  }
+< ------------------
+< _ZN3TAO16String_Manager_TIcEC2Ev:
+<     #####:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
+<         -:   45:  {
+<     #####:   46:  }
+< ------------------
+66,78d54
+< ------------------
+< _ZN3TAO16String_Manager_TIcEC2ERKS1_:
+<     #####:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
+<     #####:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
+<         -:   51:  {
+<     #####:   52:  }
+< ------------------
+< _ZN3TAO16String_Manager_TIcEC2ERKS1_:
+<     #####:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
+<     #####:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
+<         -:   51:  {
+<     #####:   52:  }
+< ------------------
+81,82c57,58
+<         -:   55:  inline String_Manager_T (const character_type *s) :
+<         -:   56:    ptr_ (s_traits::duplicate (s))
+---
+>     #####:   55:  inline String_Manager_T (const character_type *s) :
+>     #####:   56:    ptr_ (s_traits::duplicate (s))
+84c60
+<         -:   58:  }
+---
+>     #####:   58:  }
+90,100d65
+< ------------------
+< _ZN3TAO16String_Manager_TIcED2Ev:
+<     #####:   61:  inline ~String_Manager_T (void) {
+<     #####:   62:    s_traits::release (this->ptr_);
+<     #####:   63:  }
+< ------------------
+< _ZN3TAO16String_Manager_TIcED2Ev:
+<     #####:   61:  inline ~String_Manager_T (void) {
+<     #####:   62:    s_traits::release (this->ptr_);
+<     #####:   63:  }
+< ------------------
+110,128d74
+< ------------------
+< _ZN3TAO16String_Manager_TIcEaSERKS1_:
+<     #####:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
+<         -:   67:    // Strongly exception safe by means of copy and non-throwing swap
+<         -:   68:    // technique.
+<     #####:   69:    String_Manager_T <character_type> tmp (rhs);
+<     #####:   70:    std::swap (this->ptr_, tmp.ptr_);
+<     #####:   71:    return *this;
+<         -:   72:  }
+< ------------------
+< _ZN3TAO16String_Manager_TIcEaSERKS1_:
+<     #####:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
+<         -:   67:    // Strongly exception safe by means of copy and non-throwing swap
+<         -:   68:    // technique.
+<     #####:   69:    String_Manager_T <character_type> tmp (rhs);
+<     #####:   70:    std::swap (this->ptr_, tmp.ptr_);
+<     #####:   71:    return *this;
+<         -:   72:  }
+< ------------------
+140c86
+<         -:   84:  inline String_Manager_T &operator= (const character_type *p) {
+---
+>     #####:   84:  inline String_Manager_T &operator= (const character_type *p) {
+143,145c89,91
+<         -:   87:    String_Manager_T <character_type> tmp (p);
+<         -:   88:    std::swap (this->ptr_, tmp.ptr_);
+<         -:   89:    return *this;
+---
+>     #####:   87:    String_Manager_T <character_type> tmp (p);
+>     #####:   88:    std::swap (this->ptr_, tmp.ptr_);
+>     #####:   89:    return *this;
+162,163c108,109
+<     #####:  106:  inline const character_type *in (void) const {
+<     #####:  107:    return this->ptr_;
+---
+>         -:  106:  inline const character_type *in (void) const {
+>         -:  107:    return this->ptr_;

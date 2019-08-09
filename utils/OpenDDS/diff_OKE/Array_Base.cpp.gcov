@@ -1,0 +1,544 @@
+1,3c1,3
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Array_Base.cpp
+<         -:    0:Programs:70
+<         -:    1:// $Id$
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Array_Base.cpp
+>         -:    0:Programs:69
+>         -:    1:// $Id: Array_Base.cpp 935 2008-12-10 21:47:27Z mitza $
+27c27
+<       11*:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+---
+>         9:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+31c31
+<       11*:   29:    allocator_ (alloc)
+---
+>         9:   29:    allocator_ (alloc)
+33,34c33,34
+<       11*:   31:  if (this->allocator_ == 0)
+<       11*:   32:    this->allocator_ = ACE_Allocator::instance ();
+---
+>         9:   31:  if (this->allocator_ == 0)
+>         9:   32:    this->allocator_ = ACE_Allocator::instance ();
+36c36
+<       11*:   34:  if (size != 0)
+---
+>         9:   34:  if (size != 0)
+38c38
+<       11*:   36:      ACE_ALLOCATOR (this->array_,
+---
+>         9:   36:      ACE_ALLOCATOR (this->array_,
+40,41c40,41
+<      303*:   38:      for (size_type i = 0; i < size; ++i)
+<      292*:   39:        new (&array_[i]) T;
+---
+>       237:   38:      for (size_type i = 0; i < size; ++i)
+>       228:   39:        new (&array_[i]) T;
+46,193d45
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEEC2EmP13ACE_Allocator:
+<     #####:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+<         -:   26:                                   ACE_Allocator *alloc)
+<         -:   27:  : max_size_ (size),
+<         -:   28:    cur_size_ (size),
+<     #####:   29:    allocator_ (alloc)
+<         -:   30:{
+<     #####:   31:  if (this->allocator_ == 0)
+<     #####:   32:    this->allocator_ = ACE_Allocator::instance ();
+<         -:   33:
+<     #####:   34:  if (size != 0)
+<         -:   35:    {
+<     #####:   36:      ACE_ALLOCATOR (this->array_,
+<         -:   37:                     (T *) this->allocator_->malloc (size * sizeof (T)));
+<     #####:   38:      for (size_type i = 0; i < size; ++i)
+<     #####:   39:        new (&array_[i]) T;
+<         -:   40:    }
+<         -:   41:  else
+<     #####:   42:    this->array_ = 0;
+<         -:   43:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEEC2EmP13ACE_Allocator:
+<     #####:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+<         -:   26:                                   ACE_Allocator *alloc)
+<         -:   27:  : max_size_ (size),
+<         -:   28:    cur_size_ (size),
+<     #####:   29:    allocator_ (alloc)
+<         -:   30:{
+<     #####:   31:  if (this->allocator_ == 0)
+<     #####:   32:    this->allocator_ = ACE_Allocator::instance ();
+<         -:   33:
+<     #####:   34:  if (size != 0)
+<         -:   35:    {
+<     #####:   36:      ACE_ALLOCATOR (this->array_,
+<         -:   37:                     (T *) this->allocator_->malloc (size * sizeof (T)));
+<     #####:   38:      for (size_type i = 0; i < size; ++i)
+<     #####:   39:        new (&array_[i]) T;
+<         -:   40:    }
+<         -:   41:  else
+<     #####:   42:    this->array_ = 0;
+<         -:   43:}
+< ------------------
+< _ZN14ACE_Array_BaseI16ACE_Lock_AdapterI16ACE_Thread_MutexEEC2EmP13ACE_Allocator:
+<         5:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+<         -:   26:                                   ACE_Allocator *alloc)
+<         -:   27:  : max_size_ (size),
+<         -:   28:    cur_size_ (size),
+<         5:   29:    allocator_ (alloc)
+<         -:   30:{
+<         5:   31:  if (this->allocator_ == 0)
+<         5:   32:    this->allocator_ = ACE_Allocator::instance ();
+<         -:   33:
+<         5:   34:  if (size != 0)
+<         -:   35:    {
+<        5*:   36:      ACE_ALLOCATOR (this->array_,
+<         -:   37:                     (T *) this->allocator_->malloc (size * sizeof (T)));
+<       105:   38:      for (size_type i = 0; i < size; ++i)
+<       100:   39:        new (&array_[i]) T;
+<         -:   40:    }
+<         -:   41:  else
+<     #####:   42:    this->array_ = 0;
+<         -:   43:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEEC2EmP13ACE_Allocator:
+<     #####:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+<         -:   26:                                   ACE_Allocator *alloc)
+<         -:   27:  : max_size_ (size),
+<         -:   28:    cur_size_ (size),
+<     #####:   29:    allocator_ (alloc)
+<         -:   30:{
+<     #####:   31:  if (this->allocator_ == 0)
+<     #####:   32:    this->allocator_ = ACE_Allocator::instance ();
+<         -:   33:
+<     #####:   34:  if (size != 0)
+<         -:   35:    {
+<     #####:   36:      ACE_ALLOCATOR (this->array_,
+<         -:   37:                     (T *) this->allocator_->malloc (size * sizeof (T)));
+<     #####:   38:      for (size_type i = 0; i < size; ++i)
+<     #####:   39:        new (&array_[i]) T;
+<         -:   40:    }
+<         -:   41:  else
+<     #####:   42:    this->array_ = 0;
+<         -:   43:}
+< ------------------
+< _ZN14ACE_Array_BaseIcEC2EmP13ACE_Allocator:
+<     #####:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+<         -:   26:                                   ACE_Allocator *alloc)
+<         -:   27:  : max_size_ (size),
+<         -:   28:    cur_size_ (size),
+<     #####:   29:    allocator_ (alloc)
+<         -:   30:{
+<     #####:   31:  if (this->allocator_ == 0)
+<     #####:   32:    this->allocator_ = ACE_Allocator::instance ();
+<         -:   33:
+<     #####:   34:  if (size != 0)
+<         -:   35:    {
+<     #####:   36:      ACE_ALLOCATOR (this->array_,
+<         -:   37:                     (T *) this->allocator_->malloc (size * sizeof (T)));
+<     #####:   38:      for (size_type i = 0; i < size; ++i)
+<     #####:   39:        new (&array_[i]) T;
+<         -:   40:    }
+<         -:   41:  else
+<     #####:   42:    this->array_ = 0;
+<         -:   43:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEEC2EmP13ACE_Allocator:
+<     #####:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+<         -:   26:                                   ACE_Allocator *alloc)
+<         -:   27:  : max_size_ (size),
+<         -:   28:    cur_size_ (size),
+<     #####:   29:    allocator_ (alloc)
+<         -:   30:{
+<     #####:   31:  if (this->allocator_ == 0)
+<     #####:   32:    this->allocator_ = ACE_Allocator::instance ();
+<         -:   33:
+<     #####:   34:  if (size != 0)
+<         -:   35:    {
+<     #####:   36:      ACE_ALLOCATOR (this->array_,
+<         -:   37:                     (T *) this->allocator_->malloc (size * sizeof (T)));
+<     #####:   38:      for (size_type i = 0; i < size; ++i)
+<     #####:   39:        new (&array_[i]) T;
+<         -:   40:    }
+<         -:   41:  else
+<     #####:   42:    this->array_ = 0;
+<         -:   43:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN3DDS10DataReaderEEC2EmP13ACE_Allocator:
+<         6:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+<         -:   26:                                   ACE_Allocator *alloc)
+<         -:   27:  : max_size_ (size),
+<         -:   28:    cur_size_ (size),
+<         6:   29:    allocator_ (alloc)
+<         -:   30:{
+<         6:   31:  if (this->allocator_ == 0)
+<         6:   32:    this->allocator_ = ACE_Allocator::instance ();
+<         -:   33:
+<         6:   34:  if (size != 0)
+<         -:   35:    {
+<        6*:   36:      ACE_ALLOCATOR (this->array_,
+<         -:   37:                     (T *) this->allocator_->malloc (size * sizeof (T)));
+<       198:   38:      for (size_type i = 0; i < size; ++i)
+<       192:   39:        new (&array_[i]) T;
+<         -:   40:    }
+<         -:   41:  else
+<     #####:   42:    this->array_ = 0;
+<         -:   43:}
+< ------------------
+314,524c166
+<        9*:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  165:{
+<        9*:  166:  if (new_size > this->max_size_)
+<         -:  167:    {
+<     #####:  168:      T *tmp = 0;
+<         -:  169:
+<     #####:  170:      ACE_ALLOCATOR_RETURN (tmp,
+<         -:  171:                            (T *) this->allocator_->malloc (new_size * sizeof (T)),
+<         -:  172:                            -1);
+<     #####:  173:      for (size_type i = 0; i < this->cur_size_; ++i)
+<     #####:  174:        new (&tmp[i]) T (this->array_[i]);
+<         -:  175:
+<         -:  176:      // Initialize the new portion of the array that exceeds the
+<         -:  177:      // previously allocated section.
+<     #####:  178:      for (size_type j = this->cur_size_; j < new_size; ++j)
+<     #####:  179:        new (&tmp[j]) T;
+<         -:  180:
+<     #####:  181:      ACE_DES_ARRAY_FREE (this->array_,
+<         -:  182:                          this->max_size_,
+<         -:  183:                          this->allocator_->free,
+<         -:  184:                          T);
+<     #####:  185:      this->array_ = tmp;
+<     #####:  186:      this->max_size_ = new_size;
+<     #####:  187:      this->cur_size_ = new_size;
+<         -:  188:    }
+<         -:  189:
+<        9*:  190:  return 0;
+<         -:  191:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS15DurabilityQueueINS1_19DataDurabilityCache16sample_data_typeEEEE8max_sizeEm:
+<     #####:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  165:{
+<     #####:  166:  if (new_size > this->max_size_)
+<         -:  167:    {
+<     #####:  168:      T *tmp = 0;
+<         -:  169:
+<     #####:  170:      ACE_ALLOCATOR_RETURN (tmp,
+<         -:  171:                            (T *) this->allocator_->malloc (new_size * sizeof (T)),
+<         -:  172:                            -1);
+<     #####:  173:      for (size_type i = 0; i < this->cur_size_; ++i)
+<     #####:  174:        new (&tmp[i]) T (this->array_[i]);
+<         -:  175:
+<         -:  176:      // Initialize the new portion of the array that exceeds the
+<         -:  177:      // previously allocated section.
+<     #####:  178:      for (size_type j = this->cur_size_; j < new_size; ++j)
+<     #####:  179:        new (&tmp[j]) T;
+<         -:  180:
+<     #####:  181:      ACE_DES_ARRAY_FREE (this->array_,
+<         -:  182:                          this->max_size_,
+<         -:  183:                          this->allocator_->free,
+<         -:  184:                          T);
+<     #####:  185:      this->array_ = tmp;
+<     #####:  186:      this->max_size_ = new_size;
+<     #####:  187:      this->cur_size_ = new_size;
+<         -:  188:    }
+<         -:  189:
+<     #####:  190:  return 0;
+<         -:  191:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE8max_sizeEm:
+<     #####:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  165:{
+<     #####:  166:  if (new_size > this->max_size_)
+<         -:  167:    {
+<     #####:  168:      T *tmp = 0;
+<         -:  169:
+<     #####:  170:      ACE_ALLOCATOR_RETURN (tmp,
+<         -:  171:                            (T *) this->allocator_->malloc (new_size * sizeof (T)),
+<         -:  172:                            -1);
+<     #####:  173:      for (size_type i = 0; i < this->cur_size_; ++i)
+<     #####:  174:        new (&tmp[i]) T (this->array_[i]);
+<         -:  175:
+<         -:  176:      // Initialize the new portion of the array that exceeds the
+<         -:  177:      // previously allocated section.
+<     #####:  178:      for (size_type j = this->cur_size_; j < new_size; ++j)
+<     #####:  179:        new (&tmp[j]) T;
+<         -:  180:
+<     #####:  181:      ACE_DES_ARRAY_FREE (this->array_,
+<         -:  182:                          this->max_size_,
+<         -:  183:                          this->allocator_->free,
+<         -:  184:                          T);
+<     #####:  185:      this->array_ = tmp;
+<     #####:  186:      this->max_size_ = new_size;
+<     #####:  187:      this->cur_size_ = new_size;
+<         -:  188:    }
+<         -:  189:
+<     #####:  190:  return 0;
+<         -:  191:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE8max_sizeEm:
+<     #####:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  165:{
+<     #####:  166:  if (new_size > this->max_size_)
+<         -:  167:    {
+<     #####:  168:      T *tmp = 0;
+<         -:  169:
+<     #####:  170:      ACE_ALLOCATOR_RETURN (tmp,
+<         -:  171:                            (T *) this->allocator_->malloc (new_size * sizeof (T)),
+<         -:  172:                            -1);
+<     #####:  173:      for (size_type i = 0; i < this->cur_size_; ++i)
+<     #####:  174:        new (&tmp[i]) T (this->array_[i]);
+<         -:  175:
+<         -:  176:      // Initialize the new portion of the array that exceeds the
+<         -:  177:      // previously allocated section.
+<     #####:  178:      for (size_type j = this->cur_size_; j < new_size; ++j)
+<     #####:  179:        new (&tmp[j]) T;
+<         -:  180:
+<     #####:  181:      ACE_DES_ARRAY_FREE (this->array_,
+<         -:  182:                          this->max_size_,
+<         -:  183:                          this->allocator_->free,
+<         -:  184:                          T);
+<     #####:  185:      this->array_ = tmp;
+<     #####:  186:      this->max_size_ = new_size;
+<     #####:  187:      this->cur_size_ = new_size;
+<         -:  188:    }
+<         -:  189:
+<     #####:  190:  return 0;
+<         -:  191:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE8max_sizeEm:
+<     #####:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  165:{
+<     #####:  166:  if (new_size > this->max_size_)
+<         -:  167:    {
+<     #####:  168:      T *tmp = 0;
+<         -:  169:
+<     #####:  170:      ACE_ALLOCATOR_RETURN (tmp,
+<         -:  171:                            (T *) this->allocator_->malloc (new_size * sizeof (T)),
+<         -:  172:                            -1);
+<     #####:  173:      for (size_type i = 0; i < this->cur_size_; ++i)
+<     #####:  174:        new (&tmp[i]) T (this->array_[i]);
+<         -:  175:
+<         -:  176:      // Initialize the new portion of the array that exceeds the
+<         -:  177:      // previously allocated section.
+<     #####:  178:      for (size_type j = this->cur_size_; j < new_size; ++j)
+<     #####:  179:        new (&tmp[j]) T;
+<         -:  180:
+<     #####:  181:      ACE_DES_ARRAY_FREE (this->array_,
+<         -:  182:                          this->max_size_,
+<         -:  183:                          this->allocator_->free,
+<         -:  184:                          T);
+<     #####:  185:      this->array_ = tmp;
+<     #####:  186:      this->max_size_ = new_size;
+<     #####:  187:      this->cur_size_ = new_size;
+<         -:  188:    }
+<         -:  189:
+<     #####:  190:  return 0;
+<         -:  191:}
+< ------------------
+< _ZN14ACE_Array_BaseIcE8max_sizeEm:
+<     #####:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  165:{
+<     #####:  166:  if (new_size > this->max_size_)
+<         -:  167:    {
+<     #####:  168:      T *tmp = 0;
+<         -:  169:
+<     #####:  170:      ACE_ALLOCATOR_RETURN (tmp,
+<         -:  171:                            (T *) this->allocator_->malloc (new_size * sizeof (T)),
+<         -:  172:                            -1);
+<     #####:  173:      for (size_type i = 0; i < this->cur_size_; ++i)
+<     #####:  174:        new (&tmp[i]) T (this->array_[i]);
+<         -:  175:
+<         -:  176:      // Initialize the new portion of the array that exceeds the
+<         -:  177:      // previously allocated section.
+<     #####:  178:      for (size_type j = this->cur_size_; j < new_size; ++j)
+<     #####:  179:        new (&tmp[j]) T;
+<         -:  180:
+<     #####:  181:      ACE_DES_ARRAY_FREE (this->array_,
+<         -:  182:                          this->max_size_,
+<         -:  183:                          this->allocator_->free,
+<         -:  184:                          T);
+<     #####:  185:      this->array_ = tmp;
+<     #####:  186:      this->max_size_ = new_size;
+<     #####:  187:      this->cur_size_ = new_size;
+<         -:  188:    }
+<         -:  189:
+<     #####:  190:  return 0;
+<         -:  191:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE8max_sizeEm:
+<     #####:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  165:{
+<     #####:  166:  if (new_size > this->max_size_)
+<         -:  167:    {
+<     #####:  168:      T *tmp = 0;
+<         -:  169:
+<     #####:  170:      ACE_ALLOCATOR_RETURN (tmp,
+<         -:  171:                            (T *) this->allocator_->malloc (new_size * sizeof (T)),
+<         -:  172:                            -1);
+<     #####:  173:      for (size_type i = 0; i < this->cur_size_; ++i)
+<     #####:  174:        new (&tmp[i]) T (this->array_[i]);
+<         -:  175:
+<         -:  176:      // Initialize the new portion of the array that exceeds the
+<         -:  177:      // previously allocated section.
+<     #####:  178:      for (size_type j = this->cur_size_; j < new_size; ++j)
+<     #####:  179:        new (&tmp[j]) T;
+<         -:  180:
+<     #####:  181:      ACE_DES_ARRAY_FREE (this->array_,
+<         -:  182:                          this->max_size_,
+<         -:  183:                          this->allocator_->free,
+<         -:  184:                          T);
+<     #####:  185:      this->array_ = tmp;
+<     #####:  186:      this->max_size_ = new_size;
+<     #####:  187:      this->cur_size_ = new_size;
+<         -:  188:    }
+<         -:  189:
+<     #####:  190:  return 0;
+<         -:  191:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN3DDS10DataReaderEE8max_sizeEm:
+<         9:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+---
+>         2:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+526c168
+<         9:  166:  if (new_size > this->max_size_)
+---
+>         2:  166:  if (new_size > this->max_size_)
+550c192
+<         9:  190:  return 0;
+---
+>         2:  190:  return 0;
+552d193
+< ------------------
+555,566c196
+<        9*:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  195:{
+<        9*:  196:  int const r = this->max_size (new_size);
+<         -:  197:
+<        9*:  198:  if (r == 0)
+<        9*:  199:    this->cur_size_ = new_size;
+<         -:  200:
+<        9*:  201:  return r;
+<         -:  202:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS15DurabilityQueueINS1_19DataDurabilityCache16sample_data_typeEEEE4sizeEm:
+<     #####:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+---
+>         2:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+568c198
+<     #####:  196:  int const r = this->max_size (new_size);
+---
+>         2:  196:  int const r = this->max_size (new_size);
+570,571c200,201
+<     #####:  198:  if (r == 0)
+<     #####:  199:    this->cur_size_ = new_size;
+---
+>         2:  198:  if (r == 0)
+>         2:  199:    this->cur_size_ = new_size;
+573c203
+<     #####:  201:  return r;
+---
+>         2:  201:  return r;
+575,641d204
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE4sizeEm:
+<     #####:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  195:{
+<     #####:  196:  int const r = this->max_size (new_size);
+<         -:  197:
+<     #####:  198:  if (r == 0)
+<     #####:  199:    this->cur_size_ = new_size;
+<         -:  200:
+<     #####:  201:  return r;
+<         -:  202:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE4sizeEm:
+<     #####:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  195:{
+<     #####:  196:  int const r = this->max_size (new_size);
+<         -:  197:
+<     #####:  198:  if (r == 0)
+<     #####:  199:    this->cur_size_ = new_size;
+<         -:  200:
+<     #####:  201:  return r;
+<         -:  202:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE4sizeEm:
+<     #####:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  195:{
+<     #####:  196:  int const r = this->max_size (new_size);
+<         -:  197:
+<     #####:  198:  if (r == 0)
+<     #####:  199:    this->cur_size_ = new_size;
+<         -:  200:
+<     #####:  201:  return r;
+<         -:  202:}
+< ------------------
+< _ZN14ACE_Array_BaseIcE4sizeEm:
+<     #####:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  195:{
+<     #####:  196:  int const r = this->max_size (new_size);
+<         -:  197:
+<     #####:  198:  if (r == 0)
+<     #####:  199:    this->cur_size_ = new_size;
+<         -:  200:
+<     #####:  201:  return r;
+<         -:  202:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE4sizeEm:
+<     #####:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  195:{
+<     #####:  196:  int const r = this->max_size (new_size);
+<         -:  197:
+<     #####:  198:  if (r == 0)
+<     #####:  199:    this->cur_size_ = new_size;
+<         -:  200:
+<     #####:  201:  return r;
+<         -:  202:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN3DDS10DataReaderEE4sizeEm:
+<         9:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+<         -:  195:{
+<         9:  196:  int const r = this->max_size (new_size);
+<         -:  197:
+<         9:  198:  if (r == 0)
+<         9:  199:    this->cur_size_ = new_size;
+<         -:  200:
+<         9:  201:  return r;
+<         -:  202:}
+< ------------------
+652,688d214
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE4swapERS4_:
+<     #####:  206:ACE_Array_Base<T>::swap (ACE_Array_Base<T> & rhs)
+<         -:  207:{
+<     #####:  208:  std::swap (this->max_size_ , rhs.max_size_);
+<     #####:  209:  std::swap (this->cur_size_ , rhs.cur_size_);
+<     #####:  210:  std::swap (this->array_    , rhs.array_);
+<     #####:  211:  std::swap (this->allocator_, rhs.allocator_);
+<     #####:  212:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE4swapERS4_:
+<     #####:  206:ACE_Array_Base<T>::swap (ACE_Array_Base<T> & rhs)
+<         -:  207:{
+<     #####:  208:  std::swap (this->max_size_ , rhs.max_size_);
+<     #####:  209:  std::swap (this->cur_size_ , rhs.cur_size_);
+<     #####:  210:  std::swap (this->array_    , rhs.array_);
+<     #####:  211:  std::swap (this->allocator_, rhs.allocator_);
+<     #####:  212:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE4swapERS4_:
+<     #####:  206:ACE_Array_Base<T>::swap (ACE_Array_Base<T> & rhs)
+<         -:  207:{
+<     #####:  208:  std::swap (this->max_size_ , rhs.max_size_);
+<     #####:  209:  std::swap (this->cur_size_ , rhs.cur_size_);
+<     #####:  210:  std::swap (this->array_    , rhs.array_);
+<     #####:  211:  std::swap (this->allocator_, rhs.allocator_);
+<     #####:  212:}
+< ------------------
+< _ZN14ACE_Array_BaseIPN7OpenDDS4DCPS19ReceivedDataElementEE4swapERS4_:
+<     #####:  206:ACE_Array_Base<T>::swap (ACE_Array_Base<T> & rhs)
+<         -:  207:{
+<     #####:  208:  std::swap (this->max_size_ , rhs.max_size_);
+<     #####:  209:  std::swap (this->cur_size_ , rhs.cur_size_);
+<     #####:  210:  std::swap (this->array_    , rhs.array_);
+<     #####:  211:  std::swap (this->allocator_, rhs.allocator_);
+<     #####:  212:}
+< ------------------

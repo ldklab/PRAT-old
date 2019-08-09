@@ -1,0 +1,43 @@
+1c1
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/OS_NS_signal.h
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/OS_NS_signal.h
+9c9
+<         -:    7: *  $Id$
+---
+>         -:    7: *  $Id: OS_NS_signal.h 2953 2017-12-11 21:49:43Z mitza $
+71,104d70
+< ------------------
+< _Z21ace_sigfillset_helperP10__sigset_t:
+<     #####:   60:inline int ace_sigfillset_helper (sigset_t *s)
+<         -:   61:{
+<         -:   62:#  if defined (sigfillset)
+<         -:   63:  return sigfillset (s);
+<         -:   64:#  undef sigfillset
+<         -:   65:#  else
+<     #####:   66:  return ACE_STD_NAMESPACE::sigfillset (s);
+<         -:   67:#  endif /* defined (sigfillset) */
+<         -:   68:}
+< ------------------
+< _Z21ace_sigfillset_helperP10__sigset_t:
+<     #####:   60:inline int ace_sigfillset_helper (sigset_t *s)
+<         -:   61:{
+<         -:   62:#  if defined (sigfillset)
+<         -:   63:  return sigfillset (s);
+<         -:   64:#  undef sigfillset
+<         -:   65:#  else
+<     #####:   66:  return ACE_STD_NAMESPACE::sigfillset (s);
+<         -:   67:#  endif /* defined (sigfillset) */
+<         -:   68:}
+< ------------------
+< _Z21ace_sigfillset_helperP10__sigset_t:
+<     #####:   60:inline int ace_sigfillset_helper (sigset_t *s)
+<         -:   61:{
+<         -:   62:#  if defined (sigfillset)
+<         -:   63:  return sigfillset (s);
+<         -:   64:#  undef sigfillset
+<         -:   65:#  else
+<     #####:   66:  return ACE_STD_NAMESPACE::sigfillset (s);
+<         -:   67:#  endif /* defined (sigfillset) */
+<         -:   68:}
+< ------------------

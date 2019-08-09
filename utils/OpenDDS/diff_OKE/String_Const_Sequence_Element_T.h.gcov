@@ -1,0 +1,94 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Const_Sequence_Element_T.h
+<         -:    0:Programs:70
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Const_Sequence_Element_T.h
+>         -:    0:Programs:15
+41,90d40
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEEC2ERKPcb:
+<     #####:   34:  string_const_sequence_element(value_type const & e, CORBA::Boolean release)
+<         -:   35:    : element_(&e)
+<     #####:   36:    , release_(release)
+<         -:   37:  {
+<     #####:   38:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEEC2ERKPcb:
+<     #####:   34:  string_const_sequence_element(value_type const & e, CORBA::Boolean release)
+<         -:   35:    : element_(&e)
+<     #####:   36:    , release_(release)
+<         -:   37:  {
+<     #####:   38:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEEC2ERKPcb:
+<     #####:   34:  string_const_sequence_element(value_type const & e, CORBA::Boolean release)
+<         -:   35:    : element_(&e)
+<     #####:   36:    , release_(release)
+<         -:   37:  {
+<     #####:   38:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEEC2ERKPcb:
+<     #####:   34:  string_const_sequence_element(value_type const & e, CORBA::Boolean release)
+<         -:   35:    : element_(&e)
+<     #####:   36:    , release_(release)
+<         -:   37:  {
+<     #####:   38:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEEC2ERKPcb:
+<     #####:   34:  string_const_sequence_element(value_type const & e, CORBA::Boolean release)
+<         -:   35:    : element_(&e)
+<     #####:   36:    , release_(release)
+<         -:   37:  {
+<     #####:   38:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEEC2ERKPcb:
+<     #####:   34:  string_const_sequence_element(value_type const & e, CORBA::Boolean release)
+<         -:   35:    : element_(&e)
+<     #####:   36:    , release_(release)
+<         -:   37:  {
+<     #####:   38:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEEC2ERKPcb:
+<     #####:   34:  string_const_sequence_element(value_type const & e, CORBA::Boolean release)
+<         -:   35:    : element_(&e)
+<     #####:   36:    , release_(release)
+<         -:   37:  {
+<     #####:   38:  }
+< ------------------
+102,137d51
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEED2Ev:
+<     #####:   47:  ~string_const_sequence_element()
+<         -:   48:  {
+<     #####:   49:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEED2Ev:
+<     #####:   47:  ~string_const_sequence_element()
+<         -:   48:  {
+<     #####:   49:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEED2Ev:
+<     #####:   47:  ~string_const_sequence_element()
+<         -:   48:  {
+<     #####:   49:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEED2Ev:
+<     #####:   47:  ~string_const_sequence_element()
+<         -:   48:  {
+<     #####:   49:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEED2Ev:
+<     #####:   47:  ~string_const_sequence_element()
+<         -:   48:  {
+<     #####:   49:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEED2Ev:
+<     #####:   47:  ~string_const_sequence_element()
+<         -:   48:  {
+<     #####:   49:  }
+< ------------------
+< _ZN3TAO7details29string_const_sequence_elementINS0_13string_traitsIcLb1EEEED2Ev:
+<     #####:   47:  ~string_const_sequence_element()
+<         -:   48:  {
+<     #####:   49:  }
+< ------------------

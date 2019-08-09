@@ -1,0 +1,10 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Sequence_Element_T.h
+<         -:    0:Programs:70
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Sequence_Element_T.h
+>         -:    0:Programs:69
+11c11
+<         -:    9: * $Id$
+---
+>         -:    9: * $Id: String_Sequence_Element_T.h 1861 2011-08-31 16:18:08Z mesnierp $

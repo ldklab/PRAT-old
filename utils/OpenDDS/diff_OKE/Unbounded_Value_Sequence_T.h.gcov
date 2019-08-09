@@ -1,0 +1,93 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Value_Sequence_T.h
+<         -:    0:Programs:51
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Value_Sequence_T.h
+>         -:    0:Programs:15
+11c11
+<         -:    9: * $Id$
+---
+>         -:    9: * $Id: Unbounded_Value_Sequence_T.h 1861 2011-08-31 16:18:08Z mesnierp $
+63,88d62
+< ------------------
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEv:
+<     #####:   58:  inline CORBA::ULong length() const {
+<     #####:   59:    return impl_.length();
+<         -:   60:  }
+< ------------------
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEv:
+<     #####:   58:  inline CORBA::ULong length() const {
+<     #####:   59:    return impl_.length();
+<         -:   60:  }
+< ------------------
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEv:
+<     #####:   58:  inline CORBA::ULong length() const {
+<     #####:   59:    return impl_.length();
+<         -:   60:  }
+< ------------------
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEv:
+<     #####:   58:  inline CORBA::ULong length() const {
+<     #####:   59:    return impl_.length();
+<         -:   60:  }
+< ------------------
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEv:
+<     #####:   58:  inline CORBA::ULong length() const {
+<     #####:   59:    return impl_.length();
+<         -:   60:  }
+< ------------------
+92,124c66,67
+< ------------------
+< _ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEj:
+<     #####:   61:  inline void length(CORBA::ULong length) {
+<     #####:   62:    impl_.length(length);
+<     #####:   63:  }
+< ------------------
+< _ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEj:
+<     #####:   61:  inline void length(CORBA::ULong length) {
+<     #####:   62:    impl_.length(length);
+<     #####:   63:  }
+< ------------------
+< _ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEj:
+<     #####:   61:  inline void length(CORBA::ULong length) {
+<     #####:   62:    impl_.length(length);
+<     #####:   63:  }
+< ------------------
+< _ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEj:
+<     #####:   61:  inline void length(CORBA::ULong length) {
+<     #####:   62:    impl_.length(length);
+<     #####:   63:  }
+< ------------------
+<     #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+<     #####:   65:    return impl_[i];
+<         -:   66:  }
+< ------------------
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEEixEj:
+<     #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+<     #####:   65:    return impl_[i];
+<         -:   66:  }
+< ------------------
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEEixEj:
+<     #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+<     #####:   65:    return impl_[i];
+---
+>         -:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+>         -:   65:    return impl_[i];
+126,128c69,70
+< ------------------
+<     #####:   67:  inline value_type & operator[](CORBA::ULong i) {
+<     #####:   68:    return impl_[i];
+---
+>         -:   67:  inline value_type & operator[](CORBA::ULong i) {
+>         -:   68:    return impl_[i];
+137,138c79,80
+<         -:   77:  inline value_type const * get_buffer() const {
+<         -:   78:    return impl_.get_buffer();
+---
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+140,141c82,83
+<         -:   80:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
+<         -:   81:    return impl_.get_buffer(orphan);
+---
+>     #####:   80:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
+>     #####:   81:    return impl_.get_buffer(orphan);

@@ -1,0 +1,323 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/CORBA_String.h
+<         -:    0:Programs:70
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/CORBA_String.h
+>         -:    0:Programs:69
+8c8
+<         -:    6: *  $Id$
+---
+>         -:    6: *  $Id: CORBA_String.h 14 2007-02-01 15:49:12Z mitza $
+62,77d61
+< ------------------
+< _ZN3TAO10String_varIcEC2Ev:
+<     #####:   57:    inline String_var (void) : ptr_ (0)
+<         -:   58:    {
+<     #####:   59:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2Ev:
+<     #####:   57:    inline String_var (void) : ptr_ (0)
+<         -:   58:    {
+<     #####:   59:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2Ev:
+<     #####:   57:    inline String_var (void) : ptr_ (0)
+<         -:   58:    {
+<     #####:   59:    }
+< ------------------
+83,128d66
+< ------------------
+< _ZN3TAO10String_varIcEC2EPc:
+<     #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+<         -:   63:    {
+<     #####:   64:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPc:
+<     #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+<         -:   63:    {
+<     #####:   64:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPc:
+<     #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+<         -:   63:    {
+<     #####:   64:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPc:
+<     #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+<         -:   63:    {
+<     #####:   64:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPc:
+<     #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+<         -:   63:    {
+<     #####:   64:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPc:
+<     #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+<         -:   63:    {
+<     #####:   64:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPc:
+<     #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+<         -:   63:    {
+<     #####:   64:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPc:
+<     #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+<         -:   63:    {
+<     #####:   64:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPc:
+<     #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+<         -:   63:    {
+<     #####:   64:    }
+< ------------------
+131,156c69
+<        9*:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+<         -:   68:    {
+<        9*:   69:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPKc:
+<         9:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+<         -:   68:    {
+<         9:   69:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPKc:
+<     #####:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+<         -:   68:    {
+<     #####:   69:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPKc:
+<     #####:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+<         -:   68:    {
+<     #####:   69:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPKc:
+<     #####:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+<         -:   68:    {
+<     #####:   69:    }
+< ------------------
+< _ZN3TAO10String_varIcEC2EPKc:
+<     #####:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+---
+>         7:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+158,159c71
+<     #####:   69:    }
+< ------------------
+---
+>         7:   69:    }
+171,243d82
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+< _ZN3TAO10String_varIcED2Ev:
+<     #####:   77:    inline ~String_var (void)
+<         -:   78:    {
+<     #####:   79:      s_traits::release (this->ptr_);
+<     #####:   80:    }
+< ------------------
+246,253d84
+<       10*:   83:    inline String_var &operator= (character_type *p)
+<         -:   84:    {
+<       10*:   85:      String_var <charT> tmp (p);
+<       10*:   86:      std::swap (this->ptr_, tmp.ptr_);
+<       10*:   87:      return *this;
+<         -:   88:    }
+< ------------------
+< _ZN3TAO10String_varIcEaSEPc:
+256c87
+<        10:   85:      String_var <charT> tmp (p);
+---
+>        20:   85:      String_var <charT> tmp (p);
+258,266c89
+<        10:   87:      return *this;
+<         -:   88:    }
+< ------------------
+< _ZN3TAO10String_varIcEaSEPc:
+<     #####:   83:    inline String_var &operator= (character_type *p)
+<         -:   84:    {
+<     #####:   85:      String_var <charT> tmp (p);
+<     #####:   86:      std::swap (this->ptr_, tmp.ptr_);
+<     #####:   87:      return *this;
+---
+>        20:   87:      return *this;
+268,276d90
+< ------------------
+< _ZN3TAO10String_varIcEaSEPc:
+<     #####:   83:    inline String_var &operator= (character_type *p)
+<         -:   84:    {
+<     #####:   85:      String_var <charT> tmp (p);
+<     #####:   86:      std::swap (this->ptr_, tmp.ptr_);
+<     #####:   87:      return *this;
+<         -:   88:    }
+< ------------------
+299,335d112
+< ------------------
+< _ZN3TAO10String_varIcEcvRPcEv:
+<     #####:  107:    inline operator character_type *&()
+<         -:  108:    {
+<     #####:  109:      return this->ptr_;
+<         -:  110:    }
+< ------------------
+< _ZN3TAO10String_varIcEcvRPcEv:
+<     #####:  107:    inline operator character_type *&()
+<         -:  108:    {
+<     #####:  109:      return this->ptr_;
+<         -:  110:    }
+< ------------------
+< _ZN3TAO10String_varIcEcvRPcEv:
+<     #####:  107:    inline operator character_type *&()
+<         -:  108:    {
+<     #####:  109:      return this->ptr_;
+<         -:  110:    }
+< ------------------
+< _ZN3TAO10String_varIcEcvRPcEv:
+<     #####:  107:    inline operator character_type *&()
+<         -:  108:    {
+<     #####:  109:      return this->ptr_;
+<         -:  110:    }
+< ------------------
+< _ZN3TAO10String_varIcEcvRPcEv:
+<     #####:  107:    inline operator character_type *&()
+<         -:  108:    {
+<     #####:  109:      return this->ptr_;
+<         -:  110:    }
+< ------------------
+< _ZN3TAO10String_varIcEcvRPcEv:
+<     #####:  107:    inline operator character_type *&()
+<         -:  108:    {
+<     #####:  109:      return this->ptr_;
+<         -:  110:    }
+< ------------------
+362,410d138
+< ------------------
+< _ZNK3TAO10String_varIcE2inEv:
+<     #####:  133:    inline const character_type *in (void) const
+<         -:  134:    {
+<     #####:  135:      return this->ptr_;
+<         -:  136:    }
+< ------------------
+< _ZNK3TAO10String_varIcE2inEv:
+<     #####:  133:    inline const character_type *in (void) const
+<         -:  134:    {
+<     #####:  135:      return this->ptr_;
+<         -:  136:    }
+< ------------------
+< _ZNK3TAO10String_varIcE2inEv:
+<     #####:  133:    inline const character_type *in (void) const
+<         -:  134:    {
+<     #####:  135:      return this->ptr_;
+<         -:  136:    }
+< ------------------
+< _ZNK3TAO10String_varIcE2inEv:
+<     #####:  133:    inline const character_type *in (void) const
+<         -:  134:    {
+<     #####:  135:      return this->ptr_;
+<         -:  136:    }
+< ------------------
+< _ZNK3TAO10String_varIcE2inEv:
+<     #####:  133:    inline const character_type *in (void) const
+<         -:  134:    {
+<     #####:  135:      return this->ptr_;
+<         -:  136:    }
+< ------------------
+< _ZNK3TAO10String_varIcE2inEv:
+<     #####:  133:    inline const character_type *in (void) const
+<         -:  134:    {
+<     #####:  135:      return this->ptr_;
+<         -:  136:    }
+< ------------------
+< _ZNK3TAO10String_varIcE2inEv:
+<     #####:  133:    inline const character_type *in (void) const
+<         -:  134:    {
+<     #####:  135:      return this->ptr_;
+<         -:  136:    }
+< ------------------
+< _ZNK3TAO10String_varIcE2inEv:
+<     #####:  133:    inline const character_type *in (void) const
+<         -:  134:    {
+<     #####:  135:      return this->ptr_;
+<         -:  136:    }
+< ------------------
+433,449d160
+< ------------------
+< _ZN3TAO10String_varIcE5_retnEv:
+<     #####:  153:    inline character_type *_retn (void)
+<         -:  154:    {
+<     #####:  155:      character_type *temp = this->ptr_;
+<     #####:  156:      this->ptr_ = 0;
+<     #####:  157:      return temp;
+<         -:  158:    }
+< ------------------
+< _ZN3TAO10String_varIcE5_retnEv:
+<     #####:  153:    inline character_type *_retn (void)
+<         -:  154:    {
+<     #####:  155:      character_type *temp = this->ptr_;
+<     #####:  156:      this->ptr_ = 0;
+<     #####:  157:      return temp;
+<         -:  158:    }
+< ------------------

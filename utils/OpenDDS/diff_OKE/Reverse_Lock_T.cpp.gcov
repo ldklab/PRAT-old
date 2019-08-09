@@ -1,0 +1,152 @@
+1c1
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Reverse_Lock_T.cpp
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Reverse_Lock_T.cpp
+3c3
+<         -:    1:// $Id$
+---
+>         -:    1:// $Id: Reverse_Lock_T.cpp 14 2007-02-01 15:49:12Z mitza $
+24,44d23
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexED0Ev:
+<     #####:   19:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::~ACE_Reverse_Lock (void)
+<         -:   20:{
+<     #####:   21:}
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexED2Ev:
+<     #####:   19:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::~ACE_Reverse_Lock (void)
+<         -:   20:{
+<     #####:   21:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexED0Ev:
+<     #####:   19:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::~ACE_Reverse_Lock (void)
+<         -:   20:{
+<     #####:   21:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexED2Ev:
+<     #####:   19:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::~ACE_Reverse_Lock (void)
+<         -:   20:{
+<     #####:   21:}
+< ------------------
+52,64d30
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexE6removeEv:
+<     #####:   25:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::remove (void)
+<         -:   26:{
+<     #####:   27:  return this->lock_.remove ();
+<         -:   28:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexE6removeEv:
+<     #####:   25:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::remove (void)
+<         -:   26:{
+<     #####:   27:  return this->lock_.remove ();
+<         -:   28:}
+< ------------------
+72,84d37
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexE7acquireEv:
+<     #####:   32:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::acquire (void)
+<         -:   33:{
+<     #####:   34:  return this->lock_.release ();
+<         -:   35:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexE7acquireEv:
+<     #####:   32:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::acquire (void)
+<         -:   33:{
+<     #####:   34:  return this->lock_.release ();
+<         -:   35:}
+< ------------------
+92,104d44
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexE10tryacquireEv:
+<     #####:   39:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::tryacquire (void)
+<         -:   40:{
+<     #####:   41:  ACE_NOTSUP_RETURN (-1);
+<         -:   42:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexE10tryacquireEv:
+<     #####:   39:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::tryacquire (void)
+<         -:   40:{
+<     #####:   41:  ACE_NOTSUP_RETURN (-1);
+<         -:   42:}
+< ------------------
+117,139d56
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexE7releaseEv:
+<     #####:   46:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::release (void)
+<         -:   47:{
+<     #####:   48:  if (this->acquire_method_ == ACE_Acquire_Method::ACE_READ)
+<     #####:   49:    return this->lock_.acquire_read ();
+<     #####:   50:  else if (this->acquire_method_ == ACE_Acquire_Method::ACE_WRITE)
+<     #####:   51:    return this->lock_.acquire_write ();
+<         -:   52:  else
+<     #####:   53:    return this->lock_.acquire ();
+<         -:   54:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexE7releaseEv:
+<     #####:   46:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::release (void)
+<         -:   47:{
+<     #####:   48:  if (this->acquire_method_ == ACE_Acquire_Method::ACE_READ)
+<     #####:   49:    return this->lock_.acquire_read ();
+<     #####:   50:  else if (this->acquire_method_ == ACE_Acquire_Method::ACE_WRITE)
+<     #####:   51:    return this->lock_.acquire_write ();
+<         -:   52:  else
+<     #####:   53:    return this->lock_.acquire ();
+<         -:   54:}
+< ------------------
+147,159d63
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexE12acquire_readEv:
+<     #####:   58:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::acquire_read (void)
+<         -:   59:{
+<     #####:   60:  ACE_NOTSUP_RETURN (-1);
+<         -:   61:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexE12acquire_readEv:
+<     #####:   58:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::acquire_read (void)
+<         -:   59:{
+<     #####:   60:  ACE_NOTSUP_RETURN (-1);
+<         -:   61:}
+< ------------------
+167,179d70
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexE13acquire_writeEv:
+<     #####:   65:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::acquire_write (void)
+<         -:   66:{
+<     #####:   67:  ACE_NOTSUP_RETURN (-1);
+<         -:   68:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexE13acquire_writeEv:
+<     #####:   65:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::acquire_write (void)
+<         -:   66:{
+<     #####:   67:  ACE_NOTSUP_RETURN (-1);
+<         -:   68:}
+< ------------------
+187,199d77
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexE15tryacquire_readEv:
+<     #####:   72:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::tryacquire_read (void)
+<         -:   73:{
+<     #####:   74:  ACE_NOTSUP_RETURN (-1);
+<         -:   75:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexE15tryacquire_readEv:
+<     #####:   72:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::tryacquire_read (void)
+<         -:   73:{
+<     #####:   74:  ACE_NOTSUP_RETURN (-1);
+<         -:   75:}
+< ------------------
+207,219d84
+< ------------------
+< _ZN16ACE_Reverse_LockI16ACE_Thread_MutexE16tryacquire_writeEv:
+<     #####:   79:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::tryacquire_write (void)
+<         -:   80:{
+<     #####:   81:  ACE_NOTSUP_RETURN (-1);
+<         -:   82:}
+< ------------------
+< _ZN16ACE_Reverse_LockI26ACE_Recursive_Thread_MutexE16tryacquire_writeEv:
+<     #####:   79:ACE_Reverse_Lock<ACE_LOCKING_MECHANISM>::tryacquire_write (void)
+<         -:   80:{
+<     #####:   81:  ACE_NOTSUP_RETURN (-1);
+<         -:   82:}
+< ------------------

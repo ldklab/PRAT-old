@@ -1,0 +1,22 @@
+1c1
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Abstract_Timer_Queue.cpp
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Abstract_Timer_Queue.cpp
+3c3
+<         -:    1://$Id$
+---
+>         -:    1://$Id: Abstract_Timer_Queue.cpp 2179 2013-05-28 22:16:51Z mesnierp $
+25,37d24
+< ------------------
+< _ZN24ACE_Abstract_Timer_QueueIP17ACE_Event_HandlerED0Ev:
+<     #####:   19:ACE_Abstract_Timer_Queue<TYPE>::
+<         -:   20:~ACE_Abstract_Timer_Queue ()
+<         -:   21:{
+<     #####:   22:}
+< ------------------
+< _ZN24ACE_Abstract_Timer_QueueIP17ACE_Event_HandlerED2Ev:
+<     #####:   19:ACE_Abstract_Timer_Queue<TYPE>::
+<         -:   20:~ACE_Abstract_Timer_Queue ()
+<         -:   21:{
+<     #####:   22:}
+< ------------------

@@ -1,0 +1,29 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Guard_T.h
+<         -:    0:Programs:70
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Guard_T.h
+>         -:    0:Programs:69
+9c9
+<         -:    7: *  $Id$
+---
+>         -:    7: *  $Id: Guard_T.h 2622 2015-08-13 18:30:00Z mitza $
+123,130c123
+<       58*:  121:  ACE_Guard (ACE_LOCK *lock): lock_ (lock), owner_ (0) {}
+< ------------------
+< _ZN9ACE_GuardI19ACE_RW_Thread_MutexEC2EPS0_:
+<        58:  121:  ACE_Guard (ACE_LOCK *lock): lock_ (lock), owner_ (0) {}
+< ------------------
+< _ZN9ACE_GuardI19ACE_RW_Thread_MutexEC2EPS0_:
+<     #####:  121:  ACE_Guard (ACE_LOCK *lock): lock_ (lock), owner_ (0) {}
+< ------------------
+---
+>        38:  121:  ACE_Guard (ACE_LOCK *lock): lock_ (lock), owner_ (0) {}
+155c148
+<         -:  146:class ACE_Write_Guard : public ACE_Guard<ACE_LOCK>
+---
+>        14:  146:class ACE_Write_Guard : public ACE_Guard<ACE_LOCK>
+201c194
+<         -:  192:class ACE_Read_Guard : public ACE_Guard<ACE_LOCK>
+---
+>        24:  192:class ACE_Read_Guard : public ACE_Guard<ACE_LOCK>

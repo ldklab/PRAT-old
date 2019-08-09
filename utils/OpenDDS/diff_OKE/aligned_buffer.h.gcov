@@ -1,0 +1,654 @@
+1,2c1,2
+<         -:    0:Source:/usr/include/c++/8/ext/aligned_buffer.h
+<         -:    0:Programs:51
+---
+>         -:    0:Source:/usr/include/c++/7/ext/aligned_buffer.h
+>         -:    0:Programs:3
+5c5
+<         -:    3:// Copyright (C) 2013-2018 Free Software Foundation, Inc.
+---
+>         -:    3:// Copyright (C) 2013-2017 Free Software Foundation, Inc.
+54,56c54,56
+<         -:   52:      // Since GCC 8 we could just use alignof(_Tp) instead, but older
+<         -:   53:      // versions of non-GNU compilers might still need this trick.
+<         -:   54:      struct _Tp2 { _Tp _M_t; };
+---
+>         -:   52:      struct _Tp2 { _Tp _M_t; };
+>         -:   53:
+>         -:   54:      alignas(__alignof__(_Tp2::_M_t)) unsigned char _M_storage[sizeof(_Tp)];
+58c58
+<         -:   56:      alignas(__alignof__(_Tp2::_M_t)) unsigned char _M_storage[sizeof(_Tp)];
+---
+>         -:   56:      __aligned_membuf() = default;
+60,596c60,96
+<         -:   58:      __aligned_membuf() = default;
+<         -:   59:
+<         -:   60:      // Can be used to avoid value-initialization zeroing _M_storage.
+<         -:   61:      __aligned_membuf(std::nullptr_t) { }
+<         -:   62:
+<         -:   63:      void*
+<     2573*:   64:      _M_addr() noexcept
+<     2573*:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKmN7OpenDDS4DCPS8RcHandleINS4_8DataLinkEEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberES1_IPNS3_10BasicQueueINS3_21TransportQueueElementEEEP17ACE_Message_BlockEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberESt3mapIS4_S1_IPNS3_10BasicQueueINS3_21TransportQueueElementEEEP17ACE_Message_BlockESt4lessIS4_ESaIS1_IS5_SD_EEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberENS3_6GUID_tEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_13TransportInstEEEEE7_M_addrEv:
+<       712:   64:      _M_addr() noexcept
+<       712:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_EE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKiN7OpenDDS4DCPS8RcHandleINS4_15TransportConfigEEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_15TransportConfigEEEEE7_M_addrEv:
+<       624:   64:      _M_addr() noexcept
+<       624:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS8RcHandleINS2_13TransportInstEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE29ACE_Configuration_Section_KeyEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_13TransportTypeEEEEE7_M_addrEv:
+<       178:   64:      _M_addr() noexcept
+<       178:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS19TransportReassembly9FragRangeEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS19TransportReassembly7FragKeyENSt7__cxx114listINS4_9FragRangeESaIS9_EEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS19TransportReassembly7FragKeyEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS12WeakRcHandleINS3_15TransportClientEEENS3_8RcHandleINS3_8DataLinkEEEEE7_M_addrEv:
+<         2:   64:      _M_addr() noexcept
+<         2:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS6GUID_tEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKm18TAO_FixedSeq_Var_TIN7OpenDDS4DCPS7GUIDSeqEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_15TransportClient12PendingAssocEEEEE7_M_addrEv:
+<        73:   64:      _M_addr() noexcept
+<        73:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_8DataLinkEEEEE7_M_addrEv:
+<        80:   64:      _M_addr() noexcept
+<        80:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_11DataLinkSetEEEEE7_M_addrEv:
+<        54:   64:      _M_addr() noexcept
+<        54:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_21TransportSendListenerEEEEE7_M_addrEv:
+<        18:   64:      _M_addr() noexcept
+<        18:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE7_M_addrEv:
+<       188:   64:      _M_addr() noexcept
+<       188:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_18ReceiveListenerSetEEEEE7_M_addrEv:
+<       134:   64:      _M_addr() noexcept
+<       134:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKmN7OpenDDS4DCPS8RcHandleINS4_8DataLinkEEEEE7_M_addrEv:
+<       415:   64:      _M_addr() noexcept
+<       415:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_18ReceiveListenerSetEEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_21TransportSendListenerEEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tESt3setIS4_NS3_17GUID_tKeyLessThanESaIS4_EEEE7_M_addrEv:
+<        95:   64:      _M_addr() noexcept
+<        95:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_11DataLinkSetEEEEE7_M_addrEv:
+<     #####:   64:      _M_addr() noexcept
+<     #####:   65:      { return static_cast<void*>(&_M_storage); }
+< ------------------
+<         -:   66:
+<         -:   67:      const void*
+<     2965*:   68:      _M_addr() const noexcept
+<     2965*:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKiN7OpenDDS4DCPS8RcHandleINS4_15TransportConfigEEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberES1_IPNS3_10BasicQueueINS3_21TransportQueueElementEEEP17ACE_Message_BlockEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberESt3mapIS4_S1_IPNS3_10BasicQueueINS3_21TransportQueueElementEEEP17ACE_Message_BlockESt4lessIS4_ESaIS1_IS5_SD_EEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberENS3_6GUID_tEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE29ACE_Configuration_Section_KeyEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_EE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS8RcHandleINS2_13TransportInstEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_13TransportInstEEEEE7_M_addrEv:
+<       623:   68:      _M_addr() const noexcept
+<       623:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_15TransportConfigEEEEE7_M_addrEv:
+<       924:   68:      _M_addr() const noexcept
+<       924:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_13TransportTypeEEEEE7_M_addrEv:
+<       534:   68:      _M_addr() const noexcept
+<       534:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS19TransportReassembly7FragKeyENSt7__cxx114listINS4_9FragRangeESaIS9_EEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS19TransportReassembly9FragRangeEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS19TransportReassembly7FragKeyEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS12WeakRcHandleINS3_15TransportClientEEENS3_8RcHandleINS3_8DataLinkEEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_21TransportSendListenerEEEEE7_M_addrEv:
+<        61:   68:      _M_addr() const noexcept
+<        61:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_11DataLinkSetEEEEE7_M_addrEv:
+<        18:   68:      _M_addr() const noexcept
+<        18:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKm18TAO_FixedSeq_Var_TIN7OpenDDS4DCPS7GUIDSeqEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKmN7OpenDDS4DCPS8RcHandleINS4_8DataLinkEEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_15TransportClient12PendingAssocEEEEE7_M_addrEv:
+<        72:   68:      _M_addr() const noexcept
+<        72:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_8DataLinkEEEEE7_M_addrEv:
+<        90:   68:      _M_addr() const noexcept
+<        90:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_18ReceiveListenerSetEEEEE7_M_addrEv:
+<       300:   68:      _M_addr() const noexcept
+<       300:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE7_M_addrEv:
+<        79:   68:      _M_addr() const noexcept
+<        79:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS6GUID_tEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKmN7OpenDDS4DCPS8RcHandleINS4_8DataLinkEEEEE7_M_addrEv:
+<       102:   68:      _M_addr() const noexcept
+<       102:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_21TransportSendListenerEEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS6GUID_tEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tESt3setIS4_NS3_17GUID_tKeyLessThanESaIS4_EEEE7_M_addrEv:
+<       162:   68:      _M_addr() const noexcept
+<       162:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_18ReceiveListenerSetEEEEE7_M_addrEv:
+<     #####:   68:      _M_addr() const noexcept
+<     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+< ------------------
+<         -:   70:
+<         -:   71:      _Tp*
+<     2573*:   72:      _M_ptr() noexcept
+<     2573*:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKmN7OpenDDS4DCPS8RcHandleINS4_8DataLinkEEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberES1_IPNS3_10BasicQueueINS3_21TransportQueueElementEEEP17ACE_Message_BlockEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberESt3mapIS4_S1_IPNS3_10BasicQueueINS3_21TransportQueueElementEEEP17ACE_Message_BlockESt4lessIS4_ESaIS1_IS5_SD_EEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberENS3_6GUID_tEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_13TransportInstEEEEE6_M_ptrEv:
+<       712:   72:      _M_ptr() noexcept
+<       712:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_EE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKiN7OpenDDS4DCPS8RcHandleINS4_15TransportConfigEEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_15TransportConfigEEEEE6_M_ptrEv:
+<       624:   72:      _M_ptr() noexcept
+<       624:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS8RcHandleINS2_13TransportInstEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE29ACE_Configuration_Section_KeyEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_13TransportTypeEEEEE6_M_ptrEv:
+<       178:   72:      _M_ptr() noexcept
+<       178:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS19TransportReassembly9FragRangeEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS19TransportReassembly7FragKeyENSt7__cxx114listINS4_9FragRangeESaIS9_EEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS19TransportReassembly7FragKeyEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS12WeakRcHandleINS3_15TransportClientEEENS3_8RcHandleINS3_8DataLinkEEEEE6_M_ptrEv:
+<         2:   72:      _M_ptr() noexcept
+<         2:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS6GUID_tEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKm18TAO_FixedSeq_Var_TIN7OpenDDS4DCPS7GUIDSeqEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_15TransportClient12PendingAssocEEEEE6_M_ptrEv:
+<        73:   72:      _M_ptr() noexcept
+<        73:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_8DataLinkEEEEE6_M_ptrEv:
+<        80:   72:      _M_ptr() noexcept
+<        80:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_11DataLinkSetEEEEE6_M_ptrEv:
+<        54:   72:      _M_ptr() noexcept
+<        54:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_21TransportSendListenerEEEEE6_M_ptrEv:
+<        18:   72:      _M_ptr() noexcept
+<        18:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE6_M_ptrEv:
+<       188:   72:      _M_ptr() noexcept
+<       188:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_18ReceiveListenerSetEEEEE6_M_ptrEv:
+<       134:   72:      _M_ptr() noexcept
+<       134:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKmN7OpenDDS4DCPS8RcHandleINS4_8DataLinkEEEEE6_M_ptrEv:
+<       415:   72:      _M_ptr() noexcept
+<       415:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_18ReceiveListenerSetEEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_21TransportSendListenerEEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tESt3setIS4_NS3_17GUID_tKeyLessThanESaIS4_EEEE6_M_ptrEv:
+<        95:   72:      _M_ptr() noexcept
+<        95:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+< _ZN9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_11DataLinkSetEEEEE6_M_ptrEv:
+<     #####:   72:      _M_ptr() noexcept
+<     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+< ------------------
+<         -:   74:
+<         -:   75:      const _Tp*
+<     2965*:   76:      _M_ptr() const noexcept
+<     2965*:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKiN7OpenDDS4DCPS8RcHandleINS4_15TransportConfigEEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberES1_IPNS3_10BasicQueueINS3_21TransportQueueElementEEEP17ACE_Message_BlockEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberESt3mapIS4_S1_IPNS3_10BasicQueueINS3_21TransportQueueElementEEEP17ACE_Message_BlockESt4lessIS4_ESaIS1_IS5_SD_EEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS14SequenceNumberENS3_6GUID_tEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE29ACE_Configuration_Section_KeyEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_EE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS8RcHandleINS2_13TransportInstEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_13TransportInstEEEEE6_M_ptrEv:
+<       623:   76:      _M_ptr() const noexcept
+<       623:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_15TransportConfigEEEEE6_M_ptrEv:
+<       924:   76:      _M_ptr() const noexcept
+<       924:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7OpenDDS4DCPS8RcHandleINSA_13TransportTypeEEEEE6_M_ptrEv:
+<       534:   76:      _M_ptr() const noexcept
+<       534:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS19TransportReassembly7FragKeyENSt7__cxx114listINS4_9FragRangeESaIS9_EEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS19TransportReassembly9FragRangeEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS19TransportReassembly7FragKeyEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS12WeakRcHandleINS3_15TransportClientEEENS3_8RcHandleINS3_8DataLinkEEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_21TransportSendListenerEEEEE6_M_ptrEv:
+<        61:   76:      _M_ptr() const noexcept
+<        61:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_11DataLinkSetEEEEE6_M_ptrEv:
+<        18:   76:      _M_ptr() const noexcept
+<        18:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKm18TAO_FixedSeq_Var_TIN7OpenDDS4DCPS7GUIDSeqEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKmN7OpenDDS4DCPS8RcHandleINS4_8DataLinkEEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_15TransportClient12PendingAssocEEEEE6_M_ptrEv:
+<        72:   76:      _M_ptr() const noexcept
+<        72:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_8DataLinkEEEEE6_M_ptrEv:
+<        90:   76:      _M_ptr() const noexcept
+<        90:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_18ReceiveListenerSetEEEEE6_M_ptrEv:
+<       300:   76:      _M_ptr() const noexcept
+<       300:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE6_M_ptrEv:
+<        79:   76:      _M_ptr() const noexcept
+<        79:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS6GUID_tEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKmN7OpenDDS4DCPS8RcHandleINS4_8DataLinkEEEEE6_M_ptrEv:
+<       102:   76:      _M_ptr() const noexcept
+<       102:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_21TransportSendListenerEEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_12WeakRcHandleINS3_24TransportReceiveListenerEEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufIN7OpenDDS4DCPS6GUID_tEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tESt3setIS4_NS3_17GUID_tKeyLessThanESaIS4_EEEE6_M_ptrEv:
+<       162:   76:      _M_ptr() const noexcept
+<       162:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+< _ZNK9__gnu_cxx16__aligned_membufISt4pairIKN7OpenDDS4DCPS6GUID_tENS3_8RcHandleINS3_18ReceiveListenerSetEEEEE6_M_ptrEv:
+<     #####:   76:      _M_ptr() const noexcept
+<     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+< ------------------
+<         -:   78:    };
+<         -:   79:
+<         -:   80:#if _GLIBCXX_INLINE_VERSION
+<         -:   81:  template<typename _Tp>
+<         -:   82:    using __aligned_buffer = __aligned_membuf<_Tp>;
+<         -:   83:#else
+<         -:   84:  // Similar to __aligned_membuf but aligned for complete objects, not members.
+<         -:   85:  // This type is used in <forward_list>, <future>, <bits/shared_ptr_base.h>
+<         -:   86:  // and <bits/hashtable_policy.h>, but ideally they would use __aligned_membuf
+<         -:   87:  // instead, as it has smaller size for some types on some targets.
+<         -:   88:  // This type is still used to avoid an ABI change.
+<         -:   89:  template<typename _Tp>
+<         -:   90:    struct __aligned_buffer
+<         -:   91:    : std::aligned_storage<sizeof(_Tp), __alignof__(_Tp)>
+<         -:   92:    {
+<         -:   93:      typename
+<         -:   94:	std::aligned_storage<sizeof(_Tp), __alignof__(_Tp)>::type _M_storage;
+---
+>         -:   58:      // Can be used to avoid value-initialization zeroing _M_storage.
+>         -:   59:      __aligned_membuf(std::nullptr_t) { }
+>         -:   60:
+>         -:   61:      void*
+>     #####:   62:      _M_addr() noexcept
+>     #####:   63:      { return static_cast<void*>(&_M_storage); }
+>         -:   64:
+>         -:   65:      const void*
+>     #####:   66:      _M_addr() const noexcept
+>     #####:   67:      { return static_cast<const void*>(&_M_storage); }
+>         -:   68:
+>         -:   69:      _Tp*
+>     #####:   70:      _M_ptr() noexcept
+>     #####:   71:      { return static_cast<_Tp*>(_M_addr()); }
+>         -:   72:
+>         -:   73:      const _Tp*
+>     #####:   74:      _M_ptr() const noexcept
+>     #####:   75:      { return static_cast<const _Tp*>(_M_addr()); }
+>         -:   76:    };
+>         -:   77:
+>         -:   78:  // Similar to __aligned_membuf but aligned for complete objects, not members.
+>         -:   79:  // This type is used in <forward_list>, <future>, <bits/shared_ptr_base.h>
+>         -:   80:  // and <bits/hashtable_policy.h>, but ideally they would use __aligned_membuf
+>         -:   81:  // instead, as it has smaller size for some types on some targets.
+>         -:   82:  // This type is still used to avoid an ABI change.
+>         -:   83:  template<typename _Tp>
+>         -:   84:    struct __aligned_buffer
+>         -:   85:    : std::aligned_storage<sizeof(_Tp), std::alignment_of<_Tp>::value>
+>         -:   86:    {
+>         -:   87:      typename
+>         -:   88:	std::aligned_storage<sizeof(_Tp), std::alignment_of<_Tp>::value>::type
+>         -:   89:	_M_storage;
+>         -:   90:
+>         -:   91:      __aligned_buffer() = default;
+>         -:   92:
+>         -:   93:      // Can be used to avoid value-initialization
+>         -:   94:      __aligned_buffer(std::nullptr_t) { }
+598,617c98,117
+<         -:   96:      __aligned_buffer() = default;
+<         -:   97:
+<         -:   98:      // Can be used to avoid value-initialization
+<         -:   99:      __aligned_buffer(std::nullptr_t) { }
+<         -:  100:
+<         -:  101:      void*
+<         -:  102:      _M_addr() noexcept
+<         -:  103:      {
+<         -:  104:        return static_cast<void*>(&_M_storage);
+<         -:  105:      }
+<         -:  106:
+<         -:  107:      const void*
+<         -:  108:      _M_addr() const noexcept
+<         -:  109:      {
+<         -:  110:        return static_cast<const void*>(&_M_storage);
+<         -:  111:      }
+<         -:  112:
+<         -:  113:      _Tp*
+<         -:  114:      _M_ptr() noexcept
+<         -:  115:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>         -:   96:      void*
+>         -:   97:      _M_addr() noexcept
+>         -:   98:      {
+>         -:   99:        return static_cast<void*>(&_M_storage);
+>         -:  100:      }
+>         -:  101:
+>         -:  102:      const void*
+>         -:  103:      _M_addr() const noexcept
+>         -:  104:      {
+>         -:  105:        return static_cast<const void*>(&_M_storage);
+>         -:  106:      }
+>         -:  107:
+>         -:  108:      _Tp*
+>         -:  109:      _M_ptr() noexcept
+>         -:  110:      { return static_cast<_Tp*>(_M_addr()); }
+>         -:  111:
+>         -:  112:      const _Tp*
+>         -:  113:      _M_ptr() const noexcept
+>         -:  114:      { return static_cast<const _Tp*>(_M_addr()); }
+>         -:  115:    };
+619,627c119,121
+<         -:  117:      const _Tp*
+<         -:  118:      _M_ptr() const noexcept
+<         -:  119:      { return static_cast<const _Tp*>(_M_addr()); }
+<         -:  120:    };
+<         -:  121:#endif
+<         -:  122:
+<         -:  123:} // namespace
+<         -:  124:
+<         -:  125:#endif /* _ALIGNED_BUFFER_H */
+---
+>         -:  117:} // namespace
+>         -:  118:
+>         -:  119:#endif /* _ALIGNED_BUFFER_H */

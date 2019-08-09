@@ -1,0 +1,197 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/CORBA_methods.h
+<         -:    0:Programs:70
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/CORBA_methods.h
+>         -:    0:Programs:69
+8c8
+<         -:    6: *  $Id$
+---
+>         -:    6: *  $Id: CORBA_methods.h 1861 2011-08-31 16:18:08Z mesnierp $
+58c58
+<       30*:   56:  template<typename T> inline Boolean is_nil (T x)
+---
+>         9:   56:  template<typename T> inline Boolean is_nil (T x)
+60c60
+<       30*:   58:    return x == 0;
+---
+>         9:   58:    return x == 0;
+62,218d61
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS5TopicEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS7WaitSetEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS16TopicDescriptionEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS18SubscriberListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS18DataReaderListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS18SubscriberListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS18DataReaderListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS17PublisherListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS5TopicEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS18DataWriterListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS14GuardConditionEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN7OpenDDS4DCPS11TypeSupportEEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS37PublicationBuiltinTopicDataDataReaderEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS25DomainParticipantListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS37PublicationBuiltinTopicDataDataReaderEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS18DataReaderListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS17DomainParticipantEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN7OpenDDS4DCPS11TypeSupportEEEEbT_:
+<        22:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<        22:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN3DDS5TopicEEEEbT_:
+<         8:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<         8:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS18DataWriterListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN7OpenDDS4DCPS18DataWriterListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS18DataReaderListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN7OpenDDS4DCPS18DataReaderListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilIPN3DDS18SubscriberListenerEEEbT_:
+<     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<     #####:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+220,228d62
+<        2*:   61:  template<typename T> inline void release (T x)
+<         -:   62:  {
+<        2*:   63:    if (x != 0)
+<         -:   64:      {
+<        2*:   65:        x->_decr_refcount ();
+<         -:   66:      }
+<        2*:   67:  }
+< ------------------
+< _ZN5CORBA7releaseIPN3DDS14GuardConditionEEEvT_:
+236,245d69
+< ------------------
+< _ZN5CORBA7releaseIPN3DDS7WaitSetEEEvT_:
+<         2:   61:  template<typename T> inline void release (T x)
+<         -:   62:  {
+<         2:   63:    if (x != 0)
+<         -:   64:      {
+<         2:   65:        x->_decr_refcount ();
+<         -:   66:      }
+<         2:   67:  }
+< ------------------

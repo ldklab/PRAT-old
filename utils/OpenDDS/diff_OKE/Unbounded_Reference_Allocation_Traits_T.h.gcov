@@ -1,0 +1,52 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Reference_Allocation_Traits_T.h
+<         -:    0:Programs:51
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Reference_Allocation_Traits_T.h
+>         -:    0:Programs:15
+11c11
+<         -:    9: * $Id$
+---
+>         -:    9: * $Id: Unbounded_Reference_Allocation_Traits_T.h 2476 2015-02-26 23:23:49Z mesnierp $
+31c31
+<         -:   29:  inline static CORBA::ULong default_maximum()
+---
+>     #####:   29:  inline static CORBA::ULong default_maximum()
+33c33
+<         -:   31:    return 0;
+---
+>     #####:   31:    return 0;
+36c36
+<         -:   34:  inline static value_type * default_buffer_allocation()
+---
+>     #####:   34:  inline static value_type * default_buffer_allocation()
+38c38
+<         -:   36:    return 0;
+---
+>     #####:   36:    return 0;
+41c41
+<         -:   39:  inline static value_type * allocbuf(CORBA::ULong maximum)
+---
+>     #####:   39:  inline static value_type * allocbuf(CORBA::ULong maximum)
+43c43
+<         -:   41:    if (maximum == ACE_UINT32_MAX)
+---
+>     #####:   41:    if (maximum == ACE_UINT32_MAX)
+45c45
+<         -:   43:        return 0;
+---
+>     #####:   43:        return 0;
+47,48c47,48
+<         -:   45:    value_type * buffer = new value_type[maximum + 1];
+<         -:   46:    reinterpret_cast<value_type**>(buffer)[0] = buffer + maximum + 1;
+---
+>     #####:   45:    value_type * buffer = new value_type[maximum + 1];
+>     #####:   46:    reinterpret_cast<value_type**>(buffer)[0] = buffer + maximum + 1;
+51c51
+<         -:   49:    reference_traits::initialize_range(buffer + 1, buffer + maximum + 1);
+---
+>     #####:   49:    reference_traits::initialize_range(buffer + 1, buffer + maximum + 1);
+53c53
+<         -:   51:    return buffer + 1;
+---
+>     #####:   51:    return buffer + 1;

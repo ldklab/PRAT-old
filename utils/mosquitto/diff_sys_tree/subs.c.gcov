@@ -1,0 +1,20 @@
+88c88
+<     #####:   86:			db->retained_count--;
+---
+>         -:   86:			db->retained_count--;
+95c95
+<     #####:   93:			db->retained_count++;
+---
+>         -:   93:			db->retained_count++;
+308c308
+<     #####:  306:			db->subscription_count++;
+---
+>         -:  306:			db->subscription_count++;
+337c337
+<     #####:  335:				db->subscription_count--;
+---
+>         -:  335:				db->subscription_count--;
+585c585
+<     #####:  583:				db->subscription_count--;
+---
+>         -:  583:				db->subscription_count--;

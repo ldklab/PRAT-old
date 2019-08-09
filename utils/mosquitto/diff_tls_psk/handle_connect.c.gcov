@@ -1,0 +1,14 @@
+424c424
+<     #####:  422:		if(context->listener->psk_hint){
+---
+>         -:  422:		if(context->listener->psk_hint){
+426,429c426,429
+<     #####:  424:			if(!context->username){
+<     #####:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+<     #####:  426:				rc = 1;
+<     #####:  427:				goto handle_connect_error;
+---
+>         -:  424:			if(!context->username){
+>         -:  425:				send__connack(context, 0, CONNACK_REFUSED_BAD_USERNAME_PASSWORD);
+>         -:  426:				rc = 1;
+>         -:  427:				goto handle_connect_error;

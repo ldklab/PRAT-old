@@ -1,0 +1,118 @@
+1c1
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Unbounded_Queue.cpp
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Unbounded_Queue.cpp
+3c3
+<         -:    1:// $Id$
+---
+>         -:    1:// $Id: Unbounded_Queue.cpp 2622 2015-08-13 18:30:00Z mitza $
+27c27
+<         5:   25:ACE_Unbounded_Queue<T>::ACE_Unbounded_Queue (ACE_Allocator *alloc)
+---
+>         4:   25:ACE_Unbounded_Queue<T>::ACE_Unbounded_Queue (ACE_Allocator *alloc)
+30c30
+<         5:   28:    allocator_ (alloc)
+---
+>         4:   28:    allocator_ (alloc)
+34,35c34,35
+<         5:   32:  if (this->allocator_ == 0)
+<         5:   33:    this->allocator_ = ACE_Allocator::instance ();
+---
+>         4:   32:  if (this->allocator_ == 0)
+>         4:   33:    this->allocator_ = ACE_Allocator::instance ();
+37c37
+<        5*:   35:  ACE_NEW_MALLOC (this->head_,
+---
+>         4:   35:  ACE_NEW_MALLOC (this->head_,
+41c41
+<         5:   39:  this->head_->next_ = this->head_;
+---
+>         4:   39:  this->head_->next_ = this->head_;
+125c125
+<         5:  123:ACE_Unbounded_Queue<T>::delete_nodes (void)
+---
+>         4:  123:ACE_Unbounded_Queue<T>::delete_nodes (void)
+127c127
+<        5*:  125:  for (ACE_Node<T> *curr = this->head_->next_;
+---
+>         4:  125:  for (ACE_Node<T> *curr = this->head_->next_;
+129c129
+<         5:  127:       curr != this->head_;
+---
+>         4:  127:       curr != this->head_;
+146,147c146,147
+<         5:  144:  this->head_->next_ = this->head_;
+<         5:  145:}
+---
+>         4:  144:  this->head_->next_ = this->head_;
+>         4:  145:}
+150c150
+<         5:  148:ACE_Unbounded_Queue<T>::~ACE_Unbounded_Queue (void)
+---
+>         4:  148:ACE_Unbounded_Queue<T>::~ACE_Unbounded_Queue (void)
+154,155c154,155
+<         5:  152:  this->delete_nodes ();
+<         5:  153:  ACE_DES_FREE_TEMPLATE (head_,
+---
+>         4:  152:  this->delete_nodes ();
+>         4:  153:  ACE_DES_FREE_TEMPLATE (head_,
+159c159
+<         5:  157:}
+---
+>         4:  157:}
+183c183
+<     #####:  181:ACE_Unbounded_Queue<T>::enqueue_tail (const T &new_item)
+---
+>         7:  181:ACE_Unbounded_Queue<T>::enqueue_tail (const T &new_item)
+190c190
+<     #####:  188:  this->head_->item_ = new_item;
+---
+>         7:  188:  this->head_->item_ = new_item;
+192c192
+<     #####:  190:  ACE_Node<T> *temp = 0;
+---
+>         7:  190:  ACE_Node<T> *temp = 0;
+195c195
+<     #####:  193:  ACE_NEW_MALLOC_RETURN (temp,
+---
+>         7:  193:  ACE_NEW_MALLOC_RETURN (temp,
+200c200
+<     #####:  198:  this->head_->next_ = temp;
+---
+>         7:  198:  this->head_->next_ = temp;
+203c203
+<     #####:  201:  this->head_ = temp;
+---
+>         7:  201:  this->head_ = temp;
+205,206c205,206
+<     #####:  203:  ++this->cur_size_;
+<     #####:  204:  return 0;
+---
+>         7:  203:  ++this->cur_size_;
+>         7:  204:  return 0;
+210c210
+<     #####:  208:ACE_Unbounded_Queue<T>::dequeue_head (T &item)
+---
+>         7:  208:ACE_Unbounded_Queue<T>::dequeue_head (T &item)
+215c215
+<     #####:  213:  if (this->is_empty ())
+---
+>         7:  213:  if (this->is_empty ())
+218c218
+<     #####:  216:  ACE_Node<T> *temp = this->head_->next_;
+---
+>         7:  216:  ACE_Node<T> *temp = this->head_->next_;
+220,222c220,222
+<     #####:  218:  item = temp->item_;
+<     #####:  219:  this->head_->next_ = temp->next_;
+<     #####:  220:  ACE_DES_FREE_TEMPLATE (temp,
+---
+>         7:  218:  item = temp->item_;
+>         7:  219:  this->head_->next_ = temp->next_;
+>         7:  220:  ACE_DES_FREE_TEMPLATE (temp,
+226,227c226,227
+<     #####:  224:  --this->cur_size_;
+<     #####:  225:  return 0;
+---
+>         7:  224:  --this->cur_size_;
+>         7:  225:  return 0;

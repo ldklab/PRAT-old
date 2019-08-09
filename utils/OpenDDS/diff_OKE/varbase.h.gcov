@@ -1,0 +1,75 @@
+1,2c1,2
+<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/varbase.h
+<         -:    0:Programs:70
+---
+>         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/varbase.h
+>         -:    0:Programs:69
+9c9
+<         -:    7: *  $Id$
+---
+>         -:    7: *  $Id: varbase.h 14 2007-02-01 15:49:12Z mitza $
+40,103d39
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------
+< _ZN12TAO_Base_varC2Ev:
+<     #####:   37:  TAO_Base_var (void) {}
+< ------------------

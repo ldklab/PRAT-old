@@ -1,0 +1,24 @@
+52c52
+<     #####:   50:	*idlen = 36 + auto_id_prefix_len;
+---
+>         -:   50:	*idlen = 36 + auto_id_prefix_len;
+54c54
+<         -:   52:	*idlen = 64 + auto_id_prefix_len;
+---
+>     #####:   52:	*idlen = 64 + auto_id_prefix_len;
+67,68c67,68
+<     #####:   65:	uuid_generate_random(uuid);
+<     #####:   66:	uuid_unparse_lower(uuid, &client_id[auto_id_prefix_len]);
+---
+>         -:   65:	uuid_generate_random(uuid);
+>         -:   66:	uuid_unparse_lower(uuid, &client_id[auto_id_prefix_len]);
+70,71c70,71
+<         -:   68:	for(i=0; i<64; i++){
+<         -:   69:		client_id[i+auto_id_prefix_len] = (rand()%73)+48;
+---
+>     #####:   68:	for(i=0; i<64; i++){
+>     #####:   69:		client_id[i+auto_id_prefix_len] = (rand()%73)+48;
+73c73
+<         -:   71:	client_id[i] = '\0';
+---
+>     #####:   71:	client_id[i] = '\0';
