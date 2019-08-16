@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/new
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// The -*- C++ -*- dynamic memory management header.
         -:    2:
         -:    3:// Copyright (C) 1994-2017 Free Software Foundation, Inc.
@@ -167,8 +167,8 @@
         -:  165:#endif // __cpp_aligned_new
         -:  166:
         -:  167:// Default placement versions of operator new.
-    #####:  168:inline void* operator new(std::size_t, void* __p) _GLIBCXX_USE_NOEXCEPT
-    #####:  169:{ return __p; }
+    15237:  168:inline void* operator new(std::size_t, void* __p) _GLIBCXX_USE_NOEXCEPT
+    15237:  169:{ return __p; }
         -:  170:inline void* operator new[](std::size_t, void* __p) _GLIBCXX_USE_NOEXCEPT
         -:  171:{ return __p; }
         -:  172:

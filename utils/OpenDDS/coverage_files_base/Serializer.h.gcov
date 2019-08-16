@@ -1,384 +1,471 @@
         -:    0:Source:../dds/DCPS/Serializer.h
-        -:    0:Programs:24
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-        -:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-        -:   98:/*EOF*/
-        -:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-        -:  103:/*EOF*/
-        -:  104:/*EOF*/
-        -:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-        -:  108:/*EOF*/
-        -:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-        -:  112:/*EOF*/
-        -:  113:/*EOF*/
-        -:  114:/*EOF*/
-        -:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-        -:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-        -:  125:/*EOF*/
-        -:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-        -:  131:/*EOF*/
-        -:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-        -:  135:/*EOF*/
-        -:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-        -:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-        -:  147:/*EOF*/
-        -:  148:/*EOF*/
-        -:  149:/*EOF*/
-        -:  150:/*EOF*/
-        -:  151:/*EOF*/
-        -:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-        -:  157:/*EOF*/
-        -:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-        -:  165:/*EOF*/
-        -:  166:/*EOF*/
-        -:  167:/*EOF*/
-        -:  168:/*EOF*/
-        -:  169:/*EOF*/
-        -:  170:/*EOF*/
-        -:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-        -:  174:/*EOF*/
-        -:  175:/*EOF*/
-        -:  176:/*EOF*/
-        -:  177:/*EOF*/
-        -:  178:/*EOF*/
-        -:  179:/*EOF*/
-        -:  180:/*EOF*/
-        -:  181:/*EOF*/
-        -:  182:/*EOF*/
-        -:  183:/*EOF*/
-        -:  184:/*EOF*/
-        -:  185:/*EOF*/
-        -:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-        -:  190:/*EOF*/
-        -:  191:/*EOF*/
-        -:  192:/*EOF*/
-        -:  193:/*EOF*/
-        -:  194:/*EOF*/
-        -:  195:/*EOF*/
-        -:  196:/*EOF*/
-        -:  197:/*EOF*/
-        -:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-        -:  201:/*EOF*/
-        -:  202:/*EOF*/
-        -:  203:/*EOF*/
-        -:  204:/*EOF*/
-        -:  205:/*EOF*/
-        -:  206:/*EOF*/
-        -:  207:/*EOF*/
-        -:  208:/*EOF*/
-        -:  209:/*EOF*/
-        -:  210:/*EOF*/
-        -:  211:/*EOF*/
-        -:  212:/*EOF*/
-        -:  213:/*EOF*/
-        -:  214:/*EOF*/
-        -:  215:/*EOF*/
-        -:  216:/*EOF*/
-        -:  217:/*EOF*/
-        -:  218:/*EOF*/
-        -:  219:/*EOF*/
-        -:  220:/*EOF*/
-        -:  221:/*EOF*/
-        -:  222:/*EOF*/
-        -:  223:/*EOF*/
-        -:  224:/*EOF*/
-        -:  225:/*EOF*/
-        -:  226:/*EOF*/
-        -:  227:/*EOF*/
-        -:  228:/*EOF*/
-        -:  229:/*EOF*/
-        -:  230:/*EOF*/
-        -:  231:/*EOF*/
-        -:  232:/*EOF*/
-        -:  233:/*EOF*/
-        -:  234:/*EOF*/
-        -:  235:/*EOF*/
-        -:  236:/*EOF*/
-        -:  237:/*EOF*/
-        -:  238:/*EOF*/
-        -:  239:/*EOF*/
-        -:  240:/*EOF*/
-        -:  241:/*EOF*/
-        -:  242:/*EOF*/
-        -:  243:/*EOF*/
-        -:  244:/*EOF*/
-        -:  245:/*EOF*/
-        -:  246:/*EOF*/
-        -:  247:/*EOF*/
-        -:  248:/*EOF*/
-        -:  249:/*EOF*/
-        -:  250:/*EOF*/
-        -:  251:/*EOF*/
-        -:  252:/*EOF*/
-        -:  253:/*EOF*/
-        -:  254:/*EOF*/
-        -:  255:/*EOF*/
-        -:  256:/*EOF*/
-        -:  257:/*EOF*/
-        -:  258:/*EOF*/
-        -:  259:/*EOF*/
-        -:  260:/*EOF*/
-        -:  261:/*EOF*/
-        -:  262:/*EOF*/
-        -:  263:/*EOF*/
-        -:  264:/*EOF*/
-        -:  265:/*EOF*/
-        -:  266:/*EOF*/
-        -:  267:/*EOF*/
-        -:  268:/*EOF*/
-        -:  269:/*EOF*/
-        -:  270:/*EOF*/
-        -:  271:/*EOF*/
-        -:  272:/*EOF*/
-        -:  273:/*EOF*/
-        -:  274:/*EOF*/
-        -:  275:/*EOF*/
-        -:  276:/*EOF*/
-        -:  277:/*EOF*/
-        -:  278:/*EOF*/
-        -:  279:/*EOF*/
-        -:  280:/*EOF*/
-        -:  281:/*EOF*/
-        -:  282:/*EOF*/
-        -:  283:/*EOF*/
-        -:  284:/*EOF*/
-        -:  285:/*EOF*/
-        -:  286:/*EOF*/
-        -:  287:/*EOF*/
-        -:  288:/*EOF*/
-        -:  289:/*EOF*/
-        -:  290:/*EOF*/
-        -:  291:/*EOF*/
-        -:  292:/*EOF*/
-        -:  293:/*EOF*/
-        -:  294:/*EOF*/
-        -:  295:/*EOF*/
-        -:  296:/*EOF*/
-        -:  297:/*EOF*/
-        -:  298:/*EOF*/
-        -:  299:/*EOF*/
-        -:  300:/*EOF*/
-        -:  301:/*EOF*/
-        -:  302:/*EOF*/
-        -:  303:/*EOF*/
-        -:  304:/*EOF*/
-        -:  305:/*EOF*/
-        -:  306:/*EOF*/
-        -:  307:/*EOF*/
-        -:  308:/*EOF*/
-        -:  309:/*EOF*/
-        -:  310:/*EOF*/
-        -:  311:/*EOF*/
-        -:  312:/*EOF*/
-        -:  313:/*EOF*/
-        -:  314:/*EOF*/
-        -:  315:/*EOF*/
-        -:  316:/*EOF*/
-        -:  317:/*EOF*/
-        -:  318:/*EOF*/
-        -:  319:/*EOF*/
-        -:  320:/*EOF*/
-        -:  321:/*EOF*/
-        -:  322:/*EOF*/
-        -:  323:/*EOF*/
-        -:  324:/*EOF*/
-        -:  325:/*EOF*/
-        -:  326:/*EOF*/
-        -:  327:/*EOF*/
-        -:  328:/*EOF*/
-        -:  329:/*EOF*/
-        -:  330:/*EOF*/
-        -:  331:/*EOF*/
-        -:  332:/*EOF*/
-        -:  333:/*EOF*/
-        -:  334:/*EOF*/
-        -:  335:/*EOF*/
-        -:  336:/*EOF*/
-        -:  337:/*EOF*/
-        -:  338:/*EOF*/
-        -:  339:/*EOF*/
-        -:  340:/*EOF*/
-        -:  341:/*EOF*/
-        -:  342:/*EOF*/
-        -:  343:/*EOF*/
-        -:  344:/*EOF*/
-        -:  345:/*EOF*/
-        -:  346:/*EOF*/
-        -:  347:/*EOF*/
-        -:  348:/*EOF*/
-        -:  349:/*EOF*/
-        -:  350:/*EOF*/
-        -:  351:/*EOF*/
-        -:  352:/*EOF*/
-        -:  353:/*EOF*/
-        -:  354:/*EOF*/
-        -:  355:/*EOF*/
-        -:  356:/*EOF*/
-        -:  357:/*EOF*/
-        -:  358:/*EOF*/
-        -:  359:/*EOF*/
-        -:  360:/*EOF*/
-        -:  361:/*EOF*/
-        -:  362:/*EOF*/
-        -:  363:/*EOF*/
-        -:  364:/*EOF*/
-        -:  365:/*EOF*/
-        -:  366:/*EOF*/
-        -:  367:/*EOF*/
-        -:  368:/*EOF*/
-        -:  369:/*EOF*/
-        -:  370:/*EOF*/
-        -:  371:/*EOF*/
-        -:  372:/*EOF*/
-        -:  373:/*EOF*/
-        -:  374:/*EOF*/
-        -:  375:/*EOF*/
-        -:  376:/*EOF*/
-        -:  377:/*EOF*/
-        -:  378:/*EOF*/
-        -:  379:/*EOF*/
-        -:  380:/*EOF*/
-        -:  381:/*EOF*/
-       10:  382:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_SERIALIZER_H
+        -:    9:#define OPENDDS_DCPS_SERIALIZER_H
+        -:   10:
+        -:   11:#include "ace/CDR_Base.h"
+        -:   12:#include "ace/CDR_Stream.h"
+        -:   13:#include "tao/String_Alloc.h"
+        -:   14:
+        -:   15:#include "dcps_export.h"
+        -:   16:
+        -:   17:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   18:#pragma once
+        -:   19:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   20:
+        -:   21:#include "dds/DCPS/Definitions.h"
+        -:   22:
+        -:   23:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   24:class ACE_Message_Block;
+        -:   25:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:   26:
+        -:   27:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   28:
+        -:   29:namespace OpenDDS {
+        -:   30:namespace DCPS {
+        -:   31:
+        -:   32:/**
+        -:   33: * @class Serializer
+        -:   34: *
+        -:   35: * @brief Class to serialize and deserialize data for DDS.
+        -:   36: *
+        -:   37: * This class provides a mechanism to insert and extract data to and
+        -:   38: * from an ACE_Message_Block chain that represents the data which
+        -:   39: * can be transported on the wire to other DDS service participants.
+        -:   40: */
+        -:   41:class OpenDDS_Dcps_Export Serializer {
+        -:   42:public:
+        -:   43:
+        -:   44:  enum Alignment {
+        -:   45:    ALIGN_NONE,           // no alignment needed
+        -:   46:    ALIGN_INITIALIZE,     // align to CDR rules and zero-out padding
+        -:   47:    ALIGN_CDR             // align to CDR rules with uninitialized padding
+        -:   48:#ifdef ACE_INITIALIZE_MEMORY_BEFORE_USE
+        -:   49:      = ALIGN_INITIALIZE  // if the above macro is set, always init padding
+        -:   50:#endif
+        -:   51:  };
+        -:   52:
+        -:   53:
+        -:   54:  /**
+        -:   55:   * Constructor with a message block chain.  This installs the
+        -:   56:   * message block chain and sets the current block to the first in
+        -:   57:   * the chain.  Memory management is the responsibility of the owner
+        -:   58:   * of this object, and is not performed internally.  Ownership of
+        -:   59:   * the message block chain is retained by the owner of this object
+        -:   60:   * and the lifetime of the chain must be longer than the use of
+        -:   61:   * this object.
+        -:   62:   *
+        -:   63:   * Bytes are swapped when either reading or writing from the
+        -:   64:   * message chain if the swap_bytes argument is true.  It is the
+        -:   65:   * responsibility of the owner of this object to determine whether
+        -:   66:   * this should be performed or not.
+        -:   67:   */
+        -:   68:  explicit Serializer(ACE_Message_Block* chain,
+        -:   69:                      bool swap_bytes = false,
+        -:   70:                      Alignment align = ALIGN_NONE);
+        -:   71:
+        -:   72:  virtual ~Serializer();
+        -:   73:
+        -:   74:  /// Establish byte swapping behavior.
+        -:   75:  void swap_bytes(bool do_swap);
+        -:   76:
+        -:   77:  /// Examine byte swapping behavior.
+        -:   78:  bool swap_bytes() const;
+        -:   79:
+        -:   80:  /// Examine alignment behavior.
+        -:   81:  Alignment alignment() const;
+        -:   82:
+        -:   83:  /// Reset alignment as if a new instance were created
+        -:   84:  void reset_alignment();
+        -:   85:
+        -:   86:  /// Examine the state of the stream abstraction.
+        -:   87:  bool good_bit() const;
+        -:   88:
+        -:   89:  /// Number of bytes left to read in message block chain
+        -:   90:  size_t length() const;
+        -:   91:
+        -:   92:  /// Read a narrow string.
+        -:   93:  size_t read_string(ACE_CDR::Char*& dest,
+        -:   94:    ACE_CDR::Char* str_alloc(ACE_CDR::ULong) = CORBA::string_alloc,
+        -:   95:    void str_free(ACE_CDR::Char*) = CORBA::string_free);
+        -:   96:
+        -:   97:  /// Read a wide string.
+        -:   98:  size_t read_string(ACE_CDR::WChar*& dest,
+        -:   99:    ACE_CDR::WChar* str_alloc(ACE_CDR::ULong) = CORBA::wstring_alloc,
+        -:  100:    void str_free(ACE_CDR::WChar*) = CORBA::wstring_free);
+        -:  101:
+        -:  102:  /// Skip the logical rd_ptr() over a given number of bytes = n * size.
+        -:  103:  /// If alignment is enabled, skips any padding to align to 'size' before
+        -:  104:  /// skipping the n * size bytes.
+        -:  105:  /// This is used by the RTPS protocol to allow reading messages from
+        -:  106:  /// future versions of the spec which may have additional optional fields.
+        -:  107:  bool skip(ACE_CDR::UShort n, int size = 1);
+        -:  108:
+        -:  109:  size_t available_r() const { return current_ ? current_->total_length() : 0; }
+        -:  110:
+        -:  111:  /**
+        -:  112:   * The buffer @a x must be large enough to contain @a length
+        -:  113:   * elements.
+        -:  114:   * Return @c false on failure and @c true on success.
+        -:  115:   */
+        -:  116:  //@{ @name Read basic IDL types arrays
+        -:  117:  bool read_boolean_array(ACE_CDR::Boolean* x, ACE_CDR::ULong length);
+        -:  118:  bool read_char_array(ACE_CDR::Char* x, ACE_CDR::ULong length);
+        -:  119:  bool read_wchar_array(ACE_CDR::WChar* x, ACE_CDR::ULong length);
+        -:  120:  bool read_octet_array(ACE_CDR::Octet* x, ACE_CDR::ULong length);
+        -:  121:  bool read_short_array(ACE_CDR::Short* x, ACE_CDR::ULong length);
+        -:  122:  bool read_ushort_array(ACE_CDR::UShort* x, ACE_CDR::ULong length);
+        -:  123:  bool read_long_array(ACE_CDR::Long* x, ACE_CDR::ULong length);
+        -:  124:  bool read_ulong_array(ACE_CDR::ULong* x, ACE_CDR::ULong length);
+        -:  125:  bool read_longlong_array(ACE_CDR::LongLong* x, ACE_CDR::ULong length);
+        -:  126:  bool read_ulonglong_array(ACE_CDR::ULongLong* x, ACE_CDR::ULong length);
+        -:  127:  bool read_float_array(ACE_CDR::Float* x, ACE_CDR::ULong length);
+        -:  128:  bool read_double_array(ACE_CDR::Double* x, ACE_CDR::ULong length);
+        -:  129:  bool read_longdouble_array(ACE_CDR::LongDouble* x, ACE_CDR::ULong length);
+        -:  130:  //@}
+        -:  131:
+        -:  132:  /// Note: the portion written starts at x and ends
+        -:  133:  ///    at x + length.
+        -:  134:  /// The length is *NOT* stored into the CDR stream.
+        -:  135:  //@{ @name Array write operations
+        -:  136:  bool write_boolean_array(const ACE_CDR::Boolean* x, ACE_CDR::ULong length);
+        -:  137:  bool write_char_array(const ACE_CDR::Char* x, ACE_CDR::ULong length);
+        -:  138:  bool write_wchar_array(const ACE_CDR::WChar* x, ACE_CDR::ULong length);
+        -:  139:  bool write_octet_array(const ACE_CDR::Octet* x, ACE_CDR::ULong length);
+        -:  140:  bool write_short_array(const ACE_CDR::Short* x, ACE_CDR::ULong length);
+        -:  141:  bool write_ushort_array(const ACE_CDR::UShort* x, ACE_CDR::ULong length);
+        -:  142:  bool write_long_array(const ACE_CDR::Long* x, ACE_CDR::ULong length);
+        -:  143:  bool write_ulong_array(const ACE_CDR::ULong* x, ACE_CDR::ULong length);
+        -:  144:  bool write_longlong_array(const ACE_CDR::LongLong* x, ACE_CDR::ULong length);
+        -:  145:  bool write_ulonglong_array(const ACE_CDR::ULongLong* x, ACE_CDR::ULong length);
+        -:  146:  bool write_float_array(const ACE_CDR::Float* x, ACE_CDR::ULong length);
+        -:  147:  bool write_double_array(const ACE_CDR::Double* x, ACE_CDR::ULong length);
+        -:  148:  bool write_longdouble_array(const ACE_CDR::LongDouble* x, ACE_CDR::ULong length);
+        -:  149:  //@}
+        -:  150:
+        -:  151:  // Insertion operators.
+        -:  152:  friend OpenDDS_Dcps_Export
+        -:  153:  bool operator<<(Serializer& s, ACE_CDR::Char x);
+        -:  154:  friend OpenDDS_Dcps_Export
+        -:  155:  bool operator<<(Serializer& s, ACE_CDR::Short x);
+        -:  156:  friend OpenDDS_Dcps_Export
+        -:  157:  bool operator<<(Serializer& s, ACE_CDR::UShort x);
+        -:  158:  friend OpenDDS_Dcps_Export
+        -:  159:  bool operator<<(Serializer& s, ACE_CDR::Long x);
+        -:  160:  friend OpenDDS_Dcps_Export
+        -:  161:  bool operator<<(Serializer& s, ACE_CDR::ULong x);
+        -:  162:  friend OpenDDS_Dcps_Export
+        -:  163:  bool operator<<(Serializer& s, ACE_CDR::LongLong x);
+        -:  164:  friend OpenDDS_Dcps_Export
+        -:  165:  bool operator<<(Serializer& s, ACE_CDR::ULongLong x);
+        -:  166:  friend OpenDDS_Dcps_Export
+        -:  167:  bool operator<<(Serializer& s, ACE_CDR::LongDouble x);
+        -:  168:  friend OpenDDS_Dcps_Export
+        -:  169:  bool operator<<(Serializer& s, ACE_CDR::Float x);
+        -:  170:  friend OpenDDS_Dcps_Export
+        -:  171:  bool operator<<(Serializer& s, ACE_CDR::Double x);
+        -:  172:  friend OpenDDS_Dcps_Export
+        -:  173:  bool operator<<(Serializer& s, const ACE_CDR::Char* x);
+        -:  174:  friend OpenDDS_Dcps_Export
+        -:  175:  bool operator<<(Serializer& s, const ACE_CDR::WChar* x);
+        -:  176:
+        -:  177:#ifdef NONNATIVE_LONGDOUBLE
+        -:  178:  friend OpenDDS_Dcps_Export
+        -:  179:  bool operator<<(Serializer& s, long double x);
+        -:  180:#endif
+        -:  181:
+        -:  182:  // Using the ACE CDR Stream disambiguators.
+        -:  183:  friend OpenDDS_Dcps_Export
+        -:  184:  bool operator<<(Serializer& s, ACE_OutputCDR::from_boolean x);
+        -:  185:  friend OpenDDS_Dcps_Export
+        -:  186:  bool operator<<(Serializer& s, ACE_OutputCDR::from_char x);
+        -:  187:  friend OpenDDS_Dcps_Export
+        -:  188:  bool operator<<(Serializer& s, ACE_OutputCDR::from_wchar x);
+        -:  189:  friend OpenDDS_Dcps_Export
+        -:  190:  bool operator<<(Serializer& s, ACE_OutputCDR::from_octet x);
+        -:  191:  friend OpenDDS_Dcps_Export
+        -:  192:  bool operator<<(Serializer& s, ACE_OutputCDR::from_string x);
+        -:  193:  friend OpenDDS_Dcps_Export
+        -:  194:  bool operator<<(Serializer& s, ACE_OutputCDR::from_wstring x);
+        -:  195:
+        -:  196:#ifndef OPENDDS_SAFETY_PROFILE
+        -:  197:  friend OpenDDS_Dcps_Export
+        -:  198:  bool operator<<(Serializer& s, const std::string& x);
+        -:  199:
+        -:  200:  template <typename CharT>
+        -:  201:  struct FromBoundedString {
+        -:  202:    FromBoundedString(const std::basic_string<CharT>& str, ACE_CDR::ULong bound)
+        -:  203:      : str_(str), bound_(bound) {}
+        -:  204:    const std::basic_string<CharT>& str_;
+        -:  205:    ACE_CDR::ULong bound_;
+        -:  206:  };
+        -:  207:
+        -:  208:  friend OpenDDS_Dcps_Export
+        -:  209:  bool operator<<(Serializer& s, FromBoundedString<char> x);
+        -:  210:
+        -:  211:#ifdef DDS_HAS_WCHAR
+        -:  212:  friend OpenDDS_Dcps_Export
+        -:  213:  bool operator<<(Serializer& s, const std::wstring& x);
+        -:  214:
+        -:  215:  friend OpenDDS_Dcps_Export
+        -:  216:  bool operator<<(Serializer& s, FromBoundedString<wchar_t> x);
+        -:  217:#endif /* DDS_HAS_WCHAR */
+        -:  218:#endif /* !OPENDDS_SAFETYP_PROFILE */
+        -:  219:
+        -:  220:  // Extraction operators.
+        -:  221:  friend OpenDDS_Dcps_Export
+        -:  222:  bool operator>>(Serializer& s, ACE_CDR::Char& x);
+        -:  223:  friend OpenDDS_Dcps_Export
+        -:  224:  bool operator>>(Serializer& s, ACE_CDR::Short& x);
+        -:  225:  friend OpenDDS_Dcps_Export
+        -:  226:  bool operator>>(Serializer& s, ACE_CDR::UShort& x);
+        -:  227:  friend OpenDDS_Dcps_Export
+        -:  228:  bool operator>>(Serializer& s, ACE_CDR::Long& x);
+        -:  229:  friend OpenDDS_Dcps_Export
+        -:  230:  bool operator>>(Serializer& s, ACE_CDR::ULong& x);
+        -:  231:  friend OpenDDS_Dcps_Export
+        -:  232:  bool operator>>(Serializer& s, ACE_CDR::LongLong& x);
+        -:  233:  friend OpenDDS_Dcps_Export
+        -:  234:  bool operator>>(Serializer& s, ACE_CDR::ULongLong& x);
+        -:  235:  friend OpenDDS_Dcps_Export
+        -:  236:  bool operator>>(Serializer& s, ACE_CDR::LongDouble& x);
+        -:  237:  friend OpenDDS_Dcps_Export
+        -:  238:  bool operator>>(Serializer& s, ACE_CDR::Float& x);
+        -:  239:  friend OpenDDS_Dcps_Export
+        -:  240:  bool operator>>(Serializer& s, ACE_CDR::Double& x);
+        -:  241:  friend OpenDDS_Dcps_Export
+        -:  242:  bool operator>>(Serializer& s, ACE_CDR::Char*& x);
+        -:  243:  friend OpenDDS_Dcps_Export
+        -:  244:  bool operator>>(Serializer& s, ACE_CDR::WChar*& x);
+        -:  245:
+        -:  246:#ifdef NONNATIVE_LONGDOUBLE
+        -:  247:  friend OpenDDS_Dcps_Export
+        -:  248:  bool operator>>(Serializer& s, long double& x);
+        -:  249:#endif
+        -:  250:
+        -:  251:  // Using the ACE CDR Stream disambiguators.
+        -:  252:  friend OpenDDS_Dcps_Export
+        -:  253:  bool operator>>(Serializer& s, ACE_InputCDR::to_boolean x);
+        -:  254:  friend OpenDDS_Dcps_Export
+        -:  255:  bool operator>>(Serializer& s, ACE_InputCDR::to_char x);
+        -:  256:  friend OpenDDS_Dcps_Export
+        -:  257:  bool operator>>(Serializer& s, ACE_InputCDR::to_wchar x);
+        -:  258:  friend OpenDDS_Dcps_Export
+        -:  259:  bool operator>>(Serializer& s, ACE_InputCDR::to_octet x);
+        -:  260:  friend OpenDDS_Dcps_Export
+        -:  261:  bool operator>>(Serializer& s, ACE_InputCDR::to_string x);
+        -:  262:  friend OpenDDS_Dcps_Export
+        -:  263:  bool operator>>(Serializer& s, ACE_InputCDR::to_wstring x);
+        -:  264:
+        -:  265:#ifndef OPENDDS_SAFETY_PROFILE
+        -:  266:  friend OpenDDS_Dcps_Export
+        -:  267:  bool operator>>(Serializer& s, std::string& x);
+        -:  268:
+        -:  269:  template <typename CharT>
+        -:  270:  struct ToBoundedString {
+        -:  271:    ToBoundedString(std::basic_string<CharT>& str, ACE_CDR::ULong bound)
+        -:  272:      : str_(str), bound_(bound) {}
+        -:  273:    std::basic_string<CharT>& str_;
+        -:  274:    ACE_CDR::ULong bound_;
+        -:  275:  };
+        -:  276:
+        -:  277:  friend OpenDDS_Dcps_Export
+        -:  278:  bool operator>>(Serializer& s, ToBoundedString<char> x);
+        -:  279:
+        -:  280:#ifdef DDS_HAS_WCHAR
+        -:  281:  friend OpenDDS_Dcps_Export
+        -:  282:  bool operator>>(Serializer& s, std::wstring& x);
+        -:  283:
+        -:  284:  friend OpenDDS_Dcps_Export
+        -:  285:  bool operator>>(Serializer& s, ToBoundedString<wchar_t> x);
+        -:  286:#endif /* DDS_HAS_WCHAR */
+        -:  287:#endif /* !OPENDDS_SAFETY_PROFILE */
+        -:  288:
+        -:  289:  /// Read from the chain into a destination buffer.
+        -:  290:  // This method doesn't respect alignment, so use with care.
+        -:  291:  // Any of the other public methods (which know the type) are preferred.
+        -:  292:  void buffer_read(char* dest, size_t size, bool swap);
+        -:  293:
+        -:  294:  /// Align for reading: moves current_->rd_ptr() past the alignment padding.
+        -:  295:  /// Alignments of 2, 4, or 8 are supported by CDR and this implementation.
+        -:  296:  int align_r(size_t alignment);
+        -:  297:
+        -:  298:  /// Align for writing: moves current_->wr_ptr() past the padding, possibly
+        -:  299:  /// zero-filling the pad bytes (based on the alignment_ setting).
+        -:  300:  /// Alignments of 2, 4, or 8 are supported by CDR and this implementation.
+        -:  301:  int align_w(size_t alignment);
+        -:  302:
+        -:  303:private:
+        -:  304:  /// Read an array of values from the chain.
+        -:  305:  /// NOTE: This assumes that the buffer contains elements that are
+        -:  306:  ///       properly aligned.  The buffer must have padding if the
+        -:  307:  ///       elements are not naturally aligned; or this routine should
+        -:  308:  ///       not be used.
+        -:  309:  void read_array(char* x, size_t size, ACE_CDR::ULong length);
+        -:  310:  void read_array(char* x, size_t size, ACE_CDR::ULong length, bool swap);
+        -:  311:
+        -:  312:  /// Write to the chain from a source buffer.
+        -:  313:  void buffer_write(const char* src, size_t size, bool swap);
+        -:  314:
+        -:  315:  /// Write an array of values to the chain.
+        -:  316:  /// NOTE: This assumes that there is _no_ padding between the array
+        -:  317:  ///       elements.  If this is not the case, do not use this
+        -:  318:  ///       method.  If padding exists in the array, it will be
+        -:  319:  ///       written when _not_ swapping, and will _not_ be written
+        -:  320:  ///       when swapping, resulting in corrupted data.
+        -:  321:  void write_array(const char* x, size_t size, ACE_CDR::ULong length);
+        -:  322:  void write_array(const char* x, size_t size, ACE_CDR::ULong length, bool swap);
+        -:  323:
+        -:  324:  /// Efficient straight copy for quad words and shorter.  This is
+        -:  325:  /// an instance method to match the swapcpy semantics.
+        -:  326:  void smemcpy(char* to, const char* from, size_t n);
+        -:  327:
+        -:  328:  /// Efficient swapping copy for quad words and shorter.  This is an
+        -:  329:  /// instance method to allow clearing the good_bit_ on error.
+        -:  330:  void swapcpy(char* to, const char* from, size_t n);
+        -:  331:
+        -:  332:  /// Implementation of the actual read from the chain.
+        -:  333:  size_t doread(char* dest, size_t size, bool swap, size_t offset);
+        -:  334:
+        -:  335:  /// Implementation of the actual write to the chain.
+        -:  336:  size_t dowrite(const char* dest, size_t size, bool swap, size_t offset);
+        -:  337:
+        -:  338:  /// Update alignment state when a cont() chain is followed during a read.
+        -:  339:  void align_cont_r();
+        -:  340:
+        -:  341:  /// Update alignment state when a cont() chain is followed during a write.
+        -:  342:  void align_cont_w();
+        -:  343:
+        -:  344:  /// Currently active message block in chain.
+        -:  345:  ACE_Message_Block* current_;
+        -:  346:
+        -:  347:  /// Indicates whether bytes will be swapped for this stream.
+        -:  348:  bool swap_bytes_;
+        -:  349:
+        -:  350:  /// Indicates the current state of the stream abstraction.
+        -:  351:  bool good_bit_;
+        -:  352:
+        -:  353:  /// Current alignment mode, see Alignment enum above.
+        -:  354:  Alignment alignment_;
+        -:  355:
+        -:  356:  /// Number of bytes off of max alignment (8) that the current_ block's
+        -:  357:  /// rd_ptr() started at.
+        -:  358:  unsigned char align_rshift_;
+        -:  359:
+        -:  360:  /// Number of bytes off of max alignment (8) that the current_ block's
+        -:  361:  /// wr_ptr() started at.
+        -:  362:  unsigned char align_wshift_;
+        -:  363:
+        -:  364:  static const size_t MAX_ALIGN = 8;
+        -:  365:  static const char ALIGN_PAD[MAX_ALIGN];
+        -:  366:  static bool use_rti_serialization_;
+        -:  367:
+        -:  368:public:
+        -:  369:  static const size_t WCHAR_SIZE = 2; // Serialize wchar as UTF-16BE
+        -:  370:
+        -:  371:  static bool use_rti_serialization();
+        -:  372:  static void set_use_rti_serialization(bool should_use);
+        -:  373:
+        -:  374:#if defined ACE_LITTLE_ENDIAN
+        -:  375:  static const bool SWAP_BE = true;
+        -:  376:#else
+        -:  377:  static const bool SWAP_BE = false;
+        -:  378:#endif
+        -:  379:};
+        -:  380:
+        -:  381:template<typename T> struct KeyOnly {
+       30:  382:  explicit KeyOnly(T& mess) : t(mess) { }
+        -:  383:  T& t;
+        -:  384:};
+        -:  385:
+        -:  386:namespace IDL {
+        -:  387:  // Although similar to C++11 reference_wrapper, this template has the
+        -:  388:  // additional Tag parameter to allow the IDL compiler to generate distinct
+        -:  389:  // overloads for sequence/array typedefs that map to the same C++ types.
+        -:  390:  template <typename T, typename /*Tag*/>
+        -:  391:  struct DistinctType {
+        -:  392:    typedef T value_type;
+        -:  393:    T* val_;
+        -:  394:    DistinctType(T& val) : val_(&val) {}
+        -:  395:    operator T&() const { return *val_; }
+        -:  396:  };
+        -:  397:}
+        -:  398:
+        -:  399:} // namespace DCPS
+        -:  400:} // namespace OpenDDS
+        -:  401:
+        -:  402:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  403:
+        -:  404:#if defined (__ACE_INLINE__)
+        -:  405:# include "Serializer.inl"
+        -:  406:#else  /* __ACE_INLINE__ */
+        -:  407:
+        -:  408:#include <ace/CDR_Stream.h>
+        -:  409:
+        -:  410:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  411:
+        -:  412:namespace OpenDDS {
+        -:  413:namespace DCPS {
+        -:  414:
+        -:  415:// predefined type gen_max_marshaled_size methods
+        -:  416:OpenDDS_Dcps_Export
+        -:  417:size_t gen_max_marshaled_size(const ACE_CDR::Short& x);
+        -:  418:OpenDDS_Dcps_Export
+        -:  419:size_t gen_max_marshaled_size(const ACE_CDR::UShort& x);
+        -:  420:OpenDDS_Dcps_Export
+        -:  421:size_t gen_max_marshaled_size(const ACE_CDR::Long& x);
+        -:  422:OpenDDS_Dcps_Export
+        -:  423:size_t gen_max_marshaled_size(const ACE_CDR::ULong& x);
+        -:  424:OpenDDS_Dcps_Export
+        -:  425:size_t gen_max_marshaled_size(const ACE_CDR::LongLong& x);
+        -:  426:OpenDDS_Dcps_Export
+        -:  427:size_t gen_max_marshaled_size(const ACE_CDR::ULongLong& x);
+        -:  428:OpenDDS_Dcps_Export
+        -:  429:size_t gen_max_marshaled_size(const ACE_CDR::LongDouble& x);
+        -:  430:OpenDDS_Dcps_Export
+        -:  431:size_t gen_max_marshaled_size(const ACE_CDR::Float& x);
+        -:  432:OpenDDS_Dcps_Export
+        -:  433:size_t gen_max_marshaled_size(const ACE_CDR::Double& x);
+        -:  434:
+        -:  435:// predefined type gen_max_marshaled_size method disambiguators.
+        -:  436:OpenDDS_Dcps_Export
+        -:  437:size_t gen_max_marshaled_size(const ACE_OutputCDR::from_boolean x);
+        -:  438:OpenDDS_Dcps_Export
+        -:  439:size_t gen_max_marshaled_size(const ACE_OutputCDR::from_char x);
+        -:  440:OpenDDS_Dcps_Export
+        -:  441:size_t gen_max_marshaled_size(const ACE_OutputCDR::from_wchar x);
+        -:  442:OpenDDS_Dcps_Export
+        -:  443:size_t gen_max_marshaled_size(const ACE_OutputCDR::from_octet x);
+        -:  444:
+        -:  445:/// predefined type max_marshaled_size method explicit disambiguators.
+        -:  446:OpenDDS_Dcps_Export
+        -:  447:size_t max_marshaled_size_boolean();
+        -:  448:OpenDDS_Dcps_Export
+        -:  449:size_t max_marshaled_size_char();
+        -:  450:OpenDDS_Dcps_Export
+        -:  451:size_t max_marshaled_size_wchar();
+        -:  452:OpenDDS_Dcps_Export
+        -:  453:size_t max_marshaled_size_octet();
+        -:  454:
+        -:  455:/// lengths of strings and sequences are ulong
+        -:  456:OpenDDS_Dcps_Export
+        -:  457:size_t max_marshaled_size_ulong();
+        -:  458:OpenDDS_Dcps_Export
+        -:  459:void find_size_ulong(size_t& size, size_t& padding);
+        -:  460:
+        -:  461:} // namespace DCPS
+        -:  462:} // namespace OpenDDS
+        -:  463:
+        -:  464:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  465:
+        -:  466:
+        -:  467:#endif  /* __ACE_INLINE__ */
+        -:  468:
+        -:  469:#endif /* OPENDDS_DCPS_SERIALIZER_H */

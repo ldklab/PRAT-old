@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Traits_Base_T.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:#ifndef guard_string_traits_base_hpp
         -:    2:#define guard_string_traits_base_hpp
         -:    3:/**
@@ -47,20 +47,20 @@
         -:   45:  typedef ACE_InputCDR::to_string to_type;
         -:   46:  typedef ACE_OutputCDR::from_string from_type;
         -:   47:
-    #####:   48:  inline static char_type * default_initializer()
+      816:   48:  inline static char_type * default_initializer()
         -:   49:  {
-    #####:   50:    return CORBA::string_dup("");
+      816:   50:    return CORBA::string_dup("");
         -:   51:  }
         -:   52:
-    #####:   53:  inline static char_type * duplicate(char_type const * s)
+      480:   53:  inline static char_type * duplicate(char_type const * s)
         -:   54:  {
-    #####:   55:    return CORBA::string_dup(s);
+      480:   55:    return CORBA::string_dup(s);
         -:   56:  }
         -:   57:
-    #####:   58:  inline static void release(char_type * s)
+     1533:   58:  inline static void release(char_type * s)
         -:   59:  {
-    #####:   60:    CORBA::string_free(s);
-    #####:   61:  }
+     1533:   60:    CORBA::string_free(s);
+     1533:   61:  }
         -:   62:
         -:   63:  inline static char_type * allocate (CORBA::ULong len)
         -:   64:  {

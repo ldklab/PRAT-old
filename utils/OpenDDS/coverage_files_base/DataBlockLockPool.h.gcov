@@ -1,45 +1,57 @@
         -:    0:Source:../dds/DCPS/DataBlockLockPool.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        5:   32:/*EOF*/
-        5:   33:/*EOF*/
-        -:   34:/*EOF*/
-        5:   35:/*EOF*/
-        -:   36:/*EOF*/
-        5:   37:/*EOF*/
-        -:   38:/*EOF*/
-        5:   39:/*EOF*/
-        -:   40:/*EOF*/
-    #####:   41:/*EOF*/
-    #####:   42:/*EOF*/
-    #####:   43:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef DATABLOCKLOCKPOOL_H
+        -:    9:#define DATABLOCKLOCKPOOL_H
+        -:   10:
+        -:   11:#include "ace/Lock_Adapter_T.h"
+        -:   12:#include "ace/Thread_Mutex.h"
+        -:   13:#include "ace/Containers_T.h"
+        -:   14:#include "dcps_export.h"
+        -:   15:#include "dds/DCPS/PoolAllocationBase.h"
+        -:   16:
+        -:   17:/**
+        -:   18: * @class DataBlockLockPool
+        -:   19: *
+        -:   20: * @brief Holds and distributes locks to be used for locking
+        -:   21: * ACE_Data_Blocks.  Currently it does not require returning the
+        -:   22: * locks.
+        -:   23: *
+        -:   24: * @NOTE: The lock returned is not guaranteed to be unique.
+        -:   25: *
+        -:   26: * @NOTE: This class is thread safe.
+        -:   27: */
+        -:   28:class OpenDDS_Dcps_Export DataBlockLockPool : public OpenDDS::DCPS::PoolAllocationBase {
+        -:   29:public:
+        -:   30:  typedef ACE_Lock_Adapter<ACE_Thread_Mutex> DataBlockLock;
+        -:   31:
+        -:   32:  DataBlockLockPool(unsigned long size)
+        -:   33:    : pool_(size),
+        -:   34:      size_(size),
+        -:   35:      iterator_(0)
+        -:   36:  {
+        -:   37:  }
+        -:   38:
+        -:   39:  ~DataBlockLockPool() { }
+        -:   40:
+      132:   41:  DataBlockLock * get_lock() {
+      132:   42:    unsigned long index = iterator_++ % size_;
+      132:   43:    return &(pool_[index]);
+        -:   44:  }
+        -:   45:
+        -:   46:private:
+        -:   47:  typedef ACE_Array<DataBlockLock> Pool;
+        -:   48:
+        -:   49:  Pool   pool_;
+        -:   50:  const unsigned long size_;
+        -:   51:  /// Counter used to track which lock to give out next (modulus size_)
+        -:   52:  ACE_Atomic_Op<ACE_Thread_Mutex, unsigned long> iterator_;
+        -:   53:};
+        -:   54:
+        -:   55:#endif /* DATABLOCKLOCKPOOL_H  */

@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/CDR.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: CDR.inl 2179 2013-05-28 22:16:51Z mesnierp $
@@ -272,9 +272,9 @@
     #####:  270:}
         -:  271:
         -:  272:ACE_INLINE TAO_ORB_Core*
-        -:  273:TAO_InputCDR::orb_core (void) const
+      480:  273:TAO_InputCDR::orb_core (void) const
         -:  274:{
-        -:  275:  return this->orb_core_;
+      480:  275:  return this->orb_core_;
         -:  276:}
         -:  277:
         -:  278:
@@ -369,31 +369,31 @@
         -:  367:    && static_cast<ACE_OutputCDR &> (os) << x;
         -:  368:}
         -:  369:
-        -:  370:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
+     1206:  370:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
         -:  371:                                      CORBA::Long x)
         -:  372:{
         -:  373:  return
-        -:  374:    os.fragment_stream (ACE_CDR::LONG_ALIGN,
+     1206:  374:    os.fragment_stream (ACE_CDR::LONG_ALIGN,
         -:  375:                        sizeof (CORBA::Long))
-        -:  376:    && static_cast<ACE_OutputCDR &> (os) << x;
+     1206:  376:    && static_cast<ACE_OutputCDR &> (os) << x;
         -:  377:}
         -:  378:
-        -:  379:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
+     1653:  379:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
         -:  380:                                      CORBA::ULong x)
         -:  381:{
         -:  382:  return
-        -:  383:    os.fragment_stream (ACE_CDR::LONG_ALIGN,
+     1653:  383:    os.fragment_stream (ACE_CDR::LONG_ALIGN,
         -:  384:                        sizeof (CORBA::ULong))
-        -:  385:    && static_cast<ACE_OutputCDR &> (os) << x;
+     1653:  385:    && static_cast<ACE_OutputCDR &> (os) << x;
         -:  386:}
         -:  387:
-        -:  388:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
+    #####:  388:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
         -:  389:                                      CORBA::LongLong x)
         -:  390:{
         -:  391:  return
-        -:  392:    os.fragment_stream (ACE_CDR::LONGLONG_ALIGN,
+    #####:  392:    os.fragment_stream (ACE_CDR::LONGLONG_ALIGN,
         -:  393:                        sizeof (CORBA::LongLong))
-        -:  394:    && static_cast<ACE_OutputCDR &> (os) << x;
+    #####:  394:    && static_cast<ACE_OutputCDR &> (os) << x;
         -:  395:}
         -:  396:
         -:  397:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
@@ -423,22 +423,22 @@
         -:  421:    && static_cast<ACE_OutputCDR &> (os) << x;
         -:  422:}
         -:  423:
-        -:  424:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
+    #####:  424:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
         -:  425:                                      CORBA::Double x)
         -:  426:{
         -:  427:  return
-        -:  428:    os.fragment_stream (ACE_CDR::LONGLONG_ALIGN,
+    #####:  428:    os.fragment_stream (ACE_CDR::LONGLONG_ALIGN,
         -:  429:                        sizeof (CORBA::Double))
-        -:  430:    && static_cast<ACE_OutputCDR &> (os) << x;
+    #####:  430:    && static_cast<ACE_OutputCDR &> (os) << x;
         -:  431:}
         -:  432:
-        -:  433:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
+       90:  433:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
         -:  434:                                      const char * x)
         -:  435:{
         -:  436:  return
-        -:  437:    os.fragment_stream (ACE_CDR::OCTET_ALIGN,
+       90:  437:    os.fragment_stream (ACE_CDR::OCTET_ALIGN,
         -:  438:                        sizeof (char))
-        -:  439:    && static_cast<ACE_OutputCDR &> (os) << x;
+       90:  439:    && static_cast<ACE_OutputCDR &> (os) << x;
         -:  440:}
         -:  441:
         -:  442:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
@@ -452,15 +452,15 @@
         -:  450:    && static_cast<ACE_OutputCDR &> (os) << x;
         -:  451:}
         -:  452:
-        -:  453:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
+    #####:  453:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
         -:  454:                                      ACE_OutputCDR::from_string x)
         -:  455:{
-        -:  456:  if (x.bound_ != 0 && x.val_ != 0 &&
-        -:  457:      ACE_OS::strlen (x.val_) > x.bound_)
+    #####:  456:  if (x.bound_ != 0 && x.val_ != 0 &&
+    #####:  457:      ACE_OS::strlen (x.val_) > x.bound_)
         -:  458:    {
-        -:  459:      throw ::CORBA::BAD_PARAM ();
+    #####:  459:      throw ::CORBA::BAD_PARAM ();
         -:  460:    }
-        -:  461:  return os << x.val_;
+    #####:  461:  return os << x.val_;
         -:  462:}
         -:  463:
         -:  464:ACE_INLINE CORBA::Boolean operator<< (TAO_OutputCDR &os,
@@ -502,22 +502,22 @@
         -:  500:  return static_cast<ACE_InputCDR &> (is) >> x;
         -:  501:}
         -:  502:
-        -:  503:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
+     1425:  503:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
         -:  504:                                      CORBA::Long &x)
         -:  505:{
-        -:  506:  return static_cast<ACE_InputCDR&> (is) >> x;
+     1425:  506:  return static_cast<ACE_InputCDR&> (is) >> x;
         -:  507:}
         -:  508:
-        -:  509:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
+     1899:  509:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
         -:  510:                                      CORBA::ULong &x)
         -:  511:{
-        -:  512:  return static_cast<ACE_InputCDR &> (is) >> x;
+     1899:  512:  return static_cast<ACE_InputCDR &> (is) >> x;
         -:  513:}
         -:  514:
-        -:  515:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
+    #####:  515:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
         -:  516:                                      CORBA::LongLong &x)
         -:  517:{
-        -:  518:  return static_cast<ACE_InputCDR &> (is) >> x;
+    #####:  518:  return static_cast<ACE_InputCDR &> (is) >> x;
         -:  519:}
         -:  520:
         -:  521:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
@@ -538,16 +538,16 @@
         -:  536:  return static_cast<ACE_InputCDR &> (is) >> x;
         -:  537:}
         -:  538:
-        -:  539:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
+    #####:  539:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
         -:  540:                                      CORBA::Double &x)
         -:  541:{
-        -:  542:  return static_cast<ACE_InputCDR &> (is) >> x;
+    #####:  542:  return static_cast<ACE_InputCDR &> (is) >> x;
         -:  543:}
         -:  544:
-        -:  545:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
+       72:  545:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
         -:  546:                                      CORBA::Char* &x)
         -:  547:{
-        -:  548:  return static_cast<ACE_InputCDR &> (is) >> x;
+       72:  548:  return static_cast<ACE_InputCDR &> (is) >> x;
         -:  549:}
         -:  550:
         -:  551:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
@@ -556,17 +556,17 @@
         -:  554:  return static_cast<ACE_InputCDR &> (is) >> x;
         -:  555:}
         -:  556:
-        -:  557:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
+    #####:  557:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,
         -:  558:                                      ACE_InputCDR::to_string x)
         -:  559:{
         -:  560:  CORBA::Boolean const marshal_flag =
-        -:  561:    is >> const_cast<ACE_CDR::Char *&> (x.val_);
-        -:  562:  if (marshal_flag && x.bound_ != 0 && x.val_ != 0 &&
-        -:  563:      ACE_OS::strlen (x.val_) > x.bound_)
+    #####:  561:    is >> const_cast<ACE_CDR::Char *&> (x.val_);
+    #####:  562:  if (marshal_flag && x.bound_ != 0 && x.val_ != 0 &&
+    #####:  563:      ACE_OS::strlen (x.val_) > x.bound_)
         -:  564:    {
-        -:  565:      throw ::CORBA::BAD_PARAM ();
+    #####:  565:      throw ::CORBA::BAD_PARAM ();
         -:  566:    }
-        -:  567:  return marshal_flag;
+    #####:  567:  return marshal_flag;
         -:  568:}
         -:  569:
         -:  570:ACE_INLINE CORBA::Boolean operator>> (TAO_InputCDR &is,

@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Array_VarOut_T.inl
-        -:    0:Programs:24
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3://$Id: Array_VarOut_T.inl 14 2007-02-01 15:49:12Z mitza $
@@ -252,13 +252,13 @@
         -:  250:
         -:  251:template<typename T, typename T_slice, typename TAG>
         -:  252:ACE_INLINE
-      502:  253:TAO_Array_Forany_T<T,T_slice,TAG>::TAO_Array_Forany_T (
+     1506:  253:TAO_Array_Forany_T<T,T_slice,TAG>::TAO_Array_Forany_T (
         -:  254:    T_slice * p,
         -:  255:    CORBA::Boolean nocopy
         -:  256:  )
         -:  257:  : ptr_ (p),
-      502:  258:    nocopy_ (nocopy)
-      502:  259:{}
+     1506:  258:    nocopy_ (nocopy)
+     1506:  259:{}
         -:  260:
         -:  261:template<typename T, typename T_slice, typename TAG>
         -:  262:ACE_INLINE
@@ -272,9 +272,9 @@
         -:  270:
         -:  271:template<typename T, typename T_slice, typename TAG>
         -:  272:ACE_INLINE
-      502:  273:TAO_Array_Forany_T<T,T_slice,TAG>::~TAO_Array_Forany_T (void)
+     1506:  273:TAO_Array_Forany_T<T,T_slice,TAG>::~TAO_Array_Forany_T (void)
         -:  274:{
-      502:  275:}
+     1506:  275:}
         -:  276:
         -:  277:template<typename T, typename T_slice, typename TAG>
         -:  278:ACE_INLINE
@@ -331,9 +331,9 @@
         -:  329:template<typename T, typename T_slice, typename TAG>
         -:  330:ACE_INLINE
         -:  331:const T_slice *
-      282:  332:TAO_Array_Forany_T<T,T_slice,TAG>::in (void) const
+      846:  332:TAO_Array_Forany_T<T,T_slice,TAG>::in (void) const
         -:  333:{
-      282:  334:  return this->ptr_;
+      846:  334:  return this->ptr_;
         -:  335:}
         -:  336:
         -:  337:template<typename T, typename T_slice, typename TAG>
@@ -347,9 +347,9 @@
         -:  345:template<typename T, typename T_slice, typename TAG>
         -:  346:ACE_INLINE
         -:  347:T_slice *&
-      192:  348:TAO_Array_Forany_T<T,T_slice,TAG>::out (void)
+      576:  348:TAO_Array_Forany_T<T,T_slice,TAG>::out (void)
         -:  349:{
-      192:  350:  return this->ptr_;
+      576:  350:  return this->ptr_;
         -:  351:}
         -:  352:
         -:  353:template<typename T, typename T_slice, typename TAG>

@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Atomic_Op.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2:// $Id: Atomic_Op.inl 2179 2013-05-28 22:16:51Z mesnierp $
         -:    3:
@@ -482,10 +482,10 @@
         -:  480:}
         -:  481:
         -:  482:ACE_INLINE
-    #####:  483:ACE_Atomic_Op<ACE_Thread_Mutex, long>::ACE_Atomic_Op (long c) :
-    #####:  484:  ACE_Atomic_Op_GCC<long>(c)
+     2568:  483:ACE_Atomic_Op<ACE_Thread_Mutex, long>::ACE_Atomic_Op (long c) :
+     2568:  484:  ACE_Atomic_Op_GCC<long>(c)
         -:  485:{
-    #####:  486:}
+     2568:  486:}
         -:  487:
         -:  488:ACE_INLINE
         -:  489:ACE_Atomic_Op<ACE_Thread_Mutex, long>::ACE_Atomic_Op (const ACE_Atomic_Op<ACE_Thread_Mutex, long> &c) :
@@ -508,10 +508,10 @@
         -:  506:}
         -:  507:
         -:  508:ACE_INLINE
-    #####:  509:ACE_Atomic_Op<ACE_Thread_Mutex, unsigned long>::ACE_Atomic_Op (unsigned long c) :
-    #####:  510:  ACE_Atomic_Op_GCC<unsigned long>(c)
+     2619:  509:ACE_Atomic_Op<ACE_Thread_Mutex, unsigned long>::ACE_Atomic_Op (unsigned long c) :
+     2619:  510:  ACE_Atomic_Op_GCC<unsigned long>(c)
         -:  511:{
-    #####:  512:}
+     2619:  512:}
         -:  513:
         -:  514:ACE_INLINE
         -:  515:ACE_Atomic_Op<ACE_Thread_Mutex, unsigned long>::ACE_Atomic_Op (const ACE_Atomic_Op<ACE_Thread_Mutex, unsigned long> &c) :

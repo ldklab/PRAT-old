@@ -1,111 +1,126 @@
         -:    0:Source:../dds/DCPS/RakeResults_T.h
-        -:    0:Programs:24
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-    #####:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-    #####:   70:/*EOF*/
-        -:   71:/*EOF*/
-    #####:   72:/*EOF*/
-    #####:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-    #####:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-    #####:   79:/*EOF*/
-    #####:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-    #####:   83:/*EOF*/
-    #####:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-        -:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-        -:   98:/*EOF*/
-        -:   99:/*EOF*/
-        -:  100:/*EOF*/
-    #####:  101:/*EOF*/
-        -:  102:/*EOF*/
-        -:  103:/*EOF*/
-        -:  104:/*EOF*/
-        -:  105:/*EOF*/
-        -:  106:/*EOF*/
-    #####:  107:/*EOF*/
-        -:  108:/*EOF*/
-    #####:  109:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef RAKERESULTS_H
+        -:    9:#define RAKERESULTS_H
+        -:   10:
+        -:   11:#include /**/ "ace/pre.h"
+        -:   12:
+        -:   13:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   14:# pragma once
+        -:   15:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   16:
+        -:   17:#include "dds/DdsDcpsSubscriptionC.h"
+        -:   18:#include "RakeData.h"
+        -:   19:#include "Comparator_T.h"
+        -:   20:#include "PoolAllocator.h"
+        -:   21:
+        -:   22:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   23:
+        -:   24:namespace OpenDDS {
+        -:   25:namespace DCPS {
+        -:   26:
+        -:   27:enum Operation_t { DDS_OPERATION_READ, DDS_OPERATION_TAKE };
+        -:   28:
+        -:   29:/// Rake is an abbreviation for "read or take".  This class manages the
+        -:   30:/// results from a read() or take() operation, which are the received_data
+        -:   31:/// and the info_seq sequences passed in by-reference from the user.
+        -:   32:template <class SampleSeq>
+    #####:   33:class RakeResults {
+        -:   34:public:
+        -:   35:  RakeResults(DataReaderImpl* reader,
+        -:   36:              SampleSeq& received_data,
+        -:   37:              DDS::SampleInfoSeq& info_seq,
+        -:   38:              CORBA::Long max_samples,
+        -:   39:              DDS::PresentationQosPolicy presentation,
+        -:   40:#ifndef OPENDDS_NO_QUERY_CONDITION
+        -:   41:              DDS::QueryCondition_ptr cond,
+        -:   42:#endif
+        -:   43:              Operation_t oper);
+        -:   44:
+        -:   45:  /// Returns false if the sample will definitely not be part of the
+        -:   46:  /// resulting dataset, however if this returns true it still may be
+        -:   47:  /// excluded (due to sorting and max_samples).
+        -:   48:  bool insert_sample(ReceivedDataElement* sample, SubscriptionInstance_rch i,
+        -:   49:                     size_t index_in_instance);
+        -:   50:
+        -:   51:  bool copy_to_user();
+        -:   52:
+        -:   53:private:
+        -:   54:  template <class FwdIter>
+        -:   55:  bool copy_into(FwdIter begin, FwdIter end,
+        -:   56:                 typename SampleSeq::PrivateMemberAccess& received_data_p);
+        -:   57:
+        -:   58:  RakeResults(const RakeResults&); // no copy construction
+        -:   59:  RakeResults& operator=(const RakeResults&); // no assignment
+        -:   60:
+        -:   61:  DataReaderImpl* reader_;
+        -:   62:  SampleSeq& received_data_;
+        -:   63:  DDS::SampleInfoSeq& info_seq_;
+        -:   64:  CORBA::ULong max_samples_;
+        -:   65:#ifndef OPENDDS_NO_QUERY_CONDITION
+        -:   66:  DDS::QueryCondition_ptr cond_;
+        -:   67:#endif
+        -:   68:  Operation_t oper_;
+        -:   69:
+    #####:   70:  class SortedSetCmp {
+        -:   71:  public:
+    #####:   72:    bool operator()(const RakeData& lhs, const RakeData& rhs) const {
+    #####:   73:      if (!cmp_.in()) {
+        -:   74:        // The following assumes that if no comparator is set
+        -:   75:        // then PRESENTATION ordered access applies (TOPIC).
+    #####:   76:        return lhs.rde_->source_timestamp_ < rhs.rde_->source_timestamp_;
+        -:   77:      }
+        -:   78:
+    #####:   79:      return cmp_->compare(lhs.rde_->registered_data_,
+    #####:   80:                           rhs.rde_->registered_data_);
+        -:   81:    }
+        -:   82:
+    #####:   83:    SortedSetCmp(){}
+    #####:   84:    explicit SortedSetCmp(ComparatorBase::Ptr cmp) : cmp_(cmp) {}
+        -:   85:
+        -:   86:  private:
+        -:   87:    ComparatorBase::Ptr cmp_;
+        -:   88:  };
+        -:   89:
+        -:   90:  bool do_sort_, do_filter_;
+        -:   91:  typedef OPENDDS_MULTISET_CMP(RakeData, SortedSetCmp) SortedSet;
+        -:   92:
+        -:   93:  // Contains data for QueryCondition/Ordered access
+        -:   94:  SortedSet sorted_;
+        -:   95:
+        -:   96:  // Contains data for all other use cases
+        -:   97:  OPENDDS_VECTOR(RakeData) unsorted_;
+        -:   98:
+        -:   99:  // data structures used by copy_into()
+        -:  100:  typedef OPENDDS_VECTOR(CORBA::ULong) IndexList;
+    #####:  101:  struct InstanceData {
+        -:  102:    bool most_recent_generation_;
+        -:  103:    size_t MRSIC_index_;
+        -:  104:    IndexList sampleinfo_positions_;
+        -:  105:    CORBA::Long MRSIC_disposed_gc_, MRSIC_nowriters_gc_,
+        -:  106:    MRS_disposed_gc_, MRS_nowriters_gc_;
+    #####:  107:    InstanceData() : most_recent_generation_(false), MRSIC_index_(0),
+        -:  108:      MRSIC_disposed_gc_(0), MRSIC_nowriters_gc_(0), MRS_disposed_gc_(0),
+    #####:  109:      MRS_nowriters_gc_(0) {}
+        -:  110:  };
+        -:  111:};
+        -:  112:
+        -:  113:} // namespace DCPS
+        -:  114:} // namespace OpenDDS
+        -:  115:
+        -:  116:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  117:
+        -:  118:#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
+        -:  119:#include "dds/DCPS/RakeResults_T.cpp"
+        -:  120:#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
+        -:  121:
+        -:  122:#include /**/ "ace/post.h"
+        -:  123:
+        -:  124:#endif /* RAKERESULTS_H  */

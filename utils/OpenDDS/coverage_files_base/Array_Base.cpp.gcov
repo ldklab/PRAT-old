@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Array_Base.cpp
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// $Id: Array_Base.cpp 935 2008-12-10 21:47:27Z mitza $
         -:    2:
         -:    3:#ifndef ACE_ARRAY_BASE_CPP
@@ -24,46 +24,46 @@
         -:   22:
         -:   23:// Dynamically initialize an array.
         -:   24:template <class T>
-        9:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+    #####:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
         -:   26:                                   ACE_Allocator *alloc)
         -:   27:  : max_size_ (size),
         -:   28:    cur_size_ (size),
-        9:   29:    allocator_ (alloc)
+    #####:   29:    allocator_ (alloc)
         -:   30:{
-        9:   31:  if (this->allocator_ == 0)
-        9:   32:    this->allocator_ = ACE_Allocator::instance ();
+    #####:   31:  if (this->allocator_ == 0)
+    #####:   32:    this->allocator_ = ACE_Allocator::instance ();
         -:   33:
-        9:   34:  if (size != 0)
+    #####:   34:  if (size != 0)
         -:   35:    {
-        9:   36:      ACE_ALLOCATOR (this->array_,
+    #####:   36:      ACE_ALLOCATOR (this->array_,
         -:   37:                     (T *) this->allocator_->malloc (size * sizeof (T)));
-      237:   38:      for (size_type i = 0; i < size; ++i)
-      228:   39:        new (&array_[i]) T;
+    #####:   38:      for (size_type i = 0; i < size; ++i)
+    #####:   39:        new (&array_[i]) T;
         -:   40:    }
         -:   41:  else
     #####:   42:    this->array_ = 0;
         -:   43:}
         -:   44:
         -:   45:template <class T>
-    #####:   46:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+        -:   46:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
         -:   47:                                   const T &default_value,
         -:   48:                                   ACE_Allocator *alloc)
         -:   49:  : max_size_ (size),
         -:   50:    cur_size_ (size),
-    #####:   51:    allocator_ (alloc)
+        -:   51:    allocator_ (alloc)
         -:   52:{
-    #####:   53:  if (this->allocator_ == 0)
-    #####:   54:    this->allocator_ = ACE_Allocator::instance ();
+        -:   53:  if (this->allocator_ == 0)
+        -:   54:    this->allocator_ = ACE_Allocator::instance ();
         -:   55:
-    #####:   56:  if (size != 0)
+        -:   56:  if (size != 0)
         -:   57:    {
-    #####:   58:      ACE_ALLOCATOR (this->array_,
+        -:   58:      ACE_ALLOCATOR (this->array_,
         -:   59:                     (T *) this->allocator_->malloc (size * sizeof (T)));
-    #####:   60:      for (size_type i = 0; i < size; ++i)
-    #####:   61:        new (&array_[i]) T (default_value);
+        -:   60:      for (size_type i = 0; i < size; ++i)
+        -:   61:        new (&array_[i]) T (default_value);
         -:   62:    }
         -:   63:  else
-    #####:   64:    this->array_ = 0;
+        -:   64:    this->array_ = 0;
         -:   65:}
         -:   66:
         -:   67:// The copy constructor (performs initialization).
@@ -163,9 +163,9 @@
         -:  161:}
         -:  162:
         -:  163:template<class T> int
-        2:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
+    #####:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
         -:  165:{
-        2:  166:  if (new_size > this->max_size_)
+    #####:  166:  if (new_size > this->max_size_)
         -:  167:    {
     #####:  168:      T *tmp = 0;
         -:  169:
@@ -189,18 +189,18 @@
     #####:  187:      this->cur_size_ = new_size;
         -:  188:    }
         -:  189:
-        2:  190:  return 0;
+    #####:  190:  return 0;
         -:  191:}
         -:  192:
         -:  193:template<class T> int
-        2:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
+    #####:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
         -:  195:{
-        2:  196:  int const r = this->max_size (new_size);
+    #####:  196:  int const r = this->max_size (new_size);
         -:  197:
-        2:  198:  if (r == 0)
-        2:  199:    this->cur_size_ = new_size;
+    #####:  198:  if (r == 0)
+    #####:  199:    this->cur_size_ = new_size;
         -:  200:
-        2:  201:  return r;
+    #####:  201:  return r;
         -:  202:}
         -:  203:
         -:  204:template<class T>

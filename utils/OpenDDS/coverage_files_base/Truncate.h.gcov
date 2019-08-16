@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Truncate.h
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2:
         -:    3://=============================================================================
@@ -159,9 +159,9 @@
         -:  157:    typedef signed long   signed_type;
         -:  158:    typedef unsigned long unsigned_type;
         -:  159:
-      103:  160:    unsigned_type operator() (signed_type x)
+        -:  160:    unsigned_type operator() (signed_type x)
         -:  161:    {
-      103:  162:      return static_cast<unsigned_type> (x);
+        -:  162:      return static_cast<unsigned_type> (x);
         -:  163:    }
         -:  164:  };
         -:  165:
@@ -205,15 +205,15 @@
         -:  203:  template<typename LEFT, typename RIGHT>
         -:  204:  struct Safe_Comparator<LEFT, RIGHT, true, false>
         -:  205:  {
-      103:  206:    static bool greater_than (LEFT lhs, RIGHT rhs)
+        -:  206:    static bool greater_than (LEFT lhs, RIGHT rhs)
         -:  207:    {
         -:  208:      // Prevent wrap-around when casting to unsigned.
-      103:  209:      if (lhs < 0)
-    #####:  210:        return false;  // since rhs is always positive
+        -:  209:      if (lhs < 0)
+        -:  210:        return false;  // since rhs is always positive
         -:  211:      else
         -:  212:        {
         -:  213:          // Implicit promotion of unsigned LEFT and RIGHT types here.
-      103:  214:          return To_Unsigned<LEFT>() (lhs) > rhs;
+        -:  214:          return To_Unsigned<LEFT>() (lhs) > rhs;
         -:  215:        }
         -:  216:    }
         -:  217:  };
@@ -311,12 +311,12 @@
         -:  309:        RIGHT,
         -:  310:        void>::result_type>::result_type promote_type;
         -:  311:
-    #####:  312:    static bool greater_than (LEFT lhs, RIGHT rhs)
+       60:  312:    static bool greater_than (LEFT lhs, RIGHT rhs)
         -:  313:    {
         -:  314:      // The explicit cast is assumed to change the type of rhs without
         -:  315:      // changing its value.
         -:  316:      return
-    #####:  317:        (static_cast<promote_type> (lhs) > static_cast<promote_type> (rhs));
+       60:  317:        (static_cast<promote_type> (lhs) > static_cast<promote_type> (rhs));
         -:  318:    }
         -:  319:
         -:  320:  };
@@ -397,12 +397,12 @@
         -:  395:
         -:  396:    /// Truncate a value of type @c FROM to value of type @c TO, if
         -:  397:    /// the value is larger than the maximum of value of type @c TO.
-      103:  398:    TO operator() (FROM val)
+       60:  398:    TO operator() (FROM val)
         -:  399:    {
         -:  400:      return
-      103:  401:        (comparator::greater_than (val, ACE_Numeric_Limits<TO>::max ())
-      103:  402:         ? ACE_Numeric_Limits<TO>::max ()
-      103:  403:         : static_cast<TO> (val));
+       60:  401:        (comparator::greater_than (val, ACE_Numeric_Limits<TO>::max ())
+       60:  402:         ? ACE_Numeric_Limits<TO>::max ()
+       60:  403:         : static_cast<TO> (val));
         -:  404:    }
         -:  405:
         -:  406:  };
@@ -453,7 +453,7 @@
         -:  451:   * @internal Internal use only.
         -:  452:   */
         -:  453:  template<typename TO, typename FROM>
-      103:  454:  inline TO truncate_cast (FROM val)
+       60:  454:  inline TO truncate_cast (FROM val)
         -:  455:  {
         -:  456:    // If the size of FROM is less than the size of TO, "val" will
         -:  457:    // never be greater than the maximum "TO" value, so there is no
@@ -463,7 +463,7 @@
         -:  461:      Noop_Truncator<FROM, TO>,
         -:  462:      Truncator<FROM, TO> >::result_type truncator;
         -:  463:
-      103:  464:    return truncator() (val);
+       60:  464:    return truncator() (val);
         -:  465:  }
         -:  466:
         -:  467:} // namespace ACE_Utils

@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/OS_NS_sys_time.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: OS_NS_sys_time.inl 2622 2015-08-13 18:30:00Z mitza $
@@ -14,13 +14,13 @@
         -:   12:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
         -:   13:
         -:   14:ACE_INLINE ACE_Time_Value
-    #####:   15:ACE_OS::gettimeofday (void)
+     3597:   15:ACE_OS::gettimeofday (void)
         -:   16:{
         -:   17:  // ACE_OS_TRACE ("ACE_OS::gettimeofday");
         -:   18:
         -:   19:#if !defined (ACE_WIN32)
         -:   20:  timeval tv;
-    #####:   21:  int result = 0;
+     3597:   21:  int result = 0;
         -:   22:#endif // !defined (ACE_WIN32)
         -:   23:
         -:   24:#if defined (ACE_LACKS_GETTIMEOFDAY) && defined (ACE_HAS_CLOCK_GETTIME)
@@ -54,7 +54,7 @@
         -:   52:# if defined (ACE_HAS_TIMEZONE_GETTIMEOFDAY) || \
         -:   53:  defined(ACE_HAS_VOIDPTR_GETTIMEOFDAY) || \
         -:   54:  (defined (ACE_HAS_SVR4_GETTIMEOFDAY) && !defined (SCO))
-    #####:   55:  ACE_OSCALL (::gettimeofday (&tv, 0), int, -1, result);
+     3597:   55:  ACE_OSCALL (::gettimeofday (&tv, 0), int, -1, result);
         -:   56:# elif defined (ACE_VXWORKS)
         -:   57:  // Assumes that struct timespec is same size as struct timeval,
         -:   58:  // which assumes that time_t is a long: it currently (VxWorks
@@ -73,10 +73,10 @@
         -:   71:# endif /* ACE_HAS_SVR4_GETTIMEOFDAY */
         -:   72:#endif /* 0 */
         -:   73:#if !defined (ACE_WIN32)
-    #####:   74:  if (result == -1)
+     3597:   74:  if (result == -1)
     #####:   75:    return ACE_Time_Value ((time_t)-1);
         -:   76:  else
-    #####:   77:    return ACE_Time_Value (tv);
+     3597:   77:    return ACE_Time_Value (tv);
         -:   78:#endif // !defined (ACE_WIN32)
         -:   79:}
         -:   80:

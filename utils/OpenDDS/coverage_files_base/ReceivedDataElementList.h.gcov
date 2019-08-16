@@ -1,174 +1,235 @@
         -:    0:Source:../dds/DCPS/ReceivedDataElementList.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-    #####:   36:/*EOF*/
-    #####:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-    #####:   41:/*EOF*/
-    #####:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-    #####:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-    #####:   53:/*EOF*/
-        -:   54:/*EOF*/
-    #####:   55:/*EOF*/
-        -:   56:/*EOF*/
-    #####:   57:/*EOF*/
-    #####:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-    #####:   64:/*EOF*/
-    #####:   65:/*EOF*/
-        -:   66:/*EOF*/
-    #####:   67:/*EOF*/
-        -:   68:/*EOF*/
-    #####:   69:/*EOF*/
-        -:   70:/*EOF*/
-    #####:   71:/*EOF*/
-        -:   72:/*EOF*/
-    #####:   73:/*EOF*/
-    #####:   74:/*EOF*/
-        -:   75:/*EOF*/
-    #####:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-        -:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-        -:   98:/*EOF*/
-        -:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-        -:  103:/*EOF*/
-        -:  104:/*EOF*/
-        -:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-        -:  108:/*EOF*/
-        -:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-        -:  112:/*EOF*/
-        -:  113:/*EOF*/
-        -:  114:/*EOF*/
-        -:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-        -:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-        -:  125:/*EOF*/
-        -:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-        -:  131:/*EOF*/
-        -:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-        -:  135:/*EOF*/
-        -:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-        -:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-        -:  147:/*EOF*/
-        -:  148:/*EOF*/
-        -:  149:/*EOF*/
-        -:  150:/*EOF*/
-        -:  151:/*EOF*/
-        -:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-        -:  157:/*EOF*/
-        -:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-        -:  161:/*EOF*/
-    #####:  162:/*EOF*/
-    #####:  163:/*EOF*/
-        -:  164:/*EOF*/
-    #####:  165:/*EOF*/
-        -:  166:/*EOF*/
-    #####:  167:/*EOF*/
-    #####:  168:/*EOF*/
-        -:  169:/*EOF*/
-        -:  170:/*EOF*/
-    #####:  171:/*EOF*/
-    #####:  172:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_RECEIVEDDATAELEMENTLIST_H
+        -:    9:#define OPENDDS_DCPS_RECEIVEDDATAELEMENTLIST_H
+        -:   10:
+        -:   11:#include "ace/Atomic_Op_T.h"
+        -:   12:#include "ace/Thread_Mutex.h"
+        -:   13:
+        -:   14:#include "dcps_export.h"
+        -:   15:#include "Definitions.h"
+        -:   16:#include "GuidUtils.h"
+        -:   17:#include "DataSampleHeader.h"
+        -:   18:#include "Time_Helper.h"
+        -:   19:#include "unique_ptr.h"
+        -:   20:
+        -:   21:#include "dds/DdsDcpsInfrastructureC.h"
+        -:   22:
+        -:   23:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   24:#pragma once
+        -:   25:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   26:
+        -:   27:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   28:
+        -:   29:namespace OpenDDS {
+        -:   30:namespace DCPS {
+        -:   31:
+        -:   32:class InstanceState;
+        -:   33:
+        -:   34:class OpenDDS_Dcps_Export ReceivedDataElement {
+        -:   35:public:
+    #####:   36:  ReceivedDataElement(const DataSampleHeader& header, void *received_data, ACE_Recursive_Thread_Mutex* mx)
+    #####:   37:    : pub_(header.publication_id_),
+        -:   38:      registered_data_(received_data),
+        -:   39:      sample_state_(DDS::NOT_READ_SAMPLE_STATE),
+        -:   40:#ifndef OPENDDS_NO_OBJECT_MODEL_PROFILE
+    #####:   41:      coherent_change_(header.coherent_change_),
+    #####:   42:      group_coherent_(header.group_coherent_),
+        -:   43:      publisher_id_(header.publisher_id_),
+        -:   44:#endif
+    #####:   45:      valid_data_(received_data != 0),
+        -:   46:      disposed_generation_count_(0),
+        -:   47:      no_writers_generation_count_(0),
+        -:   48:      zero_copy_cnt_(0),
+        -:   49:      sequence_(header.sequence_),
+        -:   50:      previous_data_sample_(0),
+        -:   51:      next_data_sample_(0),
+        -:   52:      ref_count_(1),
+    #####:   53:      mx_(mx)
+        -:   54:  {
+    #####:   55:    this->destination_timestamp_ = time_value_to_time(ACE_OS::gettimeofday());
+        -:   56:
+    #####:   57:    this->source_timestamp_.sec = header.source_timestamp_sec_;
+    #####:   58:    this->source_timestamp_.nanosec = header.source_timestamp_nanosec_;
+        -:   59:
+        -:   60:    /*
+        -:   61:     * In some situations, we will not have data to give to the user and
+        -:   62:     * valid_data is how we communcate that to the user through a SampleInfo.
+        -:   63:     */
+    #####:   64:    if (!header.valid_data()) {
+    #####:   65:      valid_data_ = false;
+        -:   66:    }
+    #####:   67:  }
+        -:   68:
+    #####:   69:  virtual ~ReceivedDataElement(){}
+        -:   70:
+    #####:   71:  void dec_ref()
+        -:   72:  {
+    #####:   73:    if (0 == --this->ref_count_) {
+    #####:   74:      delete this;
+        -:   75:    }
+    #####:   76:  }
+        -:   77:
+    #####:   78:  void inc_ref()
+        -:   79:  {
+    #####:   80:    ++this->ref_count_;
+    #####:   81:  }
+        -:   82:
+        -:   83:  long ref_count()
+        -:   84:  {
+        -:   85:    return this->ref_count_.value();
+        -:   86:  }
+        -:   87:
+        -:   88:  PublicationId pub_;
+        -:   89:
+        -:   90:  /**
+        -:   91:   * Data sample received, could only be the key fields in case we received
+        -:   92:   * dispose and/or unregister message.
+        -:   93:   */
+        -:   94:  void* const registered_data_;  // ugly, but works....
+        -:   95:
+        -:   96:  /// Sample state for this data sample:
+        -:   97:  /// DDS::NOT_READ_SAMPLE_STATE/DDS::READ_SAMPLE_STATE
+        -:   98:  DDS::SampleStateKind sample_state_;
+        -:   99:
+        -:  100:  /// Source time stamp for this data sample
+        -:  101:  DDS::Time_t source_timestamp_;
+        -:  102:
+        -:  103:  /// Reception time stamp for this data sample
+        -:  104:  DDS::Time_t destination_timestamp_;
+        -:  105:
+        -:  106:#ifndef OPENDDS_NO_OBJECT_MODEL_PROFILE
+        -:  107:  /// Sample belongs to an active coherent change set
+        -:  108:  bool coherent_change_;
+        -:  109:
+        -:  110:  /// Sample belongs to a group coherent changes.
+        -:  111:  bool group_coherent_;
+        -:  112:
+        -:  113:  /// Publisher id represent group identifier.
+        -:  114:  RepoId publisher_id_;
+        -:  115:#endif
+        -:  116:
+        -:  117:  /// Do we contain valid data
+        -:  118:  bool valid_data_;
+        -:  119:
+        -:  120:  /// The data sample's instance's disposed_generation_count_
+        -:  121:  /// at the time the sample was received
+        -:  122:  size_t disposed_generation_count_;
+        -:  123:
+        -:  124:  /// The data sample's instance's no_writers_generation_count_
+        -:  125:  /// at the time the sample was received
+        -:  126:  size_t no_writers_generation_count_;
+        -:  127:
+        -:  128:  /// This is needed to know if delete DataReader should fail with
+        -:  129:  /// PRECONDITION_NOT_MET because there are outstanding loans.
+        -:  130:  ACE_Atomic_Op<ACE_Thread_Mutex, long> zero_copy_cnt_;
+        -:  131:
+        -:  132:  /// The data sample's sequence number
+        -:  133:  SequenceNumber sequence_;
+        -:  134:
+        -:  135:  /// the previous data sample in the ReceivedDataElementList
+        -:  136:  ReceivedDataElement* previous_data_sample_;
+        -:  137:
+        -:  138:  /// the next data sample in the ReceivedDataElementList
+        -:  139:  ReceivedDataElement* next_data_sample_;
+        -:  140:
+        -:  141:  void* operator new(size_t size, ACE_New_Allocator& pool);
+        -:  142:  void operator delete(void* memory);
+        -:  143:  void operator delete(void* memory, ACE_New_Allocator& pool);
+        -:  144:
+        -:  145:private:
+        -:  146:  ACE_Atomic_Op<ACE_Thread_Mutex, long> ref_count_;
+        -:  147:protected:
+        -:  148:  ACE_Recursive_Thread_Mutex* mx_;
+        -:  149:}; // class ReceivedDataElement
+        -:  150:
+        -:  151:struct ReceivedDataElementMemoryBlock
+        -:  152:{
+        -:  153:  ReceivedDataElement element_;
+        -:  154:  ACE_New_Allocator* allocator_;
+        -:  155:};
+        -:  156:
+        -:  157:
+        -:  158:template <typename DataTypeWithAllocator>
+        -:  159:class ReceivedDataElementWithType : public ReceivedDataElement
+        -:  160:{
+        -:  161:public:
+    #####:  162:  ReceivedDataElementWithType(const DataSampleHeader& header, DataTypeWithAllocator* received_data, ACE_Recursive_Thread_Mutex* mx)
+    #####:  163:    : ReceivedDataElement(header, received_data, mx)
+        -:  164:  {
+    #####:  165:  }
+        -:  166:
+    #####:  167:  ~ReceivedDataElementWithType() {
+    #####:  168:    ACE_GUARD(ACE_Recursive_Thread_Mutex,
+        -:  169:              guard,
+        -:  170:              *this->mx_)
+    #####:  171:    delete static_cast<DataTypeWithAllocator*> (registered_data_);
+    #####:  172:  }
+        -:  173:};
+        -:  174:
+        -:  175:class OpenDDS_Dcps_Export ReceivedDataFilter {
+        -:  176:public:
+        -:  177:  ReceivedDataFilter() {}
+        -:  178:  virtual ~ReceivedDataFilter() {}
+        -:  179:
+        -:  180:  virtual bool operator()(ReceivedDataElement* data_sample) = 0;
+        -:  181:};
+        -:  182:
+        -:  183:class OpenDDS_Dcps_Export ReceivedDataOperation {
+        -:  184:public:
+        -:  185:  ReceivedDataOperation() {}
+        -:  186:  virtual ~ReceivedDataOperation() {}
+        -:  187:
+        -:  188:  virtual void operator()(ReceivedDataElement* data_sample) = 0;
+        -:  189:};
+        -:  190:
+        -:  191:class OpenDDS_Dcps_Export ReceivedDataElementList {
+        -:  192:public:
+        -:  193:  ReceivedDataElementList(InstanceState* instance_state = 0);
+        -:  194:
+        -:  195:  ~ReceivedDataElementList();
+        -:  196:
+        -:  197:  void apply_all(ReceivedDataFilter& match, ReceivedDataOperation& func);
+        -:  198:
+        -:  199:  // adds a data sample to the end of the list
+        -:  200:  void add(ReceivedDataElement* data_sample);
+        -:  201:
+        -:  202:  // returns true if the instance was released
+        -:  203:  bool remove(ReceivedDataElement* data_sample);
+        -:  204:
+        -:  205:  // returns true if the instance was released
+        -:  206:  bool remove(ReceivedDataFilter& match, bool eval_all);
+        -:  207:
+        -:  208:  ReceivedDataElement* remove_head();
+        -:  209:  ReceivedDataElement* remove_tail();
+        -:  210:
+        -:  211:  /// The first element of the list.
+        -:  212:  ReceivedDataElement* head_;
+        -:  213:
+        -:  214:  /// The last element of the list.
+        -:  215:  ReceivedDataElement* tail_;
+        -:  216:
+        -:  217:  /// Number of elements in the list.
+        -:  218:  ssize_t size_;
+        -:  219:
+        -:  220:private:
+        -:  221:  InstanceState* instance_state_;
+        -:  222:}; // ReceivedDataElementList
+        -:  223:
+        -:  224:} // namespace DCPS
+        -:  225:} // namespace OpenDDS
+        -:  226:
+        -:  227:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  228:
+        -:  229:#if defined (__ACE_INLINE__)
+        -:  230:# include "ReceivedDataElementList.inl"
+        -:  231:#endif  /* __ACE_INLINE__ */
+        -:  232:
+        -:  233:#endif /* OPENDDS_DCPS_RECEIVEDDATAELEMENTLIST_H  */

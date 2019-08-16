@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Objref_VarOut_T.cpp
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// $Id: Objref_VarOut_T.cpp 935 2008-12-10 21:47:27Z mitza $
         -:    2:#ifndef TAO_OBJREF_VAROUT_T_CPP
         -:    3:#define TAO_OBJREF_VAROUT_T_CPP
@@ -12,36 +12,36 @@
         -:   10:#endif /* __ACE_INLINE__ */
         -:   11:
         -:   12:template <typename T>
-       41:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+        -:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
         -:   14:    const TAO_Objref_Var_T<T> & p
         -:   15:  )
         -:   16:  : TAO_Base_var (),
-       41:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+        -:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
         -:   18:{
-       41:   19:}
+        -:   19:}
         -:   20:
         -:   21:template <typename T>
         -:   22:TAO_Objref_Var_T<T> &
-       55:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+    #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
         -:   24:{
-       55:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
-       55:   26:  this->ptr_ = p;
-       55:   27:  return *this;
+    #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+    #####:   26:  this->ptr_ = p;
+    #####:   27:  return *this;
         -:   28:}
         -:   29:
         -:   30:template <typename T>
         -:   31:TAO_Objref_Var_T<T> &
-        7:   32:TAO_Objref_Var_T<T>::operator= (
+        -:   32:TAO_Objref_Var_T<T>::operator= (
         -:   33:    const TAO_Objref_Var_T<T> & p
         -:   34:  )
         -:   35:{
-        7:   36:  if (this != &p)
+        -:   36:  if (this != &p)
         -:   37:    {
-        7:   38:      TAO::Objref_Traits<T>::release (this->ptr_);
-        7:   39:      this->ptr_ = TAO::Objref_Traits<T>::duplicate (p.ptr ());
+        -:   38:      TAO::Objref_Traits<T>::release (this->ptr_);
+        -:   39:      this->ptr_ = TAO::Objref_Traits<T>::duplicate (p.ptr ());
         -:   40:    }
         -:   41:
-        7:   42:  return *this;
+        -:   42:  return *this;
         -:   43:}
         -:   44:
         -:   45:#endif /* TAO_OBJREF_VAROUT_T_CPP */

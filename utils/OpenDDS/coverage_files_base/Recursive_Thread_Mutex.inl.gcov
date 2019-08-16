@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Recursive_Thread_Mutex.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: Recursive_Thread_Mutex.inl 1861 2011-08-31 16:18:08Z mesnierp $
@@ -34,15 +34,15 @@
         -:   32:}
         -:   33:
         -:   34:ACE_INLINE int
-    #####:   35:ACE_Recursive_Thread_Mutex::acquire (void)
+    33498:   35:ACE_Recursive_Thread_Mutex::acquire (void)
         -:   36:{
-    #####:   37:  return ACE_OS::recursive_mutex_lock (&this->lock_);
+    33498:   37:  return ACE_OS::recursive_mutex_lock (&this->lock_);
         -:   38:}
         -:   39:
         -:   40:ACE_INLINE int
-    #####:   41:ACE_Recursive_Thread_Mutex::release (void)
+    33498:   41:ACE_Recursive_Thread_Mutex::release (void)
         -:   42:{
-    #####:   43:  return ACE_OS::recursive_mutex_unlock (&this->lock_);
+    33498:   43:  return ACE_OS::recursive_mutex_unlock (&this->lock_);
         -:   44:}
         -:   45:
         -:   46:ACE_INLINE int
@@ -64,15 +64,15 @@
         -:   62:}
         -:   63:
         -:   64:ACE_INLINE int
-    #####:   65:ACE_Recursive_Thread_Mutex::acquire_read (void)
+        -:   65:ACE_Recursive_Thread_Mutex::acquire_read (void)
         -:   66:{
-    #####:   67:  return this->acquire ();
+        -:   67:  return this->acquire ();
         -:   68:}
         -:   69:
         -:   70:ACE_INLINE int
-    #####:   71:ACE_Recursive_Thread_Mutex::acquire_write (void)
+        -:   71:ACE_Recursive_Thread_Mutex::acquire_write (void)
         -:   72:{
-    #####:   73:  return this->acquire ();
+        -:   73:  return this->acquire ();
         -:   74:}
         -:   75:
         -:   76:ACE_INLINE int

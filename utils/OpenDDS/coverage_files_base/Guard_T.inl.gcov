@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Guard_T.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2:// $Id: Guard_T.inl 1861 2011-08-31 16:18:08Z mesnierp $
         -:    3:
@@ -10,9 +10,9 @@
         -:    8:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
         -:    9:
         -:   10:template <class ACE_LOCK> ACE_INLINE int
-    #####:   11:ACE_Guard<ACE_LOCK>::acquire (void)
+    20844:   11:ACE_Guard<ACE_LOCK>::acquire (void)
         -:   12:{
-    #####:   13:  return this->owner_ = this->lock_->acquire ();
+    20844:   13:  return this->owner_ = this->lock_->acquire ();
         -:   14:}
         -:   15:
         -:   16:template <class ACE_LOCK> ACE_INLINE int
@@ -22,24 +22,24 @@
         -:   20:}
         -:   21:
         -:   22:template <class ACE_LOCK> ACE_INLINE int
-    #####:   23:ACE_Guard<ACE_LOCK>::release (void)
+    20991:   23:ACE_Guard<ACE_LOCK>::release (void)
         -:   24:{
-    #####:   25:  if (this->owner_ == -1)
-    #####:   26:    return -1;
+    20991:   25:  if (this->owner_ == -1)
+      144:   26:    return -1;
         -:   27:  else
         -:   28:    {
-    #####:   29:      this->owner_ = -1;
-    #####:   30:      return this->lock_->release ();
+    20847:   29:      this->owner_ = -1;
+    20847:   30:      return this->lock_->release ();
         -:   31:    }
         -:   32:}
         -:   33:
         -:   34:template <class ACE_LOCK> ACE_INLINE
-    #####:   35:ACE_Guard<ACE_LOCK>::ACE_Guard (ACE_LOCK &l)
+    20802:   35:ACE_Guard<ACE_LOCK>::ACE_Guard (ACE_LOCK &l)
         -:   36:  : lock_ (&l),
-    #####:   37:    owner_ (0)
+    20802:   37:    owner_ (0)
         -:   38:{
-    #####:   39:  this->acquire ();
-    #####:   40:}
+    20802:   39:  this->acquire ();
+    20802:   40:}
         -:   41:
         -:   42:template <class ACE_LOCK> ACE_INLINE
         -:   43:ACE_Guard<ACE_LOCK>::ACE_Guard (ACE_LOCK &l, bool block)
@@ -63,15 +63,15 @@
         -:   61:// lock.
         -:   62:
         -:   63:template <class ACE_LOCK> ACE_INLINE
-    #####:   64:ACE_Guard<ACE_LOCK>::~ACE_Guard (void)
+    20802:   64:ACE_Guard<ACE_LOCK>::~ACE_Guard (void)
         -:   65:{
-    #####:   66:  this->release ();
-    #####:   67:}
+    20802:   66:  this->release ();
+    20802:   67:}
         -:   68:
         -:   69:template <class ACE_LOCK> ACE_INLINE bool
-    #####:   70:ACE_Guard<ACE_LOCK>::locked (void) const
+    18138:   70:ACE_Guard<ACE_LOCK>::locked (void) const
         -:   71:{
-    #####:   72:  return this->owner_ != -1;
+    18138:   72:  return this->owner_ != -1;
         -:   73:}
         -:   74:
         -:   75:template <class ACE_LOCK> ACE_INLINE int

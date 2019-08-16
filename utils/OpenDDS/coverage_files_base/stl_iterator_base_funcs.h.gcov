@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/bits/stl_iterator_base_funcs.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Functions used by iterators -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
@@ -97,13 +97,13 @@
         -:   95:  template<typename _RandomAccessIterator>
         -:   96:    inline _GLIBCXX14_CONSTEXPR
         -:   97:    typename iterator_traits<_RandomAccessIterator>::difference_type
-        -:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
+    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
         -:   99:               random_access_iterator_tag)
         -:  100:    {
         -:  101:      // concept requirements
         -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
         -:  103:				  _RandomAccessIterator>)
-        -:  104:      return __last - __first;
+    #####:  104:      return __last - __first;
         -:  105:    }
         -:  106:
         -:  107:#if _GLIBCXX_USE_CXX11_ABI
@@ -140,7 +140,7 @@
     #####:  138:    distance(_InputIterator __first, _InputIterator __last)
         -:  139:    {
         -:  140:      // concept requirements -- taken care of in __distance
-    #####:  141:      return std::__distance(__first, __last,
+        -:  141:      return std::__distance(__first, __last,
     #####:  142:			     std::__iterator_category(__first));
         -:  143:    }
         -:  144:
@@ -173,14 +173,14 @@
         -:  171:
         -:  172:  template<typename _RandomAccessIterator, typename _Distance>
         -:  173:    inline _GLIBCXX14_CONSTEXPR void
-        -:  174:    __advance(_RandomAccessIterator& __i, _Distance __n,
+    #####:  174:    __advance(_RandomAccessIterator& __i, _Distance __n,
         -:  175:              random_access_iterator_tag)
         -:  176:    {
         -:  177:      // concept requirements
         -:  178:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
         -:  179:				  _RandomAccessIterator>)
-        -:  180:      __i += __n;
-        -:  181:    }
+    #####:  180:      __i += __n;
+    #####:  181:    }
         -:  182:
         -:  183:  /**
         -:  184:   *  @brief A generalization of pointer arithmetic.
@@ -196,12 +196,12 @@
         -:  194:  */
         -:  195:  template<typename _InputIterator, typename _Distance>
         -:  196:    inline _GLIBCXX17_CONSTEXPR void
-        -:  197:    advance(_InputIterator& __i, _Distance __n)
+    #####:  197:    advance(_InputIterator& __i, _Distance __n)
         -:  198:    {
         -:  199:      // concept requirements -- taken care of in __advance
-        -:  200:      typename iterator_traits<_InputIterator>::difference_type __d = __n;
-        -:  201:      std::__advance(__i, __d, std::__iterator_category(__i));
-        -:  202:    }
+    #####:  200:      typename iterator_traits<_InputIterator>::difference_type __d = __n;
+    #####:  201:      std::__advance(__i, __d, std::__iterator_category(__i));
+    #####:  202:    }
         -:  203:
         -:  204:#if __cplusplus >= 201103L
         -:  205:

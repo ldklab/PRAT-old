@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Generic_Sequence_T.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:#ifndef guard_generic_sequence_hpp
         -:    2:#define guard_generic_sequence_hpp
         -:    3:/**
@@ -109,24 +109,24 @@
         -:  107:  typedef range_checking<value_type,true> range;
         -:  108:
         -:  109:  /// Default constructor.
-        -:  110:  generic_sequence(void)
-        -:  111:    : maximum_(allocation_traits::default_maximum())
+     1275:  110:  generic_sequence(void)
+     1275:  111:    : maximum_(allocation_traits::default_maximum())
         -:  112:    , length_(0)
-        -:  113:    , buffer_(allocation_traits::default_buffer_allocation())
-        -:  114:    , release_(buffer_ != 0)
+     1275:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+     2550:  114:    , release_(buffer_ != 0)
         -:  115:  {
-        -:  116:  }
+     1275:  116:  }
         -:  117:
         -:  118:  /// Constructor with control of ownership.
-        -:  119:  explicit generic_sequence(CORBA::ULong maximum)
+      138:  119:  explicit generic_sequence(CORBA::ULong maximum)
         -:  120:    : maximum_(maximum)
         -:  121:    , length_(0)
-        -:  122:    , buffer_(allocbuf(maximum_))
-        -:  123:    , release_(true)
+      138:  122:    , buffer_(allocbuf(maximum_))
+      276:  123:    , release_(true)
         -:  124:  {
-        -:  125:  }
+      138:  125:  }
         -:  126:
-    #####:  127:  generic_sequence(
+      438:  127:  generic_sequence(
         -:  128:      CORBA::ULong maximum,
         -:  129:      CORBA::ULong length,
         -:  130:      value_type * data,
@@ -134,51 +134,51 @@
         -:  132:    : maximum_(maximum)
         -:  133:    , length_(length)
         -:  134:    , buffer_(data)
-    #####:  135:    , release_(release)
+      438:  135:    , release_(release)
         -:  136:  {
-    #####:  137:  }
+      438:  137:  }
         -:  138:
         -:  139:  /// Copy constructor
-    #####:  140:  generic_sequence(generic_sequence const & rhs)
+     1005:  140:  generic_sequence(generic_sequence const & rhs)
         -:  141:    : maximum_(0)
         -:  142:    , length_(0)
         -:  143:    , buffer_(0)
-    #####:  144:    , release_(false)
+     1005:  144:    , release_(false)
         -:  145:  {
-    #####:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+     1005:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
         -:  147:    {
-    #####:  148:      maximum_ = rhs.maximum_;
-    #####:  149:      length_ = rhs.length_;
-    #####:  150:      return;
+      729:  148:      maximum_ = rhs.maximum_;
+      729:  149:      length_ = rhs.length_;
+      729:  150:      return;
         -:  151:    }
-    #####:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
-    #####:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+      552:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+      276:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
         -:  154:                         true);
-    #####:  155:    element_traits::initialize_range(
-    #####:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
-    #####:  157:    element_traits::copy_range(
+      552:  155:    element_traits::initialize_range(
+      552:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+      552:  157:    element_traits::copy_range(
         -:  158:        rhs.buffer_,
-    #####:  159:        rhs.buffer_ + rhs.length_,
-    #####:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
-    #####:  161:    swap(tmp);
+      276:  159:        rhs.buffer_ + rhs.length_,
+      276:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+      276:  161:    swap(tmp);
         -:  162:  }
         -:  163:
         -:  164:  /// Assignment operator
-    #####:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+      219:  165:  generic_sequence & operator=(generic_sequence const & rhs)
         -:  166:  {
-    #####:  167:    generic_sequence tmp(rhs);
-    #####:  168:    swap(tmp);
-    #####:  169:    return * this;
+      438:  167:    generic_sequence tmp(rhs);
+      219:  168:    swap(tmp);
+      438:  169:    return * this;
         -:  170:  }
         -:  171:
         -:  172:  /// Destructor.
-    #####:  173:  ~generic_sequence()
+     2688:  173:  ~generic_sequence()
         -:  174:  {
-    #####:  175:    if (release_)
+     2688:  175:    if (release_)
         -:  176:    {
-    #####:  177:      freebuf(buffer_);
+      687:  177:      freebuf(buffer_);
         -:  178:    }
-    #####:  179:  }
+     2688:  179:  }
         -:  180:
         -:  181:  /// Return the maximum length of the sequence
         -:  182:  inline CORBA::ULong maximum() const
@@ -187,35 +187,35 @@
         -:  185:  }
         -:  186:
         -:  187:  /// Returns the state of the sequence release flag.
-        -:  188:  inline CORBA::Boolean release() const
+    #####:  188:  inline CORBA::Boolean release() const
         -:  189:  {
-        -:  190:    return release_;
+    #####:  190:    return release_;
         -:  191:  }
         -:  192:
         -:  193:  /// Returns the length of the sequence
-    #####:  194:  inline CORBA::ULong length() const
+      633:  194:  inline CORBA::ULong length() const
         -:  195:  {
-    #####:  196:    return length_;
+      633:  196:    return length_;
         -:  197:  }
         -:  198:
         -:  199:  /// Set a new length for the sequence
-    #####:  200:  void length(CORBA::ULong length)
+      354:  200:  void length(CORBA::ULong length)
         -:  201:  {
-    #####:  202:    if (length <= maximum_)
+      354:  202:    if (length <= maximum_)
         -:  203:    {
-    #####:  204:      if (buffer_ == 0)
+      294:  204:      if (buffer_ == 0)
         -:  205:        {
-    #####:  206:          buffer_ = allocbuf(maximum_);
-    #####:  207:          release_ = true;
-    #####:  208:          length_ = length;
+       39:  206:          buffer_ = allocbuf(maximum_);
+       39:  207:          release_ = true;
+       39:  208:          length_ = length;
         -:  209:          // Since allocbuf returns completely initialized buffer
         -:  210:          // no further actions are required.
-    #####:  211:          return;
+      333:  211:          return;
         -:  212:        }
         -:  213:
         -:  214:      // When sequence doesn't own a buffer it's not allowed
         -:  215:      // to change it in any way.
-    #####:  216:      if (length < length_ && release_)
+      255:  216:      if (length < length_ && release_)
         -:  217:      {
         -:  218:        // TODO This code does not provide the strong-exception
         -:  219:        //      guarantee, but it does provide the weak-exception
@@ -224,42 +224,42 @@
         -:  222:        //      elements have been modified.  One could argue that
         -:  223:        //      this problem is irrelevant, as the elements already
         -:  224:        //      modified are unreachable to conforming applications.
-    #####:  225:        element_traits::release_range(
-    #####:  226:          buffer_ + length, buffer_ + length_);
-    #####:  227:        element_traits::initialize_range(
-    #####:  228:          buffer_ + length, buffer_ + length_);
+       12:  225:        element_traits::release_range(
+       12:  226:          buffer_ + length, buffer_ + length_);
+       12:  227:        element_traits::initialize_range(
+       12:  228:          buffer_ + length, buffer_ + length_);
         -:  229:      }
-    #####:  230:      length_ = length;
-    #####:  231:      return;
+      255:  230:      length_ = length;
+      255:  231:      return;
         -:  232:    }
         -:  233:
-    #####:  234:    generic_sequence tmp(length, length,
+      120:  234:    generic_sequence tmp(length, length,
         -:  235:                         allocation_traits::allocbuf_noinit(length),
         -:  236:                         true);
         -:  237:    // First do initialize_range. If it will throw then tmp will be
         -:  238:    // destructed but *this will remain unchanged.
-    #####:  239:    element_traits::initialize_range(
-    #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
-    #####:  241:    element_traits::copy_swap_range(
+      120:  239:    element_traits::initialize_range(
+      120:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+      120:  241:    element_traits::copy_swap_range(
         -:  242:      buffer_,
-    #####:  243:      buffer_ + length_,
-    #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+       60:  243:      buffer_ + length_,
+       60:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
         -:  245:
-    #####:  246:    swap(tmp);
+       60:  246:    swap(tmp);
         -:  247:  }
         -:  248:
         -:  249:  /// Get a const element from the sequence
-    #####:  250:  value_type const & operator[](CORBA::ULong i) const
+      228:  250:  value_type const & operator[](CORBA::ULong i) const
         -:  251:  {
-    #####:  252:    range::check(i, length_, maximum_, "operator[]() const");
-    #####:  253:    return buffer_[i];
+      228:  252:    range::check(i, length_, maximum_, "operator[]() const");
+      228:  253:    return buffer_[i];
         -:  254:  }
         -:  255:
         -:  256:  /// Get an element from the sequence
-    #####:  257:  value_type & operator[](CORBA::ULong i)
+      129:  257:  value_type & operator[](CORBA::ULong i)
         -:  258:  {
-    #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
-    #####:  260:    return buffer_[i];
+      129:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+      129:  260:    return buffer_[i];
         -:  261:  }
         -:  262:
         -:  263:  /**
@@ -283,14 +283,14 @@
         -:  281:   * yet been allocated.  No direct modification of the returned
         -:  282:   * buffer by the caller is permitted.
         -:  283:   */
-        -:  284:  value_type const * get_buffer() const
+    #####:  284:  value_type const * get_buffer() const
         -:  285:  {
-        -:  286:    if (buffer_ == 0)
+    #####:  286:    if (buffer_ == 0)
         -:  287:    {
-        -:  288:      buffer_ = allocbuf(maximum_);
-        -:  289:      release_ = true;
+    #####:  288:      buffer_ = allocbuf(maximum_);
+    #####:  289:      release_ = true;
         -:  290:    }
-        -:  291:    return buffer_;
+    #####:  291:    return buffer_;
         -:  292:  }
         -:  293:
         -:  294:  /// Allows read-write access to the underlying buffer.
@@ -321,49 +321,49 @@
         -:  319:   * references), and then freeing the returned buffer itself using
         -:  320:   * freebuf().
         -:  321:   */
-        -:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+      108:  322:  value_type * get_buffer(CORBA::Boolean orphan)
         -:  323:  {
-        -:  324:    if (orphan && !release_)
+      108:  324:    if (orphan && !release_)
         -:  325:    {
-        -:  326:      return 0;
+    #####:  326:      return 0;
         -:  327:    }
-        -:  328:    if (buffer_ == 0)
+      108:  328:    if (buffer_ == 0)
         -:  329:    {
-        -:  330:      buffer_ = allocbuf(maximum_);
-        -:  331:      if (!orphan)
+    #####:  330:      buffer_ = allocbuf(maximum_);
+    #####:  331:      if (!orphan)
         -:  332:        {
-        -:  333:          release_ = true;
+    #####:  333:          release_ = true;
         -:  334:        }
         -:  335:    }
-        -:  336:    if (!orphan)
+      108:  336:    if (!orphan)
         -:  337:    {
-        -:  338:      return buffer_;
+      108:  338:      return buffer_;
         -:  339:    }
         -:  340:
-        -:  341:    generic_sequence tmp;
-        -:  342:    swap(tmp);
-        -:  343:    tmp.release_ = false;
+    #####:  341:    generic_sequence tmp;
+    #####:  342:    swap(tmp);
+    #####:  343:    tmp.release_ = false;
         -:  344:
-        -:  345:    return tmp.buffer_;
+    #####:  345:    return tmp.buffer_;
         -:  346:  }
         -:  347:
-    #####:  348:  void swap(generic_sequence & rhs) throw()
+      765:  348:  void swap(generic_sequence & rhs) throw()
         -:  349:  {
-    #####:  350:    std::swap(maximum_, rhs.maximum_);
-    #####:  351:    std::swap(length_, rhs.length_);
-    #####:  352:    std::swap(buffer_, rhs.buffer_);
-    #####:  353:    std::swap(release_, rhs.release_);
-    #####:  354:  }
+      765:  350:    std::swap(maximum_, rhs.maximum_);
+      765:  351:    std::swap(length_, rhs.length_);
+      765:  352:    std::swap(buffer_, rhs.buffer_);
+      765:  353:    std::swap(release_, rhs.release_);
+      765:  354:  }
         -:  355:
-    #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+      177:  356:  static value_type * allocbuf(CORBA::ULong maximum)
         -:  357:  {
-    #####:  358:    return allocation_traits::allocbuf(maximum);
+      177:  358:    return allocation_traits::allocbuf(maximum);
         -:  359:  }
         -:  360:
-    #####:  361:  static void freebuf(value_type * buffer)
+      687:  361:  static void freebuf(value_type * buffer)
         -:  362:  {
-    #####:  363:    allocation_traits::freebuf(buffer);
-    #####:  364:  }
+      687:  363:    allocation_traits::freebuf(buffer);
+      687:  364:  }
         -:  365:
         -:  366:#if defined TAO_HAS_SEQUENCE_ITERATORS && TAO_HAS_SEQUENCE_ITERATORS == 1
         -:  367:

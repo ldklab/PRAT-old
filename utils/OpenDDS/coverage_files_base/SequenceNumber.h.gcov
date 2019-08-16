@@ -1,162 +1,211 @@
         -:    0:Source:../dds/DCPS/SequenceNumber.h
-        -:    0:Programs:51
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-    #####:   31:/*EOF*/
-    #####:   32:/*EOF*/
-    #####:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-    #####:   36:/*EOF*/
-    #####:   37:/*EOF*/
-    #####:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-    #####:   41:/*EOF*/
-    #####:   42:/*EOF*/
-        -:   43:/*EOF*/
-    #####:   44:/*EOF*/
-    #####:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-    #####:   48:/*EOF*/
-        -:   49:/*EOF*/
-    #####:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-    #####:   76:/*EOF*/
-    #####:   77:/*EOF*/
-    #####:   78:/*EOF*/
-        -:   79:/*EOF*/
-    #####:   80:/*EOF*/
-    #####:   81:/*EOF*/
-    #####:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-    #####:   92:/*EOF*/
-    #####:   93:/*EOF*/
-        -:   94:/*EOF*/
-        -:   95:/*EOF*/
-    #####:   96:/*EOF*/
-    #####:   97:/*EOF*/
-    #####:   98:/*EOF*/
-        -:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-    #####:  102:/*EOF*/
-    #####:  103:/*EOF*/
-    #####:  104:/*EOF*/
-        -:  105:/*EOF*/
-    #####:  106:/*EOF*/
-    #####:  107:/*EOF*/
-    #####:  108:/*EOF*/
-        -:  109:/*EOF*/
-    #####:  110:/*EOF*/
-    #####:  111:/*EOF*/
-        -:  112:/*EOF*/
-    #####:  113:/*EOF*/
-    #####:  114:/*EOF*/
-        -:  115:/*EOF*/
-    #####:  116:/*EOF*/
-    #####:  117:/*EOF*/
-    #####:  118:/*EOF*/
-        -:  119:/*EOF*/
-        -:  120:/*EOF*/
-    #####:  121:/*EOF*/
-    #####:  122:/*EOF*/
-        -:  123:/*EOF*/
-    #####:  124:/*EOF*/
-    #####:  125:/*EOF*/
-        -:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-    #####:  129:/*EOF*/
-    #####:  130:/*EOF*/
-        -:  131:/*EOF*/
-        -:  132:/*EOF*/
-    #####:  133:/*EOF*/
-    #####:  134:/*EOF*/
-        -:  135:/*EOF*/
-        -:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-        -:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-        -:  147:/*EOF*/
-    #####:  148:/*EOF*/
-    #####:  149:/*EOF*/
-    #####:  150:/*EOF*/
-        -:  151:/*EOF*/
-        -:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-    #####:  157:/*EOF*/
-    #####:  158:/*EOF*/
-    #####:  159:/*EOF*/
-    #####:  160:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_SEQUENCENUMBER_H
+        -:    9:#define OPENDDS_DCPS_SEQUENCENUMBER_H
+        -:   10:
+        -:   11:#include "ace/Global_Macros.h"
+        -:   12:
+        -:   13:#include <utility>
+        -:   14:
+        -:   15:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   16:#pragma once
+        -:   17:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   18:
+        -:   19:#include "dds/DCPS/Serializer.h"
+        -:   20:
+        -:   21:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   22:
+        -:   23:namespace OpenDDS {
+        -:   24:namespace DCPS {
+        -:   25:
+        -:   26:/// Sequence number abstraction.  Only allows positive 64 bit values.
+        -:   27:class OpenDDS_Dcps_Export SequenceNumber {
+        -:   28:public:
+        -:   29:  typedef ACE_INT64 Value;
+        -:   30:  /// Construct with a value, default to one (starting point).
+      519:   31:  SequenceNumber(Value value = INITIAL_VALUE) {
+      519:   32:    setValue(value);
+      519:   33:  }
+        -:   34:
+        -:   35:  /// Pre-increment.
+        -:   36:  SequenceNumber& operator++() {
+        -:   37:    if (this->low_ == ACE_UINT32_MAX) {
+        -:   38:      if (this->high_ == ACE_INT32_MAX) {
+        -:   39:        // this code is here, despite the RTPS spec statement:
+        -:   40:        // "sequence numbers never wrap"
+        -:   41:        this->high_ = 0;
+        -:   42:        this->low_ = 1;
+        -:   43:      } else {
+        -:   44:        ++this->high_;
+        -:   45:        this->low_ = 0;
+        -:   46:      }
+        -:   47:    } else {
+        -:   48:      ++this->low_;
+        -:   49:    }
+        -:   50:    return *this ;
+        -:   51:  }
+        -:   52:
+        -:   53:  /// Post-increment.
+        -:   54:  SequenceNumber operator++(int) {
+        -:   55:    SequenceNumber value(*this);
+        -:   56:    ++*this;
+        -:   57:    return value ;
+        -:   58:  }
+        -:   59:
+        -:   60:  SequenceNumber previous() const {
+        -:   61:    SequenceNumber retVal(*this);
+        -:   62:    if ((this->low_ == 0) && (this->high_ == 0)) {
+        -:   63:      retVal.high_ = ACE_INT32_MAX;
+        -:   64:      retVal.low_  = ACE_UINT32_MAX;
+        -:   65:      return retVal;
+        -:   66:    }
+        -:   67:    if (this->low_ == 0) {
+        -:   68:      --retVal.high_;
+        -:   69:      retVal.low_ = ACE_UINT32_MAX;
+        -:   70:    } else {
+        -:   71:      --retVal.low_;
+        -:   72:    }
+        -:   73:    return retVal ;
+        -:   74:  }
+        -:   75:
+      519:   76:  void setValue(Value value) {
+      519:   77:    if (value < MIN_VALUE) {
+    #####:   78:      value = MIN_VALUE;
+        -:   79:    }
+      519:   80:    this->high_ = ACE_INT32(value / LOW_BASE);
+      519:   81:    this->low_  = ACE_UINT32(value % LOW_BASE);
+      519:   82:  }
+        -:   83:
+        -:   84:  void setValue(ACE_INT32 high, ACE_UINT32 low) {
+        -:   85:    this->high_ = high;
+        -:   86:    this->low_ = low;
+        -:   87:    if (this->getValue() < MIN_VALUE) {
+        -:   88:      this->setValue(MIN_VALUE);
+        -:   89:    }
+        -:   90:  }
+        -:   91:
+        -:   92:  Value getValue() const {
+        -:   93:    return LOW_BASE * this->high_ + this->low_;
+        -:   94:  }
+        -:   95:
+        -:   96:  bool operator<(const SequenceNumber& rvalue) const {
+        -:   97:    return (this->high_ < rvalue.high_)
+        -:   98:      || (this->high_ == rvalue.high_ && this->low_ < rvalue.low_);
+        -:   99:  }
+        -:  100:
+        -:  101:  /// Derive a full suite of logical operations.
+        -:  102:  bool operator==(const SequenceNumber& rvalue) const {
+        -:  103:    return (this->high_ == rvalue.high_) &&
+        -:  104:           (this->low_ == rvalue.low_) ;
+        -:  105:  }
+        -:  106:  bool operator!=(const SequenceNumber& rvalue) const {
+        -:  107:    return (this->high_ != rvalue.high_) ||
+        -:  108:           (this->low_ != rvalue.low_) ;
+        -:  109:  }
+        -:  110:  bool operator>=(const SequenceNumber& rvalue) const {
+        -:  111:    return !(*this  < rvalue);
+        -:  112:  }
+        -:  113:  bool operator<=(const SequenceNumber& rvalue) const {
+        -:  114:    return !(rvalue < *this);
+        -:  115:  }
+        -:  116:  bool operator>(const SequenceNumber& rvalue) const {
+        -:  117:    return (rvalue < *this)
+        -:  118:           && (*this != rvalue);
+        -:  119:  }
+        -:  120:
+        -:  121:  ACE_INT32 getHigh() const {
+        -:  122:    return high_;
+        -:  123:  }
+        -:  124:  ACE_UINT32 getLow() const {
+        -:  125:    return low_;
+        -:  126:  }
+        -:  127:
+        -:  128:  // SEQUENCENUMBER_UNKOWN is defined by the RTPS spec.
+        -:  129:  static SequenceNumber SEQUENCENUMBER_UNKNOWN() {
+        -:  130:    return SequenceNumber(-1, 0);
+        -:  131:  }
+        -:  132:
+        -:  133:  static SequenceNumber ZERO() {
+        -:  134:    return SequenceNumber(0, 0);
+        -:  135:  }
+        -:  136:
+        -:  137:  static const Value MAX_VALUE = ACE_INT64_MAX;
+        -:  138:  static const Value INITIAL_VALUE = 1;
+        -:  139:  static const Value MIN_VALUE = 0;
+        -:  140:  static const Value LOW_BASE = 0x0000000100000000LL;
+        -:  141:
+        -:  142:  friend ACE_CDR::Boolean operator>>(Serializer& s, SequenceNumber& x);
+        -:  143:
+        -:  144:private:
+        -:  145:
+        -:  146:  // Private constructor used to force construction of SEQUENCENUMBER_UNKNOWN.
+        -:  147:  // Also used by operator>> to allow deserialization of the same value.
+        -:  148:  SequenceNumber(ACE_INT32 high, ACE_UINT32 low)
+        -:  149:    : high_(high), low_(low) {
+        -:  150:  }
+        -:  151:
+        -:  152:  ACE_INT32  high_;
+        -:  153:  ACE_UINT32 low_;
+        -:  154:};
+        -:  155:
+        -:  156:inline ACE_CDR::Boolean
+        -:  157:operator<<(Serializer& s, const SequenceNumber& x) {
+        -:  158:  s << x.getHigh();
+        -:  159:  s << x.getLow();
+        -:  160:  return s.good_bit();
+        -:  161:}
+        -:  162:
+        -:  163:inline ACE_CDR::Boolean
+        -:  164:operator>>(Serializer& s, SequenceNumber& x) {
+        -:  165:  ACE_INT32 high;
+        -:  166:  ACE_UINT32 low;
+        -:  167:  if (!(s >> high)) {
+        -:  168:    return false;
+        -:  169:  }
+        -:  170:  if (!(s >> low)) {
+        -:  171:    return false;
+        -:  172:  }
+        -:  173:  x = SequenceNumber(high, low);
+        -:  174:  return true;
+        -:  175:}
+        -:  176:
+        -:  177:inline SequenceNumber
+        -:  178:operator+(const SequenceNumber& lhs, int rhs)
+        -:  179:{
+        -:  180:  return SequenceNumber(lhs.getValue() + rhs);
+        -:  181:}
+        -:  182:
+        -:  183:inline SequenceNumber
+        -:  184:operator+=(SequenceNumber& lhs, int rhs)
+        -:  185:{
+        -:  186:  lhs.setValue(lhs.getValue() + rhs);
+        -:  187:  return lhs;
+        -:  188:}
+        -:  189:
+        -:  190:inline SequenceNumber
+        -:  191:operator+(int lhs, const SequenceNumber& rhs)
+        -:  192:{
+        -:  193:  return rhs + lhs;
+        -:  194:}
+        -:  195:
+        -:  196:inline void
+        -:  197:gen_find_size(const SequenceNumber& /*sn*/, size_t& size, size_t& padding) {
+        -:  198:  find_size_ulong(size, padding);
+        -:  199:  size += gen_max_marshaled_size(CORBA::Long());
+        -:  200:}
+        -:  201:
+        -:  202:typedef std::pair<SequenceNumber, SequenceNumber> SequenceRange;
+        -:  203:
+        -:  204:} // namespace OpenDDS
+        -:  205:} // namespace DCPS
+        -:  206:
+        -:  207:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  208:
+        -:  209:#endif /* OPENDDS_DCPS_SEQUENCENUMBER_H */

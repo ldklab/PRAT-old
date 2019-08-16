@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/OS_NS_string.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: OS_NS_string.inl 2622 2015-08-13 18:30:00Z mitza $
@@ -30,18 +30,18 @@
         -:   28:}
         -:   29:
         -:   30:ACE_INLINE int
-    #####:   31:ACE_OS::memcmp (const void *t, const void *s, size_t len)
+        -:   31:ACE_OS::memcmp (const void *t, const void *s, size_t len)
         -:   32:{
-    #####:   33:  return ::memcmp (t, s, len);
+        -:   33:  return ::memcmp (t, s, len);
         -:   34:}
         -:   35:
         -:   36:ACE_INLINE void *
-    #####:   37:ACE_OS::memcpy (void *t, const void *s, size_t len)
+     6321:   37:ACE_OS::memcpy (void *t, const void *s, size_t len)
         -:   38:{
         -:   39:#if defined (ACE_HAS_MEMCPY_LOOP_UNROLL)
         -:   40:  return fast_memcpy (t, s, len);
         -:   41:#else
-    #####:   42:  return ::memcpy (t, s, len);
+     6321:   42:  return ::memcpy (t, s, len);
         -:   43:#endif /* ACE_HAS_MEMCPY_LOOP_UNROLL */
         -:   44:}
         -:   45:
@@ -52,7 +52,7 @@
         -:   50:}
         -:   51:
         -:   52:ACE_INLINE void *
-    #####:   53:ACE_OS::memset (void *s, int c, size_t len)
+    19665:   53:ACE_OS::memset (void *s, int c, size_t len)
         -:   54:{
         -:   55:#if defined (ACE_HAS_SLOW_MEMSET)
         -:   56:  // This section requires a high optimization level (-xO4 with SunCC)
@@ -102,7 +102,7 @@
         -:  100:
         -:  101:  return s;
         -:  102:#else
-    #####:  103:  return ::memset (s, c, len);
+    19665:  103:  return ::memset (s, c, len);
         -:  104:#endif /* ACE_HAS_SLOW_MEMSET */
         -:  105:}
         -:  106:
@@ -143,9 +143,9 @@
         -:  141:#endif /* ACE_HAS_WCHAR */
         -:  142:
         -:  143:ACE_INLINE char *
-      843:  144:ACE_OS::strchr (char *s, int c)
+        -:  144:ACE_OS::strchr (char *s, int c)
         -:  145:{
-      843:  146:  return ::strchr (s, c);
+        -:  146:  return ::strchr (s, c);
         -:  147:}
         -:  148:
         -:  149:#if defined (ACE_HAS_WCHAR)
@@ -159,9 +159,9 @@
         -:  157:#endif /* ACE_HAS_WCHAR */
         -:  158:
         -:  159:ACE_INLINE int
-    #####:  160:ACE_OS::strcmp (const char *s, const char *t)
+     1020:  160:ACE_OS::strcmp (const char *s, const char *t)
         -:  161:{
-    #####:  162:  return ::strcmp (s, t);
+     1020:  162:  return ::strcmp (s, t);
         -:  163:}
         -:  164:
         -:  165:ACE_INLINE int
@@ -296,9 +296,9 @@
         -:  294:}
         -:  295:
         -:  296:ACE_INLINE int
-    #####:  297:ACE_OS::strncmp (const char *s, const char *t, size_t len)
+        -:  297:ACE_OS::strncmp (const char *s, const char *t, size_t len)
         -:  298:{
-    #####:  299:  return ::strncmp (s, t, len);
+        -:  299:  return ::strncmp (s, t, len);
         -:  300:}
         -:  301:
         -:  302:ACE_INLINE int

@@ -1,187 +1,194 @@
         -:    0:Source:../dds/DCPS/ZeroCopyAllocator_T.cpp
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-    #####:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-    #####:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-    #####:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-    #####:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-    #####:   50:/*EOF*/
-        -:   51:/*EOF*/
-    #####:   52:/*EOF*/
-        -:   53:/*EOF*/
-    #####:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-    #####:   59:/*EOF*/
-        -:   60:/*EOF*/
-    #####:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-    #####:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-        -:   70:/*EOF*/
-    #####:   71:/*EOF*/
-        -:   72:/*EOF*/
-    #####:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-    #####:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-    #####:   82:/*EOF*/
-        -:   83:/*EOF*/
-    #####:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-    #####:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-    #####:   93:/*EOF*/
-        -:   94:/*EOF*/
-    #####:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-    #####:   98:/*EOF*/
-        -:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-    #####:  103:/*EOF*/
-        -:  104:/*EOF*/
-    #####:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-    #####:  108:/*EOF*/
-        -:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-        -:  112:/*EOF*/
-    #####:  113:/*EOF*/
-        -:  114:/*EOF*/
-    #####:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-    #####:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-    #####:  124:/*EOF*/
-        -:  125:/*EOF*/
-    #####:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-        -:  129:/*EOF*/
-    #####:  130:/*EOF*/
-        -:  131:/*EOF*/
-        -:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-    #####:  135:/*EOF*/
-        -:  136:/*EOF*/
-    #####:  137:/*EOF*/
-        -:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-    #####:  142:/*EOF*/
-        -:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-    #####:  147:/*EOF*/
-        -:  148:/*EOF*/
-    #####:  149:/*EOF*/
-        -:  150:/*EOF*/
-        -:  151:/*EOF*/
-        -:  152:/*EOF*/
-    #####:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-        -:  157:/*EOF*/
-    #####:  158:/*EOF*/
-        -:  159:/*EOF*/
-    #####:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-    #####:  165:/*EOF*/
-        -:  166:/*EOF*/
-        -:  167:/*EOF*/
-        -:  168:/*EOF*/
-        -:  169:/*EOF*/
-        -:  170:/*EOF*/
-        -:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-        -:  174:/*EOF*/
-        -:  175:/*EOF*/
-        -:  176:/*EOF*/
-        -:  177:/*EOF*/
-        -:  178:/*EOF*/
-        -:  179:/*EOF*/
-        -:  180:/*EOF*/
-    #####:  181:/*EOF*/
-        -:  182:/*EOF*/
-    #####:  183:/*EOF*/
-        -:  184:/*EOF*/
-    #####:  185:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef ZEROCOPYALLOCATOR_T_CPP
+        -:    9:#define ZEROCOPYALLOCATOR_T_CPP
+        -:   10:
+        -:   11:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   12:# pragma once
+        -:   13:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   14:
+        -:   15:#include "dds/DCPS/ZeroCopyAllocator_T.h"
+        -:   16:
+        -:   17:#if !defined (__ACE_INLINE__)
+        -:   18:#include "dds/DCPS/ZeroCopyAllocator_T.inl"
+        -:   19:#endif /* __//ACE_INLINE__ */
+        -:   20:
+        -:   21:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   22:
+        -:   23:namespace OpenDDS {
+        -:   24:namespace DCPS {
+        -:   25:
+        -:   26://=============================================================
+        -:   27:// These methods are no-ops.
+        -:   28://=============================================================
+        -:   29:template <class T, std::size_t N>
+        -:   30:void *
+    #####:   31:FirstTimeFastAllocator<T, N>::calloc(size_t nbytes, char initial_value)
+        -:   32:{/* no-op */
+        -:   33:  ACE_UNUSED_ARG(nbytes);
+        -:   34:  ACE_UNUSED_ARG(initial_value);
+    #####:   35:  return (void*)0;
+        -:   36:}
+        -:   37:
+        -:   38:template <class T, std::size_t N>
+        -:   39:void *
+    #####:   40:FirstTimeFastAllocator<T, N>::calloc(size_t n_elem, size_t elem_size, char initial_value)
+        -:   41:{/* no-op */
+        -:   42:  ACE_UNUSED_ARG(n_elem);
+        -:   43:  ACE_UNUSED_ARG(elem_size);
+        -:   44:  ACE_UNUSED_ARG(initial_value);
+    #####:   45:  return (void*)0;
+        -:   46:}
+        -:   47:
+        -:   48:template <class T, std::size_t N>
+        -:   49:int
+    #####:   50:FirstTimeFastAllocator<T, N>::remove()
+        -:   51:{/* no-op */
+    #####:   52:  ACE_ERROR((LM_ERROR,
+        -:   53:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+    #####:   54:  return -1;
+        -:   55:}
+        -:   56:
+        -:   57:template <class T, std::size_t N>
+        -:   58:int
+    #####:   59:FirstTimeFastAllocator<T, N>::bind(const char *name, void *pointer, int duplicates)
+        -:   60:{/* no-op */
+    #####:   61:  ACE_ERROR((LM_ERROR,
+        -:   62:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:   63:  ACE_UNUSED_ARG(name);
+        -:   64:  ACE_UNUSED_ARG(pointer);
+        -:   65:  ACE_UNUSED_ARG(duplicates);
+    #####:   66:  return -1;
+        -:   67:}
+        -:   68:
+        -:   69:template <class T, std::size_t N>
+        -:   70:int
+    #####:   71:FirstTimeFastAllocator<T, N>::trybind(const char *name, void *&pointer)
+        -:   72:{/* no-op */
+    #####:   73:  ACE_ERROR((LM_ERROR,
+        -:   74:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:   75:  ACE_UNUSED_ARG(name);
+        -:   76:  ACE_UNUSED_ARG(pointer);
+    #####:   77:  return -1;
+        -:   78:}
+        -:   79:
+        -:   80:template <class T, std::size_t N>
+        -:   81:int
+    #####:   82:FirstTimeFastAllocator<T, N>::find(const char *name, void *&pointer)
+        -:   83:{/* no-op */
+    #####:   84:  ACE_ERROR((LM_ERROR,
+        -:   85:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:   86:  ACE_UNUSED_ARG(name);
+        -:   87:  ACE_UNUSED_ARG(pointer);
+    #####:   88:  return -1;
+        -:   89:}
+        -:   90:
+        -:   91:template <class T, std::size_t N>
+        -:   92:int
+    #####:   93:FirstTimeFastAllocator<T, N>::find(const char *name)
+        -:   94:{/* no-op */
+    #####:   95:  ACE_ERROR((LM_ERROR,
+        -:   96:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:   97:  ACE_UNUSED_ARG(name);
+    #####:   98:  return -1;
+        -:   99:}
+        -:  100:
+        -:  101:template <class T, std::size_t N>
+        -:  102:int
+    #####:  103:FirstTimeFastAllocator<T, N>::unbind(const char *name)
+        -:  104:{/* no-op */
+    #####:  105:  ACE_ERROR((LM_ERROR,
+        -:  106:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:  107:  ACE_UNUSED_ARG(name);
+    #####:  108:  return -1;
+        -:  109:}
+        -:  110:
+        -:  111:template <class T, std::size_t N>
+        -:  112:int
+    #####:  113:FirstTimeFastAllocator<T, N>::unbind(const char *name, void *&pointer)
+        -:  114:{/* no-op */
+    #####:  115:  ACE_ERROR((LM_ERROR,
+        -:  116:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:  117:  ACE_UNUSED_ARG(name);
+        -:  118:  ACE_UNUSED_ARG(pointer);
+    #####:  119:  return -1;
+        -:  120:}
+        -:  121:
+        -:  122:template <class T, std::size_t N>
+        -:  123:int
+    #####:  124:FirstTimeFastAllocator<T, N>::sync(ssize_t len, int flags)
+        -:  125:{/* no-op */
+    #####:  126:  ACE_ERROR((LM_ERROR,
+        -:  127:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:  128:  ACE_UNUSED_ARG(len);
+        -:  129:  ACE_UNUSED_ARG(flags);
+    #####:  130:  return -1;
+        -:  131:}
+        -:  132:
+        -:  133:template <class T, std::size_t N>
+        -:  134:int
+    #####:  135:FirstTimeFastAllocator<T, N>::sync(void *addr, size_t len, int flags)
+        -:  136:{/* no-op */
+    #####:  137:  ACE_ERROR((LM_ERROR,
+        -:  138:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:  139:  ACE_UNUSED_ARG(addr);
+        -:  140:  ACE_UNUSED_ARG(len);
+        -:  141:  ACE_UNUSED_ARG(flags);
+    #####:  142:  return -1;
+        -:  143:}
+        -:  144:
+        -:  145:template <class T, std::size_t N>
+        -:  146:int
+    #####:  147:FirstTimeFastAllocator<T, N>::protect(ssize_t len, int prot)
+        -:  148:{/* no-op */
+    #####:  149:  ACE_ERROR((LM_ERROR,
+        -:  150:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:  151:  ACE_UNUSED_ARG(len);
+        -:  152:  ACE_UNUSED_ARG(prot);
+    #####:  153:  return -1;
+        -:  154:}
+        -:  155:
+        -:  156:template <class T, std::size_t N>
+        -:  157:int
+    #####:  158:FirstTimeFastAllocator<T, N>::protect(void *addr, size_t len, int prot)
+        -:  159:{/* no-op */
+    #####:  160:  ACE_ERROR((LM_ERROR,
+        -:  161:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:  162:  ACE_UNUSED_ARG(addr);
+        -:  163:  ACE_UNUSED_ARG(len);
+        -:  164:  ACE_UNUSED_ARG(prot);
+    #####:  165:  return -1;
+        -:  166:}
+        -:  167:
+        -:  168:#if defined (ACE_HAS_MALLOC_STATS)
+        -:  169:
+        -:  170:template <class T, std::size_t N>
+        -:  171:void
+        -:  172:FirstTimeFastAllocator<T, N>::print_stats() const
+        -:  173:{/* no-op */
+        -:  174:  ACE_ERROR((LM_ERROR,
+        -:  175:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+        -:  176:}
+        -:  177:#endif /* ACE_HAS_MALLOC_STATS */
+        -:  178:
+        -:  179:template <class T, std::size_t N>
+        -:  180:void
+    #####:  181:FirstTimeFastAllocator<T, N>::dump() const
+        -:  182:{/* no-op */
+    #####:  183:  ACE_ERROR((LM_ERROR,
+        -:  184:             ACE_TEXT("(%P|%t) %T not supported %a\n"))) ;
+    #####:  185:}
+        -:  186:
+        -:  187:} // namespace DCPS
+        -:  188:} // namespace OpenDDS
+        -:  189:
+        -:  190:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  191:
+        -:  192:#endif /* ZEROCOPYALLOCATOR_T_CPP  */

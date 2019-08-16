@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Sequence_Element_T.h
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:#ifndef guard_string_sequence_element_hpp
         -:    2:#define guard_string_sequence_element_hpp
         -:    3:/**
@@ -65,16 +65,16 @@
         -:   63:  {
     #####:   64:  }
         -:   65:
-    #####:   66:  string_sequence_element & operator=(const_value_type rhs)
+        -:   66:  string_sequence_element & operator=(const_value_type rhs)
         -:   67:  {
-    #####:   68:    string_var tmp(rhs);
-    #####:   69:    return pseudo_copy_swap(tmp);
+        -:   68:    string_var tmp(rhs);
+        -:   69:    return pseudo_copy_swap(tmp);
         -:   70:  }
         -:   71:
-        -:   72:  string_sequence_element & operator=(value_type rhs)
+    #####:   72:  string_sequence_element & operator=(value_type rhs)
         -:   73:  {
-        -:   74:    string_var tmp(rhs);
-        -:   75:    return pseudo_copy_swap(tmp);
+    #####:   74:    string_var tmp(rhs);
+    #####:   75:    return pseudo_copy_swap(tmp);
         -:   76:  }
         -:   77:
         -:   78:  string_sequence_element & operator=(string_sequence_element const & rhs)

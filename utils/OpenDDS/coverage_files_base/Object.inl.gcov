@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Object.inl
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: Object.inl 1861 2011-08-31 16:18:08Z mesnierp $
@@ -24,15 +24,15 @@
         -:   22:// ****************************************************************
         -:   23:
         -:   24:ACE_INLINE
-    #####:   25:CORBA::Object::Object (int)
+     1053:   25:CORBA::Object::Object (int)
         -:   26:  : refcount_ (1),
         -:   27:    is_local_ (true),
         -:   28:    is_evaluated_ (true),
         -:   29:    ior_ (),
         -:   30:    orb_core_ (0),
-    #####:   31:    protocol_proxy_ (0)
+     1053:   31:    protocol_proxy_ (0)
         -:   32:{
-    #####:   33:}
+     1053:   33:}
         -:   34:
         -:   35:ACE_INLINE CORBA::Object_ptr
         -:   36:CORBA::Object::_duplicate (CORBA::Object_ptr obj)

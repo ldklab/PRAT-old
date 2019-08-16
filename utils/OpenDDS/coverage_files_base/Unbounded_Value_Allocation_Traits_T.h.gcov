@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Value_Allocation_Traits_T.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:#ifndef guard_unbounded_value_allocation_traits_hpp
         -:    2:#define guard_unbounded_value_allocation_traits_hpp
         -:    3:/**
@@ -27,30 +27,30 @@
         -:   25:{
         -:   26:  typedef T value_type;
         -:   27:
-        -:   28:  inline static CORBA::ULong default_maximum()
+     2649:   28:  inline static CORBA::ULong default_maximum()
         -:   29:  {
-        -:   30:    return 0;
+     2649:   30:    return 0;
         -:   31:  }
         -:   32:
-        -:   33:  inline static value_type * default_buffer_allocation()
+     2649:   33:  inline static value_type * default_buffer_allocation()
         -:   34:  {
-        -:   35:    return 0;
+     2649:   35:    return 0;
         -:   36:  }
         -:   37:
-    #####:   38:  inline static value_type * allocbuf(CORBA::ULong maximum)
+      939:   38:  inline static value_type * allocbuf(CORBA::ULong maximum)
         -:   39:  {
-    #####:   40:    return new value_type[maximum];
+      939:   40:    return new value_type[maximum];
         -:   41:  }
         -:   42:
-    #####:   43:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+      336:   43:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
         -:   44:  {
-    #####:   45:    return new value_type[maximum];
+      336:   45:    return new value_type[maximum];
         -:   46:  }
         -:   47:
-    #####:   48:  inline static void freebuf(value_type * buffer)
+     1368:   48:  inline static void freebuf(value_type * buffer)
         -:   49:  {
-    #####:   50:    delete[] buffer;
-    #####:   51:  }
+     1368:   50:    delete[] buffer;
+     1368:   51:  }
         -:   52:};
         -:   53:
         -:   54:} // namespace details

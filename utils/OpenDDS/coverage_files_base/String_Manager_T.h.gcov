@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Manager_T.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2:
         -:    3://=============================================================================
@@ -43,15 +43,15 @@
         -:   41:  typedef TAO::details::string_traits_base <charT> s_traits;
         -:   42:
         -:   43:  /// Default CTOR will initialize the underlying ptr_ to empty string.
-    #####:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
+      816:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
         -:   45:  {
-    #####:   46:  }
+      816:   46:  }
         -:   47:
         -:   48:  /// Copy constructor
-    #####:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
-    #####:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
+      459:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
+      459:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
         -:   51:  {
-    #####:   52:  }
+      459:   52:  }
         -:   53:
         -:   54:  /// Constructor from const char* makes a copy.
         -:   55:  inline String_Manager_T (const character_type *s) :
@@ -60,17 +60,17 @@
         -:   58:  }
         -:   59:
         -:   60:  /// Destructor
-    #####:   61:  inline ~String_Manager_T (void) {
-    #####:   62:    s_traits::release (this->ptr_);
-    #####:   63:  }
+     1347:   61:  inline ~String_Manager_T (void) {
+     1347:   62:    s_traits::release (this->ptr_);
+     1347:   63:  }
         -:   64:
         -:   65:  /// Assignment from another managed type
-    #####:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
+      381:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
         -:   67:    // Strongly exception safe by means of copy and non-throwing swap
         -:   68:    // technique.
-    #####:   69:    String_Manager_T <character_type> tmp (rhs);
-    #####:   70:    std::swap (this->ptr_, tmp.ptr_);
-    #####:   71:    return *this;
+      762:   69:    String_Manager_T <character_type> tmp (rhs);
+      381:   70:    std::swap (this->ptr_, tmp.ptr_);
+      762:   71:    return *this;
         -:   72:  }
         -:   73:
         -:   74:  /// Assignment from var type will make a copy
@@ -105,8 +105,8 @@
         -:  103:  }
         -:  104:
         -:  105:  /// For in parameter.
-    #####:  106:  inline const character_type *in (void) const {
-    #####:  107:    return this->ptr_;
+      174:  106:  inline const character_type *in (void) const {
+      174:  107:    return this->ptr_;
         -:  108:  }
         -:  109:
         -:  110:  /// For inout parameter.
@@ -115,10 +115,10 @@
         -:  113:  }
         -:  114:
         -:  115:  /// for out parameter.
-        -:  116:  inline character_type *&out (void) {
-        -:  117:    s_traits::release (this->ptr_);
-        -:  118:    this->ptr_ = 0;
-        -:  119:    return this->ptr_;
+       72:  116:  inline character_type *&out (void) {
+       72:  117:    s_traits::release (this->ptr_);
+       72:  118:    this->ptr_ = 0;
+       72:  119:    return this->ptr_;
         -:  120:  }
         -:  121:
         -:  122:  /// For string of return type.
@@ -138,9 +138,9 @@
         -:  136:}
         -:  137:
         -:  138:
-        -:  139:inline bool operator< (const TAO::String_Manager &lhs, const TAO::String_Manager &rhs)
+    #####:  139:inline bool operator< (const TAO::String_Manager &lhs, const TAO::String_Manager &rhs)
         -:  140:{
-        -:  141:  return ACE_OS::strcmp (lhs.in(), rhs.in ()) < 0;
+    #####:  141:  return ACE_OS::strcmp (lhs.in(), rhs.in ()) < 0;
         -:  142:}
         -:  143:
         -:  144:

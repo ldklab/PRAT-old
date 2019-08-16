@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Basic_String_Sequence_T.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:#ifndef guard_unbounded_basic_string_sequence_hpp
         -:    2:#define guard_unbounded_basic_string_sequence_hpp
         -:    3:/**
@@ -23,7 +23,7 @@
         -:   21:namespace TAO
         -:   22:{
         -:   23:template<typename charT>
-    #####:   24:class unbounded_basic_string_sequence
+     1305:   24:class unbounded_basic_string_sequence
         -:   25:{
         -:   26:public:
         -:   27:  typedef charT character_type;
@@ -44,21 +44,21 @@
         -:   42:
         -:   43:
         -:   44:  /// @copydoc TAO::details::generic_sequence::generic_sequence()
-        -:   45:  inline unbounded_basic_string_sequence()
-        -:   46:    : impl_()
-        -:   47:  {}
+      486:   45:  inline unbounded_basic_string_sequence()
+      486:   46:    : impl_()
+      486:   47:  {}
         -:   48:
         -:   49:
-        -:   50:  inline explicit unbounded_basic_string_sequence(CORBA::ULong maximum)
-        -:   51:    : impl_(maximum)
-        -:   52:  {}
-        -:   53:  inline unbounded_basic_string_sequence(
+    #####:   50:  inline explicit unbounded_basic_string_sequence(CORBA::ULong maximum)
+    #####:   51:    : impl_(maximum)
+    #####:   52:  {}
+      102:   53:  inline unbounded_basic_string_sequence(
         -:   54:      CORBA::ULong maximum,
         -:   55:      CORBA::ULong length,
         -:   56:      value_type * data,
         -:   57:      CORBA::Boolean release)
-        -:   58:    : impl_(maximum, length, data, release)
-        -:   59:  {}
+      102:   58:    : impl_(maximum, length, data, release)
+      102:   59:  {}
         -:   60:
         -:   61:  /* Use default ctor, operator= and dtor */
         -:   62:
@@ -67,24 +67,24 @@
         -:   65:    return impl_.maximum();
         -:   66:  }
         -:   67:  /// @copydoc TAO::details::generic_sequence::release()
-        -:   68:  inline CORBA::Boolean release() const {
-        -:   69:    return impl_.release();
+    #####:   68:  inline CORBA::Boolean release() const {
+    #####:   69:    return impl_.release();
         -:   70:  }
         -:   71:  /// @copydoc TAO::details::generic_sequence::length()
-        -:   72:  inline CORBA::ULong length() const {
-        -:   73:    return impl_.length();
+      198:   72:  inline CORBA::ULong length() const {
+      198:   73:    return impl_.length();
         -:   74:  }
         -:   75:  /// @copydoc TAO::details::generic_sequence::length()
-        -:   76:  inline void length(CORBA::ULong length) {
-        -:   77:    impl_.length(length);
-        -:   78:  }
+    #####:   76:  inline void length(CORBA::ULong length) {
+    #####:   77:    impl_.length(length);
+    #####:   78:  }
         -:   79:  /// @copydoc TAO::details::generic_sequence::operator[]
-        -:   80:  inline const_element_type operator[](CORBA::ULong i) const {
-        -:   81:    return const_element_type (impl_[i], release());
+    #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
+    #####:   81:    return const_element_type (impl_[i], release());
         -:   82:  }
         -:   83:  /// @copydoc TAO::details::generic_sequence::operator[]
-        -:   84:  inline element_type operator[](CORBA::ULong i) {
-        -:   85:    return element_type(impl_[i], release());
+    #####:   84:  inline element_type operator[](CORBA::ULong i) {
+    #####:   85:    return element_type(impl_[i], release());
         -:   86:  }
         -:   87:  /// @copydoc TAO::details::generic_sequence::get_buffer()
         -:   88:  inline const_value_type const * get_buffer() const {
@@ -99,13 +99,13 @@
         -:   97:    impl_.replace(maximum, length, data, release);
         -:   98:  }
         -:   99:  /// @copydoc TAO::details::generic_sequence::get_buffer(CORBA::Boolean)
-        -:  100:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
-        -:  101:    return impl_.get_buffer(orphan);
+    #####:  100:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
+    #####:  101:    return impl_.get_buffer(orphan);
         -:  102:  }
         -:  103:  /// @copydoc TAO::details::generic_sequence::swap
-        -:  104:  inline void swap(unbounded_basic_string_sequence & rhs) throw() {
-        -:  105:    impl_.swap(rhs.impl_);
-        -:  106:  }
+      102:  104:  inline void swap(unbounded_basic_string_sequence & rhs) throw() {
+      102:  105:    impl_.swap(rhs.impl_);
+      102:  106:  }
         -:  107:
         -:  108:  static value_type * allocbuf(CORBA::ULong maximum)
         -:  109:  {

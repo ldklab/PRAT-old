@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/bits/stl_set.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Set implementation -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
@@ -403,13 +403,13 @@
         -:  401:
         -:  402:      ///  Returns true if the %set is empty.
         -:  403:      bool
-    #####:  404:      empty() const _GLIBCXX_NOEXCEPT
-    #####:  405:      { return _M_t.empty(); }
+        -:  404:      empty() const _GLIBCXX_NOEXCEPT
+        -:  405:      { return _M_t.empty(); }
         -:  406:
         -:  407:      ///  Returns the size of the %set.
         -:  408:      size_type
-    #####:  409:      size() const _GLIBCXX_NOEXCEPT
-    #####:  410:      { return _M_t.size(); }
+        -:  409:      size() const _GLIBCXX_NOEXCEPT
+        -:  410:      { return _M_t.size(); }
         -:  411:
         -:  412:      ///  Returns the maximum size of the %set.
         -:  413:      size_type
@@ -507,11 +507,11 @@
         -:  505:
         -:  506:#if __cplusplus >= 201103L
         -:  507:      std::pair<iterator, bool>
-        -:  508:      insert(value_type&& __x)
+    #####:  508:      insert(value_type&& __x)
         -:  509:      {
-        -:  510:	std::pair<typename _Rep_type::iterator, bool> __p =
-        -:  511:	  _M_t._M_insert_unique(std::move(__x));
-        -:  512:	return std::pair<iterator, bool>(__p.first, __p.second);
+    #####:  510:	std::pair<typename _Rep_type::iterator, bool> __p =
+    #####:  511:	  _M_t._M_insert_unique(std::move(__x));
+    #####:  512:	return std::pair<iterator, bool>(__p.first, __p.second);
         -:  513:      }
         -:  514:#endif
         -:  515:
@@ -673,8 +673,8 @@
         -:  671:       *  in any way.  Managing the pointer is the user's responsibility.
         -:  672:       */
         -:  673:      size_type
-    #####:  674:      erase(const key_type& __x)
-    #####:  675:      { return _M_t.erase(__x); }
+        -:  674:      erase(const key_type& __x)
+        -:  675:      { return _M_t.erase(__x); }
         -:  676:
         -:  677:#if __cplusplus >= 201103L
         -:  678:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
@@ -764,8 +764,8 @@
         -:  762:       *  past-the-end ( @c end() ) iterator.
         -:  763:       */
         -:  764:      iterator
-        -:  765:      find(const key_type& __x)
-        -:  766:      { return _M_t.find(__x); }
+    #####:  765:      find(const key_type& __x)
+    #####:  766:      { return _M_t.find(__x); }
         -:  767:
         -:  768:      const_iterator
         -:  769:      find(const key_type& __x) const
@@ -929,9 +929,9 @@
         -:  927:  */
         -:  928:  template<typename _Key, typename _Compare, typename _Alloc>
         -:  929:    inline bool
-        -:  930:    operator<(const set<_Key, _Compare, _Alloc>& __x,
+    #####:  930:    operator<(const set<_Key, _Compare, _Alloc>& __x,
         -:  931:	      const set<_Key, _Compare, _Alloc>& __y)
-        -:  932:    { return __x._M_t < __y._M_t; }
+    #####:  932:    { return __x._M_t < __y._M_t; }
         -:  933:
         -:  934:  ///  Returns !(x == y).
         -:  935:  template<typename _Key, typename _Compare, typename _Alloc>

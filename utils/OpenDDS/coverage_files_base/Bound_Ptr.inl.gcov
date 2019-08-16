@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Bound_Ptr.inl
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:/* -*- C++ -*- */
         -:    2:// $Id: Bound_Ptr.inl 2622 2015-08-13 18:30:00Z mitza $
         -:    3:
@@ -277,9 +277,9 @@
         -:  275:}
         -:  276:
         -:  277:template<class X, class ACE_LOCK> inline X &
-        -:  278:ACE_Strong_Bound_Ptr<X, ACE_LOCK>::operator *() const
+    #####:  278:ACE_Strong_Bound_Ptr<X, ACE_LOCK>::operator *() const
         -:  279:{
-        -:  280:  return *this->ptr_;
+    #####:  280:  return *this->ptr_;
         -:  281:}
         -:  282:
         -:  283:template <class X, class ACE_LOCK> inline X*

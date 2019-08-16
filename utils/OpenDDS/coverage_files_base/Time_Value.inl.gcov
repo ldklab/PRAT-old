@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Time_Value.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: Time_Value.inl 2179 2013-05-28 22:16:51Z mesnierp $
@@ -10,7 +10,7 @@
         -:    8:
         -:    9:/// Returns the value of the object as a timeval.
         -:   10:ACE_INLINE
-    #####:   11:ACE_Time_Value::operator timeval () const
+        -:   11:ACE_Time_Value::operator timeval () const
         -:   12:{
         -:   13:  // ACE_OS_TRACE ("ACE_Time_Value::operator timeval");
         -:   14:#if defined (ACE_HAS_TIME_T_LONG_MISMATCH)
@@ -20,26 +20,26 @@
         -:   18:  me->ext_tv_.tv_usec = ACE_Utils::truncate_cast<long> (this->tv_.tv_usec);
         -:   19:  return this->ext_tv_;
         -:   20:#else
-    #####:   21:  return this->tv_;
+        -:   21:  return this->tv_;
         -:   22:#endif /* ACE_HAS_TIME_T_LONG_MISMATCH */
         -:   23:}
         -:   24:
         -:   25:ACE_INLINE void
-    #####:   26:ACE_Time_Value::set (const timeval &tv)
+     3597:   26:ACE_Time_Value::set (const timeval &tv)
         -:   27:{
         -:   28:  // ACE_OS_TRACE ("ACE_Time_Value::set");
-    #####:   29:  this->tv_.tv_sec = tv.tv_sec;
-    #####:   30:  this->tv_.tv_usec = tv.tv_usec;
+     3597:   29:  this->tv_.tv_sec = tv.tv_sec;
+     3597:   30:  this->tv_.tv_usec = tv.tv_usec;
         -:   31:
-    #####:   32:  this->normalize ();
-    #####:   33:}
+     3597:   32:  this->normalize ();
+     3597:   33:}
         -:   34:
         -:   35:ACE_INLINE
-    #####:   36:ACE_Time_Value::ACE_Time_Value (const struct timeval &tv)
+     3597:   36:ACE_Time_Value::ACE_Time_Value (const struct timeval &tv)
         -:   37:{
         -:   38:  // ACE_OS_TRACE ("ACE_Time_Value::ACE_Time_Value");
-    #####:   39:  this->set (tv);
-    #####:   40:}
+     3597:   39:  this->set (tv);
+     3597:   40:}
         -:   41:
         -:   42:ACE_INLINE
         -:   43:ACE_Time_Value::operator const timeval * () const
@@ -202,20 +202,20 @@
         -:  200:
         -:  201:/// Sets the number of micro-seconds.
         -:  202:ACE_INLINE void
-    #####:  203:ACE_Time_Value::usec (suseconds_t usec)
+     1299:  203:ACE_Time_Value::usec (suseconds_t usec)
         -:  204:{
         -:  205:  // ACE_OS_TRACE ("ACE_Time_Value::usec");
-    #####:  206:  this->tv_.tv_usec = usec;
-    #####:  207:}
+     1299:  206:  this->tv_.tv_usec = usec;
+     1299:  207:}
         -:  208:
         -:  209:ACE_INLINE void
-    #####:  210:ACE_Time_Value::to_usec (ACE_UINT64 & usec) const
+        -:  210:ACE_Time_Value::to_usec (ACE_UINT64 & usec) const
         -:  211:{
         -:  212:  // ACE_OS_TRACE ("ACE_Time_Value::to_usec");
-    #####:  213:  usec = static_cast<ACE_UINT64> (this->tv_.tv_sec);
-    #####:  214:  usec *= 1000000;
-    #####:  215:  usec += this->tv_.tv_usec;
-    #####:  216:}
+        -:  213:  usec = static_cast<ACE_UINT64> (this->tv_.tv_sec);
+        -:  214:  usec *= 1000000;
+        -:  215:  usec += this->tv_.tv_usec;
+        -:  216:}
         -:  217:
         -:  218:ACE_INLINE ACE_Time_Value
         -:  219:operator * (double d, const ACE_Time_Value &tv)
@@ -231,32 +231,32 @@
         -:  229:
         -:  230:/// True if tv1 > tv2.
         -:  231:ACE_INLINE bool
-    #####:  232:operator > (const ACE_Time_Value &tv1,
+        -:  232:operator > (const ACE_Time_Value &tv1,
         -:  233:            const ACE_Time_Value &tv2)
         -:  234:{
         -:  235:  // ACE_OS_TRACE ("operator >");
-    #####:  236:  if (tv1.sec () > tv2.sec ())
-    #####:  237:    return 1;
-    #####:  238:  else if (tv1.sec () == tv2.sec ()
-    #####:  239:           && tv1.usec () > tv2.usec ())
-    #####:  240:    return 1;
+        -:  236:  if (tv1.sec () > tv2.sec ())
+        -:  237:    return 1;
+        -:  238:  else if (tv1.sec () == tv2.sec ()
+        -:  239:           && tv1.usec () > tv2.usec ())
+        -:  240:    return 1;
         -:  241:  else
-    #####:  242:    return 0;
+        -:  242:    return 0;
         -:  243:}
         -:  244:
         -:  245:/// True if tv1 >= tv2.
         -:  246:ACE_INLINE bool
-    #####:  247:operator >= (const ACE_Time_Value &tv1,
+      210:  247:operator >= (const ACE_Time_Value &tv1,
         -:  248:             const ACE_Time_Value &tv2)
         -:  249:{
         -:  250:  // ACE_OS_TRACE ("operator >=");
-    #####:  251:  if (tv1.sec () > tv2.sec ())
-    #####:  252:    return 1;
-    #####:  253:  else if (tv1.sec () == tv2.sec ()
-    #####:  254:           && tv1.usec () >= tv2.usec ())
-    #####:  255:    return 1;
+      210:  251:  if (tv1.sec () > tv2.sec ())
+       24:  252:    return 1;
+      372:  253:  else if (tv1.sec () == tv2.sec ()
+      186:  254:           && tv1.usec () >= tv2.usec ())
+       12:  255:    return 1;
         -:  256:  else
-    #####:  257:    return 0;
+      174:  257:    return 0;
         -:  258:}
         -:  259:
         -:  260:/// Returns the value of the object as a timespec_t.
@@ -282,50 +282,50 @@
         -:  280:
         -:  281:/// True if tv1 < tv2.
         -:  282:ACE_INLINE bool
-    #####:  283:operator < (const ACE_Time_Value &tv1,
+        -:  283:operator < (const ACE_Time_Value &tv1,
         -:  284:            const ACE_Time_Value &tv2)
         -:  285:{
         -:  286:  // ACE_OS_TRACE ("operator <");
-    #####:  287:  return tv2 > tv1;
+        -:  287:  return tv2 > tv1;
         -:  288:}
         -:  289:
         -:  290:/// True if tv1 >= tv2.
         -:  291:ACE_INLINE bool
-    #####:  292:operator <= (const ACE_Time_Value &tv1,
+        -:  292:operator <= (const ACE_Time_Value &tv1,
         -:  293:             const ACE_Time_Value &tv2)
         -:  294:{
         -:  295:  // ACE_OS_TRACE ("operator <=");
-    #####:  296:  return tv2 >= tv1;
+        -:  296:  return tv2 >= tv1;
         -:  297:}
         -:  298:
         -:  299:/// True if tv1 == tv2.
         -:  300:ACE_INLINE bool
-    #####:  301:operator == (const ACE_Time_Value &tv1,
+        -:  301:operator == (const ACE_Time_Value &tv1,
         -:  302:             const ACE_Time_Value &tv2)
         -:  303:{
         -:  304:  // ACE_OS_TRACE ("operator ==");
-    #####:  305:  return tv1.sec () == tv2.sec ()
-    #####:  306:    && tv1.usec () == tv2.usec ();
+        -:  305:  return tv1.sec () == tv2.sec ()
+        -:  306:    && tv1.usec () == tv2.usec ();
         -:  307:}
         -:  308:
         -:  309:/// True if tv1 != tv2.
         -:  310:ACE_INLINE bool
-    #####:  311:operator != (const ACE_Time_Value &tv1,
+        -:  311:operator != (const ACE_Time_Value &tv1,
         -:  312:             const ACE_Time_Value &tv2)
         -:  313:{
         -:  314:  // ACE_OS_TRACE ("operator !=");
-    #####:  315:  return !(tv1 == tv2);
+        -:  315:  return !(tv1 == tv2);
         -:  316:}
         -:  317:
         -:  318:/// Add TV to this.
         -:  319:ACE_INLINE ACE_Time_Value &
-    #####:  320:ACE_Time_Value::operator+= (const ACE_Time_Value &tv)
+        -:  320:ACE_Time_Value::operator+= (const ACE_Time_Value &tv)
         -:  321:{
         -:  322:  // ACE_OS_TRACE ("ACE_Time_Value::operator+=");
-    #####:  323:  this->sec (this->sec () + tv.sec ());
-    #####:  324:  this->usec (this->usec () + tv.usec ());
-    #####:  325:  this->normalize ();
-    #####:  326:  return *this;
+        -:  323:  this->sec (this->sec () + tv.sec ());
+        -:  324:  this->usec (this->usec () + tv.usec ());
+        -:  325:  this->normalize ();
+        -:  326:  return *this;
         -:  327:}
         -:  328:
         -:  329:ACE_INLINE ACE_Time_Value &
@@ -337,12 +337,12 @@
         -:  335:}
         -:  336:
         -:  337:ACE_INLINE ACE_Time_Value &
-    #####:  338:ACE_Time_Value::operator= (const ACE_Time_Value &tv)
+      588:  338:ACE_Time_Value::operator= (const ACE_Time_Value &tv)
         -:  339:{
         -:  340:  // ACE_OS_TRACE ("ACE_Time_Value::operator=");
-    #####:  341:  this->sec (tv.sec ());
-    #####:  342:  this->usec (tv.usec ());
-    #####:  343:  return *this;
+      588:  341:  this->sec (tv.sec ());
+      588:  342:  this->usec (tv.usec ());
+      588:  343:  return *this;
         -:  344:}
         -:  345:
         -:  346:ACE_INLINE ACE_Time_Value &
@@ -356,13 +356,13 @@
         -:  354:
         -:  355:/// Subtract TV to this.
         -:  356:ACE_INLINE ACE_Time_Value &
-    #####:  357:ACE_Time_Value::operator-= (const ACE_Time_Value &tv)
+      258:  357:ACE_Time_Value::operator-= (const ACE_Time_Value &tv)
         -:  358:{
         -:  359:  // ACE_OS_TRACE ("ACE_Time_Value::operator-=");
-    #####:  360:  this->sec (this->sec () - tv.sec ());
-    #####:  361:  this->usec (this->usec () - tv.usec ());
-    #####:  362:  this->normalize ();
-    #####:  363:  return *this;
+      258:  360:  this->sec (this->sec () - tv.sec ());
+      258:  361:  this->usec (this->usec () - tv.usec ());
+      258:  362:  this->normalize ();
+      258:  363:  return *this;
         -:  364:}
         -:  365:
         -:  366:ACE_INLINE ACE_Time_Value &
@@ -375,26 +375,26 @@
         -:  373:
         -:  374:/// Adds two ACE_Time_Value objects together, returns the sum.
         -:  375:ACE_INLINE ACE_Time_Value
-    #####:  376:operator + (const ACE_Time_Value &tv1,
+        -:  376:operator + (const ACE_Time_Value &tv1,
         -:  377:            const ACE_Time_Value &tv2)
         -:  378:{
         -:  379:  // ACE_OS_TRACE ("operator +");
-    #####:  380:  ACE_Time_Value sum (tv1);
-    #####:  381:  sum += tv2;
+        -:  380:  ACE_Time_Value sum (tv1);
+        -:  381:  sum += tv2;
         -:  382:
-    #####:  383:  return sum;
+        -:  383:  return sum;
         -:  384:}
         -:  385:
         -:  386:/// Subtracts two ACE_Time_Value objects, returns the difference.
         -:  387:ACE_INLINE ACE_Time_Value
-    #####:  388:operator - (const ACE_Time_Value &tv1,
+      258:  388:operator - (const ACE_Time_Value &tv1,
         -:  389:            const ACE_Time_Value &tv2)
         -:  390:{
         -:  391:  // ACE_OS_TRACE ("operator -");
-    #####:  392:  ACE_Time_Value delta (tv1);
-    #####:  393:  delta -= tv2;
+      258:  392:  ACE_Time_Value delta (tv1);
+      258:  393:  delta -= tv2;
         -:  394:
-    #####:  395:  return delta;
+      258:  395:  return delta;
         -:  396:}
         -:  397:
         -:  398:ACE_END_VERSIONED_NAMESPACE_DECL

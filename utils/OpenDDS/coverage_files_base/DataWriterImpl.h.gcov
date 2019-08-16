@@ -1,703 +1,718 @@
-        -:    0:Source:DCPS/DataWriterImpl.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-        -:   94:/*EOF*/
-    #####:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-        -:   98:/*EOF*/
-        -:   99:/*EOF*/
-    #####:  100:/*EOF*/
-        -:  101:/*EOF*/
-    #####:  102:/*EOF*/
-        -:  103:/*EOF*/
-    #####:  104:/*EOF*/
-        -:  105:/*EOF*/
-    #####:  106:/*EOF*/
-        -:  107:/*EOF*/
-    #####:  108:/*EOF*/
-    #####:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-        -:  112:/*EOF*/
-        -:  113:/*EOF*/
-        -:  114:/*EOF*/
-        -:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-        -:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-        -:  125:/*EOF*/
-        -:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-        -:  131:/*EOF*/
-        -:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-        -:  135:/*EOF*/
-        -:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-        -:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-        -:  147:/*EOF*/
-        -:  148:/*EOF*/
-        -:  149:/*EOF*/
-        -:  150:/*EOF*/
-        -:  151:/*EOF*/
-        -:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-        -:  157:/*EOF*/
-        -:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-        -:  165:/*EOF*/
-        -:  166:/*EOF*/
-        -:  167:/*EOF*/
-        -:  168:/*EOF*/
-        -:  169:/*EOF*/
-        -:  170:/*EOF*/
-        -:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-        -:  174:/*EOF*/
-        -:  175:/*EOF*/
-        -:  176:/*EOF*/
-        -:  177:/*EOF*/
-        -:  178:/*EOF*/
-        -:  179:/*EOF*/
-        -:  180:/*EOF*/
-        -:  181:/*EOF*/
-        -:  182:/*EOF*/
-        -:  183:/*EOF*/
-        -:  184:/*EOF*/
-        -:  185:/*EOF*/
-        -:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-        -:  190:/*EOF*/
-        -:  191:/*EOF*/
-        -:  192:/*EOF*/
-        -:  193:/*EOF*/
-        -:  194:/*EOF*/
-        -:  195:/*EOF*/
-        -:  196:/*EOF*/
-        -:  197:/*EOF*/
-        -:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-        -:  201:/*EOF*/
-        -:  202:/*EOF*/
-        -:  203:/*EOF*/
-        -:  204:/*EOF*/
-        -:  205:/*EOF*/
-        -:  206:/*EOF*/
-        -:  207:/*EOF*/
-        -:  208:/*EOF*/
-        -:  209:/*EOF*/
-        -:  210:/*EOF*/
-        -:  211:/*EOF*/
-        -:  212:/*EOF*/
-        -:  213:/*EOF*/
-        -:  214:/*EOF*/
-        -:  215:/*EOF*/
-        -:  216:/*EOF*/
-        -:  217:/*EOF*/
-        -:  218:/*EOF*/
-        -:  219:/*EOF*/
-        -:  220:/*EOF*/
-        -:  221:/*EOF*/
-        -:  222:/*EOF*/
-        -:  223:/*EOF*/
-        -:  224:/*EOF*/
-        -:  225:/*EOF*/
-        -:  226:/*EOF*/
-        -:  227:/*EOF*/
-        -:  228:/*EOF*/
-        -:  229:/*EOF*/
-        -:  230:/*EOF*/
-        -:  231:/*EOF*/
-        -:  232:/*EOF*/
-        -:  233:/*EOF*/
-        -:  234:/*EOF*/
-        -:  235:/*EOF*/
-        -:  236:/*EOF*/
-        -:  237:/*EOF*/
-        -:  238:/*EOF*/
-        -:  239:/*EOF*/
-        -:  240:/*EOF*/
-        -:  241:/*EOF*/
-        -:  242:/*EOF*/
-        -:  243:/*EOF*/
-        -:  244:/*EOF*/
-        -:  245:/*EOF*/
-        -:  246:/*EOF*/
-        -:  247:/*EOF*/
-        -:  248:/*EOF*/
-        -:  249:/*EOF*/
-        -:  250:/*EOF*/
-        -:  251:/*EOF*/
-        -:  252:/*EOF*/
-        -:  253:/*EOF*/
-        -:  254:/*EOF*/
-        -:  255:/*EOF*/
-        -:  256:/*EOF*/
-        -:  257:/*EOF*/
-        -:  258:/*EOF*/
-        -:  259:/*EOF*/
-        -:  260:/*EOF*/
-        -:  261:/*EOF*/
-        -:  262:/*EOF*/
-        -:  263:/*EOF*/
-        -:  264:/*EOF*/
-        -:  265:/*EOF*/
-        -:  266:/*EOF*/
-        -:  267:/*EOF*/
-        -:  268:/*EOF*/
-        -:  269:/*EOF*/
-        -:  270:/*EOF*/
-        -:  271:/*EOF*/
-        -:  272:/*EOF*/
-        -:  273:/*EOF*/
-        -:  274:/*EOF*/
-        -:  275:/*EOF*/
-        -:  276:/*EOF*/
-        -:  277:/*EOF*/
-        -:  278:/*EOF*/
-       32:  279:/*EOF*/
-       32:  280:/*EOF*/
-        -:  281:/*EOF*/
-        -:  282:/*EOF*/
-    #####:  283:/*EOF*/
-    #####:  284:/*EOF*/
-        -:  285:/*EOF*/
-        -:  286:/*EOF*/
-        -:  287:/*EOF*/
-        -:  288:/*EOF*/
-        -:  289:/*EOF*/
-        -:  290:/*EOF*/
-        -:  291:/*EOF*/
-        -:  292:/*EOF*/
-        -:  293:/*EOF*/
-        -:  294:/*EOF*/
-        -:  295:/*EOF*/
-        -:  296:/*EOF*/
-        -:  297:/*EOF*/
-        -:  298:/*EOF*/
-        -:  299:/*EOF*/
-        -:  300:/*EOF*/
-        -:  301:/*EOF*/
-        -:  302:/*EOF*/
-        -:  303:/*EOF*/
-        -:  304:/*EOF*/
-        -:  305:/*EOF*/
-        -:  306:/*EOF*/
-        -:  307:/*EOF*/
-        -:  308:/*EOF*/
-        -:  309:/*EOF*/
-        -:  310:/*EOF*/
-        -:  311:/*EOF*/
-        -:  312:/*EOF*/
-        -:  313:/*EOF*/
-        -:  314:/*EOF*/
-        -:  315:/*EOF*/
-        -:  316:/*EOF*/
-        -:  317:/*EOF*/
-        -:  318:/*EOF*/
-        -:  319:/*EOF*/
-        -:  320:/*EOF*/
-        -:  321:/*EOF*/
-        -:  322:/*EOF*/
-        -:  323:/*EOF*/
-        -:  324:/*EOF*/
-        -:  325:/*EOF*/
-        -:  326:/*EOF*/
-        -:  327:/*EOF*/
-        -:  328:/*EOF*/
-        -:  329:/*EOF*/
-        -:  330:/*EOF*/
-        -:  331:/*EOF*/
-        -:  332:/*EOF*/
-        -:  333:/*EOF*/
-        -:  334:/*EOF*/
-        -:  335:/*EOF*/
-        -:  336:/*EOF*/
-        -:  337:/*EOF*/
-        -:  338:/*EOF*/
-        -:  339:/*EOF*/
-        -:  340:/*EOF*/
-        -:  341:/*EOF*/
-        -:  342:/*EOF*/
-        -:  343:/*EOF*/
-        -:  344:/*EOF*/
-        -:  345:/*EOF*/
-        -:  346:/*EOF*/
-        -:  347:/*EOF*/
-        -:  348:/*EOF*/
-        -:  349:/*EOF*/
-        -:  350:/*EOF*/
-        -:  351:/*EOF*/
-        -:  352:/*EOF*/
-        -:  353:/*EOF*/
-        -:  354:/*EOF*/
-        -:  355:/*EOF*/
-        -:  356:/*EOF*/
-        -:  357:/*EOF*/
-        -:  358:/*EOF*/
-        -:  359:/*EOF*/
-        -:  360:/*EOF*/
-        -:  361:/*EOF*/
-        -:  362:/*EOF*/
-        -:  363:/*EOF*/
-    #####:  364:/*EOF*/
-    #####:  365:/*EOF*/
-        -:  366:/*EOF*/
-        -:  367:/*EOF*/
-        -:  368:/*EOF*/
-        -:  369:/*EOF*/
-        -:  370:/*EOF*/
-        -:  371:/*EOF*/
-        -:  372:/*EOF*/
-        -:  373:/*EOF*/
-        -:  374:/*EOF*/
-        -:  375:/*EOF*/
-        -:  376:/*EOF*/
-        -:  377:/*EOF*/
-        -:  378:/*EOF*/
-        -:  379:/*EOF*/
-        -:  380:/*EOF*/
-        -:  381:/*EOF*/
-        -:  382:/*EOF*/
-        -:  383:/*EOF*/
-        -:  384:/*EOF*/
-        -:  385:/*EOF*/
-        -:  386:/*EOF*/
-        -:  387:/*EOF*/
-        -:  388:/*EOF*/
-        -:  389:/*EOF*/
-        -:  390:/*EOF*/
-        -:  391:/*EOF*/
-        -:  392:/*EOF*/
-        -:  393:/*EOF*/
-        -:  394:/*EOF*/
-        -:  395:/*EOF*/
-        -:  396:/*EOF*/
-        -:  397:/*EOF*/
-        -:  398:/*EOF*/
-        -:  399:/*EOF*/
-        -:  400:/*EOF*/
-        -:  401:/*EOF*/
-        -:  402:/*EOF*/
-        -:  403:/*EOF*/
-        -:  404:/*EOF*/
-        -:  405:/*EOF*/
-        -:  406:/*EOF*/
-        -:  407:/*EOF*/
-        -:  408:/*EOF*/
-        -:  409:/*EOF*/
-        -:  410:/*EOF*/
-        -:  411:/*EOF*/
-        -:  412:/*EOF*/
-        -:  413:/*EOF*/
-        -:  414:/*EOF*/
-        -:  415:/*EOF*/
-        -:  416:/*EOF*/
-        -:  417:/*EOF*/
-        -:  418:/*EOF*/
-        -:  419:/*EOF*/
-        -:  420:/*EOF*/
-        -:  421:/*EOF*/
-        -:  422:/*EOF*/
-        -:  423:/*EOF*/
-        -:  424:/*EOF*/
-        -:  425:/*EOF*/
-        -:  426:/*EOF*/
-        -:  427:/*EOF*/
-        -:  428:/*EOF*/
-        -:  429:/*EOF*/
-        -:  430:/*EOF*/
-        -:  431:/*EOF*/
-        -:  432:/*EOF*/
-        -:  433:/*EOF*/
-        -:  434:/*EOF*/
-        -:  435:/*EOF*/
-        -:  436:/*EOF*/
-        -:  437:/*EOF*/
-        -:  438:/*EOF*/
-        -:  439:/*EOF*/
-        -:  440:/*EOF*/
-        -:  441:/*EOF*/
-        -:  442:/*EOF*/
-        -:  443:/*EOF*/
-        -:  444:/*EOF*/
-        -:  445:/*EOF*/
-        -:  446:/*EOF*/
-        -:  447:/*EOF*/
-        -:  448:/*EOF*/
-        -:  449:/*EOF*/
-        -:  450:/*EOF*/
-        -:  451:/*EOF*/
-        -:  452:/*EOF*/
-        -:  453:/*EOF*/
-        -:  454:/*EOF*/
-        -:  455:/*EOF*/
-    #####:  456:/*EOF*/
-    #####:  457:/*EOF*/
-        -:  458:/*EOF*/
-        -:  459:/*EOF*/
-        -:  460:/*EOF*/
-        -:  461:/*EOF*/
-        -:  462:/*EOF*/
-        -:  463:/*EOF*/
-        -:  464:/*EOF*/
-        -:  465:/*EOF*/
-        -:  466:/*EOF*/
-        -:  467:/*EOF*/
-        -:  468:/*EOF*/
-        -:  469:/*EOF*/
-        -:  470:/*EOF*/
-        -:  471:/*EOF*/
-        -:  472:/*EOF*/
-        -:  473:/*EOF*/
-        -:  474:/*EOF*/
-        -:  475:/*EOF*/
-        -:  476:/*EOF*/
-        -:  477:/*EOF*/
-        -:  478:/*EOF*/
-        -:  479:/*EOF*/
-        -:  480:/*EOF*/
-        -:  481:/*EOF*/
-        -:  482:/*EOF*/
-        -:  483:/*EOF*/
-        -:  484:/*EOF*/
-        -:  485:/*EOF*/
-        -:  486:/*EOF*/
-        -:  487:/*EOF*/
-        -:  488:/*EOF*/
-        -:  489:/*EOF*/
-        -:  490:/*EOF*/
-        -:  491:/*EOF*/
-        -:  492:/*EOF*/
-        -:  493:/*EOF*/
-        -:  494:/*EOF*/
-        -:  495:/*EOF*/
-        -:  496:/*EOF*/
-       20:  497:/*EOF*/
-        -:  498:/*EOF*/
-        -:  499:/*EOF*/
-        -:  500:/*EOF*/
-        -:  501:/*EOF*/
-        -:  502:/*EOF*/
-        -:  503:/*EOF*/
-        -:  504:/*EOF*/
-        -:  505:/*EOF*/
-        -:  506:/*EOF*/
-        -:  507:/*EOF*/
-        -:  508:/*EOF*/
-        -:  509:/*EOF*/
-        -:  510:/*EOF*/
-        -:  511:/*EOF*/
-        -:  512:/*EOF*/
-        -:  513:/*EOF*/
-        -:  514:/*EOF*/
-        -:  515:/*EOF*/
-        -:  516:/*EOF*/
-        -:  517:/*EOF*/
-        -:  518:/*EOF*/
-        -:  519:/*EOF*/
-        -:  520:/*EOF*/
-        -:  521:/*EOF*/
-        -:  522:/*EOF*/
-        -:  523:/*EOF*/
-        -:  524:/*EOF*/
-        -:  525:/*EOF*/
-        -:  526:/*EOF*/
-        -:  527:/*EOF*/
-        -:  528:/*EOF*/
-        -:  529:/*EOF*/
-        -:  530:/*EOF*/
-        -:  531:/*EOF*/
-        -:  532:/*EOF*/
-        -:  533:/*EOF*/
-        -:  534:/*EOF*/
-        -:  535:/*EOF*/
-        -:  536:/*EOF*/
-        -:  537:/*EOF*/
-        -:  538:/*EOF*/
-        -:  539:/*EOF*/
-        -:  540:/*EOF*/
-        -:  541:/*EOF*/
-        -:  542:/*EOF*/
-        -:  543:/*EOF*/
-        -:  544:/*EOF*/
-        -:  545:/*EOF*/
-        -:  546:/*EOF*/
-        -:  547:/*EOF*/
-        -:  548:/*EOF*/
-        -:  549:/*EOF*/
-        -:  550:/*EOF*/
-        -:  551:/*EOF*/
-    #####:  552:/*EOF*/
-    #####:  553:/*EOF*/
-        -:  554:/*EOF*/
-        -:  555:/*EOF*/
-    #####:  556:/*EOF*/
-    #####:  557:/*EOF*/
-        -:  558:/*EOF*/
-        -:  559:/*EOF*/
-    #####:  560:/*EOF*/
-    #####:  561:/*EOF*/
-        -:  562:/*EOF*/
-        -:  563:/*EOF*/
-        -:  564:/*EOF*/
-        -:  565:/*EOF*/
-        -:  566:/*EOF*/
-        -:  567:/*EOF*/
-        -:  568:/*EOF*/
-        -:  569:/*EOF*/
-        -:  570:/*EOF*/
-        -:  571:/*EOF*/
-        -:  572:/*EOF*/
-        -:  573:/*EOF*/
-        -:  574:/*EOF*/
-        -:  575:/*EOF*/
-        -:  576:/*EOF*/
-        -:  577:/*EOF*/
-        -:  578:/*EOF*/
-        -:  579:/*EOF*/
-        -:  580:/*EOF*/
-        -:  581:/*EOF*/
-        -:  582:/*EOF*/
-        -:  583:/*EOF*/
-        -:  584:/*EOF*/
-        -:  585:/*EOF*/
-        -:  586:/*EOF*/
-        -:  587:/*EOF*/
-        -:  588:/*EOF*/
-        -:  589:/*EOF*/
-        -:  590:/*EOF*/
-        -:  591:/*EOF*/
-        -:  592:/*EOF*/
-        -:  593:/*EOF*/
-        -:  594:/*EOF*/
-        -:  595:/*EOF*/
-        -:  596:/*EOF*/
-        -:  597:/*EOF*/
-        -:  598:/*EOF*/
-        -:  599:/*EOF*/
-        -:  600:/*EOF*/
-        -:  601:/*EOF*/
-        -:  602:/*EOF*/
-        -:  603:/*EOF*/
-        -:  604:/*EOF*/
-        -:  605:/*EOF*/
-        -:  606:/*EOF*/
-        -:  607:/*EOF*/
-        -:  608:/*EOF*/
-        -:  609:/*EOF*/
-        -:  610:/*EOF*/
-        -:  611:/*EOF*/
-        -:  612:/*EOF*/
-        -:  613:/*EOF*/
-        -:  614:/*EOF*/
-        -:  615:/*EOF*/
-        -:  616:/*EOF*/
-        -:  617:/*EOF*/
-        -:  618:/*EOF*/
-        -:  619:/*EOF*/
-        -:  620:/*EOF*/
-        -:  621:/*EOF*/
-        -:  622:/*EOF*/
-        -:  623:/*EOF*/
-        -:  624:/*EOF*/
-        -:  625:/*EOF*/
-        -:  626:/*EOF*/
-        -:  627:/*EOF*/
-        -:  628:/*EOF*/
-        -:  629:/*EOF*/
-        -:  630:/*EOF*/
-        -:  631:/*EOF*/
-        -:  632:/*EOF*/
-        -:  633:/*EOF*/
-        -:  634:/*EOF*/
-        -:  635:/*EOF*/
-        -:  636:/*EOF*/
-        -:  637:/*EOF*/
-        -:  638:/*EOF*/
-        -:  639:/*EOF*/
-        -:  640:/*EOF*/
-        -:  641:/*EOF*/
-        -:  642:/*EOF*/
-        -:  643:/*EOF*/
-        -:  644:/*EOF*/
-        -:  645:/*EOF*/
-        -:  646:/*EOF*/
-        -:  647:/*EOF*/
-        -:  648:/*EOF*/
-        -:  649:/*EOF*/
-        -:  650:/*EOF*/
-        -:  651:/*EOF*/
-        -:  652:/*EOF*/
-        -:  653:/*EOF*/
-        -:  654:/*EOF*/
-        -:  655:/*EOF*/
-        -:  656:/*EOF*/
-        -:  657:/*EOF*/
-        -:  658:/*EOF*/
-        -:  659:/*EOF*/
-        -:  660:/*EOF*/
-        -:  661:/*EOF*/
-        -:  662:/*EOF*/
-        -:  663:/*EOF*/
-        -:  664:/*EOF*/
-        -:  665:/*EOF*/
-        -:  666:/*EOF*/
-        -:  667:/*EOF*/
-        -:  668:/*EOF*/
-        -:  669:/*EOF*/
-        -:  670:/*EOF*/
-        -:  671:/*EOF*/
-        -:  672:/*EOF*/
-        -:  673:/*EOF*/
-        -:  674:/*EOF*/
-        -:  675:/*EOF*/
-        -:  676:/*EOF*/
-        -:  677:/*EOF*/
-        -:  678:/*EOF*/
-        -:  679:/*EOF*/
-        -:  680:/*EOF*/
-        -:  681:/*EOF*/
-        -:  682:/*EOF*/
-        -:  683:/*EOF*/
-        -:  684:/*EOF*/
-        -:  685:/*EOF*/
-        -:  686:/*EOF*/
-        -:  687:/*EOF*/
-        -:  688:/*EOF*/
-        -:  689:/*EOF*/
-        -:  690:/*EOF*/
-        -:  691:/*EOF*/
-        -:  692:/*EOF*/
-        -:  693:/*EOF*/
-        -:  694:/*EOF*/
-       10:  695:/*EOF*/
-        -:  696:/*EOF*/
-        -:  697:/*EOF*/
-        5:  698:/*EOF*/
-        5:  699:/*EOF*/
-        -:  700:/*EOF*/
-        5:  701:/*EOF*/
+        -:    0:Source:../dds/DCPS/DataWriterImpl.h
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_DATAWRITER_H
+        -:    9:#define OPENDDS_DCPS_DATAWRITER_H
+        -:   10:
+        -:   11:#include "dds/DdsDcpsDomainC.h"
+        -:   12:#include "dds/DdsDcpsTopicC.h"
+        -:   13:#include "dds/DCPS/DataWriterCallbacks.h"
+        -:   14:#include "dds/DCPS/transport/framework/TransportSendListener.h"
+        -:   15:#include "dds/DCPS/transport/framework/TransportClient.h"
+        -:   16:#include "dds/DCPS/MessageTracker.h"
+        -:   17:#include "dds/DCPS/DataBlockLockPool.h"
+        -:   18:#include "dds/DCPS/PoolAllocator.h"
+        -:   19:#include "WriteDataContainer.h"
+        -:   20:#include "Definitions.h"
+        -:   21:#include "DataSampleHeader.h"
+        -:   22:#include "TopicImpl.h"
+        -:   23:#include "Time_Helper.h"
+        -:   24:#include "CoherentChangeControl.h"
+        -:   25:#include "GuidUtils.h"
+        -:   26:#include "RcEventHandler.h"
+        -:   27:#include "unique_ptr.h"
+        -:   28:#include "Message_Block_Ptr.h"
+        -:   29:
+        -:   30:#ifndef OPENDDS_NO_CONTENT_FILTERED_TOPIC
+        -:   31:#include "FilterEvaluator.h"
+        -:   32:#endif
+        -:   33:
+        -:   34:#include "ace/Event_Handler.h"
+        -:   35:#include "ace/OS_NS_sys_time.h"
+        -:   36:
+        -:   37:#include <memory>
+        -:   38:
+        -:   39:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   40:#pragma once
+        -:   41:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   42:
+        -:   43:class DDS_TEST;
+        -:   44:
+        -:   45:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   46:
+        -:   47:namespace OpenDDS {
+        -:   48:namespace DCPS {
+        -:   49:
+        -:   50:class PublisherImpl;
+        -:   51:class DomainParticipantImpl;
+        -:   52:class OfferedDeadlineWatchdog;
+        -:   53:class Monitor;
+        -:   54:class DataSampleElement;
+        -:   55:class SendStateDataSampleList;
+        -:   56:struct AssociationData;
+        -:   57:class LivenessTimer;
+        -:   58:
+        -:   59:
+        -:   60:
+        -:   61:
+        -:   62:/**
+        -:   63:* @class DataWriterImpl
+        -:   64:*
+        -:   65:* @brief Implements the OpenDDS::DCPS::DataWriterRemote interfaces and
+        -:   66:*        DDS::DataWriter interfaces.
+        -:   67:*
+        -:   68:* See the DDS specification, OMG formal/04-12-02, for a description of
+        -:   69:* the interface this class is implementing.
+        -:   70:*
+        -:   71:* This class must be inherited by the type-specific datawriter which
+        -:   72:* is specific to the data-type associated with the topic.
+        -:   73:*
+        -:   74:* @note: This class is responsible for allocating memory for the
+        -:   75:*        header message block
+        -:   76:*        (MessageBlock + DataBlock + DataSampleHeader) and the
+        -:   77:*        DataSampleElement.
+        -:   78:*        The data-type datawriter is responsible for allocating
+        -:   79:*        memory for the sample data message block.
+        -:   80:*        (e.g. MessageBlock + DataBlock + Foo data). But it gives
+        -:   81:*        up ownership to this WriteDataContainer.
+        -:   82:*/
+        -:   83:class OpenDDS_Dcps_Export DataWriterImpl
+        -:   84:  : public virtual LocalObject<DDS::DataWriter>,
+        -:   85:    public virtual DataWriterCallbacks,
+        -:   86:    public virtual EntityImpl,
+        -:   87:    public virtual TransportClient,
+        -:   88:    public virtual TransportSendListener {
+        -:   89:public:
+        -:   90:  friend class WriteDataContainer;
+        -:   91:  friend class PublisherImpl;
+        -:   92:
+        -:   93:  typedef OPENDDS_MAP_CMP(RepoId, SequenceNumber, GUID_tKeyLessThan) RepoIdToSequenceMap;
+        -:   94:
+        -:   95:  struct AckToken {
+        -:   96:    ACE_Time_Value tstamp_;
+        -:   97:    DDS::Duration_t max_wait_;
+        -:   98:    SequenceNumber sequence_;
+        -:   99:
+        -:  100:    AckToken(const DDS::Duration_t& max_wait,
+        -:  101:             const SequenceNumber& sequence)
+        -:  102:      : tstamp_(ACE_OS::gettimeofday()),
+        -:  103:        max_wait_(max_wait),
+        -:  104:        sequence_(sequence) {}
+        -:  105:
+        -:  106:    ~AckToken() {}
+        -:  107:
+        -:  108:    ACE_Time_Value deadline() const {
+        -:  109:      return duration_to_absolute_time_value(this->max_wait_, this->tstamp_);
+        -:  110:    }
+        -:  111:
+        -:  112:    DDS::Time_t timestamp() const {
+        -:  113:      return time_value_to_time(this->tstamp_);
+        -:  114:    }
+        -:  115:  };
+        -:  116:
+        -:  117:  DataWriterImpl();
+        -:  118:
+        -:  119:  virtual ~DataWriterImpl();
+        -:  120:
+        -:  121:  virtual DDS::InstanceHandle_t get_instance_handle();
+        -:  122:
+        -:  123:  virtual DDS::ReturnCode_t set_qos(const DDS::DataWriterQos & qos);
+        -:  124:
+        -:  125:  virtual DDS::ReturnCode_t get_qos(DDS::DataWriterQos & qos);
+        -:  126:
+        -:  127:  virtual DDS::ReturnCode_t set_listener(
+        -:  128:    DDS::DataWriterListener_ptr a_listener,
+        -:  129:    DDS::StatusMask mask);
+        -:  130:
+        -:  131:  virtual DDS::DataWriterListener_ptr get_listener();
+        -:  132:
+        -:  133:  virtual DDS::Topic_ptr get_topic();
+        -:  134:
+        -:  135:  virtual DDS::ReturnCode_t wait_for_acknowledgments(
+        -:  136:    const DDS::Duration_t & max_wait);
+        -:  137:
+        -:  138:  virtual DDS::Publisher_ptr get_publisher();
+        -:  139:
+        -:  140:  virtual DDS::ReturnCode_t get_liveliness_lost_status(
+        -:  141:    DDS::LivelinessLostStatus & status);
+        -:  142:
+        -:  143:  virtual DDS::ReturnCode_t get_offered_deadline_missed_status(
+        -:  144:    DDS::OfferedDeadlineMissedStatus & status);
+        -:  145:
+        -:  146:  virtual DDS::ReturnCode_t get_offered_incompatible_qos_status(
+        -:  147:    DDS::OfferedIncompatibleQosStatus & status);
+        -:  148:
+        -:  149:  virtual DDS::ReturnCode_t get_publication_matched_status(
+        -:  150:    DDS::PublicationMatchedStatus & status);
+        -:  151:
+        -:  152:  ACE_Time_Value liveliness_check_interval(DDS::LivelinessQosPolicyKind kind);
+        -:  153:
+        -:  154:  bool participant_liveliness_activity_after(const ACE_Time_Value& tv);
+        -:  155:
+        -:  156:  virtual DDS::ReturnCode_t assert_liveliness();
+        -:  157:
+        -:  158:  virtual DDS::ReturnCode_t assert_liveliness_by_participant();
+        -:  159:
+        -:  160:  typedef OPENDDS_VECTOR(DDS::InstanceHandle_t) InstanceHandleVec;
+        -:  161:  void get_instance_handles(InstanceHandleVec& instance_handles);
+        -:  162:
+        -:  163:  void get_readers(RepoIdSet& readers);
+        -:  164:
+        -:  165:  virtual DDS::ReturnCode_t get_matched_subscriptions(
+        -:  166:    DDS::InstanceHandleSeq & subscription_handles);
+        -:  167:
+        -:  168:#if !defined (DDS_HAS_MINIMUM_BIT)
+        -:  169:  virtual DDS::ReturnCode_t get_matched_subscription_data(
+        -:  170:    DDS::SubscriptionBuiltinTopicData & subscription_data,
+        -:  171:    DDS::InstanceHandle_t subscription_handle);
+        -:  172:#endif // !defined (DDS_HAS_MINIMUM_BIT)
+        -:  173:
+        -:  174:  virtual DDS::ReturnCode_t enable();
+        -:  175:
+        -:  176:  virtual void add_association(const RepoId& yourId,
+        -:  177:                               const ReaderAssociation& reader,
+        -:  178:                               bool active);
+        -:  179:
+        -:  180:  virtual void transport_assoc_done(int flags, const RepoId& remote_id);
+        -:  181:
+        -:  182:  virtual void association_complete(const RepoId& remote_id);
+        -:  183:
+        -:  184:  virtual void remove_associations(const ReaderIdSeq & readers,
+        -:  185:                                   bool callback);
+        -:  186:
+        -:  187:  virtual void update_incompatible_qos(const IncompatibleQosStatus& status);
+        -:  188:
+        -:  189:  virtual void update_subscription_params(const RepoId& readerId,
+        -:  190:                                          const DDS::StringSeq& params);
+        -:  191:
+        -:  192:  virtual void inconsistent_topic();
+        -:  193:
+        -:  194:
+        -:  195:  /**
+        -:  196:   * cleanup the DataWriter.
+        -:  197:   */
+        -:  198:  void cleanup();
+        -:  199:
+        -:  200:  /**
+        -:  201:   * Initialize the data members.
+        -:  202:   */
+        -:  203:  void init(
+        -:  204:    TopicImpl*                            topic_servant,
+        -:  205:    const DDS::DataWriterQos &            qos,
+        -:  206:    DDS::DataWriterListener_ptr           a_listener,
+        -:  207:    const DDS::StatusMask &               mask,
+        -:  208:    WeakRcHandle<OpenDDS::DCPS::DomainParticipantImpl> participant_servant,
+        -:  209:    OpenDDS::DCPS::PublisherImpl*         publisher_servant);
+        -:  210:
+        -:  211:  void send_all_to_flush_control(ACE_Guard<ACE_Recursive_Thread_Mutex>& guard);
+        -:  212:
+        -:  213:  /**
+        -:  214:   * Delegate to the WriteDataContainer to register
+        -:  215:   * Must tell the transport to broadcast the registered
+        -:  216:   * instance upon returning.
+        -:  217:   */
+        -:  218:  DDS::ReturnCode_t
+        -:  219:  register_instance_i(
+        -:  220:    DDS::InstanceHandle_t& handle,
+        -:  221:    Message_Block_Ptr data,
+        -:  222:    const DDS::Time_t& source_timestamp);
+        -:  223:
+        -:  224:  /**
+        -:  225:   * Delegate to the WriteDataContainer to register and tell
+        -:  226:   * the transport to broadcast the registered instance.
+        -:  227:   */
+        -:  228:  DDS::ReturnCode_t
+        -:  229:  register_instance_from_durable_data(
+        -:  230:    DDS::InstanceHandle_t& handle,
+        -:  231:    Message_Block_Ptr data,
+        -:  232:    const DDS::Time_t & source_timestamp);
+        -:  233:
+        -:  234:  /**
+        -:  235:   * Delegate to the WriteDataContainer to unregister and tell
+        -:  236:   * the transport to broadcast the unregistered instance.
+        -:  237:   */
+        -:  238:  DDS::ReturnCode_t
+        -:  239:  unregister_instance_i(
+        -:  240:    DDS::InstanceHandle_t handle,
+        -:  241:    const DDS::Time_t & source_timestamp);
+        -:  242:
+        -:  243:  /**
+        -:  244:   * Unregister all registered instances and tell the transport
+        -:  245:   * to broadcast the unregistered instances.
+        -:  246:   */
+        -:  247:  void unregister_instances(const DDS::Time_t& source_timestamp);
+        -:  248:
+        -:  249:  /**
+        -:  250:   * Delegate to the WriteDataContainer to queue the instance
+        -:  251:   * sample and finally tell the transport to send the sample.
+        -:  252:   * \param filter_out can either be null (if the writer can't
+        -:  253:   *        or won't evaluate the filters), or a list of
+        -:  254:   *        associated reader RepoIds that should NOT get the
+        -:  255:   *        data sample due to content filtering.
+        -:  256:   */
+        -:  257:  DDS::ReturnCode_t write(Message_Block_Ptr sample,
+        -:  258:                          DDS::InstanceHandle_t handle,
+        -:  259:                          const DDS::Time_t& source_timestamp,
+        -:  260:                          GUIDSeq* filter_out);
+        -:  261:
+        -:  262:  /**
+        -:  263:   * Delegate to the WriteDataContainer to dispose all data
+        -:  264:   * samples for a given instance and tell the transport to
+        -:  265:   * broadcast the disposed instance.
+        -:  266:   */
+        -:  267:  DDS::ReturnCode_t dispose(DDS::InstanceHandle_t handle,
+        -:  268:                            const DDS::Time_t & source_timestamp);
+        -:  269:
+        -:  270:  /**
+        -:  271:   * Return the number of samples for a given instance.
+        -:  272:   */
+        -:  273:  DDS::ReturnCode_t num_samples(DDS::InstanceHandle_t handle,
+        -:  274:                                size_t&               size);
+        -:  275:
+        -:  276:  /**
+        -:  277:   * Retrieve the unsent data from the WriteDataContainer.
+        -:  278:   */
+        -:  279:   ACE_UINT64 get_unsent_data(SendStateDataSampleList& list) {
+        -:  280:    return data_container_->get_unsent_data(list);
+        -:  281:  }
+        -:  282:
+        -:  283:  SendStateDataSampleList get_resend_data() {
+        -:  284:    return data_container_->get_resend_data();
+        -:  285:  }
+        -:  286:
+        -:  287:  /**
+        -:  288:   * Accessor of the repository id of this datawriter/publication.
+        -:  289:   */
+        -:  290:  RepoId get_publication_id();
+        -:  291:
+        -:  292:  /**
+        -:  293:   * Accessor of the repository id of the domain participant.
+        -:  294:   */
+        -:  295:  RepoId get_dp_id();
+        -:  296:
+        -:  297:  /**
+        -:  298:   * Delegate to WriteDataContainer to unregister all instances.
+        -:  299:   */
+        -:  300:  void unregister_all();
+        -:  301:
+        -:  302:  /**
+        -:  303:   * This is called by transport to notify that the sample is
+        -:  304:   * delivered and it is delegated to WriteDataContainer
+        -:  305:   * to adjust the internal data sample threads.
+        -:  306:   */
+        -:  307:  void data_delivered(const DataSampleElement* sample);
+        -:  308:
+        -:  309:  /**
+        -:  310:   * This is called by transport to notify that the control
+        -:  311:   * message is delivered.
+        -:  312:   */
+        -:  313:  void control_delivered(const Message_Block_Ptr& sample);
+        -:  314:
+        -:  315:  /// Does this writer have samples to be acknowledged?
+        -:  316:  bool should_ack() const;
+        -:  317:
+        -:  318:  /// Create an AckToken for ack operations.
+        -:  319:  AckToken create_ack_token(DDS::Duration_t max_wait) const;
+        -:  320:
+        -:  321:  virtual void retrieve_inline_qos_data(TransportSendListener::InlineQosData& qos_data) const;
+        -:  322:
+        -:  323:  virtual bool check_transport_qos(const TransportInst& inst);
+        -:  324:
+        -:  325:#ifndef OPENDDS_NO_OBJECT_MODEL_PROFILE
+        -:  326:
+        -:  327:  /// Are coherent changes pending?
+        -:  328:  bool coherent_changes_pending();
+        -:  329:
+        -:  330:  /// Starts a coherent change set; should only be called once.
+        -:  331:  void begin_coherent_changes();
+        -:  332:
+        -:  333:  /// Ends a coherent change set; should only be called once.
+        -:  334:  void end_coherent_changes(const GroupCoherentSamples& group_samples);
+        -:  335:
+        -:  336:#endif
+        -:  337:
+        -:  338:  /**
+        -:  339:   * Get associated topic type name.
+        -:  340:   */
+        -:  341:  char const* get_type_name() const;
+        -:  342:
+        -:  343:  /**
+        -:  344:   * This mothod is called by transport to notify the instance
+        -:  345:   * sample is dropped and it delegates to WriteDataContainer
+        -:  346:   * to update the internal list.
+        -:  347:   */
+        -:  348:  void data_dropped(const DataSampleElement* element,
+        -:  349:                    bool dropped_by_transport);
+        -:  350:
+        -:  351:  /**
+        -:  352:   * This is called by transport to notify that the control
+        -:  353:   * message is dropped.
+        -:  354:   */
+        -:  355:  void control_dropped(const Message_Block_Ptr& sample,
+        -:  356:                       bool dropped_by_transport);
+        -:  357:
+        -:  358:  /**
+        -:  359:   * Accessor of the WriterDataContainer's lock.
+        -:  360:   */
+        -:  361:  // ciju: Seems this is no longer being used.
+        -:  362:  // Was wrong. Still required.
+        -:  363:  ACE_INLINE
+      111:  364:  ACE_Recursive_Thread_Mutex& get_lock() {
+      111:  365:    return data_container_->lock_;
+        -:  366:  }
+        -:  367:
+        -:  368:  /**
+        -:  369:   * This is used to retrieve the listener for a certain status
+        -:  370:   * change.
+        -:  371:   *
+        -:  372:   * If this datawriter has a registered listener and the status
+        -:  373:   * kind is in the listener mask then the listener is returned.
+        -:  374:   * Otherwise, the query for the listener is propagated up to the
+        -:  375:   * factory/publisher.
+        -:  376:   */
+        -:  377:  DDS::DataWriterListener_ptr listener_for(DDS::StatusKind kind);
+        -:  378:
+        -:  379:  /// Handle the assert liveliness timeout.
+        -:  380:  virtual int handle_timeout(const ACE_Time_Value &tv,
+        -:  381:                             const void *arg);
+        -:  382:
+        -:  383:  /// Called by the PublisherImpl to indicate that the Publisher is now
+        -:  384:  /// resumed and any data collected while it was suspended should now be sent.
+        -:  385:  void send_suspended_data();
+        -:  386:
+        -:  387:  void remove_all_associations();
+        -:  388:
+        -:  389:  virtual void register_for_reader(const RepoId& participant,
+        -:  390:                                   const RepoId& writerid,
+        -:  391:                                   const RepoId& readerid,
+        -:  392:                                   const TransportLocatorSeq& locators,
+        -:  393:                                   DiscoveryListener* listener);
+        -:  394:
+        -:  395:  virtual void unregister_for_reader(const RepoId& participant,
+        -:  396:                                     const RepoId& writerid,
+        -:  397:                                     const RepoId& readerid);
+        -:  398:
+        -:  399:  void notify_publication_disconnected(const ReaderIdSeq& subids);
+        -:  400:  void notify_publication_reconnected(const ReaderIdSeq& subids);
+        -:  401:  void notify_publication_lost(const ReaderIdSeq& subids);
+        -:  402:
+        -:  403:  /// Statistics counter.
+        -:  404:  int         data_dropped_count_;
+        -:  405:  int         data_delivered_count_;
+        -:  406:
+        -:  407:  MessageTracker controlTracker;
+        -:  408:
+        -:  409:  /**
+        -:  410:   * This method create a header message block and chain with
+        -:  411:   * the sample data. The header contains the information
+        -:  412:   * needed. e.g. message id, length of whole message...
+        -:  413:   * The fast allocator is used to allocate the message block,
+        -:  414:   * data block and header.
+        -:  415:   */
+        -:  416:  DDS::ReturnCode_t
+        -:  417:  create_sample_data_message(Message_Block_Ptr data,
+        -:  418:                             DDS::InstanceHandle_t instance_handle,
+        -:  419:                             DataSampleHeader& header_data,
+        -:  420:                             Message_Block_Ptr& message,
+        -:  421:                             const DDS::Time_t& source_timestamp,
+        -:  422:                             bool content_filter);
+        -:  423:
+        -:  424:#ifndef OPENDDS_NO_PERSISTENCE_PROFILE
+        -:  425:  /// Make sent data available beyond the lifetime of this
+        -:  426:  /// @c DataWriter.
+        -:  427:  bool persist_data();
+        -:  428:#endif
+        -:  429:
+        -:  430:  // Reset time interval for each instance.
+        -:  431:  void reschedule_deadline();
+        -:  432:
+        -:  433:  /// Wait for pending samples to drain.
+        -:  434:  void wait_pending();
+        -:  435:
+        -:  436:  /**
+        -:  437:   * Get an instance handle for a new instance.
+        -:  438:   */
+        -:  439:  DDS::InstanceHandle_t get_next_handle();
+        -:  440:
+        -:  441:  virtual RcHandle<EntityImpl> parent() const;
+        -:  442:
+        -:  443:#ifndef OPENDDS_NO_CONTENT_FILTERED_TOPIC
+        -:  444:  bool filter_out(const DataSampleElement& elt,
+        -:  445:                  const OPENDDS_STRING& filterClassName,
+        -:  446:                  const FilterEvaluator& evaluator,
+        -:  447:                  const DDS::StringSeq& expression_params) const;
+        -:  448:#endif
+        -:  449:
+        -:  450:  /**
+        -:  451:   * Wait until pending control elements have either been delivered
+        -:  452:   * or dropped.
+        -:  453:   */
+        -:  454:  void wait_control_pending();
+        -:  455:
+      132:  456:  DataBlockLockPool::DataBlockLock* get_db_lock() {
+      132:  457:    return db_lock_pool_->get_lock();
+        -:  458:  }
+        -:  459:
+        -:  460: /**
+        -:  461:  *  Attempt to locate an existing instance for the given handle.
+        -:  462:  */
+        -:  463: PublicationInstance_rch get_handle_instance(
+        -:  464:   DDS::InstanceHandle_t handle);
+        -:  465:
+        -:  466: virtual ICE::Endpoint* get_ice_endpoint();
+        -:  467:
+        -:  468:protected:
+        -:  469:
+        -:  470:  DDS::ReturnCode_t wait_for_specific_ack(const AckToken& token);
+        -:  471:
+        -:  472:  void prepare_to_delete();
+        -:  473:
+        -:  474:  // type specific DataWriter's part of enable.
+        -:  475:  virtual DDS::ReturnCode_t enable_specific() = 0;
+        -:  476:
+        -:  477:  /// The number of chunks for the cached allocator.
+        -:  478:  size_t                     n_chunks_;
+        -:  479:
+        -:  480:  /// The multiplier for allocators affected by associations
+        -:  481:  size_t                     association_chunk_multiplier_;
+        -:  482:
+        -:  483:
+        -:  484:  /// The type name of associated topic.
+        -:  485:  CORBA::String_var               type_name_;
+        -:  486:
+        -:  487:  /// The qos policy list of this datawriter.
+        -:  488:  DDS::DataWriterQos              qos_;
+        -:  489:
+        -:  490:  /// The participant servant which creats the publisher that
+        -:  491:  /// creates this datawriter.
+        -:  492:  WeakRcHandle<DomainParticipantImpl>          participant_servant_;
+        -:  493:
+        -:  494:  //This lock should be used to protect access to reader_info_
+        -:  495:  ACE_Thread_Mutex reader_info_lock_;
+        -:  496:
+        -:  497:  struct ReaderInfo {
+        -:  498:#ifndef OPENDDS_NO_CONTENT_FILTERED_TOPIC
+        -:  499:    WeakRcHandle<DomainParticipantImpl> participant_;
+        -:  500:    OPENDDS_STRING filter_class_name_;
+        -:  501:    OPENDDS_STRING filter_;
+        -:  502:    DDS::StringSeq expression_params_;
+        -:  503:    RcHandle<FilterEvaluator> eval_;
+        -:  504:#endif
+        -:  505:    SequenceNumber expected_sequence_;
+        -:  506:    bool durable_;
+        -:  507:    ReaderInfo(const char* filter_class_name, const char* filter, const DDS::StringSeq& params,
+        -:  508:               WeakRcHandle<DomainParticipantImpl> participant, bool durable);
+        -:  509:    ~ReaderInfo();
+        -:  510:  };
+        -:  511:
+        -:  512:  typedef OPENDDS_MAP_CMP(RepoId, ReaderInfo, GUID_tKeyLessThan) RepoIdToReaderInfoMap;
+        -:  513:  RepoIdToReaderInfoMap reader_info_;
+        -:  514:
+        -:  515:  struct AckCustomization {
+        -:  516:    GUIDSeq customized_;
+        -:  517:    AckToken& token_;
+        -:  518:    explicit AckCustomization(AckToken& at) : token_(at) {}
+        -:  519:  };
+        -:  520:
+        -:  521:  virtual SendControlStatus send_control(const DataSampleHeader& header,
+        -:  522:                                         Message_Block_Ptr msg);
+        -:  523:
+        -:  524:private:
+        -:  525:
+        -:  526:  void track_sequence_number(GUIDSeq* filter_out);
+        -:  527:
+        -:  528:  void notify_publication_lost(const DDS::InstanceHandleSeq& handles);
+        -:  529:
+        -:  530:  DDS::ReturnCode_t dispose_and_unregister(DDS::InstanceHandle_t handle,
+        -:  531:                                           const DDS::Time_t& timestamp);
+        -:  532:
+        -:  533:  /**
+        -:  534:   * This method create a header message block and chain with
+        -:  535:   * the registered sample. The header contains the information
+        -:  536:   * needed. e.g. message id, length of whole message...
+        -:  537:   * The fast allocator is not used for the header.
+        -:  538:   */
+        -:  539:  ACE_Message_Block*
+        -:  540:  create_control_message(MessageId message_id,
+        -:  541:                         DataSampleHeader& header,
+        -:  542:                         Message_Block_Ptr data,
+        -:  543:                         const DDS::Time_t& source_timestamp);
+        -:  544:
+        -:  545:  /// Send the liveliness message.
+        -:  546:  bool send_liveliness(const ACE_Time_Value& now);
+        -:  547:
+        -:  548:  /// Lookup the instance handles by the subscription repo ids
+        -:  549:  void lookup_instance_handles(const ReaderIdSeq& ids,
+        -:  550:                               DDS::InstanceHandleSeq& hdls);
+        -:  551:
+       24:  552:  const RepoId& get_repo_id() const {
+       24:  553:    return this->publication_id_;
+        -:  554:  }
+        -:  555:
+    #####:  556:  DDS::DomainId_t domain_id() const {
+    #####:  557:    return this->domain_id_;
+        -:  558:  }
+        -:  559:
+       24:  560:  CORBA::Long get_priority_value(const AssociationData&) const {
+       24:  561:    return this->qos_.transport_priority.value;
+        -:  562:  }
+        -:  563:
+        -:  564:#if defined(OPENDDS_SECURITY)
+        -:  565:  DDS::Security::ParticipantCryptoHandle get_crypto_handle() const;
+        -:  566:#endif
+        -:  567:
+        -:  568:  void association_complete_i(const RepoId& remote_id);
+        -:  569:
+        -:  570:  friend class ::DDS_TEST; // allows tests to get at privates
+        -:  571:
+        -:  572:
+        -:  573:  // Data block local pool for this data writer.
+        -:  574:  unique_ptr<DataBlockLockPool>  db_lock_pool_;
+        -:  575:
+        -:  576:  /// The name of associated topic.
+        -:  577:  CORBA::String_var               topic_name_;
+        -:  578:  /// The associated topic repository id.
+        -:  579:  RepoId                          topic_id_;
+        -:  580:  /// The topic servant.
+        -:  581:  TopicDescriptionPtr<TopicImpl>                 topic_servant_;
+        -:  582:
+        -:  583:  /// The StatusKind bit mask indicates which status condition change
+        -:  584:  /// can be notified by the listener of this entity.
+        -:  585:  DDS::StatusMask                 listener_mask_;
+        -:  586:  /// Used to notify the entity for relevant events.
+        -:  587:  DDS::DataWriterListener_var     listener_;
+        -:  588:  /// The domain id.
+        -:  589:  DDS::DomainId_t                 domain_id_;
+        -:  590:  RepoId                          dp_id_;
+        -:  591:  /// The publisher servant which creates this datawriter.
+        -:  592:  WeakRcHandle<PublisherImpl>     publisher_servant_;
+        -:  593:  /// The repository id of this datawriter/publication.
+        -:  594:  PublicationId                   publication_id_;
+        -:  595:  /// The sequence number unique in DataWriter scope.
+        -:  596:  SequenceNumber                  sequence_number_;
+        -:  597:  /// Flag indicating DataWriter current belongs to
+        -:  598:  /// a coherent change set.
+        -:  599:  bool                            coherent_;
+        -:  600:  /// The number of samples belonging to the current
+        -:  601:  /// coherent change set.
+        -:  602:  ACE_UINT32                      coherent_samples_;
+        -:  603:  /// The sample data container.
+        -:  604:  unique_ptr<WriteDataContainer>  data_container_;
+        -:  605:  /// The lock to protect the activate subscriptions
+        -:  606:  /// and status changes.
+        -:  607:  ACE_Recursive_Thread_Mutex      lock_;
+        -:  608:
+        -:  609:  typedef OPENDDS_MAP_CMP(RepoId, DDS::InstanceHandle_t, GUID_tKeyLessThan) RepoIdToHandleMap;
+        -:  610:
+        -:  611:  RepoIdToHandleMap               id_to_handle_map_;
+        -:  612:
+        -:  613:  RepoIdSet readers_;
+        -:  614:
+        -:  615:  /// Status conditions.
+        -:  616:  DDS::LivelinessLostStatus           liveliness_lost_status_ ;
+        -:  617:  DDS::OfferedDeadlineMissedStatus    offered_deadline_missed_status_ ;
+        -:  618:  DDS::OfferedIncompatibleQosStatus   offered_incompatible_qos_status_ ;
+        -:  619:  DDS::PublicationMatchedStatus       publication_match_status_ ;
+        -:  620:
+        -:  621:  /// True if the writer failed to actively signal its liveliness within
+        -:  622:  /// its offered liveliness period.
+        -:  623:  bool liveliness_lost_;
+        -:  624:
+        -:  625:  /**
+        -:  626:   * @todo The publication_lost_status_ and
+        -:  627:   *       publication_reconnecting_status_ are left here for
+        -:  628:   *       future use when we add get_publication_lost_status()
+        -:  629:   *       and get_publication_reconnecting_status() methods.
+        -:  630:   */
+        -:  631:  // Statistics of the lost publications due to lost connection.
+        -:  632:  // PublicationLostStatus               publication_lost_status_;
+        -:  633:  // Statistics of the publications that associates with a
+        -:  634:  // reconnecting datalink.
+        -:  635:  // PublicationReconnectingStatus       publication_reconnecting_status_;
+        -:  636:
+        -:  637:  /// The message block allocator.
+        -:  638:  unique_ptr<MessageBlockAllocator>     mb_allocator_;
+        -:  639:  /// The data block allocator.
+        -:  640:  unique_ptr<DataBlockAllocator>        db_allocator_;
+        -:  641:  /// The header data allocator.
+        -:  642:  unique_ptr<DataSampleHeaderAllocator> header_allocator_;
+        -:  643:
+        -:  644:  /// The orb's reactor to be used to register the liveliness
+        -:  645:  /// timer.
+        -:  646:  ACE_Reactor_Timer_Interface* reactor_;
+        -:  647:  /// The time interval for sending liveliness message.
+        -:  648:  ACE_Time_Value             liveliness_check_interval_;
+        -:  649:  /// Timestamp of last write/dispose/assert_liveliness.
+        -:  650:  ACE_Time_Value             last_liveliness_activity_time_;
+        -:  651:  /// Total number of offered deadlines missed during last offered
+        -:  652:  /// deadline status check.
+        -:  653:  CORBA::Long last_deadline_missed_total_count_;
+        -:  654:  /// Watchdog responsible for reporting missed offered
+        -:  655:  /// deadlines.
+        -:  656:  RcHandle<OfferedDeadlineWatchdog> watchdog_;
+        -:  657:
+        -:  658:  /// Flag indicates that this datawriter is a builtin topic
+        -:  659:  /// datawriter.
+        -:  660:  bool                       is_bit_;
+        -:  661:
+        -:  662:  RepoIdSet pending_readers_, assoc_complete_readers_;
+        -:  663:
+        -:  664:  /// The cached available data while suspending and associated transaction ids.
+        -:  665:  ACE_UINT64 min_suspended_transaction_id_;
+        -:  666:  ACE_UINT64 max_suspended_transaction_id_;
+        -:  667:  SendStateDataSampleList             available_data_list_;
+        -:  668:
+        -:  669:  /// Monitor object for this entity
+        -:  670:  Monitor* monitor_;
+        -:  671:
+        -:  672:  /// Periodic Monitor object for this entity
+        -:  673:  Monitor* periodic_monitor_;
+        -:  674:
+        -:  675:
+        -:  676:  // Do we need to set the sequence repair header bit?
+        -:  677:  //   must call prior to incrementing sequence number
+        -:  678:  bool need_sequence_repair();
+        -:  679:  bool need_sequence_repair_i() const;
+        -:  680:
+        -:  681:  DDS::ReturnCode_t send_end_historic_samples(const RepoId& readerId);
+        -:  682:  DDS::ReturnCode_t send_request_ack();
+        -:  683:
+        -:  684:  bool liveliness_asserted_;
+        -:  685:
+        -:  686:  // Lock used to synchronize remove_associations calls from discovery
+        -:  687:  // and unregister_instances during deletion of datawriter from application
+        -:  688:  ACE_Thread_Mutex sync_unreg_rem_assocs_lock_;
+        -:  689:  RcHandle<LivenessTimer> liveness_timer_;
+        -:  690:};
+        -:  691:
+        -:  692:typedef RcHandle<DataWriterImpl> DataWriterImpl_rch;
+        -:  693:
+        -:  694:
+        -:  695:class LivenessTimer : public RcEventHandler
+        -:  696:{
+        -:  697:public:
+        -:  698:  LivenessTimer(DataWriterImpl& writer)
+        -:  699:    : writer_(writer)
+        -:  700:  {
+        -:  701:  }
+        -:  702:
+        -:  703:  /// Handle the assert liveliness timeout.
+        -:  704:  virtual int handle_timeout(const ACE_Time_Value &tv,
+        -:  705:                             const void *arg);
+        -:  706:
+        -:  707:private:
+        -:  708:  WeakRcHandle<DataWriterImpl> writer_;
+        -:  709:};
+        -:  710:
+        -:  711:} // namespace DCPS
+        -:  712:} // namespace OpenDDS
+        -:  713:
+        -:  714:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  715:
+        -:  716:#endif

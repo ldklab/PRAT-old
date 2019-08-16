@@ -1,207 +1,226 @@
         -:    0:Source:../dds/DCPS/BuiltInTopicUtils.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-        -:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-        -:   98:/*EOF*/
-        -:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-        -:  103:/*EOF*/
-        -:  104:/*EOF*/
-        -:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-        -:  108:/*EOF*/
-        -:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-        -:  112:/*EOF*/
-        -:  113:/*EOF*/
-        -:  114:/*EOF*/
-        -:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-        -:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-        -:  125:/*EOF*/
-        -:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-        -:  131:/*EOF*/
-        -:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-        -:  135:/*EOF*/
-        -:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-        -:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-        -:  147:/*EOF*/
-        -:  148:/*EOF*/
-        -:  149:/*EOF*/
-        -:  150:/*EOF*/
-        -:  151:/*EOF*/
-        -:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-    #####:  157:/*EOF*/
-        -:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-    #####:  161:/*EOF*/
-    #####:  162:/*EOF*/
-    #####:  163:/*EOF*/
-    #####:  164:/*EOF*/
-    #####:  165:/*EOF*/
-    #####:  166:/*EOF*/
-        -:  167:/*EOF*/
-        -:  168:/*EOF*/
-        -:  169:/*EOF*/
-        -:  170:/*EOF*/
-        -:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-        -:  174:/*EOF*/
-        -:  175:/*EOF*/
-        -:  176:/*EOF*/
-        -:  177:/*EOF*/
-        -:  178:/*EOF*/
-        -:  179:/*EOF*/
-        -:  180:/*EOF*/
-        -:  181:/*EOF*/
-        -:  182:/*EOF*/
-        -:  183:/*EOF*/
-        -:  184:/*EOF*/
-        -:  185:/*EOF*/
-        -:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-        -:  190:/*EOF*/
-        -:  191:/*EOF*/
-        -:  192:/*EOF*/
-    #####:  193:/*EOF*/
-        -:  194:/*EOF*/
-        -:  195:/*EOF*/
-    #####:  196:/*EOF*/
-        -:  197:/*EOF*/
-        -:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-        -:  201:/*EOF*/
-    #####:  202:/*EOF*/
-        -:  203:/*EOF*/
-        -:  204:/*EOF*/
-    #####:  205:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef BUILTINTOPICUTILS_H
+        -:    9:#define BUILTINTOPICUTILS_H
+        -:   10:
+        -:   11:#include "dcps_export.h"
+        -:   12:#include "dds/DdsDcpsInfrastructureC.h"
+        -:   13:#include "dds/DdsDcpsInfoUtilsC.h"
+        -:   14:#include "dds/DdsDcpsSubscriptionC.h"
+        -:   15:#include "dds/DdsDcpsCoreC.h"
+        -:   16:#include "Service_Participant.h"
+        -:   17:#include "DomainParticipantImpl.h"
+        -:   18:
+        -:   19:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   20:
+        -:   21:namespace OpenDDS {
+        -:   22:namespace DCPS {
+        -:   23:
+        -:   24:OpenDDS_Dcps_Export extern const char* const BUILT_IN_PARTICIPANT_TOPIC;
+        -:   25:OpenDDS_Dcps_Export extern const char* const BUILT_IN_PARTICIPANT_TOPIC_TYPE;
+        -:   26:
+        -:   27:OpenDDS_Dcps_Export extern const char* const BUILT_IN_TOPIC_TOPIC;
+        -:   28:OpenDDS_Dcps_Export extern const char* const BUILT_IN_TOPIC_TOPIC_TYPE;
+        -:   29:
+        -:   30:OpenDDS_Dcps_Export extern const char* const BUILT_IN_SUBSCRIPTION_TOPIC;
+        -:   31:OpenDDS_Dcps_Export extern const char* const BUILT_IN_SUBSCRIPTION_TOPIC_TYPE;
+        -:   32:
+        -:   33:OpenDDS_Dcps_Export extern const char* const BUILT_IN_PUBLICATION_TOPIC;
+        -:   34:OpenDDS_Dcps_Export extern const char* const BUILT_IN_PUBLICATION_TOPIC_TYPE;
+        -:   35:
+        -:   36:/**
+        -:   37: * Returns true if the topic name and type pair matches one of the built-in
+        -:   38: * topic name and type pairs.
+        -:   39: */
+        -:   40:inline bool topicIsBIT(const char* name, const char* type)
+        -:   41:{
+        -:   42:    return (
+        -:   43:      !ACE_OS::strcmp(name, OpenDDS::DCPS::BUILT_IN_PARTICIPANT_TOPIC) &&
+        -:   44:      !ACE_OS::strcmp(type, OpenDDS::DCPS::BUILT_IN_PARTICIPANT_TOPIC_TYPE)
+        -:   45:    ) || (
+        -:   46:      !ACE_OS::strcmp(name, OpenDDS::DCPS::BUILT_IN_TOPIC_TOPIC) &&
+        -:   47:      !ACE_OS::strcmp(type, OpenDDS::DCPS::BUILT_IN_TOPIC_TOPIC_TYPE)
+        -:   48:    ) || (
+        -:   49:      !ACE_OS::strcmp(name, OpenDDS::DCPS::BUILT_IN_SUBSCRIPTION_TOPIC) &&
+        -:   50:      !ACE_OS::strcmp(type, OpenDDS::DCPS::BUILT_IN_SUBSCRIPTION_TOPIC_TYPE)
+        -:   51:    ) || (
+        -:   52:      !ACE_OS::strcmp(name, OpenDDS::DCPS::BUILT_IN_PUBLICATION_TOPIC) &&
+        -:   53:      !ACE_OS::strcmp(type, OpenDDS::DCPS::BUILT_IN_PUBLICATION_TOPIC_TYPE)
+        -:   54:    );
+        -:   55:}
+        -:   56:
+        -:   57:class DomainParticipantImpl;
+        -:   58:
+        -:   59:/**
+        -:   60: * Functor for ordering BuiltinKey_t.
+        -:   61: *
+        -:   62: * Use this like this:
+        -:   63: *   std::map<DDS::BuiltinTopicKey_t, int, OpenDDS::DCPS::BuiltinTopicKeyLess> MapType;
+        -:   64: */
+        -:   65:class BuiltinTopicKeyLess {
+        -:   66:public:
+        -:   67:  bool operator()(
+        -:   68:    const DDS::BuiltinTopicKey_t& lhs,
+        -:   69:    const DDS::BuiltinTopicKey_t& rhs) const;
+        -:   70:};
+        -:   71:
+        -:   72:template<typename TopicType>
+        -:   73:DDS::BuiltinTopicKey_t keyFromSample(TopicType* sample);
+        -:   74:
+        -:   75:#if !defined (DDS_HAS_MINIMUM_BIT)
+        -:   76:
+        -:   77:template<class BIT_Reader_var, class BIT_DataSeq>
+        -:   78:DDS::ReturnCode_t instance_handle_to_bit_data(
+        -:   79:  DomainParticipantImpl* dp,
+        -:   80:  const char* bit_name,
+        -:   81:  const DDS::InstanceHandle_t& handle,
+        -:   82:  BIT_DataSeq& data)
+        -:   83:{
+        -:   84:  DDS::Subscriber_var bit_subscriber = dp->get_builtin_subscriber();
+        -:   85:
+        -:   86:  DDS::DataReader_var reader = bit_subscriber->lookup_datareader(bit_name);
+        -:   87:
+        -:   88:  typedef typename BIT_Reader_var::_obj_type BIT_Reader;
+        -:   89:  BIT_Reader_var bit_reader = BIT_Reader::_narrow(reader.in());
+        -:   90:
+        -:   91:  const ACE_Time_Value due = ACE_OS::gettimeofday() +
+        -:   92:    ACE_Time_Value(TheServiceParticipant->bit_lookup_duration_msec() / 1000,
+        -:   93:                   (TheServiceParticipant->bit_lookup_duration_msec() % 1000)
+        -:   94:                   * 1000);
+        -:   95:
+        -:   96:    // Look for the data from builtin topic datareader until we get results or
+        -:   97:    // timeout.
+        -:   98:    // This is to resolve the problem of lookup return nothing. This could happen
+        -:   99:    // when the add_association is called before the builtin topic datareader got
+        -:  100:    // the published data.
+        -:  101:  while (true) {
+        -:  102:    DDS::SampleInfoSeq the_info;
+        -:  103:    BIT_DataSeq the_data;
+        -:  104:    const DDS::ReturnCode_t ret =
+        -:  105:      bit_reader->read_instance(the_data,
+        -:  106:                                the_info,
+        -:  107:                                DDS::LENGTH_UNLIMITED,
+        -:  108:                                handle,
+        -:  109:                                DDS::ANY_SAMPLE_STATE,
+        -:  110:                                DDS::ANY_VIEW_STATE,
+        -:  111:                                DDS::ANY_INSTANCE_STATE);
+        -:  112:
+        -:  113:    if (ret == DDS::RETCODE_OK) {
+        -:  114:      data.length(1);
+        -:  115:      data[0] = the_data[0];
+        -:  116:      return ret;
+        -:  117:    }
+        -:  118:
+        -:  119:    if (ret != DDS::RETCODE_BAD_PARAMETER && ret != DDS::RETCODE_NO_DATA) {
+        -:  120:      ACE_ERROR_RETURN((LM_ERROR,
+        -:  121:                        ACE_TEXT("(%P|%t) ERROR: instance_handle_to_repo_id, ")
+        -:  122:                        ACE_TEXT("read instance 0x%x returned error %d.\n"),
+        -:  123:                        handle, ret),
+        -:  124:                       ret);
+        -:  125:    }
+        -:  126:
+        -:  127:    const ACE_Time_Value now = ACE_OS::gettimeofday();
+        -:  128:
+        -:  129:    if (now < due) {
+        -:  130:      if (DCPS_debug_level >= 10) {
+        -:  131:        ACE_DEBUG((LM_DEBUG,
+        -:  132:                   ACE_TEXT("(%P|%t) instance_handle_to_repo_id, ")
+        -:  133:                   ACE_TEXT("BIT reader read_instance failed - trying again.\n")));
+        -:  134:      }
+        -:  135:
+        -:  136:      ACE_Time_Value tv = due - now;
+        -:  137:
+        -:  138:      if (tv > ACE_Time_Value(0, 100000)) {
+        -:  139:        tv = ACE_Time_Value(0, 100000);
+        -:  140:      }
+        -:  141:
+        -:  142:      ACE_OS::sleep(tv);
+        -:  143:
+        -:  144:    } else {
+        -:  145:      ACE_ERROR_RETURN((LM_ERROR,
+        -:  146:                        ACE_TEXT("(%P|%t) ERROR: instance_handle_to_repo_id,")
+        -:  147:                        ACE_TEXT(" timeout. \n")),
+        -:  148:                       DDS::RETCODE_ERROR);
+        -:  149:      return DDS::RETCODE_TIMEOUT;
+        -:  150:    }
+        -:  151:  }
+        -:  152:}
+        -:  153:#endif
+        -:  154:
+        -:  155:inline
+        -:  156:bool
+        -:  157:BuiltinTopicKeyLess::operator()(const DDS::BuiltinTopicKey_t& lhs,
+        -:  158:                                const DDS::BuiltinTopicKey_t& rhs) const
+        -:  159:{
+        -:  160:  // N.B.  This assumes that the MS index is 2 and the LS index is 0.
+        -:  161:  return (lhs.value[2] < rhs.value[2])? true:
+        -:  162:         (lhs.value[2] > rhs.value[2])? false:
+        -:  163:         (lhs.value[1] < rhs.value[1])? true:
+        -:  164:         (lhs.value[1] > rhs.value[1])? false:
+        -:  165:         (lhs.value[0] < rhs.value[0])? true:
+        -:  166:         false;
+        -:  167:
+        -:  168:}
+        -:  169:
+        -:  170:#if !defined (DDS_HAS_MINIMUM_BIT)
+        -:  171:
+        -:  172:template<>
+        -:  173:inline
+        -:  174:DDS::BuiltinTopicKey_t
+    #####:  175:keyFromSample<DDS::ParticipantBuiltinTopicData>(
+        -:  176:  DDS::ParticipantBuiltinTopicData* sample)
+        -:  177:{
+    #####:  178:  return sample->key;
+        -:  179:}
+        -:  180:
+        -:  181:template<>
+        -:  182:inline
+        -:  183:DDS::BuiltinTopicKey_t
+    #####:  184:keyFromSample<DDS::TopicBuiltinTopicData>(
+        -:  185:  DDS::TopicBuiltinTopicData* sample)
+        -:  186:{
+    #####:  187:  return sample->key;
+        -:  188:}
+        -:  189:
+        -:  190:template<>
+        -:  191:inline
+        -:  192:DDS::BuiltinTopicKey_t
+    #####:  193:keyFromSample<DDS::SubscriptionBuiltinTopicData>(
+        -:  194:  DDS::SubscriptionBuiltinTopicData* sample)
+        -:  195:{
+    #####:  196:  return sample->key;
+        -:  197:}
+        -:  198:
+        -:  199:template<>
+        -:  200:inline
+        -:  201:DDS::BuiltinTopicKey_t
+    #####:  202:keyFromSample<DDS::PublicationBuiltinTopicData>(
+        -:  203:  DDS::PublicationBuiltinTopicData* sample)
+        -:  204:{
+    #####:  205:  return sample->key;
+        -:  206:}
+        -:  207:
+        -:  208:#endif
+        -:  209:
+        -:  210:template<typename TopicType>
+        -:  211:inline
+        -:  212:DDS::BuiltinTopicKey_t keyFromSample(TopicType*)
+        -:  213:{
+        -:  214:  DDS::BuiltinTopicKey_t value;
+        -:  215:  value.value[0] = value.value[1] = value.value[2] = 0;
+        -:  216:  return value;
+        -:  217:}
+        -:  218:
+        -:  219:} // namespace DCPS
+        -:  220:} // namespace OpenDDS
+        -:  221:
+        -:  222:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  223:
+        -:  224:#endif /* BUILTINTOPICUTILS_H  */

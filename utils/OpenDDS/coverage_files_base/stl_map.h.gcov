@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/bits/stl_map.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Map implementation -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
@@ -98,7 +98,7 @@
         -:   96:  */
         -:   97:  template <typename _Key, typename _Tp, typename _Compare = std::less<_Key>,
         -:   98:	    typename _Alloc = std::allocator<std::pair<const _Key, _Tp> > >
-        8:   99:    class map
+    #####:   99:    class map
         -:  100:    {
         -:  101:    public:
         -:  102:      typedef _Key					key_type;
@@ -176,7 +176,7 @@
         -:  174:#if __cplusplus < 201103L
         -:  175:      map() : _M_t() { }
         -:  176:#else
-      164:  177:      map() = default;
+       12:  177:      map() = default;
         -:  178:#endif
         -:  179:
         -:  180:      /**
@@ -206,7 +206,7 @@
         -:  204:       *  The newly-created %map contains the exact contents of the moved
         -:  205:       *  instance. The moved instance is a valid, but unspecified, %map.
         -:  206:       */
-        -:  207:      map(map&&) = default;
+    #####:  207:      map(map&&) = default;
         -:  208:
         -:  209:      /**
         -:  210:       *  @brief  Builds a %map from an initializer_list.
@@ -293,7 +293,7 @@
         -:  291:       *  themselves are pointers, the pointed-to memory is not touched in any
         -:  292:       *  way.  Managing the pointer is the user's responsibility.
         -:  293:       */
-      160:  294:      ~map() = default;
+       12:  294:      ~map() = default;
         -:  295:#endif
         -:  296:
         -:  297:      /**
@@ -347,8 +347,8 @@
         -:  345:       *  Iteration is done in ascending order according to the keys.
         -:  346:       */
         -:  347:      iterator
-      107:  348:      begin() _GLIBCXX_NOEXCEPT
-      107:  349:      { return _M_t.begin(); }
+      102:  348:      begin() _GLIBCXX_NOEXCEPT
+      102:  349:      { return _M_t.begin(); }
         -:  350:
         -:  351:      /**
         -:  352:       *  Returns a read-only (constant) iterator that points to the first pair
@@ -365,8 +365,8 @@
         -:  363:       *  according to the keys.
         -:  364:       */
         -:  365:      iterator
-      265:  366:      end() _GLIBCXX_NOEXCEPT
-      265:  367:      { return _M_t.end(); }
+      249:  366:      end() _GLIBCXX_NOEXCEPT
+      249:  367:      { return _M_t.end(); }
         -:  368:
         -:  369:      /**
         -:  370:       *  Returns a read-only (constant) iterator that points one past the last
@@ -374,8 +374,8 @@
         -:  372:       *  the keys.
         -:  373:       */
         -:  374:      const_iterator
-       19:  375:      end() const _GLIBCXX_NOEXCEPT
-       19:  376:      { return _M_t.end(); }
+    #####:  375:      end() const _GLIBCXX_NOEXCEPT
+    #####:  376:      { return _M_t.end(); }
         -:  377:
         -:  378:      /**
         -:  379:       *  Returns a read/write reverse iterator that points to the last pair in
@@ -392,8 +392,8 @@
         -:  390:       *  according to the keys.
         -:  391:       */
         -:  392:      const_reverse_iterator
-    #####:  393:      rbegin() const _GLIBCXX_NOEXCEPT
-    #####:  394:      { return _M_t.rbegin(); }
+        -:  393:      rbegin() const _GLIBCXX_NOEXCEPT
+        -:  394:      { return _M_t.rbegin(); }
         -:  395:
         -:  396:      /**
         -:  397:       *  Returns a read/write reverse iterator that points to one before the
@@ -456,13 +456,13 @@
         -:  454:       *  end().)
         -:  455:      */
         -:  456:      bool
-       60:  457:      empty() const _GLIBCXX_NOEXCEPT
-       60:  458:      { return _M_t.empty(); }
+        -:  457:      empty() const _GLIBCXX_NOEXCEPT
+        -:  458:      { return _M_t.empty(); }
         -:  459:
         -:  460:      /** Returns the size of the %map.  */
         -:  461:      size_type
-       14:  462:      size() const _GLIBCXX_NOEXCEPT
-       14:  463:      { return _M_t.size(); }
+    #####:  462:      size() const _GLIBCXX_NOEXCEPT
+    #####:  463:      { return _M_t.size(); }
         -:  464:
         -:  465:      /** Returns the maximum size of the %map.  */
         -:  466:      size_type
@@ -483,38 +483,38 @@
         -:  481:       *  Lookup requires logarithmic time.
         -:  482:       */
         -:  483:      mapped_type&
-       36:  484:      operator[](const key_type& __k)
+    #####:  484:      operator[](const key_type& __k)
         -:  485:      {
         -:  486:	// concept requirements
         -:  487:	__glibcxx_function_requires(_DefaultConstructibleConcept<mapped_type>)
         -:  488:
-       36:  489:	iterator __i = lower_bound(__k);
+    #####:  489:	iterator __i = lower_bound(__k);
         -:  490:	// __i->first is greater than or equivalent to __k.
-       36:  491:	if (__i == end() || key_comp()(__k, (*__i).first))
+    #####:  491:	if (__i == end() || key_comp()(__k, (*__i).first))
         -:  492:#if __cplusplus >= 201103L
-       28:  493:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+    #####:  493:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
         -:  494:					    std::tuple<const key_type&>(__k),
         -:  495:					    std::tuple<>());
         -:  496:#else
         -:  497:	  __i = insert(__i, value_type(__k, mapped_type()));
         -:  498:#endif
-       36:  499:	return (*__i).second;
+    #####:  499:	return (*__i).second;
         -:  500:      }
         -:  501:
         -:  502:#if __cplusplus >= 201103L
         -:  503:      mapped_type&
-        8:  504:      operator[](key_type&& __k)
+    #####:  504:      operator[](key_type&& __k)
         -:  505:      {
         -:  506:	// concept requirements
         -:  507:	__glibcxx_function_requires(_DefaultConstructibleConcept<mapped_type>)
         -:  508:
-        8:  509:	iterator __i = lower_bound(__k);
+    #####:  509:	iterator __i = lower_bound(__k);
         -:  510:	// __i->first is greater than or equivalent to __k.
-        8:  511:	if (__i == end() || key_comp()(__k, (*__i).first))
-       16:  512:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
-        8:  513:					std::forward_as_tuple(std::move(__k)),
+    #####:  511:	if (__i == end() || key_comp()(__k, (*__i).first))
+    #####:  512:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+    #####:  513:					std::forward_as_tuple(std::move(__k)),
         -:  514:					std::tuple<>());
-        8:  515:	return (*__i).second;
+    #####:  515:	return (*__i).second;
         -:  516:      }
         -:  517:#endif
         -:  518:
@@ -567,8 +567,8 @@
         -:  565:       */
         -:  566:      template<typename... _Args>
         -:  567:	std::pair<iterator, bool>
-        -:  568:	emplace(_Args&&... __args)
-        -:  569:	{ return _M_t._M_emplace_unique(std::forward<_Args>(__args)...); }
+    #####:  568:	emplace(_Args&&... __args)
+    #####:  569:	{ return _M_t._M_emplace_unique(std::forward<_Args>(__args)...); }
         -:  570:
         -:  571:      /**
         -:  572:       *  @brief Attempts to build and insert a std::pair into the %map.
@@ -801,14 +801,14 @@
         -:  799:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
         -:  800:      // 2354. Unnecessary copying when inserting into maps with braced-init
         -:  801:      std::pair<iterator, bool>
-       22:  802:      insert(value_type&& __x)
-       22:  803:      { return _M_t._M_insert_unique(std::move(__x)); }
+       18:  802:      insert(value_type&& __x)
+       18:  803:      { return _M_t._M_insert_unique(std::move(__x)); }
         -:  804:
         -:  805:      template<typename _Pair>
         -:  806:	__enable_if_t<is_constructible<value_type, _Pair>::value,
         -:  807:		      pair<iterator, bool>>
-       20:  808:	insert(_Pair&& __x)
-       20:  809:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+    #####:  808:	insert(_Pair&& __x)
+    #####:  809:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
         -:  810:#endif
         -:  811:      // @}
         -:  812:
@@ -884,8 +884,8 @@
         -:  882:       */
         -:  883:      template<typename _InputIterator>
         -:  884:	void
-        -:  885:	insert(_InputIterator __first, _InputIterator __last)
-        -:  886:	{ _M_t._M_insert_unique(__first, __last); }
+    #####:  885:	insert(_InputIterator __first, _InputIterator __last)
+    #####:  886:	{ _M_t._M_insert_unique(__first, __last); }
         -:  887:
         -:  888:#if __cplusplus > 201402L
         -:  889:#define __cpp_lib_map_insertion 201411
@@ -1029,8 +1029,8 @@
         -: 1027:      // LWG 2059
         -: 1028:      _GLIBCXX_ABI_TAG_CXX11
         -: 1029:      iterator
-       12: 1030:      erase(iterator __position)
-       12: 1031:      { return _M_t.erase(__position); }
+    #####: 1030:      erase(iterator __position)
+    #####: 1031:      { return _M_t.erase(__position); }
         -: 1032:      // @}
         -: 1033:#else
         -: 1034:      /**
@@ -1060,8 +1060,8 @@
         -: 1058:       *  in any way.  Managing the pointer is the user's responsibility.
         -: 1059:       */
         -: 1060:      size_type
-       18: 1061:      erase(const key_type& __x)
-       18: 1062:      { return _M_t.erase(__x); }
+    #####: 1061:      erase(const key_type& __x)
+    #####: 1062:      { return _M_t.erase(__x); }
         -: 1063:
         -: 1064:#if __cplusplus >= 201103L
         -: 1065:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
@@ -1125,8 +1125,8 @@
         -: 1123:       *  Managing the pointer is the user's responsibility.
         -: 1124:       */
         -: 1125:      void
-       91: 1126:      clear() _GLIBCXX_NOEXCEPT
-       91: 1127:      { _M_t.clear(); }
+    #####: 1126:      clear() _GLIBCXX_NOEXCEPT
+    #####: 1127:      { _M_t.clear(); }
         -: 1128:
         -: 1129:      // observers
         -: 1130:      /**
@@ -1134,8 +1134,8 @@
         -: 1132:       *  constructed.
         -: 1133:       */
         -: 1134:      key_compare
-        8: 1135:      key_comp() const
-        8: 1136:      { return _M_t.key_comp(); }
+    #####: 1135:      key_comp() const
+    #####: 1136:      { return _M_t.key_comp(); }
         -: 1137:
         -: 1138:      /**
         -: 1139:       *  Returns a value comparison object, built from the key comparison
@@ -1161,8 +1161,8 @@
         -: 1159:       */
         -: 1160:
         -: 1161:      iterator
-       64: 1162:      find(const key_type& __x)
-       64: 1163:      { return _M_t.find(__x); }
+       84: 1162:      find(const key_type& __x)
+       84: 1163:      { return _M_t.find(__x); }
         -: 1164:
         -: 1165:#if __cplusplus > 201103L
         -: 1166:      template<typename _Kt>
@@ -1186,8 +1186,8 @@
         -: 1184:       */
         -: 1185:
         -: 1186:      const_iterator
-       19: 1187:      find(const key_type& __x) const
-       19: 1188:      { return _M_t.find(__x); }
+        -: 1187:      find(const key_type& __x) const
+        -: 1188:      { return _M_t.find(__x); }
         -: 1189:
         -: 1190:#if __cplusplus > 201103L
         -: 1191:      template<typename _Kt>
@@ -1207,8 +1207,8 @@
         -: 1205:       *  either be 0 (not present) or 1 (present).
         -: 1206:       */
         -: 1207:      size_type
-       12: 1208:      count(const key_type& __x) const
-       12: 1209:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+        -: 1208:      count(const key_type& __x) const
+        -: 1209:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
         -: 1210:
         -: 1211:#if __cplusplus > 201103L
         -: 1212:      template<typename _Kt>
@@ -1231,8 +1231,8 @@
         -: 1229:       *  or end() if no such element exists.
         -: 1230:       */
         -: 1231:      iterator
-       44: 1232:      lower_bound(const key_type& __x)
-       44: 1233:      { return _M_t.lower_bound(__x); }
+    #####: 1232:      lower_bound(const key_type& __x)
+    #####: 1233:      { return _M_t.lower_bound(__x); }
         -: 1234:
         -: 1235:#if __cplusplus > 201103L
         -: 1236:      template<typename _Kt>
@@ -1256,8 +1256,8 @@
         -: 1254:       *  or end() if no such element exists.
         -: 1255:       */
         -: 1256:      const_iterator
-    #####: 1257:      lower_bound(const key_type& __x) const
-    #####: 1258:      { return _M_t.lower_bound(__x); }
+        -: 1257:      lower_bound(const key_type& __x) const
+        -: 1258:      { return _M_t.lower_bound(__x); }
         -: 1259:
         -: 1260:#if __cplusplus > 201103L
         -: 1261:      template<typename _Kt>

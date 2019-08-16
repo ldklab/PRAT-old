@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/bits/stl_function.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Functor implementations -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
@@ -384,8 +384,8 @@
         -:  382:    {
         -:  383:      _GLIBCXX14_CONSTEXPR
         -:  384:      bool
-       10:  385:      operator()(const _Tp& __x, const _Tp& __y) const
-       10:  386:      { return __x < __y; }
+     2199:  385:      operator()(const _Tp& __x, const _Tp& __y) const
+     2199:  386:      { return __x < __y; }
         -:  387:    };
         -:  388:
         -:  389:  /// One of the @link comparison_functors comparison functors@endlink.
@@ -872,8 +872,8 @@
         -:  870:    : public unary_function<_Tp,_Tp>
         -:  871:    {
         -:  872:      _Tp&
-        -:  873:      operator()(_Tp& __x) const
-        -:  874:      { return __x; }
+    #####:  873:      operator()(_Tp& __x) const
+    #####:  874:      { return __x; }
         -:  875:
         -:  876:      const _Tp&
     #####:  877:      operator()(const _Tp& __x) const
@@ -885,12 +885,12 @@
         -:  883:    : public unary_function<_Pair, typename _Pair::first_type>
         -:  884:    {
         -:  885:      typename _Pair::first_type&
-       26:  886:      operator()(_Pair& __x) const
-       26:  887:      { return __x.first; }
+       24:  886:      operator()(_Pair& __x) const
+       24:  887:      { return __x.first; }
         -:  888:
         -:  889:      const typename _Pair::first_type&
-      240:  890:      operator()(const _Pair& __x) const
-      240:  891:      { return __x.first; }
+      834:  890:      operator()(const _Pair& __x) const
+      834:  891:      { return __x.first; }
         -:  892:
         -:  893:#if __cplusplus >= 201103L
         -:  894:      template<typename _Pair2>

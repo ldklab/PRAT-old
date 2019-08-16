@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Containers_T.inl
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: Containers_T.inl 14 2007-02-01 15:49:12Z mitza $
@@ -271,11 +271,11 @@
         -:  269:// ****************************************************************
         -:  270:
         -:  271:template <class T> ACE_INLINE
-        9:  272:ACE_Array<T>::ACE_Array (size_t size,
+    #####:  272:ACE_Array<T>::ACE_Array (size_t size,
         -:  273:                         ACE_Allocator *alloc)
-        9:  274:  : ACE_Array_Base<T> (size, alloc)
+    #####:  274:  : ACE_Array_Base<T> (size, alloc)
         -:  275:{
-        9:  276:}
+    #####:  276:}
         -:  277:
         -:  278:template <class T> ACE_INLINE
         -:  279:ACE_Array<T>::ACE_Array (size_t size,

@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/bits/stl_construct.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// nonstandard construct and destroy functions -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
@@ -96,19 +96,19 @@
         -:   94:   */
         -:   95:  template<typename _Tp>
         -:   96:    inline void
-       19:   97:    _Destroy(_Tp* __pointer)
-       19:   98:    { __pointer->~_Tp(); }
+    #####:   97:    _Destroy(_Tp* __pointer)
+    #####:   98:    { __pointer->~_Tp(); }
         -:   99:
         -:  100:  template<bool>
         -:  101:    struct _Destroy_aux
         -:  102:    {
         -:  103:      template<typename _ForwardIterator>
         -:  104:        static void
-       77:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+    #####:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
         -:  106:	{
-       96:  107:	  for (; __first != __last; ++__first)
-       19:  108:	    std::_Destroy(std::__addressof(*__first));
-       58:  109:	}
+    #####:  107:	  for (; __first != __last; ++__first)
+    #####:  108:	    std::_Destroy(std::__addressof(*__first));
+    #####:  109:	}
         -:  110:    };
         -:  111:
         -:  112:  template<>
@@ -116,7 +116,7 @@
         -:  114:    {
         -:  115:      template<typename _ForwardIterator>
         -:  116:        static void
-      136:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+    #####:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
         -:  118:    };
         -:  119:
         -:  120:  /**
@@ -126,7 +126,7 @@
         -:  124:   */
         -:  125:  template<typename _ForwardIterator>
         -:  126:    inline void
-      194:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+    #####:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
         -:  128:    {
         -:  129:      typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  130:                       _Value_type;
@@ -136,8 +136,8 @@
         -:  134:		    "value type is destructible");
         -:  135:#endif
         -:  136:      std::_Destroy_aux<__has_trivial_destructor(_Value_type)>::
-      194:  137:	__destroy(__first, __last);
-      194:  138:    }
+    #####:  137:	__destroy(__first, __last);
+    #####:  138:    }
         -:  139:
         -:  140:  template<bool>
         -:  141:    struct _Destroy_n_aux
@@ -202,11 +202,11 @@
         -:  200:
         -:  201:  template<typename _ForwardIterator, typename _Tp>
         -:  202:    inline void
-      194:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+    #####:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
         -:  204:	     allocator<_Tp>&)
         -:  205:    {
-      194:  206:      _Destroy(__first, __last);
-      194:  207:    }
+    #####:  206:      _Destroy(__first, __last);
+    #####:  207:    }
         -:  208:
         -:  209:#if __cplusplus > 201402L
         -:  210:  template <typename _Tp>

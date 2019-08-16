@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Thread_Mutex.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: Thread_Mutex.inl 1861 2011-08-31 16:18:08Z mesnierp $
@@ -21,17 +21,17 @@
         -:   19:}
         -:   20:
         -:   21:ACE_INLINE int
-    #####:   22:ACE_Thread_Mutex::acquire_read (void)
+        -:   22:ACE_Thread_Mutex::acquire_read (void)
         -:   23:{
         -:   24:// ACE_TRACE ("ACE_Thread_Mutex::acquire_read");
-    #####:   25:  return ACE_OS::thread_mutex_lock (&this->lock_);
+        -:   25:  return ACE_OS::thread_mutex_lock (&this->lock_);
         -:   26:}
         -:   27:
         -:   28:ACE_INLINE int
-    #####:   29:ACE_Thread_Mutex::acquire_write (void)
+        -:   29:ACE_Thread_Mutex::acquire_write (void)
         -:   30:{
         -:   31:// ACE_TRACE ("ACE_Thread_Mutex::acquire_write");
-    #####:   32:  return ACE_OS::thread_mutex_lock (&this->lock_);
+        -:   32:  return ACE_OS::thread_mutex_lock (&this->lock_);
         -:   33:}
         -:   34:
         -:   35:ACE_INLINE int
@@ -91,16 +91,16 @@
         -:   89:}
         -:   90:
         -:   91:ACE_INLINE int
-    #####:   92:ACE_Thread_Mutex::remove (void)
+        -:   92:ACE_Thread_Mutex::remove (void)
         -:   93:{
         -:   94:// ACE_TRACE ("ACE_Thread_Mutex::remove");
-    #####:   95:  int result = 0;
-    #####:   96:  if (!this->removed_)
+        -:   95:  int result = 0;
+        -:   96:  if (!this->removed_)
         -:   97:    {
-    #####:   98:      this->removed_ = true;
-    #####:   99:      result = ACE_OS::thread_mutex_destroy (&this->lock_);
+        -:   98:      this->removed_ = true;
+        -:   99:      result = ACE_OS::thread_mutex_destroy (&this->lock_);
         -:  100:    }
-    #####:  101:  return result;
+        -:  101:  return result;
         -:  102:}
         -:  103:
         -:  104:ACE_END_VERSIONED_NAMESPACE_DECL

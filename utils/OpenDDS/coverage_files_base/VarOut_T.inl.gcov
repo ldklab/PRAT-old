@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/VarOut_T.inl
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: VarOut_T.inl 2179 2013-05-28 22:16:51Z mesnierp $
@@ -8,9 +8,9 @@
         -:    6:
         -:    7:template<typename T>
         -:    8:ACE_INLINE
-    #####:    9:TAO_Var_Base_T<T>::TAO_Var_Base_T (void)
-    #####:   10:  : ptr_ (0)
-    #####:   11:{}
+     1053:    9:TAO_Var_Base_T<T>::TAO_Var_Base_T (void)
+     1053:   10:  : ptr_ (0)
+     1053:   11:{}
         -:   12:
         -:   13:template<typename T>
         -:   14:ACE_INLINE
@@ -164,8 +164,8 @@
         -:  162:
         -:  163:template<typename T>
         -:  164:ACE_INLINE
-    #####:  165:TAO_Var_Var_T<T>::TAO_Var_Var_T (void)
-    #####:  166:{}
+     1053:  165:TAO_Var_Var_T<T>::TAO_Var_Var_T (void)
+     1053:  166:{}
         -:  167:
         -:  168:template<typename T>
         -:  169:ACE_INLINE
@@ -198,9 +198,9 @@
         -:  196:
         -:  197:template<typename T>
         -:  198:ACE_INLINE
-    #####:  199:TAO_Var_Var_T<T>::operator T & ()
+        -:  199:TAO_Var_Var_T<T>::operator T & ()
         -:  200:{
-    #####:  201:  return *this->ptr_;
+        -:  201:  return *this->ptr_;
         -:  202:}
         -:  203:
         -:  204:template<typename T>
@@ -214,11 +214,11 @@
         -:  212:template<typename T>
         -:  213:ACE_INLINE
         -:  214:T *&
-    #####:  215:TAO_Var_Var_T<T>::out (void)
+        -:  215:TAO_Var_Var_T<T>::out (void)
         -:  216:{
-    #####:  217:  delete this->ptr_;
-    #####:  218:  this->ptr_ = 0;
-    #####:  219:  return this->ptr_;
+        -:  217:  delete this->ptr_;
+        -:  218:  this->ptr_ = 0;
+        -:  219:  return this->ptr_;
         -:  220:}
         -:  221:
         -:  222:template<typename T>
@@ -235,11 +235,11 @@
         -:  233:
         -:  234:template<typename T>
         -:  235:ACE_INLINE
-    #####:  236:TAO_Out_T<T>::TAO_Out_T (T *& p)
-    #####:  237:  : ptr_ (p)
+        -:  236:TAO_Out_T<T>::TAO_Out_T (T *& p)
+        -:  237:  : ptr_ (p)
         -:  238:{
-    #####:  239:  this->ptr_ = 0;
-    #####:  240:}
+        -:  239:  this->ptr_ = 0;
+        -:  240:}
         -:  241:
         -:  242:template<typename T>
         -:  243:ACE_INLINE
@@ -252,9 +252,9 @@
         -:  250:
         -:  251:template<typename T>
         -:  252:ACE_INLINE
-    #####:  253:TAO_Out_T<T>::TAO_Out_T (const TAO_Out_T<T> & p)
-    #####:  254:  : ptr_ (p.ptr_)
-    #####:  255:{}
+        -:  253:TAO_Out_T<T>::TAO_Out_T (const TAO_Out_T<T> & p)
+        -:  254:  : ptr_ (p.ptr_)
+        -:  255:{}
         -:  256:
         -:  257:template<typename T>
         -:  258:ACE_INLINE
@@ -268,10 +268,10 @@
         -:  266:template<typename T>
         -:  267:ACE_INLINE
         -:  268:TAO_Out_T<T> &
-    #####:  269:TAO_Out_T<T>::operator= (T * p)
+        -:  269:TAO_Out_T<T>::operator= (T * p)
         -:  270:{
-    #####:  271:  this->ptr_ = p;
-    #####:  272:  return *this;
+        -:  271:  this->ptr_ = p;
+        -:  272:  return *this;
         -:  273:}
         -:  274:
         -:  275:template<typename T>

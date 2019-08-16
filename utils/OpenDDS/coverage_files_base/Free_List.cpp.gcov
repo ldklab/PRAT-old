@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Free_List.cpp
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// $Id: Free_List.cpp 2622 2015-08-13 18:30:00Z mitza $
         -:    2:
         -:    3:#ifndef ACE_FREE_LIST_CPP
@@ -19,16 +19,16 @@
         -:   17:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
         -:   18:
         -:   19:template <class T>
-    #####:   20:ACE_Free_List<T>::~ACE_Free_List (void)
+      270:   20:ACE_Free_List<T>::~ACE_Free_List (void)
         -:   21:{
-    #####:   22:}
+      270:   22:}
         -:   23:
         -:   24:// Default constructor that takes in a preallocation number
         -:   25:// (<prealloc>), a low and high water mark (<lwm> and <hwm>) and an
         -:   26:// increment value (<inc>)
         -:   27:
         -:   28:template <class T, class ACE_LOCK>
-    #####:   29:ACE_Locked_Free_List<T, ACE_LOCK>::ACE_Locked_Free_List (int mode,
+      270:   29:ACE_Locked_Free_List<T, ACE_LOCK>::ACE_Locked_Free_List (int mode,
         -:   30:                                                     size_t prealloc,
         -:   31:                                                     size_t lwm,
         -:   32:                                                     size_t hwm,
@@ -38,41 +38,41 @@
         -:   36:    lwm_ (lwm),
         -:   37:    hwm_ (hwm),
         -:   38:    inc_ (inc),
-    #####:   39:    size_ (0)
+      270:   39:    size_ (0)
         -:   40:{
-    #####:   41:  this->alloc (prealloc);
-    #####:   42:}
+      270:   41:  this->alloc (prealloc);
+      270:   42:}
         -:   43:
         -:   44:// Destructor - removes all the elements from the free_list
         -:   45:
         -:   46:template <class T, class ACE_LOCK>
-    #####:   47:ACE_Locked_Free_List<T, ACE_LOCK>::~ACE_Locked_Free_List (void)
+      270:   47:ACE_Locked_Free_List<T, ACE_LOCK>::~ACE_Locked_Free_List (void)
         -:   48:{
-    #####:   49:  if (this->mode_ != ACE_PURE_FREE_LIST)
+      270:   49:  if (this->mode_ != ACE_PURE_FREE_LIST)
     #####:   50:    while (this->free_list_ != 0)
         -:   51:      {
     #####:   52:        T *temp = this->free_list_;
     #####:   53:        this->free_list_ = this->free_list_->get_next ();
     #####:   54:        delete temp;
         -:   55:      }
-    #####:   56:}
+      540:   56:}
         -:   57:
         -:   58:// Inserts an element onto the free list (if we are allowed to manage
         -:   59:// elements withing and it pasts the high water mark, delete the
         -:   60:// element)
         -:   61:
         -:   62:template <class T, class ACE_LOCK> void
-    #####:   63:ACE_Locked_Free_List<T, ACE_LOCK>::add (T *element)
+    11631:   63:ACE_Locked_Free_List<T, ACE_LOCK>::add (T *element)
         -:   64:{
-    #####:   65:  ACE_MT (ACE_GUARD (ACE_LOCK, ace_mon, this->mutex_));
+    23262:   65:  ACE_MT (ACE_GUARD (ACE_LOCK, ace_mon, this->mutex_));
         -:   66:
         -:   67:  // Check to see that we not at the high water mark.
-    #####:   68:  if (this->mode_ == ACE_PURE_FREE_LIST
+    11631:   68:  if (this->mode_ == ACE_PURE_FREE_LIST
     #####:   69:      || this->size_ < this->hwm_)
         -:   70:    {
-    #####:   71:      element->set_next (this->free_list_);
-    #####:   72:      this->free_list_ = element;
-    #####:   73:      this->size_++;
+    11631:   71:      element->set_next (this->free_list_);
+    11631:   72:      this->free_list_ = element;
+    11631:   73:      this->size_++;
         -:   74:    }
         -:   75:  else
     #####:   76:    delete element;
@@ -83,24 +83,24 @@
         -:   81:// water mark.
         -:   82:
         -:   83:template <class T, class ACE_LOCK> T *
-    #####:   84:ACE_Locked_Free_List<T, ACE_LOCK>::remove (void)
+      348:   84:ACE_Locked_Free_List<T, ACE_LOCK>::remove (void)
         -:   85:{
-    #####:   86:  ACE_MT (ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, 0));
+      696:   86:  ACE_MT (ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, 0));
         -:   87:
         -:   88:  // If we are at the low water mark, add some nodes
-    #####:   89:  if (this->mode_ != ACE_PURE_FREE_LIST && this->size_ <= this->lwm_)
+      348:   89:  if (this->mode_ != ACE_PURE_FREE_LIST && this->size_ <= this->lwm_)
     #####:   90:    this->alloc (this->inc_);
         -:   91:
         -:   92:  // Remove a node
-    #####:   93:  T *temp = this->free_list_;
+      348:   93:  T *temp = this->free_list_;
         -:   94:
-    #####:   95:  if (temp != 0)
+      348:   95:  if (temp != 0)
         -:   96:    {
-    #####:   97:      this->free_list_ = this->free_list_->get_next ();
-    #####:   98:      this->size_--;
+      348:   97:      this->free_list_ = this->free_list_->get_next ();
+      348:   98:      this->size_--;
         -:   99:    }
         -:  100:
-    #####:  101:  return temp;
+      348:  101:  return temp;
         -:  102:}
         -:  103:
         -:  104:
@@ -137,9 +137,9 @@
         -:  135:// Allocates <n> extra nodes for the freelist
         -:  136:
         -:  137:template <class T, class ACE_LOCK> void
-    #####:  138:ACE_Locked_Free_List<T, ACE_LOCK>::alloc (size_t n)
+      270:  138:ACE_Locked_Free_List<T, ACE_LOCK>::alloc (size_t n)
         -:  139:{
-    #####:  140:  for (; n > 0; n--)
+      270:  140:  for (; n > 0; n--)
         -:  141:    {
     #####:  142:      T *temp = 0;
     #####:  143:      ACE_NEW (temp, T);

@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Containers_T.h
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2:
         -:    3://=============================================================================
@@ -1993,7 +1993,7 @@
         -: 1991: * @sa ACE_Array_Base. This class inherits its operations and requirements.
         -: 1992: */
         -: 1993:template <class T>
-        9: 1994:class ACE_Array : public ACE_Array_Base<T>
+    #####: 1994:class ACE_Array : public ACE_Array_Base<T>
         -: 1995:{
         -: 1996:public:
         -: 1997:  // Define a "trait"

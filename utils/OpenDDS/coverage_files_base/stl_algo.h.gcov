@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/bits/stl_algo.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Algorithm implementation -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
@@ -100,68 +100,68 @@
         -:   98:  /// This is an overload used by find algos for the Input Iterator case.
         -:   99:  template<typename _InputIterator, typename _Predicate>
         -:  100:    inline _InputIterator
-        -:  101:    __find_if(_InputIterator __first, _InputIterator __last,
+    #####:  101:    __find_if(_InputIterator __first, _InputIterator __last,
         -:  102:	      _Predicate __pred, input_iterator_tag)
         -:  103:    {
-        -:  104:      while (__first != __last && !__pred(__first))
-        -:  105:	++__first;
-        -:  106:      return __first;
+    #####:  104:      while (__first != __last && !__pred(__first))
+    #####:  105:	++__first;
+    #####:  106:      return __first;
         -:  107:    }
         -:  108:
         -:  109:  /// This is an overload used by find algos for the RAI case.
         -:  110:  template<typename _RandomAccessIterator, typename _Predicate>
         -:  111:    _RandomAccessIterator
-        1:  112:    __find_if(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:  112:    __find_if(_RandomAccessIterator __first, _RandomAccessIterator __last,
         -:  113:	      _Predicate __pred, random_access_iterator_tag)
         -:  114:    {
         -:  115:      typename iterator_traits<_RandomAccessIterator>::difference_type
-        1:  116:	__trip_count = (__last - __first) >> 2;
+        -:  116:	__trip_count = (__last - __first) >> 2;
         -:  117:
-        1:  118:      for (; __trip_count > 0; --__trip_count)
+        -:  118:      for (; __trip_count > 0; --__trip_count)
         -:  119:	{
-    #####:  120:	  if (__pred(__first))
-    #####:  121:	    return __first;
-    #####:  122:	  ++__first;
+        -:  120:	  if (__pred(__first))
+        -:  121:	    return __first;
+        -:  122:	  ++__first;
         -:  123:
-    #####:  124:	  if (__pred(__first))
-    #####:  125:	    return __first;
-    #####:  126:	  ++__first;
+        -:  124:	  if (__pred(__first))
+        -:  125:	    return __first;
+        -:  126:	  ++__first;
         -:  127:
-    #####:  128:	  if (__pred(__first))
-    #####:  129:	    return __first;
-    #####:  130:	  ++__first;
+        -:  128:	  if (__pred(__first))
+        -:  129:	    return __first;
+        -:  130:	  ++__first;
         -:  131:
-    #####:  132:	  if (__pred(__first))
-    #####:  133:	    return __first;
-    #####:  134:	  ++__first;
+        -:  132:	  if (__pred(__first))
+        -:  133:	    return __first;
+        -:  134:	  ++__first;
         -:  135:	}
         -:  136:
-        1:  137:      switch (__last - __first)
+        -:  137:      switch (__last - __first)
         -:  138:	{
-    #####:  139:	case 3:
-    #####:  140:	  if (__pred(__first))
-    #####:  141:	    return __first;
-    #####:  142:	  ++__first;
-    #####:  143:	case 2:
-    #####:  144:	  if (__pred(__first))
-    #####:  145:	    return __first;
-    #####:  146:	  ++__first;
-    #####:  147:	case 1:
-    #####:  148:	  if (__pred(__first))
-    #####:  149:	    return __first;
-    #####:  150:	  ++__first;
-        1:  151:	case 0:
+        -:  139:	case 3:
+        -:  140:	  if (__pred(__first))
+        -:  141:	    return __first;
+        -:  142:	  ++__first;
+        -:  143:	case 2:
+        -:  144:	  if (__pred(__first))
+        -:  145:	    return __first;
+        -:  146:	  ++__first;
+        -:  147:	case 1:
+        -:  148:	  if (__pred(__first))
+        -:  149:	    return __first;
+        -:  150:	  ++__first;
+        -:  151:	case 0:
         -:  152:	default:
-        1:  153:	  return __last;
+        -:  153:	  return __last;
         -:  154:	}
         -:  155:    }
         -:  156:
         -:  157:  template<typename _Iterator, typename _Predicate>
         -:  158:    inline _Iterator
-        1:  159:    __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
+    #####:  159:    __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
         -:  160:    {
-        -:  161:      return __find_if(__first, __last, __pred,
-        1:  162:		       std::__iterator_category(__first));
+    #####:  161:      return __find_if(__first, __last, __pred,
+    #####:  162:		       std::__iterator_category(__first));
         -:  163:    }
         -:  164:
         -:  165:  /// Provided for stable_partition to use.
@@ -859,21 +859,21 @@
         -:  857:
         -:  858:  template<typename _ForwardIterator, typename _Predicate>
         -:  859:    _ForwardIterator
-        1:  860:    __remove_if(_ForwardIterator __first, _ForwardIterator __last,
+        -:  860:    __remove_if(_ForwardIterator __first, _ForwardIterator __last,
         -:  861:		_Predicate __pred)
         -:  862:    {
-        1:  863:      __first = std::__find_if(__first, __last, __pred);
-        1:  864:      if (__first == __last)
-        1:  865:	return __first;
-    #####:  866:      _ForwardIterator __result = __first;
-    #####:  867:      ++__first;
-    #####:  868:      for (; __first != __last; ++__first)
-    #####:  869:	if (!__pred(__first))
+        -:  863:      __first = std::__find_if(__first, __last, __pred);
+        -:  864:      if (__first == __last)
+        -:  865:	return __first;
+        -:  866:      _ForwardIterator __result = __first;
+        -:  867:      ++__first;
+        -:  868:      for (; __first != __last; ++__first)
+        -:  869:	if (!__pred(__first))
         -:  870:	  {
-    #####:  871:	    *__result = _GLIBCXX_MOVE(*__first);
-    #####:  872:	    ++__result;
+        -:  871:	    *__result = _GLIBCXX_MOVE(*__first);
+        -:  872:	    ++__result;
         -:  873:	  }
-    #####:  874:      return __result;
+        -:  874:      return __result;
         -:  875:    }
         -:  876:
         -:  877:  /**
@@ -895,7 +895,7 @@
         -:  893:  */
         -:  894:  template<typename _ForwardIterator, typename _Tp>
         -:  895:    inline _ForwardIterator
-        1:  896:    remove(_ForwardIterator __first, _ForwardIterator __last,
+        -:  896:    remove(_ForwardIterator __first, _ForwardIterator __last,
         -:  897:	   const _Tp& __value)
         -:  898:    {
         -:  899:      // concept requirements
@@ -905,8 +905,8 @@
         -:  903:	    typename iterator_traits<_ForwardIterator>::value_type, _Tp>)
         -:  904:      __glibcxx_requires_valid_range(__first, __last);
         -:  905:
-        1:  906:      return std::__remove_if(__first, __last,
-        1:  907:		__gnu_cxx::__ops::__iter_equals_val(__value));
+        -:  906:      return std::__remove_if(__first, __last,
+        -:  907:		__gnu_cxx::__ops::__iter_equals_val(__value));
         -:  908:    }
         -:  909:
         -:  910:  /**
@@ -1206,7 +1206,7 @@
         -: 1204:  */
         -: 1205:  template<typename _BidirectionalIterator, typename _OutputIterator>
         -: 1206:    _OutputIterator
-       20: 1207:    reverse_copy(_BidirectionalIterator __first, _BidirectionalIterator __last,
+        -: 1207:    reverse_copy(_BidirectionalIterator __first, _BidirectionalIterator __last,
         -: 1208:		 _OutputIterator __result)
         -: 1209:    {
         -: 1210:      // concept requirements
@@ -1216,13 +1216,13 @@
         -: 1214:		typename iterator_traits<_BidirectionalIterator>::value_type>)
         -: 1215:      __glibcxx_requires_valid_range(__first, __last);
         -: 1216:
-       30: 1217:      while (__first != __last)
+        -: 1217:      while (__first != __last)
         -: 1218:	{
-       10: 1219:	  --__last;
-       10: 1220:	  *__result = *__last;
-       10: 1221:	  ++__result;
+        -: 1219:	  --__last;
+        -: 1220:	  *__result = *__last;
+        -: 1221:	  ++__result;
         -: 1222:	}
-       10: 1223:      return __result;
+        -: 1223:      return __result;
         -: 1224:    }
         -: 1225:
         -: 1226:  /**
@@ -3189,13 +3189,13 @@
         -: 3187:
         -: 3188:  template<typename _InputIterator, typename _Predicate>
         -: 3189:    typename iterator_traits<_InputIterator>::difference_type
-        3: 3190:    __count_if(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+        -: 3190:    __count_if(_InputIterator __first, _InputIterator __last, _Predicate __pred)
         -: 3191:    {
-        3: 3192:      typename iterator_traits<_InputIterator>::difference_type __n = 0;
-       63: 3193:      for (; __first != __last; ++__first)
-       30: 3194:	if (__pred(__first))
-        3: 3195:	  ++__n;
-        3: 3196:      return __n;
+        -: 3192:      typename iterator_traits<_InputIterator>::difference_type __n = 0;
+        -: 3193:      for (; __first != __last; ++__first)
+        -: 3194:	if (__pred(__first))
+        -: 3195:	  ++__n;
+        -: 3196:      return __n;
         -: 3197:    }
         -: 3198:
         -: 3199:#if __cplusplus >= 201103L
@@ -3877,14 +3877,14 @@
         -: 3875:  */
         -: 3876:  template<typename _InputIterator, typename _Function>
         -: 3877:    _Function
-    #####: 3878:    for_each(_InputIterator __first, _InputIterator __last, _Function __f)
+      102: 3878:    for_each(_InputIterator __first, _InputIterator __last, _Function __f)
         -: 3879:    {
         -: 3880:      // concept requirements
         -: 3881:      __glibcxx_function_requires(_InputIteratorConcept<_InputIterator>)
         -: 3882:      __glibcxx_requires_valid_range(__first, __last);
-    #####: 3883:      for (; __first != __last; ++__first)
+      102: 3883:      for (; __first != __last; ++__first)
     #####: 3884:	__f(*__first);
-    #####: 3885:      return __f; // N.B. [alg.foreach] says std::move(f) but it's redundant.
+      102: 3885:      return __f; // N.B. [alg.foreach] says std::move(f) but it's redundant.
         -: 3886:    }
         -: 3887:
         -: 3888:  /**
@@ -3922,7 +3922,7 @@
         -: 3920:  */
         -: 3921:  template<typename _InputIterator, typename _Predicate>
         -: 3922:    inline _InputIterator
-        -: 3923:    find_if(_InputIterator __first, _InputIterator __last,
+    #####: 3923:    find_if(_InputIterator __first, _InputIterator __last,
         -: 3924:	    _Predicate __pred)
         -: 3925:    {
         -: 3926:      // concept requirements
@@ -3931,8 +3931,8 @@
         -: 3929:	      typename iterator_traits<_InputIterator>::value_type>)
         -: 3930:      __glibcxx_requires_valid_range(__first, __last);
         -: 3931:
-        -: 3932:      return std::__find_if(__first, __last,
-        -: 3933:			    __gnu_cxx::__ops::__pred_iter(__pred));
+    #####: 3932:      return std::__find_if(__first, __last,
+    #####: 3933:			    __gnu_cxx::__ops::__pred_iter(__pred));
         -: 3934:    }
         -: 3935:
         -: 3936:  /**
@@ -4075,7 +4075,7 @@
         -: 4073:  */
         -: 4074:  template<typename _InputIterator, typename _Tp>
         -: 4075:    inline typename iterator_traits<_InputIterator>::difference_type
-        3: 4076:    count(_InputIterator __first, _InputIterator __last, const _Tp& __value)
+        -: 4076:    count(_InputIterator __first, _InputIterator __last, const _Tp& __value)
         -: 4077:    {
         -: 4078:      // concept requirements
         -: 4079:      __glibcxx_function_requires(_InputIteratorConcept<_InputIterator>)
@@ -4083,8 +4083,8 @@
         -: 4081:	    typename iterator_traits<_InputIterator>::value_type, _Tp>)
         -: 4082:      __glibcxx_requires_valid_range(__first, __last);
         -: 4083:
-        3: 4084:      return std::__count_if(__first, __last,
-        3: 4085:			     __gnu_cxx::__ops::__iter_equals_val(__value));
+        -: 4084:      return std::__count_if(__first, __last,
+        -: 4085:			     __gnu_cxx::__ops::__iter_equals_val(__value));
         -: 4086:    }
         -: 4087:
         -: 4088:  /**

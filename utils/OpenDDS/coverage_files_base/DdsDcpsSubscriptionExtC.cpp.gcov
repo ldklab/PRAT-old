@@ -1,471 +1,486 @@
         -:    0:Source:DdsDcpsSubscriptionExtC.cpp
-        -:    0:Programs:24
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-    #####:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-    #####:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-    #####:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-    #####:   60:/*EOF*/
-    #####:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-    #####:   64:/*EOF*/
-        -:   65:/*EOF*/
-    #####:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-    #####:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-    #####:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        2:   77:/*EOF*/
-        2:   78:/*EOF*/
-        -:   79:/*EOF*/
-        2:   80:/*EOF*/
-        -:   81:/*EOF*/
-        2:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-    #####:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-    #####:   88:/*EOF*/
-        -:   89:/*EOF*/
-    #####:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-    #####:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-    #####:   97:/*EOF*/
-        -:   98:/*EOF*/
-    #####:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-    #####:  103:/*EOF*/
-        -:  104:/*EOF*/
-    #####:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-        -:  108:/*EOF*/
-    #####:  109:/*EOF*/
-        -:  110:/*EOF*/
-    #####:  111:/*EOF*/
-        -:  112:/*EOF*/
-    #####:  113:/*EOF*/
-        -:  114:/*EOF*/
-    #####:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-    #####:  119:/*EOF*/
-        -:  120:/*EOF*/
-    #####:  121:/*EOF*/
-    #####:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-    #####:  125:/*EOF*/
-        -:  126:/*EOF*/
-    #####:  127:/*EOF*/
-    #####:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-    #####:  131:/*EOF*/
-    #####:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-    #####:  135:/*EOF*/
-    #####:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-    #####:  139:/*EOF*/
-    #####:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-    #####:  143:/*EOF*/
-    #####:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-        -:  147:/*EOF*/
-        -:  148:/*EOF*/
-        -:  149:/*EOF*/
-    #####:  150:/*EOF*/
-        -:  151:/*EOF*/
-        -:  152:/*EOF*/
-        -:  153:/*EOF*/
-    #####:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-        -:  157:/*EOF*/
-    #####:  158:/*EOF*/
-        -:  159:/*EOF*/
-    #####:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-    #####:  164:/*EOF*/
-        -:  165:/*EOF*/
-    #####:  166:/*EOF*/
-        -:  167:/*EOF*/
-        -:  168:/*EOF*/
-        -:  169:/*EOF*/
-        -:  170:/*EOF*/
-        -:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-        -:  174:/*EOF*/
-    #####:  175:/*EOF*/
-    #####:  176:/*EOF*/
-        -:  177:/*EOF*/
-    #####:  178:/*EOF*/
-    #####:  179:/*EOF*/
-        -:  180:/*EOF*/
-        -:  181:/*EOF*/
-    #####:  182:/*EOF*/
-    #####:  183:/*EOF*/
-        -:  184:/*EOF*/
-    #####:  185:/*EOF*/
-        -:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-    #####:  190:/*EOF*/
-        -:  191:/*EOF*/
-        -:  192:/*EOF*/
-        -:  193:/*EOF*/
-    #####:  194:/*EOF*/
-    #####:  195:/*EOF*/
-        -:  196:/*EOF*/
-    #####:  197:/*EOF*/
-    #####:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-    #####:  201:/*EOF*/
-    #####:  202:/*EOF*/
-        -:  203:/*EOF*/
-    #####:  204:/*EOF*/
-    #####:  205:/*EOF*/
-        -:  206:/*EOF*/
-        -:  207:/*EOF*/
-        -:  208:/*EOF*/
-        -:  209:/*EOF*/
-        -:  210:/*EOF*/
-        -:  211:/*EOF*/
-        -:  212:/*EOF*/
-        -:  213:/*EOF*/
-        -:  214:/*EOF*/
-    #####:  215:/*EOF*/
-        -:  216:/*EOF*/
-        -:  217:/*EOF*/
-    #####:  218:/*EOF*/
-        -:  219:/*EOF*/
-        -:  220:/*EOF*/
-        -:  221:/*EOF*/
-    #####:  222:/*EOF*/
-        -:  223:/*EOF*/
-        -:  224:/*EOF*/
-    #####:  225:/*EOF*/
-    #####:  226:/*EOF*/
-        -:  227:/*EOF*/
-        -:  228:/*EOF*/
-    #####:  229:/*EOF*/
-        -:  230:/*EOF*/
-    #####:  231:/*EOF*/
-        -:  232:/*EOF*/
-        -:  233:/*EOF*/
-        -:  234:/*EOF*/
-    #####:  235:/*EOF*/
-        -:  236:/*EOF*/
-        -:  237:/*EOF*/
-        -:  238:/*EOF*/
-    #####:  239:/*EOF*/
-        -:  240:/*EOF*/
-        -:  241:/*EOF*/
-        2:  242:/*EOF*/
-        2:  243:/*EOF*/
-        -:  244:/*EOF*/
-        2:  245:/*EOF*/
-        -:  246:/*EOF*/
-        2:  247:/*EOF*/
-        -:  248:/*EOF*/
-        -:  249:/*EOF*/
-    #####:  250:/*EOF*/
-        -:  251:/*EOF*/
-        -:  252:/*EOF*/
-    #####:  253:/*EOF*/
-        -:  254:/*EOF*/
-    #####:  255:/*EOF*/
-        -:  256:/*EOF*/
-        -:  257:/*EOF*/
-        -:  258:/*EOF*/
-    #####:  259:/*EOF*/
-        -:  260:/*EOF*/
-        -:  261:/*EOF*/
-    #####:  262:/*EOF*/
-        -:  263:/*EOF*/
-    #####:  264:/*EOF*/
-        -:  265:/*EOF*/
-        -:  266:/*EOF*/
-        -:  267:/*EOF*/
-    #####:  268:/*EOF*/
-        -:  269:/*EOF*/
-    #####:  270:/*EOF*/
-        -:  271:/*EOF*/
-        -:  272:/*EOF*/
-        -:  273:/*EOF*/
-    #####:  274:/*EOF*/
-        -:  275:/*EOF*/
-    #####:  276:/*EOF*/
-        -:  277:/*EOF*/
-    #####:  278:/*EOF*/
-        -:  279:/*EOF*/
-    #####:  280:/*EOF*/
-        -:  281:/*EOF*/
-        -:  282:/*EOF*/
-        -:  283:/*EOF*/
-    #####:  284:/*EOF*/
-        -:  285:/*EOF*/
-    #####:  286:/*EOF*/
-    #####:  287:/*EOF*/
-        -:  288:/*EOF*/
-        -:  289:/*EOF*/
-    #####:  290:/*EOF*/
-        -:  291:/*EOF*/
-    #####:  292:/*EOF*/
-    #####:  293:/*EOF*/
-        -:  294:/*EOF*/
-        -:  295:/*EOF*/
-    #####:  296:/*EOF*/
-    #####:  297:/*EOF*/
-        -:  298:/*EOF*/
-        -:  299:/*EOF*/
-    #####:  300:/*EOF*/
-    #####:  301:/*EOF*/
-        -:  302:/*EOF*/
-        -:  303:/*EOF*/
-    #####:  304:/*EOF*/
-    #####:  305:/*EOF*/
-        -:  306:/*EOF*/
-        -:  307:/*EOF*/
-    #####:  308:/*EOF*/
-    #####:  309:/*EOF*/
-        -:  310:/*EOF*/
-        -:  311:/*EOF*/
-        -:  312:/*EOF*/
-        -:  313:/*EOF*/
-        -:  314:/*EOF*/
-    #####:  315:/*EOF*/
-        -:  316:/*EOF*/
-        -:  317:/*EOF*/
-        -:  318:/*EOF*/
-    #####:  319:/*EOF*/
-        -:  320:/*EOF*/
-        -:  321:/*EOF*/
-        -:  322:/*EOF*/
-    #####:  323:/*EOF*/
-        -:  324:/*EOF*/
-    #####:  325:/*EOF*/
-        -:  326:/*EOF*/
-        -:  327:/*EOF*/
-        -:  328:/*EOF*/
-    #####:  329:/*EOF*/
-        -:  330:/*EOF*/
-    #####:  331:/*EOF*/
-        -:  332:/*EOF*/
-        -:  333:/*EOF*/
-        -:  334:/*EOF*/
-        -:  335:/*EOF*/
-        -:  336:/*EOF*/
-        -:  337:/*EOF*/
-        -:  338:/*EOF*/
-        -:  339:/*EOF*/
-        -:  340:/*EOF*/
-        -:  341:/*EOF*/
-        -:  342:/*EOF*/
-    #####:  343:/*EOF*/
-        -:  344:/*EOF*/
-        -:  345:/*EOF*/
-        -:  346:/*EOF*/
-        -:  347:/*EOF*/
-    #####:  348:/*EOF*/
-        -:  349:/*EOF*/
-        -:  350:/*EOF*/
-    #####:  351:/*EOF*/
-        -:  352:/*EOF*/
-        -:  353:/*EOF*/
-        -:  354:/*EOF*/
-        -:  355:/*EOF*/
-    #####:  356:/*EOF*/
-        -:  357:/*EOF*/
-        -:  358:/*EOF*/
-        -:  359:/*EOF*/
-        -:  360:/*EOF*/
-        -:  361:/*EOF*/
-        -:  362:/*EOF*/
-        -:  363:/*EOF*/
-        -:  364:/*EOF*/
-        -:  365:/*EOF*/
-        -:  366:/*EOF*/
-        -:  367:/*EOF*/
-        -:  368:/*EOF*/
-        -:  369:/*EOF*/
-        -:  370:/*EOF*/
-        -:  371:/*EOF*/
-        -:  372:/*EOF*/
-        -:  373:/*EOF*/
-        -:  374:/*EOF*/
-        -:  375:/*EOF*/
-    #####:  376:/*EOF*/
-        -:  377:/*EOF*/
-        -:  378:/*EOF*/
-        -:  379:/*EOF*/
-        -:  380:/*EOF*/
-    #####:  381:/*EOF*/
-    #####:  382:/*EOF*/
-    #####:  383:/*EOF*/
-        -:  384:/*EOF*/
-        -:  385:/*EOF*/
-    #####:  386:/*EOF*/
-        -:  387:/*EOF*/
-        -:  388:/*EOF*/
-        -:  389:/*EOF*/
-        -:  390:/*EOF*/
-    #####:  391:/*EOF*/
-    #####:  392:/*EOF*/
-    #####:  393:/*EOF*/
-        -:  394:/*EOF*/
-        -:  395:/*EOF*/
-        -:  396:/*EOF*/
-        -:  397:/*EOF*/
-        -:  398:/*EOF*/
-        -:  399:/*EOF*/
-        -:  400:/*EOF*/
-        -:  401:/*EOF*/
-        -:  402:/*EOF*/
-        -:  403:/*EOF*/
-        -:  404:/*EOF*/
-        -:  405:/*EOF*/
-        -:  406:/*EOF*/
-        -:  407:/*EOF*/
-        -:  408:/*EOF*/
-        -:  409:/*EOF*/
-        -:  410:/*EOF*/
-        -:  411:/*EOF*/
-        -:  412:/*EOF*/
-    #####:  413:/*EOF*/
-        -:  414:/*EOF*/
-        -:  415:/*EOF*/
-        -:  416:/*EOF*/
-        -:  417:/*EOF*/
-    #####:  418:/*EOF*/
-    #####:  419:/*EOF*/
-    #####:  420:/*EOF*/
-    #####:  421:/*EOF*/
-    #####:  422:/*EOF*/
-    #####:  423:/*EOF*/
-        -:  424:/*EOF*/
-        -:  425:/*EOF*/
-    #####:  426:/*EOF*/
-        -:  427:/*EOF*/
-        -:  428:/*EOF*/
-        -:  429:/*EOF*/
-        -:  430:/*EOF*/
-    #####:  431:/*EOF*/
-    #####:  432:/*EOF*/
-    #####:  433:/*EOF*/
-    #####:  434:/*EOF*/
-    #####:  435:/*EOF*/
-    #####:  436:/*EOF*/
-        -:  437:/*EOF*/
-        -:  438:/*EOF*/
-        -:  439:/*EOF*/
-        -:  440:/*EOF*/
-        -:  441:/*EOF*/
-        -:  442:/*EOF*/
-        -:  443:/*EOF*/
-        -:  444:/*EOF*/
-        -:  445:/*EOF*/
-        -:  446:/*EOF*/
-        -:  447:/*EOF*/
-        -:  448:/*EOF*/
-        -:  449:/*EOF*/
-        -:  450:/*EOF*/
-        -:  451:/*EOF*/
-        -:  452:/*EOF*/
-        -:  453:/*EOF*/
-        -:  454:/*EOF*/
-        -:  455:/*EOF*/
-        -:  456:/*EOF*/
-        -:  457:/*EOF*/
-    #####:  458:/*EOF*/
-        -:  459:/*EOF*/
-        -:  460:/*EOF*/
-        -:  461:/*EOF*/
-    #####:  462:/*EOF*/
-        -:  463:/*EOF*/
-        -:  464:/*EOF*/
-    #####:  465:/*EOF*/
-        -:  466:/*EOF*/
-        -:  467:/*EOF*/
-        -:  468:/*EOF*/
-    #####:  469:/*EOF*/
+        -:    0:Programs:72
+        -:    1:// -*- C++ -*-
+        -:    2:// $Id$
+        -:    3:
+        -:    4:/**
+        -:    5: * Code generated by the The ACE ORB (TAO) IDL Compiler v2.2a_p15
+        -:    6: * TAO and the TAO IDL Compiler have been developed by:
+        -:    7: *       Center for Distributed Object Computing
+        -:    8: *       Washington University
+        -:    9: *       St. Louis, MO
+        -:   10: *       USA
+        -:   11: *       http://www.cs.wustl.edu/~schmidt/doc-center.html
+        -:   12: * and
+        -:   13: *       Distributed Object Computing Laboratory
+        -:   14: *       University of California at Irvine
+        -:   15: *       Irvine, CA
+        -:   16: *       USA
+        -:   17: * and
+        -:   18: *       Institute for Software Integrated Systems
+        -:   19: *       Vanderbilt University
+        -:   20: *       Nashville, TN
+        -:   21: *       USA
+        -:   22: *       http://www.isis.vanderbilt.edu/
+        -:   23: *
+        -:   24: * Information about TAO is available at:
+        -:   25: *     http://www.cs.wustl.edu/~schmidt/TAO.html
+        -:   26: **/
+        -:   27:
+        -:   28:// TAO_IDL - Generated from
+        -:   29:// be/be_codegen.cpp:376
+        -:   30:
+        -:   31:#include "DCPS/DdsDcps_pch.h"
+        -:   32:#include "DdsDcpsSubscriptionExtC.h"
+        -:   33:#include "tao/CDR.h"
+        -:   34:#include "ace/OS_NS_string.h"
+        -:   35:
+        -:   36:#if !defined (__ACE_INLINE__)
+        -:   37:#include "DdsDcpsSubscriptionExtC.inl"
+        -:   38:#endif /* !defined INLINE */
+        -:   39:
+        -:   40:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   41:
+        -:   42:
+        -:   43:
+        -:   44:// TAO_IDL - Generated from
+        -:   45:// be/be_visitor_interface/interface_cs.cpp:51
+        -:   46:
+        -:   47:// Traits specializations for OpenDDS::DCPS::DataReaderListener.
+        -:   48:
+        -:   49:OpenDDS::DCPS::DataReaderListener_ptr
+    #####:   50:TAO::Objref_Traits<OpenDDS::DCPS::DataReaderListener>::duplicate (
+        -:   51:    OpenDDS::DCPS::DataReaderListener_ptr p)
+        -:   52:{
+    #####:   53:  return OpenDDS::DCPS::DataReaderListener::_duplicate (p);
+        -:   54:}
+        -:   55:
+        -:   56:void
+    #####:   57:TAO::Objref_Traits<OpenDDS::DCPS::DataReaderListener>::release (
+        -:   58:    OpenDDS::DCPS::DataReaderListener_ptr p)
+        -:   59:{
+    #####:   60:  ::CORBA::release (p);
+    #####:   61:}
+        -:   62:
+        -:   63:OpenDDS::DCPS::DataReaderListener_ptr
+    #####:   64:TAO::Objref_Traits<OpenDDS::DCPS::DataReaderListener>::nil (void)
+        -:   65:{
+    #####:   66:  return OpenDDS::DCPS::DataReaderListener::_nil ();
+        -:   67:}
+        -:   68:
+        -:   69:::CORBA::Boolean
+    #####:   70:TAO::Objref_Traits<OpenDDS::DCPS::DataReaderListener>::marshal (
+        -:   71:    const OpenDDS::DCPS::DataReaderListener_ptr p,
+        -:   72:    TAO_OutputCDR & cdr)
+        -:   73:{
+    #####:   74:  return ::CORBA::Object::marshal (p, cdr);
+        -:   75:}
+        -:   76:
+        6:   77:OpenDDS::DCPS::DataReaderListener::DataReaderListener (void)
+        6:   78:{}
+        -:   79:
+        6:   80:OpenDDS::DCPS::DataReaderListener::~DataReaderListener (void)
+        -:   81:{
+        6:   82:}
+        -:   83:
+        -:   84:OpenDDS::DCPS::DataReaderListener_ptr
+    #####:   85:OpenDDS::DCPS::DataReaderListener::_narrow (
+        -:   86:    ::CORBA::Object_ptr _tao_objref)
+        -:   87:{
+    #####:   88:  return DataReaderListener::_duplicate (
+        -:   89:      dynamic_cast<DataReaderListener_ptr> (_tao_objref)
+    #####:   90:    );
+        -:   91:}
+        -:   92:
+        -:   93:OpenDDS::DCPS::DataReaderListener_ptr
+    #####:   94:OpenDDS::DCPS::DataReaderListener::_unchecked_narrow (
+        -:   95:    ::CORBA::Object_ptr _tao_objref)
+        -:   96:{
+    #####:   97:  return DataReaderListener::_duplicate (
+        -:   98:      dynamic_cast<DataReaderListener_ptr> (_tao_objref)
+    #####:   99:    );
+        -:  100:}
+        -:  101:
+        -:  102:OpenDDS::DCPS::DataReaderListener_ptr
+    #####:  103:OpenDDS::DCPS::DataReaderListener::_nil (void)
+        -:  104:{
+    #####:  105:  return 0;
+        -:  106:}
+        -:  107:
+        -:  108:OpenDDS::DCPS::DataReaderListener_ptr
+    #####:  109:OpenDDS::DCPS::DataReaderListener::_duplicate (DataReaderListener_ptr obj)
+        -:  110:{
+    #####:  111:  if (! ::CORBA::is_nil (obj))
+        -:  112:    {
+    #####:  113:      obj->_add_ref ();
+        -:  114:    }
+    #####:  115:  return obj;
+        -:  116:}
+        -:  117:
+        -:  118:void
+    #####:  119:OpenDDS::DCPS::DataReaderListener::_tao_release (DataReaderListener_ptr obj)
+        -:  120:{
+    #####:  121:  ::CORBA::release (obj);
+    #####:  122:}
+        -:  123:
+        -:  124:::CORBA::Boolean
+    #####:  125:OpenDDS::DCPS::DataReaderListener::_is_a (const char *value)
+        -:  126:{
+    #####:  127:  if (
+    #####:  128:      ACE_OS::strcmp (
+        -:  129:          value,
+        -:  130:          "IDL:DDS/Listener:1.0"
+    #####:  131:        ) == 0 ||
+    #####:  132:      ACE_OS::strcmp (
+        -:  133:          value,
+        -:  134:          "IDL:DDS/DataReaderListener:1.0"
+    #####:  135:        ) == 0 ||
+    #####:  136:      ACE_OS::strcmp (
+        -:  137:          value,
+        -:  138:          "IDL:OpenDDS/DCPS/DataReaderListener:1.0"
+    #####:  139:        ) == 0 ||
+    #####:  140:      ACE_OS::strcmp (
+        -:  141:          value,
+        -:  142:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  143:        ) == 0 ||
+    #####:  144:      ACE_OS::strcmp (
+        -:  145:          value,
+        -:  146:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  147:        ) == 0
+        -:  148:    )
+        -:  149:    {
+    #####:  150:      return true; // success using local knowledge
+        -:  151:    }
+        -:  152:  else
+        -:  153:    {
+    #####:  154:      return false;
+        -:  155:    }
+        -:  156:}
+        -:  157:
+    #####:  158:const char* OpenDDS::DCPS::DataReaderListener::_interface_repository_id (void) const
+        -:  159:{
+    #####:  160:  return "IDL:OpenDDS/DCPS/DataReaderListener:1.0";
+        -:  161:}
+        -:  162:
+        -:  163:::CORBA::Boolean
+    #####:  164:OpenDDS::DCPS::DataReaderListener::marshal (TAO_OutputCDR & /* cdr */)
+        -:  165:{
+    #####:  166:  return false;
+        -:  167:}
+        -:  168:
+        -:  169:// TAO_IDL - Generated from
+        -:  170:// be/be_visitor_sequence/sequence_cs.cpp:73
+        -:  171:
+        -:  172:#if !defined (_OPENDDS_DCPS_LATENCYSTATISTICSSEQ_CS_)
+        -:  173:#define _OPENDDS_DCPS_LATENCYSTATISTICSSEQ_CS_
+        -:  174:
+    #####:  175:OpenDDS::DCPS::LatencyStatisticsSeq::LatencyStatisticsSeq (void)
+    #####:  176:{}
+        -:  177:
+    #####:  178:OpenDDS::DCPS::LatencyStatisticsSeq::LatencyStatisticsSeq (
+    #####:  179:    ::CORBA::ULong max)
+        -:  180:  : ::TAO::unbounded_value_sequence<
+        -:  181:        LatencyStatistics
+    #####:  182:      > (max)
+    #####:  183:{}
+        -:  184:
+    #####:  185:OpenDDS::DCPS::LatencyStatisticsSeq::LatencyStatisticsSeq (
+        -:  186:    ::CORBA::ULong max,
+        -:  187:    ::CORBA::ULong length,
+        -:  188:    OpenDDS::DCPS::LatencyStatistics * buffer,
+        -:  189:    ::CORBA::Boolean release
+    #####:  190:  )
+        -:  191:  : ::TAO::unbounded_value_sequence<
+        -:  192:        LatencyStatistics
+        -:  193:      >
+    #####:  194:    (max, length, buffer, release)
+    #####:  195:{}
+        -:  196:
+    #####:  197:OpenDDS::DCPS::LatencyStatisticsSeq::LatencyStatisticsSeq (
+    #####:  198:    const LatencyStatisticsSeq &seq)
+        -:  199:  : ::TAO::unbounded_value_sequence<
+        -:  200:        LatencyStatistics
+    #####:  201:      > (seq)
+    #####:  202:{}
+        -:  203:
+    #####:  204:OpenDDS::DCPS::LatencyStatisticsSeq::~LatencyStatisticsSeq (void)
+    #####:  205:{}
+        -:  206:
+        -:  207:#endif /* end #if !defined */
+        -:  208:
+        -:  209:// TAO_IDL - Generated from
+        -:  210:// be/be_visitor_interface/interface_cs.cpp:51
+        -:  211:
+        -:  212:// Traits specializations for OpenDDS::DCPS::DataReaderEx.
+        -:  213:
+        -:  214:OpenDDS::DCPS::DataReaderEx_ptr
+    #####:  215:TAO::Objref_Traits<OpenDDS::DCPS::DataReaderEx>::duplicate (
+        -:  216:    OpenDDS::DCPS::DataReaderEx_ptr p)
+        -:  217:{
+    #####:  218:  return OpenDDS::DCPS::DataReaderEx::_duplicate (p);
+        -:  219:}
+        -:  220:
+        -:  221:void
+    #####:  222:TAO::Objref_Traits<OpenDDS::DCPS::DataReaderEx>::release (
+        -:  223:    OpenDDS::DCPS::DataReaderEx_ptr p)
+        -:  224:{
+    #####:  225:  ::CORBA::release (p);
+    #####:  226:}
+        -:  227:
+        -:  228:OpenDDS::DCPS::DataReaderEx_ptr
+    #####:  229:TAO::Objref_Traits<OpenDDS::DCPS::DataReaderEx>::nil (void)
+        -:  230:{
+    #####:  231:  return OpenDDS::DCPS::DataReaderEx::_nil ();
+        -:  232:}
+        -:  233:
+        -:  234:::CORBA::Boolean
+    #####:  235:TAO::Objref_Traits<OpenDDS::DCPS::DataReaderEx>::marshal (
+        -:  236:    const OpenDDS::DCPS::DataReaderEx_ptr p,
+        -:  237:    TAO_OutputCDR & cdr)
+        -:  238:{
+    #####:  239:  return ::CORBA::Object::marshal (p, cdr);
+        -:  240:}
+        -:  241:
+        6:  242:OpenDDS::DCPS::DataReaderEx::DataReaderEx (void)
+        6:  243:{}
+        -:  244:
+        6:  245:OpenDDS::DCPS::DataReaderEx::~DataReaderEx (void)
+        -:  246:{
+        6:  247:}
+        -:  248:
+        -:  249:OpenDDS::DCPS::DataReaderEx_ptr
+    #####:  250:OpenDDS::DCPS::DataReaderEx::_narrow (
+        -:  251:    ::CORBA::Object_ptr _tao_objref)
+        -:  252:{
+    #####:  253:  return DataReaderEx::_duplicate (
+        -:  254:      dynamic_cast<DataReaderEx_ptr> (_tao_objref)
+    #####:  255:    );
+        -:  256:}
+        -:  257:
+        -:  258:OpenDDS::DCPS::DataReaderEx_ptr
+    #####:  259:OpenDDS::DCPS::DataReaderEx::_unchecked_narrow (
+        -:  260:    ::CORBA::Object_ptr _tao_objref)
+        -:  261:{
+    #####:  262:  return DataReaderEx::_duplicate (
+        -:  263:      dynamic_cast<DataReaderEx_ptr> (_tao_objref)
+    #####:  264:    );
+        -:  265:}
+        -:  266:
+        -:  267:OpenDDS::DCPS::DataReaderEx_ptr
+    #####:  268:OpenDDS::DCPS::DataReaderEx::_nil (void)
+        -:  269:{
+    #####:  270:  return 0;
+        -:  271:}
+        -:  272:
+        -:  273:OpenDDS::DCPS::DataReaderEx_ptr
+    #####:  274:OpenDDS::DCPS::DataReaderEx::_duplicate (DataReaderEx_ptr obj)
+        -:  275:{
+    #####:  276:  if (! ::CORBA::is_nil (obj))
+        -:  277:    {
+    #####:  278:      obj->_add_ref ();
+        -:  279:    }
+    #####:  280:  return obj;
+        -:  281:}
+        -:  282:
+        -:  283:void
+    #####:  284:OpenDDS::DCPS::DataReaderEx::_tao_release (DataReaderEx_ptr obj)
+        -:  285:{
+    #####:  286:  ::CORBA::release (obj);
+    #####:  287:}
+        -:  288:
+        -:  289:::CORBA::Boolean
+    #####:  290:OpenDDS::DCPS::DataReaderEx::_is_a (const char *value)
+        -:  291:{
+    #####:  292:  if (
+    #####:  293:      ACE_OS::strcmp (
+        -:  294:          value,
+        -:  295:          "IDL:DDS/Entity:1.0"
+    #####:  296:        ) == 0 ||
+    #####:  297:      ACE_OS::strcmp (
+        -:  298:          value,
+        -:  299:          "IDL:DDS/DataReader:1.0"
+    #####:  300:        ) == 0 ||
+    #####:  301:      ACE_OS::strcmp (
+        -:  302:          value,
+        -:  303:          "IDL:OpenDDS/DCPS/DataReaderEx:1.0"
+    #####:  304:        ) == 0 ||
+    #####:  305:      ACE_OS::strcmp (
+        -:  306:          value,
+        -:  307:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  308:        ) == 0 ||
+    #####:  309:      ACE_OS::strcmp (
+        -:  310:          value,
+        -:  311:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  312:        ) == 0
+        -:  313:    )
+        -:  314:    {
+    #####:  315:      return true; // success using local knowledge
+        -:  316:    }
+        -:  317:  else
+        -:  318:    {
+    #####:  319:      return false;
+        -:  320:    }
+        -:  321:}
+        -:  322:
+    #####:  323:const char* OpenDDS::DCPS::DataReaderEx::_interface_repository_id (void) const
+        -:  324:{
+    #####:  325:  return "IDL:OpenDDS/DCPS/DataReaderEx:1.0";
+        -:  326:}
+        -:  327:
+        -:  328:::CORBA::Boolean
+    #####:  329:OpenDDS::DCPS::DataReaderEx::marshal (TAO_OutputCDR & /* cdr */)
+        -:  330:{
+    #####:  331:  return false;
+        -:  332:}
+        -:  333:
+        -:  334:// TAO_IDL - Generated from
+        -:  335:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  336:
+        -:  337:
+        -:  338:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  339:
+        -:  340:
+        -:  341:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  342:
+    #####:  343:::CORBA::Boolean operator<< (
+        -:  344:    TAO_OutputCDR &strm,
+        -:  345:    const OpenDDS::DCPS::SubscriptionLostStatus &_tao_aggregate)
+        -:  346:{
+        -:  347:  return
+    #####:  348:    (strm << _tao_aggregate.publication_handles);
+        -:  349:}
+        -:  350:
+    #####:  351:::CORBA::Boolean operator>> (
+        -:  352:    TAO_InputCDR &strm,
+        -:  353:    OpenDDS::DCPS::SubscriptionLostStatus &_tao_aggregate)
+        -:  354:{
+        -:  355:  return
+    #####:  356:    (strm >> _tao_aggregate.publication_handles);
+        -:  357:}
+        -:  358:
+        -:  359:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  360:
+        -:  361:
+        -:  362:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  363:
+        -:  364:
+        -:  365:
+        -:  366:
+        -:  367:// TAO_IDL - Generated from
+        -:  368:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  369:
+        -:  370:
+        -:  371:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  372:
+        -:  373:
+        -:  374:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  375:
+    #####:  376:::CORBA::Boolean operator<< (
+        -:  377:    TAO_OutputCDR &strm,
+        -:  378:    const OpenDDS::DCPS::BudgetExceededStatus &_tao_aggregate)
+        -:  379:{
+        -:  380:  return
+    #####:  381:    (strm << _tao_aggregate.total_count) &&
+    #####:  382:    (strm << _tao_aggregate.total_count_change) &&
+    #####:  383:    (strm << _tao_aggregate.last_instance_handle);
+        -:  384:}
+        -:  385:
+    #####:  386:::CORBA::Boolean operator>> (
+        -:  387:    TAO_InputCDR &strm,
+        -:  388:    OpenDDS::DCPS::BudgetExceededStatus &_tao_aggregate)
+        -:  389:{
+        -:  390:  return
+    #####:  391:    (strm >> _tao_aggregate.total_count) &&
+    #####:  392:    (strm >> _tao_aggregate.total_count_change) &&
+    #####:  393:    (strm >> _tao_aggregate.last_instance_handle);
+        -:  394:}
+        -:  395:
+        -:  396:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  397:
+        -:  398:
+        -:  399:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  400:
+        -:  401:
+        -:  402:
+        -:  403:
+        -:  404:// TAO_IDL - Generated from
+        -:  405:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  406:
+        -:  407:
+        -:  408:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  409:
+        -:  410:
+        -:  411:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  412:
+    #####:  413:::CORBA::Boolean operator<< (
+        -:  414:    TAO_OutputCDR &strm,
+        -:  415:    const OpenDDS::DCPS::LatencyStatistics &_tao_aggregate)
+        -:  416:{
+        -:  417:  return
+    #####:  418:    (strm << _tao_aggregate.publication) &&
+    #####:  419:    (strm << _tao_aggregate.n) &&
+    #####:  420:    (strm << _tao_aggregate.maximum) &&
+    #####:  421:    (strm << _tao_aggregate.minimum) &&
+    #####:  422:    (strm << _tao_aggregate.mean) &&
+    #####:  423:    (strm << _tao_aggregate.variance);
+        -:  424:}
+        -:  425:
+    #####:  426:::CORBA::Boolean operator>> (
+        -:  427:    TAO_InputCDR &strm,
+        -:  428:    OpenDDS::DCPS::LatencyStatistics &_tao_aggregate)
+        -:  429:{
+        -:  430:  return
+    #####:  431:    (strm >> _tao_aggregate.publication) &&
+    #####:  432:    (strm >> _tao_aggregate.n) &&
+    #####:  433:    (strm >> _tao_aggregate.maximum) &&
+    #####:  434:    (strm >> _tao_aggregate.minimum) &&
+    #####:  435:    (strm >> _tao_aggregate.mean) &&
+    #####:  436:    (strm >> _tao_aggregate.variance);
+        -:  437:}
+        -:  438:
+        -:  439:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  440:
+        -:  441:
+        -:  442:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  443:
+        -:  444:
+        -:  445:
+        -:  446:
+        -:  447:// TAO_IDL - Generated from
+        -:  448:// be/be_visitor_sequence/cdr_op_cs.cpp:96
+        -:  449:#if !defined _TAO_CDR_OP_OpenDDS_DCPS_LatencyStatisticsSeq_CPP_
+        -:  450:#define _TAO_CDR_OP_OpenDDS_DCPS_LatencyStatisticsSeq_CPP_
+        -:  451:
+        -:  452:
+        -:  453:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  454:
+        -:  455:
+        -:  456:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  457:
+    #####:  458:::CORBA::Boolean operator<< (
+        -:  459:    TAO_OutputCDR &strm,
+        -:  460:    const OpenDDS::DCPS::LatencyStatisticsSeq &_tao_sequence)
+        -:  461:{
+    #####:  462:  return TAO::marshal_sequence(strm, _tao_sequence);
+        -:  463:}
+        -:  464:
+    #####:  465:::CORBA::Boolean operator>> (
+        -:  466:    TAO_InputCDR &strm,
+        -:  467:    OpenDDS::DCPS::LatencyStatisticsSeq &_tao_sequence)
+        -:  468:{
+    #####:  469:  return TAO::demarshal_sequence(strm, _tao_sequence);
+        -:  470:}
+        -:  471:
+        -:  472:
+        -:  473:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  474:
+        -:  475:
+        -:  476:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  477:
+        -:  478:
+        -:  479:#endif /* _TAO_CDR_OP_OpenDDS_DCPS_LatencyStatisticsSeq_CPP_ */
+        -:  480:
+        -:  481:
+        -:  482:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  483:
+        -:  484:

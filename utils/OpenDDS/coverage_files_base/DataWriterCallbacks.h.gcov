@@ -1,68 +1,78 @@
         -:    0:Source:../dds/DCPS/DataWriterCallbacks.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-    #####:   38:/*EOF*/
-        -:   39:/*EOF*/
-    #####:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-    #####:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-    #####:   62:/*EOF*/
-        -:   63:/*EOF*/
-    #####:   64:/*EOF*/
-        -:   65:/*EOF*/
-    #####:   66:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_DATAWRITERCALLBACKS_H
+        -:    9:#define OPENDDS_DCPS_DATAWRITERCALLBACKS_H
+        -:   10:
+        -:   11:#include "dds/DCPS/Definitions.h"
+        -:   12:#include "dds/DCPS/DiscoveryListener.h"
+        -:   13:#include "dds/DCPS/RcObject.h"
+        -:   14:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   15:#pragma once
+        -:   16:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   17:
+        -:   18:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   19:
+        -:   20:namespace OpenDDS {
+        -:   21:
+        -:   22:namespace ICE {
+        -:   23:  class Endpoint;
+        -:   24:}
+        -:   25:
+        -:   26:namespace DCPS {
+        -:   27:
+        -:   28:/**
+        -:   29:* @class DataWriterCallbacks
+        -:   30:*
+        -:   31:* @brief Defines the interface for Discovery callbacks into the DataWriter.
+        -:   32:*
+        -:   33:*/
+        -:   34:class DataWriterCallbacks
+        -:   35:  : public virtual RcObject {
+        -:   36:public:
+        -:   37:
+       12:   38:  DataWriterCallbacks() {}
+        -:   39:
+       12:   40:  virtual ~DataWriterCallbacks() {}
+        -:   41:
+        -:   42:  virtual void add_association(const RepoId& yourId,
+        -:   43:                               const ReaderAssociation& reader,
+        -:   44:                               bool active) = 0;
+        -:   45:
+        -:   46:  virtual void association_complete(const RepoId& remote_id) = 0;
+        -:   47:
+        -:   48:  virtual void remove_associations(const ReaderIdSeq& readers,
+        -:   49:                                   CORBA::Boolean callback) = 0;
+        -:   50:
+        -:   51:  virtual void update_incompatible_qos(const IncompatibleQosStatus& status) = 0;
+        -:   52:
+        -:   53:  virtual void update_subscription_params(const RepoId& readerId,
+        -:   54:                                          const DDS::StringSeq& exprParams) = 0;
+        -:   55:
+        -:   56:  virtual void inconsistent_topic() = 0;
+        -:   57:
+    #####:   58:  virtual void register_for_reader(const RepoId& /*participant*/,
+        -:   59:                                   const RepoId& /*writerid*/,
+        -:   60:                                   const RepoId& /*readerid*/,
+        -:   61:                                   const TransportLocatorSeq& /*locators*/,
+    #####:   62:                                   DiscoveryListener* /*listener*/) { }
+        -:   63:
+    #####:   64:  virtual void unregister_for_reader(const RepoId& /*participant*/,
+        -:   65:                                     const RepoId& /*writerid*/,
+    #####:   66:                                     const RepoId& /*readerid*/) { }
+        -:   67:
+        -:   68:  virtual ICE::Endpoint* get_ice_endpoint() = 0;
+        -:   69:};
+        -:   70:
+        -:   71:} // namespace DCPS
+        -:   72:} // namespace OpenDDS
+        -:   73:
+        -:   74:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:   75:
+        -:   76:#endif /* OPENDDS_DCPS_DATAWRITERCALLBACKS_H  */

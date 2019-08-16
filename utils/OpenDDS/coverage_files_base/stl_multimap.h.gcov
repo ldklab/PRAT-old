@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/bits/stl_multimap.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Multimap implementation -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
@@ -173,7 +173,7 @@
         -:  171:#if __cplusplus < 201103L
         -:  172:      multimap() : _M_t() { }
         -:  173:#else
-        4:  174:      multimap() = default;
+    #####:  174:      multimap() = default;
         -:  175:#endif
         -:  176:
         -:  177:      /**
@@ -288,7 +288,7 @@
         -:  286:       *  themselves are pointers, the pointed-to memory is not touched in any
         -:  287:       *  way. Managing the pointer is the user's responsibility.
         -:  288:       */
-        4:  289:      ~multimap() = default;
+    #####:  289:      ~multimap() = default;
         -:  290:#endif
         -:  291:
         -:  292:      /**
@@ -351,8 +351,8 @@
         -:  349:       *  the keys.
         -:  350:       */
         -:  351:      const_iterator
-        -:  352:      begin() const _GLIBCXX_NOEXCEPT
-        -:  353:      { return _M_t.begin(); }
+    #####:  352:      begin() const _GLIBCXX_NOEXCEPT
+    #####:  353:      { return _M_t.begin(); }
         -:  354:
         -:  355:      /**
         -:  356:       *  Returns a read/write iterator that points one past the last pair in
@@ -369,8 +369,8 @@
         -:  367:       *  to the keys.
         -:  368:       */
         -:  369:      const_iterator
-        -:  370:      end() const _GLIBCXX_NOEXCEPT
-        -:  371:      { return _M_t.end(); }
+    #####:  370:      end() const _GLIBCXX_NOEXCEPT
+    #####:  371:      { return _M_t.end(); }
         -:  372:
         -:  373:      /**
         -:  374:       *  Returns a read/write reverse iterator that points to the last pair in
@@ -537,8 +537,8 @@
         -:  535:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
         -:  536:      // 2354. Unnecessary copying when inserting into maps with braced-init
         -:  537:      iterator
-        3:  538:      insert(value_type&& __x)
-        3:  539:      { return _M_t._M_insert_equal(std::move(__x)); }
+        -:  538:      insert(value_type&& __x)
+        -:  539:      { return _M_t._M_insert_equal(std::move(__x)); }
         -:  540:
         -:  541:      template<typename _Pair>
         -:  542:	__enable_if_t<is_constructible<value_type, _Pair>::value, iterator>
@@ -965,8 +965,8 @@
         -:  963:       *           greater than key, or end().
         -:  964:       */
         -:  965:      const_iterator
-        -:  966:      upper_bound(const key_type& __x) const
-        -:  967:      { return _M_t.upper_bound(__x); }
+    #####:  966:      upper_bound(const key_type& __x) const
+    #####:  967:      { return _M_t.upper_bound(__x); }
         -:  968:
         -:  969:#if __cplusplus > 201103L
         -:  970:      template<typename _Kt>

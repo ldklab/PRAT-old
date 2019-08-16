@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/CORBA_methods.h
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://=============================================================================
         -:    3:/**
@@ -55,18 +55,18 @@
         -:   53:                                      const wchar_t * orb_name);
         -:   54:#endif
         -:   55:
-        9:   56:  template<typename T> inline Boolean is_nil (T x)
+      669:   56:  template<typename T> inline Boolean is_nil (T x)
         -:   57:  {
-        9:   58:    return x == 0;
+      669:   58:    return x == 0;
         -:   59:  }
         -:   60:
-    #####:   61:  template<typename T> inline void release (T x)
+     1047:   61:  template<typename T> inline void release (T x)
         -:   62:  {
-    #####:   63:    if (x != 0)
+     1047:   63:    if (x != 0)
         -:   64:      {
-    #####:   65:        x->_decr_refcount ();
+      555:   65:        x->_decr_refcount ();
         -:   66:      }
-    #####:   67:  }
+     1047:   67:  }
         -:   68:}
         -:   69:
         -:   70:TAO_END_VERSIONED_NAMESPACE_DECL

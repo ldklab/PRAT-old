@@ -1,70 +1,92 @@
-        -:    0:Source:DCPS/ContentFilteredTopicImpl.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-    #####:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-    #####:   66:/*EOF*/
-        -:   67:/*EOF*/
-    #####:   68:/*EOF*/
+        -:    0:Source:../dds/DCPS/ContentFilteredTopicImpl.h
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_CONTENTFILTEREDTOPICIMPL_H
+        -:    9:#define OPENDDS_DCPS_CONTENTFILTEREDTOPICIMPL_H
+        -:   10:
+        -:   11:#ifndef OPENDDS_NO_CONTENT_FILTERED_TOPIC
+        -:   12:
+        -:   13:#include "dds/DCPS/TopicDescriptionImpl.h"
+        -:   14:#include "dds/DCPS/FilterEvaluator.h"
+        -:   15:#include "dds/DCPS/PoolAllocator.h"
+        -:   16:
+        -:   17:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   18:#pragma once
+        -:   19:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   20:
+        -:   21:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   22:
+        -:   23:namespace OpenDDS {
+        -:   24:namespace DCPS {
+        -:   25:
+        -:   26:class DataReaderImpl;
+        -:   27:
+        -:   28:class OpenDDS_Dcps_Export ContentFilteredTopicImpl
+        -:   29:  : public virtual OpenDDS::DCPS::LocalObject<DDS::ContentFilteredTopic>
+        -:   30:  , public virtual TopicDescriptionImpl {
+        -:   31:public:
+        -:   32:  ContentFilteredTopicImpl(const char* name, DDS::Topic_ptr related_topic,
+        -:   33:    const char* filter_expression, DomainParticipantImpl* participant);
+        -:   34:
+        -:   35:  virtual ~ContentFilteredTopicImpl() {}
+        -:   36:
+        -:   37:  char* get_filter_expression();
+        -:   38:
+        -:   39:  DDS::ReturnCode_t get_expression_parameters(DDS::StringSeq& parameters);
+        -:   40:
+        -:   41:  DDS::ReturnCode_t set_expression_parameters(const DDS::StringSeq& parameters);
+        -:   42:
+        -:   43:  DDS::Topic_ptr get_related_topic();
+        -:   44:
+        -:   45:  /**
+        -:   46:   * Returns true if the sample matches the filter.
+        -:   47:   */
+        -:   48:  template<typename Sample>
+    #####:   49:  bool filter(const Sample& s, bool sample_only_has_key_fields) const
+        -:   50:  {
+    #####:   51:    ACE_GUARD_RETURN(ACE_Recursive_Thread_Mutex, guard, lock_, false);
+    #####:   52:    const MetaStruct& meta = getMetaStruct<Sample>();
+        -:   53:    /*
+        -:   54:     * Omit the sample from results if the filter references non-key fields
+        -:   55:     * and the sample only has key fields.
+        -:   56:     */
+    #####:   57:    if (sample_only_has_key_fields && filter_eval_.has_non_key_fields(meta)) {
+    #####:   58:      return false;
+        -:   59:    }
+    #####:   60:    return filter_eval_.eval(s, expression_parameters_);
+        -:   61:  }
+        -:   62:
+        -:   63:  void add_reader(DataReaderImpl& reader);
+        -:   64:  void remove_reader(DataReaderImpl& reader);
+        -:   65:
+        -:   66:  const char* get_filter_class_name () const
+        -:   67:  {
+        -:   68:    return filter_eval_.usesExtendedGrammar () ? "OPENDDSSQL" : "DDSSQL";
+        -:   69:  }
+        -:   70:
+        -:   71:private:
+        -:   72:  OPENDDS_STRING filter_expression_;
+        -:   73:  FilterEvaluator filter_eval_;
+        -:   74:  DDS::StringSeq expression_parameters_;
+        -:   75:  DDS::Topic_var related_topic_;
+        -:   76:  typedef OPENDDS_VECTOR(WeakRcHandle<DataReaderImpl>) Readers;
+        -:   77:  Readers readers_;
+        -:   78:
+        -:   79:  /// Concurrent access to expression_parameters_ and readers_
+        -:   80:  mutable ACE_Recursive_Thread_Mutex lock_;
+        -:   81:};
+        -:   82:
+        -:   83:} // namespace DCPS
+        -:   84:} // namespace OpenDDS
+        -:   85:
+        -:   86:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:   87:
+        -:   88:#endif // OPENDDS_NO_CONTENT_FILTERED_TOPIC
+        -:   89:
+        -:   90:#endif

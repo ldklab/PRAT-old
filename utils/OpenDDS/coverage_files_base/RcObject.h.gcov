@@ -1,192 +1,217 @@
         -:    0:Source:../dds/DCPS/RcObject.h
-        -:    0:Programs:51
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-    #####:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-    #####:   25:/*EOF*/
-    #####:   26:/*EOF*/
-        -:   27:/*EOF*/
-    #####:   28:/*EOF*/
-        -:   29:/*EOF*/
-    #####:   30:/*EOF*/
-        -:   31:/*EOF*/
-    #####:   32:/*EOF*/
-    #####:   33:/*EOF*/
-    #####:   34:/*EOF*/
-        -:   35:/*EOF*/
-    #####:   36:/*EOF*/
-    #####:   37:/*EOF*/
-        -:   38:/*EOF*/
-    #####:   39:/*EOF*/
-    #####:   40:/*EOF*/
-        -:   41:/*EOF*/
-    #####:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-    #####:   56:/*EOF*/
-    #####:   57:/*EOF*/
-    #####:   58:/*EOF*/
-        -:   59:/*EOF*/
-    #####:   60:/*EOF*/
-    #####:   61:/*EOF*/
-    #####:   62:/*EOF*/
-        -:   63:/*EOF*/
-    #####:   64:/*EOF*/
-    #####:   65:/*EOF*/
-    #####:   66:/*EOF*/
-    #####:   67:/*EOF*/
-        -:   68:/*EOF*/
-    #####:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-    #####:   72:/*EOF*/
-    #####:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-    #####:   77:/*EOF*/
-    #####:   78:/*EOF*/
-    #####:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-    #####:   84:/*EOF*/
-    #####:   85:/*EOF*/
-    #####:   86:/*EOF*/
-    #####:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-        -:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-        -:   98:/*EOF*/
-        -:   99:/*EOF*/
-        -:  100:/*EOF*/
-    #####:  101:/*EOF*/
-        -:  102:/*EOF*/
-    #####:  103:/*EOF*/
-    #####:  104:/*EOF*/
-    #####:  105:/*EOF*/
-    #####:  106:/*EOF*/
-        -:  107:/*EOF*/
-    #####:  108:/*EOF*/
-        -:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-    #####:  112:/*EOF*/
-        -:  113:/*EOF*/
-    #####:  114:/*EOF*/
-    #####:  115:/*EOF*/
-    #####:  116:/*EOF*/
-        -:  117:/*EOF*/
-    #####:  118:/*EOF*/
-        -:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-       24:  125:/*EOF*/
-       24:  126:/*EOF*/
-        -:  127:/*EOF*/
-       24:  128:/*EOF*/
-        -:  129:/*EOF*/
-       14:  130:/*EOF*/
-       14:  131:/*EOF*/
-       14:  132:/*EOF*/
-        -:  133:/*EOF*/
-        9:  134:/*EOF*/
-        9:  135:/*EOF*/
-        9:  136:/*EOF*/
-        -:  137:/*EOF*/
-       39:  138:/*EOF*/
-       39:  139:/*EOF*/
-       39:  140:/*EOF*/
-       35:  141:/*EOF*/
-       39:  142:/*EOF*/
-        -:  143:/*EOF*/
-       83:  144:/*EOF*/
-       83:  145:/*EOF*/
-       53:  146:/*EOF*/
-       83:  147:/*EOF*/
-        -:  148:/*EOF*/
-    #####:  149:/*EOF*/
-    #####:  150:/*EOF*/
-    #####:  151:/*EOF*/
-    #####:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-        -:  157:/*EOF*/
-        -:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-       12:  161:/*EOF*/
-       24:  162:/*EOF*/
-       12:  163:/*EOF*/
-       24:  164:/*EOF*/
-        -:  165:/*EOF*/
-        -:  166:/*EOF*/
-       13:  167:/*EOF*/
-       13:  168:/*EOF*/
-       13:  169:/*EOF*/
-        -:  170:/*EOF*/
-    #####:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-    #####:  174:/*EOF*/
-        -:  175:/*EOF*/
-    #####:  176:/*EOF*/
-        -:  177:/*EOF*/
-        -:  178:/*EOF*/
-        -:  179:/*EOF*/
-        -:  180:/*EOF*/
-        -:  181:/*EOF*/
-        -:  182:/*EOF*/
-        -:  183:/*EOF*/
-        2:  184:/*EOF*/
-        -:  185:/*EOF*/
-        2:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-       10:  189:/*EOF*/
-       10:  190:/*EOF*/
+        -:    0:Programs:72
+        -:    1:#ifndef RCOBJECT_H_E92AD5BB
+        -:    2:#define RCOBJECT_H_E92AD5BB
+        -:    3:
+        -:    4:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:    5:# pragma once
+        -:    6:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:    7:
+        -:    8:
+        -:    9:#include "dds/Versioned_Namespace.h"
+        -:   10:#include "ace/Atomic_Op.h"
+        -:   11:#include "ace/Synch_Traits.h"
+        -:   12:#include "dds/DCPS/PoolAllocationBase.h"
+        -:   13:#include "RcHandle_T.h"
+        -:   14:
+        -:   15:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   16:
+        -:   17:namespace OpenDDS {
+        -:   18:namespace DCPS {
+        -:   19:
+        -:   20:  class RcObject;
+        -:   21:
+      846:   22:  class WeakObject : public PoolAllocationBase
+        -:   23:  {
+        -:   24:  public:
+      804:   25:    WeakObject(RcObject* ptr)
+      804:   26:      : ref_count_(1)
+        -:   27:      , ptr_(ptr)
+      804:   28:      , expired_(false)
+        -:   29:    {
+      804:   30:    }
+        -:   31:
+      408:   32:    void _add_ref() {
+      408:   33:      ++this->ref_count_;
+      408:   34:    }
+        -:   35:
+     1242:   36:    void _remove_ref(){
+     1242:   37:      const long new_count = --this->ref_count_;
+        -:   38:
+     1242:   39:      if (new_count == 0) {
+      846:   40:        delete this;
+        -:   41:      }
+     1242:   42:    }
+        -:   43:
+        -:   44:    RcObject* lock();
+        -:   45:    bool set_expire();
+        -:   46:  private:
+        -:   47:    ACE_Atomic_Op<ACE_SYNCH_MUTEX, long> ref_count_;
+        -:   48:    ACE_SYNCH_MUTEX mx_;
+        -:   49:    RcObject* const ptr_;
+        -:   50:    bool expired_;
+        -:   51:  };
+        -:   52:
+        -:   53:  class RcObject : public PoolAllocationBase {
+        -:   54:  public:
+        -:   55:
+     1692:   56:    virtual ~RcObject(){
+      846:   57:      weak_object_->_remove_ref();
+      846:   58:    }
+        -:   59:
+     2502:   60:    virtual void _add_ref() {
+     2502:   61:      ++this->ref_count_;
+     2502:   62:    }
+        -:   63:
+     2916:   64:    virtual void _remove_ref() {
+     2916:   65:      const long new_count = --this->ref_count_;
+     2916:   66:      if (new_count == 0 && weak_object_->set_expire()) {
+      414:   67:        delete this;
+        -:   68:      }
+     2916:   69:    }
+        -:   70:
+        -:   71:    /// This accessor is purely for debugging purposes
+      585:   72:    long ref_count() const {
+      585:   73:      return this->ref_count_.value();
+        -:   74:    }
+        -:   75:
+        -:   76:    WeakObject*
+      138:   77:    _get_weak_object() const {
+      138:   78:      weak_object_->_add_ref();
+      138:   79:      return weak_object_;
+        -:   80:    }
+        -:   81:
+        -:   82:  protected:
+        -:   83:
+      804:   84:    RcObject()
+      804:   85:      : ref_count_(1)
+      804:   86:      , weak_object_( new WeakObject(this) )
+      804:   87:    {}
+        -:   88:
+        -:   89:
+        -:   90:  private:
+        -:   91:
+        -:   92:    ACE_Atomic_Op<ACE_SYNCH_MUTEX, long> ref_count_;
+        -:   93:    WeakObject*  weak_object_;
+        -:   94:
+        -:   95:    RcObject(const RcObject&);
+        -:   96:    RcObject& operator=(const RcObject&);
+        -:   97:  };
+        -:   98:
+        -:   99:
+        -:  100:  inline RcObject*
+      744:  101:  WeakObject::lock()
+        -:  102:  {
+     1488:  103:    ACE_Guard<ACE_SYNCH_MUTEX> guard(mx_);
+      744:  104:    if (! expired_) {
+      744:  105:      ptr_->_add_ref();
+      744:  106:      return ptr_;
+        -:  107:    }
+    #####:  108:    return 0;
+        -:  109:  }
+        -:  110:
+        -:  111:  inline bool
+      414:  112:  WeakObject::set_expire()
+        -:  113:  {
+      828:  114:    ACE_Guard<ACE_SYNCH_MUTEX> guard(mx_);
+      414:  115:    if (!expired_ && ptr_->ref_count() == 0) {
+      414:  116:      expired_ = true;
+        -:  117:    }
+      828:  118:    return expired_;
+        -:  119:  }
+        -:  120:
+        -:  121:  template <typename T>
+        -:  122:  class WeakRcHandle
+        -:  123:  {
+        -:  124:  public:
+        -:  125:    WeakRcHandle()
+        -:  126:      : weak_object_(0)
+        -:  127:    {
+        -:  128:    }
+        -:  129:
+    #####:  130:    WeakRcHandle(const T& obj)
+    #####:  131:      : weak_object_(obj._get_weak_object()) {
+    #####:  132:    }
+        -:  133:
+        -:  134:    WeakRcHandle(const RcHandle<T>& rch)
+        -:  135:      : weak_object_(rch.in() ? rch.in()->_get_weak_object() : 0) {
+        -:  136:    }
+        -:  137:
+        -:  138:    WeakRcHandle(const WeakRcHandle& other)
+        -:  139:    : weak_object_(other.weak_object_){
+        -:  140:      if (weak_object_)
+        -:  141:        weak_object_->_add_ref();
+        -:  142:    }
+        -:  143:
+    #####:  144:    ~WeakRcHandle(){
+    #####:  145:      if (weak_object_)
+    #####:  146:        weak_object_->_remove_ref();
+    #####:  147:    }
+        -:  148:
+        -:  149:    WeakRcHandle& operator = (const WeakRcHandle& other) {
+        -:  150:       WeakRcHandle tmp(other);
+        -:  151:       std::swap(weak_object_, tmp.weak_object_);
+        -:  152:       return *this;
+        -:  153:    }
+        -:  154:
+        -:  155:    WeakRcHandle& operator = (const RcHandle<T>& other) {
+        -:  156:       WeakRcHandle tmp(other);
+        -:  157:       std::swap(weak_object_, tmp.weak_object_);
+        -:  158:       return *this;
+        -:  159:    }
+        -:  160:
+        -:  161:    WeakRcHandle& operator = (const T& obj) {
+        -:  162:      WeakRcHandle tmp(obj);
+        -:  163:      std::swap(weak_object_, tmp.weak_object_);
+        -:  164:      return *this;
+        -:  165:    }
+        -:  166:
+      333:  167:    RcHandle<T> lock() const {
+      333:  168:      if (weak_object_){
+      333:  169:        return RcHandle<T>(dynamic_cast<T*>(weak_object_->lock()), keep_count());
+        -:  170:      }
+    #####:  171:      return RcHandle<T>();
+        -:  172:    }
+        -:  173:
+        -:  174:    bool operator==(const WeakRcHandle& rhs) const
+        -:  175:    {
+        -:  176:      return weak_object_ == rhs.weak_object_;
+        -:  177:    }
+        -:  178:
+        -:  179:    bool operator!=(const WeakRcHandle& rhs) const
+        -:  180:    {
+        -:  181:      return weak_object_ != rhs.weak_object_;
+        -:  182:    }
+        -:  183:
+        -:  184:    bool operator < (const WeakRcHandle& rhs) const
+        -:  185:    {
+        -:  186:      return weak_object_ < rhs.weak_object_;
+        -:  187:    }
+        -:  188:
+        -:  189:    operator bool() const {
+        -:  190:      return weak_object_;
+        -:  191:    }
+        -:  192:
+        -:  193:    void reset() {
+        -:  194:      if (weak_object_) {
+        -:  195:        weak_object_->_remove_ref();
+        -:  196:        weak_object_ = 0;
+        -:  197:      }
+        -:  198:    }
+        -:  199:
+        -:  200:  private:
+        -:  201:
+        -:  202:    WeakRcHandle(WeakObject* obj)
+        -:  203:      : weak_object_(obj)
+        -:  204:    {
+        -:  205:    }
+        -:  206:
+        -:  207:    WeakObject* weak_object_;
+        -:  208:  };
+        -:  209:
+        -:  210:}// DCPS
+        -:  211:}// OPENDDS
+        -:  212:
+        -:  213:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  214:
+        -:  215:#endif /* end of include guard: RCOBJECT_H_E92AD5BB */

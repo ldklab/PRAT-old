@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/LocalObject.inl
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: LocalObject.inl 1861 2011-08-31 16:18:08Z mesnierp $
@@ -39,9 +39,9 @@
         -:   37:}
         -:   38:
         -:   39:ACE_INLINE
-    #####:   40:CORBA::LocalObject::LocalObject (void)
-    #####:   41:  : Object (0)
+     1050:   40:CORBA::LocalObject::LocalObject (void)
+     1050:   41:  : Object (0)
         -:   42:{
-    #####:   43:}
+     1050:   43:}
         -:   44:
         -:   45:TAO_END_VERSIONED_NAMESPACE_DECL

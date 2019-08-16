@@ -1,894 +1,908 @@
         -:    0:Source:DdsDcpsInfoUtilsC.cpp
-        -:    0:Programs:24
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-       95:   49:/*EOF*/
-       95:   50:/*EOF*/
-        -:   51:/*EOF*/
-    #####:   52:/*EOF*/
-    #####:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-    #####:   56:/*EOF*/
-    #####:   57:/*EOF*/
-        -:   58:/*EOF*/
-    #####:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-    #####:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-    #####:   68:/*EOF*/
-    #####:   69:/*EOF*/
-        -:   70:/*EOF*/
-       68:   71:/*EOF*/
-       68:   72:/*EOF*/
-        -:   73:/*EOF*/
-        -:   74:/*EOF*/
-       68:   75:/*EOF*/
-       68:   76:/*EOF*/
-        -:   77:/*EOF*/
-      164:   78:/*EOF*/
-      164:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        4:   89:/*EOF*/
-        4:   90:/*EOF*/
-        -:   91:/*EOF*/
-        6:   92:/*EOF*/
-        6:   93:/*EOF*/
-        -:   94:/*EOF*/
-        -:   95:/*EOF*/
-        6:   96:/*EOF*/
-        6:   97:/*EOF*/
-        -:   98:/*EOF*/
-    #####:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-        -:  103:/*EOF*/
-    #####:  104:/*EOF*/
-        -:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-    #####:  108:/*EOF*/
-    #####:  109:/*EOF*/
-        -:  110:/*EOF*/
-    #####:  111:/*EOF*/
-    #####:  112:/*EOF*/
-        -:  113:/*EOF*/
-        -:  114:/*EOF*/
-    #####:  115:/*EOF*/
-    #####:  116:/*EOF*/
-        -:  117:/*EOF*/
-       10:  118:/*EOF*/
-       10:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-        -:  125:/*EOF*/
-        -:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-       17:  129:/*EOF*/
-       17:  130:/*EOF*/
-        -:  131:/*EOF*/
-        4:  132:/*EOF*/
-        4:  133:/*EOF*/
-        -:  134:/*EOF*/
-        -:  135:/*EOF*/
-        4:  136:/*EOF*/
-        4:  137:/*EOF*/
-        -:  138:/*EOF*/
-    #####:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-        -:  143:/*EOF*/
-    #####:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-        -:  147:/*EOF*/
-    #####:  148:/*EOF*/
-    #####:  149:/*EOF*/
-        -:  150:/*EOF*/
-    #####:  151:/*EOF*/
-    #####:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-    #####:  155:/*EOF*/
-    #####:  156:/*EOF*/
-        -:  157:/*EOF*/
-       21:  158:/*EOF*/
-       21:  159:/*EOF*/
-        -:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-        -:  165:/*EOF*/
-        -:  166:/*EOF*/
-    #####:  167:/*EOF*/
-        -:  168:/*EOF*/
-        -:  169:/*EOF*/
-    #####:  170:/*EOF*/
-        -:  171:/*EOF*/
-    #####:  172:/*EOF*/
-        -:  173:/*EOF*/
-    #####:  174:/*EOF*/
-        -:  175:/*EOF*/
-        -:  176:/*EOF*/
-    #####:  177:/*EOF*/
-    #####:  178:/*EOF*/
-        -:  179:/*EOF*/
-        -:  180:/*EOF*/
-        -:  181:/*EOF*/
-    #####:  182:/*EOF*/
-        -:  183:/*EOF*/
-    #####:  184:/*EOF*/
-    #####:  185:/*EOF*/
-    #####:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-    #####:  190:/*EOF*/
-        -:  191:/*EOF*/
-        -:  192:/*EOF*/
-    #####:  193:/*EOF*/
-    #####:  194:/*EOF*/
-        -:  195:/*EOF*/
-        -:  196:/*EOF*/
-    #####:  197:/*EOF*/
-        -:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-        -:  201:/*EOF*/
-    #####:  202:/*EOF*/
-        -:  203:/*EOF*/
-    #####:  204:/*EOF*/
-        -:  205:/*EOF*/
-    #####:  206:/*EOF*/
-        -:  207:/*EOF*/
-        -:  208:/*EOF*/
-        -:  209:/*EOF*/
-        -:  210:/*EOF*/
-        -:  211:/*EOF*/
-        -:  212:/*EOF*/
-        -:  213:/*EOF*/
-    #####:  214:/*EOF*/
-    #####:  215:/*EOF*/
-        -:  216:/*EOF*/
-    #####:  217:/*EOF*/
-    #####:  218:/*EOF*/
-        -:  219:/*EOF*/
-        -:  220:/*EOF*/
-    #####:  221:/*EOF*/
-    #####:  222:/*EOF*/
-        -:  223:/*EOF*/
-    #####:  224:/*EOF*/
-        -:  225:/*EOF*/
-        -:  226:/*EOF*/
-        -:  227:/*EOF*/
-        -:  228:/*EOF*/
-    #####:  229:/*EOF*/
-        -:  230:/*EOF*/
-        -:  231:/*EOF*/
-        -:  232:/*EOF*/
-    #####:  233:/*EOF*/
-    #####:  234:/*EOF*/
-        -:  235:/*EOF*/
-    #####:  236:/*EOF*/
-    #####:  237:/*EOF*/
-        -:  238:/*EOF*/
-        -:  239:/*EOF*/
-    #####:  240:/*EOF*/
-    #####:  241:/*EOF*/
-        -:  242:/*EOF*/
-    #####:  243:/*EOF*/
-    #####:  244:/*EOF*/
-        -:  245:/*EOF*/
-        -:  246:/*EOF*/
-        -:  247:/*EOF*/
-        -:  248:/*EOF*/
-        -:  249:/*EOF*/
-        -:  250:/*EOF*/
-        -:  251:/*EOF*/
-        -:  252:/*EOF*/
-        -:  253:/*EOF*/
-        -:  254:/*EOF*/
-        -:  255:/*EOF*/
-        -:  256:/*EOF*/
-       22:  257:/*EOF*/
-        -:  258:/*EOF*/
-        -:  259:/*EOF*/
-        -:  260:/*EOF*/
-        -:  261:/*EOF*/
-       44:  262:/*EOF*/
-       44:  263:/*EOF*/
-        -:  264:/*EOF*/
-        -:  265:/*EOF*/
-       20:  266:/*EOF*/
-        -:  267:/*EOF*/
-        -:  268:/*EOF*/
-        -:  269:/*EOF*/
-        -:  270:/*EOF*/
-       40:  271:/*EOF*/
-       40:  272:/*EOF*/
-        -:  273:/*EOF*/
-        -:  274:/*EOF*/
-        -:  275:/*EOF*/
-        -:  276:/*EOF*/
-        -:  277:/*EOF*/
-        -:  278:/*EOF*/
-        -:  279:/*EOF*/
-        -:  280:/*EOF*/
-        -:  281:/*EOF*/
-        -:  282:/*EOF*/
-        -:  283:/*EOF*/
-        -:  284:/*EOF*/
-        -:  285:/*EOF*/
-        -:  286:/*EOF*/
-        -:  287:/*EOF*/
-        -:  288:/*EOF*/
-        -:  289:/*EOF*/
-        -:  290:/*EOF*/
-        -:  291:/*EOF*/
-        -:  292:/*EOF*/
-        -:  293:/*EOF*/
-       22:  294:/*EOF*/
-        -:  295:/*EOF*/
-        -:  296:/*EOF*/
-        -:  297:/*EOF*/
-       22:  298:/*EOF*/
-        -:  299:/*EOF*/
-        -:  300:/*EOF*/
-       20:  301:/*EOF*/
-        -:  302:/*EOF*/
-        -:  303:/*EOF*/
-        -:  304:/*EOF*/
-       20:  305:/*EOF*/
-        -:  306:/*EOF*/
-        -:  307:/*EOF*/
-        -:  308:/*EOF*/
-        -:  309:/*EOF*/
-        -:  310:/*EOF*/
-        -:  311:/*EOF*/
-        -:  312:/*EOF*/
-        -:  313:/*EOF*/
-        -:  314:/*EOF*/
-        -:  315:/*EOF*/
-        -:  316:/*EOF*/
-        -:  317:/*EOF*/
-        -:  318:/*EOF*/
-        -:  319:/*EOF*/
-        -:  320:/*EOF*/
-        -:  321:/*EOF*/
-        -:  322:/*EOF*/
-        -:  323:/*EOF*/
-        -:  324:/*EOF*/
-        -:  325:/*EOF*/
-    #####:  326:/*EOF*/
-        -:  327:/*EOF*/
-        -:  328:/*EOF*/
-        -:  329:/*EOF*/
-        -:  330:/*EOF*/
-    #####:  331:/*EOF*/
-    #####:  332:/*EOF*/
-    #####:  333:/*EOF*/
-    #####:  334:/*EOF*/
-        -:  335:/*EOF*/
-        -:  336:/*EOF*/
-    #####:  337:/*EOF*/
-        -:  338:/*EOF*/
-        -:  339:/*EOF*/
-        -:  340:/*EOF*/
-        -:  341:/*EOF*/
-    #####:  342:/*EOF*/
-    #####:  343:/*EOF*/
-    #####:  344:/*EOF*/
-    #####:  345:/*EOF*/
-        -:  346:/*EOF*/
-        -:  347:/*EOF*/
-        -:  348:/*EOF*/
-        -:  349:/*EOF*/
-        -:  350:/*EOF*/
-        -:  351:/*EOF*/
-        -:  352:/*EOF*/
-        -:  353:/*EOF*/
-        -:  354:/*EOF*/
-        -:  355:/*EOF*/
-        -:  356:/*EOF*/
-        -:  357:/*EOF*/
-        -:  358:/*EOF*/
-        -:  359:/*EOF*/
-        -:  360:/*EOF*/
-        -:  361:/*EOF*/
-        -:  362:/*EOF*/
-        -:  363:/*EOF*/
-        -:  364:/*EOF*/
-        6:  365:/*EOF*/
-        -:  366:/*EOF*/
-        -:  367:/*EOF*/
-        -:  368:/*EOF*/
-        -:  369:/*EOF*/
-       12:  370:/*EOF*/
-       12:  371:/*EOF*/
-        -:  372:/*EOF*/
-        -:  373:/*EOF*/
-        3:  374:/*EOF*/
-        -:  375:/*EOF*/
-        -:  376:/*EOF*/
-        -:  377:/*EOF*/
-        -:  378:/*EOF*/
-        6:  379:/*EOF*/
-        6:  380:/*EOF*/
-        -:  381:/*EOF*/
-        -:  382:/*EOF*/
-        -:  383:/*EOF*/
-        -:  384:/*EOF*/
-        -:  385:/*EOF*/
-        -:  386:/*EOF*/
-        -:  387:/*EOF*/
-        -:  388:/*EOF*/
-        -:  389:/*EOF*/
-        -:  390:/*EOF*/
-        -:  391:/*EOF*/
-        -:  392:/*EOF*/
-        -:  393:/*EOF*/
-        -:  394:/*EOF*/
-        -:  395:/*EOF*/
-        -:  396:/*EOF*/
-        -:  397:/*EOF*/
-        -:  398:/*EOF*/
-        -:  399:/*EOF*/
-        -:  400:/*EOF*/
-       17:  401:/*EOF*/
-        -:  402:/*EOF*/
-       17:  403:/*EOF*/
-        -:  404:/*EOF*/
-        -:  405:/*EOF*/
-        6:  406:/*EOF*/
-        -:  407:/*EOF*/
-        6:  408:/*EOF*/
-        6:  409:/*EOF*/
-        -:  410:/*EOF*/
-        6:  411:/*EOF*/
-        -:  412:/*EOF*/
-        6:  413:/*EOF*/
-        -:  414:/*EOF*/
-        -:  415:/*EOF*/
-        6:  416:/*EOF*/
-        -:  417:/*EOF*/
-        -:  418:/*EOF*/
-        -:  419:/*EOF*/
-        -:  420:/*EOF*/
-        -:  421:/*EOF*/
-        -:  422:/*EOF*/
-        -:  423:/*EOF*/
-        -:  424:/*EOF*/
-        -:  425:/*EOF*/
-        -:  426:/*EOF*/
-        -:  427:/*EOF*/
-        -:  428:/*EOF*/
-        -:  429:/*EOF*/
-        -:  430:/*EOF*/
-        -:  431:/*EOF*/
-        -:  432:/*EOF*/
-        -:  433:/*EOF*/
-        -:  434:/*EOF*/
-        -:  435:/*EOF*/
-       12:  436:/*EOF*/
-        -:  437:/*EOF*/
-        -:  438:/*EOF*/
-        -:  439:/*EOF*/
-        -:  440:/*EOF*/
-       24:  441:/*EOF*/
-       24:  442:/*EOF*/
-       36:  443:/*EOF*/
-       24:  444:/*EOF*/
-        -:  445:/*EOF*/
-        -:  446:/*EOF*/
-        2:  447:/*EOF*/
-        -:  448:/*EOF*/
-        -:  449:/*EOF*/
-        -:  450:/*EOF*/
-        -:  451:/*EOF*/
-        4:  452:/*EOF*/
-        4:  453:/*EOF*/
-        6:  454:/*EOF*/
-        4:  455:/*EOF*/
-        -:  456:/*EOF*/
-        -:  457:/*EOF*/
-        -:  458:/*EOF*/
-        -:  459:/*EOF*/
-        -:  460:/*EOF*/
-        -:  461:/*EOF*/
-        -:  462:/*EOF*/
-        -:  463:/*EOF*/
-        -:  464:/*EOF*/
-        -:  465:/*EOF*/
-        -:  466:/*EOF*/
-        -:  467:/*EOF*/
-        -:  468:/*EOF*/
-        -:  469:/*EOF*/
-        -:  470:/*EOF*/
-        -:  471:/*EOF*/
-        -:  472:/*EOF*/
-        -:  473:/*EOF*/
-        -:  474:/*EOF*/
-        4:  475:/*EOF*/
-        -:  476:/*EOF*/
-        -:  477:/*EOF*/
-        -:  478:/*EOF*/
-        -:  479:/*EOF*/
-        8:  480:/*EOF*/
-        8:  481:/*EOF*/
-        8:  482:/*EOF*/
-        8:  483:/*EOF*/
-        8:  484:/*EOF*/
-       12:  485:/*EOF*/
-        8:  486:/*EOF*/
-        -:  487:/*EOF*/
-        -:  488:/*EOF*/
-        2:  489:/*EOF*/
-        -:  490:/*EOF*/
-        -:  491:/*EOF*/
-        -:  492:/*EOF*/
-        -:  493:/*EOF*/
-        4:  494:/*EOF*/
-        4:  495:/*EOF*/
-        4:  496:/*EOF*/
-        4:  497:/*EOF*/
-        4:  498:/*EOF*/
-        6:  499:/*EOF*/
-        4:  500:/*EOF*/
-        -:  501:/*EOF*/
-        -:  502:/*EOF*/
-        -:  503:/*EOF*/
-        -:  504:/*EOF*/
-        -:  505:/*EOF*/
-        -:  506:/*EOF*/
-        -:  507:/*EOF*/
-        -:  508:/*EOF*/
-        -:  509:/*EOF*/
-        -:  510:/*EOF*/
-        -:  511:/*EOF*/
-        -:  512:/*EOF*/
-        -:  513:/*EOF*/
-        -:  514:/*EOF*/
-        -:  515:/*EOF*/
-        -:  516:/*EOF*/
-        -:  517:/*EOF*/
-        -:  518:/*EOF*/
-        -:  519:/*EOF*/
-        -:  520:/*EOF*/
-        -:  521:/*EOF*/
-        4:  522:/*EOF*/
-        -:  523:/*EOF*/
-        -:  524:/*EOF*/
-        -:  525:/*EOF*/
-        4:  526:/*EOF*/
-        -:  527:/*EOF*/
-        -:  528:/*EOF*/
-    #####:  529:/*EOF*/
-        -:  530:/*EOF*/
-        -:  531:/*EOF*/
-        -:  532:/*EOF*/
-    #####:  533:/*EOF*/
-        -:  534:/*EOF*/
-        -:  535:/*EOF*/
-        -:  536:/*EOF*/
-        -:  537:/*EOF*/
-        -:  538:/*EOF*/
-        -:  539:/*EOF*/
-        -:  540:/*EOF*/
-        -:  541:/*EOF*/
-        -:  542:/*EOF*/
-        -:  543:/*EOF*/
-        -:  544:/*EOF*/
-        -:  545:/*EOF*/
-        -:  546:/*EOF*/
-        -:  547:/*EOF*/
-        -:  548:/*EOF*/
-        -:  549:/*EOF*/
-        -:  550:/*EOF*/
-        -:  551:/*EOF*/
-        -:  552:/*EOF*/
-        -:  553:/*EOF*/
-        -:  554:/*EOF*/
-        -:  555:/*EOF*/
-        2:  556:/*EOF*/
-        -:  557:/*EOF*/
-        -:  558:/*EOF*/
-        -:  559:/*EOF*/
-        2:  560:/*EOF*/
-        -:  561:/*EOF*/
-        -:  562:/*EOF*/
-        2:  563:/*EOF*/
-        -:  564:/*EOF*/
-        -:  565:/*EOF*/
-        -:  566:/*EOF*/
-        2:  567:/*EOF*/
-        -:  568:/*EOF*/
-        -:  569:/*EOF*/
-        -:  570:/*EOF*/
-        -:  571:/*EOF*/
-        -:  572:/*EOF*/
-        -:  573:/*EOF*/
-        -:  574:/*EOF*/
-        -:  575:/*EOF*/
-        -:  576:/*EOF*/
-        -:  577:/*EOF*/
-        -:  578:/*EOF*/
-        -:  579:/*EOF*/
-        -:  580:/*EOF*/
-        -:  581:/*EOF*/
-        -:  582:/*EOF*/
-        -:  583:/*EOF*/
-        -:  584:/*EOF*/
-        -:  585:/*EOF*/
-        -:  586:/*EOF*/
-        -:  587:/*EOF*/
-        -:  588:/*EOF*/
-    #####:  589:/*EOF*/
-        -:  590:/*EOF*/
-        -:  591:/*EOF*/
-        -:  592:/*EOF*/
-        -:  593:/*EOF*/
-    #####:  594:/*EOF*/
-        -:  595:/*EOF*/
-    #####:  596:/*EOF*/
-        -:  597:/*EOF*/
-        -:  598:/*EOF*/
-    #####:  599:/*EOF*/
-        -:  600:/*EOF*/
-        -:  601:/*EOF*/
-        -:  602:/*EOF*/
-        -:  603:/*EOF*/
-    #####:  604:/*EOF*/
-    #####:  605:/*EOF*/
-    #####:  606:/*EOF*/
-        -:  607:/*EOF*/
-        -:  608:/*EOF*/
-        -:  609:/*EOF*/
-        -:  610:/*EOF*/
-        -:  611:/*EOF*/
-        -:  612:/*EOF*/
-        -:  613:/*EOF*/
-        -:  614:/*EOF*/
-        -:  615:/*EOF*/
-        -:  616:/*EOF*/
-        -:  617:/*EOF*/
-        -:  618:/*EOF*/
-        -:  619:/*EOF*/
-        -:  620:/*EOF*/
-        -:  621:/*EOF*/
-        -:  622:/*EOF*/
-        -:  623:/*EOF*/
-        -:  624:/*EOF*/
-        -:  625:/*EOF*/
-    #####:  626:/*EOF*/
-        -:  627:/*EOF*/
-        -:  628:/*EOF*/
-        -:  629:/*EOF*/
-        -:  630:/*EOF*/
-        -:  631:/*EOF*/
-        -:  632:/*EOF*/
-        -:  633:/*EOF*/
-        -:  634:/*EOF*/
-        -:  635:/*EOF*/
-        -:  636:/*EOF*/
-        -:  637:/*EOF*/
-        -:  638:/*EOF*/
-    #####:  639:/*EOF*/
-        -:  640:/*EOF*/
-    #####:  641:/*EOF*/
-    #####:  642:/*EOF*/
-    #####:  643:/*EOF*/
-        -:  644:/*EOF*/
-        -:  645:/*EOF*/
-    #####:  646:/*EOF*/
-        -:  647:/*EOF*/
-        -:  648:/*EOF*/
-        -:  649:/*EOF*/
-        -:  650:/*EOF*/
-        -:  651:/*EOF*/
-        -:  652:/*EOF*/
-        -:  653:/*EOF*/
-        -:  654:/*EOF*/
-        -:  655:/*EOF*/
-        -:  656:/*EOF*/
-        -:  657:/*EOF*/
-        -:  658:/*EOF*/
-    #####:  659:/*EOF*/
-        -:  660:/*EOF*/
-    #####:  661:/*EOF*/
-    #####:  662:/*EOF*/
-    #####:  663:/*EOF*/
-        -:  664:/*EOF*/
-        -:  665:/*EOF*/
-        -:  666:/*EOF*/
-        -:  667:/*EOF*/
-        -:  668:/*EOF*/
-        -:  669:/*EOF*/
-        -:  670:/*EOF*/
-        -:  671:/*EOF*/
-        -:  672:/*EOF*/
-        -:  673:/*EOF*/
-        -:  674:/*EOF*/
-        -:  675:/*EOF*/
-        -:  676:/*EOF*/
-        -:  677:/*EOF*/
-        -:  678:/*EOF*/
-        -:  679:/*EOF*/
-        -:  680:/*EOF*/
-        -:  681:/*EOF*/
-        -:  682:/*EOF*/
-        -:  683:/*EOF*/
-        -:  684:/*EOF*/
-    #####:  685:/*EOF*/
-        -:  686:/*EOF*/
-        -:  687:/*EOF*/
-        -:  688:/*EOF*/
-    #####:  689:/*EOF*/
-        -:  690:/*EOF*/
-        -:  691:/*EOF*/
-    #####:  692:/*EOF*/
-        -:  693:/*EOF*/
-        -:  694:/*EOF*/
-        -:  695:/*EOF*/
-    #####:  696:/*EOF*/
-        -:  697:/*EOF*/
-        -:  698:/*EOF*/
-        -:  699:/*EOF*/
-        -:  700:/*EOF*/
-        -:  701:/*EOF*/
-        -:  702:/*EOF*/
-        -:  703:/*EOF*/
-        -:  704:/*EOF*/
-        -:  705:/*EOF*/
-        -:  706:/*EOF*/
-        -:  707:/*EOF*/
-        -:  708:/*EOF*/
-        -:  709:/*EOF*/
-        -:  710:/*EOF*/
-        -:  711:/*EOF*/
-        -:  712:/*EOF*/
-        -:  713:/*EOF*/
-        -:  714:/*EOF*/
-        -:  715:/*EOF*/
-        -:  716:/*EOF*/
-    #####:  717:/*EOF*/
-        -:  718:/*EOF*/
-        -:  719:/*EOF*/
-        -:  720:/*EOF*/
-        -:  721:/*EOF*/
-    #####:  722:/*EOF*/
-    #####:  723:/*EOF*/
-    #####:  724:/*EOF*/
-    #####:  725:/*EOF*/
-    #####:  726:/*EOF*/
-        -:  727:/*EOF*/
-        -:  728:/*EOF*/
-    #####:  729:/*EOF*/
-        -:  730:/*EOF*/
-        -:  731:/*EOF*/
-        -:  732:/*EOF*/
-        -:  733:/*EOF*/
-    #####:  734:/*EOF*/
-    #####:  735:/*EOF*/
-    #####:  736:/*EOF*/
-    #####:  737:/*EOF*/
-    #####:  738:/*EOF*/
-        -:  739:/*EOF*/
-        -:  740:/*EOF*/
-        -:  741:/*EOF*/
-        -:  742:/*EOF*/
-        -:  743:/*EOF*/
-        -:  744:/*EOF*/
-        -:  745:/*EOF*/
-        -:  746:/*EOF*/
-        -:  747:/*EOF*/
-        -:  748:/*EOF*/
-        -:  749:/*EOF*/
-        -:  750:/*EOF*/
-        -:  751:/*EOF*/
-        -:  752:/*EOF*/
-        -:  753:/*EOF*/
-        -:  754:/*EOF*/
-        -:  755:/*EOF*/
-        -:  756:/*EOF*/
-        -:  757:/*EOF*/
-    #####:  758:/*EOF*/
-        -:  759:/*EOF*/
-        -:  760:/*EOF*/
-        -:  761:/*EOF*/
-        -:  762:/*EOF*/
-    #####:  763:/*EOF*/
-    #####:  764:/*EOF*/
-    #####:  765:/*EOF*/
-    #####:  766:/*EOF*/
-    #####:  767:/*EOF*/
-    #####:  768:/*EOF*/
-        -:  769:/*EOF*/
-        -:  770:/*EOF*/
-    #####:  771:/*EOF*/
-        -:  772:/*EOF*/
-        -:  773:/*EOF*/
-        -:  774:/*EOF*/
-        -:  775:/*EOF*/
-    #####:  776:/*EOF*/
-    #####:  777:/*EOF*/
-    #####:  778:/*EOF*/
-    #####:  779:/*EOF*/
-    #####:  780:/*EOF*/
-    #####:  781:/*EOF*/
-        -:  782:/*EOF*/
-        -:  783:/*EOF*/
-        -:  784:/*EOF*/
-        -:  785:/*EOF*/
-        -:  786:/*EOF*/
-        -:  787:/*EOF*/
-        -:  788:/*EOF*/
-        -:  789:/*EOF*/
-        -:  790:/*EOF*/
-        -:  791:/*EOF*/
-        -:  792:/*EOF*/
-        -:  793:/*EOF*/
-        -:  794:/*EOF*/
-        -:  795:/*EOF*/
-        -:  796:/*EOF*/
-        -:  797:/*EOF*/
-        -:  798:/*EOF*/
-        -:  799:/*EOF*/
-        -:  800:/*EOF*/
-    #####:  801:/*EOF*/
-        -:  802:/*EOF*/
-        -:  803:/*EOF*/
-        -:  804:/*EOF*/
-        -:  805:/*EOF*/
-    #####:  806:/*EOF*/
-    #####:  807:/*EOF*/
-    #####:  808:/*EOF*/
-        -:  809:/*EOF*/
-        -:  810:/*EOF*/
-    #####:  811:/*EOF*/
-        -:  812:/*EOF*/
-        -:  813:/*EOF*/
-        -:  814:/*EOF*/
-        -:  815:/*EOF*/
-    #####:  816:/*EOF*/
-    #####:  817:/*EOF*/
-    #####:  818:/*EOF*/
-        -:  819:/*EOF*/
-        -:  820:/*EOF*/
-        -:  821:/*EOF*/
-        -:  822:/*EOF*/
-        -:  823:/*EOF*/
-        -:  824:/*EOF*/
-        -:  825:/*EOF*/
-        -:  826:/*EOF*/
-        -:  827:/*EOF*/
-        -:  828:/*EOF*/
-        -:  829:/*EOF*/
-        -:  830:/*EOF*/
-        -:  831:/*EOF*/
-        -:  832:/*EOF*/
-        -:  833:/*EOF*/
-        -:  834:/*EOF*/
-        -:  835:/*EOF*/
-        -:  836:/*EOF*/
-        -:  837:/*EOF*/
-    #####:  838:/*EOF*/
-        -:  839:/*EOF*/
-        -:  840:/*EOF*/
-        -:  841:/*EOF*/
-        -:  842:/*EOF*/
-    #####:  843:/*EOF*/
-    #####:  844:/*EOF*/
-    #####:  845:/*EOF*/
-    #####:  846:/*EOF*/
-        -:  847:/*EOF*/
-        -:  848:/*EOF*/
-    #####:  849:/*EOF*/
-        -:  850:/*EOF*/
-        -:  851:/*EOF*/
-        -:  852:/*EOF*/
-        -:  853:/*EOF*/
-    #####:  854:/*EOF*/
-    #####:  855:/*EOF*/
-    #####:  856:/*EOF*/
-    #####:  857:/*EOF*/
-        -:  858:/*EOF*/
-        -:  859:/*EOF*/
-        -:  860:/*EOF*/
-        -:  861:/*EOF*/
-        -:  862:/*EOF*/
-        -:  863:/*EOF*/
-        -:  864:/*EOF*/
-        -:  865:/*EOF*/
-        -:  866:/*EOF*/
-        -:  867:/*EOF*/
-        -:  868:/*EOF*/
-        -:  869:/*EOF*/
-        -:  870:/*EOF*/
-        -:  871:/*EOF*/
-        -:  872:/*EOF*/
-        -:  873:/*EOF*/
-        -:  874:/*EOF*/
-        -:  875:/*EOF*/
-        -:  876:/*EOF*/
-    #####:  877:/*EOF*/
-        -:  878:/*EOF*/
-        -:  879:/*EOF*/
-        -:  880:/*EOF*/
-        -:  881:/*EOF*/
-    #####:  882:/*EOF*/
-    #####:  883:/*EOF*/
-        -:  884:/*EOF*/
-        -:  885:/*EOF*/
-    #####:  886:/*EOF*/
-        -:  887:/*EOF*/
-        -:  888:/*EOF*/
-        -:  889:/*EOF*/
-        -:  890:/*EOF*/
-    #####:  891:/*EOF*/
-    #####:  892:/*EOF*/
+        -:    0:Programs:72
+        -:    1:// -*- C++ -*-
+        -:    2:// $Id$
+        -:    3:
+        -:    4:/**
+        -:    5: * Code generated by the The ACE ORB (TAO) IDL Compiler v2.2a_p15
+        -:    6: * TAO and the TAO IDL Compiler have been developed by:
+        -:    7: *       Center for Distributed Object Computing
+        -:    8: *       Washington University
+        -:    9: *       St. Louis, MO
+        -:   10: *       USA
+        -:   11: *       http://www.cs.wustl.edu/~schmidt/doc-center.html
+        -:   12: * and
+        -:   13: *       Distributed Object Computing Laboratory
+        -:   14: *       University of California at Irvine
+        -:   15: *       Irvine, CA
+        -:   16: *       USA
+        -:   17: * and
+        -:   18: *       Institute for Software Integrated Systems
+        -:   19: *       Vanderbilt University
+        -:   20: *       Nashville, TN
+        -:   21: *       USA
+        -:   22: *       http://www.isis.vanderbilt.edu/
+        -:   23: *
+        -:   24: * Information about TAO is available at:
+        -:   25: *     http://www.cs.wustl.edu/~schmidt/TAO.html
+        -:   26: **/
+        -:   27:
+        -:   28:// TAO_IDL - Generated from
+        -:   29:// be/be_codegen.cpp:376
+        -:   30:
+        -:   31:#include "DCPS/DdsDcps_pch.h"
+        -:   32:#include "DdsDcpsInfoUtilsC.h"
+        -:   33:#include "tao/CDR.h"
+        -:   34:
+        -:   35:#if !defined (__ACE_INLINE__)
+        -:   36:#include "DdsDcpsInfoUtilsC.inl"
+        -:   37:#endif /* !defined INLINE */
+        -:   38:
+        -:   39:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   40:
+        -:   41:
+        -:   42:
+        -:   43:// TAO_IDL - Generated from
+        -:   44:// be/be_visitor_sequence/sequence_cs.cpp:73
+        -:   45:
+        -:   46:#if !defined (_OPENDDS_DCPS_TRANSPORTLOCATORSEQ_CS_)
+        -:   47:#define _OPENDDS_DCPS_TRANSPORTLOCATORSEQ_CS_
+        -:   48:
+      288:   49:OpenDDS::DCPS::TransportLocatorSeq::TransportLocatorSeq (void)
+      288:   50:{}
+        -:   51:
+    #####:   52:OpenDDS::DCPS::TransportLocatorSeq::TransportLocatorSeq (
+    #####:   53:    ::CORBA::ULong max)
+        -:   54:  : ::TAO::unbounded_value_sequence<
+        -:   55:        TransportLocator
+    #####:   56:      > (max)
+    #####:   57:{}
+        -:   58:
+    #####:   59:OpenDDS::DCPS::TransportLocatorSeq::TransportLocatorSeq (
+        -:   60:    ::CORBA::ULong max,
+        -:   61:    ::CORBA::ULong length,
+        -:   62:    OpenDDS::DCPS::TransportLocator * buffer,
+        -:   63:    ::CORBA::Boolean release
+    #####:   64:  )
+        -:   65:  : ::TAO::unbounded_value_sequence<
+        -:   66:        TransportLocator
+        -:   67:      >
+    #####:   68:    (max, length, buffer, release)
+    #####:   69:{}
+        -:   70:
+      204:   71:OpenDDS::DCPS::TransportLocatorSeq::TransportLocatorSeq (
+      204:   72:    const TransportLocatorSeq &seq)
+        -:   73:  : ::TAO::unbounded_value_sequence<
+        -:   74:        TransportLocator
+      204:   75:      > (seq)
+      204:   76:{}
+        -:   77:
+      495:   78:OpenDDS::DCPS::TransportLocatorSeq::~TransportLocatorSeq (void)
+      495:   79:{}
+        -:   80:
+        -:   81:#endif /* end #if !defined */
+        -:   82:
+        -:   83:// TAO_IDL - Generated from
+        -:   84:// be/be_visitor_sequence/sequence_cs.cpp:73
+        -:   85:
+        -:   86:#if !defined (_OPENDDS_DCPS_WRITERIDSEQ_CS_)
+        -:   87:#define _OPENDDS_DCPS_WRITERIDSEQ_CS_
+        -:   88:
+       12:   89:OpenDDS::DCPS::WriterIdSeq::WriterIdSeq (void)
+       12:   90:{}
+        -:   91:
+       18:   92:OpenDDS::DCPS::WriterIdSeq::WriterIdSeq (
+       18:   93:    ::CORBA::ULong max)
+        -:   94:  : ::TAO::unbounded_value_sequence<
+        -:   95:        RepoId
+       18:   96:      > (max)
+       18:   97:{}
+        -:   98:
+    #####:   99:OpenDDS::DCPS::WriterIdSeq::WriterIdSeq (
+        -:  100:    ::CORBA::ULong max,
+        -:  101:    ::CORBA::ULong length,
+        -:  102:    OpenDDS::DCPS::RepoId * buffer,
+        -:  103:    ::CORBA::Boolean release
+    #####:  104:  )
+        -:  105:  : ::TAO::unbounded_value_sequence<
+        -:  106:        RepoId
+        -:  107:      >
+    #####:  108:    (max, length, buffer, release)
+    #####:  109:{}
+        -:  110:
+    #####:  111:OpenDDS::DCPS::WriterIdSeq::WriterIdSeq (
+    #####:  112:    const WriterIdSeq &seq)
+        -:  113:  : ::TAO::unbounded_value_sequence<
+        -:  114:        RepoId
+    #####:  115:      > (seq)
+    #####:  116:{}
+        -:  117:
+       30:  118:OpenDDS::DCPS::WriterIdSeq::~WriterIdSeq (void)
+       30:  119:{}
+        -:  120:
+        -:  121:#endif /* end #if !defined */
+        -:  122:
+        -:  123:// TAO_IDL - Generated from
+        -:  124:// be/be_visitor_sequence/sequence_cs.cpp:73
+        -:  125:
+        -:  126:#if !defined (_OPENDDS_DCPS_READERIDSEQ_CS_)
+        -:  127:#define _OPENDDS_DCPS_READERIDSEQ_CS_
+        -:  128:
+       51:  129:OpenDDS::DCPS::ReaderIdSeq::ReaderIdSeq (void)
+       51:  130:{}
+        -:  131:
+       12:  132:OpenDDS::DCPS::ReaderIdSeq::ReaderIdSeq (
+       12:  133:    ::CORBA::ULong max)
+        -:  134:  : ::TAO::unbounded_value_sequence<
+        -:  135:        RepoId
+       12:  136:      > (max)
+       12:  137:{}
+        -:  138:
+    #####:  139:OpenDDS::DCPS::ReaderIdSeq::ReaderIdSeq (
+        -:  140:    ::CORBA::ULong max,
+        -:  141:    ::CORBA::ULong length,
+        -:  142:    OpenDDS::DCPS::RepoId * buffer,
+        -:  143:    ::CORBA::Boolean release
+    #####:  144:  )
+        -:  145:  : ::TAO::unbounded_value_sequence<
+        -:  146:        RepoId
+        -:  147:      >
+    #####:  148:    (max, length, buffer, release)
+    #####:  149:{}
+        -:  150:
+    #####:  151:OpenDDS::DCPS::ReaderIdSeq::ReaderIdSeq (
+    #####:  152:    const ReaderIdSeq &seq)
+        -:  153:  : ::TAO::unbounded_value_sequence<
+        -:  154:        RepoId
+    #####:  155:      > (seq)
+    #####:  156:{}
+        -:  157:
+       63:  158:OpenDDS::DCPS::ReaderIdSeq::~ReaderIdSeq (void)
+       63:  159:{}
+        -:  160:
+        -:  161:#endif /* end #if !defined */
+        -:  162:
+        -:  163:// TAO_IDL - Generated from
+        -:  164:// be/be_visitor_array/array_cs.cpp:97
+        -:  165:
+        -:  166:OpenDDS::DCPS::OctetArray16_slice *
+    #####:  167:OpenDDS::DCPS::OctetArray16_dup (const OpenDDS::DCPS::OctetArray16_slice *_tao_src_array)
+        -:  168:{
+        -:  169:  OpenDDS::DCPS::OctetArray16_slice *_tao_dup_array =
+    #####:  170:    OpenDDS::DCPS::OctetArray16_alloc ();
+        -:  171:  
+    #####:  172:  if (!_tao_dup_array)
+        -:  173:    {
+    #####:  174:      return static_cast <OpenDDS::DCPS::OctetArray16_slice *> (0);
+        -:  175:    }
+        -:  176:  
+    #####:  177:  OpenDDS::DCPS::OctetArray16_copy (_tao_dup_array, _tao_src_array);
+    #####:  178:  return _tao_dup_array;
+        -:  179:}
+        -:  180:
+        -:  181:OpenDDS::DCPS::OctetArray16_slice *
+    #####:  182:OpenDDS::DCPS::OctetArray16_alloc (void)
+        -:  183:{
+    #####:  184:  OpenDDS::DCPS::OctetArray16_slice *retval = 0;
+    #####:  185:  ACE_NEW_RETURN (retval, ::CORBA::Octet[16], 0);
+    #####:  186:  return retval;
+        -:  187:}
+        -:  188:
+        -:  189:void
+    #####:  190:OpenDDS::DCPS::OctetArray16_free (
+        -:  191:    OpenDDS::DCPS::OctetArray16_slice *_tao_slice)
+        -:  192:{
+    #####:  193:  delete [] _tao_slice;
+    #####:  194:}
+        -:  195:
+        -:  196:void
+    #####:  197:OpenDDS::DCPS::OctetArray16_copy (
+        -:  198:    OpenDDS::DCPS::OctetArray16_slice * _tao_to,
+        -:  199:    const OpenDDS::DCPS::OctetArray16_slice *_tao_from)
+        -:  200:{
+        -:  201:  // Copy each individual element.
+    #####:  202:  for ( ::CORBA::ULong i0 = 0; i0 < 16; ++i0)
+        -:  203:    {
+    #####:  204:      _tao_to[i0] = _tao_from[i0];
+        -:  205:    }
+    #####:  206:}
+        -:  207:
+        -:  208:// TAO_IDL - Generated from
+        -:  209:// be/be_visitor_sequence/sequence_cs.cpp:73
+        -:  210:
+        -:  211:#if !defined (_OPENDDS_DCPS_LOCATORSEQ_CS_)
+        -:  212:#define _OPENDDS_DCPS_LOCATORSEQ_CS_
+        -:  213:
+    #####:  214:OpenDDS::DCPS::LocatorSeq::LocatorSeq (void)
+    #####:  215:{}
+        -:  216:
+    #####:  217:OpenDDS::DCPS::LocatorSeq::LocatorSeq (
+    #####:  218:    ::CORBA::ULong max)
+        -:  219:  : ::TAO::unbounded_value_sequence<
+        -:  220:        Locator_t
+    #####:  221:      > (max)
+    #####:  222:{}
+        -:  223:
+    #####:  224:OpenDDS::DCPS::LocatorSeq::LocatorSeq (
+        -:  225:    ::CORBA::ULong max,
+        -:  226:    ::CORBA::ULong length,
+        -:  227:    OpenDDS::DCPS::Locator_t * buffer,
+        -:  228:    ::CORBA::Boolean release
+    #####:  229:  )
+        -:  230:  : ::TAO::unbounded_value_sequence<
+        -:  231:        Locator_t
+        -:  232:      >
+    #####:  233:    (max, length, buffer, release)
+    #####:  234:{}
+        -:  235:
+    #####:  236:OpenDDS::DCPS::LocatorSeq::LocatorSeq (
+    #####:  237:    const LocatorSeq &seq)
+        -:  238:  : ::TAO::unbounded_value_sequence<
+        -:  239:        Locator_t
+    #####:  240:      > (seq)
+    #####:  241:{}
+        -:  242:
+    #####:  243:OpenDDS::DCPS::LocatorSeq::~LocatorSeq (void)
+    #####:  244:{}
+        -:  245:
+        -:  246:#endif /* end #if !defined */
+        -:  247:
+        -:  248:// TAO_IDL - Generated from
+        -:  249:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  250:
+        -:  251:
+        -:  252:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  253:
+        -:  254:
+        -:  255:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  256:
+       66:  257:::CORBA::Boolean operator<< (
+        -:  258:    TAO_OutputCDR &strm,
+        -:  259:    const OpenDDS::DCPS::TransportLocator &_tao_aggregate)
+        -:  260:{
+        -:  261:  return
+      132:  262:    (strm << _tao_aggregate.transport_type.in ()) &&
+      132:  263:    (strm << _tao_aggregate.data);
+        -:  264:}
+        -:  265:
+       60:  266:::CORBA::Boolean operator>> (
+        -:  267:    TAO_InputCDR &strm,
+        -:  268:    OpenDDS::DCPS::TransportLocator &_tao_aggregate)
+        -:  269:{
+        -:  270:  return
+      120:  271:    (strm >> _tao_aggregate.transport_type.out ()) &&
+      120:  272:    (strm >> _tao_aggregate.data);
+        -:  273:}
+        -:  274:
+        -:  275:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  276:
+        -:  277:
+        -:  278:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  279:
+        -:  280:
+        -:  281:
+        -:  282:
+        -:  283:// TAO_IDL - Generated from
+        -:  284:// be/be_visitor_sequence/cdr_op_cs.cpp:96
+        -:  285:#if !defined _TAO_CDR_OP_OpenDDS_DCPS_TransportLocatorSeq_CPP_
+        -:  286:#define _TAO_CDR_OP_OpenDDS_DCPS_TransportLocatorSeq_CPP_
+        -:  287:
+        -:  288:
+        -:  289:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  290:
+        -:  291:
+        -:  292:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  293:
+       66:  294:::CORBA::Boolean operator<< (
+        -:  295:    TAO_OutputCDR &strm,
+        -:  296:    const OpenDDS::DCPS::TransportLocatorSeq &_tao_sequence)
+        -:  297:{
+       66:  298:  return TAO::marshal_sequence(strm, _tao_sequence);
+        -:  299:}
+        -:  300:
+       60:  301:::CORBA::Boolean operator>> (
+        -:  302:    TAO_InputCDR &strm,
+        -:  303:    OpenDDS::DCPS::TransportLocatorSeq &_tao_sequence)
+        -:  304:{
+       60:  305:  return TAO::demarshal_sequence(strm, _tao_sequence);
+        -:  306:}
+        -:  307:
+        -:  308:
+        -:  309:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  310:
+        -:  311:
+        -:  312:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  313:
+        -:  314:
+        -:  315:#endif /* _TAO_CDR_OP_OpenDDS_DCPS_TransportLocatorSeq_CPP_ */
+        -:  316:
+        -:  317:// TAO_IDL - Generated from
+        -:  318:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  319:
+        -:  320:
+        -:  321:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  322:
+        -:  323:
+        -:  324:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  325:
+    #####:  326:::CORBA::Boolean operator<< (
+        -:  327:    TAO_OutputCDR &strm,
+        -:  328:    const OpenDDS::DCPS::IncompatibleQosStatus &_tao_aggregate)
+        -:  329:{
+        -:  330:  return
+    #####:  331:    (strm << _tao_aggregate.total_count) &&
+    #####:  332:    (strm << _tao_aggregate.count_since_last_send) &&
+    #####:  333:    (strm << _tao_aggregate.last_policy_id) &&
+    #####:  334:    (strm << _tao_aggregate.policies);
+        -:  335:}
+        -:  336:
+    #####:  337:::CORBA::Boolean operator>> (
+        -:  338:    TAO_InputCDR &strm,
+        -:  339:    OpenDDS::DCPS::IncompatibleQosStatus &_tao_aggregate)
+        -:  340:{
+        -:  341:  return
+    #####:  342:    (strm >> _tao_aggregate.total_count) &&
+    #####:  343:    (strm >> _tao_aggregate.count_since_last_send) &&
+    #####:  344:    (strm >> _tao_aggregate.last_policy_id) &&
+    #####:  345:    (strm >> _tao_aggregate.policies);
+        -:  346:}
+        -:  347:
+        -:  348:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  349:
+        -:  350:
+        -:  351:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  352:
+        -:  353:
+        -:  354:
+        -:  355:
+        -:  356:// TAO_IDL - Generated from
+        -:  357:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  358:
+        -:  359:
+        -:  360:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  361:
+        -:  362:
+        -:  363:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  364:
+       18:  365:::CORBA::Boolean operator<< (
+        -:  366:    TAO_OutputCDR &strm,
+        -:  367:    const OpenDDS::DCPS::AddDomainStatus &_tao_aggregate)
+        -:  368:{
+        -:  369:  return
+       36:  370:    (strm << _tao_aggregate.id) &&
+       36:  371:    (strm << ::ACE_OutputCDR::from_boolean (_tao_aggregate.federated));
+        -:  372:}
+        -:  373:
+        9:  374:::CORBA::Boolean operator>> (
+        -:  375:    TAO_InputCDR &strm,
+        -:  376:    OpenDDS::DCPS::AddDomainStatus &_tao_aggregate)
+        -:  377:{
+        -:  378:  return
+       18:  379:    (strm >> _tao_aggregate.id) &&
+       18:  380:    (strm >> ::ACE_InputCDR::to_boolean (_tao_aggregate.federated));
+        -:  381:}
+        -:  382:
+        -:  383:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  384:
+        -:  385:
+        -:  386:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  387:
+        -:  388:
+        -:  389:
+        -:  390:
+        -:  391:// TAO_IDL - Generated from
+        -:  392:// be/be_visitor_enum/cdr_op_cs.cpp:37
+        -:  393:
+        -:  394:
+        -:  395:
+        -:  396:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  397:
+        -:  398:
+        -:  399:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  400:
+       51:  401:::CORBA::Boolean operator<< (TAO_OutputCDR &strm, OpenDDS::DCPS::TopicStatus _tao_enumerator)
+        -:  402:{
+       51:  403:  return strm << static_cast< ::CORBA::ULong> (_tao_enumerator);
+        -:  404:}
+        -:  405:
+       18:  406:::CORBA::Boolean operator>> (TAO_InputCDR &strm, OpenDDS::DCPS::TopicStatus & _tao_enumerator)
+        -:  407:{
+       18:  408:  ::CORBA::ULong _tao_temp = 0;
+       18:  409:  ::CORBA::Boolean const _tao_success = strm >> _tao_temp;
+        -:  410:  
+       18:  411:  if (_tao_success)
+        -:  412:    {
+       18:  413:      _tao_enumerator = static_cast<OpenDDS::DCPS::TopicStatus> (_tao_temp);
+        -:  414:    }
+        -:  415:  
+       18:  416:  return _tao_success;
+        -:  417:}
+        -:  418:
+        -:  419:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  420:
+        -:  421:
+        -:  422:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  423:
+        -:  424:
+        -:  425:
+        -:  426:
+        -:  427:// TAO_IDL - Generated from
+        -:  428:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  429:
+        -:  430:
+        -:  431:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  432:
+        -:  433:
+        -:  434:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  435:
+       36:  436:::CORBA::Boolean operator<< (
+        -:  437:    TAO_OutputCDR &strm,
+        -:  438:    const OpenDDS::DCPS::WriterAssociation &_tao_aggregate)
+        -:  439:{
+        -:  440:  return
+       72:  441:    (strm << _tao_aggregate.writerTransInfo) &&
+       72:  442:    (strm << _tao_aggregate.writerId) &&
+      108:  443:    (strm << _tao_aggregate.pubQos) &&
+       72:  444:    (strm << _tao_aggregate.writerQos);
+        -:  445:}
+        -:  446:
+        6:  447:::CORBA::Boolean operator>> (
+        -:  448:    TAO_InputCDR &strm,
+        -:  449:    OpenDDS::DCPS::WriterAssociation &_tao_aggregate)
+        -:  450:{
+        -:  451:  return
+       12:  452:    (strm >> _tao_aggregate.writerTransInfo) &&
+       12:  453:    (strm >> _tao_aggregate.writerId) &&
+       18:  454:    (strm >> _tao_aggregate.pubQos) &&
+       12:  455:    (strm >> _tao_aggregate.writerQos);
+        -:  456:}
+        -:  457:
+        -:  458:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  459:
+        -:  460:
+        -:  461:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  462:
+        -:  463:
+        -:  464:
+        -:  465:
+        -:  466:// TAO_IDL - Generated from
+        -:  467:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  468:
+        -:  469:
+        -:  470:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  471:
+        -:  472:
+        -:  473:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  474:
+       12:  475:::CORBA::Boolean operator<< (
+        -:  476:    TAO_OutputCDR &strm,
+        -:  477:    const OpenDDS::DCPS::ReaderAssociation &_tao_aggregate)
+        -:  478:{
+        -:  479:  return
+       24:  480:    (strm << _tao_aggregate.readerTransInfo) &&
+       24:  481:    (strm << _tao_aggregate.readerId) &&
+       24:  482:    (strm << _tao_aggregate.subQos) &&
+       24:  483:    (strm << _tao_aggregate.readerQos) &&
+       24:  484:    (strm << _tao_aggregate.filterClassName.in ()) &&
+       36:  485:    (strm << _tao_aggregate.filterExpression.in ()) &&
+       24:  486:    (strm << _tao_aggregate.exprParams);
+        -:  487:}
+        -:  488:
+        6:  489:::CORBA::Boolean operator>> (
+        -:  490:    TAO_InputCDR &strm,
+        -:  491:    OpenDDS::DCPS::ReaderAssociation &_tao_aggregate)
+        -:  492:{
+        -:  493:  return
+       12:  494:    (strm >> _tao_aggregate.readerTransInfo) &&
+       12:  495:    (strm >> _tao_aggregate.readerId) &&
+       12:  496:    (strm >> _tao_aggregate.subQos) &&
+       12:  497:    (strm >> _tao_aggregate.readerQos) &&
+       12:  498:    (strm >> _tao_aggregate.filterClassName.out ()) &&
+       18:  499:    (strm >> _tao_aggregate.filterExpression.out ()) &&
+       12:  500:    (strm >> _tao_aggregate.exprParams);
+        -:  501:}
+        -:  502:
+        -:  503:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  504:
+        -:  505:
+        -:  506:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  507:
+        -:  508:
+        -:  509:
+        -:  510:
+        -:  511:// TAO_IDL - Generated from
+        -:  512:// be/be_visitor_sequence/cdr_op_cs.cpp:96
+        -:  513:#if !defined _TAO_CDR_OP_OpenDDS_DCPS_WriterIdSeq_CPP_
+        -:  514:#define _TAO_CDR_OP_OpenDDS_DCPS_WriterIdSeq_CPP_
+        -:  515:
+        -:  516:
+        -:  517:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  518:
+        -:  519:
+        -:  520:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  521:
+       12:  522:::CORBA::Boolean operator<< (
+        -:  523:    TAO_OutputCDR &strm,
+        -:  524:    const OpenDDS::DCPS::WriterIdSeq &_tao_sequence)
+        -:  525:{
+       12:  526:  return TAO::marshal_sequence(strm, _tao_sequence);
+        -:  527:}
+        -:  528:
+    #####:  529:::CORBA::Boolean operator>> (
+        -:  530:    TAO_InputCDR &strm,
+        -:  531:    OpenDDS::DCPS::WriterIdSeq &_tao_sequence)
+        -:  532:{
+    #####:  533:  return TAO::demarshal_sequence(strm, _tao_sequence);
+        -:  534:}
+        -:  535:
+        -:  536:
+        -:  537:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  538:
+        -:  539:
+        -:  540:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  541:
+        -:  542:
+        -:  543:#endif /* _TAO_CDR_OP_OpenDDS_DCPS_WriterIdSeq_CPP_ */
+        -:  544:
+        -:  545:// TAO_IDL - Generated from
+        -:  546:// be/be_visitor_sequence/cdr_op_cs.cpp:96
+        -:  547:#if !defined _TAO_CDR_OP_OpenDDS_DCPS_ReaderIdSeq_CPP_
+        -:  548:#define _TAO_CDR_OP_OpenDDS_DCPS_ReaderIdSeq_CPP_
+        -:  549:
+        -:  550:
+        -:  551:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  552:
+        -:  553:
+        -:  554:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  555:
+        6:  556:::CORBA::Boolean operator<< (
+        -:  557:    TAO_OutputCDR &strm,
+        -:  558:    const OpenDDS::DCPS::ReaderIdSeq &_tao_sequence)
+        -:  559:{
+        6:  560:  return TAO::marshal_sequence(strm, _tao_sequence);
+        -:  561:}
+        -:  562:
+        6:  563:::CORBA::Boolean operator>> (
+        -:  564:    TAO_InputCDR &strm,
+        -:  565:    OpenDDS::DCPS::ReaderIdSeq &_tao_sequence)
+        -:  566:{
+        6:  567:  return TAO::demarshal_sequence(strm, _tao_sequence);
+        -:  568:}
+        -:  569:
+        -:  570:
+        -:  571:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  572:
+        -:  573:
+        -:  574:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  575:
+        -:  576:
+        -:  577:#endif /* _TAO_CDR_OP_OpenDDS_DCPS_ReaderIdSeq_CPP_ */
+        -:  578:
+        -:  579:// TAO_IDL - Generated from
+        -:  580:// be/be_visitor_array/cdr_op_cs.cpp:166
+        -:  581:
+        -:  582:
+        -:  583:
+        -:  584:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  585:
+        -:  586:
+        -:  587:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  588:
+    #####:  589:::CORBA::Boolean operator<< (
+        -:  590:    TAO_OutputCDR &strm,
+        -:  591:    const OpenDDS::DCPS::OctetArray16_forany &_tao_array)
+        -:  592:{
+        -:  593:  return
+    #####:  594:    strm.write_octet_array (
+        -:  595:        reinterpret_cast <const ACE_CDR::Octet *> (_tao_array.in ()),
+    #####:  596:        16);
+        -:  597:}
+        -:  598:
+    #####:  599:::CORBA::Boolean operator>> (
+        -:  600:    TAO_InputCDR &strm,
+        -:  601:    OpenDDS::DCPS::OctetArray16_forany &_tao_array)
+        -:  602:{
+        -:  603:  return
+    #####:  604:    strm.read_octet_array (
+    #####:  605:        reinterpret_cast <ACE_CDR::Octet *> (_tao_array.out ()),
+    #####:  606:        16);
+        -:  607:}
+        -:  608:
+        -:  609:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  610:
+        -:  611:
+        -:  612:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  613:
+        -:  614:
+        -:  615:
+        -:  616:
+        -:  617:// TAO_IDL - Generated from
+        -:  618:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  619:
+        -:  620:
+        -:  621:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  622:
+        -:  623:
+        -:  624:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  625:
+    #####:  626:::CORBA::Boolean operator<< (
+        -:  627:    TAO_OutputCDR &strm,
+        -:  628:    const OpenDDS::DCPS::Locator_t &_tao_aggregate)
+        -:  629:{
+        -:  630:  OpenDDS::DCPS::OctetArray16_forany _tao_aggregate_address
+        -:  631:      #if defined __IBMCPP__ && __IBMCPP__ <= 800
+        -:  632:      ((OpenDDS::DCPS::OctetArray16_slice*) (
+        -:  633:      #else
+        -:  634:      (const_cast<
+        -:  635:          OpenDDS::DCPS::OctetArray16_slice*> (
+        -:  636:      #endif
+        -:  637:          _tao_aggregate.address
+        -:  638:        )
+    #####:  639:    );
+        -:  640:  return
+    #####:  641:    (strm << _tao_aggregate.kind) &&
+    #####:  642:    (strm << _tao_aggregate.port) &&
+    #####:  643:    (strm << _tao_aggregate_address);
+        -:  644:}
+        -:  645:
+    #####:  646:::CORBA::Boolean operator>> (
+        -:  647:    TAO_InputCDR &strm,
+        -:  648:    OpenDDS::DCPS::Locator_t &_tao_aggregate)
+        -:  649:{
+        -:  650:  OpenDDS::DCPS::OctetArray16_forany _tao_aggregate_address
+        -:  651:      #if defined __IBMCPP__ && __IBMCPP__ <= 800
+        -:  652:      ((OpenDDS::DCPS::OctetArray16_slice*) (
+        -:  653:      #else
+        -:  654:      (const_cast<
+        -:  655:          OpenDDS::DCPS::OctetArray16_slice*> (
+        -:  656:      #endif
+        -:  657:          _tao_aggregate.address
+        -:  658:        )
+    #####:  659:    );
+        -:  660:  return
+    #####:  661:    (strm >> _tao_aggregate.kind) &&
+    #####:  662:    (strm >> _tao_aggregate.port) &&
+    #####:  663:    (strm >> _tao_aggregate_address);
+        -:  664:}
+        -:  665:
+        -:  666:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  667:
+        -:  668:
+        -:  669:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  670:
+        -:  671:
+        -:  672:
+        -:  673:
+        -:  674:// TAO_IDL - Generated from
+        -:  675:// be/be_visitor_sequence/cdr_op_cs.cpp:96
+        -:  676:#if !defined _TAO_CDR_OP_OpenDDS_DCPS_LocatorSeq_CPP_
+        -:  677:#define _TAO_CDR_OP_OpenDDS_DCPS_LocatorSeq_CPP_
+        -:  678:
+        -:  679:
+        -:  680:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  681:
+        -:  682:
+        -:  683:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  684:
+    #####:  685:::CORBA::Boolean operator<< (
+        -:  686:    TAO_OutputCDR &strm,
+        -:  687:    const OpenDDS::DCPS::LocatorSeq &_tao_sequence)
+        -:  688:{
+    #####:  689:  return TAO::marshal_sequence(strm, _tao_sequence);
+        -:  690:}
+        -:  691:
+    #####:  692:::CORBA::Boolean operator>> (
+        -:  693:    TAO_InputCDR &strm,
+        -:  694:    OpenDDS::DCPS::LocatorSeq &_tao_sequence)
+        -:  695:{
+    #####:  696:  return TAO::demarshal_sequence(strm, _tao_sequence);
+        -:  697:}
+        -:  698:
+        -:  699:
+        -:  700:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  701:
+        -:  702:
+        -:  703:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  704:
+        -:  705:
+        -:  706:#endif /* _TAO_CDR_OP_OpenDDS_DCPS_LocatorSeq_CPP_ */
+        -:  707:
+        -:  708:// TAO_IDL - Generated from
+        -:  709:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  710:
+        -:  711:
+        -:  712:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  713:
+        -:  714:
+        -:  715:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  716:
+    #####:  717:::CORBA::Boolean operator<< (
+        -:  718:    TAO_OutputCDR &strm,
+        -:  719:    const OpenDDS::DCPS::ContentFilterProperty_t &_tao_aggregate)
+        -:  720:{
+        -:  721:  return
+    #####:  722:    (strm << ACE_OutputCDR::from_string (_tao_aggregate.contentFilteredTopicName.in (), 256)) &&
+    #####:  723:    (strm << ACE_OutputCDR::from_string (_tao_aggregate.relatedTopicName.in (), 256)) &&
+    #####:  724:    (strm << ACE_OutputCDR::from_string (_tao_aggregate.filterClassName.in (), 256)) &&
+    #####:  725:    (strm << _tao_aggregate.filterExpression.in ()) &&
+    #####:  726:    (strm << _tao_aggregate.expressionParameters);
+        -:  727:}
+        -:  728:
+    #####:  729:::CORBA::Boolean operator>> (
+        -:  730:    TAO_InputCDR &strm,
+        -:  731:    OpenDDS::DCPS::ContentFilterProperty_t &_tao_aggregate)
+        -:  732:{
+        -:  733:  return
+    #####:  734:    (strm >> ACE_InputCDR::to_string (_tao_aggregate.contentFilteredTopicName.out (), 256)) &&
+    #####:  735:    (strm >> ACE_InputCDR::to_string (_tao_aggregate.relatedTopicName.out (), 256)) &&
+    #####:  736:    (strm >> ACE_InputCDR::to_string (_tao_aggregate.filterClassName.out (), 256)) &&
+    #####:  737:    (strm >> _tao_aggregate.filterExpression.out ()) &&
+    #####:  738:    (strm >> _tao_aggregate.expressionParameters);
+        -:  739:}
+        -:  740:
+        -:  741:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  742:
+        -:  743:
+        -:  744:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  745:
+        -:  746:
+        -:  747:
+        -:  748:
+        -:  749:// TAO_IDL - Generated from
+        -:  750:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  751:
+        -:  752:
+        -:  753:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  754:
+        -:  755:
+        -:  756:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  757:
+    #####:  758:::CORBA::Boolean operator<< (
+        -:  759:    TAO_OutputCDR &strm,
+        -:  760:    const OpenDDS::DCPS::ReaderProxy_t &_tao_aggregate)
+        -:  761:{
+        -:  762:  return
+    #####:  763:    (strm << _tao_aggregate.remoteReaderGuid) &&
+    #####:  764:    (strm << ::ACE_OutputCDR::from_boolean (_tao_aggregate.expectsInlineQos)) &&
+    #####:  765:    (strm << _tao_aggregate.unicastLocatorList) &&
+    #####:  766:    (strm << _tao_aggregate.multicastLocatorList) &&
+    #####:  767:    (strm << _tao_aggregate.allLocators) &&
+    #####:  768:    (strm << _tao_aggregate.associatedWriters);
+        -:  769:}
+        -:  770:
+    #####:  771:::CORBA::Boolean operator>> (
+        -:  772:    TAO_InputCDR &strm,
+        -:  773:    OpenDDS::DCPS::ReaderProxy_t &_tao_aggregate)
+        -:  774:{
+        -:  775:  return
+    #####:  776:    (strm >> _tao_aggregate.remoteReaderGuid) &&
+    #####:  777:    (strm >> ::ACE_InputCDR::to_boolean (_tao_aggregate.expectsInlineQos)) &&
+    #####:  778:    (strm >> _tao_aggregate.unicastLocatorList) &&
+    #####:  779:    (strm >> _tao_aggregate.multicastLocatorList) &&
+    #####:  780:    (strm >> _tao_aggregate.allLocators) &&
+    #####:  781:    (strm >> _tao_aggregate.associatedWriters);
+        -:  782:}
+        -:  783:
+        -:  784:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  785:
+        -:  786:
+        -:  787:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  788:
+        -:  789:
+        -:  790:
+        -:  791:
+        -:  792:// TAO_IDL - Generated from
+        -:  793:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  794:
+        -:  795:
+        -:  796:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  797:
+        -:  798:
+        -:  799:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  800:
+    #####:  801:::CORBA::Boolean operator<< (
+        -:  802:    TAO_OutputCDR &strm,
+        -:  803:    const OpenDDS::DCPS::DiscoveredReaderData &_tao_aggregate)
+        -:  804:{
+        -:  805:  return
+    #####:  806:    (strm << _tao_aggregate.ddsSubscriptionData) &&
+    #####:  807:    (strm << _tao_aggregate.readerProxy) &&
+    #####:  808:    (strm << _tao_aggregate.contentFilterProperty);
+        -:  809:}
+        -:  810:
+    #####:  811:::CORBA::Boolean operator>> (
+        -:  812:    TAO_InputCDR &strm,
+        -:  813:    OpenDDS::DCPS::DiscoveredReaderData &_tao_aggregate)
+        -:  814:{
+        -:  815:  return
+    #####:  816:    (strm >> _tao_aggregate.ddsSubscriptionData) &&
+    #####:  817:    (strm >> _tao_aggregate.readerProxy) &&
+    #####:  818:    (strm >> _tao_aggregate.contentFilterProperty);
+        -:  819:}
+        -:  820:
+        -:  821:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  822:
+        -:  823:
+        -:  824:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  825:
+        -:  826:
+        -:  827:
+        -:  828:
+        -:  829:// TAO_IDL - Generated from
+        -:  830:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  831:
+        -:  832:
+        -:  833:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  834:
+        -:  835:
+        -:  836:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  837:
+    #####:  838:::CORBA::Boolean operator<< (
+        -:  839:    TAO_OutputCDR &strm,
+        -:  840:    const OpenDDS::DCPS::WriterProxy_t &_tao_aggregate)
+        -:  841:{
+        -:  842:  return
+    #####:  843:    (strm << _tao_aggregate.remoteWriterGuid) &&
+    #####:  844:    (strm << _tao_aggregate.unicastLocatorList) &&
+    #####:  845:    (strm << _tao_aggregate.multicastLocatorList) &&
+    #####:  846:    (strm << _tao_aggregate.allLocators);
+        -:  847:}
+        -:  848:
+    #####:  849:::CORBA::Boolean operator>> (
+        -:  850:    TAO_InputCDR &strm,
+        -:  851:    OpenDDS::DCPS::WriterProxy_t &_tao_aggregate)
+        -:  852:{
+        -:  853:  return
+    #####:  854:    (strm >> _tao_aggregate.remoteWriterGuid) &&
+    #####:  855:    (strm >> _tao_aggregate.unicastLocatorList) &&
+    #####:  856:    (strm >> _tao_aggregate.multicastLocatorList) &&
+    #####:  857:    (strm >> _tao_aggregate.allLocators);
+        -:  858:}
+        -:  859:
+        -:  860:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  861:
+        -:  862:
+        -:  863:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  864:
+        -:  865:
+        -:  866:
+        -:  867:
+        -:  868:// TAO_IDL - Generated from
+        -:  869:// be/be_visitor_structure/cdr_op_cs.cpp:52
+        -:  870:
+        -:  871:
+        -:  872:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  873:
+        -:  874:
+        -:  875:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  876:
+    #####:  877:::CORBA::Boolean operator<< (
+        -:  878:    TAO_OutputCDR &strm,
+        -:  879:    const OpenDDS::DCPS::DiscoveredWriterData &_tao_aggregate)
+        -:  880:{
+        -:  881:  return
+    #####:  882:    (strm << _tao_aggregate.ddsPublicationData) &&
+    #####:  883:    (strm << _tao_aggregate.writerProxy);
+        -:  884:}
+        -:  885:
+    #####:  886:::CORBA::Boolean operator>> (
+        -:  887:    TAO_InputCDR &strm,
+        -:  888:    OpenDDS::DCPS::DiscoveredWriterData &_tao_aggregate)
+        -:  889:{
+        -:  890:  return
+    #####:  891:    (strm >> _tao_aggregate.ddsPublicationData) &&
+    #####:  892:    (strm >> _tao_aggregate.writerProxy);
+        -:  893:}
+        -:  894:
+        -:  895:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  896:
+        -:  897:
+        -:  898:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  899:
+        -:  900:
+        -:  901:
+        -:  902:
+        -:  903:
+        -:  904:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  905:
+        -:  906:

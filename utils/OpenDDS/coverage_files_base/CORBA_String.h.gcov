@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/CORBA_String.h
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://=============================================================================
         -:    3:/**
@@ -56,19 +56,19 @@
         -:   54:    typedef TAO::details::string_traits_base <character_type> s_traits;
         -:   55:
         -:   56:    /// Default constructor.
-    #####:   57:    inline String_var (void) : ptr_ (0)
+       30:   57:    inline String_var (void) : ptr_ (0)
         -:   58:    {
-    #####:   59:    }
+       30:   59:    }
         -:   60:
         -:   61:    /// Constructor, owns p.
-    #####:   62:    inline String_var (character_type *p) : ptr_ (p)
+       63:   62:    inline String_var (character_type *p) : ptr_ (p)
         -:   63:    {
-    #####:   64:    }
+       63:   64:    }
         -:   65:
         -:   66:    /// Constructor. Makes a copy of p.
-        7:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+        -:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
         -:   68:    {
-        7:   69:    }
+        -:   69:    }
         -:   70:
         -:   71:    /// Copy constructor.
         -:   72:    inline String_var (String_var<charT> const &s) : ptr_(s_traits::duplicate(s.ptr_))
@@ -76,25 +76,25 @@
         -:   74:    }
         -:   75:
         -:   76:    /// Destructor.
-    #####:   77:    inline ~String_var (void)
+      114:   77:    inline ~String_var (void)
         -:   78:    {
-    #####:   79:      s_traits::release (this->ptr_);
-    #####:   80:    }
+      114:   79:      s_traits::release (this->ptr_);
+      114:   80:    }
         -:   81:
         -:   82:    /// Assignment operator.
-       10:   83:    inline String_var &operator= (character_type *p)
+        -:   83:    inline String_var &operator= (character_type *p)
         -:   84:    {
-       20:   85:      String_var <charT> tmp (p);
-       10:   86:      std::swap (this->ptr_, tmp.ptr_);
-       20:   87:      return *this;
+        -:   85:      String_var <charT> tmp (p);
+        -:   86:      std::swap (this->ptr_, tmp.ptr_);
+        -:   87:      return *this;
         -:   88:    }
         -:   89:
         -:   90:    /// Assignment to a const char*.  Makes a copy.
-    #####:   91:    inline String_var &operator= (const character_type *p)
+        -:   91:    inline String_var &operator= (const character_type *p)
         -:   92:    {
-    #####:   93:      String_var <charT> tmp (p);
-    #####:   94:      std::swap (this->ptr_, tmp.ptr_);
-    #####:   95:      return *this;
+        -:   93:      String_var <charT> tmp (p);
+        -:   94:      std::swap (this->ptr_, tmp.ptr_);
+        -:   95:      return *this;
         -:   96:    }
         -:   97:
         -:   98:    /// Assignment operator.
@@ -106,9 +106,9 @@
         -:  104:    }
         -:  105:
         -:  106:    /// Spec-defined read/write version.
-    #####:  107:    inline operator character_type *&()
+       27:  107:    inline operator character_type *&()
         -:  108:    {
-    #####:  109:      return this->ptr_;
+       27:  109:      return this->ptr_;
         -:  110:    }
         -:  111:
         -:  112:    /// Only read privileges.
@@ -132,31 +132,31 @@
         -:  130:    }
         -:  131:
         -:  132:    /// For in parameter.
-    #####:  133:    inline const character_type *in (void) const
+      132:  133:    inline const character_type *in (void) const
         -:  134:    {
-    #####:  135:      return this->ptr_;
+      132:  135:      return this->ptr_;
         -:  136:    }
         -:  137:
         -:  138:    /// For inout parameter.
-        -:  139:    inline character_type *&inout (void)
+    #####:  139:    inline character_type *&inout (void)
         -:  140:    {
-        -:  141:      return this->ptr_;
+    #####:  141:      return this->ptr_;
         -:  142:    }
         -:  143:
         -:  144:    /// For out parameter.
-    #####:  145:    inline character_type *&out (void)
+        -:  145:    inline character_type *&out (void)
         -:  146:    {
-    #####:  147:      s_traits::release (this->ptr_);
-    #####:  148:      this->ptr_ = 0;
-    #####:  149:      return this->ptr_;
+        -:  147:      s_traits::release (this->ptr_);
+        -:  148:      this->ptr_ = 0;
+        -:  149:      return this->ptr_;
         -:  150:    }
         -:  151:
         -:  152:    /// For string of return type.
-    #####:  153:    inline character_type *_retn (void)
+        9:  153:    inline character_type *_retn (void)
         -:  154:    {
-    #####:  155:      character_type *temp = this->ptr_;
-    #####:  156:      this->ptr_ = 0;
-    #####:  157:      return temp;
+        9:  155:      character_type *temp = this->ptr_;
+        9:  156:      this->ptr_ = 0;
+        9:  157:      return temp;
         -:  158:    }
         -:  159:
         -:  160:  private:
@@ -181,10 +181,10 @@
         -:  179:    typedef typename s_traits::string_mgr string_mgr;
         -:  180:
         -:  181:    /// Construction from a reference to a string.
-    #####:  182:    inline String_out (character_type *&p) : ptr_ (p)
+        -:  182:    inline String_out (character_type *&p) : ptr_ (p)
         -:  183:    {
-    #####:  184:      this->ptr_ = 0;
-    #####:  185:    }
+        -:  184:      this->ptr_ = 0;
+        -:  185:    }
         -:  186:
         -:  187:    /// Construction from a var.
         -:  188:    inline String_out (String_var <character_type> &p) : ptr_ (p.out ())
@@ -197,9 +197,9 @@
         -:  195:    }
         -:  196:
         -:  197:    /// Copy constructor.
-    #####:  198:    inline String_out (const String_out<charT> &s) : ptr_ (s.ptr_)
+        -:  198:    inline String_out (const String_out<charT> &s) : ptr_ (s.ptr_)
         -:  199:    {
-    #####:  200:    }
+        -:  200:    }
         -:  201:
         -:  202:    /// Assignment from a string_out.
         -:  203:    inline String_out &operator= (String_out<charT> const &s)
@@ -216,10 +216,10 @@
         -:  214:    }
         -:  215:
         -:  216:    /// Assignment from a constant char*.
-    #####:  217:    inline String_out& operator= (const character_type* p)
+        -:  217:    inline String_out& operator= (const character_type* p)
         -:  218:    {
-    #####:  219:      this->ptr_ = s_traits::duplicate (p);
-    #####:  220:      return *this;
+        -:  219:      this->ptr_ = s_traits::duplicate (p);
+        -:  220:      return *this;
         -:  221:    }
         -:  222:
         -:  223:    /// Cast.

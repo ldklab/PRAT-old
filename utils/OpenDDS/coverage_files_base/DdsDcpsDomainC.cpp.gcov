@@ -1,422 +1,428 @@
         -:    0:Source:DdsDcpsDomainC.cpp
-        -:    0:Programs:24
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-    #####:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-    #####:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-       15:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-       15:   60:/*EOF*/
-       15:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        9:   64:/*EOF*/
-        -:   65:/*EOF*/
-        9:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-    #####:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-    #####:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        1:   77:/*EOF*/
-        1:   78:/*EOF*/
-        -:   79:/*EOF*/
-        1:   80:/*EOF*/
-        -:   81:/*EOF*/
-        1:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-    #####:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-    #####:   88:/*EOF*/
-        -:   89:/*EOF*/
-    #####:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-    #####:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-    #####:   97:/*EOF*/
-        -:   98:/*EOF*/
-    #####:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-       26:  103:/*EOF*/
-        -:  104:/*EOF*/
-       26:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-        -:  108:/*EOF*/
-        5:  109:/*EOF*/
-        -:  110:/*EOF*/
-        5:  111:/*EOF*/
-        -:  112:/*EOF*/
-        1:  113:/*EOF*/
-        -:  114:/*EOF*/
-        5:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-    #####:  119:/*EOF*/
-        -:  120:/*EOF*/
-    #####:  121:/*EOF*/
-    #####:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-    #####:  125:/*EOF*/
-        -:  126:/*EOF*/
-    #####:  127:/*EOF*/
-    #####:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-    #####:  131:/*EOF*/
-    #####:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-    #####:  135:/*EOF*/
-    #####:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-    #####:  139:/*EOF*/
-    #####:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-    #####:  143:/*EOF*/
-    #####:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-    #####:  147:/*EOF*/
-    #####:  148:/*EOF*/
-        -:  149:/*EOF*/
-        -:  150:/*EOF*/
-    #####:  151:/*EOF*/
-    #####:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-    #####:  155:/*EOF*/
-    #####:  156:/*EOF*/
-        -:  157:/*EOF*/
-        -:  158:/*EOF*/
-    #####:  159:/*EOF*/
-    #####:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-        -:  165:/*EOF*/
-    #####:  166:/*EOF*/
-        -:  167:/*EOF*/
-        -:  168:/*EOF*/
-        -:  169:/*EOF*/
-    #####:  170:/*EOF*/
-        -:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-    #####:  174:/*EOF*/
-        -:  175:/*EOF*/
-    #####:  176:/*EOF*/
-        -:  177:/*EOF*/
-        -:  178:/*EOF*/
-        -:  179:/*EOF*/
-    #####:  180:/*EOF*/
-        -:  181:/*EOF*/
-    #####:  182:/*EOF*/
-        -:  183:/*EOF*/
-        -:  184:/*EOF*/
-        -:  185:/*EOF*/
-        -:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-        -:  190:/*EOF*/
-    #####:  191:/*EOF*/
-        -:  192:/*EOF*/
-        -:  193:/*EOF*/
-    #####:  194:/*EOF*/
-        -:  195:/*EOF*/
-        -:  196:/*EOF*/
-        -:  197:/*EOF*/
-       22:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-       22:  201:/*EOF*/
-       22:  202:/*EOF*/
-        -:  203:/*EOF*/
-        -:  204:/*EOF*/
-       10:  205:/*EOF*/
-        -:  206:/*EOF*/
-       10:  207:/*EOF*/
-        -:  208:/*EOF*/
-        -:  209:/*EOF*/
-        -:  210:/*EOF*/
-    #####:  211:/*EOF*/
-        -:  212:/*EOF*/
-        -:  213:/*EOF*/
-        -:  214:/*EOF*/
-    #####:  215:/*EOF*/
-        -:  216:/*EOF*/
-        -:  217:/*EOF*/
-        5:  218:/*EOF*/
-        5:  219:/*EOF*/
-        -:  220:/*EOF*/
-        5:  221:/*EOF*/
-        -:  222:/*EOF*/
-        5:  223:/*EOF*/
-        -:  224:/*EOF*/
-        -:  225:/*EOF*/
-    #####:  226:/*EOF*/
-        -:  227:/*EOF*/
-        -:  228:/*EOF*/
-    #####:  229:/*EOF*/
-        -:  230:/*EOF*/
-    #####:  231:/*EOF*/
-        -:  232:/*EOF*/
-        -:  233:/*EOF*/
-        -:  234:/*EOF*/
-    #####:  235:/*EOF*/
-        -:  236:/*EOF*/
-        -:  237:/*EOF*/
-    #####:  238:/*EOF*/
-        -:  239:/*EOF*/
-    #####:  240:/*EOF*/
-        -:  241:/*EOF*/
-        -:  242:/*EOF*/
-        -:  243:/*EOF*/
-       11:  244:/*EOF*/
-        -:  245:/*EOF*/
-       11:  246:/*EOF*/
-        -:  247:/*EOF*/
-        -:  248:/*EOF*/
-        -:  249:/*EOF*/
-        7:  250:/*EOF*/
-        -:  251:/*EOF*/
-        7:  252:/*EOF*/
-        -:  253:/*EOF*/
-        7:  254:/*EOF*/
-        -:  255:/*EOF*/
-        7:  256:/*EOF*/
-        -:  257:/*EOF*/
-        -:  258:/*EOF*/
-        -:  259:/*EOF*/
-    #####:  260:/*EOF*/
-        -:  261:/*EOF*/
-    #####:  262:/*EOF*/
-    #####:  263:/*EOF*/
-        -:  264:/*EOF*/
-        -:  265:/*EOF*/
-    #####:  266:/*EOF*/
-        -:  267:/*EOF*/
-    #####:  268:/*EOF*/
-    #####:  269:/*EOF*/
-        -:  270:/*EOF*/
-        -:  271:/*EOF*/
-    #####:  272:/*EOF*/
-    #####:  273:/*EOF*/
-        -:  274:/*EOF*/
-        -:  275:/*EOF*/
-    #####:  276:/*EOF*/
-    #####:  277:/*EOF*/
-        -:  278:/*EOF*/
-        -:  279:/*EOF*/
-    #####:  280:/*EOF*/
-    #####:  281:/*EOF*/
-        -:  282:/*EOF*/
-        -:  283:/*EOF*/
-        -:  284:/*EOF*/
-        -:  285:/*EOF*/
-        -:  286:/*EOF*/
-    #####:  287:/*EOF*/
-        -:  288:/*EOF*/
-        -:  289:/*EOF*/
-        -:  290:/*EOF*/
-    #####:  291:/*EOF*/
-        -:  292:/*EOF*/
-        -:  293:/*EOF*/
-        -:  294:/*EOF*/
-    #####:  295:/*EOF*/
-        -:  296:/*EOF*/
-    #####:  297:/*EOF*/
-        -:  298:/*EOF*/
-        -:  299:/*EOF*/
-        -:  300:/*EOF*/
-    #####:  301:/*EOF*/
-        -:  302:/*EOF*/
-    #####:  303:/*EOF*/
-        -:  304:/*EOF*/
-        -:  305:/*EOF*/
-        -:  306:/*EOF*/
-        -:  307:/*EOF*/
-        -:  308:/*EOF*/
-        -:  309:/*EOF*/
-        -:  310:/*EOF*/
-        -:  311:/*EOF*/
-    #####:  312:/*EOF*/
-        -:  313:/*EOF*/
-        -:  314:/*EOF*/
-    #####:  315:/*EOF*/
-        -:  316:/*EOF*/
-        -:  317:/*EOF*/
-        -:  318:/*EOF*/
-       15:  319:/*EOF*/
-        -:  320:/*EOF*/
-        -:  321:/*EOF*/
-       15:  322:/*EOF*/
-       15:  323:/*EOF*/
-        -:  324:/*EOF*/
-        -:  325:/*EOF*/
-        6:  326:/*EOF*/
-        -:  327:/*EOF*/
-        6:  328:/*EOF*/
-        -:  329:/*EOF*/
-        -:  330:/*EOF*/
-        -:  331:/*EOF*/
-    #####:  332:/*EOF*/
-        -:  333:/*EOF*/
-        -:  334:/*EOF*/
-        -:  335:/*EOF*/
-    #####:  336:/*EOF*/
-        -:  337:/*EOF*/
-        -:  338:/*EOF*/
-        8:  339:/*EOF*/
-        8:  340:/*EOF*/
-        -:  341:/*EOF*/
-        7:  342:/*EOF*/
-        -:  343:/*EOF*/
-        7:  344:/*EOF*/
-        -:  345:/*EOF*/
-        -:  346:/*EOF*/
-    #####:  347:/*EOF*/
-        -:  348:/*EOF*/
-        -:  349:/*EOF*/
-    #####:  350:/*EOF*/
-        -:  351:/*EOF*/
-    #####:  352:/*EOF*/
-        -:  353:/*EOF*/
-        -:  354:/*EOF*/
-        -:  355:/*EOF*/
-    #####:  356:/*EOF*/
-        -:  357:/*EOF*/
-        -:  358:/*EOF*/
-    #####:  359:/*EOF*/
-        -:  360:/*EOF*/
-    #####:  361:/*EOF*/
-        -:  362:/*EOF*/
-        -:  363:/*EOF*/
-        -:  364:/*EOF*/
-        6:  365:/*EOF*/
-        -:  366:/*EOF*/
-        6:  367:/*EOF*/
-        -:  368:/*EOF*/
-        -:  369:/*EOF*/
-        -:  370:/*EOF*/
-        9:  371:/*EOF*/
-        -:  372:/*EOF*/
-        9:  373:/*EOF*/
-        -:  374:/*EOF*/
-        9:  375:/*EOF*/
-        -:  376:/*EOF*/
-        9:  377:/*EOF*/
-        -:  378:/*EOF*/
-        -:  379:/*EOF*/
-        -:  380:/*EOF*/
-    #####:  381:/*EOF*/
-        -:  382:/*EOF*/
-    #####:  383:/*EOF*/
-    #####:  384:/*EOF*/
-        -:  385:/*EOF*/
-        -:  386:/*EOF*/
-    #####:  387:/*EOF*/
-        -:  388:/*EOF*/
-    #####:  389:/*EOF*/
-    #####:  390:/*EOF*/
-        -:  391:/*EOF*/
-        -:  392:/*EOF*/
-    #####:  393:/*EOF*/
-    #####:  394:/*EOF*/
-        -:  395:/*EOF*/
-        -:  396:/*EOF*/
-    #####:  397:/*EOF*/
-    #####:  398:/*EOF*/
-        -:  399:/*EOF*/
-        -:  400:/*EOF*/
-        -:  401:/*EOF*/
-        -:  402:/*EOF*/
-        -:  403:/*EOF*/
-    #####:  404:/*EOF*/
-        -:  405:/*EOF*/
-        -:  406:/*EOF*/
-        -:  407:/*EOF*/
-    #####:  408:/*EOF*/
-        -:  409:/*EOF*/
-        -:  410:/*EOF*/
-        -:  411:/*EOF*/
-    #####:  412:/*EOF*/
-        -:  413:/*EOF*/
-    #####:  414:/*EOF*/
-        -:  415:/*EOF*/
-        -:  416:/*EOF*/
-        -:  417:/*EOF*/
-    #####:  418:/*EOF*/
-        -:  419:/*EOF*/
-    #####:  420:/*EOF*/
+        -:    0:Programs:72
+        -:    1:// -*- C++ -*-
+        -:    2:// $Id$
+        -:    3:
+        -:    4:/**
+        -:    5: * Code generated by the The ACE ORB (TAO) IDL Compiler v2.2a_p15
+        -:    6: * TAO and the TAO IDL Compiler have been developed by:
+        -:    7: *       Center for Distributed Object Computing
+        -:    8: *       Washington University
+        -:    9: *       St. Louis, MO
+        -:   10: *       USA
+        -:   11: *       http://www.cs.wustl.edu/~schmidt/doc-center.html
+        -:   12: * and
+        -:   13: *       Distributed Object Computing Laboratory
+        -:   14: *       University of California at Irvine
+        -:   15: *       Irvine, CA
+        -:   16: *       USA
+        -:   17: * and
+        -:   18: *       Institute for Software Integrated Systems
+        -:   19: *       Vanderbilt University
+        -:   20: *       Nashville, TN
+        -:   21: *       USA
+        -:   22: *       http://www.isis.vanderbilt.edu/
+        -:   23: *
+        -:   24: * Information about TAO is available at:
+        -:   25: *     http://www.cs.wustl.edu/~schmidt/TAO.html
+        -:   26: **/
+        -:   27:
+        -:   28:// TAO_IDL - Generated from
+        -:   29:// be/be_codegen.cpp:376
+        -:   30:
+        -:   31:#include "DCPS/DdsDcps_pch.h"
+        -:   32:#include "DdsDcpsDomainC.h"
+        -:   33:#include "tao/CDR.h"
+        -:   34:#include "ace/OS_NS_string.h"
+        -:   35:
+        -:   36:#if !defined (__ACE_INLINE__)
+        -:   37:#include "DdsDcpsDomainC.inl"
+        -:   38:#endif /* !defined INLINE */
+        -:   39:
+        -:   40:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   41:
+        -:   42:
+        -:   43:
+        -:   44:// TAO_IDL - Generated from
+        -:   45:// be/be_visitor_interface/interface_cs.cpp:51
+        -:   46:
+        -:   47:// Traits specializations for DDS::DomainParticipantListener.
+        -:   48:
+        -:   49:DDS::DomainParticipantListener_ptr
+    #####:   50:TAO::Objref_Traits<DDS::DomainParticipantListener>::duplicate (
+        -:   51:    DDS::DomainParticipantListener_ptr p)
+        -:   52:{
+    #####:   53:  return DDS::DomainParticipantListener::_duplicate (p);
+        -:   54:}
+        -:   55:
+        -:   56:void
+       39:   57:TAO::Objref_Traits<DDS::DomainParticipantListener>::release (
+        -:   58:    DDS::DomainParticipantListener_ptr p)
+        -:   59:{
+       39:   60:  ::CORBA::release (p);
+       39:   61:}
+        -:   62:
+        -:   63:DDS::DomainParticipantListener_ptr
+       24:   64:TAO::Objref_Traits<DDS::DomainParticipantListener>::nil (void)
+        -:   65:{
+       24:   66:  return DDS::DomainParticipantListener::_nil ();
+        -:   67:}
+        -:   68:
+        -:   69:::CORBA::Boolean
+    #####:   70:TAO::Objref_Traits<DDS::DomainParticipantListener>::marshal (
+        -:   71:    const DDS::DomainParticipantListener_ptr p,
+        -:   72:    TAO_OutputCDR & cdr)
+        -:   73:{
+    #####:   74:  return ::CORBA::Object::marshal (p, cdr);
+        -:   75:}
+        -:   76:
+        3:   77:DDS::DomainParticipantListener::DomainParticipantListener (void)
+        3:   78:{}
+        -:   79:
+        3:   80:DDS::DomainParticipantListener::~DomainParticipantListener (void)
+        -:   81:{
+        3:   82:}
+        -:   83:
+        -:   84:DDS::DomainParticipantListener_ptr
+    #####:   85:DDS::DomainParticipantListener::_narrow (
+        -:   86:    ::CORBA::Object_ptr _tao_objref)
+        -:   87:{
+    #####:   88:  return DomainParticipantListener::_duplicate (
+        -:   89:      dynamic_cast<DomainParticipantListener_ptr> (_tao_objref)
+    #####:   90:    );
+        -:   91:}
+        -:   92:
+        -:   93:DDS::DomainParticipantListener_ptr
+    #####:   94:DDS::DomainParticipantListener::_unchecked_narrow (
+        -:   95:    ::CORBA::Object_ptr _tao_objref)
+        -:   96:{
+    #####:   97:  return DomainParticipantListener::_duplicate (
+        -:   98:      dynamic_cast<DomainParticipantListener_ptr> (_tao_objref)
+    #####:   99:    );
+        -:  100:}
+        -:  101:
+        -:  102:DDS::DomainParticipantListener_ptr
+       75:  103:DDS::DomainParticipantListener::_nil (void)
+        -:  104:{
+       75:  105:  return 0;
+        -:  106:}
+        -:  107:
+        -:  108:DDS::DomainParticipantListener_ptr
+       12:  109:DDS::DomainParticipantListener::_duplicate (DomainParticipantListener_ptr obj)
+        -:  110:{
+       12:  111:  if (! ::CORBA::is_nil (obj))
+        -:  112:    {
+        3:  113:      obj->_add_ref ();
+        -:  114:    }
+       12:  115:  return obj;
+        -:  116:}
+        -:  117:
+        -:  118:void
+    #####:  119:DDS::DomainParticipantListener::_tao_release (DomainParticipantListener_ptr obj)
+        -:  120:{
+    #####:  121:  ::CORBA::release (obj);
+    #####:  122:}
+        -:  123:
+        -:  124:::CORBA::Boolean
+    #####:  125:DDS::DomainParticipantListener::_is_a (const char *value)
+        -:  126:{
+    #####:  127:  if (
+    #####:  128:      ACE_OS::strcmp (
+        -:  129:          value,
+        -:  130:          "IDL:DDS/Listener:1.0"
+    #####:  131:        ) == 0 ||
+    #####:  132:      ACE_OS::strcmp (
+        -:  133:          value,
+        -:  134:          "IDL:DDS/TopicListener:1.0"
+    #####:  135:        ) == 0 ||
+    #####:  136:      ACE_OS::strcmp (
+        -:  137:          value,
+        -:  138:          "IDL:DDS/DataWriterListener:1.0"
+    #####:  139:        ) == 0 ||
+    #####:  140:      ACE_OS::strcmp (
+        -:  141:          value,
+        -:  142:          "IDL:DDS/PublisherListener:1.0"
+    #####:  143:        ) == 0 ||
+    #####:  144:      ACE_OS::strcmp (
+        -:  145:          value,
+        -:  146:          "IDL:DDS/DataReaderListener:1.0"
+    #####:  147:        ) == 0 ||
+    #####:  148:      ACE_OS::strcmp (
+        -:  149:          value,
+        -:  150:          "IDL:DDS/SubscriberListener:1.0"
+    #####:  151:        ) == 0 ||
+    #####:  152:      ACE_OS::strcmp (
+        -:  153:          value,
+        -:  154:          "IDL:DDS/DomainParticipantListener:1.0"
+    #####:  155:        ) == 0 ||
+    #####:  156:      ACE_OS::strcmp (
+        -:  157:          value,
+        -:  158:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  159:        ) == 0 ||
+    #####:  160:      ACE_OS::strcmp (
+        -:  161:          value,
+        -:  162:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  163:        ) == 0
+        -:  164:    )
+        -:  165:    {
+    #####:  166:      return true; // success using local knowledge
+        -:  167:    }
+        -:  168:  else
+        -:  169:    {
+    #####:  170:      return false;
+        -:  171:    }
+        -:  172:}
+        -:  173:
+    #####:  174:const char* DDS::DomainParticipantListener::_interface_repository_id (void) const
+        -:  175:{
+    #####:  176:  return "IDL:DDS/DomainParticipantListener:1.0";
+        -:  177:}
+        -:  178:
+        -:  179:::CORBA::Boolean
+    #####:  180:DDS::DomainParticipantListener::marshal (TAO_OutputCDR & /* cdr */)
+        -:  181:{
+    #####:  182:  return false;
+        -:  183:}
+        -:  184:
+        -:  185:// TAO_IDL - Generated from
+        -:  186:// be/be_visitor_interface/interface_cs.cpp:51
+        -:  187:
+        -:  188:// Traits specializations for DDS::DomainParticipant.
+        -:  189:
+        -:  190:DDS::DomainParticipant_ptr
+    #####:  191:TAO::Objref_Traits<DDS::DomainParticipant>::duplicate (
+        -:  192:    DDS::DomainParticipant_ptr p)
+        -:  193:{
+    #####:  194:  return DDS::DomainParticipant::_duplicate (p);
+        -:  195:}
+        -:  196:
+        -:  197:void
+       63:  198:TAO::Objref_Traits<DDS::DomainParticipant>::release (
+        -:  199:    DDS::DomainParticipant_ptr p)
+        -:  200:{
+       63:  201:  ::CORBA::release (p);
+       63:  202:}
+        -:  203:
+        -:  204:DDS::DomainParticipant_ptr
+       30:  205:TAO::Objref_Traits<DDS::DomainParticipant>::nil (void)
+        -:  206:{
+       30:  207:  return DDS::DomainParticipant::_nil ();
+        -:  208:}
+        -:  209:
+        -:  210:::CORBA::Boolean
+    #####:  211:TAO::Objref_Traits<DDS::DomainParticipant>::marshal (
+        -:  212:    const DDS::DomainParticipant_ptr p,
+        -:  213:    TAO_OutputCDR & cdr)
+        -:  214:{
+    #####:  215:  return ::CORBA::Object::marshal (p, cdr);
+        -:  216:}
+        -:  217:
+       12:  218:DDS::DomainParticipant::DomainParticipant (void)
+       12:  219:{}
+        -:  220:
+       12:  221:DDS::DomainParticipant::~DomainParticipant (void)
+        -:  222:{
+       12:  223:}
+        -:  224:
+        -:  225:DDS::DomainParticipant_ptr
+    #####:  226:DDS::DomainParticipant::_narrow (
+        -:  227:    ::CORBA::Object_ptr _tao_objref)
+        -:  228:{
+    #####:  229:  return DomainParticipant::_duplicate (
+        -:  230:      dynamic_cast<DomainParticipant_ptr> (_tao_objref)
+    #####:  231:    );
+        -:  232:}
+        -:  233:
+        -:  234:DDS::DomainParticipant_ptr
+    #####:  235:DDS::DomainParticipant::_unchecked_narrow (
+        -:  236:    ::CORBA::Object_ptr _tao_objref)
+        -:  237:{
+    #####:  238:  return DomainParticipant::_duplicate (
+        -:  239:      dynamic_cast<DomainParticipant_ptr> (_tao_objref)
+    #####:  240:    );
+        -:  241:}
+        -:  242:
+        -:  243:DDS::DomainParticipant_ptr
+       30:  244:DDS::DomainParticipant::_nil (void)
+        -:  245:{
+       30:  246:  return 0;
+        -:  247:}
+        -:  248:
+        -:  249:DDS::DomainParticipant_ptr
+       21:  250:DDS::DomainParticipant::_duplicate (DomainParticipant_ptr obj)
+        -:  251:{
+       21:  252:  if (! ::CORBA::is_nil (obj))
+        -:  253:    {
+       21:  254:      obj->_add_ref ();
+        -:  255:    }
+       21:  256:  return obj;
+        -:  257:}
+        -:  258:
+        -:  259:void
+    #####:  260:DDS::DomainParticipant::_tao_release (DomainParticipant_ptr obj)
+        -:  261:{
+    #####:  262:  ::CORBA::release (obj);
+    #####:  263:}
+        -:  264:
+        -:  265:::CORBA::Boolean
+    #####:  266:DDS::DomainParticipant::_is_a (const char *value)
+        -:  267:{
+    #####:  268:  if (
+    #####:  269:      ACE_OS::strcmp (
+        -:  270:          value,
+        -:  271:          "IDL:DDS/Entity:1.0"
+    #####:  272:        ) == 0 ||
+    #####:  273:      ACE_OS::strcmp (
+        -:  274:          value,
+        -:  275:          "IDL:DDS/DomainParticipant:1.0"
+    #####:  276:        ) == 0 ||
+    #####:  277:      ACE_OS::strcmp (
+        -:  278:          value,
+        -:  279:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  280:        ) == 0 ||
+    #####:  281:      ACE_OS::strcmp (
+        -:  282:          value,
+        -:  283:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  284:        ) == 0
+        -:  285:    )
+        -:  286:    {
+    #####:  287:      return true; // success using local knowledge
+        -:  288:    }
+        -:  289:  else
+        -:  290:    {
+    #####:  291:      return false;
+        -:  292:    }
+        -:  293:}
+        -:  294:
+    #####:  295:const char* DDS::DomainParticipant::_interface_repository_id (void) const
+        -:  296:{
+    #####:  297:  return "IDL:DDS/DomainParticipant:1.0";
+        -:  298:}
+        -:  299:
+        -:  300:::CORBA::Boolean
+    #####:  301:DDS::DomainParticipant::marshal (TAO_OutputCDR & /* cdr */)
+        -:  302:{
+    #####:  303:  return false;
+        -:  304:}
+        -:  305:
+        -:  306:// TAO_IDL - Generated from
+        -:  307:// be/be_visitor_interface/interface_cs.cpp:51
+        -:  308:
+        -:  309:// Traits specializations for DDS::DomainParticipantFactory.
+        -:  310:
+        -:  311:DDS::DomainParticipantFactory_ptr
+    #####:  312:TAO::Objref_Traits<DDS::DomainParticipantFactory>::duplicate (
+        -:  313:    DDS::DomainParticipantFactory_ptr p)
+        -:  314:{
+    #####:  315:  return DDS::DomainParticipantFactory::_duplicate (p);
+        -:  316:}
+        -:  317:
+        -:  318:void
+       42:  319:TAO::Objref_Traits<DDS::DomainParticipantFactory>::release (
+        -:  320:    DDS::DomainParticipantFactory_ptr p)
+        -:  321:{
+       42:  322:  ::CORBA::release (p);
+       42:  323:}
+        -:  324:
+        -:  325:DDS::DomainParticipantFactory_ptr
+       18:  326:TAO::Objref_Traits<DDS::DomainParticipantFactory>::nil (void)
+        -:  327:{
+       18:  328:  return DDS::DomainParticipantFactory::_nil ();
+        -:  329:}
+        -:  330:
+        -:  331:::CORBA::Boolean
+    #####:  332:TAO::Objref_Traits<DDS::DomainParticipantFactory>::marshal (
+        -:  333:    const DDS::DomainParticipantFactory_ptr p,
+        -:  334:    TAO_OutputCDR & cdr)
+        -:  335:{
+    #####:  336:  return ::CORBA::Object::marshal (p, cdr);
+        -:  337:}
+        -:  338:
+       21:  339:DDS::DomainParticipantFactory::DomainParticipantFactory (void)
+       21:  340:{}
+        -:  341:
+       21:  342:DDS::DomainParticipantFactory::~DomainParticipantFactory (void)
+        -:  343:{
+       21:  344:}
+        -:  345:
+        -:  346:DDS::DomainParticipantFactory_ptr
+    #####:  347:DDS::DomainParticipantFactory::_narrow (
+        -:  348:    ::CORBA::Object_ptr _tao_objref)
+        -:  349:{
+    #####:  350:  return DomainParticipantFactory::_duplicate (
+        -:  351:      dynamic_cast<DomainParticipantFactory_ptr> (_tao_objref)
+    #####:  352:    );
+        -:  353:}
+        -:  354:
+        -:  355:DDS::DomainParticipantFactory_ptr
+    #####:  356:DDS::DomainParticipantFactory::_unchecked_narrow (
+        -:  357:    ::CORBA::Object_ptr _tao_objref)
+        -:  358:{
+    #####:  359:  return DomainParticipantFactory::_duplicate (
+        -:  360:      dynamic_cast<DomainParticipantFactory_ptr> (_tao_objref)
+    #####:  361:    );
+        -:  362:}
+        -:  363:
+        -:  364:DDS::DomainParticipantFactory_ptr
+       18:  365:DDS::DomainParticipantFactory::_nil (void)
+        -:  366:{
+       18:  367:  return 0;
+        -:  368:}
+        -:  369:
+        -:  370:DDS::DomainParticipantFactory_ptr
+       24:  371:DDS::DomainParticipantFactory::_duplicate (DomainParticipantFactory_ptr obj)
+        -:  372:{
+       24:  373:  if (! ::CORBA::is_nil (obj))
+        -:  374:    {
+       24:  375:      obj->_add_ref ();
+        -:  376:    }
+       24:  377:  return obj;
+        -:  378:}
+        -:  379:
+        -:  380:void
+    #####:  381:DDS::DomainParticipantFactory::_tao_release (DomainParticipantFactory_ptr obj)
+        -:  382:{
+    #####:  383:  ::CORBA::release (obj);
+    #####:  384:}
+        -:  385:
+        -:  386:::CORBA::Boolean
+    #####:  387:DDS::DomainParticipantFactory::_is_a (const char *value)
+        -:  388:{
+    #####:  389:  if (
+    #####:  390:      ACE_OS::strcmp (
+        -:  391:          value,
+        -:  392:          "IDL:DDS/DomainParticipantFactory:1.0"
+    #####:  393:        ) == 0 ||
+    #####:  394:      ACE_OS::strcmp (
+        -:  395:          value,
+        -:  396:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  397:        ) == 0 ||
+    #####:  398:      ACE_OS::strcmp (
+        -:  399:          value,
+        -:  400:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  401:        ) == 0
+        -:  402:    )
+        -:  403:    {
+    #####:  404:      return true; // success using local knowledge
+        -:  405:    }
+        -:  406:  else
+        -:  407:    {
+    #####:  408:      return false;
+        -:  409:    }
+        -:  410:}
+        -:  411:
+    #####:  412:const char* DDS::DomainParticipantFactory::_interface_repository_id (void) const
+        -:  413:{
+    #####:  414:  return "IDL:DDS/DomainParticipantFactory:1.0";
+        -:  415:}
+        -:  416:
+        -:  417:::CORBA::Boolean
+    #####:  418:DDS::DomainParticipantFactory::marshal (TAO_OutputCDR & /* cdr */)
+        -:  419:{
+    #####:  420:  return false;
+        -:  421:}
+        -:  422:
+        -:  423:
+        -:  424:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  425:
+        -:  426:

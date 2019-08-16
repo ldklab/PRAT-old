@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Octet_Sequence_T.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:#ifndef guard_unbounded_octet_sequence_hpp
         -:    2:#define guard_unbounded_octet_sequence_hpp
         -:    3:/**
@@ -48,115 +48,115 @@
         -:   46:  typedef details::generic_sequence<value_type, allocation_traits, element_traits> implementation_type;
         -:   47:  typedef details::range_checking<value_type,true> range;
         -:   48:
-        -:   49:  inline unbounded_value_sequence<CORBA::Octet>()
-        -:   50:    : maximum_ (allocation_traits::default_maximum())
+     1860:   49:  inline unbounded_value_sequence<CORBA::Octet>()
+     1860:   50:    : maximum_ (allocation_traits::default_maximum())
         -:   51:    , length_ (0)
-        -:   52:    , buffer_ (allocation_traits::default_buffer_allocation())
-        -:   53:    , release_ (buffer_ != 0)
-        -:   54:    , mb_ (0)
-        -:   55:  {}
-    #####:   56:  inline explicit unbounded_value_sequence<CORBA::Octet>(CORBA::ULong maximum)
-    #####:   57:    : maximum_(maximum)
+     1860:   52:    , buffer_ (allocation_traits::default_buffer_allocation())
+     1860:   53:    , release_ (buffer_ != 0)
+     5580:   54:    , mb_ (0)
+     1860:   55:  {}
+      630:   56:  inline explicit unbounded_value_sequence<CORBA::Octet>(CORBA::ULong maximum)
+      630:   57:    : maximum_(maximum)
         -:   58:    , length_(0)
-    #####:   59:    , buffer_(allocbuf(maximum_))
+      630:   59:    , buffer_(allocbuf(maximum_))
         -:   60:    , release_(true)
-    #####:   61:    , mb_ (0)
-    #####:   62:  {}
-        -:   63:  inline unbounded_value_sequence<CORBA::Octet>(
+     1260:   61:    , mb_ (0)
+      630:   62:  {}
+       21:   63:  inline unbounded_value_sequence<CORBA::Octet>(
         -:   64:      CORBA::ULong maximum,
         -:   65:      CORBA::ULong length,
         -:   66:      value_type * data,
         -:   67:      CORBA::Boolean release = false)
-        -:   68:    : maximum_ (maximum),
+       21:   68:    : maximum_ (maximum),
         -:   69:      length_ (length),
         -:   70:      buffer_ (data),
         -:   71:      release_ (release),
-        -:   72:      mb_ (0)
-        -:   73:  {}
-    #####:   74:  inline ~unbounded_value_sequence<CORBA::Octet>() {
-    #####:   75:    if (mb_)
+       21:   72:      mb_ (0)
+       21:   73:  {}
+     7152:   74:  inline ~unbounded_value_sequence<CORBA::Octet>() {
+     3576:   75:    if (mb_)
     #####:   76:      ACE_Message_Block::release (mb_);
-    #####:   77:    if (release_)
-    #####:   78:      freebuf(buffer_);
-    #####:   79:  }
+     3576:   77:    if (release_)
+      783:   78:      freebuf(buffer_);
+     3576:   79:  }
         -:   80:  /// Create a sequence of octets from a single message block (i.e. it
         -:   81:  /// ignores any chaining in the message block).
-        -:   82:  inline unbounded_value_sequence<CORBA::Octet> (CORBA::ULong length,
+    #####:   82:  inline unbounded_value_sequence<CORBA::Octet> (CORBA::ULong length,
         -:   83:                                                 const ACE_Message_Block* mb)
-        -:   84:    : maximum_ (length)
+    #####:   84:    : maximum_ (length)
         -:   85:    , length_ (length)
-        -:   86:    , buffer_ (reinterpret_cast <CORBA::Octet *>(mb->rd_ptr ()))
+    #####:   86:    , buffer_ (reinterpret_cast <CORBA::Octet *>(mb->rd_ptr ()))
         -:   87:    , release_ (false)
-        -:   88:    , mb_(0) {
+    #####:   88:    , mb_(0) {
         -:   89:    // Get the message block flags.
-        -:   90:    ACE_Message_Block::Message_Flags const flg = mb->self_flags ();
+    #####:   90:    ACE_Message_Block::Message_Flags const flg = mb->self_flags ();
         -:   91:
         -:   92:    // If the DONT_DELETE flag is disabled just a duplicate would
         -:   93:    // help. If the DONT_DELETE flag is enabled a deep copy is needed as
         -:   94:    // the contents would be on stack. Just incrementing the ref count
         -:   95:    // on the stack based data block would only crash the program when
         -:   96:    // the stack unwinds
-        -:   97:    if (ACE_BIT_DISABLED (flg,
+    #####:   97:    if (ACE_BIT_DISABLED (flg,
         -:   98:                          ACE_Message_Block::DONT_DELETE))
         -:   99:      {
-        -:  100:        this->mb_ = ACE_Message_Block::duplicate (mb);
+    #####:  100:        this->mb_ = ACE_Message_Block::duplicate (mb);
         -:  101:      }
         -:  102:    else
         -:  103:      {
         -:  104:        // As we are in CORBA mode, all the data blocks would be aligned
         -:  105:        // on an 8 byte boundary
-        -:  106:        ACE_Message_Block msgb (*mb, ACE_CDR::MAX_ALIGNMENT);
+    #####:  106:        ACE_Message_Block msgb (*mb, ACE_CDR::MAX_ALIGNMENT);
         -:  107:
         -:  108:        // Get the base pointer of the incoming message block
-        -:  109:        char *start = ACE_ptr_align_binary (mb->base (),
-        -:  110:                                            ACE_CDR::MAX_ALIGNMENT);
+    #####:  109:        char *start = ACE_ptr_align_binary (mb->base (),
+    #####:  110:                                            ACE_CDR::MAX_ALIGNMENT);
         -:  111:
         -:  112:        // Get the read and write displacements in the incoming stream
-        -:  113:        size_t const rd_pos = mb->rd_ptr () - start;
-        -:  114:        size_t const wr_pos = mb->wr_ptr () - start;
+    #####:  113:        size_t const rd_pos = mb->rd_ptr () - start;
+    #####:  114:        size_t const wr_pos = mb->wr_ptr () - start;
         -:  115:
-        -:  116:        this->mb_ = ACE_Message_Block::duplicate (&msgb);
+    #####:  116:        this->mb_ = ACE_Message_Block::duplicate (&msgb);
         -:  117:
-        -:  118:        this->mb_->rd_ptr (rd_pos);
-        -:  119:        this->mb_->wr_ptr (wr_pos);
+    #####:  118:        this->mb_->rd_ptr (rd_pos);
+    #####:  119:        this->mb_->wr_ptr (wr_pos);
         -:  120:      }
-        -:  121:  }
+    #####:  121:  }
         -:  122:  inline CORBA::ULong maximum() const {
         -:  123:    return maximum_;
         -:  124:  }
         -:  125:  inline CORBA::Boolean release() const {
         -:  126:    return release_;
         -:  127:  }
-        -:  128:  inline CORBA::ULong length() const {
-        -:  129:    return length_;
+      384:  128:  inline CORBA::ULong length() const {
+      384:  129:    return length_;
         -:  130:  }
-        -:  131:  inline void length(CORBA::ULong length) {
-        -:  132:    if (length <= maximum_)
+      246:  131:  inline void length(CORBA::ULong length) {
+      246:  132:    if (length <= maximum_)
         -:  133:      {
-        -:  134:        if (this->mb_ == 0)
+      246:  134:        if (this->mb_ == 0)
         -:  135:          {
-        -:  136:            length_ = length;
+      246:  136:            length_ = length;
         -:  137:          }
         -:  138:        else
         -:  139:          {
-        -:  140:            unbounded_value_sequence<CORBA::Octet> tmp(length);
-        -:  141:            tmp.length_ = length;
-        -:  142:            element_traits::copy_range(
+    #####:  140:            unbounded_value_sequence<CORBA::Octet> tmp(length);
+    #####:  141:            tmp.length_ = length;
+    #####:  142:            element_traits::copy_range(
         -:  143:              buffer_,
-        -:  144:              buffer_ + length,
-        -:  145:              ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
-        -:  146:            swap(tmp);
+    #####:  144:              buffer_ + length,
+    #####:  145:              ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+    #####:  146:            swap(tmp);
         -:  147:          }
-        -:  148:        return;
+      492:  148:        return;
         -:  149:      }
         -:  150:
-        -:  151:    unbounded_value_sequence<CORBA::Octet> tmp(length);
-        -:  152:    tmp.length_ = length;
-        -:  153:    element_traits::copy_range(
+    #####:  151:    unbounded_value_sequence<CORBA::Octet> tmp(length);
+    #####:  152:    tmp.length_ = length;
+    #####:  153:    element_traits::copy_range(
         -:  154:      buffer_,
-        -:  155:      buffer_ + length_,
-        -:  156:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
-        -:  157:    swap(tmp);
+    #####:  155:      buffer_ + length_,
+    #####:  156:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+    #####:  157:    swap(tmp);
         -:  158:  }
         -:  159:  inline value_type const & operator[](CORBA::ULong i) const {
         -:  160:    range::check(i, length_, maximum_, "operator[]() const");
@@ -174,37 +174,37 @@
         -:  172:    unbounded_value_sequence<CORBA::Octet> tmp(maximum, length, data, release);
         -:  173:    swap(tmp);
         -:  174:  }
-        -:  175:  inline value_type const * get_buffer() const {
-        -:  176:    if (buffer_ == 0)
+      234:  175:  inline value_type const * get_buffer() const {
+      234:  176:    if (buffer_ == 0)
         -:  177:      {
-        -:  178:        buffer_ = allocbuf(maximum_);
-        -:  179:        release_ = true;
+      132:  178:        buffer_ = allocbuf(maximum_);
+      132:  179:        release_ = true;
         -:  180:      }
-        -:  181:    return buffer_;
+      234:  181:    return buffer_;
         -:  182:  }
-        -:  183:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
-        -:  184:    if (orphan && !release_)
+      246:  183:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
+      246:  184:    if (orphan && !release_)
         -:  185:    {
-        -:  186:      return 0;
+    #####:  186:      return 0;
         -:  187:    }
-        -:  188:    if (buffer_ == 0)
+      246:  188:    if (buffer_ == 0)
         -:  189:    {
-        -:  190:      buffer_ = allocbuf(maximum_);
-        -:  191:      if (!orphan)
+    #####:  190:      buffer_ = allocbuf(maximum_);
+    #####:  191:      if (!orphan)
         -:  192:        {
-        -:  193:          release_ = true;
+    #####:  193:          release_ = true;
         -:  194:        }
         -:  195:    }
-        -:  196:    if (!orphan)
+      246:  196:    if (!orphan)
         -:  197:    {
-        -:  198:      return buffer_;
+      246:  198:      return buffer_;
         -:  199:    }
         -:  200:
-        -:  201:    unbounded_value_sequence<CORBA::Octet> tmp;
-        -:  202:    swap(tmp);
-        -:  203:    tmp.release_ = false;
+    #####:  201:    unbounded_value_sequence<CORBA::Octet> tmp;
+    #####:  202:    swap(tmp);
+    #####:  203:    tmp.release_ = false;
         -:  204:
-        -:  205:    return tmp.buffer_;
+    #####:  205:    return tmp.buffer_;
         -:  206:  }
         -:  207:
         -:  208:  // moved inside the class to resolve namespace lookup issues.
@@ -227,54 +227,54 @@
         -:  225:    return !this->operator==(rhs);
         -:  226:  }
         -:  227:
-    #####:  228:  inline void swap(unbounded_value_sequence & rhs) throw() {
-    #####:  229:    std::swap (mb_, rhs.mb_);
-    #####:  230:    std::swap (maximum_, rhs.maximum_);
-    #####:  231:    std::swap (length_, rhs.length_);
-    #####:  232:    std::swap (buffer_, rhs.buffer_);
-    #####:  233:    std::swap (release_, rhs.release_);
-    #####:  234:  }
-    #####:  235:  static value_type * allocbuf(CORBA::ULong maximum) {
-    #####:  236:    return allocation_traits::allocbuf(maximum);
+     1308:  228:  inline void swap(unbounded_value_sequence & rhs) throw() {
+     1308:  229:    std::swap (mb_, rhs.mb_);
+     1308:  230:    std::swap (maximum_, rhs.maximum_);
+     1308:  231:    std::swap (length_, rhs.length_);
+     1308:  232:    std::swap (buffer_, rhs.buffer_);
+     1308:  233:    std::swap (release_, rhs.release_);
+     1308:  234:  }
+      762:  235:  static value_type * allocbuf(CORBA::ULong maximum) {
+      762:  236:    return allocation_traits::allocbuf(maximum);
         -:  237:  }
-    #####:  238:  static void freebuf(value_type * buffer) {
-    #####:  239:    allocation_traits::freebuf(buffer);
-    #####:  240:  }
+      783:  238:  static void freebuf(value_type * buffer) {
+      783:  239:    allocation_traits::freebuf(buffer);
+      783:  240:  }
         -:  241:
         -:  242:  /// Returns the underlying message block, the caller must *not*
         -:  243:  /// release the copy.
-        -:  244:  inline ACE_Message_Block* mb (void) const {
-        -:  245:    return mb_;
+      234:  244:  inline ACE_Message_Block* mb (void) const {
+      234:  245:    return mb_;
         -:  246:  }
         -:  247:
         -:  248:  /// Replaces the current buffer with @a mb, using only @a length bytes.
         -:  249:  /// It takes a duplicate of <mb> so the user still owns it.
-        -:  250:  inline void replace (CORBA::ULong length, const ACE_Message_Block* mb) {
-        -:  251:    unbounded_value_sequence<CORBA::Octet> s (length, mb);
-        -:  252:    swap (s);
-        -:  253:  }
+    #####:  250:  inline void replace (CORBA::ULong length, const ACE_Message_Block* mb) {
+    #####:  251:    unbounded_value_sequence<CORBA::Octet> s (length, mb);
+    #####:  252:    swap (s);
+    #####:  253:  }
         -:  254:
-    #####:  255:  unbounded_value_sequence<CORBA::Octet> (
+     1281:  255:  unbounded_value_sequence<CORBA::Octet> (
         -:  256:    const unbounded_value_sequence<CORBA::Octet> &rhs)
-    #####:  257:    : maximum_ (0)
+     1281:  257:    : maximum_ (0)
         -:  258:    , length_ (0)
         -:  259:    , buffer_(0)
         -:  260:    , release_(false)
-    #####:  261:    , mb_ (0)
+     1281:  261:    , mb_ (0)
         -:  262:  {
-    #####:  263:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+     1281:  263:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
         -:  264:    {
-    #####:  265:      maximum_ = rhs.maximum_;
-    #####:  266:      length_ = rhs.length_;
-    #####:  267:      return;
+      897:  265:      maximum_ = rhs.maximum_;
+      897:  266:      length_ = rhs.length_;
+      897:  267:      return;
         -:  268:    }
-    #####:  269:    unbounded_value_sequence<CORBA::Octet> tmp(rhs.maximum_);
-    #####:  270:    tmp.length_ = rhs.length_;
-    #####:  271:    if (rhs.mb_ == 0)
+      768:  269:    unbounded_value_sequence<CORBA::Octet> tmp(rhs.maximum_);
+      384:  270:    tmp.length_ = rhs.length_;
+      384:  271:    if (rhs.mb_ == 0)
         -:  272:      {
-    #####:  273:        ACE_OS::memcpy (tmp.buffer_,
-    #####:  274:                        rhs.buffer_,
-    #####:  275:                        rhs.length_);
+      768:  273:        ACE_OS::memcpy (tmp.buffer_,
+      384:  274:                        rhs.buffer_,
+      384:  275:                        rhs.length_);
         -:  276:      }
         -:  277:    else
         -:  278:      {
@@ -288,15 +288,15 @@
     #####:  286:            offset += i->length ();
         -:  287:          }
         -:  288:      }
-    #####:  289:    swap(tmp);
+      384:  289:    swap(tmp);
         -:  290:  }
         -:  291:
         -:  292:  unbounded_value_sequence<CORBA::Octet> &
-    #####:  293:  operator= (const unbounded_value_sequence<CORBA::Octet> & rhs)
+      678:  293:  operator= (const unbounded_value_sequence<CORBA::Octet> & rhs)
         -:  294:  {
-    #####:  295:    unbounded_value_sequence<CORBA::Octet> tmp(rhs);
-    #####:  296:    swap(tmp);
-    #####:  297:    return * this;
+     1356:  295:    unbounded_value_sequence<CORBA::Octet> tmp(rhs);
+      678:  296:    swap(tmp);
+     1356:  297:    return * this;
         -:  298:  }
         -:  299:
         -:  300:private:

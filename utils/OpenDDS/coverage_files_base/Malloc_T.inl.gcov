@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Malloc_T.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: Malloc_T.inl 2741 2015-11-05 17:34:21Z mitza $
@@ -9,25 +9,25 @@
         -:    7:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
         -:    8:
         -:    9:template <class T> ACE_INLINE T *
-    #####:   10:ACE_Cached_Mem_Pool_Node<T>::addr (void)
+      348:   10:ACE_Cached_Mem_Pool_Node<T>::addr (void)
         -:   11:{
         -:   12:  // This should be done using a single reinterpret_cast, but Sun/CC
         -:   13:  // (4.2) gets awfully confused when T is a char[20] (and maybe other
         -:   14:  // types).
-    #####:   15:  return static_cast<T *> (static_cast <void *> (this));
+      348:   15:  return static_cast<T *> (static_cast <void *> (this));
         -:   16:}
         -:   17:
         -:   18:template <class T> ACE_INLINE ACE_Cached_Mem_Pool_Node<T> *
-    #####:   19:ACE_Cached_Mem_Pool_Node<T>::get_next (void)
+      348:   19:ACE_Cached_Mem_Pool_Node<T>::get_next (void)
         -:   20:{
-    #####:   21:  return this->next_;
+      348:   21:  return this->next_;
         -:   22:}
         -:   23:
         -:   24:template <class T> ACE_INLINE void
-    #####:   25:ACE_Cached_Mem_Pool_Node<T>::set_next (ACE_Cached_Mem_Pool_Node<T> *ptr)
+    11631:   25:ACE_Cached_Mem_Pool_Node<T>::set_next (ACE_Cached_Mem_Pool_Node<T> *ptr)
         -:   26:{
-    #####:   27:  this->next_ = ptr;
-    #####:   28:}
+    11631:   27:  this->next_ = ptr;
+    11631:   28:}
         -:   29:
         -:   30:ACE_ALLOC_HOOK_DEFINE_Tc(ACE_Cached_Mem_Pool_Node)
         -:   31:

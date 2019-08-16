@@ -1,272 +1,309 @@
         -:    0:Source:../dds/DCPS/ZeroCopySeq_T.inl
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-    #####:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-    #####:   25:/*EOF*/
-        -:   26:/*EOF*/
-    #####:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-    #####:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-    #####:   35:/*EOF*/
-    #####:   36:/*EOF*/
-    #####:   37:/*EOF*/
-    #####:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-    #####:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-    #####:   52:/*EOF*/
-    #####:   53:/*EOF*/
-        -:   54:/*EOF*/
-    #####:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-    #####:   87:/*EOF*/
-        -:   88:/*EOF*/
-    #####:   89:/*EOF*/
-    #####:   90:/*EOF*/
-    #####:   91:/*EOF*/
-    #####:   92:/*EOF*/
-        -:   93:/*EOF*/
-    #####:   94:/*EOF*/
-    #####:   95:/*EOF*/
-    #####:   96:/*EOF*/
-    #####:   97:/*EOF*/
-    #####:   98:/*EOF*/
-    #####:   99:/*EOF*/
-    #####:  100:/*EOF*/
-        -:  101:/*EOF*/
-    #####:  102:/*EOF*/
-        -:  103:/*EOF*/
-    #####:  104:/*EOF*/
-        -:  105:/*EOF*/
-    #####:  106:/*EOF*/
-        -:  107:/*EOF*/
-    #####:  108:/*EOF*/
-    #####:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-    #####:  112:/*EOF*/
-        -:  113:/*EOF*/
-    #####:  114:/*EOF*/
-        -:  115:/*EOF*/
-    #####:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-    #####:  119:/*EOF*/
-    #####:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-    #####:  124:/*EOF*/
-        -:  125:/*EOF*/
-    #####:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-        -:  131:/*EOF*/
-        -:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-        -:  135:/*EOF*/
-        -:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-        -:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-    #####:  146:/*EOF*/
-        -:  147:/*EOF*/
-    #####:  148:/*EOF*/
-        -:  149:/*EOF*/
-        -:  150:/*EOF*/
-        -:  151:/*EOF*/
-        -:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-        -:  157:/*EOF*/
-        -:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-        -:  165:/*EOF*/
-        -:  166:/*EOF*/
-        -:  167:/*EOF*/
-    #####:  168:/*EOF*/
-        -:  169:/*EOF*/
-    #####:  170:/*EOF*/
-    #####:  171:/*EOF*/
-    #####:  172:/*EOF*/
-        -:  173:/*EOF*/
-    #####:  174:/*EOF*/
-        -:  175:/*EOF*/
-        -:  176:/*EOF*/
-    #####:  177:/*EOF*/
-        -:  178:/*EOF*/
-        -:  179:/*EOF*/
-        -:  180:/*EOF*/
-        -:  181:/*EOF*/
-        -:  182:/*EOF*/
-    #####:  183:/*EOF*/
-        -:  184:/*EOF*/
-    #####:  185:/*EOF*/
-        -:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-        -:  190:/*EOF*/
-        -:  191:/*EOF*/
-        -:  192:/*EOF*/
-        -:  193:/*EOF*/
-        -:  194:/*EOF*/
-        -:  195:/*EOF*/
-        -:  196:/*EOF*/
-        -:  197:/*EOF*/
-        -:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-        -:  201:/*EOF*/
-    #####:  202:/*EOF*/
-        -:  203:/*EOF*/
-    #####:  204:/*EOF*/
-    #####:  205:/*EOF*/
-    #####:  206:/*EOF*/
-        -:  207:/*EOF*/
-    #####:  208:/*EOF*/
-    #####:  209:/*EOF*/
-        -:  210:/*EOF*/
-        -:  211:/*EOF*/
-    #####:  212:/*EOF*/
-    #####:  213:/*EOF*/
-        -:  214:/*EOF*/
-        -:  215:/*EOF*/
-        -:  216:/*EOF*/
-        -:  217:/*EOF*/
-        -:  218:/*EOF*/
-        -:  219:/*EOF*/
-        -:  220:/*EOF*/
-        -:  221:/*EOF*/
-        -:  222:/*EOF*/
-        -:  223:/*EOF*/
-        -:  224:/*EOF*/
-        -:  225:/*EOF*/
-        -:  226:/*EOF*/
-        -:  227:/*EOF*/
-        -:  228:/*EOF*/
-        -:  229:/*EOF*/
-        -:  230:/*EOF*/
-        -:  231:/*EOF*/
-        -:  232:/*EOF*/
-        -:  233:/*EOF*/
-        -:  234:/*EOF*/
-        -:  235:/*EOF*/
-    #####:  236:/*EOF*/
-        -:  237:/*EOF*/
-    #####:  238:/*EOF*/
-        -:  239:/*EOF*/
-        -:  240:/*EOF*/
-        -:  241:/*EOF*/
-        -:  242:/*EOF*/
-        -:  243:/*EOF*/
-    #####:  244:/*EOF*/
-        -:  245:/*EOF*/
-    #####:  246:/*EOF*/
-    #####:  247:/*EOF*/
-        -:  248:/*EOF*/
-        -:  249:/*EOF*/
-        -:  250:/*EOF*/
-        -:  251:/*EOF*/
-        -:  252:/*EOF*/
-        -:  253:/*EOF*/
-        -:  254:/*EOF*/
-        -:  255:/*EOF*/
-        -:  256:/*EOF*/
-        -:  257:/*EOF*/
-        -:  258:/*EOF*/
-        -:  259:/*EOF*/
-        -:  260:/*EOF*/
-        -:  261:/*EOF*/
-        -:  262:/*EOF*/
-        -:  263:/*EOF*/
-        -:  264:/*EOF*/
-        -:  265:/*EOF*/
-    #####:  266:/*EOF*/
-        -:  267:/*EOF*/
-        -:  268:/*EOF*/
-    #####:  269:/*EOF*/
-    #####:  270:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#include "dds/DCPS/ReceivedDataElementList.h"
+        -:    9:#include "ace/Truncate.h"
+        -:   10:
+        -:   11:#include <utility>
+        -:   12:#include <algorithm>
+        -:   13:
+        -:   14:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   15:
+        -:   16:namespace TAO {
+        -:   17:namespace DCPS {
+        -:   18:
+        -:   19://ZeroCopyVector implementation
+        -:   20:
+        -:   21:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+    #####:   22:ZeroCopyDataSeq<Sample_T, DEF_MAX>::ZeroCopyVector::ZeroCopyVector(
+        -:   23:  const size_t init_size,
+        -:   24:  ACE_Allocator* alloc)
+    #####:   25:  : ACE_Vector<OpenDDS::DCPS::ReceivedDataElement*, DEF_MAX> (init_size, alloc)
+        -:   26:{
+    #####:   27:}
+        -:   28:
+        -:   29:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:   30:void
+    #####:   31:ZeroCopyDataSeq<Sample_T, DEF_MAX>::ZeroCopyVector::swap(ZeroCopyVector& rhs)
+        -:   32:{
+        -:   33:  // Later versions of ACE do have a working ACE_Vector<T,MAX>::swap so we must
+        -:   34:  // delegate up to ACE_Array<T> to get consistent swap behavior.
+    #####:   35:  ACE_Array<OpenDDS::DCPS::ReceivedDataElement*>::swap(rhs);
+    #####:   36:  std::swap(this->length_, rhs.length_);
+    #####:   37:  std::swap(this->curr_max_size_, rhs.curr_max_size_);
+    #####:   38:}
+        -:   39:
+        -:   40://ZeroCopyDataSeq implementation
+        -:   41:
+        -:   42:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+    #####:   43:ZeroCopyDataSeq<Sample_T, DEF_MAX>::ZeroCopyDataSeq(
+        -:   44:  CORBA::ULong maximum /* = 0 */,
+        -:   45:  CORBA::ULong init_size /* = DEF_MAX */,
+        -:   46:  ACE_Allocator* alloc /* = 0 */)
+        -:   47:  : loaner_(0)
+        -:   48:  , ptrs_((maximum == 0) ? init_size : 0
+        -:   49:            , alloc ? alloc : &default_allocator_)
+        -:   50:  , sc_maximum_(maximum)
+        -:   51:  , sc_length_(0)
+    #####:   52:  , sc_buffer_(sc_maximum_ ? allocbuf(sc_maximum_) : 0)
+    #####:   53:  , sc_release_(sc_maximum_)
+        -:   54:{
+    #####:   55:}
+        -:   56:
+        -:   57:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:   58:ZeroCopyDataSeq<Sample_T, DEF_MAX>::ZeroCopyDataSeq(
+        -:   59:  CORBA::ULong maximum,
+        -:   60:  CORBA::ULong length,
+        -:   61:  Sample_T* buffer,
+        -:   62:  CORBA::Boolean release /* = false */)
+        -:   63:  : loaner_(0)
+        -:   64:  , ptrs_(0)
+        -:   65:  , sc_maximum_(maximum)
+        -:   66:  , sc_length_(length)
+        -:   67:  , sc_buffer_(buffer)
+        -:   68:  , sc_release_(release)
+        -:   69:{
+        -:   70:}
+        -:   71:
+        -:   72:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:   73:ZeroCopyDataSeq<Sample_T, DEF_MAX>&
+        -:   74:ZeroCopyDataSeq<Sample_T, DEF_MAX>::operator=(
+        -:   75:  const ZeroCopyDataSeq& frm)
+        -:   76:{
+        -:   77:  if (this != &frm) {
+        -:   78:    ZeroCopyDataSeq<Sample_T, DEF_MAX> temp(frm);
+        -:   79:    swap(temp);
+        -:   80:  }
+        -:   81:
+        -:   82:  return *this;
+        -:   83:}
+        -:   84:
+        -:   85:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:   86:void
+    #####:   87:ZeroCopyDataSeq<Sample_T, DEF_MAX>::swap(ZeroCopyDataSeq& frm)
+        -:   88:{
+    #####:   89:  bool thisUsedDefAlloc = ptrs_.allocator_ == &default_allocator_;
+    #####:   90:  bool thisUsedLocalBuffer = ptrs_.array_ == default_allocator_.pool();
+    #####:   91:  bool frmUsedDefAlloc = frm.ptrs_.allocator_ == &frm.default_allocator_;
+    #####:   92:  bool frmUsedLocalBuffer = frm.ptrs_.array_ == frm.default_allocator_.pool();
+        -:   93:
+    #####:   94:  std::swap(loaner_, frm.loaner_);
+    #####:   95:  std::swap(default_allocator_, frm.default_allocator_);
+    #####:   96:  ptrs_.swap(frm.ptrs_);
+    #####:   97:  std::swap(sc_maximum_, frm.sc_maximum_);
+    #####:   98:  std::swap(sc_length_, frm.sc_length_);
+    #####:   99:  std::swap(sc_buffer_, frm.sc_buffer_);
+    #####:  100:  std::swap(sc_release_, frm.sc_release_);
+        -:  101:
+    #####:  102:  if (thisUsedDefAlloc) frm.ptrs_.allocator_ = &frm.default_allocator_;
+        -:  103:
+    #####:  104:  if (thisUsedLocalBuffer) frm.ptrs_.array_ = frm.default_allocator_.pool();
+        -:  105:
+    #####:  106:  if (frmUsedDefAlloc) ptrs_.allocator_ = &default_allocator_;
+        -:  107:
+    #####:  108:  if (frmUsedLocalBuffer) ptrs_.array_ = default_allocator_.pool();
+    #####:  109:}
+        -:  110:
+        -:  111:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+    #####:  112:ZeroCopyDataSeq<Sample_T, DEF_MAX>::~ZeroCopyDataSeq()
+        -:  113:{
+    #####:  114:  if (!this->release())
+        -:  115:  {
+    #####:  116:    this->length(0);
+        -:  117:  }
+        -:  118:
+    #####:  119:  if (sc_release_ && sc_buffer_) freebuf(sc_buffer_);
+    #####:  120:}
+        -:  121:
+        -:  122:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  123:bool
+    #####:  124:ZeroCopyDataSeq<Sample_T, DEF_MAX>::is_zero_copy() const
+        -:  125:{
+    #####:  126:  return sc_maximum_ == 0;
+        -:  127:}
+        -:  128:
+        -:  129:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  130:CORBA::ULong
+    #####:  131:ZeroCopyDataSeq<Sample_T, DEF_MAX>::maximum() const
+        -:  132:{
+    #####:  133:  return sc_maximum_;
+        -:  134:}
+        -:  135:
+        -:  136:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  137:CORBA::ULong
+    #####:  138:ZeroCopyDataSeq<Sample_T, DEF_MAX>::max_slots() const
+        -:  139:{
+    #####:  140:  return is_zero_copy() ? static_cast<CORBA::ULong>(ptrs_.max_size())
+    #####:  141:    : sc_maximum_;
+        -:  142:}
+        -:  143:
+        -:  144:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  145:CORBA::ULong
+    #####:  146:ZeroCopyDataSeq<Sample_T, DEF_MAX>::length() const
+        -:  147:{
+    #####:  148:  return is_zero_copy() ? static_cast<CORBA::ULong>(ptrs_.size()) : sc_length_;
+        -:  149:}
+        -:  150:
+        -:  151:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  152:const Sample_T&
+        -:  153:ZeroCopyDataSeq<Sample_T, DEF_MAX>::operator[](CORBA::ULong i) const
+        -:  154:{
+        -:  155:  if (is_zero_copy()) {
+        -:  156:    if (ptrs_[i]->registered_data_) {
+        -:  157:      return *static_cast<const Sample_T*>(ptrs_[i]->registered_data_);
+        -:  158:    }
+        -:  159:    return default_;
+        -:  160:
+        -:  161:  } else {
+        -:  162:    return sc_buffer_[i];
+        -:  163:  }
+        -:  164:}
+        -:  165:
+        -:  166:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  167:Sample_T&
+    #####:  168:ZeroCopyDataSeq<Sample_T, DEF_MAX>::operator[](CORBA::ULong i)
+        -:  169:{
+    #####:  170:  if (is_zero_copy()) {
+    #####:  171:    if (ptrs_[i]->registered_data_) {
+    #####:  172:      return *static_cast<Sample_T*>(ptrs_[i]->registered_data_);
+        -:  173:    }
+    #####:  174:    return default_;
+        -:  175:
+        -:  176:  } else {
+    #####:  177:    return sc_buffer_[i];
+        -:  178:  }
+        -:  179:}
+        -:  180:
+        -:  181:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  182:CORBA::Boolean
+    #####:  183:ZeroCopyDataSeq<Sample_T, DEF_MAX>::release() const
+        -:  184:{
+    #####:  185:  return sc_release_; //will always be false in zero-copy mode
+        -:  186:}
+        -:  187:
+        -:  188:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  189:void
+        -:  190:ZeroCopyDataSeq<Sample_T, DEF_MAX>::replace(
+        -:  191:  CORBA::ULong maximum,
+        -:  192:  CORBA::ULong length,
+        -:  193:  Sample_T* buffer,
+        -:  194:  CORBA::Boolean release /* = false */)
+        -:  195:{
+        -:  196:  ZeroCopyDataSeq<Sample_T, DEF_MAX> newOne(maximum, length, buffer, release);
+        -:  197:  swap(newOne);
+        -:  198:}
+        -:  199:
+        -:  200:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  201:void
+    #####:  202:ZeroCopyDataSeq<Sample_T, DEF_MAX>::make_single_copy(CORBA::ULong maximum)
+        -:  203:{
+    #####:  204:  CORBA::ULong currentSize(static_cast<CORBA::ULong>(ptrs_.size()));
+    #####:  205:  ZeroCopyDataSeq<Sample_T, DEF_MAX> sc((std::max)(maximum, currentSize));
+    #####:  206:  sc.length(currentSize);
+        -:  207:
+    #####:  208:  for (CORBA::ULong i(0); i < ptrs_.size(); ++i) {
+    #####:  209:    sc[i] = (*this)[i];
+        -:  210:  }
+        -:  211:
+    #####:  212:  swap(sc);
+    #####:  213:}
+        -:  214:
+        -:  215:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  216:const Sample_T*
+        -:  217:ZeroCopyDataSeq<Sample_T, DEF_MAX>::get_buffer() const
+        -:  218:{
+        -:  219:  //If we're currently zero-copy we must become single copy in order to return
+        -:  220:  //a contiguous buffer.  The only way to do this and meet the CORBA/C++ spec
+        -:  221:  //interface is to cast-away the constness.
+        -:  222:  if (is_zero_copy())
+        -:  223:    const_cast<ZeroCopyDataSeq*>(this)->make_single_copy(max_slots());
+        -:  224:
+        -:  225:  if (!sc_buffer_) {
+        -:  226:    sc_buffer_ = allocbuf(sc_maximum_);
+        -:  227:    sc_release_ = true;
+        -:  228:  }
+        -:  229:
+        -:  230:  return sc_buffer_;
+        -:  231:}
+        -:  232:
+        -:  233:/*static*/
+        -:  234:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  235:Sample_T*
+    #####:  236:ZeroCopyDataSeq<Sample_T, DEF_MAX>::allocbuf(CORBA::ULong nelems)
+        -:  237:{
+    #####:  238:  return new Sample_T[nelems];
+        -:  239:}
+        -:  240:
+        -:  241:/*static*/
+        -:  242:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  243:void
+    #####:  244:ZeroCopyDataSeq<Sample_T, DEF_MAX>::freebuf(Sample_T* buffer)
+        -:  245:{
+    #####:  246:  delete[] buffer;
+    #####:  247:}
+        -:  248:
+        -:  249:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  250:void
+    #####:  251:ZeroCopyDataSeq<Sample_T, DEF_MAX>::internal_set_length(CORBA::ULong len)
+        -:  252:{
+    #####:  253:  if (!is_zero_copy() || len < ptrs_.size()) {
+    #####:  254:    length(len);
+        -:  255:
+    #####:  256:  } else if (len > ptrs_.size()) {
+        -:  257:    //We need the vector to grow efficiently (not reallocate on each call)...
+    #####:  258:    ptrs_.resize((std::max)(len, CORBA::ULong(ptrs_.size()) * 2), 0);
+        -:  259:    //...but maintain the invariant that the size of ptrs_ is our length
+    #####:  260:    ptrs_.resize(len, 0);
+        -:  261:  }
+    #####:  262:}
+        -:  263:
+        -:  264:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  265:void
+    #####:  266:ZeroCopyDataSeq<Sample_T, DEF_MAX>::set_loaner(
+        -:  267:  OpenDDS::DCPS::DataReaderImpl* loaner)
+        -:  268:{
+    #####:  269:  loaner_ = loaner;
+    #####:  270:}
+        -:  271:
+        -:  272:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  273:void
+    #####:  274:ZeroCopyDataSeq<Sample_T, DEF_MAX>::assign_ptr(
+        -:  275:  CORBA::ULong ii,
+        -:  276:  OpenDDS::DCPS::ReceivedDataElement* item)
+        -:  277:{
+    #####:  278:  ACE_ASSERT(is_zero_copy());
+    #####:  279:  if (ptrs_[ii])
+    #####:  280:    ptrs_[ii]->dec_ref();
+        -:  281:
+    #####:  282:  item->inc_ref();
+    #####:  283:  ++item->zero_copy_cnt_;
+    #####:  284:  ptrs_[ii] = item;
+    #####:  285:}
+        -:  286:
+        -:  287:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  288:OpenDDS::DCPS::ReceivedDataElement*
+        -:  289:ZeroCopyDataSeq<Sample_T, DEF_MAX>::get_ptr(CORBA::ULong ii) const
+        -:  290:{
+        -:  291:  ACE_ASSERT(is_zero_copy());
+        -:  292:  return ptrs_[ii];
+        -:  293:}
+        -:  294:
+        -:  295:template <class Sample_T, size_t DEF_MAX> ACE_INLINE
+        -:  296:void
+    #####:  297:ZeroCopyDataSeq<Sample_T, DEF_MAX>::assign_sample(
+        -:  298:  CORBA::ULong ii, const Sample_T& sample)
+        -:  299:{
+    #####:  300:  ACE_ASSERT(!is_zero_copy());
+    #####:  301:  sc_buffer_[ii] = sample;
+    #####:  302:}
+        -:  303:
+        -:  304:} // namespace DCPS
+        -:  305:} // namespace TAO
+        -:  306:
+        -:  307:TAO_END_VERSIONED_NAMESPACE_DECL

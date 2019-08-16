@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Vector_T.cpp
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// $Id: Vector_T.cpp 2622 2015-08-13 18:30:00Z mitza $
         -:    2:
         -:    3:#ifndef ACE_VECTOR_T_CPP
@@ -33,19 +33,19 @@
     #####:   31:}
         -:   32:
         -:   33:template <class T, size_t DEFAULT_SIZE>
-        2:   34:void ACE_Vector<T, DEFAULT_SIZE>::push_back (const T& elem)
+        -:   34:void ACE_Vector<T, DEFAULT_SIZE>::push_back (const T& elem)
         -:   35:{
-        2:   36:  if (length_ == curr_max_size_)
+        -:   36:  if (length_ == curr_max_size_)
         -:   37:    {
-    #####:   38:      ACE_Array<T>::size (curr_max_size_ * 2);
-    #####:   39:      curr_max_size_ = this->max_size ();
+        -:   38:      ACE_Array<T>::size (curr_max_size_ * 2);
+        -:   39:      curr_max_size_ = this->max_size ();
         -:   40:    }
         -:   41:  else
-        2:   42:    ACE_Array<T>::size (length_ + 1);
+        -:   42:    ACE_Array<T>::size (length_ + 1);
         -:   43:
-        2:   44:  ++length_;
-        2:   45:  (*this)[length_-1] = elem;
-        2:   46:}
+        -:   44:  ++length_;
+        -:   45:  (*this)[length_-1] = elem;
+        -:   46:}
         -:   47:
         -:   48:template <class T, size_t DEFAULT_SIZE>
         -:   49:void ACE_Vector<T, DEFAULT_SIZE>::dump (void) const

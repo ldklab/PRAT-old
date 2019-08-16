@@ -1,97 +1,107 @@
         -:    0:Source:../dds/DCPS/MonitorFactory.h
-        -:    0:Programs:51
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-       64:   94:/*EOF*/
-       64:   95:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_MONITOR_FACTORY_BASE_H
+        -:    9:#define OPENDDS_DCPS_MONITOR_FACTORY_BASE_H
+        -:   10:
+        -:   11:#include "ace/Service_Object.h"
+        -:   12:#include "ace/Service_Config.h"
+        -:   13:#include "tao/corba.h"
+        -:   14:#include "dcps_export.h"
+        -:   15:#include "dds/DCPS/PublicationInstance.h"
+        -:   16:
+        -:   17:
+        -:   18:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   19:#pragma once
+        -:   20:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   21:
+        -:   22:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   23:
+        -:   24:namespace OpenDDS {
+        -:   25:namespace DCPS {
+        -:   26:
+        -:   27:class Service_Participant;
+        -:   28:class DomainParticipantImpl;
+        -:   29:class TopicImpl;
+        -:   30:class PublisherImpl;
+        -:   31:class SubscriberImpl;
+        -:   32:class DataWriterImpl;
+        -:   33:class DataReaderImpl;
+        -:   34:class TransportImpl;
+        -:   35:
+        -:   36:
+        -:   37:class Monitor {
+        -:   38:public:
+        -:   39:  Monitor() { }
+        -:   40:  virtual ~Monitor() { }
+        -:   41:  virtual void report() = 0;
+        -:   42:};
+        -:   43:
+        -:   44:/**
+        -:   45:* @class MonitorFactory
+        -:   46:*
+        -:   47:* @brief Null implementation of the MonitorFactory
+        -:   48:*
+        -:   49:* Full version of this library is implemented by the monitor lib.
+        -:   50:*/
+        -:   51:class OpenDDS_Dcps_Export MonitorFactory
+        -:   52:  : public ACE_Service_Object {
+        -:   53:public:
+        -:   54:  MonitorFactory();
+        -:   55:
+        -:   56:  virtual ~MonitorFactory();
+        -:   57:
+        -:   58:  /// Factory function to create a service participant monitor object
+        -:   59:  virtual Monitor* create_sp_monitor(Service_Participant* sp);
+        -:   60:
+        -:   61:  /// Factory function to create a domain participant monitor object
+        -:   62:  virtual Monitor* create_dp_monitor(DomainParticipantImpl* dp);
+        -:   63:
+        -:   64:  /// Factory function to create a topic monitor object
+        -:   65:  virtual Monitor* create_topic_monitor(TopicImpl* topic);
+        -:   66:
+        -:   67:  /// Factory function to create a publisher monitor object
+        -:   68:  virtual Monitor* create_publisher_monitor(PublisherImpl* publisher);
+        -:   69:
+        -:   70:  /// Factory function to create a subscriber monitor object
+        -:   71:  virtual Monitor* create_subscriber_monitor(SubscriberImpl* subscriber);
+        -:   72:
+        -:   73:  /// Factory function to create a data writer monitor object
+        -:   74:  virtual Monitor* create_data_writer_monitor(DataWriterImpl* dw);
+        -:   75:
+        -:   76:  /// Factory function to create a data writer periodic monitor object
+        -:   77:  virtual Monitor* create_data_writer_periodic_monitor(DataWriterImpl* dw);
+        -:   78:
+        -:   79:  /// Factory function to create a data reader monitor object
+        -:   80:  virtual Monitor* create_data_reader_monitor(DataReaderImpl* dr);
+        -:   81:
+        -:   82:  /// Factory function to create a data reader periodic monitor object
+        -:   83:  virtual Monitor* create_data_reader_periodic_monitor(DataReaderImpl* dr);
+        -:   84:
+        -:   85:  /// Factory function to create a transport monitor object
+        -:   86:  virtual Monitor* create_transport_monitor(TransportImpl* transport);
+        -:   87:
+        -:   88:  /// Initialize the monitor (required to report data)
+        -:   89:  virtual void initialize();
+        -:   90:
+        -:   91:  static int service_initialize();
+        -:   92:};
+        -:   93:
+       24:   94:static int OpenDDS_Requires_MonitorFactory_Initializer =
+       24:   95:  MonitorFactory::service_initialize();
+        -:   96:
+        -:   97:} // namespace DCPS
+        -:   98:} // namespace OpenDDS
+        -:   99:
+        -:  100:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  101:
+        -:  102:ACE_STATIC_SVC_DECLARE (MonitorFactory)
+        -:  103:ACE_FACTORY_DECLARE (OpenDDS_Dcps, MonitorFactory)
+        -:  104:
+        -:  105:#endif /* OPENDDS_DCPS_MONITOR_FACTORY_BASE_H */

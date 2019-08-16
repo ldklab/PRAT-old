@@ -1,22 +1,32 @@
         -:    0:Source:../dds/DCPS/Message_Block_Ptr.h
-        -:    0:Programs:51
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-    #####:   18:/*EOF*/
-    #####:   19:/*EOF*/
-    #####:   20:/*EOF*/
+        -:    0:Programs:72
+        -:    1:#ifndef MESSAGE_BLOCK_PTR_H_18C6F30C
+        -:    2:#define MESSAGE_BLOCK_PTR_H_18C6F30C
+        -:    3:
+        -:    4:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:    5:# pragma once
+        -:    6:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:    7:
+        -:    8:#include "unique_ptr.h"
+        -:    9:#include "ace/Message_Block.h"
+        -:   10:
+        -:   11:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   12:
+        -:   13:namespace OpenDDS {
+        -:   14:namespace DCPS {
+        -:   15:
+        -:   16:struct Message_Block_Deleter
+        -:   17:{
+      147:   18:  void operator()(ACE_Message_Block* ptr) const {
+      147:   19:    ACE_Message_Block::release(ptr);
+      147:   20:  }
+        -:   21:};
+        -:   22:
+        -:   23:typedef unique_ptr<ACE_Message_Block,Message_Block_Deleter> Message_Block_Ptr;
+        -:   24:
+        -:   25:} // namespace DCPS
+        -:   26:} // namespace OpenDDS
+        -:   27:
+        -:   28:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:   29:
+        -:   30:#endif // MESSAGE_BLOCK_PTR_H_18C6F30C

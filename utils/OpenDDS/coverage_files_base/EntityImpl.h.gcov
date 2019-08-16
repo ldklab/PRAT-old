@@ -1,62 +1,96 @@
-        -:    0:Source:DCPS/EntityImpl.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-    #####:   60:/*EOF*/
+        -:    0:Source:../dds/DCPS/EntityImpl.h
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_ENTITY_IMPL_H
+        -:    9:#define OPENDDS_DCPS_ENTITY_IMPL_H
+        -:   10:
+        -:   11:#include "dds/DdsDcpsInfrastructureC.h"
+        -:   12:#include "ace/Atomic_Op_T.h"
+        -:   13:#include "dds/DCPS/LocalObject.h"
+        -:   14:#include "Definitions.h"
+        -:   15:#include "dds/DCPS/transport/framework/TransportConfig_rch.h"
+        -:   16:
+        -:   17:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   18:#pragma once
+        -:   19:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   20:
+        -:   21:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   22:
+        -:   23:namespace OpenDDS {
+        -:   24:namespace DCPS {
+        -:   25:
+        -:   26:/**
+        -:   27:* @class EntityImpl
+        -:   28:*
+        -:   29:* @brief Implements the OpenDDS::DCPS::Entity
+        -:   30:*        interfaces.
+        -:   31:*
+        -:   32:* This class is the base class of other servant classes.
+        -:   33:* e.g. DomainParticipantImpl, PublisherImpl ...
+        -:   34:*/
+        -:   35:class OpenDDS_Dcps_Export EntityImpl
+        -:   36:  : public virtual LocalObject<DDS::Entity> {
+        -:   37:public:
+        -:   38:  EntityImpl();
+        -:   39:
+        -:   40:  virtual ~EntityImpl();
+        -:   41:
+        -:   42:  bool is_enabled() const;
+        -:   43:
+        -:   44:  virtual DDS::StatusCondition_ptr get_statuscondition();
+        -:   45:
+        -:   46:  virtual DDS::StatusMask get_status_changes();
+        -:   47:
+        -:   48:  virtual DDS::InstanceHandle_t get_instance_handle() = 0;
+        -:   49:
+        -:   50:  void set_status_changed_flag(DDS::StatusKind status,
+        -:   51:                               bool status_changed_flag);
+        -:   52:
+        -:   53:  /// Call this *after* dispatching to listeners when the "changed status
+        -:   54:  /// flag" is enabled so that any waiting waitsets can be unblocked.
+        -:   55:  void notify_status_condition();
+        -:   56:
+        -:   57:  virtual void transport_config(const TransportConfig_rch& cfg);
+        -:   58:  TransportConfig_rch transport_config() const;
+        -:   59:
+        9:   60:  virtual RcHandle<EntityImpl> parent() const { return RcHandle<EntityImpl>(); }
+        -:   61:
+        -:   62:protected:
+        -:   63:  DDS::ReturnCode_t set_enabled();
+        -:   64:
+        -:   65:  void set_deleted(bool state);
+        -:   66:
+        -:   67:  bool get_deleted();
+        -:   68:
+        -:   69:  /// The flag indicates the entity is enabled.
+        -:   70:  ACE_Atomic_Op<TAO_SYNCH_MUTEX, bool>       enabled_;
+        -:   71:
+        -:   72:  /// The flag indicates the entity is being deleted.
+        -:   73:  ACE_Atomic_Op<TAO_SYNCH_MUTEX, bool>       entity_deleted_;
+        -:   74:
+        -:   75:private:
+        -:   76:  /// The status_changes_ variable lists all status changed flag.
+        -:   77:  /// The StatusChangedFlag becomes TRUE whenever the plain communication
+        -:   78:  /// status changes and it is reset to FALSE each time the application
+        -:   79:  /// accesses the plain communication status via the proper
+        -:   80:  /// get_<plain communication status> operation on the Entity.
+        -:   81:  DDS::StatusMask status_changes_;
+        -:   82:  DDS::StatusCondition_var status_condition_;
+        -:   83:
+        -:   84:  TransportConfig_rch transport_config_;
+        -:   85:
+        -:   86:  mutable ACE_Thread_Mutex lock_;
+        -:   87:};
+        -:   88:
+        -:   89:} // namespace DCPS
+        -:   90:} // namespace OpenDDS
+        -:   91:
+        -:   92:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:   93:
+        -:   94:#endif /* OPENDDS_DCPS_ENTITY_IMPL_H */

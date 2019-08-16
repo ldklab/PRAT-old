@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Object_Reference_Traits_T.h
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:#ifndef guard_object_reference_traits_hpp
         -:    2:#define guard_object_reference_traits_hpp
         -:    3:/**
@@ -47,19 +47,19 @@
         -:   45:
         -:   46:  // Allow MSVC++ >= 8 checked iterators to be used.
         -:   47:  template <typename iter>
-        -:   48:  inline static void copy_range(
+    #####:   48:  inline static void copy_range(
         -:   49:      object_type ** begin, object_type ** end, iter dst)
         -:   50:  {
-        -:   51:    std::transform(begin, end, dst, &derived::duplicate);
-        -:   52:  }
+    #####:   51:    std::transform(begin, end, dst, &derived::duplicate);
+    #####:   52:  }
         -:   53:
         -:   54:  // Allow MSVC++ >= 8 checked iterators to be used.
         -:   55:  template <typename iter>
-    #####:   56:  inline static void copy_swap_range(
+        -:   56:  inline static void copy_swap_range(
         -:   57:      object_type ** begin, object_type ** end, iter dst)
         -:   58:  {
-    #####:   59:    std::swap_ranges(begin, end, dst);
-    #####:   60:  }
+        -:   59:    std::swap_ranges(begin, end, dst);
+        -:   60:  }
         -:   61:
     #####:   62:  inline static void release_range(
         -:   63:      object_type ** begin, object_type ** end)

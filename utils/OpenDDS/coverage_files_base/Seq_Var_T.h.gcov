@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Seq_Var_T.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2:
         -:    3://=============================================================================
@@ -77,7 +77,7 @@
         -:   75: * whose element is of fixed size..
         -:   76: */
         -:   77:template <typename T>
-    #####:   78:class TAO_FixedSeq_Var_T : public TAO_Seq_Var_Base_T<T>
+      162:   78:class TAO_FixedSeq_Var_T : public TAO_Seq_Var_Base_T<T>
         -:   79:{
         -:   80:public:
         -:   81:  typedef typename T::subscript_type T_elem;

@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/bits/basic_string.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Components for manipulating sequences of characters -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 1997-2017 Free Software Foundation, Inc.
@@ -5924,12 +5924,12 @@
         -: 5922:   */
         -: 5923:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5924:    inline basic_string<_CharT, _Traits, _Alloc>
-        -: 5925:    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+    #####: 5925:    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
         -: 5926:	      const _CharT* __rhs)
         -: 5927:    {
-        -: 5928:      basic_string<_CharT, _Traits, _Alloc> __str(__lhs);
-        -: 5929:      __str.append(__rhs);
-        -: 5930:      return __str;
+    #####: 5928:      basic_string<_CharT, _Traits, _Alloc> __str(__lhs);
+    #####: 5929:      __str.append(__rhs);
+    #####: 5930:      return __str;
         -: 5931:    }
         -: 5932:
         -: 5933:  /**
@@ -5952,9 +5952,9 @@
         -: 5950:#if __cplusplus >= 201103L
         -: 5951:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5952:    inline basic_string<_CharT, _Traits, _Alloc>
-    #####: 5953:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+        -: 5953:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
         -: 5954:	      const basic_string<_CharT, _Traits, _Alloc>& __rhs)
-    #####: 5955:    { return std::move(__lhs.append(__rhs)); }
+        -: 5955:    { return std::move(__lhs.append(__rhs)); }
         -: 5956:
         -: 5957:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5958:    inline basic_string<_CharT, _Traits, _Alloc>
@@ -5964,21 +5964,21 @@
         -: 5962:
         -: 5963:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5964:    inline basic_string<_CharT, _Traits, _Alloc>
-    #####: 5965:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+       24: 5965:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
         -: 5966:	      basic_string<_CharT, _Traits, _Alloc>&& __rhs)
         -: 5967:    {
-    #####: 5968:      const auto __size = __lhs.size() + __rhs.size();
-    #####: 5969:      const bool __cond = (__size > __lhs.capacity()
-    #####: 5970:			   && __size <= __rhs.capacity());
+       24: 5968:      const auto __size = __lhs.size() + __rhs.size();
+       48: 5969:      const bool __cond = (__size > __lhs.capacity()
+       24: 5970:			   && __size <= __rhs.capacity());
     #####: 5971:      return __cond ? std::move(__rhs.insert(0, __lhs))
-    #####: 5972:	            : std::move(__lhs.append(__rhs));
+       24: 5972:	            : std::move(__lhs.append(__rhs));
         -: 5973:    }
         -: 5974:
         -: 5975:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5976:    inline basic_string<_CharT, _Traits, _Alloc>
-    #####: 5977:    operator+(const _CharT* __lhs,
+       15: 5977:    operator+(const _CharT* __lhs,
         -: 5978:	      basic_string<_CharT, _Traits, _Alloc>&& __rhs)
-    #####: 5979:    { return std::move(__rhs.insert(0, __lhs)); }
+       15: 5979:    { return std::move(__rhs.insert(0, __lhs)); }
         -: 5980:
         -: 5981:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5982:    inline basic_string<_CharT, _Traits, _Alloc>
@@ -5994,9 +5994,9 @@
         -: 5992:
         -: 5993:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5994:    inline basic_string<_CharT, _Traits, _Alloc>
-    #####: 5995:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+        -: 5995:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
         -: 5996:	      _CharT __rhs)
-    #####: 5997:    { return std::move(__lhs.append(1, __rhs)); }
+        -: 5997:    { return std::move(__lhs.append(1, __rhs)); }
         -: 5998:#endif
         -: 5999:
         -: 6000:  // operator ==
@@ -6030,9 +6030,9 @@
         -: 6028:   */
         -: 6029:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 6030:    inline bool
-       12: 6031:    operator==(const _CharT* __lhs,
+        -: 6031:    operator==(const _CharT* __lhs,
         -: 6032:	       const basic_string<_CharT, _Traits, _Alloc>& __rhs)
-       12: 6033:    { return __rhs.compare(__lhs) == 0; }
+        -: 6033:    { return __rhs.compare(__lhs) == 0; }
         -: 6034:
         -: 6035:  /**
         -: 6036:   *  @brief  Test equivalence of string and C string.
@@ -6042,9 +6042,9 @@
         -: 6040:   */
         -: 6041:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 6042:    inline bool
-    #####: 6043:    operator==(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+        -: 6043:    operator==(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
         -: 6044:	       const _CharT* __rhs)
-    #####: 6045:    { return __lhs.compare(__rhs) == 0; }
+        -: 6045:    { return __lhs.compare(__rhs) == 0; }
         -: 6046:
         -: 6047:  // operator !=
         -: 6048:  /**
@@ -6080,9 +6080,9 @@
         -: 6078:   */
         -: 6079:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 6080:    inline bool
-    #####: 6081:    operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+        -: 6081:    operator!=(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
         -: 6082:	       const _CharT* __rhs)
-    #####: 6083:    { return !(__lhs == __rhs); }
+        -: 6083:    { return !(__lhs == __rhs); }
         -: 6084:
         -: 6085:  // operator <
         -: 6086:  /**
@@ -6093,10 +6093,10 @@
         -: 6091:   */
         -: 6092:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 6093:    inline bool
-    #####: 6094:    operator<(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     1470: 6094:    operator<(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
         -: 6095:	      const basic_string<_CharT, _Traits, _Alloc>& __rhs)
         -: 6096:    _GLIBCXX_NOEXCEPT
-    #####: 6097:    { return __lhs.compare(__rhs) < 0; }
+     1470: 6097:    { return __lhs.compare(__rhs) < 0; }
         -: 6098:
         -: 6099:  /**
         -: 6100:   *  @brief  Test if string precedes C string.

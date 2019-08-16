@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/OS_NS_Thread.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: OS_NS_Thread.inl 2793 2015-11-30 23:09:18Z mitza $
@@ -111,14 +111,14 @@
         -:  109:/*****************************************************************************/
         -:  110:
         -:  111:ACE_INLINE int
-    #####:  112:ACE_OS::thr_equal (ACE_thread_t t1, ACE_thread_t t2)
+        -:  112:ACE_OS::thr_equal (ACE_thread_t t1, ACE_thread_t t2)
         -:  113:{
         -:  114:#if defined (ACE_HAS_PTHREADS)
         -:  115:# if defined (pthread_equal)
         -:  116:  // If it's a macro we can't say "pthread_equal"...
         -:  117:  return pthread_equal (t1, t2);
         -:  118:# else
-    #####:  119:  return pthread_equal (t1, t2);
+        -:  119:  return pthread_equal (t1, t2);
         -:  120:# endif /* pthread_equal */
         -:  121:#else /* For both STHREADS and WTHREADS... */
         -:  122:  // Hum, Do we need to treat WTHREAD differently?
@@ -817,11 +817,11 @@
         -:  815:}
         -:  816:
         -:  817:ACE_INLINE int
-    #####:  818:ACE_OS::recursive_mutex_lock (ACE_recursive_thread_mutex_t *m)
+    33498:  818:ACE_OS::recursive_mutex_lock (ACE_recursive_thread_mutex_t *m)
         -:  819:{
         -:  820:#if defined (ACE_HAS_THREADS)
         -:  821:#if defined (ACE_HAS_RECURSIVE_MUTEXES)
-    #####:  822:  return ACE_OS::thread_mutex_lock (m);
+    33498:  822:  return ACE_OS::thread_mutex_lock (m);
         -:  823:#else
         -:  824:  ACE_thread_t const t_id = ACE_OS::thr_self ();
         -:  825:  int result = 0;
@@ -987,11 +987,11 @@
         -:  985:}
         -:  986:
         -:  987:ACE_INLINE int
-    #####:  988:ACE_OS::recursive_mutex_unlock (ACE_recursive_thread_mutex_t *m)
+    33498:  988:ACE_OS::recursive_mutex_unlock (ACE_recursive_thread_mutex_t *m)
         -:  989:{
         -:  990:#if defined (ACE_HAS_THREADS)
         -:  991:#  if defined (ACE_HAS_RECURSIVE_MUTEXES)
-    #####:  992:  return ACE_OS::thread_mutex_unlock (m);
+    33498:  992:  return ACE_OS::thread_mutex_unlock (m);
         -:  993:#  else
         -:  994:  ACE_OS_TRACE ("ACE_OS::recursive_mutex_unlock");
         -:  995:#    if !defined (ACE_NDEBUG)
@@ -3176,13 +3176,13 @@
         -: 3174:}
         -: 3175:
         -: 3176:ACE_INLINE ACE_thread_t
-    #####: 3177:ACE_OS::thr_self (void)
+        -: 3177:ACE_OS::thr_self (void)
         -: 3178:{
         -: 3179:  // ACE_OS_TRACE ("ACE_OS::thr_self");
         -: 3180:#if defined (ACE_HAS_THREADS)
         -: 3181:# if defined (ACE_HAS_PTHREADS)
         -: 3182:  // Note, don't use "::" here since the following call is often a macro.
-    #####: 3183:  return pthread_self ();
+        -: 3183:  return pthread_self ();
         -: 3184:# elif defined (ACE_HAS_STHREADS)
         -: 3185:  ACE_OSCALL_RETURN (::thr_self (), int, -1);
         -: 3186:# elif defined (ACE_HAS_WTHREADS)
@@ -3425,7 +3425,7 @@
         -: 3423:}
         -: 3424:
         -: 3425:ACE_INLINE int
-    #####: 3426:ACE_OS::thr_sigsetmask (int how,
+        -: 3426:ACE_OS::thr_sigsetmask (int how,
         -: 3427:                        const sigset_t *nsm,
         -: 3428:                        sigset_t *osm)
         -: 3429:{
@@ -3458,7 +3458,7 @@
         -: 3456:                     int,
         -: 3457:                     -1);
         -: 3458:#    else
-    #####: 3459:  ACE_OSCALL_RETURN (ACE_ADAPT_RETVAL (::pthread_sigmask (how, nsm, osm),
+        -: 3459:  ACE_OSCALL_RETURN (ACE_ADAPT_RETVAL (::pthread_sigmask (how, nsm, osm),
         -: 3460:                                       result),
         -: 3461:                     int,
         -: 3462:                     -1);
@@ -3591,7 +3591,7 @@
         -: 3589:}
         -: 3590:
         -: 3591:ACE_INLINE int
-    #####: 3592:ACE_OS::thread_mutex_destroy (ACE_thread_mutex_t *m)
+        -: 3592:ACE_OS::thread_mutex_destroy (ACE_thread_mutex_t *m)
         -: 3593:{
         -: 3594:  ACE_OS_TRACE ("ACE_OS::thread_mutex_destroy");
         -: 3595:#if defined (ACE_HAS_THREADS)
@@ -3599,7 +3599,7 @@
         -: 3597:  ::DeleteCriticalSection (m);
         -: 3598:  return 0;
         -: 3599:# else
-    #####: 3600:  return ACE_OS::mutex_destroy (m);
+        -: 3600:  return ACE_OS::mutex_destroy (m);
         -: 3601:# endif /* ACE_HAS_WTHREADS */
         -: 3602:#else
         -: 3603:  ACE_UNUSED_ARG (m);

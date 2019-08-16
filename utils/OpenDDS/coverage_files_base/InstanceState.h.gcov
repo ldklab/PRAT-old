@@ -1,134 +1,227 @@
-        -:    0:Source:DCPS/InstanceState.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-        -:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-        -:   98:/*EOF*/
-        -:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-        -:  103:/*EOF*/
-        -:  104:/*EOF*/
-        -:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-        -:  108:/*EOF*/
-        -:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-        -:  112:/*EOF*/
-        -:  113:/*EOF*/
-        -:  114:/*EOF*/
-        -:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-        -:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-        -:  125:/*EOF*/
-        -:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-        -:  131:/*EOF*/
-    #####:  132:/*EOF*/
+        -:    0:Source:../dds/DCPS/InstanceState.h
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_INSTANCESTATE_H
+        -:    9:#define OPENDDS_DCPS_INSTANCESTATE_H
+        -:   10:
+        -:   11:#include "dcps_export.h"
+        -:   12:#include "ace/Time_Value.h"
+        -:   13:#include "dds/DdsDcpsInfrastructureC.h"
+        -:   14:#include "dds/DCPS/Definitions.h"
+        -:   15:#include "dds/DCPS/GuidUtils.h"
+        -:   16:#include "dds/DCPS/PoolAllocator.h"
+        -:   17:#include "dds/DCPS/RepoIdTypes.h"
+        -:   18:
+        -:   19:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   20:#pragma once
+        -:   21:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   22:
+        -:   23:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   24:
+        -:   25:namespace OpenDDS {
+        -:   26:namespace DCPS {
+        -:   27:
+        -:   28:class DataReaderImpl;
+        -:   29:class ReceivedDataElement;
+        -:   30:
+        -:   31:/**
+        -:   32: * @class InstanceState
+        -:   33: *
+        -:   34: * @brief manage the states of a received data instance.
+        -:   35: *
+        -:   36: * Provide a mechanism to manage the view state and instance
+        -:   37: * state values for an instance contained within a DataReader.
+        -:   38: * The instance_state and view_state are managed by this class.
+        -:   39: * Accessors are provided to query the current value of each of
+        -:   40: * these states.
+        -:   41: */
+        -:   42:class OpenDDS_Dcps_Export InstanceState : public ACE_Event_Handler {
+        -:   43:public:
+        -:   44:  InstanceState(DataReaderImpl* reader,
+        -:   45:                ACE_Recursive_Thread_Mutex& lock,
+        -:   46:                DDS::InstanceHandle_t handle);
+        -:   47:
+        -:   48:  virtual ~InstanceState();
+        -:   49:
+        -:   50:  /// Populate the SampleInfo structure
+        -:   51:  void sample_info(DDS::SampleInfo& si,
+        -:   52:                   const ReceivedDataElement* de);
+        -:   53:
+        -:   54:  /// Access instance state.
+        -:   55:  DDS::InstanceStateKind instance_state() const;
+        -:   56:
+        -:   57:  /// Access view state.
+        -:   58:  DDS::ViewStateKind view_state() const;
+        -:   59:
+        -:   60:  /// Access disposed generation count
+        -:   61:  size_t disposed_generation_count() const;
+        -:   62:
+        -:   63:  /// Access no writers generation count
+        -:   64:  size_t no_writers_generation_count() const;
+        -:   65:
+        -:   66:  /// DISPOSE message received for this instance.
+        -:   67:  /// Return flag indicates whether the instance state was changed.
+        -:   68:  /// This flag is used by concrete DataReader to determine whether
+        -:   69:  /// it should notify listener. If state is not changed, the dispose
+        -:   70:  /// message is ignored.
+        -:   71:  bool dispose_was_received(const PublicationId& writer_id);
+        -:   72:
+        -:   73:  /// UNREGISTER message received for this instance.
+        -:   74:  /// Return flag indicates whether the instance state was changed.
+        -:   75:  /// This flag is used by concrete DataReader to determine whether
+        -:   76:  /// it should notify listener. If state is not changed, the unregister
+        -:   77:  /// message is ignored.
+        -:   78:  bool unregister_was_received(const PublicationId& writer_id);
+        -:   79:
+        -:   80:  /// Data sample received for this instance.
+        -:   81:  void data_was_received(const PublicationId& writer_id);
+        -:   82:
+        -:   83:  /// LIVELINESS message received for this DataWriter.
+        -:   84:  void lively(const PublicationId& writer_id);
+        -:   85:
+        -:   86:  /// A read or take operation has been performed on this instance.
+        -:   87:  void accessed();
+        -:   88:
+        -:   89:  bool most_recent_generation(ReceivedDataElement* item) const;
+        -:   90:
+        -:   91:  /// DataReader has become empty.  Returns true if the instance was released.
+        -:   92:  bool empty(bool value);
+        -:   93:
+        -:   94:  /// Schedule a pending release of resources.
+        -:   95:  void schedule_pending();
+        -:   96:
+        -:   97:  /// Schedule an immediate release of resources.
+        -:   98:  void schedule_release();
+        -:   99:
+        -:  100:  /// Cancel a scheduled or pending release of resources.
+        -:  101:  void cancel_release();
+        -:  102:
+        -:  103:  /// Remove the instance if it's instance has no samples
+        -:  104:  /// and no writers.
+        -:  105:  /// Returns true if the instance was released.
+        -:  106:  bool release_if_empty();
+        -:  107:
+        -:  108:  /// Remove the instance immediately.
+        -:  109:  void release();
+        -:  110:
+        -:  111:  /// tell this instance when a DataWriter transitions to NOT_ALIVE
+        -:  112:  void writer_became_dead(const PublicationId& writer_id,
+        -:  113:                          int num_alive_writers,
+        -:  114:                          const ACE_Time_Value& when);
+        -:  115:
+        -:  116:  DataReaderImpl* data_reader() const;
+        -:  117:
+        -:  118:  virtual int handle_timeout(const ACE_Time_Value& current_time,
+        -:  119:                             const void* arg);
+        -:  120:
+        -:  121:  void set_owner (const PublicationId& owner);
+        -:  122:  PublicationId& get_owner ();
+        -:  123:  bool is_exclusive () const;
+        -:  124:  bool registered();
+        -:  125:  void registered (bool flag);
+        -:  126:  bool is_last (const PublicationId& pub);
+        -:  127:
+        -:  128:  bool no_writer () const;
+        -:  129:
+        -:  130:  void reset_ownership (DDS::InstanceHandle_t instance);
+        -:  131:
+        -:  132:  DDS::InstanceHandle_t instance_handle() const { return handle_; }
+        -:  133:
+        -:  134:  /// Return string of the name of the current instance state
+    #####:  135:  OPENDDS_STRING instance_state_string() const
+        -:  136:  {
+    #####:  137:    return instance_state_string(instance_state_);
+        -:  138:  }
+        -:  139:
+        -:  140:  /// Return string of the name of the instance state kind or mask passed
+        -:  141:  static OPENDDS_STRING instance_state_string(DDS::InstanceStateKind value);
+        -:  142:
+        -:  143:private:
+        -:  144:  ACE_Recursive_Thread_Mutex& lock_;
+        -:  145:
+        -:  146:  /**
+        -:  147:   * Current instance state.
+        -:  148:   *
+        -:  149:   * Can have values defined as:
+        -:  150:   *
+        -:  151:   *   DDS::ALIVE_INSTANCE_STATE
+        -:  152:   *   DDS::NOT_ALIVE_DISPOSED_INSTANCE_STATE
+        -:  153:   *   DDS::NOT_ALIVE_NO_WRITERS_INSTANCE_STATE
+        -:  154:   *
+        -:  155:   * and can be checked with the masks:
+        -:  156:   *
+        -:  157:   *   DDS::ANY_INSTANCE_STATE
+        -:  158:   *   DDS::NOT_ALIVE_INSTANCE_STATE
+        -:  159:   */
+        -:  160:  DDS::InstanceStateKind instance_state_;
+        -:  161:
+        -:  162:  /**
+        -:  163:   * Current instance view state.
+        -:  164:   *
+        -:  165:   * Can have values defined as:
+        -:  166:   *
+        -:  167:   *   DDS::NEW_VIEW_STATE
+        -:  168:   *   DDS::NOT_NEW_VIEW_STATE
+        -:  169:   *
+        -:  170:   * and can be checked with the mask:
+        -:  171:   *
+        -:  172:   *   DDS::ANY_VIEW_STATE
+        -:  173:   */
+        -:  174:  DDS::ViewStateKind view_state_;
+        -:  175:
+        -:  176:  /// Number of times the instance state changes
+        -:  177:  /// from NOT_ALIVE_DISPOSED to ALIVE.
+        -:  178:  size_t disposed_generation_count_;
+        -:  179:
+        -:  180:  /// Number of times the instance state changes
+        -:  181:  /// from NOT_ALIVE_NO_WRITERS to ALIVE.
+        -:  182:  size_t no_writers_generation_count_;
+        -:  183:
+        -:  184:  /**
+        -:  185:   * Keep track of whether the DataReader is empty or not.
+        -:  186:   */
+        -:  187:  bool empty_;
+        -:  188:
+        -:  189:  /**
+        -:  190:   * Keep track of whether the instance is waiting to be released.
+        -:  191:   */
+        -:  192:  bool release_pending_;
+        -:  193:
+        -:  194:  /**
+        -:  195:   * Keep track of a scheduled release timer.
+        -:  196:   */
+        -:  197:  long release_timer_id_;
+        -:  198:
+        -:  199:  /**
+        -:  200:   * Reference to our containing reader.  This is used to call back
+        -:  201:   * and notify the reader that liveliness has been lost on this
+        -:  202:   * instance.  It is also queried to determine if the DataReader is
+        -:  203:   * empty -- that it contains no more sample data.
+        -:  204:   */
+        -:  205:  DataReaderImpl* reader_;
+        -:  206:  DDS::InstanceHandle_t handle_;
+        -:  207:
+        -:  208:  RepoIdSet writers_;
+        -:  209:  PublicationId owner_;
+        -:  210:  bool exclusive_;
+        -:  211:  /// registered with participant so it can be called back as
+        -:  212:  /// the owner is updated.
+        -:  213:  bool registered_;
+        -:  214:};
+        -:  215:
+        -:  216:} // namespace DCPS
+        -:  217:} // namespace OpenDDS
+        -:  218:
+        -:  219:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  220:
+        -:  221:#if defined (__ACE_INLINE__)
+        -:  222:# include "InstanceState.inl"
+        -:  223:#endif  /* __ACE_INLINE__ */
+        -:  224:
+        -:  225:#endif /* OPENDDS_DCPS_INSTANCESTATE_H */

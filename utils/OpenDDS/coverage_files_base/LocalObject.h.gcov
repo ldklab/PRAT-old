@@ -1,46 +1,63 @@
         -:    0:Source:../dds/DCPS/LocalObject.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-    #####:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-    #####:   31:/*EOF*/
-    #####:   32:/*EOF*/
-    #####:   33:/*EOF*/
-    #####:   34:/*EOF*/
-    #####:   35:/*EOF*/
-    #####:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-      139:   44:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_LOCALOBJECT_H
+        -:    9:#define OPENDDS_DCPS_LOCALOBJECT_H
+        -:   10:
+        -:   11:#include "tao/LocalObject.h"
+        -:   12:#include "tao/Version.h"
+        -:   13:#include "dds/DCPS/PoolAllocationBase.h"
+        -:   14:#include "dds/DCPS/RcObject.h"
+        -:   15:
+        -:   16:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   17:
+        -:   18:namespace OpenDDS {
+        -:   19:namespace DCPS {
+        -:   20:
+        -:   21:// support TAO-style _ptr and _var
+        -:   22:typedef CORBA::LocalObject_ptr LocalObject_ptr;
+        -:   23:typedef CORBA::LocalObject_var LocalObject_var;
+        -:   24:
+        -:   25:
+      300:   26:class LocalObjectBase
+        -:   27:  : public virtual CORBA::LocalObject
+        -:   28:  , public virtual RcObject
+        -:   29:{
+        -:   30:public:
+     1215:   31:  virtual void _add_ref() {
+     1215:   32:    RcObject::_add_ref();
+     1215:   33:  }
+     1371:   34:  virtual void _remove_ref() {
+     1371:   35:    RcObject::_remove_ref();
+     1371:   36:  }
+        -:   37:};
+        -:   38:
+        -:   39:/// OpenDDS::DCPS::LocalObject resolves ambigously-inherited members like
+        -:   40:/// _narrow and _ptr_type.  It is used from client code like so:
+        -:   41:/// class MyReaderListener
+        -:   42:///   : public OpenDDS::DCPS::LocalObject<OpenDDS::DCPS::DataReaderListener> {...};
+        -:   43:template <class Stub>
+      186:   44:class LocalObject
+        -:   45:  : public virtual Stub
+        -:   46:  , public virtual LocalObjectBase
+        -:   47:{
+        -:   48:public:
+        -:   49:  typedef typename Stub::_ptr_type _ptr_type;
+        -:   50:  typedef typename Stub::_var_type _var_type;
+        -:   51:  static _ptr_type _narrow(CORBA::Object_ptr obj) {
+        -:   52:    return Stub::_narrow(obj);
+        -:   53:  }
+        -:   54:};
+        -:   55:
+        -:   56:} // namespace DCPS
+        -:   57:} // namespace OpenDDS
+        -:   58:
+        -:   59:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:   60:
+        -:   61:#endif /* OPENDDS_DCPS_LOCALOBJECT_H */

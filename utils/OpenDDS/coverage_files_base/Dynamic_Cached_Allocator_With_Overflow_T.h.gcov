@@ -1,214 +1,247 @@
         -:    0:Source:../dds/DCPS/Dynamic_Cached_Allocator_With_Overflow_T.h
-        -:    0:Programs:24
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-    #####:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-    #####:   53:/*EOF*/
-        -:   54:/*EOF*/
-    #####:   55:/*EOF*/
-    #####:   56:/*EOF*/
-        -:   57:/*EOF*/
-    #####:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-    #####:   62:/*EOF*/
-    #####:   63:/*EOF*/
-        -:   64:/*EOF*/
-    #####:   65:/*EOF*/
-        -:   66:/*EOF*/
-    #####:   67:/*EOF*/
-        -:   68:/*EOF*/
-    #####:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-    #####:   72:/*EOF*/
-    #####:   73:/*EOF*/
-    #####:   74:/*EOF*/
-    #####:   75:/*EOF*/
-    #####:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-    #####:   84:/*EOF*/
-        -:   85:/*EOF*/
-    #####:   86:/*EOF*/
-    #####:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-    #####:   91:/*EOF*/
-        -:   92:/*EOF*/
-    #####:   93:/*EOF*/
-    #####:   94:/*EOF*/
-    #####:   95:/*EOF*/
-        -:   96:/*EOF*/
-    #####:   97:/*EOF*/
-    #####:   98:/*EOF*/
-    #####:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-        -:  103:/*EOF*/
-        -:  104:/*EOF*/
-    #####:  105:/*EOF*/
-    #####:  106:/*EOF*/
-    #####:  107:/*EOF*/
-        -:  108:/*EOF*/
-        -:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-        -:  112:/*EOF*/
-        -:  113:/*EOF*/
-        -:  114:/*EOF*/
-    #####:  115:/*EOF*/
-        -:  116:/*EOF*/
-    #####:  117:/*EOF*/
-    #####:  118:/*EOF*/
-    #####:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-        -:  125:/*EOF*/
-        -:  126:/*EOF*/
-    #####:  127:/*EOF*/
-        -:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-        -:  131:/*EOF*/
-        -:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-        -:  135:/*EOF*/
-    #####:  136:/*EOF*/
-        -:  137:/*EOF*/
-    #####:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-    #####:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-    #####:  146:/*EOF*/
-        -:  147:/*EOF*/
-        -:  148:/*EOF*/
-        -:  149:/*EOF*/
-    #####:  150:/*EOF*/
-    #####:  151:/*EOF*/
-    #####:  152:/*EOF*/
-    #####:  153:/*EOF*/
-    #####:  154:/*EOF*/
-    #####:  155:/*EOF*/
-        -:  156:/*EOF*/
-    #####:  157:/*EOF*/
-    #####:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-        -:  165:/*EOF*/
-    #####:  166:/*EOF*/
-    #####:  167:/*EOF*/
-    #####:  168:/*EOF*/
-        -:  169:/*EOF*/
-        -:  170:/*EOF*/
-        -:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-        -:  174:/*EOF*/
-        -:  175:/*EOF*/
-    #####:  176:/*EOF*/
-        -:  177:/*EOF*/
-    #####:  178:/*EOF*/
-    #####:  179:/*EOF*/
-        -:  180:/*EOF*/
-    #####:  181:/*EOF*/
-    #####:  182:/*EOF*/
-        -:  183:/*EOF*/
-        -:  184:/*EOF*/
-        -:  185:/*EOF*/
-        -:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-    #####:  190:/*EOF*/
-        -:  191:/*EOF*/
-    #####:  192:/*EOF*/
-    #####:  193:/*EOF*/
-    #####:  194:/*EOF*/
-        -:  195:/*EOF*/
-        -:  196:/*EOF*/
-        -:  197:/*EOF*/
-        -:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-        -:  201:/*EOF*/
-        -:  202:/*EOF*/
-        -:  203:/*EOF*/
-        -:  204:/*EOF*/
-        -:  205:/*EOF*/
-        -:  206:/*EOF*/
-        -:  207:/*EOF*/
-        -:  208:/*EOF*/
-        -:  209:/*EOF*/
-        -:  210:/*EOF*/
-    #####:  211:/*EOF*/
-    #####:  212:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef DYNAMIC_CACHED_ALLOCATOR_WITH_OVERFLOW_T_H
+        -:    9:#define DYNAMIC_CACHED_ALLOCATOR_WITH_OVERFLOW_T_H
+        -:   10:
+        -:   11:#include "debug.h"
+        -:   12:#include "ace/Malloc_Allocator.h"
+        -:   13:#include "ace/Malloc_T.h"
+        -:   14:#include "ace/Free_List.h"
+        -:   15:#include "ace/Guard_T.h"
+        -:   16:
+        -:   17:#include "PoolAllocationBase.h"
+        -:   18:
+        -:   19:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   20:# pragma once
+        -:   21:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   22:
+        -:   23:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   24:
+        -:   25:namespace OpenDDS {
+        -:   26:namespace DCPS {
+        -:   27:
+        -:   28:/**
+        -:   29:* @class Dynamic_Cached_Allocator_With_Overflow
+        -:   30:*
+        -:   31:* @brief A size-based allocator that caches blocks for quicker access,
+        -:   32:*        but if the pool is exhausted it will use the heap.
+        -:   33:*
+        -:   34:* This class enables caching of dynamically allocated,
+        -:   35:* fixed-size chunks.  Notice that the <code>chunk_size</code>
+        -:   36:* must be greater than or equal to <code> sizeof (void*) </code> for
+        -:   37:* this to work properly.
+        -:   38:*
+        -:   39:* This class can be configured flexibly with different types of
+        -:   40:* ACE_LOCK strategies that support the @a ACE_Thread_Mutex and @a
+        -:   41:* ACE_Process_Mutex constructor API.
+        -:   42:*/
+        -:   43:template <class ACE_LOCK>
+        -:   44:class Dynamic_Cached_Allocator_With_Overflow : public ACE_New_Allocator, public PoolAllocationBase {
+        -:   45:public:
+        -:   46:  /// Create a cached memory pool with @a n_chunks chunks
+        -:   47:  /// each with @a chunk_size size.
+    #####:   48:  Dynamic_Cached_Allocator_With_Overflow(size_t n_chunks, size_t chunk_size)
+        -:   49:  : allocs_from_heap_(0),
+        -:   50:    allocs_from_pool_(0),
+        -:   51:    frees_to_heap_(0),
+        -:   52:    frees_to_pool_(0),
+    #####:   53:    free_list_(ACE_PURE_FREE_LIST)
+        -:   54:  {
+    #####:   55:    chunk_size_ = ACE_MALLOC_ROUNDUP(chunk_size, ACE_MALLOC_ALIGN);
+    #####:   56:    begin_ = static_cast<unsigned char*> (ACE_Allocator::instance()->malloc(n_chunks * chunk_size_));
+        -:   57:    // Remember end of the pool.
+    #####:   58:    end_ = begin_ + n_chunks * chunk_size_;
+        -:   59:
+        -:   60:    // Put into free list using placement contructor, no real memory
+        -:   61:    // allocation in the <new> below.
+    #####:   62:    for (size_t c = 0;
+    #####:   63:         c < n_chunks;
+        -:   64:         c++) {
+    #####:   65:      void* placement = begin_ + c * chunk_size_;
+        -:   66:
+    #####:   67:      this->free_list_.add(new(placement) ACE_Cached_Mem_Pool_Node<char>);
+        -:   68:    }
+    #####:   69:  }
+        -:   70:
+        -:   71:  /// Clear things up.
+    #####:   72:  ~Dynamic_Cached_Allocator_With_Overflow() {
+    #####:   73:    ACE_Allocator::instance()->free(begin_);
+    #####:   74:    begin_ = 0;
+    #####:   75:    chunk_size_ = 0;
+    #####:   76:  }
+        -:   77:
+        -:   78:  /**
+        -:   79:  * Get a chunk of memory from free list cache.  Note that @a nbytes is
+        -:   80:  * only checked to make sure that it's less or equal to @a chunk_size,
+        -:   81:  * and is otherwise ignored since malloc() always returns a pointer to an
+        -:   82:  * item of @a chunk_size size.
+        -:   83:  */
+    #####:   84:  void *malloc(size_t nbytes = 0) {
+        -:   85:    // Check if size requested fits within pre-determined size.
+    #####:   86:    if (nbytes > chunk_size_)
+    #####:   87:      return 0;
+        -:   88:
+        -:   89:    // addr() call is really not absolutely necessary because of the way
+        -:   90:    // ACE_Cached_Mem_Pool_Node's internal structure arranged.
+    #####:   91:    void* rtn = this->free_list_.remove()->addr();
+        -:   92:
+    #####:   93:    if (0 == rtn) {
+    #####:   94:      rtn = ACE_Allocator::instance()->malloc(chunk_size_);
+    #####:   95:      allocs_from_heap_++;
+        -:   96:
+    #####:   97:      if (DCPS_debug_level >= 2) {
+    #####:   98:        if (allocs_from_heap_ == 1 && DCPS_debug_level >= 2)
+    #####:   99:          ACE_DEBUG((LM_DEBUG,
+        -:  100:                     "(%P|%t) Dynamic_Cached_Allocator_With_Overflow::malloc %x"
+        -:  101:                     " %d heap allocs with %d outstanding\n",
+        -:  102:                     this, this->allocs_from_heap_.value(),
+        -:  103:                     this->allocs_from_heap_.value() - this->frees_to_heap_.value()));
+        -:  104:
+    #####:  105:        if (DCPS_debug_level >= 6)
+    #####:  106:          if (allocs_from_heap_.value() % 500 == 0)
+    #####:  107:            ACE_DEBUG((LM_DEBUG,
+        -:  108:                       "(%P|%t) Dynamic_Cached_Allocator_With_Overflow::malloc %@"
+        -:  109:                       " %Lu heap allocs with %Lu outstanding\n",
+        -:  110:                       this, this->allocs_from_heap_.value(),
+        -:  111:                       this->allocs_from_heap_.value() - this->frees_to_heap_.value()));
+        -:  112:      }
+        -:  113:
+        -:  114:    } else {
+    #####:  115:      allocs_from_pool_++;
+        -:  116:
+    #####:  117:      if (DCPS_debug_level >= 6)
+    #####:  118:        if (allocs_from_pool_.value() % 500 == 0)
+    #####:  119:          ACE_DEBUG((LM_DEBUG,
+        -:  120:                     "(%P|%t) Dynamic_Cached_Allocator_With_Overflow::malloc %x"
+        -:  121:                     " %d pool allocs %d pool free with %d available\n",
+        -:  122:                     this, this->allocs_from_pool_.value(),
+        -:  123:                     this->frees_to_pool_.value(),
+        -:  124:                     this->available()));
+        -:  125:    }
+        -:  126:
+    #####:  127:    return rtn;
+        -:  128:  }
+        -:  129:
+        -:  130:  /**
+        -:  131:  * Get a chunk of memory from free list cache, giving them
+        -:  132:  * @a initial_value.  Note that @a nbytes is only checked to make sure
+        -:  133:  * that it's less or equal to @a chunk_size, and is otherwise ignored
+        -:  134:  * since calloc() always returns a pointer to an item of @a chunk_size.
+        -:  135:  */
+    #####:  136:  virtual void *calloc(size_t /* nbytes */,
+        -:  137:                       char /* initial_value */ = '\0') {
+    #####:  138:    ACE_NOTSUP_RETURN(0);
+        -:  139:  }
+        -:  140:
+        -:  141:  /// This method is a no-op and just returns 0 since the free list
+        -:  142:  /// only works with fixed sized entities.
+    #####:  143:  virtual void *calloc(size_t /* n_elem */,
+        -:  144:                       size_t /* elem_size */,
+        -:  145:                       char /* initial_value */ = '\0') {
+    #####:  146:    ACE_NOTSUP_RETURN(0);
+        -:  147:  }
+        -:  148:
+        -:  149:  /// Return a chunk of memory back to free list cache.
+    #####:  150:  void free(void * ptr) {
+    #####:  151:    unsigned char* tmp = static_cast<unsigned char*> (ptr);
+    #####:  152:    if (tmp < begin_ ||
+    #####:  153:        tmp >= end_) {
+    #####:  154:      ACE_Allocator::instance()->free(tmp);
+    #####:  155:      frees_to_heap_ ++;
+        -:  156:
+    #####:  157:      if (frees_to_heap_.value() > allocs_from_heap_.value()) {
+    #####:  158:        ACE_ERROR((LM_ERROR,
+        -:  159:                   "(%P|%t) ERROR: Dynamic_Cached_Allocator_With_Overflow::free %x"
+        -:  160:                   " more deletes %d than allocs %d to the heap\n",
+        -:  161:                   this,
+        -:  162:                   this->frees_to_heap_.value(),
+        -:  163:                   this->allocs_from_heap_.value()));
+        -:  164:      }
+        -:  165:
+    #####:  166:      if (DCPS_debug_level >= 6) {
+    #####:  167:        if (frees_to_heap_.value() % 500 == 0) {
+    #####:  168:          ACE_DEBUG((LM_DEBUG,
+        -:  169:                     "(%P|%t) Dynamic_Cached_Allocator_With_Overflow::free %@"
+        -:  170:                     " %Lu heap allocs with %Lu oustanding\n",
+        -:  171:                     this, this->allocs_from_heap_.value(),
+        -:  172:                     this->allocs_from_heap_.value() - this->frees_to_heap_.value()));
+        -:  173:        }
+        -:  174:      }
+        -:  175:
+    #####:  176:      return;
+        -:  177:
+    #####:  178:    } else if (ptr != 0) {
+    #####:  179:      this->frees_to_pool_ ++;
+        -:  180:
+    #####:  181:      if (frees_to_pool_.value() > allocs_from_pool_.value()) {
+    #####:  182:        ACE_ERROR((LM_ERROR,
+        -:  183:                   "(%P|%t) ERROR: Dynamic_Cached_Allocator_With_Overflow::free %x"
+        -:  184:                   " more deletes %d than allocs %d from the pool\n",
+        -:  185:                   this,
+        -:  186:                   this->frees_to_pool_.value(),
+        -:  187:                   this->allocs_from_pool_.value()));
+        -:  188:      }
+        -:  189:
+    #####:  190:      this->free_list_.add((ACE_Cached_Mem_Pool_Node<char> *) ptr) ;
+        -:  191:
+    #####:  192:      if (DCPS_debug_level >= 6)
+    #####:  193:        if (this->available() % 500 == 0)
+    #####:  194:          ACE_DEBUG((LM_DEBUG,
+        -:  195:                     "(%P|%t) Dynamic_Cached_Allocator_With_Overflow::malloc %x"
+        -:  196:                     " %d pool allocs %d pool frees with %d available\n",
+        -:  197:                     this, this->allocs_from_pool_.value(), this->frees_to_pool_.value(),
+        -:  198:                     this->available()));
+        -:  199:    }
+        -:  200:  }
+        -:  201:
+        -:  202:  /// Return the number of chunks available in the cache.
+        -:  203:  size_t pool_depth() {
+        -:  204:    return this->free_list_.size() ;
+        -:  205:  }
+        -:  206:
+        -:  207:  // -- for debug
+        -:  208:
+        -:  209:  /** How many chunks are available at this time.
+        -:  210:  */
+    #####:  211:  size_t available() {
+    #####:  212:    return free_list_.size();
+        -:  213:  };
+        -:  214:
+        -:  215:  /// number of allocations from the heap.
+        -:  216:  ACE_Atomic_Op<ACE_Thread_Mutex, unsigned long> allocs_from_heap_;
+        -:  217:  /// number of allocations from the pool.
+        -:  218:  ACE_Atomic_Op<ACE_Thread_Mutex, unsigned long> allocs_from_pool_;
+        -:  219:  /// number of frees returned to the heap
+        -:  220:  ACE_Atomic_Op<ACE_Thread_Mutex, unsigned long> frees_to_heap_ ;
+        -:  221:  /// number of frees returned to the pool
+        -:  222:  ACE_Atomic_Op<ACE_Thread_Mutex, unsigned long> frees_to_pool_;
+        -:  223:private:
+        -:  224:  /// Remember how we allocate the memory in the first place so
+        -:  225:  /// we can clear things up later.
+        -:  226:  unsigned char* begin_;
+        -:  227:  /// The end of the pool.
+        -:  228:  unsigned char* end_;
+        -:  229:
+        -:  230:  /// Maintain a cached memory free list. We use @c char as template
+        -:  231:  /// parameter, although sizeof(char) is usually less than
+        -:  232:  /// sizeof(void*). Really important is that @a chunk_size
+        -:  233:  /// must be greater or equal to sizeof(void*).
+        -:  234:  ACE_Locked_Free_List<ACE_Cached_Mem_Pool_Node<char>, ACE_LOCK> free_list_;
+        -:  235:
+        -:  236:  /// Remember the size of our chunks.
+        -:  237:  size_t chunk_size_;
+        -:  238:};
+        -:  239:
+        -:  240:} // namespace DCPS
+        -:  241:} // namespace OpenDDS
+        -:  242:
+        -:  243:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  244:
+        -:  245:#endif /* DYNAMIC_CACHED_ALLOCATOR_WITH_OVERFLOW_T_H */

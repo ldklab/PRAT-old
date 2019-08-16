@@ -1,537 +1,546 @@
         -:    0:Source:../dds/DCPS/MultiTopicDataReader_T.cpp
-        -:    0:Programs:24
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-    #####:   24:/*EOF*/
-        -:   25:/*EOF*/
-    #####:   26:/*EOF*/
-    #####:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-    #####:   31:/*EOF*/
-        -:   32:/*EOF*/
-    #####:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-    #####:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-    #####:   43:/*EOF*/
-    #####:   44:/*EOF*/
-        -:   45:/*EOF*/
-    #####:   46:/*EOF*/
-    #####:   47:/*EOF*/
-    #####:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-    #####:   52:/*EOF*/
-    #####:   53:/*EOF*/
-    #####:   54:/*EOF*/
-    #####:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-    #####:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-    #####:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-    #####:   66:/*EOF*/
-    #####:   67:/*EOF*/
-    #####:   68:/*EOF*/
-    #####:   69:/*EOF*/
-    #####:   70:/*EOF*/
-        -:   71:/*EOF*/
-    #####:   72:/*EOF*/
-    #####:   73:/*EOF*/
-    #####:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        -:   77:/*EOF*/
-    #####:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-    #####:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-    #####:   88:/*EOF*/
-        -:   89:/*EOF*/
-    #####:   90:/*EOF*/
-    #####:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-        -:   94:/*EOF*/
-    #####:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-    #####:   98:/*EOF*/
-    #####:   99:/*EOF*/
-    #####:  100:/*EOF*/
-    #####:  101:/*EOF*/
-        -:  102:/*EOF*/
-    #####:  103:/*EOF*/
-    #####:  104:/*EOF*/
-    #####:  105:/*EOF*/
-    #####:  106:/*EOF*/
-        -:  107:/*EOF*/
-    #####:  108:/*EOF*/
-        -:  109:/*EOF*/
-    #####:  110:/*EOF*/
-    #####:  111:/*EOF*/
-    #####:  112:/*EOF*/
-        -:  113:/*EOF*/
-    #####:  114:/*EOF*/
-    #####:  115:/*EOF*/
-    #####:  116:/*EOF*/
-    #####:  117:/*EOF*/
-    #####:  118:/*EOF*/
-    #####:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-    #####:  124:/*EOF*/
-    #####:  125:/*EOF*/
-    #####:  126:/*EOF*/
-    #####:  127:/*EOF*/
-        -:  128:/*EOF*/
-    #####:  129:/*EOF*/
-        -:  130:/*EOF*/
-    #####:  131:/*EOF*/
-    #####:  132:/*EOF*/
-    #####:  133:/*EOF*/
-        -:  134:/*EOF*/
-    #####:  135:/*EOF*/
-    #####:  136:/*EOF*/
-    #####:  137:/*EOF*/
-    #####:  138:/*EOF*/
-        -:  139:/*EOF*/
-    #####:  140:/*EOF*/
-        -:  141:/*EOF*/
-    #####:  142:/*EOF*/
-    #####:  143:/*EOF*/
-    #####:  144:/*EOF*/
-    #####:  145:/*EOF*/
-    #####:  146:/*EOF*/
-        -:  147:/*EOF*/
-        -:  148:/*EOF*/
-        -:  149:/*EOF*/
-    #####:  150:/*EOF*/
-    #####:  151:/*EOF*/
-    #####:  152:/*EOF*/
-    #####:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-        -:  157:/*EOF*/
-        -:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-        -:  161:/*EOF*/
-    #####:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-        -:  165:/*EOF*/
-    #####:  166:/*EOF*/
-    #####:  167:/*EOF*/
-    #####:  168:/*EOF*/
-    #####:  169:/*EOF*/
-    #####:  170:/*EOF*/
-    #####:  171:/*EOF*/
-    #####:  172:/*EOF*/
-    #####:  173:/*EOF*/
-    #####:  174:/*EOF*/
-    #####:  175:/*EOF*/
-    #####:  176:/*EOF*/
-        -:  177:/*EOF*/
-        -:  178:/*EOF*/
-    #####:  179:/*EOF*/
-    #####:  180:/*EOF*/
-        -:  181:/*EOF*/
-    #####:  182:/*EOF*/
-    #####:  183:/*EOF*/
-    #####:  184:/*EOF*/
-    #####:  185:/*EOF*/
-    #####:  186:/*EOF*/
-        -:  187:/*EOF*/
-    #####:  188:/*EOF*/
-    #####:  189:/*EOF*/
-    #####:  190:/*EOF*/
-    #####:  191:/*EOF*/
-        -:  192:/*EOF*/
-        -:  193:/*EOF*/
-    #####:  194:/*EOF*/
-    #####:  195:/*EOF*/
-        -:  196:/*EOF*/
-        -:  197:/*EOF*/
-    #####:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-    #####:  201:/*EOF*/
-    #####:  202:/*EOF*/
-        -:  203:/*EOF*/
-        -:  204:/*EOF*/
-        -:  205:/*EOF*/
-    #####:  206:/*EOF*/
-        -:  207:/*EOF*/
-        -:  208:/*EOF*/
-        -:  209:/*EOF*/
-        -:  210:/*EOF*/
-    #####:  211:/*EOF*/
-    #####:  212:/*EOF*/
-        -:  213:/*EOF*/
-    #####:  214:/*EOF*/
-    #####:  215:/*EOF*/
-    #####:  216:/*EOF*/
-    #####:  217:/*EOF*/
-    #####:  218:/*EOF*/
-    #####:  219:/*EOF*/
-        -:  220:/*EOF*/
-        -:  221:/*EOF*/
-    #####:  222:/*EOF*/
-        -:  223:/*EOF*/
-    #####:  224:/*EOF*/
-    #####:  225:/*EOF*/
-    #####:  226:/*EOF*/
-        -:  227:/*EOF*/
-        -:  228:/*EOF*/
-    #####:  229:/*EOF*/
-    #####:  230:/*EOF*/
-        -:  231:/*EOF*/
-        -:  232:/*EOF*/
-    #####:  233:/*EOF*/
-        -:  234:/*EOF*/
-    #####:  235:/*EOF*/
-    #####:  236:/*EOF*/
-    #####:  237:/*EOF*/
-    #####:  238:/*EOF*/
-    #####:  239:/*EOF*/
-    #####:  240:/*EOF*/
-    #####:  241:/*EOF*/
-    #####:  242:/*EOF*/
-    #####:  243:/*EOF*/
-        -:  244:/*EOF*/
-    #####:  245:/*EOF*/
-    #####:  246:/*EOF*/
-        -:  247:/*EOF*/
-        -:  248:/*EOF*/
-    #####:  249:/*EOF*/
-        -:  250:/*EOF*/
-    #####:  251:/*EOF*/
-        -:  252:/*EOF*/
-        -:  253:/*EOF*/
-    #####:  254:/*EOF*/
-        -:  255:/*EOF*/
-        -:  256:/*EOF*/
-    #####:  257:/*EOF*/
-    #####:  258:/*EOF*/
-    #####:  259:/*EOF*/
-    #####:  260:/*EOF*/
-    #####:  261:/*EOF*/
-        -:  262:/*EOF*/
-    #####:  263:/*EOF*/
-    #####:  264:/*EOF*/
-        -:  265:/*EOF*/
-        -:  266:/*EOF*/
-    =====:  267:/*EOF*/
-    =====:  268:/*EOF*/
-        -:  269:/*EOF*/
-        -:  270:/*EOF*/
-        -:  271:/*EOF*/
-    #####:  272:/*EOF*/
-        -:  273:/*EOF*/
-        -:  274:/*EOF*/
-        -:  275:/*EOF*/
-    #####:  276:/*EOF*/
-        -:  277:/*EOF*/
-        -:  278:/*EOF*/
-        -:  279:/*EOF*/
-        -:  280:/*EOF*/
-        -:  281:/*EOF*/
-    #####:  282:/*EOF*/
-    #####:  283:/*EOF*/
-    #####:  284:/*EOF*/
-    #####:  285:/*EOF*/
-    #####:  286:/*EOF*/
-    #####:  287:/*EOF*/
-    #####:  288:/*EOF*/
-    #####:  289:/*EOF*/
-        -:  290:/*EOF*/
-    #####:  291:/*EOF*/
-        -:  292:/*EOF*/
-    #####:  293:/*EOF*/
-    #####:  294:/*EOF*/
-    #####:  295:/*EOF*/
-    #####:  296:/*EOF*/
-    #####:  297:/*EOF*/
-    =====:  298:/*EOF*/
-    =====:  299:/*EOF*/
-    =====:  300:/*EOF*/
-        -:  301:/*EOF*/
-        -:  302:/*EOF*/
-    #####:  303:/*EOF*/
-        -:  304:/*EOF*/
-        -:  305:/*EOF*/
-        -:  306:/*EOF*/
-    #####:  307:/*EOF*/
-        -:  308:/*EOF*/
-        -:  309:/*EOF*/
-        -:  310:/*EOF*/
-        -:  311:/*EOF*/
-    #####:  312:/*EOF*/
-        -:  313:/*EOF*/
-        -:  314:/*EOF*/
-    #####:  315:/*EOF*/
-    #####:  316:/*EOF*/
-    #####:  317:/*EOF*/
-    #####:  318:/*EOF*/
-    #####:  319:/*EOF*/
-        -:  320:/*EOF*/
-    #####:  321:/*EOF*/
-        -:  322:/*EOF*/
-        -:  323:/*EOF*/
-    #####:  324:/*EOF*/
-    #####:  325:/*EOF*/
-    #####:  326:/*EOF*/
-    #####:  327:/*EOF*/
-    #####:  328:/*EOF*/
-    #####:  329:/*EOF*/
-    #####:  330:/*EOF*/
-        -:  331:/*EOF*/
-        -:  332:/*EOF*/
-        -:  333:/*EOF*/
-    #####:  334:/*EOF*/
-        -:  335:/*EOF*/
-    #####:  336:/*EOF*/
-    #####:  337:/*EOF*/
-        -:  338:/*EOF*/
-        -:  339:/*EOF*/
-        -:  340:/*EOF*/
-    #####:  341:/*EOF*/
-        -:  342:/*EOF*/
-        -:  343:/*EOF*/
-    #####:  344:/*EOF*/
-    #####:  345:/*EOF*/
-    #####:  346:/*EOF*/
-    #####:  347:/*EOF*/
-    #####:  348:/*EOF*/
-    #####:  349:/*EOF*/
-        -:  350:/*EOF*/
-    #####:  351:/*EOF*/
-        -:  352:/*EOF*/
-    #####:  353:/*EOF*/
-    #####:  354:/*EOF*/
-        -:  355:/*EOF*/
-        -:  356:/*EOF*/
-        -:  357:/*EOF*/
-        -:  358:/*EOF*/
-        -:  359:/*EOF*/
-        -:  360:/*EOF*/
-        -:  361:/*EOF*/
-        -:  362:/*EOF*/
-        -:  363:/*EOF*/
-        -:  364:/*EOF*/
-        -:  365:/*EOF*/
-    #####:  366:/*EOF*/
-        -:  367:/*EOF*/
-        -:  368:/*EOF*/
-        -:  369:/*EOF*/
-        -:  370:/*EOF*/
-    #####:  371:/*EOF*/
-    #####:  372:/*EOF*/
-        -:  373:/*EOF*/
-        -:  374:/*EOF*/
-        -:  375:/*EOF*/
-        -:  376:/*EOF*/
-    #####:  377:/*EOF*/
-        -:  378:/*EOF*/
-        -:  379:/*EOF*/
-        -:  380:/*EOF*/
-        -:  381:/*EOF*/
-    #####:  382:/*EOF*/
-    #####:  383:/*EOF*/
-        -:  384:/*EOF*/
-        -:  385:/*EOF*/
-        -:  386:/*EOF*/
-        -:  387:/*EOF*/
-    #####:  388:/*EOF*/
-        -:  389:/*EOF*/
-        -:  390:/*EOF*/
-        -:  391:/*EOF*/
-    #####:  392:/*EOF*/
-    #####:  393:/*EOF*/
-        -:  394:/*EOF*/
-        -:  395:/*EOF*/
-        -:  396:/*EOF*/
-        -:  397:/*EOF*/
-    #####:  398:/*EOF*/
-        -:  399:/*EOF*/
-        -:  400:/*EOF*/
-        -:  401:/*EOF*/
-    #####:  402:/*EOF*/
-    #####:  403:/*EOF*/
-        -:  404:/*EOF*/
-        -:  405:/*EOF*/
-        -:  406:/*EOF*/
-        -:  407:/*EOF*/
-    #####:  408:/*EOF*/
-        -:  409:/*EOF*/
-        -:  410:/*EOF*/
-    #####:  411:/*EOF*/
-        -:  412:/*EOF*/
-        -:  413:/*EOF*/
-        -:  414:/*EOF*/
-        -:  415:/*EOF*/
-    #####:  416:/*EOF*/
-        -:  417:/*EOF*/
-        -:  418:/*EOF*/
-    #####:  419:/*EOF*/
-        -:  420:/*EOF*/
-        -:  421:/*EOF*/
-        -:  422:/*EOF*/
-        -:  423:/*EOF*/
-    #####:  424:/*EOF*/
-        -:  425:/*EOF*/
-        -:  426:/*EOF*/
-        -:  427:/*EOF*/
-        -:  428:/*EOF*/
-        -:  429:/*EOF*/
-    #####:  430:/*EOF*/
-    #####:  431:/*EOF*/
-        -:  432:/*EOF*/
-        -:  433:/*EOF*/
-        -:  434:/*EOF*/
-        -:  435:/*EOF*/
-    #####:  436:/*EOF*/
-        -:  437:/*EOF*/
-        -:  438:/*EOF*/
-        -:  439:/*EOF*/
-        -:  440:/*EOF*/
-        -:  441:/*EOF*/
-    #####:  442:/*EOF*/
-    #####:  443:/*EOF*/
-        -:  444:/*EOF*/
-        -:  445:/*EOF*/
-        -:  446:/*EOF*/
-        -:  447:/*EOF*/
-    #####:  448:/*EOF*/
-        -:  449:/*EOF*/
-        -:  450:/*EOF*/
-        -:  451:/*EOF*/
-        -:  452:/*EOF*/
-    #####:  453:/*EOF*/
-    #####:  454:/*EOF*/
-        -:  455:/*EOF*/
-        -:  456:/*EOF*/
-        -:  457:/*EOF*/
-        -:  458:/*EOF*/
-    #####:  459:/*EOF*/
-        -:  460:/*EOF*/
-        -:  461:/*EOF*/
-        -:  462:/*EOF*/
-        -:  463:/*EOF*/
-    #####:  464:/*EOF*/
-    #####:  465:/*EOF*/
-        -:  466:/*EOF*/
-        -:  467:/*EOF*/
-        -:  468:/*EOF*/
-        -:  469:/*EOF*/
-    #####:  470:/*EOF*/
-        -:  471:/*EOF*/
-        -:  472:/*EOF*/
-        -:  473:/*EOF*/
-        -:  474:/*EOF*/
-        -:  475:/*EOF*/
-    #####:  476:/*EOF*/
-    #####:  477:/*EOF*/
-        -:  478:/*EOF*/
-        -:  479:/*EOF*/
-        -:  480:/*EOF*/
-        -:  481:/*EOF*/
-    #####:  482:/*EOF*/
-        -:  483:/*EOF*/
-        -:  484:/*EOF*/
-        -:  485:/*EOF*/
-        -:  486:/*EOF*/
-        -:  487:/*EOF*/
-    #####:  488:/*EOF*/
-    #####:  489:/*EOF*/
-        -:  490:/*EOF*/
-        -:  491:/*EOF*/
-        -:  492:/*EOF*/
-        -:  493:/*EOF*/
-    #####:  494:/*EOF*/
-        -:  495:/*EOF*/
-        -:  496:/*EOF*/
-        -:  497:/*EOF*/
-        -:  498:/*EOF*/
-    #####:  499:/*EOF*/
-    #####:  500:/*EOF*/
-        -:  501:/*EOF*/
-        -:  502:/*EOF*/
-        -:  503:/*EOF*/
-        -:  504:/*EOF*/
-    #####:  505:/*EOF*/
-        -:  506:/*EOF*/
-        -:  507:/*EOF*/
-        -:  508:/*EOF*/
-        -:  509:/*EOF*/
-    #####:  510:/*EOF*/
-    #####:  511:/*EOF*/
-        -:  512:/*EOF*/
-        -:  513:/*EOF*/
-        -:  514:/*EOF*/
-        -:  515:/*EOF*/
-    #####:  516:/*EOF*/
-        -:  517:/*EOF*/
-        -:  518:/*EOF*/
-    #####:  519:/*EOF*/
-        -:  520:/*EOF*/
-        -:  521:/*EOF*/
-        -:  522:/*EOF*/
-        -:  523:/*EOF*/
-    #####:  524:/*EOF*/
-        -:  525:/*EOF*/
-        -:  526:/*EOF*/
-    #####:  527:/*EOF*/
-        -:  528:/*EOF*/
-        -:  529:/*EOF*/
-        -:  530:/*EOF*/
-        -:  531:/*EOF*/
-    #####:  532:/*EOF*/
-        -:  533:/*EOF*/
-        -:  534:/*EOF*/
-    #####:  535:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef OPENDDS_DCPS_MULTITOPICDATAREADER_T_CPP
+        -:    9:#define OPENDDS_DCPS_MULTITOPICDATAREADER_T_CPP
+        -:   10:
+        -:   11:#ifndef OPENDDS_NO_MULTI_TOPIC
+        -:   12:
+        -:   13:#include <stdexcept>
+        -:   14:#include <sstream>
+        -:   15:
+        -:   16:
+        -:   17:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   18:
+        -:   19:namespace OpenDDS {
+        -:   20:namespace DCPS {
+        -:   21:
+        -:   22:template<typename Sample, typename TypedDataReader>
+        -:   23:void
+    #####:   24:MultiTopicDataReader_T<Sample, TypedDataReader>::init_typed(DataReaderEx* dr)
+        -:   25:{
+    #####:   26:  typed_reader_ = TypedDataReader::Interface::_narrow(dr);
+    #####:   27:}
+        -:   28:
+        -:   29:template<typename Sample, typename TypedDataReader>
+        -:   30:const MetaStruct&
+    #####:   31:MultiTopicDataReader_T<Sample, TypedDataReader>::getResultingMeta()
+        -:   32:{
+    #####:   33:  return getMetaStruct<Sample>();
+        -:   34:}
+        -:   35:
+        -:   36:template<typename Sample, typename TypedDataReader>
+        -:   37:void
+    #####:   38:MultiTopicDataReader_T<Sample, TypedDataReader>::assign_fields(void* incoming,
+        -:   39:  Sample& resulting, const MultiTopicDataReaderBase::QueryPlan& qp,
+        -:   40:  const MetaStruct& meta)
+        -:   41:{
+        -:   42:  using namespace std;
+    #####:   43:  const vector<SubjectFieldSpec>& proj = qp.projection_;
+    #####:   44:  const MetaStruct& resulting_meta = getResultingMeta();
+        -:   45:  typedef vector<SubjectFieldSpec>::const_iterator iter_t;
+    #####:   46:  for (iter_t iter = proj.begin(); iter != proj.end(); ++iter) {
+    #####:   47:    const SubjectFieldSpec& sfs = *iter;
+    #####:   48:    resulting_meta.assign(&resulting, sfs.resulting_name_.c_str(),
+        -:   49:                          incoming, sfs.incoming_name_.c_str(), meta);
+        -:   50:  }
+        -:   51:
+    #####:   52:  const vector<OPENDDS_STRING>& proj_out = qp.keys_projected_out_;
+    #####:   53:  for (vector<OPENDDS_STRING>::const_iterator iter = proj_out.begin();
+    #####:   54:       iter != proj_out.end(); ++iter) {
+    #####:   55:    resulting_meta.assign(&resulting, iter->c_str(),
+        -:   56:                          incoming, iter->c_str(), meta);
+        -:   57:  }
+    #####:   58:}
+        -:   59:
+        -:   60:template<typename Sample, typename TypedDataReader>
+        -:   61:void
+    #####:   62:MultiTopicDataReader_T<Sample, TypedDataReader>::assign_resulting_fields(
+        -:   63:  Sample& target, const Sample& source, const TopicSet& other_topics)
+        -:   64:{
+        -:   65:  using namespace std;
+    #####:   66:  const MetaStruct& meta = getResultingMeta();
+    #####:   67:  for (TopicSet::const_iterator iterTopic = other_topics.begin();
+    #####:   68:       iterTopic != other_topics.end(); ++iterTopic) {
+    #####:   69:    const QueryPlan& qp = query_plans_[*iterTopic];
+    #####:   70:    const vector<SubjectFieldSpec>& proj = qp.projection_;
+        -:   71:    typedef vector<SubjectFieldSpec>::const_iterator iter_t;
+    #####:   72:    for (iter_t iter = proj.begin(); iter != proj.end(); ++iter) {
+    #####:   73:      const SubjectFieldSpec& sfs = *iter;
+    #####:   74:      meta.assign(&target, sfs.resulting_name_.c_str(),
+        -:   75:                  &source, sfs.resulting_name_.c_str(), meta);
+        -:   76:    }
+        -:   77:  }
+    #####:   78:}
+        -:   79:
+        -:   80:template<typename Sample, typename TypedDataReader>
+        -:   81:void
+    #####:   82:MultiTopicDataReader_T<Sample, TypedDataReader>::join(
+        -:   83:  SampleVec& resulting, const SampleWithInfo& prototype,
+        -:   84:  const std::vector<OPENDDS_STRING>& key_names, const void* key_data,
+        -:   85:  DDS::DataReader_ptr other_dr, const MetaStruct& other_meta)
+        -:   86:{
+        -:   87:  using namespace DDS;
+    #####:   88:  DataReaderImpl* other_dri = dynamic_cast<DataReaderImpl*>(other_dr);
+        -:   89:
+    #####:   90:  if (!other_dri) {
+    #####:   91:    ACE_ERROR((LM_ERROR,
+        -:   92:      ACE_TEXT("(%P|%t) ERROR: ")
+        -:   93:      ACE_TEXT("MultiTopicDataReader_T::join, ")
+        -:   94:      ACE_TEXT("Failed to get DataReaderImpl.\n")));
+    #####:   95:    return;
+        -:   96:  }
+        -:   97:
+    #####:   98:  TopicDescription_var other_td = other_dri->get_topicdescription();
+    #####:   99:  CORBA::String_var other_topic = other_td->get_name();
+    #####:  100:  const QueryPlan& other_qp = query_plans_[other_topic.in()];
+    #####:  101:  const size_t n_keys = key_names.size();
+        -:  102:
+    #####:  103:  if (n_keys > 0 && other_meta.numDcpsKeys() == n_keys) { // complete key
+    #####:  104:    InstanceHandle_t ih = other_dri->lookup_instance_generic(key_data);
+    #####:  105:    if (ih != HANDLE_NIL) {
+    #####:  106:      GenericData other_data(other_meta, false);
+        -:  107:      SampleInfo info;
+    #####:  108:      ReturnCode_t ret = other_dri->read_instance_generic(other_data.ptr_,
+        -:  109:        info, ih, READ_SAMPLE_STATE, ANY_VIEW_STATE, ALIVE_INSTANCE_STATE);
+    #####:  110:      if (ret != RETCODE_OK && ret != RETCODE_NO_DATA) {
+    #####:  111:        std::ostringstream rc_ss;
+    #####:  112:        rc_ss << ret;
+        -:  113:        throw std::runtime_error("In join(), incoming DataReader for " +
+    #####:  114:          OPENDDS_STRING(other_topic) + " read_instance_generic, error #" +
+    #####:  115:          rc_ss.str());
+    #####:  116:      } else if (ret == DDS::RETCODE_OK) {
+    #####:  117:        resulting.push_back(prototype);
+    #####:  118:        resulting.back().combine(SampleWithInfo(other_topic.in(), info));
+    #####:  119:        assign_fields(other_data.ptr_, resulting.back().sample_,
+        -:  120:                      other_qp, other_meta);
+        -:  121:      }
+        -:  122:    }
+        -:  123:  } else { // incomplete key or cross-join (0 key fields)
+    #####:  124:    SampleVec new_resulting;
+    #####:  125:    ReturnCode_t ret = RETCODE_OK;
+    #####:  126:    for (InstanceHandle_t ih = HANDLE_NIL; ret != RETCODE_NO_DATA;) {
+    #####:  127:      GenericData other_data(other_meta, false);
+        -:  128:      SampleInfo info;
+    #####:  129:      ret = other_dri->read_next_instance_generic(other_data.ptr_, info, ih,
+        -:  130:        READ_SAMPLE_STATE, ANY_VIEW_STATE, ALIVE_INSTANCE_STATE);
+    #####:  131:      if (ret != RETCODE_OK && ret != RETCODE_NO_DATA) {
+    #####:  132:        std::ostringstream rc_ss;
+    #####:  133:        rc_ss << ret;
+        -:  134:        throw std::runtime_error("In join(), incoming DataReader for " +
+    #####:  135:          OPENDDS_STRING(other_topic) + " read_next_instance_generic, error #" +
+    #####:  136:          rc_ss.str());
+    #####:  137:      } else if (ret == RETCODE_NO_DATA) {
+    #####:  138:        break;
+        -:  139:      }
+    #####:  140:      ih = info.instance_handle;
+        -:  141:
+    #####:  142:      bool match = true;
+    #####:  143:      for (size_t i = 0; match && i < key_names.size(); ++i) {
+    #####:  144:        if (!other_meta.compare(key_data, other_data.ptr_,
+    #####:  145:                                key_names[i].c_str())) {
+    #####:  146:          match = false;
+        -:  147:        }
+        -:  148:      }
+        -:  149:
+    #####:  150:      if (match) {
+    #####:  151:        resulting.push_back(prototype);
+    #####:  152:        resulting.back().combine(SampleWithInfo(other_topic.in(), info));
+    #####:  153:        assign_fields(other_data.ptr_, resulting.back().sample_,
+        -:  154:                      other_qp, other_meta);
+        -:  155:      }
+        -:  156:    }
+        -:  157:  }
+        -:  158:}
+        -:  159:
+        -:  160:template<typename Sample, typename TypedDataReader>
+        -:  161:void
+    #####:  162:MultiTopicDataReader_T<Sample, TypedDataReader>::combine(
+        -:  163:  SampleVec& resulting, const SampleVec& other,
+        -:  164:  const std::vector<OPENDDS_STRING>& key_names, const TopicSet& other_topics)
+        -:  165:{
+    #####:  166:  const MetaStruct& meta = getResultingMeta();
+    #####:  167:  SampleVec newData;
+    #####:  168:  for (typename SampleVec::iterator iterRes = resulting.begin();
+    #####:  169:       iterRes != resulting.end(); /*incremented in loop*/) {
+    #####:  170:    bool foundOneMatch = false;
+    #####:  171:    for (typename SampleVec::const_iterator iterOther = other.begin();
+    #####:  172:         iterOther != other.end(); ++iterOther) {
+    #####:  173:      bool match = true;
+    #####:  174:      for (size_t i = 0; match && i < key_names.size(); ++i) {
+    #####:  175:        if (!meta.compare(&*iterRes, &*iterOther, key_names[i].c_str())) {
+    #####:  176:          match = false;
+        -:  177:        }
+        -:  178:      }
+    #####:  179:      if (!match) {
+    #####:  180:        continue;
+        -:  181:      }
+    #####:  182:      if (foundOneMatch) {
+    #####:  183:        newData.push_back(*iterRes);
+    #####:  184:        newData.back().combine(*iterOther);
+    #####:  185:        assign_resulting_fields(newData.back().sample_,
+    #####:  186:                                iterOther->sample_, other_topics);
+        -:  187:      } else {
+    #####:  188:        foundOneMatch = true;
+    #####:  189:        iterRes->combine(*iterOther);
+    #####:  190:        assign_resulting_fields(iterRes->sample_,
+    #####:  191:                                iterOther->sample_, other_topics);
+        -:  192:      }
+        -:  193:    }
+    #####:  194:    if (foundOneMatch) {
+    #####:  195:      ++iterRes;
+        -:  196:    } else {
+        -:  197:      // no match found in 'other' so data must not appear in result set
+    #####:  198:      iterRes = resulting.erase(iterRes);
+        -:  199:    }
+        -:  200:  }
+    #####:  201:  resulting.insert(resulting.end(), newData.begin(), newData.end());
+    #####:  202:}
+        -:  203:
+        -:  204:template<typename Sample, typename TypedDataReader>
+        -:  205:void
+    #####:  206:MultiTopicDataReader_T<Sample, TypedDataReader>::process_joins(
+        -:  207:  std::map<TopicSet, SampleVec>& partialResults, SampleVec starting,
+        -:  208:  const TopicSet& seen, const QueryPlan& qp)
+        -:  209:{
+        -:  210:  using namespace std;
+    #####:  211:  const MetaStruct& resulting_meta = getResultingMeta();
+    #####:  212:  const OPENDDS_STRING this_topic = topicNameFor(qp.data_reader_);
+        -:  213:  typedef multimap<OPENDDS_STRING, OPENDDS_STRING>::const_iterator iter_t;
+    #####:  214:  for (iter_t iter = qp.adjacent_joins_.begin();
+    #####:  215:       iter != qp.adjacent_joins_.end();) { // for each topic we're joining
+    #####:  216:    const OPENDDS_STRING& other_topic = iter->first;
+    #####:  217:    iter_t range_end = qp.adjacent_joins_.upper_bound(other_topic);
+    #####:  218:    const QueryPlan& other_qp = query_plans_[other_topic];
+    #####:  219:    DDS::DataReader_ptr other_dr = other_qp.data_reader_;
+        -:  220:
+        -:  221:    try {
+    #####:  222:      const MetaStruct& other_meta = metaStructFor(other_dr);
+        -:  223:
+    #####:  224:      vector<OPENDDS_STRING> keys;
+    #####:  225:      for (; iter != range_end; ++iter) { // for each key in common w/ this topic
+    #####:  226:        keys.push_back(iter->second);
+        -:  227:      }
+        -:  228:
+    #####:  229:      typename std::map<TopicSet, SampleVec>::iterator found =
+    #####:  230:        find_if(partialResults.begin(), partialResults.end(),
+        -:  231:          Contains(other_topic));
+        -:  232:
+    #####:  233:      if (found == partialResults.end()) { // haven't seen this topic yet
+        -:  234:
+    #####:  235:        partialResults.erase(seen);
+    #####:  236:        TopicSet withJoin(seen);
+    #####:  237:        withJoin.insert(other_topic);
+    #####:  238:        SampleVec& join_result = partialResults[withJoin];
+    #####:  239:        for (size_t i = 0; i < starting.size(); ++i) {
+    #####:  240:          GenericData other_key(other_meta);
+    #####:  241:          for (size_t j = 0; j < keys.size(); ++j) {
+    #####:  242:            other_meta.assign(other_key.ptr_, keys[j].c_str(),
+    #####:  243:              &starting[i], keys[j].c_str(), resulting_meta);
+        -:  244:          }
+    #####:  245:          join(join_result, starting[i], keys,
+    #####:  246:            other_key.ptr_, other_dr, other_meta);
+        -:  247:        }
+        -:  248:
+    #####:  249:        if (!join_result.empty() && !seen.count(other_topic)) {
+        -:  250:          // recurse
+    #####:  251:          process_joins(partialResults, join_result, withJoin, other_qp);
+        -:  252:        }
+        -:  253:
+    #####:  254:      } else if (!found->first.count(this_topic) /*avoid looping back*/) {
+        -:  255:        // we have partialResults for this topic, use them instead of recursing
+        -:  256:
+    #####:  257:        combine(starting, found->second, keys, found->first);
+    #####:  258:        TopicSet newKey(found->first);
+    #####:  259:        for (set<OPENDDS_STRING>::const_iterator i3 = found->first.begin();
+    #####:  260:          i3 != found->first.end(); ++i3) {
+    #####:  261:          newKey.insert(*i3);
+        -:  262:        }
+    #####:  263:        partialResults.erase(found);
+    #####:  264:        partialResults[newKey] = starting;
+        -:  265:
+        -:  266:      }
+    =====:  267:    } catch (const std::runtime_error& e) {
+    =====:  268:      ACE_ERROR((LM_ERROR, "(%P|%t) MultiTopicDataReader_T::process_joins: "
+        -:  269:        "%C", e.what()));
+        -:  270:    }
+        -:  271:  }
+    #####:  272:}
+        -:  273:
+        -:  274:template<typename Sample, typename TypedDataReader>
+        -:  275:void
+    #####:  276:MultiTopicDataReader_T<Sample, TypedDataReader>::cross_join(
+        -:  277:  std::map<TopicSet, SampleVec>& partialResults, const TopicSet& seen,
+        -:  278:  const QueryPlan& qp)
+        -:  279:{
+        -:  280:  using namespace std;
+        -:  281:  try {
+    #####:  282:    const MetaStruct& other_meta = metaStructFor(qp.data_reader_);
+    #####:  283:    vector<OPENDDS_STRING> no_keys;
+    #####:  284:    for (typename std::map<TopicSet, SampleVec>::iterator iterPR =
+    #####:  285:      partialResults.begin(); iterPR != partialResults.end(); ++iterPR) {
+    #####:  286:      SampleVec resulting;
+    #####:  287:      for (typename SampleVec::iterator i = iterPR->second.begin();
+    #####:  288:        i != iterPR->second.end(); ++i) {
+    #####:  289:        join(resulting, *i, no_keys, NULL, qp.data_reader_, other_meta);
+        -:  290:      }
+    #####:  291:      resulting.swap(iterPR->second);
+        -:  292:    }
+    #####:  293:    TopicSet withJoin(seen);
+    #####:  294:    withJoin.insert(topicNameFor(qp.data_reader_));
+    #####:  295:    partialResults[withJoin].swap(partialResults[seen]);
+    #####:  296:    partialResults.erase(seen);
+    #####:  297:    process_joins(partialResults, partialResults[withJoin], withJoin, qp);
+    =====:  298:  } catch (const std::runtime_error& e) {
+    =====:  299:    if (OpenDDS::DCPS::DCPS_debug_level) {
+    =====:  300:      ACE_ERROR((LM_ERROR, "(%P|%t) MultiTopicDataReader_T::cross_join: %C", e.what()));
+        -:  301:    }
+        -:  302:  }
+    #####:  303:}
+        -:  304:
+        -:  305:template<typename Sample, typename TypedDataReader>
+        -:  306:void
+    #####:  307:MultiTopicDataReader_T<Sample, TypedDataReader>::incoming_sample(void* sample,
+        -:  308:  const DDS::SampleInfo& info, const char* topic, const MetaStruct& meta)
+        -:  309:{
+        -:  310:  using namespace std;
+        -:  311:  using namespace DDS;
+    #####:  312:  const QueryPlan& qp = query_plans_[topic];
+        -:  313:
+        -:  314:  // Track results of joins along multiple paths through the MultiTopic keys.
+    #####:  315:  std::map<TopicSet, SampleVec> partialResults;
+    #####:  316:  TopicSet seen;
+    #####:  317:  seen.insert(topic);
+    #####:  318:  partialResults[seen].push_back(SampleWithInfo(topic, info));
+    #####:  319:  assign_fields(sample, partialResults[seen].back().sample_, qp, meta);
+        -:  320:
+    #####:  321:  process_joins(partialResults, partialResults[seen], seen, qp);
+        -:  322:
+        -:  323:  // Any topic we haven't seen needs to be cross-joined
+    #####:  324:  for (std::map<OPENDDS_STRING, QueryPlan>::iterator iter = query_plans_.begin();
+    #####:  325:       iter != query_plans_.end(); ++iter) {
+    #####:  326:    typename std::map<TopicSet, SampleVec>::iterator found =
+    #####:  327:      find_if(partialResults.begin(), partialResults.end(),
+    #####:  328:              Contains(iter->first));
+    #####:  329:    if (found == partialResults.end()) {
+    #####:  330:      cross_join(partialResults, seen, iter->second);
+        -:  331:    }
+        -:  332:  }
+        -:  333:
+    #####:  334:  TypedDataReader* tdr = dynamic_cast<TypedDataReader*>(typed_reader_.in());
+        -:  335:
+    #####:  336:  if (!tdr) {
+    #####:  337:    ACE_ERROR((LM_ERROR,
+        -:  338:      ACE_TEXT("(%P|%t) ERROR: ")
+        -:  339:      ACE_TEXT("MultiTopicDataReader_T::incoming_sample, ")
+        -:  340:      ACE_TEXT("Failed to get TypedDataReader.\n")));
+    #####:  341:    return;
+        -:  342:  }
+        -:  343:
+    #####:  344:  for (typename std::map<TopicSet, SampleVec>::iterator iterPR =
+    #####:  345:       partialResults.begin(); iterPR != partialResults.end(); ++iterPR) {
+    #####:  346:    for (typename SampleVec::iterator i = iterPR->second.begin();
+    #####:  347:         i != iterPR->second.end(); ++i) {
+    #####:  348:      InstanceHandle_t ih = tdr->store_synthetic_data(i->sample_, i->view_);
+    #####:  349:      if (ih != HANDLE_NIL) {
+        -:  350:        typedef std::map<OPENDDS_STRING, InstanceHandle_t>::iterator mapiter_t;
+    #####:  351:        for (mapiter_t iterMap = i->info_.begin(); iterMap != i->info_.end();
+        -:  352:             ++iterMap) {
+    #####:  353:          query_plans_[iterMap->first].instances_.insert(
+    #####:  354:            make_pair(iterMap->second, ih));
+        -:  355:        }
+        -:  356:      }
+        -:  357:    }
+        -:  358:  }
+        -:  359:}
+        -:  360:
+        -:  361:// The following methods implement the FooDataReader API by delegating
+        -:  362:// to the typed_reader_.
+        -:  363:
+        -:  364:template<typename Sample, typename TypedDataReader>
+        -:  365:DDS::ReturnCode_t
+    #####:  366:MultiTopicDataReader_T<Sample, TypedDataReader>::read(SampleSeq& received_data,
+        -:  367:  DDS::SampleInfoSeq& info_seq, CORBA::Long max_samples,
+        -:  368:  DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states,
+        -:  369:  DDS::InstanceStateMask instance_states)
+        -:  370:{
+    #####:  371:  return typed_reader_->read(received_data, info_seq, max_samples,
+    #####:  372:    sample_states, view_states, instance_states);
+        -:  373:}
+        -:  374:
+        -:  375:template<typename Sample, typename TypedDataReader>
+        -:  376:DDS::ReturnCode_t
+    #####:  377:MultiTopicDataReader_T<Sample, TypedDataReader>::take(SampleSeq& received_data,
+        -:  378:  DDS::SampleInfoSeq& info_seq, CORBA::Long max_samples,
+        -:  379:  DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states,
+        -:  380:  DDS::InstanceStateMask instance_states)
+        -:  381:{
+    #####:  382:  return typed_reader_->take(received_data, info_seq, max_samples,
+    #####:  383:    sample_states, view_states, instance_states);
+        -:  384:}
+        -:  385:
+        -:  386:template<typename Sample, typename TypedDataReader>
+        -:  387:DDS::ReturnCode_t
+    #####:  388:MultiTopicDataReader_T<Sample, TypedDataReader>::read_w_condition(
+        -:  389:  SampleSeq& data_values, DDS::SampleInfoSeq& sample_infos,
+        -:  390:  CORBA::Long max_samples, DDS::ReadCondition_ptr a_condition)
+        -:  391:{
+    #####:  392:  return typed_reader_->read_w_condition(data_values, sample_infos,
+    #####:  393:    max_samples, a_condition);
+        -:  394:}
+        -:  395:
+        -:  396:template<typename Sample, typename TypedDataReader>
+        -:  397:DDS::ReturnCode_t
+    #####:  398:MultiTopicDataReader_T<Sample, TypedDataReader>::take_w_condition(
+        -:  399:  SampleSeq& data_values, DDS::SampleInfoSeq& sample_infos,
+        -:  400:  CORBA::Long max_samples, DDS::ReadCondition_ptr a_condition)
+        -:  401:{
+    #####:  402:  return typed_reader_->take_w_condition(data_values, sample_infos,
+    #####:  403:    max_samples, a_condition);
+        -:  404:}
+        -:  405:
+        -:  406:template<typename Sample, typename TypedDataReader>
+        -:  407:DDS::ReturnCode_t
+    #####:  408:MultiTopicDataReader_T<Sample, TypedDataReader>::read_next_sample(
+        -:  409:  Sample& received_data, DDS::SampleInfo& sample_info)
+        -:  410:{
+    #####:  411:  return typed_reader_->read_next_sample(received_data, sample_info);
+        -:  412:}
+        -:  413:
+        -:  414:template<typename Sample, typename TypedDataReader>
+        -:  415:DDS::ReturnCode_t
+    #####:  416:MultiTopicDataReader_T<Sample, TypedDataReader>::take_next_sample(
+        -:  417:  Sample& received_data, DDS::SampleInfo& sample_info)
+        -:  418:{
+    #####:  419:  return typed_reader_->take_next_sample(received_data, sample_info);
+        -:  420:}
+        -:  421:
+        -:  422:template<typename Sample, typename TypedDataReader>
+        -:  423:DDS::ReturnCode_t
+    #####:  424:MultiTopicDataReader_T<Sample, TypedDataReader>::read_instance(
+        -:  425:  SampleSeq& received_data, DDS::SampleInfoSeq& info_seq,
+        -:  426:  CORBA::Long max_samples, DDS::InstanceHandle_t a_handle,
+        -:  427:  DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states,
+        -:  428:  DDS::InstanceStateMask instance_states)
+        -:  429:{
+    #####:  430:  return typed_reader_->read_instance(received_data, info_seq, max_samples,
+    #####:  431:    a_handle, sample_states, view_states, instance_states);
+        -:  432:}
+        -:  433:
+        -:  434:template<typename Sample, typename TypedDataReader>
+        -:  435:DDS::ReturnCode_t
+    #####:  436:MultiTopicDataReader_T<Sample, TypedDataReader>::take_instance(
+        -:  437:  SampleSeq& received_data, DDS::SampleInfoSeq& info_seq,
+        -:  438:  CORBA::Long max_samples, DDS::InstanceHandle_t a_handle,
+        -:  439:  DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states,
+        -:  440:  DDS::InstanceStateMask instance_states)
+        -:  441:{
+    #####:  442:  return typed_reader_->take_instance(received_data, info_seq, max_samples,
+    #####:  443:    a_handle, sample_states, view_states, instance_states);
+        -:  444:}
+        -:  445:
+        -:  446:template<typename Sample, typename TypedDataReader>
+        -:  447:DDS::ReturnCode_t
+    #####:  448:MultiTopicDataReader_T<Sample, TypedDataReader>::read_instance_w_condition(
+        -:  449:  SampleSeq& data_values, DDS::SampleInfoSeq& sample_infos,
+        -:  450:  CORBA::Long max_samples, DDS::InstanceHandle_t handle,
+        -:  451:  DDS::ReadCondition_ptr a_condition)
+        -:  452:{
+    #####:  453:  return typed_reader_->read_instance_w_condition(data_values,
+    #####:  454:    sample_infos, max_samples, handle, a_condition);
+        -:  455:}
+        -:  456:
+        -:  457:template<typename Sample, typename TypedDataReader>
+        -:  458:DDS::ReturnCode_t
+    #####:  459:MultiTopicDataReader_T<Sample, TypedDataReader>::take_instance_w_condition(
+        -:  460:  SampleSeq& data_values, DDS::SampleInfoSeq& sample_infos,
+        -:  461:  CORBA::Long max_samples, DDS::InstanceHandle_t handle,
+        -:  462:  DDS::ReadCondition_ptr a_condition)
+        -:  463:{
+    #####:  464:  return typed_reader_->take_instance_w_condition(data_values,
+    #####:  465:    sample_infos, max_samples, handle, a_condition);
+        -:  466:}
+        -:  467:
+        -:  468:template<typename Sample, typename TypedDataReader>
+        -:  469:DDS::ReturnCode_t
+    #####:  470:MultiTopicDataReader_T<Sample, TypedDataReader>::read_next_instance(
+        -:  471:  SampleSeq& received_data, DDS::SampleInfoSeq& info_seq,
+        -:  472:  CORBA::Long max_samples, DDS::InstanceHandle_t a_handle,
+        -:  473:  DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states,
+        -:  474:  DDS::InstanceStateMask instance_states)
+        -:  475:{
+    #####:  476:  return typed_reader_->read_next_instance(received_data, info_seq, max_samples,
+    #####:  477:    a_handle, sample_states, view_states, instance_states);
+        -:  478:}
+        -:  479:
+        -:  480:template<typename Sample, typename TypedDataReader>
+        -:  481:DDS::ReturnCode_t
+    #####:  482:MultiTopicDataReader_T<Sample, TypedDataReader>::take_next_instance(
+        -:  483:  SampleSeq& received_data, DDS::SampleInfoSeq& info_seq,
+        -:  484:  CORBA::Long max_samples, DDS::InstanceHandle_t a_handle,
+        -:  485:  DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states,
+        -:  486:  DDS::InstanceStateMask instance_states)
+        -:  487:{
+    #####:  488:  return typed_reader_->take_next_instance(received_data, info_seq, max_samples,
+    #####:  489:    a_handle, sample_states, view_states, instance_states);
+        -:  490:}
+        -:  491:
+        -:  492:template<typename Sample, typename TypedDataReader>
+        -:  493:DDS::ReturnCode_t
+    #####:  494:MultiTopicDataReader_T<Sample, TypedDataReader>::read_next_instance_w_condition(
+        -:  495:  SampleSeq& data_values, DDS::SampleInfoSeq& sample_infos,
+        -:  496:  CORBA::Long max_samples, DDS::InstanceHandle_t previous_handle,
+        -:  497:  DDS::ReadCondition_ptr a_condition)
+        -:  498:{
+    #####:  499:  return typed_reader_->read_next_instance_w_condition(data_values,
+    #####:  500:    sample_infos, max_samples, previous_handle, a_condition);
+        -:  501:}
+        -:  502:
+        -:  503:template<typename Sample, typename TypedDataReader>
+        -:  504:DDS::ReturnCode_t
+    #####:  505:MultiTopicDataReader_T<Sample, TypedDataReader>::take_next_instance_w_condition(
+        -:  506:  SampleSeq& data_values, DDS::SampleInfoSeq& sample_infos,
+        -:  507:  CORBA::Long max_samples, DDS::InstanceHandle_t previous_handle,
+        -:  508:  DDS::ReadCondition_ptr a_condition)
+        -:  509:{
+    #####:  510:  return typed_reader_->take_next_instance_w_condition(data_values,
+    #####:  511:    sample_infos, max_samples, previous_handle, a_condition);
+        -:  512:}
+        -:  513:
+        -:  514:template<typename Sample, typename TypedDataReader>
+        -:  515:DDS::ReturnCode_t
+    #####:  516:MultiTopicDataReader_T<Sample, TypedDataReader>::return_loan(
+        -:  517:  SampleSeq& received_data, DDS::SampleInfoSeq& info_seq)
+        -:  518:{
+    #####:  519:  return typed_reader_->return_loan(received_data, info_seq);
+        -:  520:}
+        -:  521:
+        -:  522:template<typename Sample, typename TypedDataReader>
+        -:  523:DDS::ReturnCode_t
+    #####:  524:MultiTopicDataReader_T<Sample, TypedDataReader>::get_key_value(
+        -:  525:  Sample& key_holder, DDS::InstanceHandle_t handle)
+        -:  526:{
+    #####:  527:  return typed_reader_->get_key_value(key_holder, handle);
+        -:  528:}
+        -:  529:
+        -:  530:template<typename Sample, typename TypedDataReader>
+        -:  531:DDS::InstanceHandle_t
+    #####:  532:MultiTopicDataReader_T<Sample, TypedDataReader>::lookup_instance(
+        -:  533:  const Sample& instance_data)
+        -:  534:{
+    #####:  535:  return typed_reader_->lookup_instance(instance_data);
+        -:  536:}
+        -:  537:
+        -:  538:}
+        -:  539:}
+        -:  540:
+        -:  541:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  542:
+        -:  543:#endif
+        -:  544:#endif

@@ -1,554 +1,1951 @@
-        -:    0:Source:../dds/DdsDcpsInfrastructureC.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        -:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        -:   60:/*EOF*/
-        -:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-        -:   64:/*EOF*/
-        -:   65:/*EOF*/
-        -:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-        -:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-        -:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        -:   77:/*EOF*/
-        -:   78:/*EOF*/
-        -:   79:/*EOF*/
-        -:   80:/*EOF*/
-        -:   81:/*EOF*/
-        -:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-        -:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-        -:   88:/*EOF*/
-        -:   89:/*EOF*/
-        -:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-        -:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-        -:   97:/*EOF*/
-        -:   98:/*EOF*/
-        -:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-        -:  103:/*EOF*/
-        -:  104:/*EOF*/
-        -:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-        -:  108:/*EOF*/
-        -:  109:/*EOF*/
-        -:  110:/*EOF*/
-        -:  111:/*EOF*/
-        -:  112:/*EOF*/
-        -:  113:/*EOF*/
-        -:  114:/*EOF*/
-        -:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-        -:  119:/*EOF*/
-        -:  120:/*EOF*/
-        -:  121:/*EOF*/
-        -:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-        -:  125:/*EOF*/
-        -:  126:/*EOF*/
-        -:  127:/*EOF*/
-        -:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-        -:  131:/*EOF*/
-        -:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-        -:  135:/*EOF*/
-        -:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-        -:  142:/*EOF*/
-        -:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-        -:  146:/*EOF*/
-        -:  147:/*EOF*/
-        -:  148:/*EOF*/
-        -:  149:/*EOF*/
-        -:  150:/*EOF*/
-        -:  151:/*EOF*/
-        -:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-        -:  156:/*EOF*/
-        -:  157:/*EOF*/
-        -:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-        -:  165:/*EOF*/
-        -:  166:/*EOF*/
-        -:  167:/*EOF*/
-        -:  168:/*EOF*/
-        -:  169:/*EOF*/
-        -:  170:/*EOF*/
-        -:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-        -:  174:/*EOF*/
-        -:  175:/*EOF*/
-        -:  176:/*EOF*/
-        -:  177:/*EOF*/
-        -:  178:/*EOF*/
-        -:  179:/*EOF*/
-        -:  180:/*EOF*/
-        -:  181:/*EOF*/
-        -:  182:/*EOF*/
-        -:  183:/*EOF*/
-        -:  184:/*EOF*/
-        -:  185:/*EOF*/
-        -:  186:/*EOF*/
-        -:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-        -:  190:/*EOF*/
-        -:  191:/*EOF*/
-        -:  192:/*EOF*/
-        -:  193:/*EOF*/
-        -:  194:/*EOF*/
-        -:  195:/*EOF*/
-        -:  196:/*EOF*/
-        -:  197:/*EOF*/
-        -:  198:/*EOF*/
-        -:  199:/*EOF*/
-        -:  200:/*EOF*/
-        -:  201:/*EOF*/
-        -:  202:/*EOF*/
-        -:  203:/*EOF*/
-        -:  204:/*EOF*/
-        -:  205:/*EOF*/
-        -:  206:/*EOF*/
-        -:  207:/*EOF*/
-        -:  208:/*EOF*/
-        -:  209:/*EOF*/
-        -:  210:/*EOF*/
-        -:  211:/*EOF*/
-        -:  212:/*EOF*/
-        -:  213:/*EOF*/
-        -:  214:/*EOF*/
-        -:  215:/*EOF*/
-        -:  216:/*EOF*/
-        -:  217:/*EOF*/
-        -:  218:/*EOF*/
-        -:  219:/*EOF*/
-        -:  220:/*EOF*/
-        -:  221:/*EOF*/
-        -:  222:/*EOF*/
-        -:  223:/*EOF*/
-        -:  224:/*EOF*/
-        -:  225:/*EOF*/
-        -:  226:/*EOF*/
-        -:  227:/*EOF*/
-        -:  228:/*EOF*/
-        -:  229:/*EOF*/
-        -:  230:/*EOF*/
-        -:  231:/*EOF*/
-        -:  232:/*EOF*/
-        -:  233:/*EOF*/
-        -:  234:/*EOF*/
-        -:  235:/*EOF*/
-        -:  236:/*EOF*/
-        -:  237:/*EOF*/
-        -:  238:/*EOF*/
-        -:  239:/*EOF*/
-        -:  240:/*EOF*/
-        -:  241:/*EOF*/
-        -:  242:/*EOF*/
-        -:  243:/*EOF*/
-        -:  244:/*EOF*/
-        -:  245:/*EOF*/
-        -:  246:/*EOF*/
-        -:  247:/*EOF*/
-        -:  248:/*EOF*/
-        -:  249:/*EOF*/
-        -:  250:/*EOF*/
-        -:  251:/*EOF*/
-        -:  252:/*EOF*/
-        -:  253:/*EOF*/
-        -:  254:/*EOF*/
-        -:  255:/*EOF*/
-        -:  256:/*EOF*/
-        -:  257:/*EOF*/
-        -:  258:/*EOF*/
-        -:  259:/*EOF*/
-        -:  260:/*EOF*/
-        -:  261:/*EOF*/
-        -:  262:/*EOF*/
-        -:  263:/*EOF*/
-        -:  264:/*EOF*/
-        -:  265:/*EOF*/
-        -:  266:/*EOF*/
-        -:  267:/*EOF*/
-        -:  268:/*EOF*/
-        -:  269:/*EOF*/
-        -:  270:/*EOF*/
-        -:  271:/*EOF*/
-        -:  272:/*EOF*/
-        -:  273:/*EOF*/
-        -:  274:/*EOF*/
-        -:  275:/*EOF*/
-        -:  276:/*EOF*/
-        -:  277:/*EOF*/
-        -:  278:/*EOF*/
-        -:  279:/*EOF*/
-        -:  280:/*EOF*/
-        -:  281:/*EOF*/
-        -:  282:/*EOF*/
-        -:  283:/*EOF*/
-        -:  284:/*EOF*/
-        -:  285:/*EOF*/
-        -:  286:/*EOF*/
-        -:  287:/*EOF*/
-        -:  288:/*EOF*/
-        -:  289:/*EOF*/
-        -:  290:/*EOF*/
-        -:  291:/*EOF*/
-        -:  292:/*EOF*/
-        -:  293:/*EOF*/
-        -:  294:/*EOF*/
-        -:  295:/*EOF*/
-        -:  296:/*EOF*/
-        -:  297:/*EOF*/
-        -:  298:/*EOF*/
-        -:  299:/*EOF*/
-        -:  300:/*EOF*/
-        -:  301:/*EOF*/
-        -:  302:/*EOF*/
-        -:  303:/*EOF*/
-        -:  304:/*EOF*/
-        -:  305:/*EOF*/
-        -:  306:/*EOF*/
-        -:  307:/*EOF*/
-        -:  308:/*EOF*/
-        -:  309:/*EOF*/
-        -:  310:/*EOF*/
-        -:  311:/*EOF*/
-        -:  312:/*EOF*/
-        -:  313:/*EOF*/
-        -:  314:/*EOF*/
-        -:  315:/*EOF*/
-        -:  316:/*EOF*/
-        -:  317:/*EOF*/
-        -:  318:/*EOF*/
-        -:  319:/*EOF*/
-        -:  320:/*EOF*/
-        -:  321:/*EOF*/
-        -:  322:/*EOF*/
-        -:  323:/*EOF*/
-        -:  324:/*EOF*/
-        -:  325:/*EOF*/
-        -:  326:/*EOF*/
-        -:  327:/*EOF*/
-        -:  328:/*EOF*/
-        -:  329:/*EOF*/
-        -:  330:/*EOF*/
-        -:  331:/*EOF*/
-        -:  332:/*EOF*/
-        -:  333:/*EOF*/
-        -:  334:/*EOF*/
-        -:  335:/*EOF*/
-        -:  336:/*EOF*/
-        -:  337:/*EOF*/
-        -:  338:/*EOF*/
-        -:  339:/*EOF*/
-        -:  340:/*EOF*/
-        -:  341:/*EOF*/
-        -:  342:/*EOF*/
-        -:  343:/*EOF*/
-        -:  344:/*EOF*/
-        -:  345:/*EOF*/
-        -:  346:/*EOF*/
-        -:  347:/*EOF*/
-        -:  348:/*EOF*/
-        -:  349:/*EOF*/
-        -:  350:/*EOF*/
-        -:  351:/*EOF*/
-        -:  352:/*EOF*/
-        -:  353:/*EOF*/
-        -:  354:/*EOF*/
-        -:  355:/*EOF*/
-        -:  356:/*EOF*/
-        -:  357:/*EOF*/
-        -:  358:/*EOF*/
-        -:  359:/*EOF*/
-        -:  360:/*EOF*/
-        -:  361:/*EOF*/
-        -:  362:/*EOF*/
-        -:  363:/*EOF*/
-        -:  364:/*EOF*/
-        -:  365:/*EOF*/
-        -:  366:/*EOF*/
-        -:  367:/*EOF*/
-        -:  368:/*EOF*/
-        -:  369:/*EOF*/
-        -:  370:/*EOF*/
-        -:  371:/*EOF*/
-        -:  372:/*EOF*/
-        -:  373:/*EOF*/
-        -:  374:/*EOF*/
-        -:  375:/*EOF*/
-        -:  376:/*EOF*/
-        -:  377:/*EOF*/
-        -:  378:/*EOF*/
-        -:  379:/*EOF*/
-        -:  380:/*EOF*/
-        -:  381:/*EOF*/
-        -:  382:/*EOF*/
-        -:  383:/*EOF*/
-        -:  384:/*EOF*/
-        -:  385:/*EOF*/
-        -:  386:/*EOF*/
-        -:  387:/*EOF*/
-        -:  388:/*EOF*/
-        -:  389:/*EOF*/
-        -:  390:/*EOF*/
-        -:  391:/*EOF*/
-        -:  392:/*EOF*/
-        -:  393:/*EOF*/
-        -:  394:/*EOF*/
-        -:  395:/*EOF*/
-        -:  396:/*EOF*/
-        -:  397:/*EOF*/
-        -:  398:/*EOF*/
-        -:  399:/*EOF*/
-        -:  400:/*EOF*/
-        -:  401:/*EOF*/
-        -:  402:/*EOF*/
-        -:  403:/*EOF*/
-        -:  404:/*EOF*/
-        -:  405:/*EOF*/
-        -:  406:/*EOF*/
-        -:  407:/*EOF*/
-        -:  408:/*EOF*/
-        -:  409:/*EOF*/
-        -:  410:/*EOF*/
-        -:  411:/*EOF*/
-        -:  412:/*EOF*/
-        -:  413:/*EOF*/
-        -:  414:/*EOF*/
-        -:  415:/*EOF*/
-        -:  416:/*EOF*/
-        -:  417:/*EOF*/
-        -:  418:/*EOF*/
-        -:  419:/*EOF*/
-        -:  420:/*EOF*/
-        -:  421:/*EOF*/
-        -:  422:/*EOF*/
-        -:  423:/*EOF*/
-        -:  424:/*EOF*/
-        -:  425:/*EOF*/
-        -:  426:/*EOF*/
-        -:  427:/*EOF*/
-        -:  428:/*EOF*/
-        -:  429:/*EOF*/
-        -:  430:/*EOF*/
-        -:  431:/*EOF*/
-        -:  432:/*EOF*/
-        -:  433:/*EOF*/
-        -:  434:/*EOF*/
-        -:  435:/*EOF*/
-        -:  436:/*EOF*/
-        -:  437:/*EOF*/
-        -:  438:/*EOF*/
-        -:  439:/*EOF*/
-        -:  440:/*EOF*/
-        -:  441:/*EOF*/
-        -:  442:/*EOF*/
-        -:  443:/*EOF*/
-        -:  444:/*EOF*/
-        -:  445:/*EOF*/
-        -:  446:/*EOF*/
-        -:  447:/*EOF*/
-        -:  448:/*EOF*/
-        -:  449:/*EOF*/
-        -:  450:/*EOF*/
-        -:  451:/*EOF*/
-        -:  452:/*EOF*/
-        -:  453:/*EOF*/
-        -:  454:/*EOF*/
-        -:  455:/*EOF*/
-        -:  456:/*EOF*/
-        -:  457:/*EOF*/
-        -:  458:/*EOF*/
-        -:  459:/*EOF*/
-        -:  460:/*EOF*/
-        -:  461:/*EOF*/
-        -:  462:/*EOF*/
-        -:  463:/*EOF*/
-        -:  464:/*EOF*/
-        -:  465:/*EOF*/
-        -:  466:/*EOF*/
-        -:  467:/*EOF*/
-        -:  468:/*EOF*/
-        -:  469:/*EOF*/
-        -:  470:/*EOF*/
-        -:  471:/*EOF*/
-        -:  472:/*EOF*/
-        -:  473:/*EOF*/
-        -:  474:/*EOF*/
-        -:  475:/*EOF*/
-        -:  476:/*EOF*/
-        -:  477:/*EOF*/
-        -:  478:/*EOF*/
-        -:  479:/*EOF*/
-        -:  480:/*EOF*/
-        -:  481:/*EOF*/
-        -:  482:/*EOF*/
-        -:  483:/*EOF*/
-        -:  484:/*EOF*/
-        -:  485:/*EOF*/
-        -:  486:/*EOF*/
-        -:  487:/*EOF*/
-        -:  488:/*EOF*/
-        -:  489:/*EOF*/
-        -:  490:/*EOF*/
-        -:  491:/*EOF*/
-        -:  492:/*EOF*/
-        -:  493:/*EOF*/
-        -:  494:/*EOF*/
-        -:  495:/*EOF*/
-        -:  496:/*EOF*/
-        -:  497:/*EOF*/
-        -:  498:/*EOF*/
-        -:  499:/*EOF*/
-        -:  500:/*EOF*/
-        -:  501:/*EOF*/
-        -:  502:/*EOF*/
-        -:  503:/*EOF*/
-        -:  504:/*EOF*/
-        -:  505:/*EOF*/
-        -:  506:/*EOF*/
-        -:  507:/*EOF*/
-        -:  508:/*EOF*/
-        -:  509:/*EOF*/
-        -:  510:/*EOF*/
-        -:  511:/*EOF*/
-        -:  512:/*EOF*/
-        -:  513:/*EOF*/
-        -:  514:/*EOF*/
-        -:  515:/*EOF*/
-    #####:  516:/*EOF*/
-        -:  517:/*EOF*/
-        -:  518:/*EOF*/
-        -:  519:/*EOF*/
-        -:  520:/*EOF*/
-        -:  521:/*EOF*/
-        -:  522:/*EOF*/
-        -:  523:/*EOF*/
-        -:  524:/*EOF*/
-        -:  525:/*EOF*/
-        -:  526:/*EOF*/
-        -:  527:/*EOF*/
-        -:  528:/*EOF*/
-        -:  529:/*EOF*/
-        -:  530:/*EOF*/
-        -:  531:/*EOF*/
-        -:  532:/*EOF*/
-        -:  533:/*EOF*/
-        -:  534:/*EOF*/
-        -:  535:/*EOF*/
-        -:  536:/*EOF*/
-        -:  537:/*EOF*/
-        -:  538:/*EOF*/
-        -:  539:/*EOF*/
-        -:  540:/*EOF*/
-        -:  541:/*EOF*/
-        -:  542:/*EOF*/
-        -:  543:/*EOF*/
-        -:  544:/*EOF*/
-        -:  545:/*EOF*/
-        -:  546:/*EOF*/
-        -:  547:/*EOF*/
-        -:  548:/*EOF*/
-        -:  549:/*EOF*/
-        -:  550:/*EOF*/
-        -:  551:/*EOF*/
-    #####:  552:/*EOF*/
+        -:    0:Source:DdsDcpsInfrastructureC.h
+        -:    0:Programs:72
+        -:    1:// -*- C++ -*-
+        -:    2:// $Id$
+        -:    3:
+        -:    4:/**
+        -:    5: * Code generated by the The ACE ORB (TAO) IDL Compiler v2.2a_p15
+        -:    6: * TAO and the TAO IDL Compiler have been developed by:
+        -:    7: *       Center for Distributed Object Computing
+        -:    8: *       Washington University
+        -:    9: *       St. Louis, MO
+        -:   10: *       USA
+        -:   11: *       http://www.cs.wustl.edu/~schmidt/doc-center.html
+        -:   12: * and
+        -:   13: *       Distributed Object Computing Laboratory
+        -:   14: *       University of California at Irvine
+        -:   15: *       Irvine, CA
+        -:   16: *       USA
+        -:   17: * and
+        -:   18: *       Institute for Software Integrated Systems
+        -:   19: *       Vanderbilt University
+        -:   20: *       Nashville, TN
+        -:   21: *       USA
+        -:   22: *       http://www.isis.vanderbilt.edu/
+        -:   23: *
+        -:   24: * Information about TAO is available at:
+        -:   25: *     http://www.cs.wustl.edu/~schmidt/TAO.html
+        -:   26: **/
+        -:   27:
+        -:   28:// TAO_IDL - Generated from
+        -:   29:// be/be_codegen.cpp:152
+        -:   30:
+        -:   31:#ifndef _TAO_IDL_DDSDCPSINFRASTRUCTUREC_UW0TSQ_H_
+        -:   32:#define _TAO_IDL_DDSDCPSINFRASTRUCTUREC_UW0TSQ_H_
+        -:   33:
+        -:   34:#include /**/ "ace/pre.h"
+        -:   35:
+        -:   36:
+        -:   37:#include /**/ "ace/config-all.h"
+        -:   38:
+        -:   39:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   40:# pragma once
+        -:   41:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   42:
+        -:   43:
+        -:   44:#include /**/ "dds/DCPS/dcps_export.h"
+        -:   45:#include "tao/ORB.h"
+        -:   46:#include "tao/SystemException.h"
+        -:   47:#include "tao/Basic_Types.h"
+        -:   48:#include "tao/ORB_Constants.h"
+        -:   49:#include "dds/DCPS/ZeroCopyInfoSeq_T.h"
+        -:   50:#include "tao/Object.h"
+        -:   51:#include "tao/String_Manager_T.h"
+        -:   52:#include "tao/Objref_VarOut_T.h"
+        -:   53:#include "tao/VarOut_T.h"
+        -:   54:#include "tao/Arg_Traits_T.h"
+        -:   55:#include "tao/Basic_Arguments.h"
+        -:   56:#include "tao/Special_Basic_Arguments.h"
+        -:   57:#include "tao/Any_Insert_Policy_T.h"
+        -:   58:#include "tao/Basic_Argument_T.h"
+        -:   59:#include "tao/Fixed_Size_Argument_T.h"
+        -:   60:#include "tao/Var_Size_Argument_T.h"
+        -:   61:#include "tao/UB_String_Arguments.h"
+        -:   62:#include /**/ "tao/Version.h"
+        -:   63:#include /**/ "tao/Versioned_Namespace.h"
+        -:   64:#include /**/ "dds/Versioned_Namespace.h"
+        -:   65:
+        -:   66:#include "dds/DdsDcpsCoreC.h"
+        -:   67:#include "dds/DdsDcpsConditionSeqC.h"
+        -:   68:
+        -:   69:#if TAO_MAJOR_VERSION != 2 || TAO_MINOR_VERSION != 2 || TAO_BETA_VERSION != 0
+        -:   70:#error This file should be regenerated with TAO_IDL
+        -:   71:#endif
+        -:   72:
+        -:   73:#if defined (TAO_EXPORT_MACRO)
+        -:   74:#undef TAO_EXPORT_MACRO
+        -:   75:#endif
+        -:   76:#define TAO_EXPORT_MACRO OpenDDS_Dcps_Export
+        -:   77:
+        -:   78:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   79:
+        -:   80:
+        -:   81:
+        -:   82:// TAO_IDL - Generated from
+        -:   83:// be/be_visitor_module/module_ch.cpp:38
+        -:   84:
+        -:   85:namespace DDS
+        -:   86:{
+        -:   87:
+        -:   88:  // TAO_IDL - Generated from
+        -:   89:  // be/be_visitor_typedef/typedef_ch.cpp:373
+        -:   90:
+        -:   91:  typedef ::CORBA::Long DomainId_t;
+        -:   92:  typedef ::CORBA::Long_out DomainId_t_out;
+        -:   93:
+        -:   94:  // TAO_IDL - Generated from
+        -:   95:  // be/be_visitor_typedef/typedef_ch.cpp:373
+        -:   96:
+        -:   97:  typedef ::CORBA::Long ReturnCode_t;
+        -:   98:  typedef ::CORBA::Long_out ReturnCode_t_out;
+        -:   99:
+        -:  100:  // TAO_IDL - Generated from
+        -:  101:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  102:
+        -:  103:  const CORBA::Long HANDLE_NIL = 0;
+        -:  104:
+        -:  105:  // TAO_IDL - Generated from
+        -:  106:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  107:
+        -:  108:  const CORBA::Long LENGTH_UNLIMITED = -1;
+        -:  109:
+        -:  110:  // TAO_IDL - Generated from
+        -:  111:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  112:
+        -:  113:  const CORBA::Long RETCODE_OK = 0;
+        -:  114:
+        -:  115:  // TAO_IDL - Generated from
+        -:  116:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  117:
+        -:  118:  const CORBA::Long RETCODE_ERROR = 1;
+        -:  119:
+        -:  120:  // TAO_IDL - Generated from
+        -:  121:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  122:
+        -:  123:  const CORBA::Long RETCODE_UNSUPPORTED = 2;
+        -:  124:
+        -:  125:  // TAO_IDL - Generated from
+        -:  126:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  127:
+        -:  128:  const CORBA::Long RETCODE_BAD_PARAMETER = 3;
+        -:  129:
+        -:  130:  // TAO_IDL - Generated from
+        -:  131:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  132:
+        -:  133:  const CORBA::Long RETCODE_PRECONDITION_NOT_MET = 4;
+        -:  134:
+        -:  135:  // TAO_IDL - Generated from
+        -:  136:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  137:
+        -:  138:  const CORBA::Long RETCODE_OUT_OF_RESOURCES = 5;
+        -:  139:
+        -:  140:  // TAO_IDL - Generated from
+        -:  141:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  142:
+        -:  143:  const CORBA::Long RETCODE_NOT_ENABLED = 6;
+        -:  144:
+        -:  145:  // TAO_IDL - Generated from
+        -:  146:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  147:
+        -:  148:  const CORBA::Long RETCODE_IMMUTABLE_POLICY = 7;
+        -:  149:
+        -:  150:  // TAO_IDL - Generated from
+        -:  151:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  152:
+        -:  153:  const CORBA::Long RETCODE_INCONSISTENT_POLICY = 8;
+        -:  154:
+        -:  155:  // TAO_IDL - Generated from
+        -:  156:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  157:
+        -:  158:  const CORBA::Long RETCODE_ALREADY_DELETED = 9;
+        -:  159:
+        -:  160:  // TAO_IDL - Generated from
+        -:  161:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  162:
+        -:  163:  const CORBA::Long RETCODE_TIMEOUT = 10;
+        -:  164:
+        -:  165:  // TAO_IDL - Generated from
+        -:  166:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  167:
+        -:  168:  const CORBA::Long RETCODE_NO_DATA = 11;
+        -:  169:
+        -:  170:  // TAO_IDL - Generated from
+        -:  171:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  172:
+        -:  173:  const CORBA::Long RETCODE_ILLEGAL_OPERATION = 12;
+        -:  174:
+        -:  175:  // TAO_IDL - Generated from
+        -:  176:  // be/be_visitor_typedef/typedef_ch.cpp:373
+        -:  177:
+        -:  178:  typedef ::CORBA::ULong StatusKind;
+        -:  179:  typedef ::CORBA::ULong_out StatusKind_out;
+        -:  180:
+        -:  181:  // TAO_IDL - Generated from
+        -:  182:  // be/be_visitor_typedef/typedef_ch.cpp:373
+        -:  183:
+        -:  184:  typedef ::CORBA::ULong StatusMask;
+        -:  185:  typedef ::CORBA::ULong_out StatusMask_out;
+        -:  186:
+        -:  187:  // TAO_IDL - Generated from
+        -:  188:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  189:
+        -:  190:  const CORBA::ULong INCONSISTENT_TOPIC_STATUS = 1U;
+        -:  191:
+        -:  192:  // TAO_IDL - Generated from
+        -:  193:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  194:
+        -:  195:  const CORBA::ULong OFFERED_DEADLINE_MISSED_STATUS = 2U;
+        -:  196:
+        -:  197:  // TAO_IDL - Generated from
+        -:  198:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  199:
+        -:  200:  const CORBA::ULong REQUESTED_DEADLINE_MISSED_STATUS = 4U;
+        -:  201:
+        -:  202:  // TAO_IDL - Generated from
+        -:  203:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  204:
+        -:  205:  const CORBA::ULong OFFERED_INCOMPATIBLE_QOS_STATUS = 32U;
+        -:  206:
+        -:  207:  // TAO_IDL - Generated from
+        -:  208:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  209:
+        -:  210:  const CORBA::ULong REQUESTED_INCOMPATIBLE_QOS_STATUS = 64U;
+        -:  211:
+        -:  212:  // TAO_IDL - Generated from
+        -:  213:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  214:
+        -:  215:  const CORBA::ULong SAMPLE_LOST_STATUS = 128U;
+        -:  216:
+        -:  217:  // TAO_IDL - Generated from
+        -:  218:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  219:
+        -:  220:  const CORBA::ULong SAMPLE_REJECTED_STATUS = 256U;
+        -:  221:
+        -:  222:  // TAO_IDL - Generated from
+        -:  223:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  224:
+        -:  225:  const CORBA::ULong DATA_ON_READERS_STATUS = 512U;
+        -:  226:
+        -:  227:  // TAO_IDL - Generated from
+        -:  228:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  229:
+        -:  230:  const CORBA::ULong DATA_AVAILABLE_STATUS = 1024U;
+        -:  231:
+        -:  232:  // TAO_IDL - Generated from
+        -:  233:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  234:
+        -:  235:  const CORBA::ULong LIVELINESS_LOST_STATUS = 2048U;
+        -:  236:
+        -:  237:  // TAO_IDL - Generated from
+        -:  238:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  239:
+        -:  240:  const CORBA::ULong LIVELINESS_CHANGED_STATUS = 4096U;
+        -:  241:
+        -:  242:  // TAO_IDL - Generated from
+        -:  243:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  244:
+        -:  245:  const CORBA::ULong PUBLICATION_MATCHED_STATUS = 8192U;
+        -:  246:
+        -:  247:  // TAO_IDL - Generated from
+        -:  248:  // be/be_visitor_constant/constant_ch.cpp:38
+        -:  249:
+        -:  250:  const CORBA::ULong SUBSCRIPTION_MATCHED_STATUS = 16384U;
+        -:  251:
+        -:  252:  // TAO_IDL - Generated from
+        -:  253:  // be/be_type.cpp:261
+        -:  254:
+        -:  255:  struct InconsistentTopicStatus;
+        -:  256:
+        -:  257:  typedef
+        -:  258:    ::TAO_Fixed_Var_T<
+        -:  259:        InconsistentTopicStatus
+        -:  260:      >
+        -:  261:    InconsistentTopicStatus_var;
+        -:  262:
+        -:  263:  typedef
+        -:  264:    InconsistentTopicStatus &
+        -:  265:    InconsistentTopicStatus_out;
+        -:  266:
+        -:  267:  // TAO_IDL - Generated from
+        -:  268:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  269:
+        -:  270:  struct OpenDDS_Dcps_Export InconsistentTopicStatus
+        -:  271:  {
+        -:  272:
+        -:  273:    // TAO_IDL - Generated from
+        -:  274:    // be/be_type.cpp:307
+        -:  275:
+        -:  276:    
+        -:  277:    typedef InconsistentTopicStatus_var _var_type;
+        -:  278:    typedef InconsistentTopicStatus_out _out_type;
+        -:  279:    
+        -:  280:    ::CORBA::Long total_count;
+        -:  281:    ::CORBA::Long total_count_change;
+        -:  282:  };
+        -:  283:
+        -:  284:  // TAO_IDL - Generated from
+        -:  285:  // be/be_type.cpp:261
+        -:  286:
+        -:  287:  struct SampleLostStatus;
+        -:  288:
+        -:  289:  typedef
+        -:  290:    ::TAO_Fixed_Var_T<
+        -:  291:        SampleLostStatus
+        -:  292:      >
+        -:  293:    SampleLostStatus_var;
+        -:  294:
+        -:  295:  typedef
+        -:  296:    SampleLostStatus &
+        -:  297:    SampleLostStatus_out;
+        -:  298:
+        -:  299:  // TAO_IDL - Generated from
+        -:  300:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  301:
+        -:  302:  struct OpenDDS_Dcps_Export SampleLostStatus
+        -:  303:  {
+        -:  304:
+        -:  305:    // TAO_IDL - Generated from
+        -:  306:    // be/be_type.cpp:307
+        -:  307:
+        -:  308:    
+        -:  309:    typedef SampleLostStatus_var _var_type;
+        -:  310:    typedef SampleLostStatus_out _out_type;
+        -:  311:    
+        -:  312:    ::CORBA::Long total_count;
+        -:  313:    ::CORBA::Long total_count_change;
+        -:  314:  };
+        -:  315:
+        -:  316:  // TAO_IDL - Generated from
+        -:  317:  // be/be_visitor_enum/enum_ch.cpp:47
+        -:  318:
+        -:  319:  enum SampleRejectedStatusKind
+        -:  320:  {
+        -:  321:    NOT_REJECTED,
+        -:  322:    REJECTED_BY_INSTANCES_LIMIT,
+        -:  323:    REJECTED_BY_SAMPLES_LIMIT,
+        -:  324:    REJECTED_BY_SAMPLES_PER_INSTANCE_LIMIT
+        -:  325:  };
+        -:  326:
+        -:  327:  typedef SampleRejectedStatusKind &SampleRejectedStatusKind_out;
+        -:  328:
+        -:  329:  // TAO_IDL - Generated from
+        -:  330:  // be/be_type.cpp:261
+        -:  331:
+        -:  332:  struct SampleRejectedStatus;
+        -:  333:
+        -:  334:  typedef
+        -:  335:    ::TAO_Fixed_Var_T<
+        -:  336:        SampleRejectedStatus
+        -:  337:      >
+        -:  338:    SampleRejectedStatus_var;
+        -:  339:
+        -:  340:  typedef
+        -:  341:    SampleRejectedStatus &
+        -:  342:    SampleRejectedStatus_out;
+        -:  343:
+        -:  344:  // TAO_IDL - Generated from
+        -:  345:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  346:
+        -:  347:  struct OpenDDS_Dcps_Export SampleRejectedStatus
+        -:  348:  {
+        -:  349:
+        -:  350:    // TAO_IDL - Generated from
+        -:  351:    // be/be_type.cpp:307
+        -:  352:
+        -:  353:    
+        -:  354:    typedef SampleRejectedStatus_var _var_type;
+        -:  355:    typedef SampleRejectedStatus_out _out_type;
+        -:  356:    
+        -:  357:    ::CORBA::Long total_count;
+        -:  358:    ::CORBA::Long total_count_change;
+        -:  359:    DDS::SampleRejectedStatusKind last_reason;
+        -:  360:    DDS::InstanceHandle_t last_instance_handle;
+        -:  361:  };
+        -:  362:
+        -:  363:  // TAO_IDL - Generated from
+        -:  364:  // be/be_type.cpp:261
+        -:  365:
+        -:  366:  struct LivelinessLostStatus;
+        -:  367:
+        -:  368:  typedef
+        -:  369:    ::TAO_Fixed_Var_T<
+        -:  370:        LivelinessLostStatus
+        -:  371:      >
+        -:  372:    LivelinessLostStatus_var;
+        -:  373:
+        -:  374:  typedef
+        -:  375:    LivelinessLostStatus &
+        -:  376:    LivelinessLostStatus_out;
+        -:  377:
+        -:  378:  // TAO_IDL - Generated from
+        -:  379:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  380:
+        -:  381:  struct OpenDDS_Dcps_Export LivelinessLostStatus
+        -:  382:  {
+        -:  383:
+        -:  384:    // TAO_IDL - Generated from
+        -:  385:    // be/be_type.cpp:307
+        -:  386:
+        -:  387:    
+        -:  388:    typedef LivelinessLostStatus_var _var_type;
+        -:  389:    typedef LivelinessLostStatus_out _out_type;
+        -:  390:    
+        -:  391:    ::CORBA::Long total_count;
+        -:  392:    ::CORBA::Long total_count_change;
+        -:  393:  };
+        -:  394:
+        -:  395:  // TAO_IDL - Generated from
+        -:  396:  // be/be_type.cpp:261
+        -:  397:
+        -:  398:  struct LivelinessChangedStatus;
+        -:  399:
+        -:  400:  typedef
+        -:  401:    ::TAO_Fixed_Var_T<
+        -:  402:        LivelinessChangedStatus
+        -:  403:      >
+        -:  404:    LivelinessChangedStatus_var;
+        -:  405:
+        -:  406:  typedef
+        -:  407:    LivelinessChangedStatus &
+        -:  408:    LivelinessChangedStatus_out;
+        -:  409:
+        -:  410:  // TAO_IDL - Generated from
+        -:  411:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  412:
+        -:  413:  struct OpenDDS_Dcps_Export LivelinessChangedStatus
+        -:  414:  {
+        -:  415:
+        -:  416:    // TAO_IDL - Generated from
+        -:  417:    // be/be_type.cpp:307
+        -:  418:
+        -:  419:    
+        -:  420:    typedef LivelinessChangedStatus_var _var_type;
+        -:  421:    typedef LivelinessChangedStatus_out _out_type;
+        -:  422:    
+        -:  423:    ::CORBA::Long alive_count;
+        -:  424:    ::CORBA::Long not_alive_count;
+        -:  425:    ::CORBA::Long alive_count_change;
+        -:  426:    ::CORBA::Long not_alive_count_change;
+        -:  427:    DDS::InstanceHandle_t last_publication_handle;
+        -:  428:  };
+        -:  429:
+        -:  430:  // TAO_IDL - Generated from
+        -:  431:  // be/be_type.cpp:261
+        -:  432:
+        -:  433:  struct OfferedDeadlineMissedStatus;
+        -:  434:
+        -:  435:  typedef
+        -:  436:    ::TAO_Fixed_Var_T<
+        -:  437:        OfferedDeadlineMissedStatus
+        -:  438:      >
+        -:  439:    OfferedDeadlineMissedStatus_var;
+        -:  440:
+        -:  441:  typedef
+        -:  442:    OfferedDeadlineMissedStatus &
+        -:  443:    OfferedDeadlineMissedStatus_out;
+        -:  444:
+        -:  445:  // TAO_IDL - Generated from
+        -:  446:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  447:
+        -:  448:  struct OpenDDS_Dcps_Export OfferedDeadlineMissedStatus
+        -:  449:  {
+        -:  450:
+        -:  451:    // TAO_IDL - Generated from
+        -:  452:    // be/be_type.cpp:307
+        -:  453:
+        -:  454:    
+        -:  455:    typedef OfferedDeadlineMissedStatus_var _var_type;
+        -:  456:    typedef OfferedDeadlineMissedStatus_out _out_type;
+        -:  457:    
+        -:  458:    ::CORBA::Long total_count;
+        -:  459:    ::CORBA::Long total_count_change;
+        -:  460:    DDS::InstanceHandle_t last_instance_handle;
+        -:  461:  };
+        -:  462:
+        -:  463:  // TAO_IDL - Generated from
+        -:  464:  // be/be_type.cpp:261
+        -:  465:
+        -:  466:  struct RequestedDeadlineMissedStatus;
+        -:  467:
+        -:  468:  typedef
+        -:  469:    ::TAO_Fixed_Var_T<
+        -:  470:        RequestedDeadlineMissedStatus
+        -:  471:      >
+        -:  472:    RequestedDeadlineMissedStatus_var;
+        -:  473:
+        -:  474:  typedef
+        -:  475:    RequestedDeadlineMissedStatus &
+        -:  476:    RequestedDeadlineMissedStatus_out;
+        -:  477:
+        -:  478:  // TAO_IDL - Generated from
+        -:  479:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  480:
+        -:  481:  struct OpenDDS_Dcps_Export RequestedDeadlineMissedStatus
+        -:  482:  {
+        -:  483:
+        -:  484:    // TAO_IDL - Generated from
+        -:  485:    // be/be_type.cpp:307
+        -:  486:
+        -:  487:    
+        -:  488:    typedef RequestedDeadlineMissedStatus_var _var_type;
+        -:  489:    typedef RequestedDeadlineMissedStatus_out _out_type;
+        -:  490:    
+        -:  491:    ::CORBA::Long total_count;
+        -:  492:    ::CORBA::Long total_count_change;
+        -:  493:    DDS::InstanceHandle_t last_instance_handle;
+        -:  494:  };
+        -:  495:
+        -:  496:  // TAO_IDL - Generated from
+        -:  497:  // be/be_type.cpp:261
+        -:  498:
+        -:  499:  struct OfferedIncompatibleQosStatus;
+        -:  500:
+        -:  501:  typedef
+        -:  502:    ::TAO_Var_Var_T<
+        -:  503:        OfferedIncompatibleQosStatus
+        -:  504:      >
+        -:  505:    OfferedIncompatibleQosStatus_var;
+        -:  506:
+        -:  507:  typedef
+        -:  508:    ::TAO_Out_T<
+        -:  509:        OfferedIncompatibleQosStatus
+        -:  510:      >
+        -:  511:    OfferedIncompatibleQosStatus_out;
+        -:  512:
+        -:  513:  // TAO_IDL - Generated from
+        -:  514:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  515:
+       30:  516:  struct OpenDDS_Dcps_Export OfferedIncompatibleQosStatus
+        -:  517:  {
+        -:  518:
+        -:  519:    // TAO_IDL - Generated from
+        -:  520:    // be/be_type.cpp:307
+        -:  521:
+        -:  522:    
+        -:  523:    typedef OfferedIncompatibleQosStatus_var _var_type;
+        -:  524:    typedef OfferedIncompatibleQosStatus_out _out_type;
+        -:  525:    
+        -:  526:    ::CORBA::Long total_count;
+        -:  527:    ::CORBA::Long total_count_change;
+        -:  528:    DDS::QosPolicyId_t last_policy_id;
+        -:  529:    DDS::QosPolicyCountSeq policies;
+        -:  530:  };
+        -:  531:
+        -:  532:  // TAO_IDL - Generated from
+        -:  533:  // be/be_type.cpp:261
+        -:  534:
+        -:  535:  struct RequestedIncompatibleQosStatus;
+        -:  536:
+        -:  537:  typedef
+        -:  538:    ::TAO_Var_Var_T<
+        -:  539:        RequestedIncompatibleQosStatus
+        -:  540:      >
+        -:  541:    RequestedIncompatibleQosStatus_var;
+        -:  542:
+        -:  543:  typedef
+        -:  544:    ::TAO_Out_T<
+        -:  545:        RequestedIncompatibleQosStatus
+        -:  546:      >
+        -:  547:    RequestedIncompatibleQosStatus_out;
+        -:  548:
+        -:  549:  // TAO_IDL - Generated from
+        -:  550:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  551:
+       12:  552:  struct OpenDDS_Dcps_Export RequestedIncompatibleQosStatus
+        -:  553:  {
+        -:  554:
+        -:  555:    // TAO_IDL - Generated from
+        -:  556:    // be/be_type.cpp:307
+        -:  557:
+        -:  558:    
+        -:  559:    typedef RequestedIncompatibleQosStatus_var _var_type;
+        -:  560:    typedef RequestedIncompatibleQosStatus_out _out_type;
+        -:  561:    
+        -:  562:    ::CORBA::Long total_count;
+        -:  563:    ::CORBA::Long total_count_change;
+        -:  564:    DDS::QosPolicyId_t last_policy_id;
+        -:  565:    DDS::QosPolicyCountSeq policies;
+        -:  566:  };
+        -:  567:
+        -:  568:  // TAO_IDL - Generated from
+        -:  569:  // be/be_type.cpp:261
+        -:  570:
+        -:  571:  struct PublicationMatchedStatus;
+        -:  572:
+        -:  573:  typedef
+        -:  574:    ::TAO_Fixed_Var_T<
+        -:  575:        PublicationMatchedStatus
+        -:  576:      >
+        -:  577:    PublicationMatchedStatus_var;
+        -:  578:
+        -:  579:  typedef
+        -:  580:    PublicationMatchedStatus &
+        -:  581:    PublicationMatchedStatus_out;
+        -:  582:
+        -:  583:  // TAO_IDL - Generated from
+        -:  584:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  585:
+        -:  586:  struct OpenDDS_Dcps_Export PublicationMatchedStatus
+        -:  587:  {
+        -:  588:
+        -:  589:    // TAO_IDL - Generated from
+        -:  590:    // be/be_type.cpp:307
+        -:  591:
+        -:  592:    
+        -:  593:    typedef PublicationMatchedStatus_var _var_type;
+        -:  594:    typedef PublicationMatchedStatus_out _out_type;
+        -:  595:    
+        -:  596:    ::CORBA::Long total_count;
+        -:  597:    ::CORBA::Long total_count_change;
+        -:  598:    ::CORBA::Long current_count;
+        -:  599:    ::CORBA::Long current_count_change;
+        -:  600:    DDS::InstanceHandle_t last_subscription_handle;
+        -:  601:  };
+        -:  602:
+        -:  603:  // TAO_IDL - Generated from
+        -:  604:  // be/be_type.cpp:261
+        -:  605:
+        -:  606:  struct SubscriptionMatchedStatus;
+        -:  607:
+        -:  608:  typedef
+        -:  609:    ::TAO_Fixed_Var_T<
+        -:  610:        SubscriptionMatchedStatus
+        -:  611:      >
+        -:  612:    SubscriptionMatchedStatus_var;
+        -:  613:
+        -:  614:  typedef
+        -:  615:    SubscriptionMatchedStatus &
+        -:  616:    SubscriptionMatchedStatus_out;
+        -:  617:
+        -:  618:  // TAO_IDL - Generated from
+        -:  619:  // be/be_visitor_structure/structure_ch.cpp:51
+        -:  620:
+        -:  621:  struct OpenDDS_Dcps_Export SubscriptionMatchedStatus
+        -:  622:  {
+        -:  623:
+        -:  624:    // TAO_IDL - Generated from
+        -:  625:    // be/be_type.cpp:307
+        -:  626:
+        -:  627:    
+        -:  628:    typedef SubscriptionMatchedStatus_var _var_type;
+        -:  629:    typedef SubscriptionMatchedStatus_out _out_type;
+        -:  630:    
+        -:  631:    ::CORBA::Long total_count;
+        -:  632:    ::CORBA::Long total_count_change;
+        -:  633:    ::CORBA::Long current_count;
+        -:  634:    ::CORBA::Long current_count_change;
+        -:  635:    DDS::InstanceHandle_t last_publication_handle;
+        -:  636:  };
+        -:  637:
+        -:  638:  // TAO_IDL - Generated from
+        -:  639:  // be/be_interface.cpp:751
+        -:  640:
+        -:  641:#if !defined (_DDS_LISTENER__VAR_OUT_CH_)
+        -:  642:#define _DDS_LISTENER__VAR_OUT_CH_
+        -:  643:
+        -:  644:  class Listener;
+        -:  645:  typedef Listener *Listener_ptr;
+        -:  646:
+        -:  647:  typedef
+        -:  648:    TAO_Objref_Var_T<
+        -:  649:        Listener
+        -:  650:      >
+        -:  651:    Listener_var;
+        -:  652:  
+        -:  653:  typedef
+        -:  654:    TAO_Objref_Out_T<
+        -:  655:        Listener
+        -:  656:      >
+        -:  657:    Listener_out;
+        -:  658:
+        -:  659:#endif /* end #if !defined */
+        -:  660:
+        -:  661:  // TAO_IDL - Generated from
+        -:  662:  // be/be_interface.cpp:751
+        -:  663:
+        -:  664:#if !defined (_DDS_ENTITY__VAR_OUT_CH_)
+        -:  665:#define _DDS_ENTITY__VAR_OUT_CH_
+        -:  666:
+        -:  667:  class Entity;
+        -:  668:  typedef Entity *Entity_ptr;
+        -:  669:
+        -:  670:  typedef
+        -:  671:    TAO_Objref_Var_T<
+        -:  672:        Entity
+        -:  673:      >
+        -:  674:    Entity_var;
+        -:  675:  
+        -:  676:  typedef
+        -:  677:    TAO_Objref_Out_T<
+        -:  678:        Entity
+        -:  679:      >
+        -:  680:    Entity_out;
+        -:  681:
+        -:  682:#endif /* end #if !defined */
+        -:  683:
+        -:  684:  // TAO_IDL - Generated from
+        -:  685:  // be/be_visitor_interface/interface_ch.cpp:43
+        -:  686:
+        -:  687:  class OpenDDS_Dcps_Export Listener
+        -:  688:    : public virtual ::CORBA::Object
+        -:  689:  {
+        -:  690:  public:
+        -:  691:
+        -:  692:    // TAO_IDL - Generated from
+        -:  693:    // be/be_type.cpp:307
+        -:  694:
+        -:  695:    typedef Listener_ptr _ptr_type;
+        -:  696:    typedef Listener_var _var_type;
+        -:  697:    typedef Listener_out _out_type;
+        -:  698:
+        -:  699:    // The static operations.
+        -:  700:    static Listener_ptr _duplicate (Listener_ptr obj);
+        -:  701:
+        -:  702:    static void _tao_release (Listener_ptr obj);
+        -:  703:
+        -:  704:    static Listener_ptr _narrow (::CORBA::Object_ptr obj);
+        -:  705:    static Listener_ptr _unchecked_narrow (::CORBA::Object_ptr obj);
+        -:  706:    static Listener_ptr _nil (void);
+        -:  707:
+        -:  708:    // TAO_IDL - Generated from
+        -:  709:    // be/be_visitor_interface/interface_ch.cpp:140
+        -:  710:
+        -:  711:    virtual ::CORBA::Boolean _is_a (const char *type_id);
+        -:  712:    virtual const char* _interface_repository_id (void) const;
+        -:  713:    virtual ::CORBA::Boolean marshal (TAO_OutputCDR &cdr);
+        -:  714:  
+        -:  715:  protected:
+        -:  716:    // Abstract or local interface only.
+        -:  717:    Listener (void);
+        -:  718:
+        -:  719:    
+        -:  720:
+        -:  721:    virtual ~Listener (void);
+        -:  722:  
+        -:  723:  private:
+        -:  724:    // Private and unimplemented for concrete interfaces.
+        -:  725:    Listener (const Listener &);
+        -:  726:
+        -:  727:    void operator= (const Listener &);
+        -:  728:  };
+        -:  729:
+        -:  730:  // TAO_IDL - Generated from
+        -:  731:  // be/be_interface.cpp:751
+        -:  732:
+        -:  733:#if !defined (_DDS_CONDITION__VAR_OUT_CH_)
+        -:  734:#define _DDS_CONDITION__VAR_OUT_CH_
+        -:  735:
+        -:  736:  class Condition;
+        -:  737:  typedef Condition *Condition_ptr;
+        -:  738:
+        -:  739:  typedef
+        -:  740:    TAO_Objref_Var_T<
+        -:  741:        Condition
+        -:  742:      >
+        -:  743:    Condition_var;
+        -:  744:  
+        -:  745:  typedef
+        -:  746:    TAO_Objref_Out_T<
+        -:  747:        Condition
+        -:  748:      >
+        -:  749:    Condition_out;
+        -:  750:
+        -:  751:#endif /* end #if !defined */
+        -:  752:
+        -:  753:  // TAO_IDL - Generated from
+        -:  754:  // be/be_visitor_interface/interface_ch.cpp:43
+        -:  755:
+        -:  756:  class OpenDDS_Dcps_Export Condition
+        -:  757:    : public virtual ::CORBA::Object
+        -:  758:  {
+        -:  759:  public:
+        -:  760:
+        -:  761:    // TAO_IDL - Generated from
+        -:  762:    // be/be_type.cpp:307
+        -:  763:
+        -:  764:    typedef Condition_ptr _ptr_type;
+        -:  765:    typedef Condition_var _var_type;
+        -:  766:    typedef Condition_out _out_type;
+        -:  767:
+        -:  768:    // The static operations.
+        -:  769:    static Condition_ptr _duplicate (Condition_ptr obj);
+        -:  770:
+        -:  771:    static void _tao_release (Condition_ptr obj);
+        -:  772:
+        -:  773:    static Condition_ptr _narrow (::CORBA::Object_ptr obj);
+        -:  774:    static Condition_ptr _unchecked_narrow (::CORBA::Object_ptr obj);
+        -:  775:    static Condition_ptr _nil (void);
+        -:  776:
+        -:  777:    virtual ::CORBA::Boolean get_trigger_value (
+        -:  778:      void) = 0;
+        -:  779:
+        -:  780:    // TAO_IDL - Generated from
+        -:  781:    // be/be_visitor_interface/interface_ch.cpp:140
+        -:  782:
+        -:  783:    virtual ::CORBA::Boolean _is_a (const char *type_id);
+        -:  784:    virtual const char* _interface_repository_id (void) const;
+        -:  785:    virtual ::CORBA::Boolean marshal (TAO_OutputCDR &cdr);
+        -:  786:  
+        -:  787:  protected:
+        -:  788:    // Abstract or local interface only.
+        -:  789:    Condition (void);
+        -:  790:
+        -:  791:    
+        -:  792:
+        -:  793:    virtual ~Condition (void);
+        -:  794:  
+        -:  795:  private:
+        -:  796:    // Private and unimplemented for concrete interfaces.
+        -:  797:    Condition (const Condition &);
+        -:  798:
+        -:  799:    void operator= (const Condition &);
+        -:  800:  };
+        -:  801:
+        -:  802:  // TAO_IDL - Generated from
+        -:  803:  // be/be_interface.cpp:751
+        -:  804:
+        -:  805:#if !defined (_DDS_WAITSETINTERF__VAR_OUT_CH_)
+        -:  806:#define _DDS_WAITSETINTERF__VAR_OUT_CH_
+        -:  807:
+        -:  808:  class WaitSetInterf;
+        -:  809:  typedef WaitSetInterf *WaitSetInterf_ptr;
+        -:  810:
+        -:  811:  typedef
+        -:  812:    TAO_Objref_Var_T<
+        -:  813:        WaitSetInterf
+        -:  814:      >
+        -:  815:    WaitSetInterf_var;
+        -:  816:  
+        -:  817:  typedef
+        -:  818:    TAO_Objref_Out_T<
+        -:  819:        WaitSetInterf
+        -:  820:      >
+        -:  821:    WaitSetInterf_out;
+        -:  822:
+        -:  823:#endif /* end #if !defined */
+        -:  824:
+        -:  825:  // TAO_IDL - Generated from
+        -:  826:  // be/be_visitor_interface/interface_ch.cpp:43
+        -:  827:
+        -:  828:  class OpenDDS_Dcps_Export WaitSetInterf
+        -:  829:    : public virtual ::CORBA::Object
+        -:  830:  {
+        -:  831:  public:
+        -:  832:
+        -:  833:    // TAO_IDL - Generated from
+        -:  834:    // be/be_type.cpp:307
+        -:  835:
+        -:  836:    typedef WaitSetInterf_ptr _ptr_type;
+        -:  837:    typedef WaitSetInterf_var _var_type;
+        -:  838:    typedef WaitSetInterf_out _out_type;
+        -:  839:
+        -:  840:    // The static operations.
+        -:  841:    static WaitSetInterf_ptr _duplicate (WaitSetInterf_ptr obj);
+        -:  842:
+        -:  843:    static void _tao_release (WaitSetInterf_ptr obj);
+        -:  844:
+        -:  845:    static WaitSetInterf_ptr _narrow (::CORBA::Object_ptr obj);
+        -:  846:    static WaitSetInterf_ptr _unchecked_narrow (::CORBA::Object_ptr obj);
+        -:  847:    static WaitSetInterf_ptr _nil (void);
+        -:  848:
+        -:  849:    virtual ::DDS::ReturnCode_t wait (
+        -:  850:      ::DDS::ConditionSeq & active_conditions,
+        -:  851:      const ::DDS::Duration_t & timeout) = 0;
+        -:  852:
+        -:  853:    virtual ::DDS::ReturnCode_t attach_condition (
+        -:  854:      ::DDS::Condition_ptr cond) = 0;
+        -:  855:
+        -:  856:    virtual ::DDS::ReturnCode_t detach_condition (
+        -:  857:      ::DDS::Condition_ptr cond) = 0;
+        -:  858:
+        -:  859:    virtual ::DDS::ReturnCode_t get_conditions (
+        -:  860:      ::DDS::ConditionSeq & attached_conditions) = 0;
+        -:  861:
+        -:  862:    // TAO_IDL - Generated from
+        -:  863:    // be/be_visitor_interface/interface_ch.cpp:140
+        -:  864:
+        -:  865:    virtual ::CORBA::Boolean _is_a (const char *type_id);
+        -:  866:    virtual const char* _interface_repository_id (void) const;
+        -:  867:    virtual ::CORBA::Boolean marshal (TAO_OutputCDR &cdr);
+        -:  868:  
+        -:  869:  protected:
+        -:  870:    // Abstract or local interface only.
+        -:  871:    WaitSetInterf (void);
+        -:  872:
+        -:  873:    
+        -:  874:
+        -:  875:    virtual ~WaitSetInterf (void);
+        -:  876:  
+        -:  877:  private:
+        -:  878:    // Private and unimplemented for concrete interfaces.
+        -:  879:    WaitSetInterf (const WaitSetInterf &);
+        -:  880:
+        -:  881:    void operator= (const WaitSetInterf &);
+        -:  882:  };
+        -:  883:
+        -:  884:  // TAO_IDL - Generated from
+        -:  885:  // be/be_interface.cpp:751
+        -:  886:
+        -:  887:#if !defined (_DDS_GUARDCONDITIONINTERF__VAR_OUT_CH_)
+        -:  888:#define _DDS_GUARDCONDITIONINTERF__VAR_OUT_CH_
+        -:  889:
+        -:  890:  class GuardConditionInterf;
+        -:  891:  typedef GuardConditionInterf *GuardConditionInterf_ptr;
+        -:  892:
+        -:  893:  typedef
+        -:  894:    TAO_Objref_Var_T<
+        -:  895:        GuardConditionInterf
+        -:  896:      >
+        -:  897:    GuardConditionInterf_var;
+        -:  898:  
+        -:  899:  typedef
+        -:  900:    TAO_Objref_Out_T<
+        -:  901:        GuardConditionInterf
+        -:  902:      >
+        -:  903:    GuardConditionInterf_out;
+        -:  904:
+        -:  905:#endif /* end #if !defined */
+        -:  906:
+        -:  907:  // TAO_IDL - Generated from
+        -:  908:  // be/be_visitor_interface/interface_ch.cpp:43
+        -:  909:
+        -:  910:  class OpenDDS_Dcps_Export GuardConditionInterf
+        -:  911:    : public virtual ::DDS::Condition
+        -:  912:  
+        -:  913:  {
+        -:  914:  public:
+        -:  915:
+        -:  916:    // TAO_IDL - Generated from
+        -:  917:    // be/be_type.cpp:307
+        -:  918:
+        -:  919:    typedef GuardConditionInterf_ptr _ptr_type;
+        -:  920:    typedef GuardConditionInterf_var _var_type;
+        -:  921:    typedef GuardConditionInterf_out _out_type;
+        -:  922:
+        -:  923:    // The static operations.
+        -:  924:    static GuardConditionInterf_ptr _duplicate (GuardConditionInterf_ptr obj);
+        -:  925:
+        -:  926:    static void _tao_release (GuardConditionInterf_ptr obj);
+        -:  927:
+        -:  928:    static GuardConditionInterf_ptr _narrow (::CORBA::Object_ptr obj);
+        -:  929:    static GuardConditionInterf_ptr _unchecked_narrow (::CORBA::Object_ptr obj);
+        -:  930:    static GuardConditionInterf_ptr _nil (void);
+        -:  931:
+        -:  932:    virtual ::DDS::ReturnCode_t set_trigger_value (
+        -:  933:      ::CORBA::Boolean value) = 0;
+        -:  934:
+        -:  935:    // TAO_IDL - Generated from
+        -:  936:    // be/be_visitor_interface/interface_ch.cpp:140
+        -:  937:
+        -:  938:    virtual ::CORBA::Boolean _is_a (const char *type_id);
+        -:  939:    virtual const char* _interface_repository_id (void) const;
+        -:  940:    virtual ::CORBA::Boolean marshal (TAO_OutputCDR &cdr);
+        -:  941:  
+        -:  942:  protected:
+        -:  943:    // Abstract or local interface only.
+        -:  944:    GuardConditionInterf (void);
+        -:  945:
+        -:  946:    
+        -:  947:
+        -:  948:    virtual ~GuardConditionInterf (void);
+        -:  949:  
+        -:  950:  private:
+        -:  951:    // Private and unimplemented for concrete interfaces.
+        -:  952:    GuardConditionInterf (const GuardConditionInterf &);
+        -:  953:
+        -:  954:    void operator= (const GuardConditionInterf &);
+        -:  955:  };
+        -:  956:
+        -:  957:  // TAO_IDL - Generated from
+        -:  958:  // be/be_interface.cpp:751
+        -:  959:
+        -:  960:#if !defined (_DDS_STATUSCONDITION__VAR_OUT_CH_)
+        -:  961:#define _DDS_STATUSCONDITION__VAR_OUT_CH_
+        -:  962:
+        -:  963:  class StatusCondition;
+        -:  964:  typedef StatusCondition *StatusCondition_ptr;
+        -:  965:
+        -:  966:  typedef
+        -:  967:    TAO_Objref_Var_T<
+        -:  968:        StatusCondition
+        -:  969:      >
+        -:  970:    StatusCondition_var;
+        -:  971:  
+        -:  972:  typedef
+        -:  973:    TAO_Objref_Out_T<
+        -:  974:        StatusCondition
+        -:  975:      >
+        -:  976:    StatusCondition_out;
+        -:  977:
+        -:  978:#endif /* end #if !defined */
+        -:  979:
+        -:  980:  // TAO_IDL - Generated from
+        -:  981:  // be/be_visitor_interface/interface_ch.cpp:43
+        -:  982:
+        -:  983:  class OpenDDS_Dcps_Export StatusCondition
+        -:  984:    : public virtual ::DDS::Condition
+        -:  985:  
+        -:  986:  {
+        -:  987:  public:
+        -:  988:
+        -:  989:    // TAO_IDL - Generated from
+        -:  990:    // be/be_type.cpp:307
+        -:  991:
+        -:  992:    typedef StatusCondition_ptr _ptr_type;
+        -:  993:    typedef StatusCondition_var _var_type;
+        -:  994:    typedef StatusCondition_out _out_type;
+        -:  995:
+        -:  996:    // The static operations.
+        -:  997:    static StatusCondition_ptr _duplicate (StatusCondition_ptr obj);
+        -:  998:
+        -:  999:    static void _tao_release (StatusCondition_ptr obj);
+        -: 1000:
+        -: 1001:    static StatusCondition_ptr _narrow (::CORBA::Object_ptr obj);
+        -: 1002:    static StatusCondition_ptr _unchecked_narrow (::CORBA::Object_ptr obj);
+        -: 1003:    static StatusCondition_ptr _nil (void);
+        -: 1004:
+        -: 1005:    virtual ::DDS::StatusMask get_enabled_statuses (
+        -: 1006:      void) = 0;
+        -: 1007:
+        -: 1008:    virtual ::DDS::ReturnCode_t set_enabled_statuses (
+        -: 1009:      ::DDS::StatusMask mask) = 0;
+        -: 1010:
+        -: 1011:    virtual ::DDS::Entity_ptr get_entity (
+        -: 1012:      void) = 0;
+        -: 1013:
+        -: 1014:    // TAO_IDL - Generated from
+        -: 1015:    // be/be_visitor_interface/interface_ch.cpp:140
+        -: 1016:
+        -: 1017:    virtual ::CORBA::Boolean _is_a (const char *type_id);
+        -: 1018:    virtual const char* _interface_repository_id (void) const;
+        -: 1019:    virtual ::CORBA::Boolean marshal (TAO_OutputCDR &cdr);
+        -: 1020:  
+        -: 1021:  protected:
+        -: 1022:    // Abstract or local interface only.
+        -: 1023:    StatusCondition (void);
+        -: 1024:
+        -: 1025:    
+        -: 1026:
+        -: 1027:    virtual ~StatusCondition (void);
+        -: 1028:  
+        -: 1029:  private:
+        -: 1030:    // Private and unimplemented for concrete interfaces.
+        -: 1031:    StatusCondition (const StatusCondition &);
+        -: 1032:
+        -: 1033:    void operator= (const StatusCondition &);
+        -: 1034:  };
+        -: 1035:
+        -: 1036:  // TAO_IDL - Generated from
+        -: 1037:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1038:
+        -: 1039:  const char *const USERDATA_QOS_POLICY_NAME = "UserData";
+        -: 1040:
+        -: 1041:  // TAO_IDL - Generated from
+        -: 1042:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1043:
+        -: 1044:  const char *const DURABILITY_QOS_POLICY_NAME = "Durability";
+        -: 1045:
+        -: 1046:  // TAO_IDL - Generated from
+        -: 1047:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1048:
+        -: 1049:  const char *const PRESENTATION_QOS_POLICY_NAME = "Presentation";
+        -: 1050:
+        -: 1051:  // TAO_IDL - Generated from
+        -: 1052:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1053:
+        -: 1054:  const char *const DEADLINE_QOS_POLICY_NAME = "Deadline";
+        -: 1055:
+        -: 1056:  // TAO_IDL - Generated from
+        -: 1057:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1058:
+        -: 1059:  const char *const LATENCYBUDGET_QOS_POLICY_NAME = "LatencyBudget";
+        -: 1060:
+        -: 1061:  // TAO_IDL - Generated from
+        -: 1062:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1063:
+        -: 1064:  const char *const OWNERSHIP_QOS_POLICY_NAME = "Ownership";
+        -: 1065:
+        -: 1066:  // TAO_IDL - Generated from
+        -: 1067:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1068:
+        -: 1069:  const char *const OWNERSHIPSTRENGTH_QOS_POLICY_NAME = "OwnershipStrength";
+        -: 1070:
+        -: 1071:  // TAO_IDL - Generated from
+        -: 1072:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1073:
+        -: 1074:  const char *const LIVELINESS_QOS_POLICY_NAME = "Liveliness";
+        -: 1075:
+        -: 1076:  // TAO_IDL - Generated from
+        -: 1077:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1078:
+        -: 1079:  const char *const TIMEBASEDFILTER_QOS_POLICY_NAME = "TimeBasedFilter";
+        -: 1080:
+        -: 1081:  // TAO_IDL - Generated from
+        -: 1082:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1083:
+        -: 1084:  const char *const PARTITION_QOS_POLICY_NAME = "Partition";
+        -: 1085:
+        -: 1086:  // TAO_IDL - Generated from
+        -: 1087:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1088:
+        -: 1089:  const char *const RELIABILITY_QOS_POLICY_NAME = "Reliability";
+        -: 1090:
+        -: 1091:  // TAO_IDL - Generated from
+        -: 1092:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1093:
+        -: 1094:  const char *const DESTINATIONORDER_QOS_POLICY_NAME = "DestinationOrder";
+        -: 1095:
+        -: 1096:  // TAO_IDL - Generated from
+        -: 1097:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1098:
+        -: 1099:  const char *const HISTORY_QOS_POLICY_NAME = "History";
+        -: 1100:
+        -: 1101:  // TAO_IDL - Generated from
+        -: 1102:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1103:
+        -: 1104:  const char *const RESOURCELIMITS_QOS_POLICY_NAME = "ResourceLimits";
+        -: 1105:
+        -: 1106:  // TAO_IDL - Generated from
+        -: 1107:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1108:
+        -: 1109:  const char *const ENTITYFACTORY_QOS_POLICY_NAME = "EntityFactory";
+        -: 1110:
+        -: 1111:  // TAO_IDL - Generated from
+        -: 1112:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1113:
+        -: 1114:  const char *const WRITERDATALIFECYCLE_QOS_POLICY_NAME = "WriterDataLifecycle";
+        -: 1115:
+        -: 1116:  // TAO_IDL - Generated from
+        -: 1117:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1118:
+        -: 1119:  const char *const READERDATALIFECYCLE_QOS_POLICY_NAME = "ReaderDataLifecycle";
+        -: 1120:
+        -: 1121:  // TAO_IDL - Generated from
+        -: 1122:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1123:
+        -: 1124:  const char *const TOPICDATA_QOS_POLICY_NAME = "TopicData";
+        -: 1125:
+        -: 1126:  // TAO_IDL - Generated from
+        -: 1127:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1128:
+        -: 1129:  const char *const GROUPDATA_QOS_POLICY_NAME = "GroupData";
+        -: 1130:
+        -: 1131:  // TAO_IDL - Generated from
+        -: 1132:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1133:
+        -: 1134:  const char *const TRANSPORTPRIORITY_QOS_POLICY_NAME = "TransportPriority";
+        -: 1135:
+        -: 1136:  // TAO_IDL - Generated from
+        -: 1137:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1138:
+        -: 1139:  const char *const LIFESPAN_QOS_POLICY_NAME = "Lifespan";
+        -: 1140:
+        -: 1141:  // TAO_IDL - Generated from
+        -: 1142:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1143:
+        -: 1144:  const char *const DURABILITYSERVICE_POLICY_NAME = "DurabilityService";
+        -: 1145:
+        -: 1146:  // TAO_IDL - Generated from
+        -: 1147:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1148:
+        -: 1149:  const CORBA::Long INVALID_QOS_POLICY_ID = 0;
+        -: 1150:
+        -: 1151:  // TAO_IDL - Generated from
+        -: 1152:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1153:
+        -: 1154:  const CORBA::Long USERDATA_QOS_POLICY_ID = 1;
+        -: 1155:
+        -: 1156:  // TAO_IDL - Generated from
+        -: 1157:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1158:
+        -: 1159:  const CORBA::Long DURABILITY_QOS_POLICY_ID = 2;
+        -: 1160:
+        -: 1161:  // TAO_IDL - Generated from
+        -: 1162:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1163:
+        -: 1164:  const CORBA::Long PRESENTATION_QOS_POLICY_ID = 3;
+        -: 1165:
+        -: 1166:  // TAO_IDL - Generated from
+        -: 1167:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1168:
+        -: 1169:  const CORBA::Long DEADLINE_QOS_POLICY_ID = 4;
+        -: 1170:
+        -: 1171:  // TAO_IDL - Generated from
+        -: 1172:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1173:
+        -: 1174:  const CORBA::Long LATENCYBUDGET_QOS_POLICY_ID = 5;
+        -: 1175:
+        -: 1176:  // TAO_IDL - Generated from
+        -: 1177:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1178:
+        -: 1179:  const CORBA::Long OWNERSHIP_QOS_POLICY_ID = 6;
+        -: 1180:
+        -: 1181:  // TAO_IDL - Generated from
+        -: 1182:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1183:
+        -: 1184:  const CORBA::Long OWNERSHIPSTRENGTH_QOS_POLICY_ID = 7;
+        -: 1185:
+        -: 1186:  // TAO_IDL - Generated from
+        -: 1187:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1188:
+        -: 1189:  const CORBA::Long LIVELINESS_QOS_POLICY_ID = 8;
+        -: 1190:
+        -: 1191:  // TAO_IDL - Generated from
+        -: 1192:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1193:
+        -: 1194:  const CORBA::Long TIMEBASEDFILTER_QOS_POLICY_ID = 9;
+        -: 1195:
+        -: 1196:  // TAO_IDL - Generated from
+        -: 1197:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1198:
+        -: 1199:  const CORBA::Long PARTITION_QOS_POLICY_ID = 10;
+        -: 1200:
+        -: 1201:  // TAO_IDL - Generated from
+        -: 1202:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1203:
+        -: 1204:  const CORBA::Long RELIABILITY_QOS_POLICY_ID = 11;
+        -: 1205:
+        -: 1206:  // TAO_IDL - Generated from
+        -: 1207:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1208:
+        -: 1209:  const CORBA::Long DESTINATIONORDER_QOS_POLICY_ID = 12;
+        -: 1210:
+        -: 1211:  // TAO_IDL - Generated from
+        -: 1212:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1213:
+        -: 1214:  const CORBA::Long HISTORY_QOS_POLICY_ID = 13;
+        -: 1215:
+        -: 1216:  // TAO_IDL - Generated from
+        -: 1217:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1218:
+        -: 1219:  const CORBA::Long RESOURCELIMITS_QOS_POLICY_ID = 14;
+        -: 1220:
+        -: 1221:  // TAO_IDL - Generated from
+        -: 1222:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1223:
+        -: 1224:  const CORBA::Long ENTITYFACTORY_QOS_POLICY_ID = 15;
+        -: 1225:
+        -: 1226:  // TAO_IDL - Generated from
+        -: 1227:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1228:
+        -: 1229:  const CORBA::Long WRITERDATALIFECYCLE_QOS_POLICY_ID = 16;
+        -: 1230:
+        -: 1231:  // TAO_IDL - Generated from
+        -: 1232:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1233:
+        -: 1234:  const CORBA::Long READERDATALIFECYCLE_QOS_POLICY_ID = 17;
+        -: 1235:
+        -: 1236:  // TAO_IDL - Generated from
+        -: 1237:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1238:
+        -: 1239:  const CORBA::Long TOPICDATA_QOS_POLICY_ID = 18;
+        -: 1240:
+        -: 1241:  // TAO_IDL - Generated from
+        -: 1242:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1243:
+        -: 1244:  const CORBA::Long GROUPDATA_QOS_POLICY_ID = 19;
+        -: 1245:
+        -: 1246:  // TAO_IDL - Generated from
+        -: 1247:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1248:
+        -: 1249:  const CORBA::Long TRANSPORTPRIORITY_QOS_POLICY_ID = 20;
+        -: 1250:
+        -: 1251:  // TAO_IDL - Generated from
+        -: 1252:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1253:
+        -: 1254:  const CORBA::Long LIFESPAN_QOS_POLICY_ID = 21;
+        -: 1255:
+        -: 1256:  // TAO_IDL - Generated from
+        -: 1257:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1258:
+        -: 1259:  const CORBA::Long DURABILITYSERVICE_QOS_POLICY_ID = 22;
+        -: 1260:
+        -: 1261:  // TAO_IDL - Generated from
+        -: 1262:  // be/be_visitor_interface/interface_ch.cpp:43
+        -: 1263:
+        -: 1264:  class OpenDDS_Dcps_Export Entity
+        -: 1265:    : public virtual ::CORBA::Object
+        -: 1266:  {
+        -: 1267:  public:
+        -: 1268:
+        -: 1269:    // TAO_IDL - Generated from
+        -: 1270:    // be/be_type.cpp:307
+        -: 1271:
+        -: 1272:    typedef Entity_ptr _ptr_type;
+        -: 1273:    typedef Entity_var _var_type;
+        -: 1274:    typedef Entity_out _out_type;
+        -: 1275:
+        -: 1276:    // The static operations.
+        -: 1277:    static Entity_ptr _duplicate (Entity_ptr obj);
+        -: 1278:
+        -: 1279:    static void _tao_release (Entity_ptr obj);
+        -: 1280:
+        -: 1281:    static Entity_ptr _narrow (::CORBA::Object_ptr obj);
+        -: 1282:    static Entity_ptr _unchecked_narrow (::CORBA::Object_ptr obj);
+        -: 1283:    static Entity_ptr _nil (void);
+        -: 1284:
+        -: 1285:    virtual ::DDS::ReturnCode_t enable (
+        -: 1286:      void) = 0;
+        -: 1287:
+        -: 1288:    virtual ::DDS::StatusCondition_ptr get_statuscondition (
+        -: 1289:      void) = 0;
+        -: 1290:
+        -: 1291:    virtual ::DDS::StatusMask get_status_changes (
+        -: 1292:      void) = 0;
+        -: 1293:
+        -: 1294:    virtual ::DDS::InstanceHandle_t get_instance_handle (
+        -: 1295:      void) = 0;
+        -: 1296:
+        -: 1297:    // TAO_IDL - Generated from
+        -: 1298:    // be/be_visitor_interface/interface_ch.cpp:140
+        -: 1299:
+        -: 1300:    virtual ::CORBA::Boolean _is_a (const char *type_id);
+        -: 1301:    virtual const char* _interface_repository_id (void) const;
+        -: 1302:    virtual ::CORBA::Boolean marshal (TAO_OutputCDR &cdr);
+        -: 1303:  
+        -: 1304:  protected:
+        -: 1305:    // Abstract or local interface only.
+        -: 1306:    Entity (void);
+        -: 1307:
+        -: 1308:    
+        -: 1309:
+        -: 1310:    virtual ~Entity (void);
+        -: 1311:  
+        -: 1312:  private:
+        -: 1313:    // Private and unimplemented for concrete interfaces.
+        -: 1314:    Entity (const Entity &);
+        -: 1315:
+        -: 1316:    void operator= (const Entity &);
+        -: 1317:  };
+        -: 1318:
+        -: 1319:// TAO_IDL - Generated from
+        -: 1320:// be/be_visitor_module/module_ch.cpp:67
+        -: 1321:
+        -: 1322:} // module DDS
+        -: 1323:
+        -: 1324:// TAO_IDL - Generated from
+        -: 1325:// be/be_visitor_module/module_ch.cpp:38
+        -: 1326:
+        -: 1327:namespace OpenDDS
+        -: 1328:{
+        -: 1329:
+        -: 1330:  // TAO_IDL - Generated from
+        -: 1331:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1332:
+        -: 1333:  const char *const TRANSPORTTYPE_QOS_POLICY_NAME = "TransportType";
+        -: 1334:
+        -: 1335:  // TAO_IDL - Generated from
+        -: 1336:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1337:
+        -: 1338:  const CORBA::Long TRANSPORTTYPE_QOS_POLICY_ID = 2147483647;
+        -: 1339:
+        -: 1340:  // TAO_IDL - Generated from
+        -: 1341:  // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1342:
+        -: 1343:  const CORBA::Long MAX_USER_DOMAINID = 2147483647;
+        -: 1344:
+        -: 1345:  // TAO_IDL - Generated from
+        -: 1346:  // be/be_visitor_module/module_ch.cpp:38
+        -: 1347:
+        -: 1348:  namespace DCPS
+        -: 1349:  {
+        -: 1350:
+        -: 1351:    // TAO_IDL - Generated from
+        -: 1352:    // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1353:
+        -: 1354:    const CORBA::ULong ALL_STATUS_MASK = 4294967295U;
+        -: 1355:
+        -: 1356:    // TAO_IDL - Generated from
+        -: 1357:    // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1358:
+        -: 1359:    const CORBA::ULong NO_STATUS_MASK = 0U;
+        -: 1360:
+        -: 1361:    // TAO_IDL - Generated from
+        -: 1362:    // be/be_visitor_constant/constant_ch.cpp:38
+        -: 1363:
+        -: 1364:    const CORBA::ULong DEFAULT_STATUS_MASK = 4294967295U;
+        -: 1365:  
+        -: 1366:  // TAO_IDL - Generated from
+        -: 1367:  // be/be_visitor_module/module_ch.cpp:67
+        -: 1368:  
+        -: 1369:  } // module OpenDDS::DCPS
+        -: 1370:
+        -: 1371:// TAO_IDL - Generated from
+        -: 1372:// be/be_visitor_module/module_ch.cpp:67
+        -: 1373:
+        -: 1374:} // module OpenDDS
+        -: 1375:
+        -: 1376:// TAO_IDL - Generated from
+        -: 1377:// be/be_visitor_arg_traits.cpp:68
+        -: 1378:
+        -: 1379:
+        -: 1380:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1381:
+        -: 1382:
+        -: 1383:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1384:
+        -: 1385:
+        -: 1386:// Arg traits specializations.
+        -: 1387:namespace TAO
+        -: 1388:{
+        -: 1389:
+        -: 1390:  // TAO_IDL - Generated from
+        -: 1391:  // be/be_visitor_arg_traits.cpp:947
+        -: 1392:
+        -: 1393:  template<>
+        -: 1394:  class Arg_Traits< ::DDS::InconsistentTopicStatus>
+        -: 1395:    : public
+        -: 1396:        Fixed_Size_Arg_Traits_T<
+        -: 1397:            ::DDS::InconsistentTopicStatus,
+        -: 1398:            TAO::Any_Insert_Policy_Noop
+        -: 1399:          >
+        -: 1400:  {
+        -: 1401:  };
+        -: 1402:
+        -: 1403:  // TAO_IDL - Generated from
+        -: 1404:  // be/be_visitor_arg_traits.cpp:947
+        -: 1405:
+        -: 1406:  template<>
+        -: 1407:  class Arg_Traits< ::DDS::SampleLostStatus>
+        -: 1408:    : public
+        -: 1409:        Fixed_Size_Arg_Traits_T<
+        -: 1410:            ::DDS::SampleLostStatus,
+        -: 1411:            TAO::Any_Insert_Policy_Noop
+        -: 1412:          >
+        -: 1413:  {
+        -: 1414:  };
+        -: 1415:
+        -: 1416:  // TAO_IDL - Generated from
+        -: 1417:  // be/be_visitor_arg_traits.cpp:904
+        -: 1418:
+        -: 1419:  template<>
+        -: 1420:  class Arg_Traits< ::DDS::SampleRejectedStatusKind>
+        -: 1421:    : public
+        -: 1422:        Basic_Arg_Traits_T<
+        -: 1423:            ::DDS::SampleRejectedStatusKind,
+        -: 1424:            TAO::Any_Insert_Policy_Noop
+        -: 1425:          >
+        -: 1426:  {
+        -: 1427:  };
+        -: 1428:
+        -: 1429:  // TAO_IDL - Generated from
+        -: 1430:  // be/be_visitor_arg_traits.cpp:947
+        -: 1431:
+        -: 1432:  template<>
+        -: 1433:  class Arg_Traits< ::DDS::SampleRejectedStatus>
+        -: 1434:    : public
+        -: 1435:        Fixed_Size_Arg_Traits_T<
+        -: 1436:            ::DDS::SampleRejectedStatus,
+        -: 1437:            TAO::Any_Insert_Policy_Noop
+        -: 1438:          >
+        -: 1439:  {
+        -: 1440:  };
+        -: 1441:
+        -: 1442:  // TAO_IDL - Generated from
+        -: 1443:  // be/be_visitor_arg_traits.cpp:947
+        -: 1444:
+        -: 1445:  template<>
+        -: 1446:  class Arg_Traits< ::DDS::LivelinessLostStatus>
+        -: 1447:    : public
+        -: 1448:        Fixed_Size_Arg_Traits_T<
+        -: 1449:            ::DDS::LivelinessLostStatus,
+        -: 1450:            TAO::Any_Insert_Policy_Noop
+        -: 1451:          >
+        -: 1452:  {
+        -: 1453:  };
+        -: 1454:
+        -: 1455:  // TAO_IDL - Generated from
+        -: 1456:  // be/be_visitor_arg_traits.cpp:947
+        -: 1457:
+        -: 1458:  template<>
+        -: 1459:  class Arg_Traits< ::DDS::LivelinessChangedStatus>
+        -: 1460:    : public
+        -: 1461:        Fixed_Size_Arg_Traits_T<
+        -: 1462:            ::DDS::LivelinessChangedStatus,
+        -: 1463:            TAO::Any_Insert_Policy_Noop
+        -: 1464:          >
+        -: 1465:  {
+        -: 1466:  };
+        -: 1467:
+        -: 1468:  // TAO_IDL - Generated from
+        -: 1469:  // be/be_visitor_arg_traits.cpp:947
+        -: 1470:
+        -: 1471:  template<>
+        -: 1472:  class Arg_Traits< ::DDS::OfferedDeadlineMissedStatus>
+        -: 1473:    : public
+        -: 1474:        Fixed_Size_Arg_Traits_T<
+        -: 1475:            ::DDS::OfferedDeadlineMissedStatus,
+        -: 1476:            TAO::Any_Insert_Policy_Noop
+        -: 1477:          >
+        -: 1478:  {
+        -: 1479:  };
+        -: 1480:
+        -: 1481:  // TAO_IDL - Generated from
+        -: 1482:  // be/be_visitor_arg_traits.cpp:947
+        -: 1483:
+        -: 1484:  template<>
+        -: 1485:  class Arg_Traits< ::DDS::RequestedDeadlineMissedStatus>
+        -: 1486:    : public
+        -: 1487:        Fixed_Size_Arg_Traits_T<
+        -: 1488:            ::DDS::RequestedDeadlineMissedStatus,
+        -: 1489:            TAO::Any_Insert_Policy_Noop
+        -: 1490:          >
+        -: 1491:  {
+        -: 1492:  };
+        -: 1493:
+        -: 1494:  // TAO_IDL - Generated from
+        -: 1495:  // be/be_visitor_arg_traits.cpp:947
+        -: 1496:
+        -: 1497:  template<>
+        -: 1498:  class Arg_Traits< ::DDS::OfferedIncompatibleQosStatus>
+        -: 1499:    : public
+        -: 1500:        Var_Size_Arg_Traits_T<
+        -: 1501:            ::DDS::OfferedIncompatibleQosStatus,
+        -: 1502:            TAO::Any_Insert_Policy_Noop
+        -: 1503:          >
+        -: 1504:  {
+        -: 1505:  };
+        -: 1506:
+        -: 1507:  // TAO_IDL - Generated from
+        -: 1508:  // be/be_visitor_arg_traits.cpp:947
+        -: 1509:
+        -: 1510:  template<>
+        -: 1511:  class Arg_Traits< ::DDS::RequestedIncompatibleQosStatus>
+        -: 1512:    : public
+        -: 1513:        Var_Size_Arg_Traits_T<
+        -: 1514:            ::DDS::RequestedIncompatibleQosStatus,
+        -: 1515:            TAO::Any_Insert_Policy_Noop
+        -: 1516:          >
+        -: 1517:  {
+        -: 1518:  };
+        -: 1519:
+        -: 1520:  // TAO_IDL - Generated from
+        -: 1521:  // be/be_visitor_arg_traits.cpp:947
+        -: 1522:
+        -: 1523:  template<>
+        -: 1524:  class Arg_Traits< ::DDS::PublicationMatchedStatus>
+        -: 1525:    : public
+        -: 1526:        Fixed_Size_Arg_Traits_T<
+        -: 1527:            ::DDS::PublicationMatchedStatus,
+        -: 1528:            TAO::Any_Insert_Policy_Noop
+        -: 1529:          >
+        -: 1530:  {
+        -: 1531:  };
+        -: 1532:
+        -: 1533:  // TAO_IDL - Generated from
+        -: 1534:  // be/be_visitor_arg_traits.cpp:947
+        -: 1535:
+        -: 1536:  template<>
+        -: 1537:  class Arg_Traits< ::DDS::SubscriptionMatchedStatus>
+        -: 1538:    : public
+        -: 1539:        Fixed_Size_Arg_Traits_T<
+        -: 1540:            ::DDS::SubscriptionMatchedStatus,
+        -: 1541:            TAO::Any_Insert_Policy_Noop
+        -: 1542:          >
+        -: 1543:  {
+        -: 1544:  };
+        -: 1545:}
+        -: 1546:
+        -: 1547:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1548:
+        -: 1549:
+        -: 1550:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1551:
+        -: 1552:
+        -: 1553:
+        -: 1554:
+        -: 1555:// TAO_IDL - Generated from
+        -: 1556:// be/be_visitor_traits.cpp:62
+        -: 1557:
+        -: 1558:
+        -: 1559:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1560:
+        -: 1561:
+        -: 1562:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1563:
+        -: 1564:// Traits specializations.
+        -: 1565:namespace TAO
+        -: 1566:{
+        -: 1567:
+        -: 1568:#if !defined (_DDS_LISTENER__TRAITS_)
+        -: 1569:#define _DDS_LISTENER__TRAITS_
+        -: 1570:
+        -: 1571:  template<>
+        -: 1572:  struct OpenDDS_Dcps_Export Objref_Traits< ::DDS::Listener>
+        -: 1573:  {
+        -: 1574:    static ::DDS::Listener_ptr duplicate (
+        -: 1575:        ::DDS::Listener_ptr p);
+        -: 1576:    static void release (
+        -: 1577:        ::DDS::Listener_ptr p);
+        -: 1578:    static ::DDS::Listener_ptr nil (void);
+        -: 1579:    static ::CORBA::Boolean marshal (
+        -: 1580:        const ::DDS::Listener_ptr p,
+        -: 1581:        TAO_OutputCDR & cdr);
+        -: 1582:  };
+        -: 1583:
+        -: 1584:#endif /* end #if !defined */
+        -: 1585:
+        -: 1586:#if !defined (_DDS_CONDITION__TRAITS_)
+        -: 1587:#define _DDS_CONDITION__TRAITS_
+        -: 1588:
+        -: 1589:  template<>
+        -: 1590:  struct OpenDDS_Dcps_Export Objref_Traits< ::DDS::Condition>
+        -: 1591:  {
+        -: 1592:    static ::DDS::Condition_ptr duplicate (
+        -: 1593:        ::DDS::Condition_ptr p);
+        -: 1594:    static void release (
+        -: 1595:        ::DDS::Condition_ptr p);
+        -: 1596:    static ::DDS::Condition_ptr nil (void);
+        -: 1597:    static ::CORBA::Boolean marshal (
+        -: 1598:        const ::DDS::Condition_ptr p,
+        -: 1599:        TAO_OutputCDR & cdr);
+        -: 1600:  };
+        -: 1601:
+        -: 1602:#endif /* end #if !defined */
+        -: 1603:
+        -: 1604:#if !defined (_DDS_WAITSETINTERF__TRAITS_)
+        -: 1605:#define _DDS_WAITSETINTERF__TRAITS_
+        -: 1606:
+        -: 1607:  template<>
+        -: 1608:  struct OpenDDS_Dcps_Export Objref_Traits< ::DDS::WaitSetInterf>
+        -: 1609:  {
+        -: 1610:    static ::DDS::WaitSetInterf_ptr duplicate (
+        -: 1611:        ::DDS::WaitSetInterf_ptr p);
+        -: 1612:    static void release (
+        -: 1613:        ::DDS::WaitSetInterf_ptr p);
+        -: 1614:    static ::DDS::WaitSetInterf_ptr nil (void);
+        -: 1615:    static ::CORBA::Boolean marshal (
+        -: 1616:        const ::DDS::WaitSetInterf_ptr p,
+        -: 1617:        TAO_OutputCDR & cdr);
+        -: 1618:  };
+        -: 1619:
+        -: 1620:#endif /* end #if !defined */
+        -: 1621:
+        -: 1622:#if !defined (_DDS_GUARDCONDITIONINTERF__TRAITS_)
+        -: 1623:#define _DDS_GUARDCONDITIONINTERF__TRAITS_
+        -: 1624:
+        -: 1625:  template<>
+        -: 1626:  struct OpenDDS_Dcps_Export Objref_Traits< ::DDS::GuardConditionInterf>
+        -: 1627:  {
+        -: 1628:    static ::DDS::GuardConditionInterf_ptr duplicate (
+        -: 1629:        ::DDS::GuardConditionInterf_ptr p);
+        -: 1630:    static void release (
+        -: 1631:        ::DDS::GuardConditionInterf_ptr p);
+        -: 1632:    static ::DDS::GuardConditionInterf_ptr nil (void);
+        -: 1633:    static ::CORBA::Boolean marshal (
+        -: 1634:        const ::DDS::GuardConditionInterf_ptr p,
+        -: 1635:        TAO_OutputCDR & cdr);
+        -: 1636:  };
+        -: 1637:
+        -: 1638:#endif /* end #if !defined */
+        -: 1639:
+        -: 1640:#if !defined (_DDS_STATUSCONDITION__TRAITS_)
+        -: 1641:#define _DDS_STATUSCONDITION__TRAITS_
+        -: 1642:
+        -: 1643:  template<>
+        -: 1644:  struct OpenDDS_Dcps_Export Objref_Traits< ::DDS::StatusCondition>
+        -: 1645:  {
+        -: 1646:    static ::DDS::StatusCondition_ptr duplicate (
+        -: 1647:        ::DDS::StatusCondition_ptr p);
+        -: 1648:    static void release (
+        -: 1649:        ::DDS::StatusCondition_ptr p);
+        -: 1650:    static ::DDS::StatusCondition_ptr nil (void);
+        -: 1651:    static ::CORBA::Boolean marshal (
+        -: 1652:        const ::DDS::StatusCondition_ptr p,
+        -: 1653:        TAO_OutputCDR & cdr);
+        -: 1654:  };
+        -: 1655:
+        -: 1656:#endif /* end #if !defined */
+        -: 1657:
+        -: 1658:#if !defined (_DDS_ENTITY__TRAITS_)
+        -: 1659:#define _DDS_ENTITY__TRAITS_
+        -: 1660:
+        -: 1661:  template<>
+        -: 1662:  struct OpenDDS_Dcps_Export Objref_Traits< ::DDS::Entity>
+        -: 1663:  {
+        -: 1664:    static ::DDS::Entity_ptr duplicate (
+        -: 1665:        ::DDS::Entity_ptr p);
+        -: 1666:    static void release (
+        -: 1667:        ::DDS::Entity_ptr p);
+        -: 1668:    static ::DDS::Entity_ptr nil (void);
+        -: 1669:    static ::CORBA::Boolean marshal (
+        -: 1670:        const ::DDS::Entity_ptr p,
+        -: 1671:        TAO_OutputCDR & cdr);
+        -: 1672:  };
+        -: 1673:
+        -: 1674:#endif /* end #if !defined */
+        -: 1675:}
+        -: 1676:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1677:
+        -: 1678:
+        -: 1679:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1680:
+        -: 1681:
+        -: 1682:
+        -: 1683:
+        -: 1684:// TAO_IDL - Generated from
+        -: 1685:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1686:
+        -: 1687:
+        -: 1688:
+        -: 1689:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1690:
+        -: 1691:
+        -: 1692:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1693:
+        -: 1694:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::InconsistentTopicStatus &);
+        -: 1695:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::InconsistentTopicStatus &);
+        -: 1696:
+        -: 1697:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1698:
+        -: 1699:
+        -: 1700:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1701:
+        -: 1702:
+        -: 1703:
+        -: 1704:
+        -: 1705:// TAO_IDL - Generated from
+        -: 1706:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1707:
+        -: 1708:
+        -: 1709:
+        -: 1710:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1711:
+        -: 1712:
+        -: 1713:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1714:
+        -: 1715:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::SampleLostStatus &);
+        -: 1716:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::SampleLostStatus &);
+        -: 1717:
+        -: 1718:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1719:
+        -: 1720:
+        -: 1721:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1722:
+        -: 1723:
+        -: 1724:
+        -: 1725:
+        -: 1726:// TAO_IDL - Generated from
+        -: 1727:// be/be_visitor_enum/cdr_op_ch.cpp:37
+        -: 1728:
+        -: 1729:
+        -: 1730:
+        -: 1731:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1732:
+        -: 1733:
+        -: 1734:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1735:
+        -: 1736:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &strm, DDS::SampleRejectedStatusKind _tao_enumerator);
+        -: 1737:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &strm, DDS::SampleRejectedStatusKind &_tao_enumerator);
+        -: 1738:
+        -: 1739:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1740:
+        -: 1741:
+        -: 1742:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1743:
+        -: 1744:
+        -: 1745:
+        -: 1746:
+        -: 1747:// TAO_IDL - Generated from
+        -: 1748:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1749:
+        -: 1750:
+        -: 1751:
+        -: 1752:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1753:
+        -: 1754:
+        -: 1755:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1756:
+        -: 1757:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::SampleRejectedStatus &);
+        -: 1758:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::SampleRejectedStatus &);
+        -: 1759:
+        -: 1760:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1761:
+        -: 1762:
+        -: 1763:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1764:
+        -: 1765:
+        -: 1766:
+        -: 1767:
+        -: 1768:// TAO_IDL - Generated from
+        -: 1769:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1770:
+        -: 1771:
+        -: 1772:
+        -: 1773:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1774:
+        -: 1775:
+        -: 1776:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1777:
+        -: 1778:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::LivelinessLostStatus &);
+        -: 1779:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::LivelinessLostStatus &);
+        -: 1780:
+        -: 1781:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1782:
+        -: 1783:
+        -: 1784:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1785:
+        -: 1786:
+        -: 1787:
+        -: 1788:
+        -: 1789:// TAO_IDL - Generated from
+        -: 1790:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1791:
+        -: 1792:
+        -: 1793:
+        -: 1794:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1795:
+        -: 1796:
+        -: 1797:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1798:
+        -: 1799:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::LivelinessChangedStatus &);
+        -: 1800:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::LivelinessChangedStatus &);
+        -: 1801:
+        -: 1802:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1803:
+        -: 1804:
+        -: 1805:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1806:
+        -: 1807:
+        -: 1808:
+        -: 1809:
+        -: 1810:// TAO_IDL - Generated from
+        -: 1811:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1812:
+        -: 1813:
+        -: 1814:
+        -: 1815:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1816:
+        -: 1817:
+        -: 1818:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1819:
+        -: 1820:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::OfferedDeadlineMissedStatus &);
+        -: 1821:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::OfferedDeadlineMissedStatus &);
+        -: 1822:
+        -: 1823:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1824:
+        -: 1825:
+        -: 1826:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1827:
+        -: 1828:
+        -: 1829:
+        -: 1830:
+        -: 1831:// TAO_IDL - Generated from
+        -: 1832:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1833:
+        -: 1834:
+        -: 1835:
+        -: 1836:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1837:
+        -: 1838:
+        -: 1839:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1840:
+        -: 1841:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::RequestedDeadlineMissedStatus &);
+        -: 1842:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::RequestedDeadlineMissedStatus &);
+        -: 1843:
+        -: 1844:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1845:
+        -: 1846:
+        -: 1847:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1848:
+        -: 1849:
+        -: 1850:
+        -: 1851:
+        -: 1852:// TAO_IDL - Generated from
+        -: 1853:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1854:
+        -: 1855:
+        -: 1856:
+        -: 1857:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1858:
+        -: 1859:
+        -: 1860:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1861:
+        -: 1862:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::OfferedIncompatibleQosStatus &);
+        -: 1863:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::OfferedIncompatibleQosStatus &);
+        -: 1864:
+        -: 1865:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1866:
+        -: 1867:
+        -: 1868:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1869:
+        -: 1870:
+        -: 1871:
+        -: 1872:
+        -: 1873:// TAO_IDL - Generated from
+        -: 1874:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1875:
+        -: 1876:
+        -: 1877:
+        -: 1878:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1879:
+        -: 1880:
+        -: 1881:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1882:
+        -: 1883:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::RequestedIncompatibleQosStatus &);
+        -: 1884:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::RequestedIncompatibleQosStatus &);
+        -: 1885:
+        -: 1886:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1887:
+        -: 1888:
+        -: 1889:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1890:
+        -: 1891:
+        -: 1892:
+        -: 1893:
+        -: 1894:// TAO_IDL - Generated from
+        -: 1895:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1896:
+        -: 1897:
+        -: 1898:
+        -: 1899:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1900:
+        -: 1901:
+        -: 1902:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1903:
+        -: 1904:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::PublicationMatchedStatus &);
+        -: 1905:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::PublicationMatchedStatus &);
+        -: 1906:
+        -: 1907:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1908:
+        -: 1909:
+        -: 1910:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1911:
+        -: 1912:
+        -: 1913:
+        -: 1914:
+        -: 1915:// TAO_IDL - Generated from
+        -: 1916:// be/be_visitor_structure/cdr_op_ch.cpp:46
+        -: 1917:
+        -: 1918:
+        -: 1919:
+        -: 1920:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1921:
+        -: 1922:
+        -: 1923:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1924:
+        -: 1925:OpenDDS_Dcps_Export ::CORBA::Boolean operator<< (TAO_OutputCDR &, const DDS::SubscriptionMatchedStatus &);
+        -: 1926:OpenDDS_Dcps_Export ::CORBA::Boolean operator>> (TAO_InputCDR &, DDS::SubscriptionMatchedStatus &);
+        -: 1927:
+        -: 1928:TAO_END_VERSIONED_NAMESPACE_DECL
+        -: 1929:
+        -: 1930:
+        -: 1931:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -: 1932:
+        -: 1933:
+        -: 1934:
+        -: 1935:
+        -: 1936:// TAO_IDL - Generated from
+        -: 1937:// be/be_codegen.cpp:1703
+        -: 1938:
+        -: 1939:
+        -: 1940:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -: 1941:
+        -: 1942:#if defined (__ACE_INLINE__)
+        -: 1943:#include "DdsDcpsInfrastructureC.inl"
+        -: 1944:#endif /* defined INLINE */
+        -: 1945:
+        -: 1946:#include /**/ "ace/post.h"
+        -: 1947:
+        -: 1948:#endif /* ifndef */
+        -: 1949:

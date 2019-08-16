@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Objref_VarOut_T.h
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2:
         -:    3://=============================================================================
@@ -53,7 +53,7 @@
         -:   51:{
         -:   52:public:
         -:   53:  TAO_Objref_Var_T (void);
-       71:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+       30:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
         -:   55:  TAO_Objref_Var_T (const TAO_Objref_Var_T<T> &);
         -:   56:  ~TAO_Objref_Var_T (void);
         -:   57:

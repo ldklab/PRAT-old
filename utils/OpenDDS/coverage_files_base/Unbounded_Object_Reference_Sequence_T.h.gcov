@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Object_Reference_Sequence_T.h
-        -:    0:Programs:70
+        -:    0:Programs:72
         -:    1:#ifndef guard_unbounded_object_reference_sequence_hpp
         -:    2:#define guard_unbounded_object_reference_sequence_hpp
         -:    3:/**
@@ -24,7 +24,7 @@
         -:   22:{
         -:   23:
         -:   24:template<typename object_t, typename object_t_var>
-        -:   25:class unbounded_object_reference_sequence
+    #####:   25:class unbounded_object_reference_sequence
         -:   26:{
         -:   27:public:
         -:   28:  typedef object_t object_type;
@@ -42,44 +42,44 @@
         -:   40:
         -:   41:  typedef details::generic_sequence<value_type, allocation_traits, element_traits> implementation_type;
         -:   42:
-        -:   43:  inline unbounded_object_reference_sequence()
-        -:   44:    : impl_()
-        -:   45:  {}
-        -:   46:  inline explicit unbounded_object_reference_sequence(CORBA::ULong maximum)
-        -:   47:    : impl_(maximum)
-        -:   48:  {}
-        -:   49:  inline unbounded_object_reference_sequence(
+    #####:   43:  inline unbounded_object_reference_sequence()
+    #####:   44:    : impl_()
+    #####:   45:  {}
+    #####:   46:  inline explicit unbounded_object_reference_sequence(CORBA::ULong maximum)
+    #####:   47:    : impl_(maximum)
+    #####:   48:  {}
+    #####:   49:  inline unbounded_object_reference_sequence(
         -:   50:      CORBA::ULong maximum,
         -:   51:      CORBA::ULong length,
         -:   52:      value_type * data,
         -:   53:      CORBA::Boolean release)
-        -:   54:    : impl_(maximum, length, data, release)
-        -:   55:  {}
+    #####:   54:    : impl_(maximum, length, data, release)
+    #####:   55:  {}
         -:   56:
         -:   57:  /// @copydoc TAO::details::generic_sequence::maximum()
         -:   58:  inline CORBA::ULong maximum() const {
         -:   59:    return impl_.maximum();
         -:   60:  }
         -:   61:  /// @copydoc TAO::details::generic_sequence::release()
-    #####:   62:  inline CORBA::Boolean release() const {
-    #####:   63:    return impl_.release();
+        -:   62:  inline CORBA::Boolean release() const {
+        -:   63:    return impl_.release();
         -:   64:  }
         -:   65:  /// @copydoc TAO::details::generic_sequence::length()
-    #####:   66:  inline CORBA::ULong length() const {
-    #####:   67:    return impl_.length();
+        -:   66:  inline CORBA::ULong length() const {
+        -:   67:    return impl_.length();
         -:   68:  }
         -:   69:
         -:   70:  /// @copydoc TAO::details::generic_sequence::length()
-    #####:   71:  inline void length(CORBA::ULong length) {
-    #####:   72:    impl_.length(length);
-    #####:   73:  }
+        -:   71:  inline void length(CORBA::ULong length) {
+        -:   72:    impl_.length(length);
+        -:   73:  }
         -:   74:  /// @copydoc TAO::details::generic_sequence::operator[]
-    #####:   75:  inline const_element_type operator[](CORBA::ULong i) const {
-    #####:   76:    return const_element_type (impl_[i], release());
+        -:   75:  inline const_element_type operator[](CORBA::ULong i) const {
+        -:   76:    return const_element_type (impl_[i], release());
         -:   77:  }
         -:   78:  /// @copydoc TAO::details::generic_sequence::operator[]
-    #####:   79:  inline element_type operator[](CORBA::ULong i) {
-    #####:   80:    return element_type(impl_[i], release());
+        -:   79:  inline element_type operator[](CORBA::ULong i) {
+        -:   80:    return element_type(impl_[i], release());
         -:   81:  }
         -:   82:  /// @copydoc TAO::details::generic_sequence::get_buffer()
         -:   83:  inline value_type const * get_buffer() const {

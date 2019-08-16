@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Traits_T.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:#ifndef guard_string_traits_hpp
         -:    2:#define guard_string_traits_hpp
         -:    3:/**
@@ -31,11 +31,11 @@
         -:   29:  typedef char_type * value_type;
         -:   30:  typedef char_type const * const_value_type;
         -:   31:
-    #####:   32:  inline static void zero_range(
+      102:   32:  inline static void zero_range(
         -:   33:      char_type ** begin, char_type ** end)
         -:   34:  {
-    #####:   35:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (char_type*));
-    #####:   36:  }
+      102:   35:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (char_type*));
+      102:   36:  }
         -:   37:
     #####:   38:  inline static void initialize_range(
         -:   39:      char_type ** begin, char_type ** end)
@@ -53,17 +53,17 @@
         -:   51:
         -:   52:  // Allow MSVC++ >= 8 checked iterators to be used.
         -:   53:  template <typename iter>
-        -:   54:  inline static void copy_swap_range(
+    #####:   54:  inline static void copy_swap_range(
         -:   55:      char_type ** begin, char_type ** end, iter dst)
         -:   56:  {
-        -:   57:    std::swap_ranges(begin, end, dst);
-        -:   58:  }
+    #####:   57:    std::swap_ranges(begin, end, dst);
+    #####:   58:  }
         -:   59:
-    #####:   60:  inline static void release_range(
+      102:   60:  inline static void release_range(
         -:   61:      char_type ** begin, char_type ** end)
         -:   62:  {
-    #####:   63:    std::for_each(begin, end, &derived::release);
-    #####:   64:  }
+      102:   63:    std::for_each(begin, end, &derived::release);
+      102:   64:  }
         -:   65:
         -:   66:  inline static char_type const * initialize_if_zero(char_type * & element)
         -:   67:  {

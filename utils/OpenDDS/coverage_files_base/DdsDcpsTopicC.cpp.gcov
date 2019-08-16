@@ -1,765 +1,771 @@
         -:    0:Source:DdsDcpsTopicC.cpp
-        -:    0:Programs:24
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-        -:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-    #####:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-    #####:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-        4:   57:/*EOF*/
-        -:   58:/*EOF*/
-        -:   59:/*EOF*/
-        4:   60:/*EOF*/
-        4:   61:/*EOF*/
-        -:   62:/*EOF*/
-        -:   63:/*EOF*/
-    #####:   64:/*EOF*/
-        -:   65:/*EOF*/
-    #####:   66:/*EOF*/
-        -:   67:/*EOF*/
-        -:   68:/*EOF*/
-        -:   69:/*EOF*/
-    #####:   70:/*EOF*/
-        -:   71:/*EOF*/
-        -:   72:/*EOF*/
-        -:   73:/*EOF*/
-    #####:   74:/*EOF*/
-        -:   75:/*EOF*/
-        -:   76:/*EOF*/
-        7:   77:/*EOF*/
-        7:   78:/*EOF*/
-        -:   79:/*EOF*/
-        7:   80:/*EOF*/
-        -:   81:/*EOF*/
-        7:   82:/*EOF*/
-        -:   83:/*EOF*/
-        -:   84:/*EOF*/
-    #####:   85:/*EOF*/
-        -:   86:/*EOF*/
-        -:   87:/*EOF*/
-    #####:   88:/*EOF*/
-        -:   89:/*EOF*/
-    #####:   90:/*EOF*/
-        -:   91:/*EOF*/
-        -:   92:/*EOF*/
-        -:   93:/*EOF*/
-    #####:   94:/*EOF*/
-        -:   95:/*EOF*/
-        -:   96:/*EOF*/
-    #####:   97:/*EOF*/
-        -:   98:/*EOF*/
-    #####:   99:/*EOF*/
-        -:  100:/*EOF*/
-        -:  101:/*EOF*/
-        -:  102:/*EOF*/
-    #####:  103:/*EOF*/
-        -:  104:/*EOF*/
-    #####:  105:/*EOF*/
-        -:  106:/*EOF*/
-        -:  107:/*EOF*/
-        -:  108:/*EOF*/
-        2:  109:/*EOF*/
-        -:  110:/*EOF*/
-        2:  111:/*EOF*/
-        -:  112:/*EOF*/
-        2:  113:/*EOF*/
-        -:  114:/*EOF*/
-        2:  115:/*EOF*/
-        -:  116:/*EOF*/
-        -:  117:/*EOF*/
-        -:  118:/*EOF*/
-    #####:  119:/*EOF*/
-        -:  120:/*EOF*/
-    #####:  121:/*EOF*/
-    #####:  122:/*EOF*/
-        -:  123:/*EOF*/
-        -:  124:/*EOF*/
-    #####:  125:/*EOF*/
-        -:  126:/*EOF*/
-    #####:  127:/*EOF*/
-    #####:  128:/*EOF*/
-        -:  129:/*EOF*/
-        -:  130:/*EOF*/
-    #####:  131:/*EOF*/
-    #####:  132:/*EOF*/
-        -:  133:/*EOF*/
-        -:  134:/*EOF*/
-    #####:  135:/*EOF*/
-    #####:  136:/*EOF*/
-        -:  137:/*EOF*/
-        -:  138:/*EOF*/
-        -:  139:/*EOF*/
-        -:  140:/*EOF*/
-        -:  141:/*EOF*/
-    #####:  142:/*EOF*/
-        -:  143:/*EOF*/
-        -:  144:/*EOF*/
-        -:  145:/*EOF*/
-    #####:  146:/*EOF*/
-        -:  147:/*EOF*/
-        -:  148:/*EOF*/
-        -:  149:/*EOF*/
-    #####:  150:/*EOF*/
-        -:  151:/*EOF*/
-    #####:  152:/*EOF*/
-        -:  153:/*EOF*/
-        -:  154:/*EOF*/
-        -:  155:/*EOF*/
-    #####:  156:/*EOF*/
-        -:  157:/*EOF*/
-    #####:  158:/*EOF*/
-        -:  159:/*EOF*/
-        -:  160:/*EOF*/
-        -:  161:/*EOF*/
-        -:  162:/*EOF*/
-        -:  163:/*EOF*/
-        -:  164:/*EOF*/
-        -:  165:/*EOF*/
-        -:  166:/*EOF*/
-    #####:  167:/*EOF*/
-        -:  168:/*EOF*/
-        -:  169:/*EOF*/
-    #####:  170:/*EOF*/
-        -:  171:/*EOF*/
-        -:  172:/*EOF*/
-        -:  173:/*EOF*/
-        7:  174:/*EOF*/
-        -:  175:/*EOF*/
-        -:  176:/*EOF*/
-        7:  177:/*EOF*/
-        7:  178:/*EOF*/
-        -:  179:/*EOF*/
-        -:  180:/*EOF*/
-    #####:  181:/*EOF*/
-        -:  182:/*EOF*/
-    #####:  183:/*EOF*/
-        -:  184:/*EOF*/
-        -:  185:/*EOF*/
-        -:  186:/*EOF*/
-    #####:  187:/*EOF*/
-        -:  188:/*EOF*/
-        -:  189:/*EOF*/
-        -:  190:/*EOF*/
-    #####:  191:/*EOF*/
-        -:  192:/*EOF*/
-        -:  193:/*EOF*/
-        1:  194:/*EOF*/
-        1:  195:/*EOF*/
-        -:  196:/*EOF*/
-        1:  197:/*EOF*/
-        -:  198:/*EOF*/
-        1:  199:/*EOF*/
-        -:  200:/*EOF*/
-        -:  201:/*EOF*/
-    #####:  202:/*EOF*/
-        -:  203:/*EOF*/
-        -:  204:/*EOF*/
-    #####:  205:/*EOF*/
-        -:  206:/*EOF*/
-    #####:  207:/*EOF*/
-        -:  208:/*EOF*/
-        -:  209:/*EOF*/
-        -:  210:/*EOF*/
-    #####:  211:/*EOF*/
-        -:  212:/*EOF*/
-        -:  213:/*EOF*/
-    #####:  214:/*EOF*/
-        -:  215:/*EOF*/
-    #####:  216:/*EOF*/
-        -:  217:/*EOF*/
-        -:  218:/*EOF*/
-        -:  219:/*EOF*/
-        7:  220:/*EOF*/
-        -:  221:/*EOF*/
-        7:  222:/*EOF*/
-        -:  223:/*EOF*/
-        -:  224:/*EOF*/
-        -:  225:/*EOF*/
-        7:  226:/*EOF*/
-        -:  227:/*EOF*/
-        7:  228:/*EOF*/
-        -:  229:/*EOF*/
-    #####:  230:/*EOF*/
-        -:  231:/*EOF*/
-        7:  232:/*EOF*/
-        -:  233:/*EOF*/
-        -:  234:/*EOF*/
-        -:  235:/*EOF*/
-    #####:  236:/*EOF*/
-        -:  237:/*EOF*/
-    #####:  238:/*EOF*/
-    #####:  239:/*EOF*/
-        -:  240:/*EOF*/
-        -:  241:/*EOF*/
-    #####:  242:/*EOF*/
-        -:  243:/*EOF*/
-    #####:  244:/*EOF*/
-    #####:  245:/*EOF*/
-        -:  246:/*EOF*/
-        -:  247:/*EOF*/
-    #####:  248:/*EOF*/
-    #####:  249:/*EOF*/
-        -:  250:/*EOF*/
-        -:  251:/*EOF*/
-    #####:  252:/*EOF*/
-    #####:  253:/*EOF*/
-        -:  254:/*EOF*/
-        -:  255:/*EOF*/
-    #####:  256:/*EOF*/
-    #####:  257:/*EOF*/
-        -:  258:/*EOF*/
-        -:  259:/*EOF*/
-        -:  260:/*EOF*/
-        -:  261:/*EOF*/
-        -:  262:/*EOF*/
-    #####:  263:/*EOF*/
-        -:  264:/*EOF*/
-        -:  265:/*EOF*/
-        -:  266:/*EOF*/
-    #####:  267:/*EOF*/
-        -:  268:/*EOF*/
-        -:  269:/*EOF*/
-        -:  270:/*EOF*/
-    #####:  271:/*EOF*/
-        -:  272:/*EOF*/
-    #####:  273:/*EOF*/
-        -:  274:/*EOF*/
-        -:  275:/*EOF*/
-        -:  276:/*EOF*/
-    #####:  277:/*EOF*/
-        -:  278:/*EOF*/
-    #####:  279:/*EOF*/
-        -:  280:/*EOF*/
-        -:  281:/*EOF*/
-        -:  282:/*EOF*/
-        -:  283:/*EOF*/
-        -:  284:/*EOF*/
-        -:  285:/*EOF*/
-        -:  286:/*EOF*/
-        -:  287:/*EOF*/
-       21:  288:/*EOF*/
-        -:  289:/*EOF*/
-        -:  290:/*EOF*/
-       21:  291:/*EOF*/
-        -:  292:/*EOF*/
-        -:  293:/*EOF*/
-        -:  294:/*EOF*/
-       58:  295:/*EOF*/
-        -:  296:/*EOF*/
-        -:  297:/*EOF*/
-       58:  298:/*EOF*/
-       58:  299:/*EOF*/
-        -:  300:/*EOF*/
-        -:  301:/*EOF*/
-       23:  302:/*EOF*/
-        -:  303:/*EOF*/
-       23:  304:/*EOF*/
-        -:  305:/*EOF*/
-        -:  306:/*EOF*/
-        -:  307:/*EOF*/
-    #####:  308:/*EOF*/
-        -:  309:/*EOF*/
-        -:  310:/*EOF*/
-        -:  311:/*EOF*/
-    #####:  312:/*EOF*/
-        -:  313:/*EOF*/
-        -:  314:/*EOF*/
-        7:  315:/*EOF*/
-        7:  316:/*EOF*/
-        -:  317:/*EOF*/
-        7:  318:/*EOF*/
-        -:  319:/*EOF*/
-        7:  320:/*EOF*/
-        -:  321:/*EOF*/
-        -:  322:/*EOF*/
-    #####:  323:/*EOF*/
-        -:  324:/*EOF*/
-        -:  325:/*EOF*/
-    #####:  326:/*EOF*/
-        -:  327:/*EOF*/
-    #####:  328:/*EOF*/
-        -:  329:/*EOF*/
-        -:  330:/*EOF*/
-        -:  331:/*EOF*/
-    #####:  332:/*EOF*/
-        -:  333:/*EOF*/
-        -:  334:/*EOF*/
-    #####:  335:/*EOF*/
-        -:  336:/*EOF*/
-    #####:  337:/*EOF*/
-        -:  338:/*EOF*/
-        -:  339:/*EOF*/
-        -:  340:/*EOF*/
-       23:  341:/*EOF*/
-        -:  342:/*EOF*/
-       23:  343:/*EOF*/
-        -:  344:/*EOF*/
-        -:  345:/*EOF*/
-        -:  346:/*EOF*/
-       28:  347:/*EOF*/
-        -:  348:/*EOF*/
-       28:  349:/*EOF*/
-        -:  350:/*EOF*/
-       28:  351:/*EOF*/
-        -:  352:/*EOF*/
-       28:  353:/*EOF*/
-        -:  354:/*EOF*/
-        -:  355:/*EOF*/
-        -:  356:/*EOF*/
-    #####:  357:/*EOF*/
-        -:  358:/*EOF*/
-    #####:  359:/*EOF*/
-    #####:  360:/*EOF*/
-        -:  361:/*EOF*/
-        -:  362:/*EOF*/
-    #####:  363:/*EOF*/
-        -:  364:/*EOF*/
-    #####:  365:/*EOF*/
-    #####:  366:/*EOF*/
-        -:  367:/*EOF*/
-        -:  368:/*EOF*/
-    #####:  369:/*EOF*/
-    #####:  370:/*EOF*/
-        -:  371:/*EOF*/
-        -:  372:/*EOF*/
-    #####:  373:/*EOF*/
-    #####:  374:/*EOF*/
-        -:  375:/*EOF*/
-        -:  376:/*EOF*/
-    #####:  377:/*EOF*/
-    #####:  378:/*EOF*/
-        -:  379:/*EOF*/
-        -:  380:/*EOF*/
-    #####:  381:/*EOF*/
-    #####:  382:/*EOF*/
-        -:  383:/*EOF*/
-        -:  384:/*EOF*/
-        -:  385:/*EOF*/
-        -:  386:/*EOF*/
-        -:  387:/*EOF*/
-    #####:  388:/*EOF*/
-        -:  389:/*EOF*/
-        -:  390:/*EOF*/
-        -:  391:/*EOF*/
-    #####:  392:/*EOF*/
-        -:  393:/*EOF*/
-        -:  394:/*EOF*/
-        -:  395:/*EOF*/
-    #####:  396:/*EOF*/
-        -:  397:/*EOF*/
-    #####:  398:/*EOF*/
-        -:  399:/*EOF*/
-        -:  400:/*EOF*/
-        -:  401:/*EOF*/
-    #####:  402:/*EOF*/
-        -:  403:/*EOF*/
-    #####:  404:/*EOF*/
-        -:  405:/*EOF*/
-        -:  406:/*EOF*/
-        -:  407:/*EOF*/
-        -:  408:/*EOF*/
-        -:  409:/*EOF*/
-        -:  410:/*EOF*/
-        -:  411:/*EOF*/
-        -:  412:/*EOF*/
-    #####:  413:/*EOF*/
-        -:  414:/*EOF*/
-        -:  415:/*EOF*/
-    #####:  416:/*EOF*/
-        -:  417:/*EOF*/
-        -:  418:/*EOF*/
-        -:  419:/*EOF*/
-    #####:  420:/*EOF*/
-        -:  421:/*EOF*/
-        -:  422:/*EOF*/
-    #####:  423:/*EOF*/
-    #####:  424:/*EOF*/
-        -:  425:/*EOF*/
-        -:  426:/*EOF*/
-    #####:  427:/*EOF*/
-        -:  428:/*EOF*/
-    #####:  429:/*EOF*/
-        -:  430:/*EOF*/
-        -:  431:/*EOF*/
-        -:  432:/*EOF*/
-    #####:  433:/*EOF*/
-        -:  434:/*EOF*/
-        -:  435:/*EOF*/
-        -:  436:/*EOF*/
-    #####:  437:/*EOF*/
-        -:  438:/*EOF*/
-        -:  439:/*EOF*/
-    #####:  440:/*EOF*/
-    #####:  441:/*EOF*/
-        -:  442:/*EOF*/
-    #####:  443:/*EOF*/
-        -:  444:/*EOF*/
-    #####:  445:/*EOF*/
-        -:  446:/*EOF*/
-        -:  447:/*EOF*/
-    #####:  448:/*EOF*/
-        -:  449:/*EOF*/
-        -:  450:/*EOF*/
-    #####:  451:/*EOF*/
-        -:  452:/*EOF*/
-    #####:  453:/*EOF*/
-        -:  454:/*EOF*/
-        -:  455:/*EOF*/
-        -:  456:/*EOF*/
-    #####:  457:/*EOF*/
-        -:  458:/*EOF*/
-        -:  459:/*EOF*/
-    #####:  460:/*EOF*/
-        -:  461:/*EOF*/
-    #####:  462:/*EOF*/
-        -:  463:/*EOF*/
-        -:  464:/*EOF*/
-        -:  465:/*EOF*/
-    #####:  466:/*EOF*/
-        -:  467:/*EOF*/
-    #####:  468:/*EOF*/
-        -:  469:/*EOF*/
-        -:  470:/*EOF*/
-        -:  471:/*EOF*/
-    #####:  472:/*EOF*/
-        -:  473:/*EOF*/
-    #####:  474:/*EOF*/
-        -:  475:/*EOF*/
-    #####:  476:/*EOF*/
-        -:  477:/*EOF*/
-    #####:  478:/*EOF*/
-        -:  479:/*EOF*/
-        -:  480:/*EOF*/
-        -:  481:/*EOF*/
-    #####:  482:/*EOF*/
-        -:  483:/*EOF*/
-    #####:  484:/*EOF*/
-    #####:  485:/*EOF*/
-        -:  486:/*EOF*/
-        -:  487:/*EOF*/
-    #####:  488:/*EOF*/
-        -:  489:/*EOF*/
-    #####:  490:/*EOF*/
-    #####:  491:/*EOF*/
-        -:  492:/*EOF*/
-        -:  493:/*EOF*/
-    #####:  494:/*EOF*/
-    #####:  495:/*EOF*/
-        -:  496:/*EOF*/
-        -:  497:/*EOF*/
-    #####:  498:/*EOF*/
-    #####:  499:/*EOF*/
-        -:  500:/*EOF*/
-        -:  501:/*EOF*/
-    #####:  502:/*EOF*/
-    #####:  503:/*EOF*/
-        -:  504:/*EOF*/
-        -:  505:/*EOF*/
-        -:  506:/*EOF*/
-        -:  507:/*EOF*/
-        -:  508:/*EOF*/
-    #####:  509:/*EOF*/
-        -:  510:/*EOF*/
-        -:  511:/*EOF*/
-        -:  512:/*EOF*/
-    #####:  513:/*EOF*/
-        -:  514:/*EOF*/
-        -:  515:/*EOF*/
-        -:  516:/*EOF*/
-    #####:  517:/*EOF*/
-        -:  518:/*EOF*/
-    #####:  519:/*EOF*/
-        -:  520:/*EOF*/
-        -:  521:/*EOF*/
-        -:  522:/*EOF*/
-    #####:  523:/*EOF*/
-        -:  524:/*EOF*/
-    #####:  525:/*EOF*/
-        -:  526:/*EOF*/
-        -:  527:/*EOF*/
-        -:  528:/*EOF*/
-        -:  529:/*EOF*/
-        -:  530:/*EOF*/
-        -:  531:/*EOF*/
-        -:  532:/*EOF*/
-        -:  533:/*EOF*/
-    #####:  534:/*EOF*/
-        -:  535:/*EOF*/
-        -:  536:/*EOF*/
-    #####:  537:/*EOF*/
-        -:  538:/*EOF*/
-        -:  539:/*EOF*/
-        -:  540:/*EOF*/
-    #####:  541:/*EOF*/
-        -:  542:/*EOF*/
-        -:  543:/*EOF*/
-    #####:  544:/*EOF*/
-    #####:  545:/*EOF*/
-        -:  546:/*EOF*/
-        -:  547:/*EOF*/
-    #####:  548:/*EOF*/
-        -:  549:/*EOF*/
-    #####:  550:/*EOF*/
-        -:  551:/*EOF*/
-        -:  552:/*EOF*/
-        -:  553:/*EOF*/
-    #####:  554:/*EOF*/
-        -:  555:/*EOF*/
-        -:  556:/*EOF*/
-        -:  557:/*EOF*/
-    #####:  558:/*EOF*/
-        -:  559:/*EOF*/
-        -:  560:/*EOF*/
-    #####:  561:/*EOF*/
-    #####:  562:/*EOF*/
-        -:  563:/*EOF*/
-    #####:  564:/*EOF*/
-        -:  565:/*EOF*/
-    #####:  566:/*EOF*/
-        -:  567:/*EOF*/
-        -:  568:/*EOF*/
-    #####:  569:/*EOF*/
-        -:  570:/*EOF*/
-        -:  571:/*EOF*/
-    #####:  572:/*EOF*/
-        -:  573:/*EOF*/
-    #####:  574:/*EOF*/
-        -:  575:/*EOF*/
-        -:  576:/*EOF*/
-        -:  577:/*EOF*/
-    #####:  578:/*EOF*/
-        -:  579:/*EOF*/
-        -:  580:/*EOF*/
-    #####:  581:/*EOF*/
-        -:  582:/*EOF*/
-    #####:  583:/*EOF*/
-        -:  584:/*EOF*/
-        -:  585:/*EOF*/
-        -:  586:/*EOF*/
-    #####:  587:/*EOF*/
-        -:  588:/*EOF*/
-    #####:  589:/*EOF*/
-        -:  590:/*EOF*/
-        -:  591:/*EOF*/
-        -:  592:/*EOF*/
-    #####:  593:/*EOF*/
-        -:  594:/*EOF*/
-    #####:  595:/*EOF*/
-        -:  596:/*EOF*/
-    #####:  597:/*EOF*/
-        -:  598:/*EOF*/
-    #####:  599:/*EOF*/
-        -:  600:/*EOF*/
-        -:  601:/*EOF*/
-        -:  602:/*EOF*/
-    #####:  603:/*EOF*/
-        -:  604:/*EOF*/
-    #####:  605:/*EOF*/
-    #####:  606:/*EOF*/
-        -:  607:/*EOF*/
-        -:  608:/*EOF*/
-    #####:  609:/*EOF*/
-        -:  610:/*EOF*/
-    #####:  611:/*EOF*/
-    #####:  612:/*EOF*/
-        -:  613:/*EOF*/
-        -:  614:/*EOF*/
-    #####:  615:/*EOF*/
-    #####:  616:/*EOF*/
-        -:  617:/*EOF*/
-        -:  618:/*EOF*/
-    #####:  619:/*EOF*/
-    #####:  620:/*EOF*/
-        -:  621:/*EOF*/
-        -:  622:/*EOF*/
-    #####:  623:/*EOF*/
-    #####:  624:/*EOF*/
-        -:  625:/*EOF*/
-        -:  626:/*EOF*/
-        -:  627:/*EOF*/
-        -:  628:/*EOF*/
-        -:  629:/*EOF*/
-    #####:  630:/*EOF*/
-        -:  631:/*EOF*/
-        -:  632:/*EOF*/
-        -:  633:/*EOF*/
-    #####:  634:/*EOF*/
-        -:  635:/*EOF*/
-        -:  636:/*EOF*/
-        -:  637:/*EOF*/
-    #####:  638:/*EOF*/
-        -:  639:/*EOF*/
-    #####:  640:/*EOF*/
-        -:  641:/*EOF*/
-        -:  642:/*EOF*/
-        -:  643:/*EOF*/
-    #####:  644:/*EOF*/
-        -:  645:/*EOF*/
-    #####:  646:/*EOF*/
-        -:  647:/*EOF*/
-        -:  648:/*EOF*/
-        -:  649:/*EOF*/
-        -:  650:/*EOF*/
-        -:  651:/*EOF*/
-        -:  652:/*EOF*/
-        -:  653:/*EOF*/
-        -:  654:/*EOF*/
-    #####:  655:/*EOF*/
-        -:  656:/*EOF*/
-        -:  657:/*EOF*/
-    #####:  658:/*EOF*/
-        -:  659:/*EOF*/
-        -:  660:/*EOF*/
-        -:  661:/*EOF*/
-    #####:  662:/*EOF*/
-        -:  663:/*EOF*/
-        -:  664:/*EOF*/
-    #####:  665:/*EOF*/
-    #####:  666:/*EOF*/
-        -:  667:/*EOF*/
-        -:  668:/*EOF*/
-    #####:  669:/*EOF*/
-        -:  670:/*EOF*/
-    #####:  671:/*EOF*/
-        -:  672:/*EOF*/
-        -:  673:/*EOF*/
-        -:  674:/*EOF*/
-    #####:  675:/*EOF*/
-        -:  676:/*EOF*/
-        -:  677:/*EOF*/
-        -:  678:/*EOF*/
-    #####:  679:/*EOF*/
-        -:  680:/*EOF*/
-        -:  681:/*EOF*/
-        7:  682:/*EOF*/
-        7:  683:/*EOF*/
-        -:  684:/*EOF*/
-        7:  685:/*EOF*/
-        -:  686:/*EOF*/
-        7:  687:/*EOF*/
-        -:  688:/*EOF*/
-        -:  689:/*EOF*/
-    #####:  690:/*EOF*/
-        -:  691:/*EOF*/
-        -:  692:/*EOF*/
-    #####:  693:/*EOF*/
-        -:  694:/*EOF*/
-    #####:  695:/*EOF*/
-        -:  696:/*EOF*/
-        -:  697:/*EOF*/
-        -:  698:/*EOF*/
-    #####:  699:/*EOF*/
-        -:  700:/*EOF*/
-        -:  701:/*EOF*/
-    #####:  702:/*EOF*/
-        -:  703:/*EOF*/
-    #####:  704:/*EOF*/
-        -:  705:/*EOF*/
-        -:  706:/*EOF*/
-        -:  707:/*EOF*/
-    #####:  708:/*EOF*/
-        -:  709:/*EOF*/
-    #####:  710:/*EOF*/
-        -:  711:/*EOF*/
-        -:  712:/*EOF*/
-        -:  713:/*EOF*/
-    #####:  714:/*EOF*/
-        -:  715:/*EOF*/
-    #####:  716:/*EOF*/
-        -:  717:/*EOF*/
-    #####:  718:/*EOF*/
-        -:  719:/*EOF*/
-    #####:  720:/*EOF*/
-        -:  721:/*EOF*/
-        -:  722:/*EOF*/
-        -:  723:/*EOF*/
-    #####:  724:/*EOF*/
-        -:  725:/*EOF*/
-    #####:  726:/*EOF*/
-    #####:  727:/*EOF*/
-        -:  728:/*EOF*/
-        -:  729:/*EOF*/
-    #####:  730:/*EOF*/
-        -:  731:/*EOF*/
-    #####:  732:/*EOF*/
-    #####:  733:/*EOF*/
-        -:  734:/*EOF*/
-        -:  735:/*EOF*/
-    #####:  736:/*EOF*/
-    #####:  737:/*EOF*/
-        -:  738:/*EOF*/
-        -:  739:/*EOF*/
-    #####:  740:/*EOF*/
-    #####:  741:/*EOF*/
-        -:  742:/*EOF*/
-        -:  743:/*EOF*/
-        -:  744:/*EOF*/
-        -:  745:/*EOF*/
-        -:  746:/*EOF*/
-    #####:  747:/*EOF*/
-        -:  748:/*EOF*/
-        -:  749:/*EOF*/
-        -:  750:/*EOF*/
-    #####:  751:/*EOF*/
-        -:  752:/*EOF*/
-        -:  753:/*EOF*/
-        -:  754:/*EOF*/
-    #####:  755:/*EOF*/
-        -:  756:/*EOF*/
-    #####:  757:/*EOF*/
-        -:  758:/*EOF*/
-        -:  759:/*EOF*/
-        -:  760:/*EOF*/
-    #####:  761:/*EOF*/
-        -:  762:/*EOF*/
-    #####:  763:/*EOF*/
+        -:    0:Programs:72
+        -:    1:// -*- C++ -*-
+        -:    2:// $Id$
+        -:    3:
+        -:    4:/**
+        -:    5: * Code generated by the The ACE ORB (TAO) IDL Compiler v2.2a_p15
+        -:    6: * TAO and the TAO IDL Compiler have been developed by:
+        -:    7: *       Center for Distributed Object Computing
+        -:    8: *       Washington University
+        -:    9: *       St. Louis, MO
+        -:   10: *       USA
+        -:   11: *       http://www.cs.wustl.edu/~schmidt/doc-center.html
+        -:   12: * and
+        -:   13: *       Distributed Object Computing Laboratory
+        -:   14: *       University of California at Irvine
+        -:   15: *       Irvine, CA
+        -:   16: *       USA
+        -:   17: * and
+        -:   18: *       Institute for Software Integrated Systems
+        -:   19: *       Vanderbilt University
+        -:   20: *       Nashville, TN
+        -:   21: *       USA
+        -:   22: *       http://www.isis.vanderbilt.edu/
+        -:   23: *
+        -:   24: * Information about TAO is available at:
+        -:   25: *     http://www.cs.wustl.edu/~schmidt/TAO.html
+        -:   26: **/
+        -:   27:
+        -:   28:// TAO_IDL - Generated from
+        -:   29:// be/be_codegen.cpp:376
+        -:   30:
+        -:   31:#include "DCPS/DdsDcps_pch.h"
+        -:   32:#include "DdsDcpsTopicC.h"
+        -:   33:#include "tao/CDR.h"
+        -:   34:#include "ace/OS_NS_string.h"
+        -:   35:
+        -:   36:#if !defined (__ACE_INLINE__)
+        -:   37:#include "DdsDcpsTopicC.inl"
+        -:   38:#endif /* !defined INLINE */
+        -:   39:
+        -:   40:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   41:
+        -:   42:
+        -:   43:
+        -:   44:// TAO_IDL - Generated from
+        -:   45:// be/be_visitor_interface/interface_cs.cpp:51
+        -:   46:
+        -:   47:// Traits specializations for DDS::TopicDescription.
+        -:   48:
+        -:   49:DDS::TopicDescription_ptr
+    #####:   50:TAO::Objref_Traits<DDS::TopicDescription>::duplicate (
+        -:   51:    DDS::TopicDescription_ptr p)
+        -:   52:{
+    #####:   53:  return DDS::TopicDescription::_duplicate (p);
+        -:   54:}
+        -:   55:
+        -:   56:void
+       12:   57:TAO::Objref_Traits<DDS::TopicDescription>::release (
+        -:   58:    DDS::TopicDescription_ptr p)
+        -:   59:{
+       12:   60:  ::CORBA::release (p);
+       12:   61:}
+        -:   62:
+        -:   63:DDS::TopicDescription_ptr
+    #####:   64:TAO::Objref_Traits<DDS::TopicDescription>::nil (void)
+        -:   65:{
+    #####:   66:  return DDS::TopicDescription::_nil ();
+        -:   67:}
+        -:   68:
+        -:   69:::CORBA::Boolean
+    #####:   70:TAO::Objref_Traits<DDS::TopicDescription>::marshal (
+        -:   71:    const DDS::TopicDescription_ptr p,
+        -:   72:    TAO_OutputCDR & cdr)
+        -:   73:{
+    #####:   74:  return ::CORBA::Object::marshal (p, cdr);
+        -:   75:}
+        -:   76:
+       21:   77:DDS::TopicDescription::TopicDescription (void)
+       21:   78:{}
+        -:   79:
+       21:   80:DDS::TopicDescription::~TopicDescription (void)
+        -:   81:{
+       21:   82:}
+        -:   83:
+        -:   84:DDS::TopicDescription_ptr
+    #####:   85:DDS::TopicDescription::_narrow (
+        -:   86:    ::CORBA::Object_ptr _tao_objref)
+        -:   87:{
+    #####:   88:  return TopicDescription::_duplicate (
+        -:   89:      dynamic_cast<TopicDescription_ptr> (_tao_objref)
+    #####:   90:    );
+        -:   91:}
+        -:   92:
+        -:   93:DDS::TopicDescription_ptr
+    #####:   94:DDS::TopicDescription::_unchecked_narrow (
+        -:   95:    ::CORBA::Object_ptr _tao_objref)
+        -:   96:{
+    #####:   97:  return TopicDescription::_duplicate (
+        -:   98:      dynamic_cast<TopicDescription_ptr> (_tao_objref)
+    #####:   99:    );
+        -:  100:}
+        -:  101:
+        -:  102:DDS::TopicDescription_ptr
+    #####:  103:DDS::TopicDescription::_nil (void)
+        -:  104:{
+    #####:  105:  return 0;
+        -:  106:}
+        -:  107:
+        -:  108:DDS::TopicDescription_ptr
+        6:  109:DDS::TopicDescription::_duplicate (TopicDescription_ptr obj)
+        -:  110:{
+        6:  111:  if (! ::CORBA::is_nil (obj))
+        -:  112:    {
+        6:  113:      obj->_add_ref ();
+        -:  114:    }
+        6:  115:  return obj;
+        -:  116:}
+        -:  117:
+        -:  118:void
+    #####:  119:DDS::TopicDescription::_tao_release (TopicDescription_ptr obj)
+        -:  120:{
+    #####:  121:  ::CORBA::release (obj);
+    #####:  122:}
+        -:  123:
+        -:  124:::CORBA::Boolean
+    #####:  125:DDS::TopicDescription::_is_a (const char *value)
+        -:  126:{
+    #####:  127:  if (
+    #####:  128:      ACE_OS::strcmp (
+        -:  129:          value,
+        -:  130:          "IDL:DDS/TopicDescription:1.0"
+    #####:  131:        ) == 0 ||
+    #####:  132:      ACE_OS::strcmp (
+        -:  133:          value,
+        -:  134:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  135:        ) == 0 ||
+    #####:  136:      ACE_OS::strcmp (
+        -:  137:          value,
+        -:  138:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  139:        ) == 0
+        -:  140:    )
+        -:  141:    {
+    #####:  142:      return true; // success using local knowledge
+        -:  143:    }
+        -:  144:  else
+        -:  145:    {
+    #####:  146:      return false;
+        -:  147:    }
+        -:  148:}
+        -:  149:
+    #####:  150:const char* DDS::TopicDescription::_interface_repository_id (void) const
+        -:  151:{
+    #####:  152:  return "IDL:DDS/TopicDescription:1.0";
+        -:  153:}
+        -:  154:
+        -:  155:::CORBA::Boolean
+    #####:  156:DDS::TopicDescription::marshal (TAO_OutputCDR & /* cdr */)
+        -:  157:{
+    #####:  158:  return false;
+        -:  159:}
+        -:  160:
+        -:  161:// TAO_IDL - Generated from
+        -:  162:// be/be_visitor_interface/interface_cs.cpp:51
+        -:  163:
+        -:  164:// Traits specializations for DDS::TopicListener.
+        -:  165:
+        -:  166:DDS::TopicListener_ptr
+    #####:  167:TAO::Objref_Traits<DDS::TopicListener>::duplicate (
+        -:  168:    DDS::TopicListener_ptr p)
+        -:  169:{
+    #####:  170:  return DDS::TopicListener::_duplicate (p);
+        -:  171:}
+        -:  172:
+        -:  173:void
+       21:  174:TAO::Objref_Traits<DDS::TopicListener>::release (
+        -:  175:    DDS::TopicListener_ptr p)
+        -:  176:{
+       21:  177:  ::CORBA::release (p);
+       21:  178:}
+        -:  179:
+        -:  180:DDS::TopicListener_ptr
+    #####:  181:TAO::Objref_Traits<DDS::TopicListener>::nil (void)
+        -:  182:{
+    #####:  183:  return DDS::TopicListener::_nil ();
+        -:  184:}
+        -:  185:
+        -:  186:::CORBA::Boolean
+    #####:  187:TAO::Objref_Traits<DDS::TopicListener>::marshal (
+        -:  188:    const DDS::TopicListener_ptr p,
+        -:  189:    TAO_OutputCDR & cdr)
+        -:  190:{
+    #####:  191:  return ::CORBA::Object::marshal (p, cdr);
+        -:  192:}
+        -:  193:
+        3:  194:DDS::TopicListener::TopicListener (void)
+        3:  195:{}
+        -:  196:
+        3:  197:DDS::TopicListener::~TopicListener (void)
+        -:  198:{
+        3:  199:}
+        -:  200:
+        -:  201:DDS::TopicListener_ptr
+    #####:  202:DDS::TopicListener::_narrow (
+        -:  203:    ::CORBA::Object_ptr _tao_objref)
+        -:  204:{
+    #####:  205:  return TopicListener::_duplicate (
+        -:  206:      dynamic_cast<TopicListener_ptr> (_tao_objref)
+    #####:  207:    );
+        -:  208:}
+        -:  209:
+        -:  210:DDS::TopicListener_ptr
+    #####:  211:DDS::TopicListener::_unchecked_narrow (
+        -:  212:    ::CORBA::Object_ptr _tao_objref)
+        -:  213:{
+    #####:  214:  return TopicListener::_duplicate (
+        -:  215:      dynamic_cast<TopicListener_ptr> (_tao_objref)
+    #####:  216:    );
+        -:  217:}
+        -:  218:
+        -:  219:DDS::TopicListener_ptr
+       21:  220:DDS::TopicListener::_nil (void)
+        -:  221:{
+       21:  222:  return 0;
+        -:  223:}
+        -:  224:
+        -:  225:DDS::TopicListener_ptr
+       21:  226:DDS::TopicListener::_duplicate (TopicListener_ptr obj)
+        -:  227:{
+       21:  228:  if (! ::CORBA::is_nil (obj))
+        -:  229:    {
+    #####:  230:      obj->_add_ref ();
+        -:  231:    }
+       21:  232:  return obj;
+        -:  233:}
+        -:  234:
+        -:  235:void
+    #####:  236:DDS::TopicListener::_tao_release (TopicListener_ptr obj)
+        -:  237:{
+    #####:  238:  ::CORBA::release (obj);
+    #####:  239:}
+        -:  240:
+        -:  241:::CORBA::Boolean
+    #####:  242:DDS::TopicListener::_is_a (const char *value)
+        -:  243:{
+    #####:  244:  if (
+    #####:  245:      ACE_OS::strcmp (
+        -:  246:          value,
+        -:  247:          "IDL:DDS/Listener:1.0"
+    #####:  248:        ) == 0 ||
+    #####:  249:      ACE_OS::strcmp (
+        -:  250:          value,
+        -:  251:          "IDL:DDS/TopicListener:1.0"
+    #####:  252:        ) == 0 ||
+    #####:  253:      ACE_OS::strcmp (
+        -:  254:          value,
+        -:  255:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  256:        ) == 0 ||
+    #####:  257:      ACE_OS::strcmp (
+        -:  258:          value,
+        -:  259:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  260:        ) == 0
+        -:  261:    )
+        -:  262:    {
+    #####:  263:      return true; // success using local knowledge
+        -:  264:    }
+        -:  265:  else
+        -:  266:    {
+    #####:  267:      return false;
+        -:  268:    }
+        -:  269:}
+        -:  270:
+    #####:  271:const char* DDS::TopicListener::_interface_repository_id (void) const
+        -:  272:{
+    #####:  273:  return "IDL:DDS/TopicListener:1.0";
+        -:  274:}
+        -:  275:
+        -:  276:::CORBA::Boolean
+    #####:  277:DDS::TopicListener::marshal (TAO_OutputCDR & /* cdr */)
+        -:  278:{
+    #####:  279:  return false;
+        -:  280:}
+        -:  281:
+        -:  282:// TAO_IDL - Generated from
+        -:  283:// be/be_visitor_interface/interface_cs.cpp:51
+        -:  284:
+        -:  285:// Traits specializations for DDS::Topic.
+        -:  286:
+        -:  287:DDS::Topic_ptr
+       63:  288:TAO::Objref_Traits<DDS::Topic>::duplicate (
+        -:  289:    DDS::Topic_ptr p)
+        -:  290:{
+       63:  291:  return DDS::Topic::_duplicate (p);
+        -:  292:}
+        -:  293:
+        -:  294:void
+      174:  295:TAO::Objref_Traits<DDS::Topic>::release (
+        -:  296:    DDS::Topic_ptr p)
+        -:  297:{
+      174:  298:  ::CORBA::release (p);
+      174:  299:}
+        -:  300:
+        -:  301:DDS::Topic_ptr
+       69:  302:TAO::Objref_Traits<DDS::Topic>::nil (void)
+        -:  303:{
+       69:  304:  return DDS::Topic::_nil ();
+        -:  305:}
+        -:  306:
+        -:  307:::CORBA::Boolean
+    #####:  308:TAO::Objref_Traits<DDS::Topic>::marshal (
+        -:  309:    const DDS::Topic_ptr p,
+        -:  310:    TAO_OutputCDR & cdr)
+        -:  311:{
+    #####:  312:  return ::CORBA::Object::marshal (p, cdr);
+        -:  313:}
+        -:  314:
+       21:  315:DDS::Topic::Topic (void)
+       21:  316:{}
+        -:  317:
+       21:  318:DDS::Topic::~Topic (void)
+        -:  319:{
+       21:  320:}
+        -:  321:
+        -:  322:DDS::Topic_ptr
+    #####:  323:DDS::Topic::_narrow (
+        -:  324:    ::CORBA::Object_ptr _tao_objref)
+        -:  325:{
+    #####:  326:  return Topic::_duplicate (
+        -:  327:      dynamic_cast<Topic_ptr> (_tao_objref)
+    #####:  328:    );
+        -:  329:}
+        -:  330:
+        -:  331:DDS::Topic_ptr
+    #####:  332:DDS::Topic::_unchecked_narrow (
+        -:  333:    ::CORBA::Object_ptr _tao_objref)
+        -:  334:{
+    #####:  335:  return Topic::_duplicate (
+        -:  336:      dynamic_cast<Topic_ptr> (_tao_objref)
+    #####:  337:    );
+        -:  338:}
+        -:  339:
+        -:  340:DDS::Topic_ptr
+       69:  341:DDS::Topic::_nil (void)
+        -:  342:{
+       69:  343:  return 0;
+        -:  344:}
+        -:  345:
+        -:  346:DDS::Topic_ptr
+       84:  347:DDS::Topic::_duplicate (Topic_ptr obj)
+        -:  348:{
+       84:  349:  if (! ::CORBA::is_nil (obj))
+        -:  350:    {
+       84:  351:      obj->_add_ref ();
+        -:  352:    }
+       84:  353:  return obj;
+        -:  354:}
+        -:  355:
+        -:  356:void
+    #####:  357:DDS::Topic::_tao_release (Topic_ptr obj)
+        -:  358:{
+    #####:  359:  ::CORBA::release (obj);
+    #####:  360:}
+        -:  361:
+        -:  362:::CORBA::Boolean
+    #####:  363:DDS::Topic::_is_a (const char *value)
+        -:  364:{
+    #####:  365:  if (
+    #####:  366:      ACE_OS::strcmp (
+        -:  367:          value,
+        -:  368:          "IDL:DDS/Entity:1.0"
+    #####:  369:        ) == 0 ||
+    #####:  370:      ACE_OS::strcmp (
+        -:  371:          value,
+        -:  372:          "IDL:DDS/TopicDescription:1.0"
+    #####:  373:        ) == 0 ||
+    #####:  374:      ACE_OS::strcmp (
+        -:  375:          value,
+        -:  376:          "IDL:DDS/Topic:1.0"
+    #####:  377:        ) == 0 ||
+    #####:  378:      ACE_OS::strcmp (
+        -:  379:          value,
+        -:  380:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  381:        ) == 0 ||
+    #####:  382:      ACE_OS::strcmp (
+        -:  383:          value,
+        -:  384:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  385:        ) == 0
+        -:  386:    )
+        -:  387:    {
+    #####:  388:      return true; // success using local knowledge
+        -:  389:    }
+        -:  390:  else
+        -:  391:    {
+    #####:  392:      return false;
+        -:  393:    }
+        -:  394:}
+        -:  395:
+    #####:  396:const char* DDS::Topic::_interface_repository_id (void) const
+        -:  397:{
+    #####:  398:  return "IDL:DDS/Topic:1.0";
+        -:  399:}
+        -:  400:
+        -:  401:::CORBA::Boolean
+    #####:  402:DDS::Topic::marshal (TAO_OutputCDR & /* cdr */)
+        -:  403:{
+    #####:  404:  return false;
+        -:  405:}
+        -:  406:
+        -:  407:// TAO_IDL - Generated from
+        -:  408:// be/be_visitor_interface/interface_cs.cpp:51
+        -:  409:
+        -:  410:// Traits specializations for DDS::ContentFilteredTopic.
+        -:  411:
+        -:  412:DDS::ContentFilteredTopic_ptr
+    #####:  413:TAO::Objref_Traits<DDS::ContentFilteredTopic>::duplicate (
+        -:  414:    DDS::ContentFilteredTopic_ptr p)
+        -:  415:{
+    #####:  416:  return DDS::ContentFilteredTopic::_duplicate (p);
+        -:  417:}
+        -:  418:
+        -:  419:void
+    #####:  420:TAO::Objref_Traits<DDS::ContentFilteredTopic>::release (
+        -:  421:    DDS::ContentFilteredTopic_ptr p)
+        -:  422:{
+    #####:  423:  ::CORBA::release (p);
+    #####:  424:}
+        -:  425:
+        -:  426:DDS::ContentFilteredTopic_ptr
+    #####:  427:TAO::Objref_Traits<DDS::ContentFilteredTopic>::nil (void)
+        -:  428:{
+    #####:  429:  return DDS::ContentFilteredTopic::_nil ();
+        -:  430:}
+        -:  431:
+        -:  432:::CORBA::Boolean
+    #####:  433:TAO::Objref_Traits<DDS::ContentFilteredTopic>::marshal (
+        -:  434:    const DDS::ContentFilteredTopic_ptr p,
+        -:  435:    TAO_OutputCDR & cdr)
+        -:  436:{
+    #####:  437:  return ::CORBA::Object::marshal (p, cdr);
+        -:  438:}
+        -:  439:
+    #####:  440:DDS::ContentFilteredTopic::ContentFilteredTopic (void)
+    #####:  441:{}
+        -:  442:
+    #####:  443:DDS::ContentFilteredTopic::~ContentFilteredTopic (void)
+        -:  444:{
+    #####:  445:}
+        -:  446:
+        -:  447:DDS::ContentFilteredTopic_ptr
+    #####:  448:DDS::ContentFilteredTopic::_narrow (
+        -:  449:    ::CORBA::Object_ptr _tao_objref)
+        -:  450:{
+    #####:  451:  return ContentFilteredTopic::_duplicate (
+        -:  452:      dynamic_cast<ContentFilteredTopic_ptr> (_tao_objref)
+    #####:  453:    );
+        -:  454:}
+        -:  455:
+        -:  456:DDS::ContentFilteredTopic_ptr
+    #####:  457:DDS::ContentFilteredTopic::_unchecked_narrow (
+        -:  458:    ::CORBA::Object_ptr _tao_objref)
+        -:  459:{
+    #####:  460:  return ContentFilteredTopic::_duplicate (
+        -:  461:      dynamic_cast<ContentFilteredTopic_ptr> (_tao_objref)
+    #####:  462:    );
+        -:  463:}
+        -:  464:
+        -:  465:DDS::ContentFilteredTopic_ptr
+    #####:  466:DDS::ContentFilteredTopic::_nil (void)
+        -:  467:{
+    #####:  468:  return 0;
+        -:  469:}
+        -:  470:
+        -:  471:DDS::ContentFilteredTopic_ptr
+    #####:  472:DDS::ContentFilteredTopic::_duplicate (ContentFilteredTopic_ptr obj)
+        -:  473:{
+    #####:  474:  if (! ::CORBA::is_nil (obj))
+        -:  475:    {
+    #####:  476:      obj->_add_ref ();
+        -:  477:    }
+    #####:  478:  return obj;
+        -:  479:}
+        -:  480:
+        -:  481:void
+    #####:  482:DDS::ContentFilteredTopic::_tao_release (ContentFilteredTopic_ptr obj)
+        -:  483:{
+    #####:  484:  ::CORBA::release (obj);
+    #####:  485:}
+        -:  486:
+        -:  487:::CORBA::Boolean
+    #####:  488:DDS::ContentFilteredTopic::_is_a (const char *value)
+        -:  489:{
+    #####:  490:  if (
+    #####:  491:      ACE_OS::strcmp (
+        -:  492:          value,
+        -:  493:          "IDL:DDS/TopicDescription:1.0"
+    #####:  494:        ) == 0 ||
+    #####:  495:      ACE_OS::strcmp (
+        -:  496:          value,
+        -:  497:          "IDL:DDS/ContentFilteredTopic:1.0"
+    #####:  498:        ) == 0 ||
+    #####:  499:      ACE_OS::strcmp (
+        -:  500:          value,
+        -:  501:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  502:        ) == 0 ||
+    #####:  503:      ACE_OS::strcmp (
+        -:  504:          value,
+        -:  505:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  506:        ) == 0
+        -:  507:    )
+        -:  508:    {
+    #####:  509:      return true; // success using local knowledge
+        -:  510:    }
+        -:  511:  else
+        -:  512:    {
+    #####:  513:      return false;
+        -:  514:    }
+        -:  515:}
+        -:  516:
+    #####:  517:const char* DDS::ContentFilteredTopic::_interface_repository_id (void) const
+        -:  518:{
+    #####:  519:  return "IDL:DDS/ContentFilteredTopic:1.0";
+        -:  520:}
+        -:  521:
+        -:  522:::CORBA::Boolean
+    #####:  523:DDS::ContentFilteredTopic::marshal (TAO_OutputCDR & /* cdr */)
+        -:  524:{
+    #####:  525:  return false;
+        -:  526:}
+        -:  527:
+        -:  528:// TAO_IDL - Generated from
+        -:  529:// be/be_visitor_interface/interface_cs.cpp:51
+        -:  530:
+        -:  531:// Traits specializations for DDS::MultiTopic.
+        -:  532:
+        -:  533:DDS::MultiTopic_ptr
+    #####:  534:TAO::Objref_Traits<DDS::MultiTopic>::duplicate (
+        -:  535:    DDS::MultiTopic_ptr p)
+        -:  536:{
+    #####:  537:  return DDS::MultiTopic::_duplicate (p);
+        -:  538:}
+        -:  539:
+        -:  540:void
+    #####:  541:TAO::Objref_Traits<DDS::MultiTopic>::release (
+        -:  542:    DDS::MultiTopic_ptr p)
+        -:  543:{
+    #####:  544:  ::CORBA::release (p);
+    #####:  545:}
+        -:  546:
+        -:  547:DDS::MultiTopic_ptr
+    #####:  548:TAO::Objref_Traits<DDS::MultiTopic>::nil (void)
+        -:  549:{
+    #####:  550:  return DDS::MultiTopic::_nil ();
+        -:  551:}
+        -:  552:
+        -:  553:::CORBA::Boolean
+    #####:  554:TAO::Objref_Traits<DDS::MultiTopic>::marshal (
+        -:  555:    const DDS::MultiTopic_ptr p,
+        -:  556:    TAO_OutputCDR & cdr)
+        -:  557:{
+    #####:  558:  return ::CORBA::Object::marshal (p, cdr);
+        -:  559:}
+        -:  560:
+    #####:  561:DDS::MultiTopic::MultiTopic (void)
+    #####:  562:{}
+        -:  563:
+    #####:  564:DDS::MultiTopic::~MultiTopic (void)
+        -:  565:{
+    #####:  566:}
+        -:  567:
+        -:  568:DDS::MultiTopic_ptr
+    #####:  569:DDS::MultiTopic::_narrow (
+        -:  570:    ::CORBA::Object_ptr _tao_objref)
+        -:  571:{
+    #####:  572:  return MultiTopic::_duplicate (
+        -:  573:      dynamic_cast<MultiTopic_ptr> (_tao_objref)
+    #####:  574:    );
+        -:  575:}
+        -:  576:
+        -:  577:DDS::MultiTopic_ptr
+    #####:  578:DDS::MultiTopic::_unchecked_narrow (
+        -:  579:    ::CORBA::Object_ptr _tao_objref)
+        -:  580:{
+    #####:  581:  return MultiTopic::_duplicate (
+        -:  582:      dynamic_cast<MultiTopic_ptr> (_tao_objref)
+    #####:  583:    );
+        -:  584:}
+        -:  585:
+        -:  586:DDS::MultiTopic_ptr
+    #####:  587:DDS::MultiTopic::_nil (void)
+        -:  588:{
+    #####:  589:  return 0;
+        -:  590:}
+        -:  591:
+        -:  592:DDS::MultiTopic_ptr
+    #####:  593:DDS::MultiTopic::_duplicate (MultiTopic_ptr obj)
+        -:  594:{
+    #####:  595:  if (! ::CORBA::is_nil (obj))
+        -:  596:    {
+    #####:  597:      obj->_add_ref ();
+        -:  598:    }
+    #####:  599:  return obj;
+        -:  600:}
+        -:  601:
+        -:  602:void
+    #####:  603:DDS::MultiTopic::_tao_release (MultiTopic_ptr obj)
+        -:  604:{
+    #####:  605:  ::CORBA::release (obj);
+    #####:  606:}
+        -:  607:
+        -:  608:::CORBA::Boolean
+    #####:  609:DDS::MultiTopic::_is_a (const char *value)
+        -:  610:{
+    #####:  611:  if (
+    #####:  612:      ACE_OS::strcmp (
+        -:  613:          value,
+        -:  614:          "IDL:DDS/TopicDescription:1.0"
+    #####:  615:        ) == 0 ||
+    #####:  616:      ACE_OS::strcmp (
+        -:  617:          value,
+        -:  618:          "IDL:DDS/MultiTopic:1.0"
+    #####:  619:        ) == 0 ||
+    #####:  620:      ACE_OS::strcmp (
+        -:  621:          value,
+        -:  622:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  623:        ) == 0 ||
+    #####:  624:      ACE_OS::strcmp (
+        -:  625:          value,
+        -:  626:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  627:        ) == 0
+        -:  628:    )
+        -:  629:    {
+    #####:  630:      return true; // success using local knowledge
+        -:  631:    }
+        -:  632:  else
+        -:  633:    {
+    #####:  634:      return false;
+        -:  635:    }
+        -:  636:}
+        -:  637:
+    #####:  638:const char* DDS::MultiTopic::_interface_repository_id (void) const
+        -:  639:{
+    #####:  640:  return "IDL:DDS/MultiTopic:1.0";
+        -:  641:}
+        -:  642:
+        -:  643:::CORBA::Boolean
+    #####:  644:DDS::MultiTopic::marshal (TAO_OutputCDR & /* cdr */)
+        -:  645:{
+    #####:  646:  return false;
+        -:  647:}
+        -:  648:
+        -:  649:// TAO_IDL - Generated from
+        -:  650:// be/be_visitor_interface/interface_cs.cpp:51
+        -:  651:
+        -:  652:// Traits specializations for DDS::TypeSupport.
+        -:  653:
+        -:  654:DDS::TypeSupport_ptr
+    #####:  655:TAO::Objref_Traits<DDS::TypeSupport>::duplicate (
+        -:  656:    DDS::TypeSupport_ptr p)
+        -:  657:{
+    #####:  658:  return DDS::TypeSupport::_duplicate (p);
+        -:  659:}
+        -:  660:
+        -:  661:void
+    #####:  662:TAO::Objref_Traits<DDS::TypeSupport>::release (
+        -:  663:    DDS::TypeSupport_ptr p)
+        -:  664:{
+    #####:  665:  ::CORBA::release (p);
+    #####:  666:}
+        -:  667:
+        -:  668:DDS::TypeSupport_ptr
+    #####:  669:TAO::Objref_Traits<DDS::TypeSupport>::nil (void)
+        -:  670:{
+    #####:  671:  return DDS::TypeSupport::_nil ();
+        -:  672:}
+        -:  673:
+        -:  674:::CORBA::Boolean
+    #####:  675:TAO::Objref_Traits<DDS::TypeSupport>::marshal (
+        -:  676:    const DDS::TypeSupport_ptr p,
+        -:  677:    TAO_OutputCDR & cdr)
+        -:  678:{
+    #####:  679:  return ::CORBA::Object::marshal (p, cdr);
+        -:  680:}
+        -:  681:
+       21:  682:DDS::TypeSupport::TypeSupport (void)
+       21:  683:{}
+        -:  684:
+       21:  685:DDS::TypeSupport::~TypeSupport (void)
+        -:  686:{
+       21:  687:}
+        -:  688:
+        -:  689:DDS::TypeSupport_ptr
+    #####:  690:DDS::TypeSupport::_narrow (
+        -:  691:    ::CORBA::Object_ptr _tao_objref)
+        -:  692:{
+    #####:  693:  return TypeSupport::_duplicate (
+        -:  694:      dynamic_cast<TypeSupport_ptr> (_tao_objref)
+    #####:  695:    );
+        -:  696:}
+        -:  697:
+        -:  698:DDS::TypeSupport_ptr
+    #####:  699:DDS::TypeSupport::_unchecked_narrow (
+        -:  700:    ::CORBA::Object_ptr _tao_objref)
+        -:  701:{
+    #####:  702:  return TypeSupport::_duplicate (
+        -:  703:      dynamic_cast<TypeSupport_ptr> (_tao_objref)
+    #####:  704:    );
+        -:  705:}
+        -:  706:
+        -:  707:DDS::TypeSupport_ptr
+    #####:  708:DDS::TypeSupport::_nil (void)
+        -:  709:{
+    #####:  710:  return 0;
+        -:  711:}
+        -:  712:
+        -:  713:DDS::TypeSupport_ptr
+    #####:  714:DDS::TypeSupport::_duplicate (TypeSupport_ptr obj)
+        -:  715:{
+    #####:  716:  if (! ::CORBA::is_nil (obj))
+        -:  717:    {
+    #####:  718:      obj->_add_ref ();
+        -:  719:    }
+    #####:  720:  return obj;
+        -:  721:}
+        -:  722:
+        -:  723:void
+    #####:  724:DDS::TypeSupport::_tao_release (TypeSupport_ptr obj)
+        -:  725:{
+    #####:  726:  ::CORBA::release (obj);
+    #####:  727:}
+        -:  728:
+        -:  729:::CORBA::Boolean
+    #####:  730:DDS::TypeSupport::_is_a (const char *value)
+        -:  731:{
+    #####:  732:  if (
+    #####:  733:      ACE_OS::strcmp (
+        -:  734:          value,
+        -:  735:          "IDL:DDS/TypeSupport:1.0"
+    #####:  736:        ) == 0 ||
+    #####:  737:      ACE_OS::strcmp (
+        -:  738:          value,
+        -:  739:          "IDL:omg.org/CORBA/LocalObject:1.0"
+    #####:  740:        ) == 0 ||
+    #####:  741:      ACE_OS::strcmp (
+        -:  742:          value,
+        -:  743:          "IDL:omg.org/CORBA/Object:1.0"
+        -:  744:        ) == 0
+        -:  745:    )
+        -:  746:    {
+    #####:  747:      return true; // success using local knowledge
+        -:  748:    }
+        -:  749:  else
+        -:  750:    {
+    #####:  751:      return false;
+        -:  752:    }
+        -:  753:}
+        -:  754:
+    #####:  755:const char* DDS::TypeSupport::_interface_repository_id (void) const
+        -:  756:{
+    #####:  757:  return "IDL:DDS/TypeSupport:1.0";
+        -:  758:}
+        -:  759:
+        -:  760:::CORBA::Boolean
+    #####:  761:DDS::TypeSupport::marshal (TAO_OutputCDR & /* cdr */)
+        -:  762:{
+    #####:  763:  return false;
+        -:  764:}
+        -:  765:
+        -:  766:
+        -:  767:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:  768:
+        -:  769:

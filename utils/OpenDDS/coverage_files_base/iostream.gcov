@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/iostream
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Standard iostream objects -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 1997-2017 Free Software Foundation, Inc.
@@ -73,7 +73,7 @@
         -:   71:  //@}
         -:   72:
         -:   73:  // For construction of filebuffers for cout, cin, cerr, clog et. al.
-      120:   74:  static ios_base::Init __ioinit;
+       24:   74:  static ios_base::Init __ioinit;
         -:   75:
         -:   76:_GLIBCXX_END_NAMESPACE_VERSION
         -:   77:} // namespace

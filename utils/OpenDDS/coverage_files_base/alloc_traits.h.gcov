@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/ext/alloc_traits.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Allocator traits -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2011-2017 Free Software Foundation, Inc.
@@ -96,11 +96,11 @@
     #####:   94:    static _Alloc _S_select_on_copy(const _Alloc& __a)
     #####:   95:    { return _Base_type::select_on_container_copy_construction(__a); }
         -:   96:
-       80:   97:    static void _S_on_swap(_Alloc& __a, _Alloc& __b)
-       80:   98:    { std::__alloc_on_swap(__a, __b); }
+    #####:   97:    static void _S_on_swap(_Alloc& __a, _Alloc& __b)
+    #####:   98:    { std::__alloc_on_swap(__a, __b); }
         -:   99:
-        8:  100:    static constexpr bool _S_propagate_on_copy_assign()
-        8:  101:    { return _Base_type::propagate_on_container_copy_assignment::value; }
+    #####:  100:    static constexpr bool _S_propagate_on_copy_assign()
+    #####:  101:    { return _Base_type::propagate_on_container_copy_assignment::value; }
         -:  102:
         -:  103:    static constexpr bool _S_propagate_on_move_assign()
         -:  104:    { return _Base_type::propagate_on_container_move_assignment::value; }

@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/bits/allocator.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// Allocators -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
@@ -130,15 +130,15 @@
         -:  128:      typedef true_type is_always_equal;
         -:  129:#endif
         -:  130:
-      396:  131:      allocator() throw() { }
+       51:  131:      allocator() throw() { }
         -:  132:
     #####:  133:      allocator(const allocator& __a) throw()
     #####:  134:      : __allocator_base<_Tp>(__a) { }
         -:  135:
         -:  136:      template<typename _Tp1>
-      208:  137:	allocator(const allocator<_Tp1>&) throw() { }
+    #####:  137:	allocator(const allocator<_Tp1>&) throw() { }
         -:  138:
-      599:  139:      ~allocator() throw() { }
+       48:  139:      ~allocator() throw() { }
         -:  140:
         -:  141:      // Inherit everything else.
         -:  142:    };
@@ -201,8 +201,8 @@
         -:  199:    struct __alloc_neq
         -:  200:    {
         -:  201:      static bool
-    #####:  202:      _S_do_it(const _Alloc&, const _Alloc&)
-    #####:  203:      { return false; }
+        -:  202:      _S_do_it(const _Alloc&, const _Alloc&)
+        -:  203:      { return false; }
         -:  204:    };
         -:  205:
         -:  206:  template<typename _Alloc>

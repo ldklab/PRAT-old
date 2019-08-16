@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Malloc_Allocator.h
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2:
         -:    3://==========================================================================
@@ -53,7 +53,7 @@
         -:   51: * added functionality of bind/find/etc. while using the new/delete
         -:   52: * operators.
         -:   53: */
-    #####:   54:class ACE_Export ACE_New_Allocator : public ACE_Allocator
+      612:   54:class ACE_Export ACE_New_Allocator : public ACE_Allocator
         -:   55:{
         -:   56:public:
         -:   57:  /// These methods are defined.

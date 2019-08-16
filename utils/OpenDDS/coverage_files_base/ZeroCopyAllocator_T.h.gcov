@@ -1,60 +1,90 @@
         -:    0:Source:../dds/DCPS/ZeroCopyAllocator_T.h
-        -:    0:Programs:70
-        -:    1:/*EOF*/
-        -:    2:/*EOF*/
-        -:    3:/*EOF*/
-        -:    4:/*EOF*/
-        -:    5:/*EOF*/
-        -:    6:/*EOF*/
-        -:    7:/*EOF*/
-        -:    8:/*EOF*/
-        -:    9:/*EOF*/
-        -:   10:/*EOF*/
-        -:   11:/*EOF*/
-        -:   12:/*EOF*/
-        -:   13:/*EOF*/
-        -:   14:/*EOF*/
-        -:   15:/*EOF*/
-        -:   16:/*EOF*/
-        -:   17:/*EOF*/
-        -:   18:/*EOF*/
-        -:   19:/*EOF*/
-        -:   20:/*EOF*/
-        -:   21:/*EOF*/
-        -:   22:/*EOF*/
-        -:   23:/*EOF*/
-        -:   24:/*EOF*/
-        -:   25:/*EOF*/
-        -:   26:/*EOF*/
-        -:   27:/*EOF*/
-        -:   28:/*EOF*/
-        -:   29:/*EOF*/
-        -:   30:/*EOF*/
-        -:   31:/*EOF*/
-    #####:   32:/*EOF*/
-        -:   33:/*EOF*/
-        -:   34:/*EOF*/
-        -:   35:/*EOF*/
-        -:   36:/*EOF*/
-        -:   37:/*EOF*/
-        -:   38:/*EOF*/
-        -:   39:/*EOF*/
-        -:   40:/*EOF*/
-        -:   41:/*EOF*/
-        -:   42:/*EOF*/
-        -:   43:/*EOF*/
-        -:   44:/*EOF*/
-        -:   45:/*EOF*/
-        -:   46:/*EOF*/
-        -:   47:/*EOF*/
-        -:   48:/*EOF*/
-        -:   49:/*EOF*/
-        -:   50:/*EOF*/
-        -:   51:/*EOF*/
-        -:   52:/*EOF*/
-        -:   53:/*EOF*/
-        -:   54:/*EOF*/
-        -:   55:/*EOF*/
-        -:   56:/*EOF*/
-    #####:   57:/*EOF*/
-    #####:   58:/*EOF*/
+        -:    0:Programs:72
+        -:    1:/*
+        -:    2: *
+        -:    3: *
+        -:    4: * Distributed under the OpenDDS License.
+        -:    5: * See: http://www.opendds.org/license.html
+        -:    6: */
+        -:    7:
+        -:    8:#ifndef ZEROCOPYALLOCATOR_H
+        -:    9:#define ZEROCOPYALLOCATOR_H
+        -:   10:
+        -:   11:#include /**/ "ace/pre.h"
+        -:   12:#include "ace/Malloc_Base.h"          /* Need ACE_Allocator */
+        -:   13:// not needed export for templates #include "dcps_export.h"
+        -:   14:
+        -:   15:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   16:# pragma once
+        -:   17:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   18:
+        -:   19:#include "dds/Versioned_Namespace.h"
+        -:   20:
+        -:   21:OPENDDS_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   22:
+        -:   23:namespace OpenDDS {
+        -:   24:namespace DCPS {
+        -:   25:
+        -:   26:/// This allocator is "Fast" because it's pool can be on the stack
+        -:   27:///   (If the object is on the stack and hence it does not require the
+        -:   28:///    cost of allocating and deallocating on the heap.  It object is on the
+        -:   29:///    heap then it requires just one allocation; not two.)
+        -:   30:/// *WARNING* The object using this allocator must not have a scope smaller than this object !!!
+        -:   31:template <class T, std::size_t N>
+    #####:   32:class FirstTimeFastAllocator : public ACE_Allocator {
+        -:   33:public:
+        -:   34:  FirstTimeFastAllocator();
+        -:   35:  virtual void *malloc(size_t nbytes);
+        -:   36:  virtual void free(void *ptr);
+        -:   37:
+        -:   38:  /// These methods are no-ops.
+        -:   39:  virtual void *calloc(size_t nbytes, char initial_value = '\0');
+        -:   40:  virtual void *calloc(size_t n_elem, size_t elem_size, char initial_value = '\0');
+        -:   41:  virtual int remove();
+        -:   42:  virtual int bind(const char *name, void *pointer, int duplicates = 0);
+        -:   43:  virtual int trybind(const char *name, void *&pointer);
+        -:   44:  virtual int find(const char *name, void *&pointer);
+        -:   45:  virtual int find(const char *name);
+        -:   46:  virtual int unbind(const char *name);
+        -:   47:  virtual int unbind(const char *name, void *&pointer);
+        -:   48:  virtual int sync(ssize_t len = -1, int flags = MS_SYNC);
+        -:   49:  virtual int sync(void *addr, size_t len, int flags = MS_SYNC);
+        -:   50:  virtual int protect(ssize_t len = -1, int prot = PROT_RDWR);
+        -:   51:  virtual int protect(void *addr, size_t len, int prot = PROT_RDWR);
+        -:   52:#if defined (ACE_HAS_MALLOC_STATS)
+        -:   53:  virtual void print_stats() const;
+        -:   54:#endif /* ACE_HAS_MALLOC_STATS */
+        -:   55:  virtual void dump() const;
+        -:   56:
+    #####:   57:  T* pool() {
+    #####:   58:    return pool_;
+        -:   59:  }
+        -:   60:
+        -:   61:private:
+        -:   62:  /// is this the first time this is allocated?
+        -:   63:  bool firstTime_;
+        -:   64:
+        -:   65:  /// the pool of allocated memory.
+        -:   66:  T pool_[N];
+        -:   67:};
+        -:   68:
+        -:   69:} // namespace  DDS
+        -:   70:} // namespace OpenDDS
+        -:   71:
+        -:   72:OPENDDS_END_VERSIONED_NAMESPACE_DECL
+        -:   73:
+        -:   74:#if defined (__ACE_INLINE__)
+        -:   75:#include "dds/DCPS/ZeroCopyAllocator_T.inl"
+        -:   76:#endif /* __ACE_INLINE__ */
+        -:   77:
+        -:   78:#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
+        -:   79:#include "dds/DCPS/ZeroCopyAllocator_T.cpp"
+        -:   80:#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
+        -:   81:
+        -:   82:#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
+        -:   83:#pragma implementation ("ZeroCopyAllocator_T.cpp")
+        -:   84:#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
+        -:   85:
+        -:   86:#include /**/ "ace/post.h"
+        -:   87:
+        -:   88:#endif /* ZEROCOPYALLOCATOR_H  */

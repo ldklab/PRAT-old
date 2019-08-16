@@ -1,5 +1,5 @@
         -:    0:Source:/usr/include/c++/7/tuple
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// <tuple> -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2007-2017 Free Software Foundation, Inc.
@@ -75,8 +75,8 @@
         -:   73:    struct _Head_base<_Idx, _Head, true>
         -:   74:    : public _Head
         -:   75:    {
-       36:   76:      constexpr _Head_base()
-       36:   77:      : _Head() { }
+      441:   76:      constexpr _Head_base()
+      441:   77:      : _Head() { }
         -:   78:
         -:   79:      constexpr _Head_base(const _Head& __h)
         -:   80:      : _Head(__h) { }
@@ -85,8 +85,8 @@
         -:   83:      constexpr _Head_base(_Head_base&&) = default;
         -:   84:
         -:   85:      template<typename _UHead>
-    #####:   86:        constexpr _Head_base(_UHead&& __h)
-    #####:   87:	: _Head(std::forward<_UHead>(__h)) { }
+      249:   86:        constexpr _Head_base(_UHead&& __h)
+      249:   87:	: _Head(std::forward<_UHead>(__h)) { }
         -:   88:
         -:   89:      _Head_base(allocator_arg_t, __uses_alloc0)
         -:   90:      : _Head() { }
@@ -112,7 +112,7 @@
         -:  110:	: _Head(std::forward<_UHead>(__uhead), *__a._M_a) { }
         -:  111:
         -:  112:      static constexpr _Head&
-       24:  113:      _M_head(_Head_base& __b) noexcept { return __b; }
+      594:  113:      _M_head(_Head_base& __b) noexcept { return __b; }
         -:  114:
         -:  115:      static constexpr const _Head&
         -:  116:      _M_head(const _Head_base& __b) noexcept { return __b; }
@@ -121,18 +121,18 @@
         -:  119:  template<std::size_t _Idx, typename _Head>
         -:  120:    struct _Head_base<_Idx, _Head, false>
         -:  121:    {
-       36:  122:      constexpr _Head_base()
-       36:  123:      : _M_head_impl() { }
+      366:  122:      constexpr _Head_base()
+      366:  123:      : _M_head_impl() { }
         -:  124:
-    #####:  125:      constexpr _Head_base(const _Head& __h)
-    #####:  126:      : _M_head_impl(__h) { }
+       36:  125:      constexpr _Head_base(const _Head& __h)
+       36:  126:      : _M_head_impl(__h) { }
         -:  127:
         -:  128:      constexpr _Head_base(const _Head_base&) = default;
         -:  129:      constexpr _Head_base(_Head_base&&) = default;
         -:  130:
         -:  131:      template<typename _UHead>
-    #####:  132:        constexpr _Head_base(_UHead&& __h)
-    #####:  133:	: _M_head_impl(std::forward<_UHead>(__h)) { }
+      558:  132:        constexpr _Head_base(_UHead&& __h)
+      558:  133:	: _M_head_impl(std::forward<_UHead>(__h)) { }
         -:  134:
         -:  135:      _Head_base(allocator_arg_t, __uses_alloc0)
         -:  136:      : _M_head_impl() { }
@@ -159,10 +159,10 @@
         -:  157:	: _M_head_impl(std::forward<_UHead>(__uhead), *__a._M_a) { }
         -:  158:
         -:  159:      static constexpr _Head&
-       60:  160:      _M_head(_Head_base& __b) noexcept { return __b._M_head_impl; }
+     1854:  160:      _M_head(_Head_base& __b) noexcept { return __b._M_head_impl; }
         -:  161:
         -:  162:      static constexpr const _Head&
-       86:  163:      _M_head(const _Head_base& __b) noexcept { return __b._M_head_impl; }
+     1578:  163:      _M_head(const _Head_base& __b) noexcept { return __b._M_head_impl; }
         -:  164:
         -:  165:      _Head _M_head_impl;
         -:  166:    };
@@ -194,10 +194,10 @@
         -:  192:      typedef _Head_base<_Idx, _Head> _Base;
         -:  193:
         -:  194:      static constexpr _Head&
-       60:  195:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+     1881:  195:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
         -:  196:
         -:  197:      static constexpr const _Head&
-       86:  198:      _M_head(const _Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+     1926:  198:      _M_head(const _Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
         -:  199:
         -:  200:      static constexpr _Inherited&
     #####:  201:      _M_tail(_Tuple_impl& __t) noexcept { return __t; }
@@ -205,19 +205,19 @@
         -:  203:      static constexpr const _Inherited&
         -:  204:      _M_tail(const _Tuple_impl& __t) noexcept { return __t; }
         -:  205:
-       36:  206:      constexpr _Tuple_impl()
-       36:  207:      : _Inherited(), _Base() { }
+      441:  206:      constexpr _Tuple_impl()
+      441:  207:      : _Inherited(), _Base() { }
         -:  208:
         -:  209:      explicit
-        -:  210:      constexpr _Tuple_impl(const _Head& __head, const _Tail&... __tail)
-        -:  211:      : _Inherited(__tail...), _Base(__head) { }
+    #####:  210:      constexpr _Tuple_impl(const _Head& __head, const _Tail&... __tail)
+    #####:  211:      : _Inherited(__tail...), _Base(__head) { }
         -:  212:
         -:  213:      template<typename _UHead, typename... _UTail, typename = typename
         -:  214:               enable_if<sizeof...(_Tail) == sizeof...(_UTail)>::type>
         -:  215:        explicit
-    #####:  216:        constexpr _Tuple_impl(_UHead&& __head, _UTail&&... __tail)
+      249:  216:        constexpr _Tuple_impl(_UHead&& __head, _UTail&&... __tail)
         -:  217:	: _Inherited(std::forward<_UTail>(__tail)...),
-    #####:  218:	  _Base(std::forward<_UHead>(__head)) { }
+      249:  218:	  _Base(std::forward<_UHead>(__head)) { }
         -:  219:
         -:  220:      constexpr _Tuple_impl(const _Tuple_impl&) = default;
         -:  221:
@@ -299,13 +299,13 @@
         -:  297:      }
         -:  298:
         -:  299:      _Tuple_impl&
-    #####:  300:      operator=(_Tuple_impl&& __in)
+        -:  300:      operator=(_Tuple_impl&& __in)
         -:  301:      noexcept(__and_<is_nothrow_move_assignable<_Head>,
         -:  302:	              is_nothrow_move_assignable<_Inherited>>::value)
         -:  303:      {
-    #####:  304:	_M_head(*this) = std::forward<_Head>(_M_head(__in));
-    #####:  305:	_M_tail(*this) = std::move(_M_tail(__in));
-    #####:  306:	return *this;
+        -:  304:	_M_head(*this) = std::forward<_Head>(_M_head(__in));
+        -:  305:	_M_tail(*this) = std::move(_M_tail(__in));
+        -:  306:	return *this;
         -:  307:      }
         -:  308:
         -:  309:      template<typename... _UElements>
@@ -350,29 +350,29 @@
         -:  348:      typedef _Head_base<_Idx, _Head> _Base;
         -:  349:
         -:  350:      static constexpr _Head&
-       24:  351:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+     1014:  351:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
         -:  352:
         -:  353:      static constexpr const _Head&
         -:  354:      _M_head(const _Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
         -:  355:
-       36:  356:      constexpr _Tuple_impl()
-       36:  357:      : _Base() { }
+      441:  356:      constexpr _Tuple_impl()
+      441:  357:      : _Base() { }
         -:  358:
         -:  359:      explicit
-    #####:  360:      constexpr _Tuple_impl(const _Head& __head)
-    #####:  361:      : _Base(__head) { }
+       18:  360:      constexpr _Tuple_impl(const _Head& __head)
+       18:  361:      : _Base(__head) { }
         -:  362:
         -:  363:      template<typename _UHead>
         -:  364:        explicit
-    #####:  365:        constexpr _Tuple_impl(_UHead&& __head)
-    #####:  366:	: _Base(std::forward<_UHead>(__head)) { }
+      441:  365:        constexpr _Tuple_impl(_UHead&& __head)
+      441:  366:	: _Base(std::forward<_UHead>(__head)) { }
         -:  367:
         -:  368:      constexpr _Tuple_impl(const _Tuple_impl&) = default;
         -:  369:
         -:  370:      constexpr
-    #####:  371:      _Tuple_impl(_Tuple_impl&& __in)
+      210:  371:      _Tuple_impl(_Tuple_impl&& __in)
         -:  372:      noexcept(is_nothrow_move_constructible<_Head>::value)
-    #####:  373:      : _Base(std::forward<_Head>(_M_head(__in))) { }
+      210:  373:      : _Base(std::forward<_Head>(_M_head(__in))) { }
         -:  374:
         -:  375:      template<typename _UHead>
         -:  376:        constexpr _Tuple_impl(const _Tuple_impl<_Idx, _UHead>& __in)
@@ -430,11 +430,11 @@
         -:  428:      }
         -:  429:
         -:  430:      _Tuple_impl&
-    #####:  431:      operator=(_Tuple_impl&& __in)
+        -:  431:      operator=(_Tuple_impl&& __in)
         -:  432:      noexcept(is_nothrow_move_assignable<_Head>::value)
         -:  433:      {
-    #####:  434:	_M_head(*this) = std::forward<_Head>(_M_head(__in));
-    #####:  435:	return *this;
+        -:  434:	_M_head(*this) = std::forward<_Head>(_M_head(__in));
+        -:  435:	return *this;
         -:  436:      }
         -:  437:
         -:  438:      template<typename _UHead>
@@ -607,8 +607,8 @@
         -:  605:                   _ImplicitlyConvertibleTuple<_Elements...>()
         -:  606:                 && (sizeof...(_Elements) >= 1),
         -:  607:               bool>::type=true>
-    #####:  608:        constexpr tuple(const _Elements&... __elements)
-    #####:  609:      : _Inherited(__elements...) { }
+       18:  608:        constexpr tuple(const _Elements&... __elements)
+       18:  609:      : _Inherited(__elements...) { }
         -:  610:
         -:  611:      template<typename _Dummy = void,
         -:  612:               typename enable_if<
@@ -645,8 +645,8 @@
         -:  643:                    _ImplicitlyMoveConvertibleTuple<_UElements...>()
         -:  644:                  && (sizeof...(_Elements) >= 1),
         -:  645:        bool>::type=true>
-    #####:  646:        constexpr tuple(_UElements&&... __elements)
-    #####:  647:        : _Inherited(std::forward<_UElements>(__elements)...) { }
+      192:  646:        constexpr tuple(_UElements&&... __elements)
+      192:  647:        : _Inherited(std::forward<_UElements>(__elements)...) { }
         -:  648:
         -:  649:      template<typename... _UElements, typename
         -:  650:        enable_if<
@@ -661,7 +661,7 @@
         -:  659:
         -:  660:      constexpr tuple(const tuple&) = default;
         -:  661:
-    #####:  662:      constexpr tuple(tuple&&) = default;
+      348:  662:      constexpr tuple(tuple&&) = default;
         -:  663:
         -:  664:      // Shortcut for the cases where constructors taking tuples
         -:  665:      // must avoid creating temporaries.
@@ -918,8 +918,8 @@
         -:  916:                                     __is_implicitly_default_constructible<_U2>>
         -:  917:                                   ::value, bool>::type = true>
         -:  918:
-       36:  919:      constexpr tuple()
-       36:  920:      : _Inherited() { }
+      441:  919:      constexpr tuple()
+      441:  920:      : _Inherited() { }
         -:  921:
         -:  922:      template <typename _U1 = _T1,
         -:  923:                typename _U2 = _T2,
@@ -970,8 +970,8 @@
         -:  968:	          && !is_same<typename decay<_U1>::type,
         -:  969:			      allocator_arg_t>::value,
         -:  970:	bool>::type = true>
-    #####:  971:        constexpr tuple(_U1&& __a1, _U2&& __a2)
-    #####:  972:	: _Inherited(std::forward<_U1>(__a1), std::forward<_U2>(__a2)) { }
+      249:  971:        constexpr tuple(_U1&& __a1, _U2&& __a2)
+      249:  972:	: _Inherited(std::forward<_U1>(__a1), std::forward<_U2>(__a2)) { }
         -:  973:
         -:  974:      template<typename _U1, typename _U2, typename
         -:  975:        enable_if<_TMC::template
@@ -986,7 +986,7 @@
         -:  984:
         -:  985:      constexpr tuple(const tuple&) = default;
         -:  986:
-    #####:  987:      constexpr tuple(tuple&&) = default;
+        -:  987:      constexpr tuple(tuple&&) = default;
         -:  988:
         -:  989:      template<typename _U1, typename _U2, typename
         -:  990:        enable_if<_TMC::template
@@ -1215,11 +1215,11 @@
         -: 1213:      }
         -: 1214:
         -: 1215:      tuple&
-    #####: 1216:      operator=(tuple&& __in)
+        -: 1216:      operator=(tuple&& __in)
         -: 1217:      noexcept(is_nothrow_move_assignable<_Inherited>::value)
         -: 1218:      {
-    #####: 1219:	static_cast<_Inherited&>(*this) = std::move(__in);
-    #####: 1220:	return *this;
+        -: 1219:	static_cast<_Inherited&>(*this) = std::move(__in);
+        -: 1220:	return *this;
         -: 1221:      }
         -: 1222:
         -: 1223:      template<typename _U1, typename _U2>
@@ -1302,25 +1302,25 @@
         -: 1300:
         -: 1301:  template<std::size_t __i, typename _Head, typename... _Tail>
         -: 1302:    constexpr _Head&
-       84: 1303:    __get_helper(_Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
-       84: 1304:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
+     2685: 1303:    __get_helper(_Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
+     2685: 1304:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
         -: 1305:
         -: 1306:  template<std::size_t __i, typename _Head, typename... _Tail>
         -: 1307:    constexpr const _Head&
-       86: 1308:    __get_helper(const _Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
-       86: 1309:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
+     1926: 1308:    __get_helper(const _Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
+     1926: 1309:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
         -: 1310:
         -: 1311:  /// Return a reference to the ith element of a tuple.
         -: 1312:  template<std::size_t __i, typename... _Elements>
         -: 1313:    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
-       84: 1314:    get(tuple<_Elements...>& __t) noexcept
-       84: 1315:    { return std::__get_helper<__i>(__t); }
+     2685: 1314:    get(tuple<_Elements...>& __t) noexcept
+     2685: 1315:    { return std::__get_helper<__i>(__t); }
         -: 1316:
         -: 1317:  /// Return a const reference to the ith element of a const tuple.
         -: 1318:  template<std::size_t __i, typename... _Elements>
         -: 1319:    constexpr const __tuple_element_t<__i, tuple<_Elements...>>&
-       86: 1320:    get(const tuple<_Elements...>& __t) noexcept
-       86: 1321:    { return std::__get_helper<__i>(__t); }
+     1926: 1320:    get(const tuple<_Elements...>& __t) noexcept
+     1926: 1321:    { return std::__get_helper<__i>(__t); }
         -: 1322:
         -: 1323:  /// Return an rvalue reference to the ith element of a tuple rvalue.
         -: 1324:  template<std::size_t __i, typename... _Elements>
@@ -1458,8 +1458,8 @@
         -: 1456:  // 2275. Why is forward_as_tuple not constexpr?
         -: 1457:  template<typename... _Elements>
         -: 1458:    constexpr tuple<_Elements&&...>
-    #####: 1459:    forward_as_tuple(_Elements&&... __args) noexcept
-    #####: 1460:    { return tuple<_Elements&&...>(std::forward<_Elements>(__args)...); }
+      192: 1459:    forward_as_tuple(_Elements&&... __args) noexcept
+      192: 1460:    { return tuple<_Elements&&...>(std::forward<_Elements>(__args)...); }
         -: 1461:
         -: 1462:  template<size_t, typename, typename, size_t>
         -: 1463:    struct __make_tuple_impl;
@@ -1635,24 +1635,24 @@
         -: 1633:  template<class _T1, class _T2>
         -: 1634:    template<typename... _Args1, typename... _Args2>
         -: 1635:      inline
-       36: 1636:      pair<_T1, _T2>::
+    #####: 1636:      pair<_T1, _T2>::
         -: 1637:      pair(piecewise_construct_t,
         -: 1638:	   tuple<_Args1...> __first, tuple<_Args2...> __second)
         -: 1639:      : pair(__first, __second,
         -: 1640:	     typename _Build_index_tuple<sizeof...(_Args1)>::__type(),
-       36: 1641:	     typename _Build_index_tuple<sizeof...(_Args2)>::__type())
-       36: 1642:      { }
+    #####: 1641:	     typename _Build_index_tuple<sizeof...(_Args2)>::__type())
+    #####: 1642:      { }
         -: 1643:
         -: 1644:  template<class _T1, class _T2>
         -: 1645:    template<typename... _Args1, std::size_t... _Indexes1,
         -: 1646:             typename... _Args2, std::size_t... _Indexes2>
         -: 1647:      inline
-       36: 1648:      pair<_T1, _T2>::
+    #####: 1648:      pair<_T1, _T2>::
         -: 1649:      pair(tuple<_Args1...>& __tuple1, tuple<_Args2...>& __tuple2,
         -: 1650:	   _Index_tuple<_Indexes1...>, _Index_tuple<_Indexes2...>)
-       36: 1651:      : first(std::forward<_Args1>(std::get<_Indexes1>(__tuple1))...),
-       56: 1652:        second(std::forward<_Args2>(std::get<_Indexes2>(__tuple2))...)
-       36: 1653:      { }
+    #####: 1651:      : first(std::forward<_Args1>(std::get<_Indexes1>(__tuple1))...),
+    #####: 1652:        second(std::forward<_Args2>(std::get<_Indexes2>(__tuple2))...)
+    #####: 1653:      { }
         -: 1654:
         -: 1655:#if __cplusplus > 201402L
         -: 1656:# define __cpp_lib_apply 201603

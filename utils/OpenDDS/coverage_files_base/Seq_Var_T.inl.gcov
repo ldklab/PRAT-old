@@ -1,5 +1,5 @@
         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Seq_Var_T.inl
-        -:    0:Programs:51
+        -:    0:Programs:72
         -:    1:// -*- C++ -*-
         -:    2://
         -:    3:// $Id: Seq_Var_T.inl 2179 2013-05-28 22:16:51Z mesnierp $
@@ -10,22 +10,22 @@
         -:    8:
         -:    9:template<typename T>
         -:   10:ACE_INLINE
-    #####:   11:TAO_Seq_Var_Base_T<T>::TAO_Seq_Var_Base_T (void)
-    #####:   12:  : ptr_ (0)
-    #####:   13:{}
+      114:   11:TAO_Seq_Var_Base_T<T>::TAO_Seq_Var_Base_T (void)
+      114:   12:  : ptr_ (0)
+      114:   13:{}
         -:   14:
         -:   15:template<typename T>
         -:   16:ACE_INLINE
-    #####:   17:TAO_Seq_Var_Base_T<T>::TAO_Seq_Var_Base_T (T * p)
-    #####:   18:  : ptr_ (p)
-    #####:   19:{}
+        -:   17:TAO_Seq_Var_Base_T<T>::TAO_Seq_Var_Base_T (T * p)
+        -:   18:  : ptr_ (p)
+        -:   19:{}
         -:   20:
         -:   21:template<typename T>
         -:   22:ACE_INLINE
-    #####:   23:TAO_Seq_Var_Base_T<T>::~TAO_Seq_Var_Base_T (void)
+      162:   23:TAO_Seq_Var_Base_T<T>::~TAO_Seq_Var_Base_T (void)
         -:   24:{
-    #####:   25:  delete this->ptr_;
-    #####:   26:}
+      162:   25:  delete this->ptr_;
+      162:   26:}
         -:   27:
         -:   28:template<typename T>
         -:   29:ACE_INLINE
@@ -38,9 +38,9 @@
         -:   36:template<typename T>
         -:   37:ACE_INLINE
         -:   38:T *
-    #####:   39:TAO_Seq_Var_Base_T<T>::operator-> (void)
+        -:   39:TAO_Seq_Var_Base_T<T>::operator-> (void)
         -:   40:{
-    #####:   41:  return this->ptr_;
+        -:   41:  return this->ptr_;
         -:   42:}
         -:   43:
         -:   44:template<typename T>
@@ -52,9 +52,9 @@
         -:   50:
         -:   51:template<typename T>
         -:   52:ACE_INLINE
-    #####:   53:TAO_Seq_Var_Base_T<T>::operator T & ()
+        -:   53:TAO_Seq_Var_Base_T<T>::operator T & ()
         -:   54:{
-    #####:   55:  return *this->ptr_;
+        -:   55:  return *this->ptr_;
         -:   56:}
         -:   57:
         -:   58:template<typename T>
@@ -67,9 +67,9 @@
         -:   65:template<typename T>
         -:   66:ACE_INLINE
         -:   67:const T &
-    #####:   68:TAO_Seq_Var_Base_T<T>::in (void) const
+        -:   68:TAO_Seq_Var_Base_T<T>::in (void) const
         -:   69:{
-    #####:   70:  return *this->ptr_;
+        -:   70:  return *this->ptr_;
         -:   71:}
         -:   72:
         -:   73:template<typename T>
@@ -93,33 +93,33 @@
         -:   91:template<typename T>
         -:   92:ACE_INLINE
         -:   93:T *
-    #####:   94:TAO_Seq_Var_Base_T<T>::_retn (void)
+       66:   94:TAO_Seq_Var_Base_T<T>::_retn (void)
         -:   95:{
-    #####:   96:  T * tmp = this->ptr_;
-    #####:   97:  this->ptr_ = 0;
-    #####:   98:  return tmp;
+       66:   96:  T * tmp = this->ptr_;
+       66:   97:  this->ptr_ = 0;
+       66:   98:  return tmp;
         -:   99:}
         -:  100:
         -:  101:template<typename T>
         -:  102:ACE_INLINE
         -:  103:T *
-    #####:  104:TAO_Seq_Var_Base_T<T>::ptr (void) const
+       30:  104:TAO_Seq_Var_Base_T<T>::ptr (void) const
         -:  105:{
-    #####:  106:  return this->ptr_;
+       30:  106:  return this->ptr_;
         -:  107:}
         -:  108:
         -:  109:// ***************************************************************
         -:  110:
         -:  111:template<typename T>
         -:  112:ACE_INLINE
-    #####:  113:TAO_FixedSeq_Var_T<T>::TAO_FixedSeq_Var_T (void)
-    #####:  114:{}
+      114:  113:TAO_FixedSeq_Var_T<T>::TAO_FixedSeq_Var_T (void)
+      114:  114:{}
         -:  115:
         -:  116:template<typename T>
         -:  117:ACE_INLINE
-    #####:  118:TAO_FixedSeq_Var_T<T>::TAO_FixedSeq_Var_T (T * p)
-    #####:  119:  : TAO_Seq_Var_Base_T<T> (p)
-    #####:  120:{}
+        -:  118:TAO_FixedSeq_Var_T<T>::TAO_FixedSeq_Var_T (T * p)
+        -:  119:  : TAO_Seq_Var_Base_T<T> (p)
+        -:  120:{}
         -:  121:
         -:  122:template<typename T>
         -:  123:TAO_FixedSeq_Var_T<T>::TAO_FixedSeq_Var_T (
@@ -141,11 +141,11 @@
         -:  139:template<typename T>
         -:  140:ACE_INLINE
         -:  141:TAO_FixedSeq_Var_T<T> &
-    #####:  142:TAO_FixedSeq_Var_T<T>::operator= (T * p)
+       48:  142:TAO_FixedSeq_Var_T<T>::operator= (T * p)
         -:  143:{
-    #####:  144:  delete this->ptr_;
-    #####:  145:  this->ptr_ = p;
-    #####:  146:  return *this;
+       48:  144:  delete this->ptr_;
+       48:  145:  this->ptr_ = p;
+       48:  146:  return *this;
         -:  147:}
         -:  148:
         -:  149:template<typename T>
