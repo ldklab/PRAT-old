@@ -1,0 +1,294 @@
+271,272c271,272
+<      193*:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+<      193*:  261:      : first(__a), second(__b) { }
+---
+>       67*:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+>       67*:  261:      : first(__a), second(__b) { }
+275,276c275,276
+<         9:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+<         9:  261:      : first(__a), second(__b) { }
+---
+>     #####:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+>     #####:  261:      : first(__a), second(__b) { }
+279,280c279,280
+<         9:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+<         9:  261:      : first(__a), second(__b) { }
+---
+>     #####:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+>     #####:  261:      : first(__a), second(__b) { }
+283,284c283,284
+<         3:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+<         3:  261:      : first(__a), second(__b) { }
+---
+>     #####:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+>     #####:  261:      : first(__a), second(__b) { }
+287,288c287,288
+<        83:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+<        83:  261:      : first(__a), second(__b) { }
+---
+>     #####:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+>     #####:  261:      : first(__a), second(__b) { }
+299,300c299,300
+<        89:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+<        89:  261:      : first(__a), second(__b) { }
+---
+>        67:  260:      constexpr pair(const _T1& __a, const _T2& __b)
+>        67:  261:      : first(__a), second(__b) { }
+343c343
+<       10*:  303:      constexpr pair(const pair&) = default;
+---
+>     #####:  303:      constexpr pair(const pair&) = default;
+352c352
+<         2:  303:      constexpr pair(const pair&) = default;
+---
+>     #####:  303:      constexpr pair(const pair&) = default;
+355c355
+<         8:  303:      constexpr pair(const pair&) = default;
+---
+>     #####:  303:      constexpr pair(const pair&) = default;
+360c360
+<      176*:  304:      constexpr pair(pair&&) = default;
+---
+>       67*:  304:      constexpr pair(pair&&) = default;
+363c363
+<         2:  304:      constexpr pair(pair&&) = default;
+---
+>     #####:  304:      constexpr pair(pair&&) = default;
+366c366
+<        83:  304:      constexpr pair(pair&&) = default;
+---
+>     #####:  304:      constexpr pair(pair&&) = default;
+372c372
+<         2:  304:      constexpr pair(pair&&) = default;
+---
+>     #####:  304:      constexpr pair(pair&&) = default;
+375c375
+<        89:  304:      constexpr pair(pair&&) = default;
+---
+>        67:  304:      constexpr pair(pair&&) = default;
+383,384c383,384
+<       18*:  311:       constexpr pair(_U1&& __x, const _T2& __y)
+<       18*:  312:       : first(std::forward<_U1>(__x)), second(__y) { }
+---
+>     #####:  311:       constexpr pair(_U1&& __x, const _T2& __y)
+>     #####:  312:       : first(std::forward<_U1>(__x)), second(__y) { }
+403,404c403,404
+<        18:  311:       constexpr pair(_U1&& __x, const _T2& __y)
+<        18:  312:       : first(std::forward<_U1>(__x)), second(__y) { }
+---
+>     #####:  311:       constexpr pair(_U1&& __x, const _T2& __y)
+>     #####:  312:       : first(std::forward<_U1>(__x)), second(__y) { }
+475,476c475,476
+<      861*:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<      861*:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>      290*:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>      290*:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+479,480c479,480
+<        89:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        89:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>        67:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>        67:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+495,496c495,496
+<        18:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        18:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+499,500c499,500
+<         2:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<         2:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+503,504c503,504
+<         2:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<         2:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+539,540c539,540
+<        18:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        18:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+543,544c543,544
+<        89:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        89:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>        67:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>        67:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+547,548c547,548
+<        89:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        89:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>        67:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>        67:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+555,556c555,556
+<       119:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<       119:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>        89:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>        89:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+591,592c591,592
+<        45:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        45:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+603,604c603,604
+<        18:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        18:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+607,608c607,608
+<        18:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        18:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+615,616c615,616
+<         6:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<         6:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+623,624c623,624
+<         9:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<         9:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+627,628c627,628
+<         9:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<         9:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+655,656c655,656
+<        10:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        10:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+659,660c659,660
+<        91:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        91:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+663,664c663,664
+<        91:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        91:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+671,672c671,672
+<        18:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        18:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+675,676c675,676
+<         6:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<         6:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+683,684c683,684
+<        27:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        27:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+687,688c687,688
+<        27:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        27:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+695,696c695,696
+<        28:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        28:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+699,700c699,700
+<        14:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        14:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+703,704c703,704
+<        18:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+<        18:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+---
+>     #####:  341:	constexpr pair(_U1&& __x, _U2&& __y)
+>     #####:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+723,725c723,725
+<       54*:  360:	constexpr pair(pair<_U1, _U2>&& __p)
+<       54*:  361:	: first(std::forward<_U1>(__p.first)),
+<       54*:  362:	  second(std::forward<_U2>(__p.second)) { }
+---
+>     #####:  360:	constexpr pair(pair<_U1, _U2>&& __p)
+>     #####:  361:	: first(std::forward<_U1>(__p.first)),
+>     #####:  362:	  second(std::forward<_U2>(__p.second)) { }
+728,730c728,730
+<         9:  360:	constexpr pair(pair<_U1, _U2>&& __p)
+<         9:  361:	: first(std::forward<_U1>(__p.first)),
+<         9:  362:	  second(std::forward<_U2>(__p.second)) { }
+---
+>     #####:  360:	constexpr pair(pair<_U1, _U2>&& __p)
+>     #####:  361:	: first(std::forward<_U1>(__p.first)),
+>     #####:  362:	  second(std::forward<_U2>(__p.second)) { }
+738,740c738,740
+<        27:  360:	constexpr pair(pair<_U1, _U2>&& __p)
+<        27:  361:	: first(std::forward<_U1>(__p.first)),
+<        27:  362:	  second(std::forward<_U2>(__p.second)) { }
+---
+>     #####:  360:	constexpr pair(pair<_U1, _U2>&& __p)
+>     #####:  361:	: first(std::forward<_U1>(__p.first)),
+>     #####:  362:	  second(std::forward<_U2>(__p.second)) { }
+743,745c743,745
+<        18:  360:	constexpr pair(pair<_U1, _U2>&& __p)
+<        18:  361:	: first(std::forward<_U1>(__p.first)),
+<        18:  362:	  second(std::forward<_U2>(__p.second)) { }
+---
+>     #####:  360:	constexpr pair(pair<_U1, _U2>&& __p)
+>     #####:  361:	: first(std::forward<_U1>(__p.first)),
+>     #####:  362:	  second(std::forward<_U2>(__p.second)) { }
+773c773
+<        2*:  389:      operator=(typename conditional<
+---
+>     #####:  389:      operator=(typename conditional<
+780,782c780,782
+<        2*:  396:	first = std::forward<first_type>(__p.first);
+<        2*:  397:	second = std::forward<second_type>(__p.second);
+<        2*:  398:	return *this;
+---
+>     #####:  396:	first = std::forward<first_type>(__p.first);
+>     #####:  397:	second = std::forward<second_type>(__p.second);
+>     #####:  398:	return *this;
+812c812
+<         2:  389:      operator=(typename conditional<
+---
+>     #####:  389:      operator=(typename conditional<
+819,821c819,821
+<         2:  396:	first = std::forward<first_type>(__p.first);
+<         2:  397:	second = std::forward<second_type>(__p.second);
+<         2:  398:	return *this;
+---
+>     #####:  396:	first = std::forward<first_type>(__p.first);
+>     #####:  397:	second = std::forward<second_type>(__p.second);
+>     #####:  398:	return *this;
+948c948
+<      102*:  524:    make_pair(_T1&& __x, _T2&& __y)
+---
+>     #####:  524:    make_pair(_T1&& __x, _T2&& __y)
+953c953
+<      102*:  529:      return __pair_type(std::forward<_T1>(__x), std::forward<_T2>(__y));
+---
+>     #####:  529:      return __pair_type(std::forward<_T1>(__x), std::forward<_T2>(__y));

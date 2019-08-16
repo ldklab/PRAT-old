@@ -1,0 +1,180 @@
+133c133
+<     1116*:  131:      allocator() throw() { }
+---
+>      512*:  131:      allocator() throw() { }
+136c136
+<       119:  131:      allocator() throw() { }
+---
+>        89:  131:      allocator() throw() { }
+154c154
+<       119:  131:      allocator() throw() { }
+---
+>        89:  131:      allocator() throw() { }
+160c160
+<       119:  131:      allocator() throw() { }
+---
+>        89:  131:      allocator() throw() { }
+163c163
+<         5:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+166c166
+<       119:  131:      allocator() throw() { }
+---
+>        89:  131:      allocator() throw() { }
+169c169
+<        42:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+181c181
+<        99:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+187c187
+<        24:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+193c193
+<        12:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+196c196
+<         6:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+199c199
+<         6:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+205c205
+<       109:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+208c208
+<         3:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+211c211
+<        42:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+214c214
+<         6:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+220c220
+<        32:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+223c223
+<        18:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+226c226
+<        14:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+229c229
+<        14:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+235c235
+<       208:  131:      allocator() throw() { }
+---
+>       156:  131:      allocator() throw() { }
+255c255
+<       72*:  137:	allocator(const allocator<_Tp1>&) throw() { }
+---
+>     #####:  137:	allocator(const allocator<_Tp1>&) throw() { }
+267c267
+<        72:  137:	allocator(const allocator<_Tp1>&) throw() { }
+---
+>     #####:  137:	allocator(const allocator<_Tp1>&) throw() { }
+273c273
+<     1188*:  139:      ~allocator() throw() { }
+---
+>      512*:  139:      ~allocator() throw() { }
+276c276
+<       119:  139:      ~allocator() throw() { }
+---
+>        89:  139:      ~allocator() throw() { }
+279c279
+<         5:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+297c297
+<       119:  139:      ~allocator() throw() { }
+---
+>        89:  139:      ~allocator() throw() { }
+303c303
+<       119:  139:      ~allocator() throw() { }
+---
+>        89:  139:      ~allocator() throw() { }
+306c306
+<       119:  139:      ~allocator() throw() { }
+---
+>        89:  139:      ~allocator() throw() { }
+309c309
+<       208:  139:      ~allocator() throw() { }
+---
+>       156:  139:      ~allocator() throw() { }
+312c312
+<        72:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+315c315
+<        42:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+333c333
+<        99:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+339c339
+<        24:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+342c342
+<         6:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+348c348
+<        12:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+351c351
+<         6:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+360c360
+<       109:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+363c363
+<         3:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+366c366
+<        42:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+372c372
+<         6:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+384c384
+<        32:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+387c387
+<        18:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+390c390
+<        14:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+393c393
+<        14:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }

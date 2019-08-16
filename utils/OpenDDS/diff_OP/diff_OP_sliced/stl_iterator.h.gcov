@@ -1,0 +1,728 @@
+469,470c469,470
+<        9*:  467:      back_insert_iterator(_Container& __x)
+<        9*:  468:      : container(std::__addressof(__x)) { }
+---
+>     #####:  467:      back_insert_iterator(_Container& __x)
+>     #####:  468:      : container(std::__addressof(__x)) { }
+473,474c473,474
+<         9:  467:      back_insert_iterator(_Container& __x)
+<         9:  468:      : container(std::__addressof(__x)) { }
+---
+>     #####:  467:      back_insert_iterator(_Container& __x)
+>     #####:  468:      : container(std::__addressof(__x)) { }
+505c505
+<        9*:  490:      operator=(const typename _Container::value_type& __value)
+---
+>     #####:  490:      operator=(const typename _Container::value_type& __value)
+507,508c507,508
+<        9*:  492:	container->push_back(__value);
+<        9*:  493:	return *this;
+---
+>     #####:  492:	container->push_back(__value);
+>     #####:  493:	return *this;
+512c512
+<         9:  490:      operator=(const typename _Container::value_type& __value)
+---
+>     #####:  490:      operator=(const typename _Container::value_type& __value)
+514,515c514,515
+<         9:  492:	container->push_back(__value);
+<         9:  493:	return *this;
+---
+>     #####:  492:	container->push_back(__value);
+>     #####:  493:	return *this;
+543,544c543,544
+<        9*:  506:      operator*()
+<        9*:  507:      { return *this; }
+---
+>     #####:  506:      operator*()
+>     #####:  507:      { return *this; }
+547,548c547,548
+<         9:  506:      operator*()
+<         9:  507:      { return *this; }
+---
+>     #####:  506:      operator*()
+>     #####:  507:      { return *this; }
+561,562c561,562
+<        9*:  511:      operator++()
+<        9*:  512:      { return *this; }
+---
+>     #####:  511:      operator++()
+>     #####:  512:      { return *this; }
+565,566c565,566
+<         9:  511:      operator++()
+<         9:  512:      { return *this; }
+---
+>     #####:  511:      operator++()
+>     #####:  512:      { return *this; }
+596,597c596,597
+<        9*:  533:    back_inserter(_Container& __x)
+<        9*:  534:    { return back_insert_iterator<_Container>(__x); }
+---
+>     #####:  533:    back_inserter(_Container& __x)
+>     #####:  534:    { return back_insert_iterator<_Container>(__x); }
+600,601c600,601
+<         9:  533:    back_inserter(_Container& __x)
+<         9:  534:    { return back_insert_iterator<_Container>(__x); }
+---
+>     #####:  533:    back_inserter(_Container& __x)
+>     #####:  534:    { return back_insert_iterator<_Container>(__x); }
+859,860c859,860
+<     1067*:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<     1067*:  784:      : _M_current(__i) { }
+---
+>      536*:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>      536*:  784:      : _M_current(__i) { }
+867,868c867,868
+<        38:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<        38:  784:      : _M_current(__i) { }
+---
+>     #####:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>     #####:  784:      : _M_current(__i) { }
+871,872c871,872
+<         4:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<         4:  784:      : _M_current(__i) { }
+---
+>     #####:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>     #####:  784:      : _M_current(__i) { }
+887,888c887,888
+<       623:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<       623:  784:      : _M_current(__i) { }
+---
+>       469:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>       469:  784:      : _M_current(__i) { }
+891,892c891,892
+<        93:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<        93:  784:      : _M_current(__i) { }
+---
+>        67:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>        67:  784:      : _M_current(__i) { }
+899,900c899,900
+<        29:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<        29:  784:      : _M_current(__i) { }
+---
+>     #####:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>     #####:  784:      : _M_current(__i) { }
+903,904c903,904
+<        82:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<        82:  784:      : _M_current(__i) { }
+---
+>     #####:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>     #####:  784:      : _M_current(__i) { }
+911,912c911,912
+<        82:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<        82:  784:      : _M_current(__i) { }
+---
+>     #####:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>     #####:  784:      : _M_current(__i) { }
+915,916c915,916
+<        84:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<        84:  784:      : _M_current(__i) { }
+---
+>     #####:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>     #####:  784:      : _M_current(__i) { }
+919,920c919,920
+<        18:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<        18:  784:      : _M_current(__i) { }
+---
+>     #####:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>     #####:  784:      : _M_current(__i) { }
+931,932c931,932
+<        14:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<        14:  784:      : _M_current(__i) { }
+---
+>     #####:  783:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>     #####:  784:      : _M_current(__i) { }
+937c937
+<        95:  788:        __normal_iterator(const __normal_iterator<_Iter,
+---
+>       67*:  788:        __normal_iterator(const __normal_iterator<_Iter,
+941c941
+<        95:  792:        : _M_current(__i.base()) { }
+---
+>       67*:  792:        : _M_current(__i.base()) { }
+944c944
+<         2:  788:        __normal_iterator(const __normal_iterator<_Iter,
+---
+>     #####:  788:        __normal_iterator(const __normal_iterator<_Iter,
+948c948
+<         2:  792:        : _M_current(__i.base()) { }
+---
+>     #####:  792:        : _M_current(__i.base()) { }
+951c951
+<        89:  788:        __normal_iterator(const __normal_iterator<_Iter,
+---
+>        67:  788:        __normal_iterator(const __normal_iterator<_Iter,
+955c955
+<        89:  792:        : _M_current(__i.base()) { }
+---
+>        67:  792:        : _M_current(__i.base()) { }
+958c958
+<         4:  788:        __normal_iterator(const __normal_iterator<_Iter,
+---
+>     #####:  788:        __normal_iterator(const __normal_iterator<_Iter,
+962c962
+<         4:  792:        : _M_current(__i.base()) { }
+---
+>     #####:  792:        : _M_current(__i.base()) { }
+967,968c967,968
+<       24*:  796:      operator*() const _GLIBCXX_NOEXCEPT
+<       24*:  797:      { return *_M_current; }
+---
+>     #####:  796:      operator*() const _GLIBCXX_NOEXCEPT
+>     #####:  797:      { return *_M_current; }
+971,972c971,972
+<         2:  796:      operator*() const _GLIBCXX_NOEXCEPT
+<         2:  797:      { return *_M_current; }
+---
+>     #####:  796:      operator*() const _GLIBCXX_NOEXCEPT
+>     #####:  797:      { return *_M_current; }
+975,976c975,976
+<        18:  796:      operator*() const _GLIBCXX_NOEXCEPT
+<        18:  797:      { return *_M_current; }
+---
+>     #####:  796:      operator*() const _GLIBCXX_NOEXCEPT
+>     #####:  797:      { return *_M_current; }
+995,996c995,996
+<         4:  796:      operator*() const _GLIBCXX_NOEXCEPT
+<         4:  797:      { return *_M_current; }
+---
+>     #####:  796:      operator*() const _GLIBCXX_NOEXCEPT
+>     #####:  797:      { return *_M_current; }
+1000,1001c1000,1001
+<        23:  800:      operator->() const _GLIBCXX_NOEXCEPT
+<        23:  801:      { return _M_current; }
+---
+>     #####:  800:      operator->() const _GLIBCXX_NOEXCEPT
+>     #####:  801:      { return _M_current; }
+1004,1005c1004,1005
+<        15:  800:      operator->() const _GLIBCXX_NOEXCEPT
+<        15:  801:      { return _M_current; }
+---
+>     #####:  800:      operator->() const _GLIBCXX_NOEXCEPT
+>     #####:  801:      { return _M_current; }
+1008,1009c1008,1009
+<         8:  800:      operator->() const _GLIBCXX_NOEXCEPT
+<         8:  801:      { return _M_current; }
+---
+>     #####:  800:      operator->() const _GLIBCXX_NOEXCEPT
+>     #####:  801:      { return _M_current; }
+1013c1013
+<        3*:  804:      operator++() _GLIBCXX_NOEXCEPT
+---
+>     #####:  804:      operator++() _GLIBCXX_NOEXCEPT
+1015,1016c1015,1016
+<        3*:  806:	++_M_current;
+<        3*:  807:	return *this;
+---
+>     #####:  806:	++_M_current;
+>     #####:  807:	return *this;
+1027c1027
+<         3:  804:      operator++() _GLIBCXX_NOEXCEPT
+---
+>     #####:  804:      operator++() _GLIBCXX_NOEXCEPT
+1029,1030c1029,1030
+<         3:  806:	++_M_current;
+<         3:  807:	return *this;
+---
+>     #####:  806:	++_M_current;
+>     #####:  807:	return *this;
+1082c1082
+<         9:  816:      operator--() _GLIBCXX_NOEXCEPT
+---
+>     #####:  816:      operator--() _GLIBCXX_NOEXCEPT
+1084,1085c1084,1085
+<         9:  818:	--_M_current;
+<         9:  819:	return *this;
+---
+>     #####:  818:	--_M_current;
+>     #####:  819:	return *this;
+1102,1103c1102,1103
+<       101:  836:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+<       101:  837:      { return __normal_iterator(_M_current + __n); }
+---
+>       67*:  836:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+>       67*:  837:      { return __normal_iterator(_M_current + __n); }
+1106,1107c1106,1107
+<         2:  836:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+<         2:  837:      { return __normal_iterator(_M_current + __n); }
+---
+>     #####:  836:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+>     #####:  837:      { return __normal_iterator(_M_current + __n); }
+1110,1111c1110,1111
+<        89:  836:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+<        89:  837:      { return __normal_iterator(_M_current + __n); }
+---
+>        67:  836:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+>        67:  837:      { return __normal_iterator(_M_current + __n); }
+1114,1115c1114,1115
+<        10:  836:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+<        10:  837:      { return __normal_iterator(_M_current + __n); }
+---
+>     #####:  836:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+>     #####:  837:      { return __normal_iterator(_M_current + __n); }
+1123,1124c1123,1124
+<        11:  844:      operator-(difference_type __n) const _GLIBCXX_NOEXCEPT
+<        11:  845:      { return __normal_iterator(_M_current - __n); }
+---
+>     #####:  844:      operator-(difference_type __n) const _GLIBCXX_NOEXCEPT
+>     #####:  845:      { return __normal_iterator(_M_current - __n); }
+1127,1128c1127,1128
+<         2:  844:      operator-(difference_type __n) const _GLIBCXX_NOEXCEPT
+<         2:  845:      { return __normal_iterator(_M_current - __n); }
+---
+>     #####:  844:      operator-(difference_type __n) const _GLIBCXX_NOEXCEPT
+>     #####:  845:      { return __normal_iterator(_M_current - __n); }
+1131,1132c1131,1132
+<         9:  844:      operator-(difference_type __n) const _GLIBCXX_NOEXCEPT
+<         9:  845:      { return __normal_iterator(_M_current - __n); }
+---
+>     #####:  844:      operator-(difference_type __n) const _GLIBCXX_NOEXCEPT
+>     #####:  845:      { return __normal_iterator(_M_current - __n); }
+1136,1137c1136,1137
+<     1501*:  848:      base() const _GLIBCXX_NOEXCEPT
+<     1501*:  849:      { return _M_current; }
+---
+>      737*:  848:      base() const _GLIBCXX_NOEXCEPT
+>      737*:  849:      { return _M_current; }
+1144,1145c1144,1145
+<        46:  848:      base() const _GLIBCXX_NOEXCEPT
+<        46:  849:      { return _M_current; }
+---
+>     #####:  848:      base() const _GLIBCXX_NOEXCEPT
+>     #####:  849:      { return _M_current; }
+1148,1149c1148,1149
+<         8:  848:      base() const _GLIBCXX_NOEXCEPT
+<         8:  849:      { return _M_current; }
+---
+>     #####:  848:      base() const _GLIBCXX_NOEXCEPT
+>     #####:  849:      { return _M_current; }
+1164,1165c1164,1165
+<       712:  848:      base() const _GLIBCXX_NOEXCEPT
+<       712:  849:      { return _M_current; }
+---
+>       536:  848:      base() const _GLIBCXX_NOEXCEPT
+>       536:  849:      { return _M_current; }
+1168,1169c1168,1169
+<       271:  848:      base() const _GLIBCXX_NOEXCEPT
+<       271:  849:      { return _M_current; }
+---
+>       201:  848:      base() const _GLIBCXX_NOEXCEPT
+>       201:  849:      { return _M_current; }
+1180,1181c1180,1181
+<        32:  848:      base() const _GLIBCXX_NOEXCEPT
+<        32:  849:      { return _M_current; }
+---
+>     #####:  848:      base() const _GLIBCXX_NOEXCEPT
+>     #####:  849:      { return _M_current; }
+1184,1185c1184,1185
+<       128:  848:      base() const _GLIBCXX_NOEXCEPT
+<       128:  849:      { return _M_current; }
+---
+>     #####:  848:      base() const _GLIBCXX_NOEXCEPT
+>     #####:  849:      { return _M_current; }
+1192,1193c1192,1193
+<        82:  848:      base() const _GLIBCXX_NOEXCEPT
+<        82:  849:      { return _M_current; }
+---
+>     #####:  848:      base() const _GLIBCXX_NOEXCEPT
+>     #####:  849:      { return _M_current; }
+1196,1197c1196,1197
+<       168:  848:      base() const _GLIBCXX_NOEXCEPT
+<       168:  849:      { return _M_current; }
+---
+>     #####:  848:      base() const _GLIBCXX_NOEXCEPT
+>     #####:  849:      { return _M_current; }
+1200,1201c1200,1201
+<        36:  848:      base() const _GLIBCXX_NOEXCEPT
+<        36:  849:      { return _M_current; }
+---
+>     #####:  848:      base() const _GLIBCXX_NOEXCEPT
+>     #####:  849:      { return _M_current; }
+1212,1213c1212,1213
+<        18:  848:      base() const _GLIBCXX_NOEXCEPT
+<        18:  849:      { return _M_current; }
+---
+>     #####:  848:      base() const _GLIBCXX_NOEXCEPT
+>     #####:  849:      { return _M_current; }
+1235c1235
+<       58*:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+1238c1238
+<       58*:  873:    { return __lhs.base() == __rhs.base(); }
+---
+>     #####:  873:    { return __lhs.base() == __rhs.base(); }
+1241c1241
+<         1:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+1244c1244
+<         1:  873:    { return __lhs.base() == __rhs.base(); }
+---
+>     #####:  873:    { return __lhs.base() == __rhs.base(); }
+1247c1247
+<        14:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+1250c1250
+<        14:  873:    { return __lhs.base() == __rhs.base(); }
+---
+>     #####:  873:    { return __lhs.base() == __rhs.base(); }
+1259c1259
+<        41:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+1262c1262
+<        41:  873:    { return __lhs.base() == __rhs.base(); }
+---
+>     #####:  873:    { return __lhs.base() == __rhs.base(); }
+1271c1271
+<         2:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  870:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+1274c1274
+<         2:  873:    { return __lhs.base() == __rhs.base(); }
+---
+>     #####:  873:    { return __lhs.base() == __rhs.base(); }
+1292c1292
+<      124*:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>       67*:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+1295c1295
+<      124*:  887:    { return __lhs.base() != __rhs.base(); }
+---
+>       67*:  887:    { return __lhs.base() != __rhs.base(); }
+1298c1298
+<         1:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+1301c1301
+<         1:  887:    { return __lhs.base() != __rhs.base(); }
+---
+>     #####:  887:    { return __lhs.base() != __rhs.base(); }
+1304c1304
+<         6:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+1307c1307
+<         6:  887:    { return __lhs.base() != __rhs.base(); }
+---
+>     #####:  887:    { return __lhs.base() != __rhs.base(); }
+1310c1310
+<        18:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+1313c1313
+<        18:  887:    { return __lhs.base() != __rhs.base(); }
+---
+>     #####:  887:    { return __lhs.base() != __rhs.base(); }
+1322c1322
+<        89:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>        67:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+1325c1325
+<        89:  887:    { return __lhs.base() != __rhs.base(); }
+---
+>        67:  887:    { return __lhs.base() != __rhs.base(); }
+1340c1340
+<        10:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  884:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+1343c1343
+<        10:  887:    { return __lhs.base() != __rhs.base(); }
+---
+>     #####:  887:    { return __lhs.base() != __rhs.base(); }
+1411c1411
+<        89:  954:    operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+---
+>        67:  954:    operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+1419c1419
+<        89:  962:    { return __lhs.base() - __rhs.base(); }
+---
+>        67:  962:    { return __lhs.base() - __rhs.base(); }
+1423c1423
+<      263*:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>      134*:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1426c1426
+<      263*:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>      134*:  969:    { return __lhs.base() - __rhs.base(); }
+1429c1429
+<         4:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1432c1432
+<         4:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>     #####:  969:    { return __lhs.base() - __rhs.base(); }
+1435c1435
+<         2:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1438c1438
+<         2:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>     #####:  969:    { return __lhs.base() - __rhs.base(); }
+1447c1447
+<         6:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1450c1450
+<         6:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>     #####:  969:    { return __lhs.base() - __rhs.base(); }
+1453c1453
+<        42:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1456c1456
+<        42:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>     #####:  969:    { return __lhs.base() - __rhs.base(); }
+1459c1459
+<        23:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1462c1462
+<        23:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>     #####:  969:    { return __lhs.base() - __rhs.base(); }
+1471c1471
+<        89:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>        67:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1474c1474
+<        89:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>        67:  969:    { return __lhs.base() - __rhs.base(); }
+1477c1477
+<        89:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>        67:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1480c1480
+<        89:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>        67:  969:    { return __lhs.base() - __rhs.base(); }
+1495c1495
+<         4:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1498c1498
+<         4:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>     #####:  969:    { return __lhs.base() - __rhs.base(); }
+1501c1501
+<         4:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>     #####:  966:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+1504c1504
+<         4:  969:    { return __lhs.base() - __rhs.base(); }
+---
+>     #####:  969:    { return __lhs.base() - __rhs.base(); }
+1523,1524c1523,1524
+<        6*:  987:    __niter_base(__gnu_cxx::__normal_iterator<_Iterator, _Container> __it)
+<        6*:  988:    { return __it.base(); }
+---
+>     #####:  987:    __niter_base(__gnu_cxx::__normal_iterator<_Iterator, _Container> __it)
+>     #####:  988:    { return __it.base(); }
+1531,1532c1531,1532
+<         6:  987:    __niter_base(__gnu_cxx::__normal_iterator<_Iterator, _Container> __it)
+<         6:  988:    { return __it.base(); }
+---
+>     #####:  987:    __niter_base(__gnu_cxx::__normal_iterator<_Iterator, _Container> __it)
+>     #####:  988:    { return __it.base(); }
+1578,1579c1578,1579
+<      162*: 1033:      move_iterator(iterator_type __i)
+<      162*: 1034:      : _M_current(__i) { }
+---
+>     #####: 1033:      move_iterator(iterator_type __i)
+>     #####: 1034:      : _M_current(__i) { }
+1582,1583c1582,1583
+<        24: 1033:      move_iterator(iterator_type __i)
+<        24: 1034:      : _M_current(__i) { }
+---
+>     #####: 1033:      move_iterator(iterator_type __i)
+>     #####: 1034:      : _M_current(__i) { }
+1586,1587c1586,1587
+<       110: 1033:      move_iterator(iterator_type __i)
+<       110: 1034:      : _M_current(__i) { }
+---
+>     #####: 1033:      move_iterator(iterator_type __i)
+>     #####: 1034:      : _M_current(__i) { }
+1594,1595c1594,1595
+<        28: 1033:      move_iterator(iterator_type __i)
+<        28: 1034:      : _M_current(__i) { }
+---
+>     #####: 1033:      move_iterator(iterator_type __i)
+>     #####: 1034:      : _M_current(__i) { }
+1604,1605c1604,1605
+<      172*: 1042:      base() const
+<      172*: 1043:      { return _M_current; }
+---
+>     #####: 1042:      base() const
+>     #####: 1043:      { return _M_current; }
+1608,1609c1608,1609
+<        30: 1042:      base() const
+<        30: 1043:      { return _M_current; }
+---
+>     #####: 1042:      base() const
+>     #####: 1043:      { return _M_current; }
+1612,1613c1612,1613
+<       110: 1042:      base() const
+<       110: 1043:      { return _M_current; }
+---
+>     #####: 1042:      base() const
+>     #####: 1043:      { return _M_current; }
+1620,1621c1620,1621
+<        32: 1042:      base() const
+<        32: 1043:      { return _M_current; }
+---
+>     #####: 1042:      base() const
+>     #####: 1043:      { return _M_current; }
+1625,1626c1625,1626
+<        5*: 1046:      operator*() const
+<        5*: 1047:      { return static_cast<reference>(*_M_current); }
+---
+>     #####: 1046:      operator*() const
+>     #####: 1047:      { return static_cast<reference>(*_M_current); }
+1629,1630c1629,1630
+<         3: 1046:      operator*() const
+<         3: 1047:      { return static_cast<reference>(*_M_current); }
+---
+>     #####: 1046:      operator*() const
+>     #####: 1047:      { return static_cast<reference>(*_M_current); }
+1637,1638c1637,1638
+<         2: 1046:      operator*() const
+<         2: 1047:      { return static_cast<reference>(*_M_current); }
+---
+>     #####: 1046:      operator*() const
+>     #####: 1047:      { return static_cast<reference>(*_M_current); }
+1646c1646
+<        5*: 1054:      operator++()
+---
+>     #####: 1054:      operator++()
+1648,1649c1648,1649
+<        5*: 1056:	++_M_current;
+<        5*: 1057:	return *this;
+---
+>     #####: 1056:	++_M_current;
+>     #####: 1057:	return *this;
+1653c1653
+<         3: 1054:      operator++()
+---
+>     #####: 1054:      operator++()
+1655,1656c1655,1656
+<         3: 1056:	++_M_current;
+<         3: 1057:	return *this;
+---
+>     #####: 1056:	++_M_current;
+>     #####: 1057:	return *this;
+1667c1667
+<         2: 1054:      operator++()
+---
+>     #####: 1054:      operator++()
+1669,1670c1669,1670
+<         2: 1056:	++_M_current;
+<         2: 1057:	return *this;
+---
+>     #####: 1056:	++_M_current;
+>     #####: 1057:	return *this;
+1735c1735
+<       31*: 1121:    operator==(const move_iterator<_Iterator>& __x,
+---
+>     #####: 1121:    operator==(const move_iterator<_Iterator>& __x,
+1737c1737
+<       31*: 1123:    { return __x.base() == __y.base(); }
+---
+>     #####: 1123:    { return __x.base() == __y.base(); }
+1740c1740
+<        15: 1121:    operator==(const move_iterator<_Iterator>& __x,
+---
+>     #####: 1121:    operator==(const move_iterator<_Iterator>& __x,
+1742c1742
+<        15: 1123:    { return __x.base() == __y.base(); }
+---
+>     #####: 1123:    { return __x.base() == __y.base(); }
+1750c1750
+<        16: 1121:    operator==(const move_iterator<_Iterator>& __x,
+---
+>     #####: 1121:    operator==(const move_iterator<_Iterator>& __x,
+1752c1752
+<        16: 1123:    { return __x.base() == __y.base(); }
+---
+>     #####: 1123:    { return __x.base() == __y.base(); }
+1763c1763
+<       31*: 1133:    operator!=(const move_iterator<_Iterator>& __x,
+---
+>     #####: 1133:    operator!=(const move_iterator<_Iterator>& __x,
+1765c1765
+<       31*: 1135:    { return !(__x == __y); }
+---
+>     #####: 1135:    { return !(__x == __y); }
+1768c1768
+<        15: 1133:    operator!=(const move_iterator<_Iterator>& __x,
+---
+>     #####: 1133:    operator!=(const move_iterator<_Iterator>& __x,
+1770c1770
+<        15: 1135:    { return !(__x == __y); }
+---
+>     #####: 1135:    { return !(__x == __y); }
+1778c1778
+<        16: 1133:    operator!=(const move_iterator<_Iterator>& __x,
+---
+>     #####: 1133:    operator!=(const move_iterator<_Iterator>& __x,
+1780c1780
+<        16: 1135:    { return !(__x == __y); }
+---
+>     #####: 1135:    { return !(__x == __y); }
+1864,1865c1864,1865
+<      694*: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+<      694*: 1219:    { return _ReturnType(__i); }
+---
+>      268*: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+>      268*: 1219:    { return _ReturnType(__i); }
+1868,1869c1868,1869
+<         8: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+<         8: 1219:    { return _ReturnType(__i); }
+---
+>     #####: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+>     #####: 1219:    { return _ReturnType(__i); }
+1876,1877c1876,1877
+<        24: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+<        24: 1219:    { return _ReturnType(__i); }
+---
+>     #####: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+>     #####: 1219:    { return _ReturnType(__i); }
+1880,1881c1880,1881
+<       168: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+<       168: 1219:    { return _ReturnType(__i); }
+---
+>     #####: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+>     #####: 1219:    { return _ReturnType(__i); }
+1884,1885c1884,1885
+<       110: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+<       110: 1219:    { return _ReturnType(__i); }
+---
+>     #####: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+>     #####: 1219:    { return _ReturnType(__i); }
+1892,1893c1892,1893
+<       356: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+<       356: 1219:    { return _ReturnType(__i); }
+---
+>       268: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+>       268: 1219:    { return _ReturnType(__i); }
+1904,1905c1904,1905
+<        28: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+<        28: 1219:    { return _ReturnType(__i); }
+---
+>     #####: 1218:    __make_move_if_noexcept_iterator(_Tp* __i)
+>     #####: 1219:    { return _ReturnType(__i); }
+1925c1925
+<       110: 1238:    __miter_base(move_iterator<_Iterator> __it)
+---
+>     #####: 1238:    __miter_base(move_iterator<_Iterator> __it)
+1927c1927
+<       110: 1240:    { return __miter_base(__it.base()); }
+---
+>     #####: 1240:    { return __miter_base(__it.base()); }

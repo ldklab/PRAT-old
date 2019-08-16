@@ -1,0 +1,108 @@
+387,388c387,388
+<       84*:  385:      operator()(const _Tp& __x, const _Tp& __y) const
+<       84*:  386:      { return __x < __y; }
+---
+>     #####:  385:      operator()(const _Tp& __x, const _Tp& __y) const
+>     #####:  386:      { return __x < __y; }
+391,392c391,392
+<        84:  385:      operator()(const _Tp& __x, const _Tp& __y) const
+<        84:  386:      { return __x < __y; }
+---
+>     #####:  385:      operator()(const _Tp& __x, const _Tp& __y) const
+>     #####:  386:      { return __x < __y; }
+1171,1172c1171,1172
+<      183*: 1127:      operator()(_Pair& __x) const
+<      183*: 1128:      { return __x.first; }
+---
+>       67*: 1127:      operator()(_Pair& __x) const
+>       67*: 1128:      { return __x.first; }
+1175,1176c1175,1176
+<        92: 1127:      operator()(_Pair& __x) const
+<        92: 1128:      { return __x.first; }
+---
+>     #####: 1127:      operator()(_Pair& __x) const
+>     #####: 1128:      { return __x.first; }
+1183,1184c1183,1184
+<         2: 1127:      operator()(_Pair& __x) const
+<         2: 1128:      { return __x.first; }
+---
+>     #####: 1127:      operator()(_Pair& __x) const
+>     #####: 1128:      { return __x.first; }
+1187,1188c1187,1188
+<        89: 1127:      operator()(_Pair& __x) const
+<        89: 1128:      { return __x.first; }
+---
+>        67: 1127:      operator()(_Pair& __x) const
+>        67: 1128:      { return __x.first; }
+1192,1193c1192,1193
+<     2687*: 1131:      operator()(const _Pair& __x) const
+<     2687*: 1132:      { return __x.first; }
+---
+>     1362*: 1131:      operator()(const _Pair& __x) const
+>     1362*: 1132:      { return __x.first; }
+1212,1213c1212,1213
+<       623: 1131:      operator()(const _Pair& __x) const
+<       623: 1132:      { return __x.first; }
+---
+>       469: 1131:      operator()(const _Pair& __x) const
+>       469: 1132:      { return __x.first; }
+1216,1217c1216,1217
+<       834: 1131:      operator()(const _Pair& __x) const
+<       834: 1132:      { return __x.first; }
+---
+>       625: 1131:      operator()(const _Pair& __x) const
+>       625: 1132:      { return __x.first; }
+1224,1225c1224,1225
+<       356: 1131:      operator()(const _Pair& __x) const
+<       356: 1132:      { return __x.first; }
+---
+>       268: 1131:      operator()(const _Pair& __x) const
+>       268: 1132:      { return __x.first; }
+1240,1241c1240,1241
+<        61: 1131:      operator()(const _Pair& __x) const
+<        61: 1132:      { return __x.first; }
+---
+>     #####: 1131:      operator()(const _Pair& __x) const
+>     #####: 1132:      { return __x.first; }
+1248,1249c1248,1249
+<        18: 1131:      operator()(const _Pair& __x) const
+<        18: 1132:      { return __x.first; }
+---
+>     #####: 1131:      operator()(const _Pair& __x) const
+>     #####: 1132:      { return __x.first; }
+1256,1257c1256,1257
+<        72: 1131:      operator()(const _Pair& __x) const
+<        72: 1132:      { return __x.first; }
+---
+>     #####: 1131:      operator()(const _Pair& __x) const
+>     #####: 1132:      { return __x.first; }
+1260,1261c1260,1261
+<        90: 1131:      operator()(const _Pair& __x) const
+<        90: 1132:      { return __x.first; }
+---
+>     #####: 1131:      operator()(const _Pair& __x) const
+>     #####: 1132:      { return __x.first; }
+1264,1265c1264,1265
+<        79: 1131:      operator()(const _Pair& __x) const
+<        79: 1132:      { return __x.first; }
+---
+>     #####: 1131:      operator()(const _Pair& __x) const
+>     #####: 1132:      { return __x.first; }
+1268,1269c1268,1269
+<       300: 1131:      operator()(const _Pair& __x) const
+<       300: 1132:      { return __x.first; }
+---
+>     #####: 1131:      operator()(const _Pair& __x) const
+>     #####: 1132:      { return __x.first; }
+1276,1277c1276,1277
+<        92: 1131:      operator()(const _Pair& __x) const
+<        92: 1132:      { return __x.first; }
+---
+>     #####: 1131:      operator()(const _Pair& __x) const
+>     #####: 1132:      { return __x.first; }
+1292,1293c1292,1293
+<       162: 1131:      operator()(const _Pair& __x) const
+<       162: 1132:      { return __x.first; }
+---
+>     #####: 1131:      operator()(const _Pair& __x) const
+>     #####: 1132:      { return __x.first; }

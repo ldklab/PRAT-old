@@ -1,0 +1,81 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+58c58
+<       30*:   56:  template<typename T> inline Boolean is_nil (T x)
+---
+>     #####:   56:  template<typename T> inline Boolean is_nil (T x)
+60c60
+<       30*:   58:    return x == 0;
+---
+>     #####:   58:    return x == 0;
+63c63
+< _ZN5CORBA6is_nilIPN3DDS5TopicEEEbT_:
+---
+> _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN7OpenDDS4DCPS11TypeSupportEEEEbT_:
+135c135
+< _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN7OpenDDS4DCPS11TypeSupportEEEEbT_:
+---
+> _ZN5CORBA6is_nilIPN3DDS37PublicationBuiltinTopicDataDataReaderEEEbT_:
+141c141
+< _ZN5CORBA6is_nilIPN3DDS37PublicationBuiltinTopicDataDataReaderEEEbT_:
+---
+> _ZN5CORBA6is_nilIPN3DDS5TopicEEEbT_:
+153c153
+< _ZN5CORBA6is_nilIPN3DDS37PublicationBuiltinTopicDataDataReaderEEEbT_:
+---
+> _ZN5CORBA6is_nilIPN3DDS17DomainParticipantEEEbT_:
+159c159
+< _ZN5CORBA6is_nilIPN3DDS18DataReaderListenerEEEbT_:
+---
+> _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN7OpenDDS4DCPS11TypeSupportEEEEbT_:
+165c165
+< _ZN5CORBA6is_nilIPN3DDS17DomainParticipantEEEbT_:
+---
+> _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN3DDS5TopicEEEEbT_:
+171,182d170
+< _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN7OpenDDS4DCPS11TypeSupportEEEEbT_:
+<        22:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<        22:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+< _ZN5CORBA6is_nilI16TAO_Objref_Var_TIN3DDS5TopicEEEEbT_:
+<         8:   56:  template<typename T> inline Boolean is_nil (T x)
+<         -:   57:  {
+<         8:   58:    return x == 0;
+<         -:   59:  }
+< ------------------
+220c208
+<        2*:   61:  template<typename T> inline void release (T x)
+---
+>     #####:   61:  template<typename T> inline void release (T x)
+222c210
+<        2*:   63:    if (x != 0)
+---
+>     #####:   63:    if (x != 0)
+224c212
+<        2*:   65:        x->_decr_refcount ();
+---
+>     #####:   65:        x->_decr_refcount ();
+226c214
+<        2*:   67:  }
+---
+>     #####:   67:  }
+238c226
+<         2:   61:  template<typename T> inline void release (T x)
+---
+>     #####:   61:  template<typename T> inline void release (T x)
+240c228
+<         2:   63:    if (x != 0)
+---
+>     #####:   63:    if (x != 0)
+242c230
+<         2:   65:        x->_decr_refcount ();
+---
+>     #####:   65:        x->_decr_refcount ();
+244c232
+<         2:   67:  }
+---
+>     #####:   67:  }

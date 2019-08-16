@@ -1,0 +1,73 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:15
+421,424d420
+<      138*:  419:    __miter_base(_Iterator __it)
+<      138*:  420:    { return __it; }
+< ------------------
+< _ZSt12__miter_baseIPN7OpenDDS4DCPS16TransportLocatorEET_S4_:
+428,432c424
+< _ZSt12__miter_baseIPKhET_S2_:
+<        24:  419:    __miter_base(_Iterator __it)
+<        24:  420:    { return __it; }
+< ------------------
+< _ZSt12__miter_baseISt15_Deque_iteratorIPN7OpenDDS4DCPS21TransportQueueElementERS4_PS4_EET_S8_:
+---
+> _ZSt12__miter_baseIPbET_S1_:
+436,440c428
+< _ZSt12__miter_baseIN9__gnu_cxx17__normal_iteratorIPSt4pairIPN7OpenDDS4DCPS21TransportQueueElementENS4_21TransportSendStrategy8SendModeEESt6vectorIS9_SaIS9_EEEEET_SF_:
+<         4:  419:    __miter_base(_Iterator __it)
+<         4:  420:    { return __it; }
+< ------------------
+< _ZSt12__miter_baseIPPPN7OpenDDS4DCPS21TransportQueueElementEET_S6_:
+---
+> _ZSt12__miter_baseIPcET_S1_:
+444c432
+< _ZSt12__miter_baseISt15_Deque_iteratorIPN7OpenDDS4DCPS21TransportQueueElementERS4_PS4_EET_S8_:
+---
+> _ZSt12__miter_baseIPdET_S1_:
+448c436
+< _ZSt12__miter_baseIPPPN7OpenDDS4DCPS21TransportQueueElementEET_S6_:
+---
+> _ZSt12__miter_baseIPfET_S1_:
+452c440
+< _ZSt12__miter_baseIPN7OpenDDS4DCPS6GUID_tEET_S4_:
+---
+> _ZSt12__miter_baseIPeET_S1_:
+456c444
+< _ZSt12__miter_baseIPN7OpenDDS4DCPS8RcHandleINS1_13TransportInstEEEET_S6_:
+---
+> _ZSt12__miter_baseIPlET_S1_:
+460c448
+< _ZSt12__miter_baseIPPPN7OpenDDS4DCPS21TransportQueueElementEET_S6_:
+---
+> _ZSt12__miter_baseIPiET_S1_:
+464c452
+< _ZSt12__miter_baseIPN7OpenDDS4DCPS16TransportLocatorEET_S4_:
+---
+> _ZSt12__miter_baseIPhET_S1_:
+468,472c456
+< _ZSt12__miter_baseIPPN7OpenDDS4DCPS13TransportImplEET_S5_:
+<       110:  419:    __miter_base(_Iterator __it)
+<       110:  420:    { return __it; }
+< ------------------
+< _ZSt12__miter_baseIPPSt10unique_ptrIN7OpenDDS4DCPS18ReactorInterceptor7CommandESt14default_deleteIS4_EEET_SA_:
+---
+> _ZSt12__miter_baseIPsET_S1_:
+476c460
+< _ZSt12__miter_baseIPPPN7OpenDDS4DCPS11SendRequestEET_S6_:
+---
+> _ZSt12__miter_baseIPmET_S1_:
+480c464
+< _ZSt12__miter_baseIPN7OpenDDS4DCPS6GUID_tEET_S4_:
+---
+> _ZSt12__miter_baseIPjET_S1_:
+484c468
+< _ZSt12__miter_baseIN9__gnu_cxx17__normal_iteratorIPSt4pairIN7OpenDDS4DCPS12WeakRcHandleINS4_15TransportClientEEENS4_6GUID_tEESt6vectorIS9_SaIS9_EEEEET_SF_:
+---
+> _ZSt12__miter_baseIPtET_S1_:
+488c472
+< _ZSt12__miter_baseIPN7OpenDDS4DCPS6GUID_tEET_S4_:
+---
+> _ZSt12__miter_baseIPwET_S1_:

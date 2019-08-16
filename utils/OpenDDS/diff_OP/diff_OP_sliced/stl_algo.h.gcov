@@ -1,0 +1,246 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:15
+114c114
+<         1:  112:    __find_if(_RandomAccessIterator __first, _RandomAccessIterator __last,
+---
+>         -:  112:    __find_if(_RandomAccessIterator __first, _RandomAccessIterator __last,
+118c118
+<         1:  116:	__trip_count = (__last - __first) >> 2;
+---
+>         -:  116:	__trip_count = (__last - __first) >> 2;
+120c120
+<        1*:  118:      for (; __trip_count > 0; --__trip_count)
+---
+>         -:  118:      for (; __trip_count > 0; --__trip_count)
+122,124c122,124
+<     #####:  120:	  if (__pred(__first))
+<     #####:  121:	    return __first;
+<     #####:  122:	  ++__first;
+---
+>         -:  120:	  if (__pred(__first))
+>         -:  121:	    return __first;
+>         -:  122:	  ++__first;
+126,128c126,128
+<     #####:  124:	  if (__pred(__first))
+<     #####:  125:	    return __first;
+<     #####:  126:	  ++__first;
+---
+>         -:  124:	  if (__pred(__first))
+>         -:  125:	    return __first;
+>         -:  126:	  ++__first;
+130,132c130,132
+<     #####:  128:	  if (__pred(__first))
+<     #####:  129:	    return __first;
+<     #####:  130:	  ++__first;
+---
+>         -:  128:	  if (__pred(__first))
+>         -:  129:	    return __first;
+>         -:  130:	  ++__first;
+134,136c134,136
+<     #####:  132:	  if (__pred(__first))
+<     #####:  133:	    return __first;
+<     #####:  134:	  ++__first;
+---
+>         -:  132:	  if (__pred(__first))
+>         -:  133:	    return __first;
+>         -:  134:	  ++__first;
+139c139
+<         1:  137:      switch (__last - __first)
+---
+>         -:  137:      switch (__last - __first)
+141,153c141,153
+<     #####:  139:	case 3:
+<     #####:  140:	  if (__pred(__first))
+<     #####:  141:	    return __first;
+<     #####:  142:	  ++__first;
+<     #####:  143:	case 2:
+<     #####:  144:	  if (__pred(__first))
+<     #####:  145:	    return __first;
+<     #####:  146:	  ++__first;
+<     #####:  147:	case 1:
+<     #####:  148:	  if (__pred(__first))
+<     #####:  149:	    return __first;
+<     #####:  150:	  ++__first;
+<         1:  151:	case 0:
+---
+>         -:  139:	case 3:
+>         -:  140:	  if (__pred(__first))
+>         -:  141:	    return __first;
+>         -:  142:	  ++__first;
+>         -:  143:	case 2:
+>         -:  144:	  if (__pred(__first))
+>         -:  145:	    return __first;
+>         -:  146:	  ++__first;
+>         -:  147:	case 1:
+>         -:  148:	  if (__pred(__first))
+>         -:  149:	    return __first;
+>         -:  150:	  ++__first;
+>         -:  151:	case 0:
+155c155
+<         1:  153:	  return __last;
+---
+>         -:  153:	  return __last;
+161c161
+<         1:  159:    __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
+---
+>         -:  159:    __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
+163,164c163,164
+<         1:  161:      return __find_if(__first, __last, __pred,
+<         2:  162:		       std::__iterator_category(__first));
+---
+>         -:  161:      return __find_if(__first, __last, __pred,
+>         -:  162:		       std::__iterator_category(__first));
+862c862
+<         1:  860:    __remove_if(_ForwardIterator __first, _ForwardIterator __last,
+---
+>         -:  860:    __remove_if(_ForwardIterator __first, _ForwardIterator __last,
+865,871c865,871
+<         1:  863:      __first = std::__find_if(__first, __last, __pred);
+<         1:  864:      if (__first == __last)
+<         1:  865:	return __first;
+<     #####:  866:      _ForwardIterator __result = __first;
+<     #####:  867:      ++__first;
+<     #####:  868:      for (; __first != __last; ++__first)
+<     #####:  869:	if (!__pred(__first))
+---
+>         -:  863:      __first = std::__find_if(__first, __last, __pred);
+>         -:  864:      if (__first == __last)
+>         -:  865:	return __first;
+>         -:  866:      _ForwardIterator __result = __first;
+>         -:  867:      ++__first;
+>         -:  868:      for (; __first != __last; ++__first)
+>         -:  869:	if (!__pred(__first))
+873,874c873,874
+<     #####:  871:	    *__result = _GLIBCXX_MOVE(*__first);
+<     #####:  872:	    ++__result;
+---
+>         -:  871:	    *__result = _GLIBCXX_MOVE(*__first);
+>         -:  872:	    ++__result;
+876c876
+<     #####:  874:      return __result;
+---
+>         -:  874:      return __result;
+898c898
+<         1:  896:    remove(_ForwardIterator __first, _ForwardIterator __last,
+---
+>         -:  896:    remove(_ForwardIterator __first, _ForwardIterator __last,
+908,909c908,909
+<         1:  906:      return std::__remove_if(__first, __last,
+<         1:  907:		__gnu_cxx::__ops::__iter_equals_val(__value));
+---
+>         -:  906:      return std::__remove_if(__first, __last,
+>         -:  907:		__gnu_cxx::__ops::__iter_equals_val(__value));
+1209c1209
+<        18: 1207:    reverse_copy(_BidirectionalIterator __first, _BidirectionalIterator __last,
+---
+>         -: 1207:    reverse_copy(_BidirectionalIterator __first, _BidirectionalIterator __last,
+1219c1219
+<        18: 1217:      while (__first != __last)
+---
+>         -: 1217:      while (__first != __last)
+1221,1223c1221,1223
+<         9: 1219:	  --__last;
+<         9: 1220:	  *__result = *__last;
+<         9: 1221:	  ++__result;
+---
+>         -: 1219:	  --__last;
+>         -: 1220:	  *__result = *__last;
+>         -: 1221:	  ++__result;
+1225c1225
+<         9: 1223:      return __result;
+---
+>         -: 1223:      return __result;
+3192c3192
+<         2: 3190:    __count_if(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+---
+>         -: 3190:    __count_if(_InputIterator __first, _InputIterator __last, _Predicate __pred)
+3194,3198c3194,3198
+<         2: 3192:      typename iterator_traits<_InputIterator>::difference_type __n = 0;
+<        2*: 3193:      for (; __first != __last; ++__first)
+<     #####: 3194:	if (__pred(__first))
+<     #####: 3195:	  ++__n;
+<         2: 3196:      return __n;
+---
+>         -: 3192:      typename iterator_traits<_InputIterator>::difference_type __n = 0;
+>         -: 3193:      for (; __first != __last; ++__first)
+>         -: 3194:	if (__pred(__first))
+>         -: 3195:	  ++__n;
+>         -: 3196:      return __n;
+3886a3887,3909
+> ------------------
+> _ZSt8for_eachIPPcPFvS0_EET0_T_S5_S4_:
+>     #####: 3876:    for_each(_InputIterator __first, _InputIterator __last, _Function __f)
+>         -: 3877:    {
+>         -: 3878:      // concept requirements
+>         -: 3879:      __glibcxx_function_requires(_InputIteratorConcept<_InputIterator>)
+>         -: 3880:      __glibcxx_requires_valid_range(__first, __last);
+>     #####: 3881:      for (; __first != __last; ++__first)
+>     #####: 3882:	__f(*__first);
+>     #####: 3883:      return __f; // N.B. [alg.foreach] says std::move(f) but it's redundant.
+>         -: 3884:    }
+> ------------------
+> _ZSt8for_eachIPPwPFvS0_EET0_T_S5_S4_:
+>     #####: 3876:    for_each(_InputIterator __first, _InputIterator __last, _Function __f)
+>         -: 3877:    {
+>         -: 3878:      // concept requirements
+>         -: 3879:      __glibcxx_function_requires(_InputIteratorConcept<_InputIterator>)
+>         -: 3880:      __glibcxx_requires_valid_range(__first, __last);
+>     #####: 3881:      for (; __first != __last; ++__first)
+>     #####: 3882:	__f(*__first);
+>     #####: 3883:      return __f; // N.B. [alg.foreach] says std::move(f) but it's redundant.
+>         -: 3884:    }
+> ------------------
+4076c4099
+<         2: 4074:    count(_InputIterator __first, _InputIterator __last, const _Tp& __value)
+---
+>         -: 4074:    count(_InputIterator __first, _InputIterator __last, const _Tp& __value)
+4084,4085c4107,4108
+<         2: 4082:      return std::__count_if(__first, __last,
+<         2: 4083:			     __gnu_cxx::__ops::__iter_equals_val(__value));
+---
+>         -: 4082:      return std::__count_if(__first, __last,
+>         -: 4083:			     __gnu_cxx::__ops::__iter_equals_val(__value));
+4295c4318
+<     #####: 4293:    transform(_InputIterator __first, _InputIterator __last,
+---
+>         -: 4293:    transform(_InputIterator __first, _InputIterator __last,
+4305,4307c4328,4330
+<     #####: 4303:      for (; __first != __last; ++__first, (void)++__result)
+<     #####: 4304:	*__result = __unary_op(*__first);
+<     #####: 4305:      return __result;
+---
+>         -: 4303:      for (; __first != __last; ++__first, (void)++__result)
+>         -: 4304:	*__result = __unary_op(*__first);
+>         -: 4305:      return __result;
+4439a4463,4491
+> ------------------
+> _ZSt8generateIPPcPFS0_vEEvT_S4_T0_:
+>     #####: 4426:    generate(_ForwardIterator __first, _ForwardIterator __last,
+>         -: 4427:	     _Generator __gen)
+>         -: 4428:    {
+>         -: 4429:      // concept requirements
+>         -: 4430:      __glibcxx_function_requires(_ForwardIteratorConcept<_ForwardIterator>)
+>         -: 4431:      __glibcxx_function_requires(_GeneratorConcept<_Generator,
+>         -: 4432:	    typename iterator_traits<_ForwardIterator>::value_type>)
+>         -: 4433:      __glibcxx_requires_valid_range(__first, __last);
+>         -: 4434:
+>     #####: 4435:      for (; __first != __last; ++__first)
+>     #####: 4436:	*__first = __gen();
+>     #####: 4437:    }
+> ------------------
+> _ZSt8generateIPPwPFS0_vEEvT_S4_T0_:
+>     #####: 4426:    generate(_ForwardIterator __first, _ForwardIterator __last,
+>         -: 4427:	     _Generator __gen)
+>         -: 4428:    {
+>         -: 4429:      // concept requirements
+>         -: 4430:      __glibcxx_function_requires(_ForwardIteratorConcept<_ForwardIterator>)
+>         -: 4431:      __glibcxx_function_requires(_GeneratorConcept<_Generator,
+>         -: 4432:	    typename iterator_traits<_ForwardIterator>::value_type>)
+>         -: 4433:      __glibcxx_requires_valid_range(__first, __last);
+>         -: 4434:
+>     #####: 4435:      for (; __first != __last; ++__first)
+>     #####: 4436:	*__first = __gen();
+>     #####: 4437:    }
+> ------------------

@@ -1,0 +1,14 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+24c24
+<       118:   22:ACE_Dynamic_Service<TYPE>::instance (const ACE_TCHAR *name)
+---
+>        89:   22:ACE_Dynamic_Service<TYPE>::instance (const ACE_TCHAR *name)
+28,29c28,29
+<       118:   26:    (ACE_Dynamic_Service_Base::instance (name,false));
+<      118*:   27:  return dynamic_cast<TYPE *> (svc_obj);
+---
+>        89:   26:    (ACE_Dynamic_Service_Base::instance (name,false));
+>       89*:   27:  return dynamic_cast<TYPE *> (svc_obj);

@@ -1,0 +1,222 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+35c35
+<       236:   33:ACE_Arg_Shifter_T<CHAR_TYPE>::ACE_Arg_Shifter_T (int& argc,
+---
+>       178:   33:ACE_Arg_Shifter_T<CHAR_TYPE>::ACE_Arg_Shifter_T (int& argc,
+43,44c43,44
+<       236:   41:    back_ (argc - 1),
+<       472:   42:    front_ (0)
+---
+>       178:   41:    back_ (argc - 1),
+>       356:   42:    front_ (0)
+46,47c46,47
+<       236:   44:  this->init ();
+<       236:   45:}
+---
+>       178:   44:  this->init ();
+>       178:   45:}
+51c51
+<       236:   49:ACE_Arg_Shifter_T<CHAR_TYPE>::init (void)
+---
+>       178:   49:ACE_Arg_Shifter_T<CHAR_TYPE>::init (void)
+54c54
+<       236:   52:  if (this->temp_ == 0)
+---
+>       178:   52:  if (this->temp_ == 0)
+59c59
+<      236*:   57:    ACE_NEW (this->temp_,
+---
+>      178*:   57:    ACE_NEW (this->temp_,
+62c62
+<       236:   60:  if (this->temp_ != 0)
+---
+>       178:   60:  if (this->temp_ != 0)
+65,66c65,66
+<       236:   63:      this->argc_ = 0;
+<      1306:   64:      for (int i = 0; i < this->total_size_; i++)
+---
+>       178:   63:      this->argc_ = 0;
+>       972:   64:      for (int i = 0; i < this->total_size_; i++)
+68,69c68,69
+<      1070:   66:          this->temp_[i] = this->argv_[i];
+<      1070:   67:          this->argv_[i] = 0;
+---
+>       794:   66:          this->temp_[i] = this->argv_[i];
+>       794:   67:          this->argv_[i] = 0;
+81c81
+<       236:   79:ACE_Arg_Shifter_T<CHAR_TYPE>::~ACE_Arg_Shifter_T (void)
+---
+>       178:   79:ACE_Arg_Shifter_T<CHAR_TYPE>::~ACE_Arg_Shifter_T (void)
+88c88
+<       236:   86:  delete [] temp_;
+---
+>       178:   86:  delete [] temp_;
+90c90
+<       236:   88:}
+---
+>       178:   88:}
+94c94
+<         4:   92:ACE_Arg_Shifter_T<CHAR_TYPE>::get_current (void) const
+---
+>     #####:   92:ACE_Arg_Shifter_T<CHAR_TYPE>::get_current (void) const
+96c96
+<         4:   94:  const CHAR_TYPE * retval = 0;
+---
+>     #####:   94:  const CHAR_TYPE * retval = 0;
+98,99c98,99
+<         4:   96:  if (this->is_anything_left ())
+<         4:   97:    retval =  this->temp_[current_index_];
+---
+>     #####:   96:  if (this->is_anything_left ())
+>     #####:   97:    retval =  this->temp_[current_index_];
+101c101
+<         4:   99:  return retval;
+---
+>     #####:   99:  return retval;
+106c106
+<     10894:  104:ACE_Arg_Shifter_T<CHAR_TYPE>::get_the_parameter (const CHAR_TYPE *flag)
+---
+>      8237:  104:ACE_Arg_Shifter_T<CHAR_TYPE>::get_the_parameter (const CHAR_TYPE *flag)
+112c112
+<     10894:  110:  if (!this->is_anything_left())
+---
+>      8237:  110:  if (!this->is_anything_left())
+116,118c116,118
+<     10894:  114:  int const offset = this->cur_arg_strncasecmp (flag);
+<     10894:  115:  if (offset == -1)
+<     10817:  116:    return 0;
+---
+>      8237:  114:  int const offset = this->cur_arg_strncasecmp (flag);
+>      8237:  115:  if (offset == -1)
+>      8183:  116:    return 0;
+120c120
+<        77:  118:  if (offset == 0)
+---
+>        54:  118:  if (offset == 0)
+122c122
+<        77:  120:      this->consume_arg ();
+---
+>        54:  120:      this->consume_arg ();
+124c124
+<        77:  122:      if (!this->is_parameter_next())
+---
+>        54:  122:      if (!this->is_parameter_next())
+130c130
+<        77:  128:  return this->temp_[current_index_] + offset;
+---
+>        54:  128:  return this->temp_[current_index_] + offset;
+135c135
+<     12495:  133:ACE_Arg_Shifter_T<CHAR_TYPE>::cur_arg_strncasecmp (const CHAR_TYPE *flag)
+---
+>      9428:  133:ACE_Arg_Shifter_T<CHAR_TYPE>::cur_arg_strncasecmp (const CHAR_TYPE *flag)
+137c137
+<     12495:  135:  if (!this->is_anything_left ())
+---
+>      9428:  135:  if (!this->is_anything_left ())
+140,141c140,141
+<     12495:  138:  const size_t flag_length = ACE_OS::strlen (flag);
+<     12495:  139:  const CHAR_TYPE *arg = this->temp_[this->current_index_];
+---
+>      9428:  138:  const size_t flag_length = ACE_OS::strlen (flag);
+>      9428:  139:  const CHAR_TYPE *arg = this->temp_[this->current_index_];
+143,144c143,144
+<     12495:  141:  if (ACE_OS::strncasecmp (arg, flag, flag_length) != 0)
+<     12414:  142:    return -1;
+---
+>      9428:  141:  if (ACE_OS::strncasecmp (arg, flag, flag_length) != 0)
+>      9374:  142:    return -1;
+146,148c146,148
+<        81:  144:  const size_t arg_length = ACE_OS::strlen (arg);
+<        81:  145:  size_t remaining = flag_length;
+<       81*:  146:  while (remaining < arg_length && arg[remaining] == CHAR_TYPE (' '))
+---
+>        54:  144:  const size_t arg_length = ACE_OS::strlen (arg);
+>        54:  145:  size_t remaining = flag_length;
+>       54*:  146:  while (remaining < arg_length && arg[remaining] == CHAR_TYPE (' '))
+150c150
+<        81:  148:  return (arg_length == flag_length) ? 0 : static_cast<int> (remaining);
+---
+>       54*:  148:  return (arg_length == flag_length) ? 0 : static_cast<int> (remaining);
+155c155
+<       158:  153:ACE_Arg_Shifter_T<CHAR_TYPE>::consume_arg (int number)
+---
+>       108:  153:ACE_Arg_Shifter_T<CHAR_TYPE>::consume_arg (int number)
+157c157
+<       158:  155:  int retval = 0;
+---
+>       108:  155:  int retval = 0;
+160c160
+<       158:  158:  if (this->is_anything_left() >= number)
+---
+>       108:  158:  if (this->is_anything_left() >= number)
+162,165c162,165
+<       158:  160:      for (int i = 0, j = this->back_ - (number - 1);
+<       316:  161:           i < number;
+<       158:  162:           ++i, ++j, ++this->current_index_)
+<       158:  163:        this->argv_[j] = this->temp_[this->current_index_];
+---
+>       108:  160:      for (int i = 0, j = this->back_ - (number - 1);
+>       216:  161:           i < number;
+>       108:  162:           ++i, ++j, ++this->current_index_)
+>       108:  163:        this->argv_[j] = this->temp_[this->current_index_];
+167,168c167,168
+<       158:  165:      this->back_ -= number;
+<       158:  166:      retval = 1;
+---
+>       108:  165:      this->back_ -= number;
+>       108:  166:      retval = 1;
+171c171
+<       158:  169:  return retval;
+---
+>       108:  169:  return retval;
+176c176
+<       912:  174:ACE_Arg_Shifter_T<CHAR_TYPE>::ignore_arg (int number)
+---
+>       686:  174:ACE_Arg_Shifter_T<CHAR_TYPE>::ignore_arg (int number)
+178c178
+<       912:  176:  int retval = 0;
+---
+>       686:  176:  int retval = 0;
+181c181
+<       912:  179:  if (this->is_anything_left () >= number)
+---
+>       686:  179:  if (this->is_anything_left () >= number)
+183,186c183,186
+<       912:  181:      for (int i = 0;
+<      1824:  182:           i < number;
+<      1824:  183:           i++, this->current_index_++, this->front_++)
+<       912:  184:        this->argv_[this->front_] = this->temp_[this->current_index_];
+---
+>       686:  181:      for (int i = 0;
+>      1372:  182:           i < number;
+>      1372:  183:           i++, this->current_index_++, this->front_++)
+>       686:  184:        this->argv_[this->front_] = this->temp_[this->current_index_];
+188,189c188,189
+<       912:  186:      retval = 1;
+<       912:  187:      this->argc_ += number;
+---
+>       686:  186:      retval = 1;
+>       686:  187:      this->argc_ += number;
+192c192
+<       912:  190:  return retval;
+---
+>       686:  190:  return retval;
+197c197
+<     25769:  195:ACE_Arg_Shifter_T<CHAR_TYPE>::is_anything_left (void) const
+---
+>     19431:  195:ACE_Arg_Shifter_T<CHAR_TYPE>::is_anything_left (void) const
+199c199
+<     25769:  197:  return this->total_size_ - this->current_index_;
+---
+>     19431:  197:  return this->total_size_ - this->current_index_;
+212c212
+<        79:  210:ACE_Arg_Shifter_T<CHAR_TYPE>::is_parameter_next (void) const
+---
+>        54:  210:ACE_Arg_Shifter_T<CHAR_TYPE>::is_parameter_next (void) const
+215c215
+<       79*:  213:    && this->temp_[this->current_index_][0] != '-';
+---
+>       54*:  213:    && this->temp_[this->current_index_][0] != '-';

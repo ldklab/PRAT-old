@@ -1,0 +1,362 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:15
+30c30
+<         -:   28:  inline static CORBA::ULong default_maximum()
+---
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+32c32
+<         -:   30:    return 0;
+---
+>     #####:   30:    return 0;
+33a34,112
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIbLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIcLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIdLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIfLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIeLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIlLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIiLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIhLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIsLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsImLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIjLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsItLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIwLb1EE15default_maximumEv:
+>     #####:   28:  inline static CORBA::ULong default_maximum()
+>         -:   29:  {
+>     #####:   30:    return 0;
+>         -:   31:  }
+> ------------------
+35c114
+<         -:   33:  inline static value_type * default_buffer_allocation()
+---
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+37c116
+<         -:   35:    return 0;
+---
+>     #####:   35:    return 0;
+38a118,196
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIbLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIcLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIdLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIfLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIeLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIlLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIiLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIhLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIsLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsImLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIjLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsItLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIwLb1EE25default_buffer_allocationEv:
+>     #####:   33:  inline static value_type * default_buffer_allocation()
+>         -:   34:  {
+>     #####:   35:    return 0;
+>         -:   36:  }
+> ------------------
+45c203
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS6GUID_tELb1EE8allocbufEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIbLb1EE8allocbufEj:
+51c209
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS6GUID_tELb1EE8allocbufEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIcLb1EE8allocbufEj:
+57c215
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE8allocbufEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIdLb1EE8allocbufEj:
+63c221
+< _ZN3TAO7details33unbounded_value_allocation_traitsIhLb1EE8allocbufEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIfLb1EE8allocbufEj:
+69c227
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE8allocbufEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIeLb1EE8allocbufEj:
+75c233,239
+< _ZN3TAO7details33unbounded_value_allocation_traitsIhLb1EE8allocbufEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIlLb1EE8allocbufEj:
+>     #####:   38:  inline static value_type * allocbuf(CORBA::ULong maximum)
+>         -:   39:  {
+>     #####:   40:    return new value_type[maximum];
+>         -:   41:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIiLb1EE8allocbufEj:
+86a251,280
+> _ZN3TAO7details33unbounded_value_allocation_traitsIsLb1EE8allocbufEj:
+>     #####:   38:  inline static value_type * allocbuf(CORBA::ULong maximum)
+>         -:   39:  {
+>     #####:   40:    return new value_type[maximum];
+>         -:   41:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsImLb1EE8allocbufEj:
+>     #####:   38:  inline static value_type * allocbuf(CORBA::ULong maximum)
+>         -:   39:  {
+>     #####:   40:    return new value_type[maximum];
+>         -:   41:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIjLb1EE8allocbufEj:
+>     #####:   38:  inline static value_type * allocbuf(CORBA::ULong maximum)
+>         -:   39:  {
+>     #####:   40:    return new value_type[maximum];
+>         -:   41:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsItLb1EE8allocbufEj:
+>     #####:   38:  inline static value_type * allocbuf(CORBA::ULong maximum)
+>         -:   39:  {
+>     #####:   40:    return new value_type[maximum];
+>         -:   41:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIwLb1EE8allocbufEj:
+>     #####:   38:  inline static value_type * allocbuf(CORBA::ULong maximum)
+>         -:   39:  {
+>     #####:   40:    return new value_type[maximum];
+>         -:   41:  }
+> ------------------
+93c287,299
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS6GUID_tELb1EE15allocbuf_noinitEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIbLb1EE15allocbuf_noinitEj:
+>     #####:   43:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+>         -:   44:  {
+>     #####:   45:    return new value_type[maximum];
+>         -:   46:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIcLb1EE15allocbuf_noinitEj:
+>     #####:   43:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+>         -:   44:  {
+>     #####:   45:    return new value_type[maximum];
+>         -:   46:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIdLb1EE15allocbuf_noinitEj:
+99c305
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS6GUID_tELb1EE15allocbuf_noinitEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIfLb1EE15allocbuf_noinitEj:
+105c311
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE15allocbuf_noinitEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIeLb1EE15allocbuf_noinitEj:
+111c317
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE15allocbuf_noinitEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIlLb1EE15allocbuf_noinitEj:
+117c323,353
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS6GUID_tELb1EE15allocbuf_noinitEj:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIiLb1EE15allocbuf_noinitEj:
+>     #####:   43:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+>         -:   44:  {
+>     #####:   45:    return new value_type[maximum];
+>         -:   46:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIsLb1EE15allocbuf_noinitEj:
+>     #####:   43:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+>         -:   44:  {
+>     #####:   45:    return new value_type[maximum];
+>         -:   46:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsImLb1EE15allocbuf_noinitEj:
+>     #####:   43:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+>         -:   44:  {
+>     #####:   45:    return new value_type[maximum];
+>         -:   46:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIjLb1EE15allocbuf_noinitEj:
+>     #####:   43:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+>         -:   44:  {
+>     #####:   45:    return new value_type[maximum];
+>         -:   46:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsItLb1EE15allocbuf_noinitEj:
+>     #####:   43:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+>         -:   44:  {
+>     #####:   45:    return new value_type[maximum];
+>         -:   46:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIwLb1EE15allocbuf_noinitEj:
+129c365
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS6GUID_tELb1EE7freebufEPS4_:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIbLb1EE7freebufEPb:
+135c371
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS6GUID_tELb1EE7freebufEPS4_:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIcLb1EE7freebufEPc:
+141c377
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE7freebufEPS4_:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIdLb1EE7freebufEPd:
+147c383
+< _ZN3TAO7details33unbounded_value_allocation_traitsIhLb1EE7freebufEPh:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIfLb1EE7freebufEPf:
+153c389
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS16TransportLocatorELb1EE7freebufEPS4_:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIeLb1EE7freebufEPe:
+159c395
+< _ZN3TAO7details33unbounded_value_allocation_traitsIhLb1EE7freebufEPh:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIlLb1EE7freebufEPl:
+165c401
+< _ZN3TAO7details33unbounded_value_allocation_traitsIN7OpenDDS4DCPS6GUID_tELb1EE7freebufEPS4_:
+---
+> _ZN3TAO7details33unbounded_value_allocation_traitsIiLb1EE7freebufEPi:
+171a408,437
+>     #####:   48:  inline static void freebuf(value_type * buffer)
+>         -:   49:  {
+>     #####:   50:    delete[] buffer;
+>     #####:   51:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIsLb1EE7freebufEPs:
+>     #####:   48:  inline static void freebuf(value_type * buffer)
+>         -:   49:  {
+>     #####:   50:    delete[] buffer;
+>     #####:   51:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsImLb1EE7freebufEPm:
+>     #####:   48:  inline static void freebuf(value_type * buffer)
+>         -:   49:  {
+>     #####:   50:    delete[] buffer;
+>     #####:   51:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIjLb1EE7freebufEPj:
+>     #####:   48:  inline static void freebuf(value_type * buffer)
+>         -:   49:  {
+>     #####:   50:    delete[] buffer;
+>     #####:   51:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsItLb1EE7freebufEPt:
+>     #####:   48:  inline static void freebuf(value_type * buffer)
+>         -:   49:  {
+>     #####:   50:    delete[] buffer;
+>     #####:   51:  }
+> ------------------
+> _ZN3TAO7details33unbounded_value_allocation_traitsIwLb1EE7freebufEPw:

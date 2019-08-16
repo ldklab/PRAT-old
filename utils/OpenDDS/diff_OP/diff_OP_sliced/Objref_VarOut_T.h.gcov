@@ -1,0 +1,175 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+56c56,59
+<      136*:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+> ------------------
+> _ZN16TAO_Objref_Var_TIN3DDS18DataWriterListenerEEC2EPS1_:
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+74c77
+<         2:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+77c80
+<         5:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+82,83c85,86
+< _ZN16TAO_Objref_Var_TIN3DDS18DataWriterListenerEEC2EPS1_:
+<         2:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+> _ZN16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEC2EPS1_:
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+107,116c110
+<        36:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+< ------------------
+< _ZN16TAO_Objref_Var_TIN3DDS9PublisherEEC2EPS1_:
+<         5:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+< ------------------
+< _ZN16TAO_Objref_Var_TIN3DDS9ConditionEEC2EPS1_:
+<         7:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+< ------------------
+< _ZN16TAO_Objref_Var_TIN3DDS13TopicListenerEEC2EPS1_:
+<        14:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+121c115
+< _ZN16TAO_Objref_Var_TIN3DDS10DataReaderEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS18SubscriberListenerEEC2EPS1_:
+124c118
+< _ZN16TAO_Objref_Var_TIN3DDS10SubscriberEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEC2EPS1_:
+130c124
+< _ZN16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS10SubscriberEEC2EPS1_:
+133c127
+< _ZN16TAO_Objref_Var_TIN3DDS10DataReaderEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS17DomainParticipantEEC2EPS1_:
+136c130
+< _ZN16TAO_Objref_Var_TIN3DDS17DomainParticipantEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS9PublisherEEC2EPS1_:
+139,140c133,134
+< _ZN16TAO_Objref_Var_TIN3DDS17DomainParticipantEEC2EPS1_:
+<        14:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+> _ZN16TAO_Objref_Var_TIN3DDS10DataReaderEEC2EPS1_:
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+142c136
+< _ZN16TAO_Objref_Var_TIN3DDS10SubscriberEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEC2EPS1_:
+148c142
+< _ZN16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS10SubscriberEEC2EPS1_:
+151c145
+< _ZN16TAO_Objref_Var_TIN3DDS18SubscriberListenerEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS10DataReaderEEC2EPS1_:
+155c149
+<        30:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+157c151
+< _ZN16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS13TopicListenerEEC2EPS1_:
+160c154
+< _ZN16TAO_Objref_Var_TIN3DDS13ReadConditionEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS9ConditionEEC2EPS1_:
+164,166d157
+<         2:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+< ------------------
+< _ZN16TAO_Objref_Var_TIN3DDS18DataWriterListenerEEC2EPS1_:
+169c160
+< _ZN16TAO_Objref_Var_TIN7OpenDDS4DCPS18DataWriterListenerEEC2EPS2_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS5TopicEEC2EPS1_:
+172c163
+< _ZN16TAO_Objref_Var_TIN3DDS10SubscriberEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS37PublicationBuiltinTopicDataDataReaderEEC2EPS1_:
+178c169
+< _ZN16TAO_Objref_Var_TIN3DDS38SubscriptionBuiltinTopicDataDataReaderEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS10SubscriberEEC2EPS1_:
+181c172
+< _ZN16TAO_Objref_Var_TIN3DDS16TopicDescriptionEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS18SubscriberListenerEEC2EPS1_:
+184c175
+< _ZN16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN7OpenDDS4DCPS18DataReaderListenerEEC2EPS2_:
+187,189d177
+< _ZN16TAO_Objref_Var_TIN3DDS39SubscriptionBuiltinTopicDataTypeSupportEEC2EPS1_:
+<         2:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+< ------------------
+193,194c181,182
+< _ZN16TAO_Objref_Var_TIN7OpenDDS4DCPS18DataReaderListenerEEC2EPS2_:
+<         1:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+> _ZN16TAO_Objref_Var_TIN3DDS13ReadConditionEEC2EPS1_:
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+196c184
+< _ZN16TAO_Objref_Var_TIN3DDS18SubscriberListenerEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEC2EPS1_:
+199,200c187,191
+< _ZN16TAO_Objref_Var_TIN3DDS10SubscriberEEC2EPS1_:
+<         4:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+> _ZN16TAO_Objref_Var_TIN3DDS16TopicDescriptionEEC2EPS1_:
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+> ------------------
+> _ZN16TAO_Objref_Var_TIN3DDS38SubscriptionBuiltinTopicDataDataReaderEEC2EPS1_:
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+203c194
+<         4:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+205c196
+< _ZN16TAO_Objref_Var_TIN3DDS37PublicationBuiltinTopicDataDataReaderEEC2EPS1_:
+---
+> _ZN16TAO_Objref_Var_TIN3DDS10SubscriberEEC2EPS1_:
+208,209c199,203
+< _ZN16TAO_Objref_Var_TIN3DDS5TopicEEC2EPS1_:
+<         4:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+> _ZN16TAO_Objref_Var_TIN7OpenDDS4DCPS18DataWriterListenerEEC2EPS2_:
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+> ------------------
+> _ZN16TAO_Objref_Var_TIN3DDS18DataWriterListenerEEC2EPS1_:
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+213a208,210
+> _ZN16TAO_Objref_Var_TIN3DDS39SubscriptionBuiltinTopicDataTypeSupportEEC2EPS1_:
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+> ------------------
+215c212
+<         2:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+221c218
+<         2:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+---
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+232,237d228
+< _ZN16TAO_Objref_Var_TIN3DDS18DataReaderListenerEEC2EPS1_:
+<     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+< ------------------
+< _ZN16TAO_Objref_Var_TIN3DDS37PublicationBuiltinTopicDataDataReaderEEC2EPS1_:
+<     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+< ------------------
+256a248,250
+>     #####:   54:  TAO_Objref_Var_T (T * p) : ptr_ (p) {}
+> ------------------
+> _ZN16TAO_Objref_Var_TIN3DDS17DomainParticipantEEC2EPS1_:

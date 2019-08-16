@@ -1,0 +1,14 @@
+182c182
+<         5:  180:      multimap() = default;
+---
+>     #####:  180:      multimap() = default;
+297c297
+<         5:  295:      ~multimap() = default;
+---
+>     #####:  295:      ~multimap() = default;
+546,547c546,547
+<         2:  544:      insert(value_type&& __x)
+<         2:  545:      { return _M_t._M_insert_equal(std::move(__x)); }
+---
+>     #####:  544:      insert(value_type&& __x)
+>     #####:  545:      { return _M_t._M_insert_equal(std::move(__x)); }

@@ -1,0 +1,44 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+131c131
+<        9*:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+---
+>     #####:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+133c133
+<        9*:   69:    }
+---
+>     #####:   69:    }
+136c136
+<         9:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+---
+>     #####:   67:    inline String_var (const character_type *p) : ptr_ (s_traits::duplicate (p))
+138c138
+<         9:   69:    }
+---
+>     #####:   69:    }
+246c246
+<       10*:   83:    inline String_var &operator= (character_type *p)
+---
+>     #####:   83:    inline String_var &operator= (character_type *p)
+248,250c248,250
+<       10*:   85:      String_var <charT> tmp (p);
+<       10*:   86:      std::swap (this->ptr_, tmp.ptr_);
+<       10*:   87:      return *this;
+---
+>     #####:   85:      String_var <charT> tmp (p);
+>     #####:   86:      std::swap (this->ptr_, tmp.ptr_);
+>     #####:   87:      return *this;
+254c254
+<        10:   83:    inline String_var &operator= (character_type *p)
+---
+>     #####:   83:    inline String_var &operator= (character_type *p)
+256,258c256,258
+<        10:   85:      String_var <charT> tmp (p);
+<        10:   86:      std::swap (this->ptr_, tmp.ptr_);
+<        10:   87:      return *this;
+---
+>     #####:   85:      String_var <charT> tmp (p);
+>     #####:   86:      std::swap (this->ptr_, tmp.ptr_);
+>     #####:   87:      return *this;

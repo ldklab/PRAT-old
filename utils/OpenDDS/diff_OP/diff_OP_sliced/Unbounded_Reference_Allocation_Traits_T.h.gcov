@@ -1,0 +1,172 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:15
+31c31
+<         -:   29:  inline static CORBA::ULong default_maximum()
+---
+>     #####:   29:  inline static CORBA::ULong default_maximum()
+33c33
+<         -:   31:    return 0;
+---
+>     #####:   31:    return 0;
+34a35,47
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPcNS0_13string_traitsIcLb1EEELb1EE15default_maximumEv:
+>     #####:   29:  inline static CORBA::ULong default_maximum()
+>         -:   30:  {
+>     #####:   31:    return 0;
+>         -:   32:  }
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPwNS0_13string_traitsIwLb1EEELb1EE15default_maximumEv:
+>     #####:   29:  inline static CORBA::ULong default_maximum()
+>         -:   30:  {
+>     #####:   31:    return 0;
+>         -:   32:  }
+> ------------------
+36c49,61
+<         -:   34:  inline static value_type * default_buffer_allocation()
+---
+>     #####:   34:  inline static value_type * default_buffer_allocation()
+>         -:   35:  {
+>     #####:   36:    return 0;
+>         -:   37:  }
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPcNS0_13string_traitsIcLb1EEELb1EE25default_buffer_allocationEv:
+>     #####:   34:  inline static value_type * default_buffer_allocation()
+>         -:   35:  {
+>     #####:   36:    return 0;
+>         -:   37:  }
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPwNS0_13string_traitsIwLb1EEELb1EE25default_buffer_allocationEv:
+>     #####:   34:  inline static value_type * default_buffer_allocation()
+38c63
+<         -:   36:    return 0;
+---
+>     #####:   36:    return 0;
+39a65
+> ------------------
+41c67
+<         -:   39:  inline static value_type * allocbuf(CORBA::ULong maximum)
+---
+>     #####:   39:  inline static value_type * allocbuf(CORBA::ULong maximum)
+43c69
+<         -:   41:    if (maximum == ACE_UINT32_MAX)
+---
+>     #####:   41:    if (maximum == ACE_UINT32_MAX)
+45c71
+<         -:   43:        return 0;
+---
+>     #####:   43:        return 0;
+47,48c73,74
+<         -:   45:    value_type * buffer = new value_type[maximum + 1];
+<         -:   46:    reinterpret_cast<value_type**>(buffer)[0] = buffer + maximum + 1;
+---
+>     #####:   45:    value_type * buffer = new value_type[maximum + 1];
+>     #####:   46:    reinterpret_cast<value_type**>(buffer)[0] = buffer + maximum + 1;
+51c77
+<         -:   49:    reference_traits::initialize_range(buffer + 1, buffer + maximum + 1);
+---
+>     #####:   49:    reference_traits::initialize_range(buffer + 1, buffer + maximum + 1);
+53c79
+<         -:   51:    return buffer + 1;
+---
+>     #####:   51:    return buffer + 1;
+54a81,113
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPcNS0_13string_traitsIcLb1EEELb1EE8allocbufEj:
+>     #####:   39:  inline static value_type * allocbuf(CORBA::ULong maximum)
+>         -:   40:  {
+>     #####:   41:    if (maximum == ACE_UINT32_MAX)
+>         -:   42:      {
+>     #####:   43:        return 0;
+>         -:   44:      }
+>     #####:   45:    value_type * buffer = new value_type[maximum + 1];
+>     #####:   46:    reinterpret_cast<value_type**>(buffer)[0] = buffer + maximum + 1;
+>         -:   47:
+>         -:   48:    // no throw
+>     #####:   49:    reference_traits::initialize_range(buffer + 1, buffer + maximum + 1);
+>         -:   50:
+>     #####:   51:    return buffer + 1;
+>         -:   52:  }
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPwNS0_13string_traitsIwLb1EEELb1EE8allocbufEj:
+>     #####:   39:  inline static value_type * allocbuf(CORBA::ULong maximum)
+>         -:   40:  {
+>     #####:   41:    if (maximum == ACE_UINT32_MAX)
+>         -:   42:      {
+>     #####:   43:        return 0;
+>         -:   44:      }
+>     #####:   45:    value_type * buffer = new value_type[maximum + 1];
+>     #####:   46:    reinterpret_cast<value_type**>(buffer)[0] = buffer + maximum + 1;
+>         -:   47:
+>         -:   48:    // no throw
+>     #####:   49:    reference_traits::initialize_range(buffer + 1, buffer + maximum + 1);
+>         -:   50:
+>     #####:   51:    return buffer + 1;
+>         -:   52:  }
+> ------------------
+69a129,161
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPcNS0_13string_traitsIcLb1EEELb1EE15allocbuf_noinitEj:
+>     #####:   54:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+>         -:   55:  {
+>     #####:   56:    if (maximum == ACE_UINT32_MAX)
+>         -:   57:      {
+>     #####:   58:        return 0;
+>         -:   59:      }
+>     #####:   60:    value_type * buffer = new value_type[maximum + 1];
+>     #####:   61:    reinterpret_cast<value_type**>(buffer)[0] = buffer + maximum + 1;
+>         -:   62:
+>         -:   63:    // no throw
+>     #####:   64:    reference_traits::zero_range(buffer + 1, buffer + maximum + 1);
+>         -:   65:
+>     #####:   66:    return buffer + 1;
+>         -:   67:  }
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPwNS0_13string_traitsIwLb1EEELb1EE15allocbuf_noinitEj:
+>     #####:   54:  inline static value_type * allocbuf_noinit(CORBA::ULong maximum)
+>         -:   55:  {
+>     #####:   56:    if (maximum == ACE_UINT32_MAX)
+>         -:   57:      {
+>     #####:   58:        return 0;
+>         -:   59:      }
+>     #####:   60:    value_type * buffer = new value_type[maximum + 1];
+>     #####:   61:    reinterpret_cast<value_type**>(buffer)[0] = buffer + maximum + 1;
+>         -:   62:
+>         -:   63:    // no throw
+>     #####:   64:    reference_traits::zero_range(buffer + 1, buffer + maximum + 1);
+>         -:   65:
+>     #####:   66:    return buffer + 1;
+>         -:   67:  }
+> ------------------
+82a175,203
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPcNS0_13string_traitsIcLb1EEELb1EE7freebufEPS2_:
+>     #####:   69:  inline static void freebuf(value_type * buffer)
+>         -:   70:  {
+>     #####:   71:    if(buffer != 0)
+>         -:   72:    {
+>     #####:   73:      value_type * begin = buffer - 1;
+>     #####:   74:      value_type * end = reinterpret_cast<value_type*>(*begin);
+>     #####:   75:      reference_traits::release_range(buffer, end);
+>         -:   76:
+>     #####:   77:      buffer = begin;
+>         -:   78:    }
+>     #####:   79:    delete[] buffer;
+>     #####:   80:  }
+> ------------------
+> _ZN3TAO7details37unbounded_reference_allocation_traitsIPwNS0_13string_traitsIwLb1EEELb1EE7freebufEPS2_:
+>     #####:   69:  inline static void freebuf(value_type * buffer)
+>         -:   70:  {
+>     #####:   71:    if(buffer != 0)
+>         -:   72:    {
+>     #####:   73:      value_type * begin = buffer - 1;
+>     #####:   74:      value_type * end = reinterpret_cast<value_type*>(*begin);
+>     #####:   75:      reference_traits::release_range(buffer, end);
+>         -:   76:
+>     #####:   77:      buffer = begin;
+>         -:   78:    }
+>     #####:   79:    delete[] buffer;
+>     #####:   80:  }
+> ------------------

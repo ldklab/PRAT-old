@@ -1,0 +1,788 @@
+185c185
+<      679*:  183:      map() = default;
+---
+>      356*:  183:      map() = default;
+200c200
+<       119:  183:      map() = default;
+---
+>        89:  183:      map() = default;
+203c203
+<       119:  183:      map() = default;
+---
+>        89:  183:      map() = default;
+206c206
+<       119:  183:      map() = default;
+---
+>        89:  183:      map() = default;
+212c212
+<       119:  183:      map() = default;
+---
+>        89:  183:      map() = default;
+215c215
+<        12:  183:      map() = default;
+---
+>     #####:  183:      map() = default;
+218c218
+<        14:  183:      map() = default;
+---
+>     #####:  183:      map() = default;
+221c221
+<        14:  183:      map() = default;
+---
+>     #####:  183:      map() = default;
+224c224
+<        18:  183:      map() = default;
+---
+>     #####:  183:      map() = default;
+227c227
+<        24:  183:      map() = default;
+---
+>     #####:  183:      map() = default;
+230c230
+<       109:  183:      map() = default;
+---
+>     #####:  183:      map() = default;
+236c236
+<         6:  183:      map() = default;
+---
+>     #####:  183:      map() = default;
+239c239
+<         6:  183:      map() = default;
+---
+>     #####:  183:      map() = default;
+357c357
+<      679*:  300:      ~map() = default;
+---
+>      356*:  300:      ~map() = default;
+360c360
+<        14:  300:      ~map() = default;
+---
+>     #####:  300:      ~map() = default;
+372c372
+<       119:  300:      ~map() = default;
+---
+>        89:  300:      ~map() = default;
+375c375
+<       119:  300:      ~map() = default;
+---
+>        89:  300:      ~map() = default;
+378c378
+<       119:  300:      ~map() = default;
+---
+>        89:  300:      ~map() = default;
+384c384
+<       119:  300:      ~map() = default;
+---
+>        89:  300:      ~map() = default;
+390c390
+<        12:  300:      ~map() = default;
+---
+>     #####:  300:      ~map() = default;
+393c393
+<        14:  300:      ~map() = default;
+---
+>     #####:  300:      ~map() = default;
+396c396
+<        18:  300:      ~map() = default;
+---
+>     #####:  300:      ~map() = default;
+399c399
+<         6:  300:      ~map() = default;
+---
+>     #####:  300:      ~map() = default;
+402c402
+<        24:  300:      ~map() = default;
+---
+>     #####:  300:      ~map() = default;
+405c405
+<       109:  300:      ~map() = default;
+---
+>     #####:  300:      ~map() = default;
+414c414
+<         6:  300:      ~map() = default;
+---
+>     #####:  300:      ~map() = default;
+469,470c469,470
+<      318*:  354:      begin() _GLIBCXX_NOEXCEPT
+<      318*:  355:      { return _M_t.begin(); }
+---
+>       89*:  354:      begin() _GLIBCXX_NOEXCEPT
+>       89*:  355:      { return _M_t.begin(); }
+481,482c481,482
+<         3:  354:      begin() _GLIBCXX_NOEXCEPT
+<         3:  355:      { return _M_t.begin(); }
+---
+>     #####:  354:      begin() _GLIBCXX_NOEXCEPT
+>     #####:  355:      { return _M_t.begin(); }
+485,486c485,486
+<       137:  354:      begin() _GLIBCXX_NOEXCEPT
+<       137:  355:      { return _M_t.begin(); }
+---
+>     #####:  354:      begin() _GLIBCXX_NOEXCEPT
+>     #####:  355:      { return _M_t.begin(); }
+497,498c497,498
+<        45:  354:      begin() _GLIBCXX_NOEXCEPT
+<        45:  355:      { return _M_t.begin(); }
+---
+>     #####:  354:      begin() _GLIBCXX_NOEXCEPT
+>     #####:  355:      { return _M_t.begin(); }
+501,502c501,502
+<        14:  354:      begin() _GLIBCXX_NOEXCEPT
+<        14:  355:      { return _M_t.begin(); }
+---
+>     #####:  354:      begin() _GLIBCXX_NOEXCEPT
+>     #####:  355:      { return _M_t.begin(); }
+513,514c513,514
+<       119:  354:      begin() _GLIBCXX_NOEXCEPT
+<       119:  355:      { return _M_t.begin(); }
+---
+>        89:  354:      begin() _GLIBCXX_NOEXCEPT
+>        89:  355:      { return _M_t.begin(); }
+531,532c531,532
+<       12*:  363:      begin() const _GLIBCXX_NOEXCEPT
+<       12*:  364:      { return _M_t.begin(); }
+---
+>     #####:  363:      begin() const _GLIBCXX_NOEXCEPT
+>     #####:  364:      { return _M_t.begin(); }
+535,536c535,536
+<        12:  363:      begin() const _GLIBCXX_NOEXCEPT
+<        12:  364:      { return _M_t.begin(); }
+---
+>     #####:  363:      begin() const _GLIBCXX_NOEXCEPT
+>     #####:  364:      { return _M_t.begin(); }
+553,554c553,554
+<     1507*:  372:      end() _GLIBCXX_NOEXCEPT
+<     1507*:  373:      { return _M_t.end(); }
+---
+>      580*:  372:      end() _GLIBCXX_NOEXCEPT
+>      580*:  373:      { return _M_t.end(); }
+573,574c573,574
+<       475:  372:      end() _GLIBCXX_NOEXCEPT
+<       475:  373:      { return _M_t.end(); }
+---
+>       357:  372:      end() _GLIBCXX_NOEXCEPT
+>       357:  373:      { return _M_t.end(); }
+581,582c581,582
+<       208:  372:      end() _GLIBCXX_NOEXCEPT
+<       208:  373:      { return _M_t.end(); }
+---
+>       156:  372:      end() _GLIBCXX_NOEXCEPT
+>       156:  373:      { return _M_t.end(); }
+585,586c585,586
+<        89:  372:      end() _GLIBCXX_NOEXCEPT
+<        89:  373:      { return _M_t.end(); }
+---
+>        67:  372:      end() _GLIBCXX_NOEXCEPT
+>        67:  373:      { return _M_t.end(); }
+593,594c593,594
+<        21:  372:      end() _GLIBCXX_NOEXCEPT
+<        21:  373:      { return _M_t.end(); }
+---
+>     #####:  372:      end() _GLIBCXX_NOEXCEPT
+>     #####:  373:      { return _M_t.end(); }
+605,606c605,606
+<        18:  372:      end() _GLIBCXX_NOEXCEPT
+<        18:  373:      { return _M_t.end(); }
+---
+>     #####:  372:      end() _GLIBCXX_NOEXCEPT
+>     #####:  373:      { return _M_t.end(); }
+609,610c609,610
+<        59:  372:      end() _GLIBCXX_NOEXCEPT
+<        59:  373:      { return _M_t.end(); }
+---
+>     #####:  372:      end() _GLIBCXX_NOEXCEPT
+>     #####:  373:      { return _M_t.end(); }
+613,614c613,614
+<        44:  372:      end() _GLIBCXX_NOEXCEPT
+<        44:  373:      { return _M_t.end(); }
+---
+>     #####:  372:      end() _GLIBCXX_NOEXCEPT
+>     #####:  373:      { return _M_t.end(); }
+617,618c617,618
+<        99:  372:      end() _GLIBCXX_NOEXCEPT
+<        99:  373:      { return _M_t.end(); }
+---
+>     #####:  372:      end() _GLIBCXX_NOEXCEPT
+>     #####:  373:      { return _M_t.end(); }
+621,622c621,622
+<        78:  372:      end() _GLIBCXX_NOEXCEPT
+<        78:  373:      { return _M_t.end(); }
+---
+>     #####:  372:      end() _GLIBCXX_NOEXCEPT
+>     #####:  373:      { return _M_t.end(); }
+629,630c629,630
+<       377:  372:      end() _GLIBCXX_NOEXCEPT
+<       377:  373:      { return _M_t.end(); }
+---
+>     #####:  372:      end() _GLIBCXX_NOEXCEPT
+>     #####:  373:      { return _M_t.end(); }
+645,646c645,646
+<        39:  372:      end() _GLIBCXX_NOEXCEPT
+<        39:  373:      { return _M_t.end(); }
+---
+>     #####:  372:      end() _GLIBCXX_NOEXCEPT
+>     #####:  373:      { return _M_t.end(); }
+655,656c655,656
+<      282*:  381:      end() const _GLIBCXX_NOEXCEPT
+<      282*:  382:      { return _M_t.end(); }
+---
+>      201*:  381:      end() const _GLIBCXX_NOEXCEPT
+>      201*:  382:      { return _M_t.end(); }
+659,660c659,660
+<        12:  381:      end() const _GLIBCXX_NOEXCEPT
+<        12:  382:      { return _M_t.end(); }
+---
+>     #####:  381:      end() const _GLIBCXX_NOEXCEPT
+>     #####:  382:      { return _M_t.end(); }
+687,688c687,688
+<       180:  381:      end() const _GLIBCXX_NOEXCEPT
+<       180:  382:      { return _M_t.end(); }
+---
+>       134:  381:      end() const _GLIBCXX_NOEXCEPT
+>       134:  382:      { return _M_t.end(); }
+691,692c691,692
+<        90:  381:      end() const _GLIBCXX_NOEXCEPT
+<        90:  382:      { return _M_t.end(); }
+---
+>        67:  381:      end() const _GLIBCXX_NOEXCEPT
+>        67:  382:      { return _M_t.end(); }
+782,783c782,783
+<      101*:  463:      empty() const _GLIBCXX_NOEXCEPT
+<      101*:  464:      { return _M_t.empty(); }
+---
+>     #####:  463:      empty() const _GLIBCXX_NOEXCEPT
+>     #####:  464:      { return _M_t.empty(); }
+786,787c786,787
+<         4:  463:      empty() const _GLIBCXX_NOEXCEPT
+<         4:  464:      { return _M_t.empty(); }
+---
+>     #####:  463:      empty() const _GLIBCXX_NOEXCEPT
+>     #####:  464:      { return _M_t.empty(); }
+790,791c790,791
+<        28:  463:      empty() const _GLIBCXX_NOEXCEPT
+<        28:  464:      { return _M_t.empty(); }
+---
+>     #####:  463:      empty() const _GLIBCXX_NOEXCEPT
+>     #####:  464:      { return _M_t.empty(); }
+794,795c794,795
+<        51:  463:      empty() const _GLIBCXX_NOEXCEPT
+<        51:  464:      { return _M_t.empty(); }
+---
+>     #####:  463:      empty() const _GLIBCXX_NOEXCEPT
+>     #####:  464:      { return _M_t.empty(); }
+798,799c798,799
+<        18:  463:      empty() const _GLIBCXX_NOEXCEPT
+<        18:  464:      { return _M_t.empty(); }
+---
+>     #####:  463:      empty() const _GLIBCXX_NOEXCEPT
+>     #####:  464:      { return _M_t.empty(); }
+816,817c816,817
+<       68*:  468:      size() const _GLIBCXX_NOEXCEPT
+<       68*:  469:      { return _M_t.size(); }
+---
+>     #####:  468:      size() const _GLIBCXX_NOEXCEPT
+>     #####:  469:      { return _M_t.size(); }
+820,821c820,821
+<        12:  468:      size() const _GLIBCXX_NOEXCEPT
+<        12:  469:      { return _M_t.size(); }
+---
+>     #####:  468:      size() const _GLIBCXX_NOEXCEPT
+>     #####:  469:      { return _M_t.size(); }
+832,833c832,833
+<        18:  468:      size() const _GLIBCXX_NOEXCEPT
+<        18:  469:      { return _M_t.size(); }
+---
+>     #####:  468:      size() const _GLIBCXX_NOEXCEPT
+>     #####:  469:      { return _M_t.size(); }
+836,837c836,837
+<        38:  468:      size() const _GLIBCXX_NOEXCEPT
+<        38:  469:      { return _M_t.size(); }
+---
+>     #####:  468:      size() const _GLIBCXX_NOEXCEPT
+>     #####:  469:      { return _M_t.size(); }
+863c863
+<      375*:  490:      operator[](const key_type& __k)
+---
+>      201*:  490:      operator[](const key_type& __k)
+868c868
+<      375*:  495:	iterator __i = lower_bound(__k);
+---
+>      201*:  495:	iterator __i = lower_bound(__k);
+870c870
+<      375*:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+---
+>      201*:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+872c872
+<      339*:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+---
+>      201*:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+878c878
+<      375*:  505:	return (*__i).second;
+---
+>      201*:  505:	return (*__i).second;
+882c882
+<        18:  490:      operator[](const key_type& __k)
+---
+>     #####:  490:      operator[](const key_type& __k)
+887c887
+<        18:  495:	iterator __i = lower_bound(__k);
+---
+>     #####:  495:	iterator __i = lower_bound(__k);
+889c889
+<       18*:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+---
+>     #####:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+891c891
+<        18:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+---
+>     #####:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+897c897
+<        18:  505:	return (*__i).second;
+---
+>     #####:  505:	return (*__i).second;
+901c901
+<        36:  490:      operator[](const key_type& __k)
+---
+>     #####:  490:      operator[](const key_type& __k)
+906c906
+<        36:  495:	iterator __i = lower_bound(__k);
+---
+>     #####:  495:	iterator __i = lower_bound(__k);
+908c908
+<        36:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+---
+>     #####:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+910c910
+<        18:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+---
+>     #####:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+916c916
+<        36:  505:	return (*__i).second;
+---
+>     #####:  505:	return (*__i).second;
+939c939
+<        36:  490:      operator[](const key_type& __k)
+---
+>     #####:  490:      operator[](const key_type& __k)
+944c944
+<        36:  495:	iterator __i = lower_bound(__k);
+---
+>     #####:  495:	iterator __i = lower_bound(__k);
+946c946
+<        36:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+---
+>     #####:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+948c948
+<        18:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+---
+>     #####:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+954c954
+<        36:  505:	return (*__i).second;
+---
+>     #####:  505:	return (*__i).second;
+977c977
+<        18:  490:      operator[](const key_type& __k)
+---
+>     #####:  490:      operator[](const key_type& __k)
+982c982
+<        18:  495:	iterator __i = lower_bound(__k);
+---
+>     #####:  495:	iterator __i = lower_bound(__k);
+984c984
+<       18*:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+---
+>     #####:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+986c986
+<        18:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+---
+>     #####:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+992c992
+<        18:  505:	return (*__i).second;
+---
+>     #####:  505:	return (*__i).second;
+1015c1015
+<        89:  490:      operator[](const key_type& __k)
+---
+>        67:  490:      operator[](const key_type& __k)
+1020c1020
+<        89:  495:	iterator __i = lower_bound(__k);
+---
+>        67:  495:	iterator __i = lower_bound(__k);
+1022c1022
+<       89*:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+---
+>       67*:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+1024c1024
+<        89:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+---
+>        67:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+1030c1030
+<        89:  505:	return (*__i).second;
+---
+>        67:  505:	return (*__i).second;
+1034c1034
+<       178:  490:      operator[](const key_type& __k)
+---
+>       134:  490:      operator[](const key_type& __k)
+1039c1039
+<       178:  495:	iterator __i = lower_bound(__k);
+---
+>       134:  495:	iterator __i = lower_bound(__k);
+1041c1041
+<      178*:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+---
+>      134*:  497:	if (__i == end() || key_comp()(__k, (*__i).first))
+1043c1043
+<       178:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+---
+>       134:  499:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+1049c1049
+<       178:  505:	return (*__i).second;
+---
+>       134:  505:	return (*__i).second;
+1112c1112
+<      119*:  510:      operator[](key_type&& __k)
+---
+>       89*:  510:      operator[](key_type&& __k)
+1117c1117
+<      119*:  515:	iterator __i = lower_bound(__k);
+---
+>       89*:  515:	iterator __i = lower_bound(__k);
+1119,1121c1119,1121
+<      119*:  517:	if (__i == end() || key_comp()(__k, (*__i).first))
+<      119*:  518:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+<      119*:  519:					std::forward_as_tuple(std::move(__k)),
+---
+>       89*:  517:	if (__i == end() || key_comp()(__k, (*__i).first))
+>       89*:  518:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+>       89*:  519:					std::forward_as_tuple(std::move(__k)),
+1123c1123
+<      119*:  521:	return (*__i).second;
+---
+>       89*:  521:	return (*__i).second;
+1142c1142
+<       119:  510:      operator[](key_type&& __k)
+---
+>        89:  510:      operator[](key_type&& __k)
+1147c1147
+<       119:  515:	iterator __i = lower_bound(__k);
+---
+>        89:  515:	iterator __i = lower_bound(__k);
+1149,1151c1149,1151
+<      119*:  517:	if (__i == end() || key_comp()(__k, (*__i).first))
+<       119:  518:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+<       119:  519:					std::forward_as_tuple(std::move(__k)),
+---
+>       89*:  517:	if (__i == end() || key_comp()(__k, (*__i).first))
+>        89:  518:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+>        89:  519:					std::forward_as_tuple(std::move(__k)),
+1153c1153
+<       119:  521:	return (*__i).second;
+---
+>        89:  521:	return (*__i).second;
+1441,1442c1441,1442
+<      172*:  808:      insert(value_type&& __x)
+<      172*:  809:      { return _M_t._M_insert_unique(std::move(__x)); }
+---
+>       67*:  808:      insert(value_type&& __x)
+>       67*:  809:      { return _M_t._M_insert_unique(std::move(__x)); }
+1445,1446c1445,1446
+<        83:  808:      insert(value_type&& __x)
+<        83:  809:      { return _M_t._M_insert_unique(std::move(__x)); }
+---
+>     #####:  808:      insert(value_type&& __x)
+>     #####:  809:      { return _M_t._M_insert_unique(std::move(__x)); }
+1453,1454c1453,1454
+<        89:  808:      insert(value_type&& __x)
+<        89:  809:      { return _M_t._M_insert_unique(std::move(__x)); }
+---
+>        67:  808:      insert(value_type&& __x)
+>        67:  809:      { return _M_t._M_insert_unique(std::move(__x)); }
+1460,1461c1460,1461
+<       62*:  814:	insert(_Pair&& __x)
+<       62*:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+---
+>     #####:  814:	insert(_Pair&& __x)
+>     #####:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+1464,1465c1464,1465
+<         9:  814:	insert(_Pair&& __x)
+<         9:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+---
+>     #####:  814:	insert(_Pair&& __x)
+>     #####:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+1472,1473c1472,1473
+<        27:  814:	insert(_Pair&& __x)
+<        27:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+---
+>     #####:  814:	insert(_Pair&& __x)
+>     #####:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+1476,1477c1476,1477
+<        18:  814:	insert(_Pair&& __x)
+<        18:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+---
+>     #####:  814:	insert(_Pair&& __x)
+>     #####:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+1480,1481c1480,1481
+<         8:  814:	insert(_Pair&& __x)
+<         8:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+---
+>     #####:  814:	insert(_Pair&& __x)
+>     #####:  815:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+1703,1704c1703,1704
+<       54*: 1036:      erase(iterator __position)
+<       54*: 1037:      { return _M_t.erase(__position); }
+---
+>     #####: 1036:      erase(iterator __position)
+>     #####: 1037:      { return _M_t.erase(__position); }
+1707,1708c1707,1708
+<        18: 1036:      erase(iterator __position)
+<        18: 1037:      { return _M_t.erase(__position); }
+---
+>     #####: 1036:      erase(iterator __position)
+>     #####: 1037:      { return _M_t.erase(__position); }
+1711,1712c1711,1712
+<        18: 1036:      erase(iterator __position)
+<        18: 1037:      { return _M_t.erase(__position); }
+---
+>     #####: 1036:      erase(iterator __position)
+>     #####: 1037:      { return _M_t.erase(__position); }
+1715,1716c1715,1716
+<         9: 1036:      erase(iterator __position)
+<         9: 1037:      { return _M_t.erase(__position); }
+---
+>     #####: 1036:      erase(iterator __position)
+>     #####: 1037:      { return _M_t.erase(__position); }
+1719,1720c1719,1720
+<         9: 1036:      erase(iterator __position)
+<         9: 1037:      { return _M_t.erase(__position); }
+---
+>     #####: 1036:      erase(iterator __position)
+>     #####: 1037:      { return _M_t.erase(__position); }
+1763,1764c1763,1764
+<       74*: 1067:      erase(const key_type& __x)
+<       74*: 1068:      { return _M_t.erase(__x); }
+---
+>     #####: 1067:      erase(const key_type& __x)
+>     #####: 1068:      { return _M_t.erase(__x); }
+1771,1772c1771,1772
+<        18: 1067:      erase(const key_type& __x)
+<        18: 1068:      { return _M_t.erase(__x); }
+---
+>     #####: 1067:      erase(const key_type& __x)
+>     #####: 1068:      { return _M_t.erase(__x); }
+1779,1780c1779,1780
+<        10: 1067:      erase(const key_type& __x)
+<        10: 1068:      { return _M_t.erase(__x); }
+---
+>     #####: 1067:      erase(const key_type& __x)
+>     #####: 1068:      { return _M_t.erase(__x); }
+1787,1788c1787,1788
+<        18: 1067:      erase(const key_type& __x)
+<        18: 1068:      { return _M_t.erase(__x); }
+---
+>     #####: 1067:      erase(const key_type& __x)
+>     #####: 1068:      { return _M_t.erase(__x); }
+1791,1792c1791,1792
+<        28: 1067:      erase(const key_type& __x)
+<        28: 1068:      { return _M_t.erase(__x); }
+---
+>     #####: 1067:      erase(const key_type& __x)
+>     #####: 1068:      { return _M_t.erase(__x); }
+1865,1866c1865,1866
+<      576*: 1132:      clear() _GLIBCXX_NOEXCEPT
+<      576*: 1133:      { _M_t.clear(); }
+---
+>      356*: 1132:      clear() _GLIBCXX_NOEXCEPT
+>      356*: 1133:      { _M_t.clear(); }
+1881,1882c1881,1882
+<        42: 1132:      clear() _GLIBCXX_NOEXCEPT
+<        42: 1133:      { _M_t.clear(); }
+---
+>     #####: 1132:      clear() _GLIBCXX_NOEXCEPT
+>     #####: 1133:      { _M_t.clear(); }
+1885,1886c1885,1886
+<        58: 1132:      clear() _GLIBCXX_NOEXCEPT
+<        58: 1133:      { _M_t.clear(); }
+---
+>     #####: 1132:      clear() _GLIBCXX_NOEXCEPT
+>     #####: 1133:      { _M_t.clear(); }
+1889,1890c1889,1890
+<       119: 1132:      clear() _GLIBCXX_NOEXCEPT
+<       119: 1133:      { _M_t.clear(); }
+---
+>        89: 1132:      clear() _GLIBCXX_NOEXCEPT
+>        89: 1133:      { _M_t.clear(); }
+1893,1894c1893,1894
+<       119: 1132:      clear() _GLIBCXX_NOEXCEPT
+<       119: 1133:      { _M_t.clear(); }
+---
+>        89: 1132:      clear() _GLIBCXX_NOEXCEPT
+>        89: 1133:      { _M_t.clear(); }
+1897,1898c1897,1898
+<       119: 1132:      clear() _GLIBCXX_NOEXCEPT
+<       119: 1133:      { _M_t.clear(); }
+---
+>        89: 1132:      clear() _GLIBCXX_NOEXCEPT
+>        89: 1133:      { _M_t.clear(); }
+1901,1902c1901,1902
+<       119: 1132:      clear() _GLIBCXX_NOEXCEPT
+<       119: 1133:      { _M_t.clear(); }
+---
+>        89: 1132:      clear() _GLIBCXX_NOEXCEPT
+>        89: 1133:      { _M_t.clear(); }
+1911,1912c1911,1912
+<       40*: 1141:      key_comp() const
+<       40*: 1142:      { return _M_t.key_comp(); }
+---
+>     #####: 1141:      key_comp() const
+>     #####: 1142:      { return _M_t.key_comp(); }
+1919,1920c1919,1920
+<        20: 1141:      key_comp() const
+<        20: 1142:      { return _M_t.key_comp(); }
+---
+>     #####: 1141:      key_comp() const
+>     #####: 1142:      { return _M_t.key_comp(); }
+1927,1928c1927,1928
+<        20: 1141:      key_comp() const
+<        20: 1142:      { return _M_t.key_comp(); }
+---
+>     #####: 1141:      key_comp() const
+>     #####: 1142:      { return _M_t.key_comp(); }
+1991,1992c1991,1992
+<      335*: 1168:      find(const key_type& __x)
+<      335*: 1169:      { return _M_t.find(__x); }
+---
+>       67*: 1168:      find(const key_type& __x)
+>       67*: 1169:      { return _M_t.find(__x); }
+1995,1996c1995,1996
+<        45: 1168:      find(const key_type& __x)
+<        45: 1169:      { return _M_t.find(__x); }
+---
+>     #####: 1168:      find(const key_type& __x)
+>     #####: 1169:      { return _M_t.find(__x); }
+2015,2016c2015,2016
+<        89: 1168:      find(const key_type& __x)
+<        89: 1169:      { return _M_t.find(__x); }
+---
+>        67: 1168:      find(const key_type& __x)
+>        67: 1169:      { return _M_t.find(__x); }
+2023,2024c2023,2024
+<        18: 1168:      find(const key_type& __x)
+<        18: 1169:      { return _M_t.find(__x); }
+---
+>     #####: 1168:      find(const key_type& __x)
+>     #####: 1169:      { return _M_t.find(__x); }
+2035,2036c2035,2036
+<         3: 1168:      find(const key_type& __x)
+<         3: 1169:      { return _M_t.find(__x); }
+---
+>     #####: 1168:      find(const key_type& __x)
+>     #####: 1169:      { return _M_t.find(__x); }
+2039,2040c2039,2040
+<        26: 1168:      find(const key_type& __x)
+<        26: 1169:      { return _M_t.find(__x); }
+---
+>     #####: 1168:      find(const key_type& __x)
+>     #####: 1169:      { return _M_t.find(__x); }
+2047,2048c2047,2048
+<        42: 1168:      find(const key_type& __x)
+<        42: 1169:      { return _M_t.find(__x); }
+---
+>     #####: 1168:      find(const key_type& __x)
+>     #####: 1169:      { return _M_t.find(__x); }
+2051,2052c2051,2052
+<         9: 1168:      find(const key_type& __x)
+<         9: 1169:      { return _M_t.find(__x); }
+---
+>     #####: 1168:      find(const key_type& __x)
+>     #####: 1169:      { return _M_t.find(__x); }
+2059,2060c2059,2060
+<       103: 1168:      find(const key_type& __x)
+<       103: 1169:      { return _M_t.find(__x); }
+---
+>     #####: 1168:      find(const key_type& __x)
+>     #####: 1169:      { return _M_t.find(__x); }
+2093,2094c2093,2094
+<      270*: 1193:      find(const key_type& __x) const
+<      270*: 1194:      { return _M_t.find(__x); }
+---
+>      201*: 1193:      find(const key_type& __x) const
+>      201*: 1194:      { return _M_t.find(__x); }
+2125,2126c2125,2126
+<       180: 1193:      find(const key_type& __x) const
+<       180: 1194:      { return _M_t.find(__x); }
+---
+>       134: 1193:      find(const key_type& __x) const
+>       134: 1194:      { return _M_t.find(__x); }
+2129,2130c2129,2130
+<        90: 1193:      find(const key_type& __x) const
+<        90: 1194:      { return _M_t.find(__x); }
+---
+>        67: 1193:      find(const key_type& __x) const
+>        67: 1194:      { return _M_t.find(__x); }
+2155,2156c2155,2156
+<      277*: 1214:      count(const key_type& __x) const
+<      277*: 1215:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+---
+>      201*: 1214:      count(const key_type& __x) const
+>      201*: 1215:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+2159,2160c2159,2160
+<        10: 1214:      count(const key_type& __x) const
+<        10: 1215:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+---
+>     #####: 1214:      count(const key_type& __x) const
+>     #####: 1215:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+2175,2176c2175,2176
+<        89: 1214:      count(const key_type& __x) const
+<       89*: 1215:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+---
+>        67: 1214:      count(const key_type& __x) const
+>       67*: 1215:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+2179,2180c2179,2180
+<       178: 1214:      count(const key_type& __x) const
+<      178*: 1215:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+---
+>       134: 1214:      count(const key_type& __x) const
+>      134*: 1215:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+2204,2205c2204,2205
+<      494*: 1238:      lower_bound(const key_type& __x)
+<      494*: 1239:      { return _M_t.lower_bound(__x); }
+---
+>      290*: 1238:      lower_bound(const key_type& __x)
+>      290*: 1239:      { return _M_t.lower_bound(__x); }
+2208,2209c2208,2209
+<        18: 1238:      lower_bound(const key_type& __x)
+<        18: 1239:      { return _M_t.lower_bound(__x); }
+---
+>     #####: 1238:      lower_bound(const key_type& __x)
+>     #####: 1239:      { return _M_t.lower_bound(__x); }
+2212,2213c2212,2213
+<        36: 1238:      lower_bound(const key_type& __x)
+<        36: 1239:      { return _M_t.lower_bound(__x); }
+---
+>     #####: 1238:      lower_bound(const key_type& __x)
+>     #####: 1239:      { return _M_t.lower_bound(__x); }
+2220,2221c2220,2221
+<        36: 1238:      lower_bound(const key_type& __x)
+<        36: 1239:      { return _M_t.lower_bound(__x); }
+---
+>     #####: 1238:      lower_bound(const key_type& __x)
+>     #####: 1239:      { return _M_t.lower_bound(__x); }
+2228,2229c2228,2229
+<        18: 1238:      lower_bound(const key_type& __x)
+<        18: 1239:      { return _M_t.lower_bound(__x); }
+---
+>     #####: 1238:      lower_bound(const key_type& __x)
+>     #####: 1239:      { return _M_t.lower_bound(__x); }
+2236,2237c2236,2237
+<       178: 1238:      lower_bound(const key_type& __x)
+<       178: 1239:      { return _M_t.lower_bound(__x); }
+---
+>       134: 1238:      lower_bound(const key_type& __x)
+>       134: 1239:      { return _M_t.lower_bound(__x); }
+2244,2245c2244,2245
+<       208: 1238:      lower_bound(const key_type& __x)
+<       208: 1239:      { return _M_t.lower_bound(__x); }
+---
+>       156: 1238:      lower_bound(const key_type& __x)
+>       156: 1239:      { return _M_t.lower_bound(__x); }

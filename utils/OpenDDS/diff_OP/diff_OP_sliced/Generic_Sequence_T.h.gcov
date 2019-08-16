@@ -1,0 +1,2005 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:15
+112,113c112,113
+<         -:  110:  generic_sequence(void)
+<         -:  111:    : maximum_(allocation_traits::default_maximum())
+---
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+115,116c115,116
+<         -:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+<         -:  114:    , release_(buffer_ != 0)
+---
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+118c118,245
+<         -:  116:  }
+---
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_EC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEEC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_EC2Ev:
+>     #####:  110:  generic_sequence(void)
+>     #####:  111:    : maximum_(allocation_traits::default_maximum())
+>         -:  112:    , length_(0)
+>     #####:  113:    , buffer_(allocation_traits::default_buffer_allocation())
+>     #####:  114:    , release_(buffer_ != 0)
+>         -:  115:  {
+>     #####:  116:  }
+> ------------------
+141c268,307
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+---
+> _ZN3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEEC2EjjPbb:
+>     #####:  127:  generic_sequence(
+>         -:  128:      CORBA::ULong maximum,
+>         -:  129:      CORBA::ULong length,
+>         -:  130:      value_type * data,
+>         -:  131:      CORBA::Boolean release)
+>         -:  132:    : maximum_(maximum)
+>         -:  133:    , length_(length)
+>         -:  134:    , buffer_(data)
+>     #####:  135:    , release_(release)
+>         -:  136:  {
+>     #####:  137:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEEC2EjjPcb:
+>     #####:  127:  generic_sequence(
+>         -:  128:      CORBA::ULong maximum,
+>         -:  129:      CORBA::ULong length,
+>         -:  130:      value_type * data,
+>         -:  131:      CORBA::Boolean release)
+>         -:  132:    : maximum_(maximum)
+>         -:  133:    , length_(length)
+>         -:  134:    , buffer_(data)
+>     #####:  135:    , release_(release)
+>         -:  136:  {
+>     #####:  137:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEEC2EjjPdb:
+>     #####:  127:  generic_sequence(
+>         -:  128:      CORBA::ULong maximum,
+>         -:  129:      CORBA::ULong length,
+>         -:  130:      value_type * data,
+>         -:  131:      CORBA::Boolean release)
+>         -:  132:    : maximum_(maximum)
+>         -:  133:    , length_(length)
+>         -:  134:    , buffer_(data)
+>     #####:  135:    , release_(release)
+>         -:  136:  {
+>     #####:  137:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEEC2EjjPfb:
+154c320
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+---
+> _ZN3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEEC2EjjPeb:
+167c333
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+---
+> _ZN3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEEC2EjjPlb:
+180c346
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+---
+> _ZN3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEEC2EjjPib:
+193c359
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2EjjPS4_b:
+---
+> _ZN3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEEC2EjjPsb:
+219,243c385,396
+<         -:  138:
+<         -:  139:  /// Copy constructor
+<     #####:  140:  generic_sequence(generic_sequence const & rhs)
+<         -:  141:    : maximum_(0)
+<         -:  142:    , length_(0)
+<         -:  143:    , buffer_(0)
+<     #####:  144:    , release_(false)
+<         -:  145:  {
+<     #####:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+<         -:  147:    {
+<     #####:  148:      maximum_ = rhs.maximum_;
+<     #####:  149:      length_ = rhs.length_;
+<     #####:  150:      return;
+<         -:  151:    }
+<     #####:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+<     #####:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+<         -:  154:                         true);
+<     #####:  155:    element_traits::initialize_range(
+<     #####:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+<     #####:  157:    element_traits::copy_range(
+<         -:  158:        rhs.buffer_,
+<     #####:  159:        rhs.buffer_ + rhs.length_,
+<     #####:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+<     #####:  161:    swap(tmp);
+<         -:  162:  }
+---
+> _ZN3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEEC2EjjPmb:
+>     #####:  127:  generic_sequence(
+>         -:  128:      CORBA::ULong maximum,
+>         -:  129:      CORBA::ULong length,
+>         -:  130:      value_type * data,
+>         -:  131:      CORBA::Boolean release)
+>         -:  132:    : maximum_(maximum)
+>         -:  133:    , length_(length)
+>         -:  134:    , buffer_(data)
+>     #####:  135:    , release_(release)
+>         -:  136:  {
+>     #####:  137:  }
+245,268c398,409
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2ERKS9_:
+<     #####:  140:  generic_sequence(generic_sequence const & rhs)
+<         -:  141:    : maximum_(0)
+<         -:  142:    , length_(0)
+<         -:  143:    , buffer_(0)
+<     #####:  144:    , release_(false)
+<         -:  145:  {
+<     #####:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+<         -:  147:    {
+<     #####:  148:      maximum_ = rhs.maximum_;
+<     #####:  149:      length_ = rhs.length_;
+<     #####:  150:      return;
+<         -:  151:    }
+<     #####:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+<     #####:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+<         -:  154:                         true);
+<     #####:  155:    element_traits::initialize_range(
+<     #####:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+<     #####:  157:    element_traits::copy_range(
+<         -:  158:        rhs.buffer_,
+<     #####:  159:        rhs.buffer_ + rhs.length_,
+<     #####:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+<     #####:  161:    swap(tmp);
+<         -:  162:  }
+---
+> _ZN3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEEC2EjjPjb:
+>     #####:  127:  generic_sequence(
+>         -:  128:      CORBA::ULong maximum,
+>         -:  129:      CORBA::ULong length,
+>         -:  130:      value_type * data,
+>         -:  131:      CORBA::Boolean release)
+>         -:  132:    : maximum_(maximum)
+>         -:  133:    , length_(length)
+>         -:  134:    , buffer_(data)
+>     #####:  135:    , release_(release)
+>         -:  136:  {
+>     #####:  137:  }
+270,293c411,422
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEC2ERKS9_:
+<     #####:  140:  generic_sequence(generic_sequence const & rhs)
+<         -:  141:    : maximum_(0)
+<         -:  142:    , length_(0)
+<         -:  143:    , buffer_(0)
+<     #####:  144:    , release_(false)
+<         -:  145:  {
+<     #####:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+<         -:  147:    {
+<     #####:  148:      maximum_ = rhs.maximum_;
+<     #####:  149:      length_ = rhs.length_;
+<     #####:  150:      return;
+<         -:  151:    }
+<     #####:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+<     #####:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+<         -:  154:                         true);
+<     #####:  155:    element_traits::initialize_range(
+<     #####:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+<     #####:  157:    element_traits::copy_range(
+<         -:  158:        rhs.buffer_,
+<     #####:  159:        rhs.buffer_ + rhs.length_,
+<     #####:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+<     #####:  161:    swap(tmp);
+<         -:  162:  }
+---
+> _ZN3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEEC2EjjPtb:
+>     #####:  127:  generic_sequence(
+>         -:  128:      CORBA::ULong maximum,
+>         -:  129:      CORBA::ULong length,
+>         -:  130:      value_type * data,
+>         -:  131:      CORBA::Boolean release)
+>         -:  132:    : maximum_(maximum)
+>         -:  133:    , length_(length)
+>         -:  134:    , buffer_(data)
+>     #####:  135:    , release_(release)
+>         -:  136:  {
+>     #####:  137:  }
+295,296c424,452
+< _ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_EC2ERKS7_:
+<     #####:  140:  generic_sequence(generic_sequence const & rhs)
+---
+> _ZN3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEEC2EjjPwb:
+>     #####:  127:  generic_sequence(
+>         -:  128:      CORBA::ULong maximum,
+>         -:  129:      CORBA::ULong length,
+>         -:  130:      value_type * data,
+>         -:  131:      CORBA::Boolean release)
+>         -:  132:    : maximum_(maximum)
+>         -:  133:    , length_(length)
+>         -:  134:    , buffer_(data)
+>     #####:  135:    , release_(release)
+>         -:  136:  {
+>     #####:  137:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_EC2EjjPS2_b:
+>     #####:  127:  generic_sequence(
+>         -:  128:      CORBA::ULong maximum,
+>         -:  129:      CORBA::ULong length,
+>         -:  130:      value_type * data,
+>         -:  131:      CORBA::Boolean release)
+>         -:  132:    : maximum_(maximum)
+>         -:  133:    , length_(length)
+>         -:  134:    , buffer_(data)
+>     #####:  135:    , release_(release)
+>         -:  136:  {
+>     #####:  137:  }
+> ------------------
+>         -:  138:
+>         -:  139:  /// Copy constructor
+>         -:  140:  generic_sequence(generic_sequence const & rhs)
+300c456
+<     #####:  144:    , release_(false)
+---
+>         -:  144:    , release_(false)
+302c458
+<     #####:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+---
+>         -:  146:    if (rhs.maximum_ == 0 || rhs.buffer_ == 0)
+304,306c460,462
+<     #####:  148:      maximum_ = rhs.maximum_;
+<     #####:  149:      length_ = rhs.length_;
+<     #####:  150:      return;
+---
+>         -:  148:      maximum_ = rhs.maximum_;
+>         -:  149:      length_ = rhs.length_;
+>         -:  150:      return;
+308,309c464,465
+<     #####:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+<     #####:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+---
+>         -:  152:    generic_sequence tmp(rhs.maximum_, rhs.length_,
+>         -:  153:                         allocation_traits::allocbuf_noinit(rhs.maximum_),
+311,313c467,469
+<     #####:  155:    element_traits::initialize_range(
+<     #####:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+<     #####:  157:    element_traits::copy_range(
+---
+>         -:  155:    element_traits::initialize_range(
+>         -:  156:        tmp.buffer_ + tmp.length_, tmp.buffer_ + tmp.maximum_);
+>         -:  157:    element_traits::copy_range(
+315,317c471,473
+<     #####:  159:        rhs.buffer_ + rhs.length_,
+<     #####:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+<     #####:  161:    swap(tmp);
+---
+>         -:  159:        rhs.buffer_ + rhs.length_,
+>         -:  160:        ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  161:    swap(tmp);
+319d474
+< ------------------
+322,330c477
+<     #####:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+<         -:  166:  {
+<     #####:  167:    generic_sequence tmp(rhs);
+<     #####:  168:    swap(tmp);
+<     #####:  169:    return * this;
+<         -:  170:  }
+< ------------------
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEaSERKS9_:
+<     #####:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+---
+>         -:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+332,334c479,481
+<     #####:  167:    generic_sequence tmp(rhs);
+<     #####:  168:    swap(tmp);
+<     #####:  169:    return * this;
+---
+>         -:  167:    generic_sequence tmp(rhs);
+>         -:  168:    swap(tmp);
+>         -:  169:    return * this;
+335a483,491
+>         -:  171:
+>         -:  172:  /// Destructor.
+>     #####:  173:  ~generic_sequence()
+>         -:  174:  {
+>     #####:  175:    if (release_)
+>         -:  176:    {
+>     #####:  177:      freebuf(buffer_);
+>         -:  178:    }
+>     #####:  179:  }
+337,343c493,500
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEaSERKS9_:
+<     #####:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+<         -:  166:  {
+<     #####:  167:    generic_sequence tmp(rhs);
+<     #####:  168:    swap(tmp);
+<     #####:  169:    return * this;
+<         -:  170:  }
+---
+> _ZN3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEED2Ev:
+>     #####:  173:  ~generic_sequence()
+>         -:  174:  {
+>     #####:  175:    if (release_)
+>         -:  176:    {
+>     #####:  177:      freebuf(buffer_);
+>         -:  178:    }
+>     #####:  179:  }
+345,351c502,509
+< _ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_EaSERKS7_:
+<     #####:  165:  generic_sequence & operator=(generic_sequence const & rhs)
+<         -:  166:  {
+<     #####:  167:    generic_sequence tmp(rhs);
+<     #####:  168:    swap(tmp);
+<     #####:  169:    return * this;
+<         -:  170:  }
+---
+> _ZN3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEED2Ev:
+>     #####:  173:  ~generic_sequence()
+>         -:  174:  {
+>     #####:  175:    if (release_)
+>         -:  176:    {
+>     #####:  177:      freebuf(buffer_);
+>         -:  178:    }
+>     #####:  179:  }
+353,354c511
+<         -:  171:
+<         -:  172:  /// Destructor.
+---
+> _ZN3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEED2Ev:
+363c520
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+---
+> _ZN3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEED2Ev:
+372c529
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+---
+> _ZN3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEED2Ev:
+381c538
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+---
+> _ZN3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEED2Ev:
+390c547
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+---
+> _ZN3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEED2Ev:
+399c556
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEED2Ev:
+---
+> _ZN3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEED2Ev:
+416a574,618
+> _ZN3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEED2Ev:
+>     #####:  173:  ~generic_sequence()
+>         -:  174:  {
+>     #####:  175:    if (release_)
+>         -:  176:    {
+>     #####:  177:      freebuf(buffer_);
+>         -:  178:    }
+>     #####:  179:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEED2Ev:
+>     #####:  173:  ~generic_sequence()
+>         -:  174:  {
+>     #####:  175:    if (release_)
+>         -:  176:    {
+>     #####:  177:      freebuf(buffer_);
+>         -:  178:    }
+>     #####:  179:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEED2Ev:
+>     #####:  173:  ~generic_sequence()
+>         -:  174:  {
+>     #####:  175:    if (release_)
+>         -:  176:    {
+>     #####:  177:      freebuf(buffer_);
+>         -:  178:    }
+>     #####:  179:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEED2Ev:
+>     #####:  173:  ~generic_sequence()
+>         -:  174:  {
+>     #####:  175:    if (release_)
+>         -:  176:    {
+>     #####:  177:      freebuf(buffer_);
+>         -:  178:    }
+>     #####:  179:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_ED2Ev:
+>     #####:  173:  ~generic_sequence()
+>         -:  174:  {
+>     #####:  175:    if (release_)
+>         -:  176:    {
+>     #####:  177:      freebuf(buffer_);
+>         -:  178:    }
+>     #####:  179:  }
+> ------------------
+425c627
+<         -:  188:  inline CORBA::Boolean release() const
+---
+>     #####:  188:  inline CORBA::Boolean release() const
+427c629
+<         -:  190:    return release_;
+---
+>     #####:  190:    return release_;
+428a631,643
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_E7releaseEv:
+>     #####:  188:  inline CORBA::Boolean release() const
+>         -:  189:  {
+>     #####:  190:    return release_;
+>         -:  191:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_E7releaseEv:
+>     #####:  188:  inline CORBA::Boolean release() const
+>         -:  189:  {
+>     #####:  190:    return release_;
+>         -:  191:  }
+> ------------------
+436c651,669
+< _ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+---
+> _ZNK3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEE6lengthEv:
+>     #####:  194:  inline CORBA::ULong length() const
+>         -:  195:  {
+>     #####:  196:    return length_;
+>         -:  197:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEE6lengthEv:
+>     #####:  194:  inline CORBA::ULong length() const
+>         -:  195:  {
+>     #####:  196:    return length_;
+>         -:  197:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEE6lengthEv:
+>     #####:  194:  inline CORBA::ULong length() const
+>         -:  195:  {
+>     #####:  196:    return length_;
+>         -:  197:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEE6lengthEv:
+442c675
+< _ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+---
+> _ZNK3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEE6lengthEv:
+448c681
+< _ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+---
+> _ZNK3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEE6lengthEv:
+454c687
+< _ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+---
+> _ZNK3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEE6lengthEv:
+460c693,729
+< _ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEv:
+---
+> _ZNK3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEE6lengthEv:
+>     #####:  194:  inline CORBA::ULong length() const
+>         -:  195:  {
+>     #####:  196:    return length_;
+>         -:  197:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_E6lengthEv:
+>     #####:  194:  inline CORBA::ULong length() const
+>         -:  195:  {
+>     #####:  196:    return length_;
+>         -:  197:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEE6lengthEv:
+>     #####:  194:  inline CORBA::ULong length() const
+>         -:  195:  {
+>     #####:  196:    return length_;
+>         -:  197:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEE6lengthEv:
+>     #####:  194:  inline CORBA::ULong length() const
+>         -:  195:  {
+>     #####:  196:    return length_;
+>         -:  197:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEE6lengthEv:
+>     #####:  194:  inline CORBA::ULong length() const
+>         -:  195:  {
+>     #####:  196:    return length_;
+>         -:  197:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEE6lengthEv:
+>     #####:  194:  inline CORBA::ULong length() const
+>         -:  195:  {
+>     #####:  196:    return length_;
+>         -:  197:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_E6lengthEv:
+517c786
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEj:
+---
+> _ZN3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEE6lengthEj:
+567c836
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEj:
+---
+> _ZN3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEE6lengthEj:
+617c886
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEj:
+---
+> _ZN3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEE6lengthEj:
+667c936,1436
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE6lengthEj:
+---
+> _ZN3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEE6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEE6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEE6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEE6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEE6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_E6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEE6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEE6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEE6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEE6lengthEj:
+>     #####:  200:  void length(CORBA::ULong length)
+>         -:  201:  {
+>     #####:  202:    if (length <= maximum_)
+>         -:  203:    {
+>     #####:  204:      if (buffer_ == 0)
+>         -:  205:        {
+>     #####:  206:          buffer_ = allocbuf(maximum_);
+>     #####:  207:          release_ = true;
+>     #####:  208:          length_ = length;
+>         -:  209:          // Since allocbuf returns completely initialized buffer
+>         -:  210:          // no further actions are required.
+>     #####:  211:          return;
+>         -:  212:        }
+>         -:  213:
+>         -:  214:      // When sequence doesn't own a buffer it's not allowed
+>         -:  215:      // to change it in any way.
+>     #####:  216:      if (length < length_ && release_)
+>         -:  217:      {
+>         -:  218:        // TODO This code does not provide the strong-exception
+>         -:  219:        //      guarantee, but it does provide the weak-exception
+>         -:  220:        //      guarantee.  The problem would appear when
+>         -:  221:        //      initialize_range() raises an exception after several
+>         -:  222:        //      elements have been modified.  One could argue that
+>         -:  223:        //      this problem is irrelevant, as the elements already
+>         -:  224:        //      modified are unreachable to conforming applications.
+>     #####:  225:        element_traits::release_range(
+>     #####:  226:          buffer_ + length, buffer_ + length_);
+>     #####:  227:        element_traits::initialize_range(
+>     #####:  228:          buffer_ + length, buffer_ + length_);
+>         -:  229:      }
+>     #####:  230:      length_ = length;
+>     #####:  231:      return;
+>         -:  232:    }
+>         -:  233:
+>     #####:  234:    generic_sequence tmp(length, length,
+>         -:  235:                         allocation_traits::allocbuf_noinit(length),
+>         -:  236:                         true);
+>         -:  237:    // First do initialize_range. If it will throw then tmp will be
+>         -:  238:    // destructed but *this will remain unchanged.
+>     #####:  239:    element_traits::initialize_range(
+>     #####:  240:        tmp.buffer_ + length_, tmp.buffer_ + length);
+>     #####:  241:    element_traits::copy_swap_range(
+>         -:  242:      buffer_,
+>     #####:  243:      buffer_ + length_,
+>     #####:  244:      ACE_make_checked_array_iterator (tmp.buffer_, tmp.length_));
+>         -:  245:
+>     #####:  246:    swap(tmp);
+>         -:  247:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_E6lengthEj:
+725c1494
+< _ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+---
+> _ZNK3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_EixEj:
+732c1501
+< _ZNK3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+---
+> _ZNK3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_EixEj:
+741c1510
+<     #####:  257:  value_type & operator[](CORBA::ULong i)
+---
+>         -:  257:  value_type & operator[](CORBA::ULong i)
+743,744c1512,1513
+<     #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+<     #####:  260:    return buffer_[i];
+---
+>         -:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+>         -:  260:    return buffer_[i];
+746,774d1514
+< ------------------
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+<     #####:  257:  value_type & operator[](CORBA::ULong i)
+<         -:  258:  {
+<     #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+<     #####:  260:    return buffer_[i];
+<         -:  261:  }
+< ------------------
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+<     #####:  257:  value_type & operator[](CORBA::ULong i)
+<         -:  258:  {
+<     #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+<     #####:  260:    return buffer_[i];
+<         -:  261:  }
+< ------------------
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+<     #####:  257:  value_type & operator[](CORBA::ULong i)
+<         -:  258:  {
+<     #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+<     #####:  260:    return buffer_[i];
+<         -:  261:  }
+< ------------------
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEEixEj:
+<     #####:  257:  value_type & operator[](CORBA::ULong i)
+<         -:  258:  {
+<     #####:  259:    range::check(i, length_, maximum_, "operator[]() non-const");
+<     #####:  260:    return buffer_[i];
+<         -:  261:  }
+< ------------------
+797c1537
+<         -:  284:  value_type const * get_buffer() const
+---
+>     #####:  284:  value_type const * get_buffer() const
+799c1539
+<         -:  286:    if (buffer_ == 0)
+---
+>     #####:  286:    if (buffer_ == 0)
+801,802c1541,1542
+<         -:  288:      buffer_ = allocbuf(maximum_);
+<         -:  289:      release_ = true;
+---
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+804c1544
+<         -:  291:    return buffer_;
+---
+>     #####:  291:    return buffer_;
+805a1546,1678
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+> _ZNK3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEE10get_bufferEv:
+>     #####:  284:  value_type const * get_buffer() const
+>         -:  285:  {
+>     #####:  286:    if (buffer_ == 0)
+>         -:  287:    {
+>     #####:  288:      buffer_ = allocbuf(maximum_);
+>     #####:  289:      release_ = true;
+>         -:  290:    }
+>     #####:  291:    return buffer_;
+>         -:  292:  }
+> ------------------
+835c1708,1789
+<         -:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+---
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+837c1791
+<         -:  324:    if (orphan && !release_)
+---
+>     #####:  324:    if (orphan && !release_)
+839c1793
+<         -:  326:      return 0;
+---
+>     #####:  326:      return 0;
+841c1795
+<         -:  328:    if (buffer_ == 0)
+---
+>     #####:  328:    if (buffer_ == 0)
+843,844c1797,1798
+<         -:  330:      buffer_ = allocbuf(maximum_);
+<         -:  331:      if (!orphan)
+---
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+846c1800
+<         -:  333:          release_ = true;
+---
+>     #####:  333:          release_ = true;
+849c1803
+<         -:  336:    if (!orphan)
+---
+>     #####:  336:    if (!orphan)
+851c1805
+<         -:  338:      return buffer_;
+---
+>     #####:  338:      return buffer_;
+854,856c1808,1810
+<         -:  341:    generic_sequence tmp;
+<         -:  342:    swap(tmp);
+<         -:  343:    tmp.release_ = false;
+---
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+858c1812
+<         -:  345:    return tmp.buffer_;
+---
+>     #####:  345:    return tmp.buffer_;
+859a1814,2111
+> ------------------
+> _ZN3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_E10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEE10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_E10get_bufferEb:
+>     #####:  322:  value_type * get_buffer(CORBA::Boolean orphan)
+>         -:  323:  {
+>     #####:  324:    if (orphan && !release_)
+>         -:  325:    {
+>     #####:  326:      return 0;
+>         -:  327:    }
+>     #####:  328:    if (buffer_ == 0)
+>         -:  329:    {
+>     #####:  330:      buffer_ = allocbuf(maximum_);
+>     #####:  331:      if (!orphan)
+>         -:  332:        {
+>     #####:  333:          release_ = true;
+>         -:  334:        }
+>         -:  335:    }
+>     #####:  336:    if (!orphan)
+>         -:  337:    {
+>     #####:  338:      return buffer_;
+>         -:  339:    }
+>         -:  340:
+>     #####:  341:    generic_sequence tmp;
+>     #####:  342:    swap(tmp);
+>     #####:  343:    tmp.release_ = false;
+>         -:  344:
+>     #####:  345:    return tmp.buffer_;
+>         -:  346:  }
+> ------------------
+869c2121,2148
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+---
+> _ZN3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEE4swapERS6_:
+>     #####:  348:  void swap(generic_sequence & rhs) throw()
+>         -:  349:  {
+>     #####:  350:    std::swap(maximum_, rhs.maximum_);
+>     #####:  351:    std::swap(length_, rhs.length_);
+>     #####:  352:    std::swap(buffer_, rhs.buffer_);
+>     #####:  353:    std::swap(release_, rhs.release_);
+>     #####:  354:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEE4swapERS6_:
+>     #####:  348:  void swap(generic_sequence & rhs) throw()
+>         -:  349:  {
+>     #####:  350:    std::swap(maximum_, rhs.maximum_);
+>     #####:  351:    std::swap(length_, rhs.length_);
+>     #####:  352:    std::swap(buffer_, rhs.buffer_);
+>     #####:  353:    std::swap(release_, rhs.release_);
+>     #####:  354:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEE4swapERS6_:
+>     #####:  348:  void swap(generic_sequence & rhs) throw()
+>         -:  349:  {
+>     #####:  350:    std::swap(maximum_, rhs.maximum_);
+>     #####:  351:    std::swap(length_, rhs.length_);
+>     #####:  352:    std::swap(buffer_, rhs.buffer_);
+>     #####:  353:    std::swap(release_, rhs.release_);
+>     #####:  354:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEE4swapERS6_:
+878c2157
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+---
+> _ZN3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEE4swapERS6_:
+887c2166
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+---
+> _ZN3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEE4swapERS6_:
+896c2175
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+---
+> _ZN3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEE4swapERS6_:
+905c2184
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE4swapERS9_:
+---
+> _ZN3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEE4swapERS6_:
+922a2202,2246
+> _ZN3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEE4swapERS6_:
+>     #####:  348:  void swap(generic_sequence & rhs) throw()
+>         -:  349:  {
+>     #####:  350:    std::swap(maximum_, rhs.maximum_);
+>     #####:  351:    std::swap(length_, rhs.length_);
+>     #####:  352:    std::swap(buffer_, rhs.buffer_);
+>     #####:  353:    std::swap(release_, rhs.release_);
+>     #####:  354:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEE4swapERS6_:
+>     #####:  348:  void swap(generic_sequence & rhs) throw()
+>         -:  349:  {
+>     #####:  350:    std::swap(maximum_, rhs.maximum_);
+>     #####:  351:    std::swap(length_, rhs.length_);
+>     #####:  352:    std::swap(buffer_, rhs.buffer_);
+>     #####:  353:    std::swap(release_, rhs.release_);
+>     #####:  354:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEE4swapERS6_:
+>     #####:  348:  void swap(generic_sequence & rhs) throw()
+>         -:  349:  {
+>     #####:  350:    std::swap(maximum_, rhs.maximum_);
+>     #####:  351:    std::swap(length_, rhs.length_);
+>     #####:  352:    std::swap(buffer_, rhs.buffer_);
+>     #####:  353:    std::swap(release_, rhs.release_);
+>     #####:  354:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEE4swapERS6_:
+>     #####:  348:  void swap(generic_sequence & rhs) throw()
+>         -:  349:  {
+>     #####:  350:    std::swap(maximum_, rhs.maximum_);
+>     #####:  351:    std::swap(length_, rhs.length_);
+>     #####:  352:    std::swap(buffer_, rhs.buffer_);
+>     #####:  353:    std::swap(release_, rhs.release_);
+>     #####:  354:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_E4swapERS7_:
+>     #####:  348:  void swap(generic_sequence & rhs) throw()
+>         -:  349:  {
+>     #####:  350:    std::swap(maximum_, rhs.maximum_);
+>     #####:  351:    std::swap(length_, rhs.length_);
+>     #####:  352:    std::swap(buffer_, rhs.buffer_);
+>     #####:  353:    std::swap(release_, rhs.release_);
+>     #####:  354:  }
+> ------------------
+929c2253,2265
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE8allocbufEj:
+---
+> _ZN3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEE8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEE8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEE8allocbufEj:
+935c2271
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE8allocbufEj:
+---
+> _ZN3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEE8allocbufEj:
+941c2277
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE8allocbufEj:
+---
+> _ZN3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEE8allocbufEj:
+947c2283,2331
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE8allocbufEj:
+---
+> _ZN3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEE8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEE8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEE8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPcNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIcLb1EEELb1EEES5_E8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEE8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEE8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEE8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEE8allocbufEj:
+>     #####:  356:  static value_type * allocbuf(CORBA::ULong maximum)
+>         -:  357:  {
+>     #####:  358:    return allocation_traits::allocbuf(maximum);
+>         -:  359:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_E8allocbufEj:
+959c2343,2355
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+---
+> _ZN3TAO7details16generic_sequenceIbNS0_33unbounded_value_allocation_traitsIbLb1EEENS0_12value_traitsIbLb1EEEE7freebufEPb:
+>     #####:  361:  static void freebuf(value_type * buffer)
+>         -:  362:  {
+>     #####:  363:    allocation_traits::freebuf(buffer);
+>     #####:  364:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIcNS0_33unbounded_value_allocation_traitsIcLb1EEENS0_12value_traitsIcLb1EEEE7freebufEPc:
+>     #####:  361:  static void freebuf(value_type * buffer)
+>         -:  362:  {
+>     #####:  363:    allocation_traits::freebuf(buffer);
+>     #####:  364:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIdNS0_33unbounded_value_allocation_traitsIdLb1EEENS0_12value_traitsIdLb1EEEE7freebufEPd:
+965c2361
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+---
+> _ZN3TAO7details16generic_sequenceIfNS0_33unbounded_value_allocation_traitsIfLb1EEENS0_12value_traitsIfLb1EEEE7freebufEPf:
+971c2367
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+---
+> _ZN3TAO7details16generic_sequenceIeNS0_33unbounded_value_allocation_traitsIeLb1EEENS0_12value_traitsIeLb1EEEE7freebufEPe:
+977c2373
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS16TransportLocatorENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+---
+> _ZN3TAO7details16generic_sequenceIlNS0_33unbounded_value_allocation_traitsIlLb1EEENS0_12value_traitsIlLb1EEEE7freebufEPl:
+983c2379,2385
+< _ZN3TAO7details16generic_sequenceIN7OpenDDS4DCPS6GUID_tENS0_33unbounded_value_allocation_traitsIS4_Lb1EEENS0_12value_traitsIS4_Lb1EEEE7freebufEPS4_:
+---
+> _ZN3TAO7details16generic_sequenceIiNS0_33unbounded_value_allocation_traitsIiLb1EEENS0_12value_traitsIiLb1EEEE7freebufEPi:
+>     #####:  361:  static void freebuf(value_type * buffer)
+>         -:  362:  {
+>     #####:  363:    allocation_traits::freebuf(buffer);
+>     #####:  364:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIsNS0_33unbounded_value_allocation_traitsIsLb1EEENS0_12value_traitsIsLb1EEEE7freebufEPs:
+989a2392,2421
+>     #####:  361:  static void freebuf(value_type * buffer)
+>         -:  362:  {
+>     #####:  363:    allocation_traits::freebuf(buffer);
+>     #####:  364:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceImNS0_33unbounded_value_allocation_traitsImLb1EEENS0_12value_traitsImLb1EEEE7freebufEPm:
+>     #####:  361:  static void freebuf(value_type * buffer)
+>         -:  362:  {
+>     #####:  363:    allocation_traits::freebuf(buffer);
+>     #####:  364:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIjNS0_33unbounded_value_allocation_traitsIjLb1EEENS0_12value_traitsIjLb1EEEE7freebufEPj:
+>     #####:  361:  static void freebuf(value_type * buffer)
+>         -:  362:  {
+>     #####:  363:    allocation_traits::freebuf(buffer);
+>     #####:  364:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceItNS0_33unbounded_value_allocation_traitsItLb1EEENS0_12value_traitsItLb1EEEE7freebufEPt:
+>     #####:  361:  static void freebuf(value_type * buffer)
+>         -:  362:  {
+>     #####:  363:    allocation_traits::freebuf(buffer);
+>     #####:  364:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIwNS0_33unbounded_value_allocation_traitsIwLb1EEENS0_12value_traitsIwLb1EEEE7freebufEPw:
+>     #####:  361:  static void freebuf(value_type * buffer)
+>         -:  362:  {
+>     #####:  363:    allocation_traits::freebuf(buffer);
+>     #####:  364:  }
+> ------------------
+> _ZN3TAO7details16generic_sequenceIPwNS0_37unbounded_reference_allocation_traitsIS2_NS0_13string_traitsIwLb1EEELb1EEES5_E7freebufEPS2_:

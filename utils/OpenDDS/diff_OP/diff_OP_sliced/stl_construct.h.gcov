@@ -1,0 +1,254 @@
+76,77c76,77
+<        5*:   74:    _Construct(_T1* __p, _Args&&... __args)
+<        5*:   75:    { ::new(static_cast<void*>(__p)) _T1(std::forward<_Args>(__args)...); }
+---
+>     #####:   74:    _Construct(_T1* __p, _Args&&... __args)
+>     #####:   75:    { ::new(static_cast<void*>(__p)) _T1(std::forward<_Args>(__args)...); }
+88,89c88,89
+<         3:   74:    _Construct(_T1* __p, _Args&&... __args)
+<         3:   75:    { ::new(static_cast<void*>(__p)) _T1(std::forward<_Args>(__args)...); }
+---
+>     #####:   74:    _Construct(_T1* __p, _Args&&... __args)
+>     #####:   75:    { ::new(static_cast<void*>(__p)) _T1(std::forward<_Args>(__args)...); }
+116,117c116,117
+<         2:   74:    _Construct(_T1* __p, _Args&&... __args)
+<         2:   75:    { ::new(static_cast<void*>(__p)) _T1(std::forward<_Args>(__args)...); }
+---
+>     #####:   74:    _Construct(_T1* __p, _Args&&... __args)
+>     #####:   75:    { ::new(static_cast<void*>(__p)) _T1(std::forward<_Args>(__args)...); }
+140,141c140,141
+<      229*:   97:    _Destroy(_Tp* __pointer)
+<      229*:   98:    { __pointer->~_Tp(); }
+---
+>      134*:   97:    _Destroy(_Tp* __pointer)
+>      134*:   98:    { __pointer->~_Tp(); }
+152,153c152,153
+<         9:   97:    _Destroy(_Tp* __pointer)
+<         9:   98:    { __pointer->~_Tp(); }
+---
+>     #####:   97:    _Destroy(_Tp* __pointer)
+>     #####:   98:    { __pointer->~_Tp(); }
+156,157c156,157
+<        42:   97:    _Destroy(_Tp* __pointer)
+<        42:   98:    { __pointer->~_Tp(); }
+---
+>     #####:   97:    _Destroy(_Tp* __pointer)
+>     #####:   98:    { __pointer->~_Tp(); }
+164,165c164,165
+<       178:   97:    _Destroy(_Tp* __pointer)
+<       178:   98:    { __pointer->~_Tp(); }
+---
+>       134:   97:    _Destroy(_Tp* __pointer)
+>       134:   98:    { __pointer->~_Tp(); }
+181c181
+<      627*:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>      357*:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+183,185c183,185
+<      627*:  107:	  for (; __first != __last; ++__first)
+<      229*:  108:	    std::_Destroy(std::__addressof(*__first));
+<      398*:  109:	}
+---
+>      357*:  107:	  for (; __first != __last; ++__first)
+>      134*:  108:	    std::_Destroy(std::__addressof(*__first));
+>      223*:  109:	}
+188c188
+<         8:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>     #####:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+190c190
+<        8*:  107:	  for (; __first != __last; ++__first)
+---
+>     #####:  107:	  for (; __first != __last; ++__first)
+192c192
+<         8:  109:	}
+---
+>     #####:  109:	}
+202c202
+<        18:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>     #####:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+204,206c204,206
+<        18:  107:	  for (; __first != __last; ++__first)
+<         9:  108:	    std::_Destroy(std::__addressof(*__first));
+<         9:  109:	}
+---
+>     #####:  107:	  for (; __first != __last; ++__first)
+>     #####:  108:	    std::_Destroy(std::__addressof(*__first));
+>     #####:  109:	}
+209c209
+<       126:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>     #####:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+211,213c211,213
+<       126:  107:	  for (; __first != __last; ++__first)
+<        42:  108:	    std::_Destroy(std::__addressof(*__first));
+<        84:  109:	}
+---
+>     #####:  107:	  for (; __first != __last; ++__first)
+>     #####:  108:	    std::_Destroy(std::__addressof(*__first));
+>     #####:  109:	}
+223c223
+<       475:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>       357:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+225,227c225,227
+<       475:  107:	  for (; __first != __last; ++__first)
+<       178:  108:	    std::_Destroy(std::__addressof(*__first));
+<       297:  109:	}
+---
+>       357:  107:	  for (; __first != __last; ++__first)
+>       134:  108:	    std::_Destroy(std::__addressof(*__first));
+>       223:  109:	}
+250c250
+<      214*:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+---
+>     #####:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+256c256
+<        64:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+---
+>     #####:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+262c262
+<       150:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+---
+>     #####:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+273c273
+<      612*:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>      223*:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+283,284c283,284
+<      612*:  137:	__destroy(__first, __last);
+<      612*:  138:    }
+---
+>      223*:  137:	__destroy(__first, __last);
+>      223*:  138:    }
+301c301
+<         8:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>     #####:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+311,312c311,312
+<         8:  137:	__destroy(__first, __last);
+<         8:  138:    }
+---
+>     #####:  137:	__destroy(__first, __last);
+>     #####:  138:    }
+329c329
+<         9:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>     #####:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+339,340c339,340
+<         9:  137:	__destroy(__first, __last);
+<         9:  138:    }
+---
+>     #####:  137:	__destroy(__first, __last);
+>     #####:  138:    }
+343c343
+<        84:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>     #####:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+353,354c353,354
+<        84:  137:	__destroy(__first, __last);
+<        84:  138:    }
+---
+>     #####:  137:	__destroy(__first, __last);
+>     #####:  138:    }
+357c357
+<        64:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>     #####:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+367,368c367,368
+<        64:  137:	__destroy(__first, __last);
+<        64:  138:    }
+---
+>     #####:  137:	__destroy(__first, __last);
+>     #####:  138:    }
+385c385
+<       297:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>       223:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+395,396c395,396
+<       297:  137:	__destroy(__first, __last);
+<       297:  138:    }
+---
+>       223:  137:	__destroy(__first, __last);
+>       223:  138:    }
+441c441
+<       150:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>     #####:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+451,452c451,452
+<       150:  137:	__destroy(__first, __last);
+<       150:  138:    }
+---
+>     #####:  137:	__destroy(__first, __last);
+>     #####:  138:    }
+518c518
+<      612*:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+---
+>      223*:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+521,522c521,522
+<      612*:  206:      _Destroy(__first, __last);
+<      612*:  207:    }
+---
+>      223*:  206:      _Destroy(__first, __last);
+>      223*:  207:    }
+532c532
+<         8:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+---
+>     #####:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+535,536c535,536
+<         8:  206:      _Destroy(__first, __last);
+<         8:  207:    }
+---
+>     #####:  206:      _Destroy(__first, __last);
+>     #####:  207:    }
+546c546
+<         9:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+---
+>     #####:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+549,550c549,550
+<         9:  206:      _Destroy(__first, __last);
+<         9:  207:    }
+---
+>     #####:  206:      _Destroy(__first, __last);
+>     #####:  207:    }
+553c553
+<        84:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+---
+>     #####:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+556,557c556,557
+<        84:  206:      _Destroy(__first, __last);
+<        84:  207:    }
+---
+>     #####:  206:      _Destroy(__first, __last);
+>     #####:  207:    }
+560c560
+<        64:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+---
+>     #####:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+563,564c563,564
+<        64:  206:      _Destroy(__first, __last);
+<        64:  207:    }
+---
+>     #####:  206:      _Destroy(__first, __last);
+>     #####:  207:    }
+574c574
+<       297:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+---
+>       223:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+577,578c577,578
+<       297:  206:      _Destroy(__first, __last);
+<       297:  207:    }
+---
+>       223:  206:      _Destroy(__first, __last);
+>       223:  207:    }
+602c602
+<       150:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+---
+>     #####:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+605,606c605,606
+<       150:  206:      _Destroy(__first, __last);
+<       150:  207:    }
+---
+>     #####:  206:      _Destroy(__first, __last);
+>     #####:  207:    }

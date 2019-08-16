@@ -1,0 +1,16 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+17c17
+<         6:   15:TAO_Seq_Var_Base_T<T>::TAO_Seq_Var_Base_T (
+---
+>     #####:   15:TAO_Seq_Var_Base_T<T>::TAO_Seq_Var_Base_T (
+19c19
+<        6*:   17:  : ptr_ (p.ptr_ ? new T (*p.ptr_) : 0)
+---
+>     #####:   17:  : ptr_ (p.ptr_ ? new T (*p.ptr_) : 0)
+21c21
+<         6:   19:}
+---
+>     #####:   19:}

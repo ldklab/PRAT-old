@@ -1,0 +1,24 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+102c102
+<        2*:   56:  inline static void copy_swap_range(
+---
+>     #####:   56:  inline static void copy_swap_range(
+105,106c105,106
+<        2*:   59:    std::swap_ranges(begin, end, dst);
+<        2*:   60:  }
+---
+>     #####:   59:    std::swap_ranges(begin, end, dst);
+>     #####:   60:  }
+123c123
+<         2:   56:  inline static void copy_swap_range(
+---
+>     #####:   56:  inline static void copy_swap_range(
+126,127c126,127
+<         2:   59:    std::swap_ranges(begin, end, dst);
+<         2:   60:  }
+---
+>     #####:   59:    std::swap_ranges(begin, end, dst);
+>     #####:   60:  }

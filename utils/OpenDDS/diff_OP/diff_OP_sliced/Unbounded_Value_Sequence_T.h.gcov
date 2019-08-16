@@ -1,0 +1,211 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:15
+64c64
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEv:
+---
+> _ZNK3TAO24unbounded_value_sequenceIbE6lengthEv:
+69c69
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEv:
+---
+> _ZNK3TAO24unbounded_value_sequenceIcE6lengthEv:
+74c74
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEv:
+---
+> _ZNK3TAO24unbounded_value_sequenceIdE6lengthEv:
+79c79
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEv:
+---
+> _ZNK3TAO24unbounded_value_sequenceIfE6lengthEv:
+84c84,119
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEv:
+---
+> _ZNK3TAO24unbounded_value_sequenceIeE6lengthEv:
+>     #####:   58:  inline CORBA::ULong length() const {
+>     #####:   59:    return impl_.length();
+>         -:   60:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIlE6lengthEv:
+>     #####:   58:  inline CORBA::ULong length() const {
+>     #####:   59:    return impl_.length();
+>         -:   60:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIiE6lengthEv:
+>     #####:   58:  inline CORBA::ULong length() const {
+>     #####:   59:    return impl_.length();
+>         -:   60:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIsE6lengthEv:
+>     #####:   58:  inline CORBA::ULong length() const {
+>     #####:   59:    return impl_.length();
+>         -:   60:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceImE6lengthEv:
+>     #####:   58:  inline CORBA::ULong length() const {
+>     #####:   59:    return impl_.length();
+>         -:   60:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIjE6lengthEv:
+>     #####:   58:  inline CORBA::ULong length() const {
+>     #####:   59:    return impl_.length();
+>         -:   60:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceItE6lengthEv:
+>     #####:   58:  inline CORBA::ULong length() const {
+>     #####:   59:    return impl_.length();
+>         -:   60:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIwE6lengthEv:
+93c128
+< _ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEj:
+---
+> _ZN3TAO24unbounded_value_sequenceIbE6lengthEj:
+98c133
+< _ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEj:
+---
+> _ZN3TAO24unbounded_value_sequenceIcE6lengthEj:
+103c138
+< _ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEj:
+---
+> _ZN3TAO24unbounded_value_sequenceIdE6lengthEj:
+108c143
+< _ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEj:
+---
+> _ZN3TAO24unbounded_value_sequenceIfE6lengthEj:
+113,115c148,151
+<     #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+<     #####:   65:    return impl_[i];
+<         -:   66:  }
+---
+> _ZN3TAO24unbounded_value_sequenceIeE6lengthEj:
+>     #####:   61:  inline void length(CORBA::ULong length) {
+>     #####:   62:    impl_.length(length);
+>     #####:   63:  }
+117,120c153,156
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEEixEj:
+<     #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+<     #####:   65:    return impl_[i];
+<         -:   66:  }
+---
+> _ZN3TAO24unbounded_value_sequenceIlE6lengthEj:
+>     #####:   61:  inline void length(CORBA::ULong length) {
+>     #####:   62:    impl_.length(length);
+>     #####:   63:  }
+122,125c158,186
+< _ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEEixEj:
+<     #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+<     #####:   65:    return impl_[i];
+<         -:   66:  }
+---
+> _ZN3TAO24unbounded_value_sequenceIiE6lengthEj:
+>     #####:   61:  inline void length(CORBA::ULong length) {
+>     #####:   62:    impl_.length(length);
+>     #####:   63:  }
+> ------------------
+> _ZN3TAO24unbounded_value_sequenceIsE6lengthEj:
+>     #####:   61:  inline void length(CORBA::ULong length) {
+>     #####:   62:    impl_.length(length);
+>     #####:   63:  }
+> ------------------
+> _ZN3TAO24unbounded_value_sequenceImE6lengthEj:
+>     #####:   61:  inline void length(CORBA::ULong length) {
+>     #####:   62:    impl_.length(length);
+>     #####:   63:  }
+> ------------------
+> _ZN3TAO24unbounded_value_sequenceIjE6lengthEj:
+>     #####:   61:  inline void length(CORBA::ULong length) {
+>     #####:   62:    impl_.length(length);
+>     #####:   63:  }
+> ------------------
+> _ZN3TAO24unbounded_value_sequenceItE6lengthEj:
+>     #####:   61:  inline void length(CORBA::ULong length) {
+>     #####:   62:    impl_.length(length);
+>     #####:   63:  }
+> ------------------
+> _ZN3TAO24unbounded_value_sequenceIwE6lengthEj:
+>     #####:   61:  inline void length(CORBA::ULong length) {
+>     #####:   62:    impl_.length(length);
+>     #####:   63:  }
+127,128c188,192
+<     #####:   67:  inline value_type & operator[](CORBA::ULong i) {
+<     #####:   68:    return impl_[i];
+---
+>         -:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+>         -:   65:    return impl_[i];
+>         -:   66:  }
+>         -:   67:  inline value_type & operator[](CORBA::ULong i) {
+>         -:   68:    return impl_[i];
+137,138c201,212
+<         -:   77:  inline value_type const * get_buffer() const {
+<         -:   78:    return impl_.get_buffer();
+---
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIbE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIcE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+140,141c214,266
+<         -:   80:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
+<         -:   81:    return impl_.get_buffer(orphan);
+---
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIdE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIfE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIeE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIlE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIiE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIsE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceImE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIjE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceItE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+> _ZNK3TAO24unbounded_value_sequenceIwE10get_bufferEv:
+>     #####:   77:  inline value_type const * get_buffer() const {
+>     #####:   78:    return impl_.get_buffer();
+>         -:   79:  }
+> ------------------
+>     #####:   80:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
+>     #####:   81:    return impl_.get_buffer(orphan);

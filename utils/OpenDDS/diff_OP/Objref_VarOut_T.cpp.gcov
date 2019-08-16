@@ -1,0 +1,214 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+15c15
+<       99*:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+---
+>     #####:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+19c19
+<       99*:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+---
+>     #####:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+21c21
+<       99*:   19:}
+---
+>     #####:   19:}
+42c42
+<        36:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+---
+>     #####:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+46c46
+<        36:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+---
+>     #####:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+48c48
+<        36:   19:}
+---
+>     #####:   19:}
+51c51
+<        50:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+---
+>     #####:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+55c55
+<        50:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+---
+>     #####:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+57c57
+<        50:   19:}
+---
+>     #####:   19:}
+69c69
+<         2:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+---
+>     #####:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+73c73
+<         2:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+---
+>     #####:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+75c75
+<         2:   19:}
+---
+>     #####:   19:}
+123c123
+<         3:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+---
+>     #####:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+127c127
+<         3:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+---
+>     #####:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+129c129
+<         3:   19:}
+---
+>     #####:   19:}
+150c150
+<         8:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+---
+>     #####:   13:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (
+154c154
+<         8:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+---
+>     #####:   17:    ptr_ (TAO::Objref_Traits<T>::duplicate (p.ptr ()))
+156c156
+<         8:   19:}
+---
+>     #####:   19:}
+161c161
+<       80*:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+163,165c163,165
+<       80*:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<       80*:   26:  this->ptr_ = p;
+<       80*:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+185c185
+<         3:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+187,189c187,189
+<         3:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<         3:   26:  this->ptr_ = p;
+<         3:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+209c209
+<        14:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+211,213c211,213
+<        14:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<        14:   26:  this->ptr_ = p;
+<        14:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+217c217
+<        14:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+219,221c219,221
+<        14:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<        14:   26:  this->ptr_ = p;
+<        14:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+249c249
+<         8:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+251,253c251,253
+<         8:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<         8:   26:  this->ptr_ = p;
+<         8:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+281c281
+<         3:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+283,285c283,285
+<         3:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<         3:   26:  this->ptr_ = p;
+<         3:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+289c289
+<         4:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+291,293c291,293
+<         4:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<         4:   26:  this->ptr_ = p;
+<         4:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+305c305
+<        20:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+307,309c307,309
+<        20:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<        20:   26:  this->ptr_ = p;
+<        20:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+313c313
+<        10:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+315,317c315,317
+<        10:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<        10:   26:  this->ptr_ = p;
+<        10:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+321c321
+<         4:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+---
+>     #####:   23:TAO_Objref_Var_T<T>::operator= (T * p)
+323,325c323,325
+<         4:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+<         4:   26:  this->ptr_ = p;
+<         4:   27:  return *this;
+---
+>     #####:   25:  TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   26:  this->ptr_ = p;
+>     #####:   27:  return *this;
+331c331
+<       14*:   32:TAO_Objref_Var_T<T>::operator= (
+---
+>     #####:   32:TAO_Objref_Var_T<T>::operator= (
+335c335
+<       14*:   36:  if (this != &p)
+---
+>     #####:   36:  if (this != &p)
+337,338c337,338
+<       14*:   38:      TAO::Objref_Traits<T>::release (this->ptr_);
+<       14*:   39:      this->ptr_ = TAO::Objref_Traits<T>::duplicate (p.ptr ());
+---
+>     #####:   38:      TAO::Objref_Traits<T>::release (this->ptr_);
+>     #####:   39:      this->ptr_ = TAO::Objref_Traits<T>::duplicate (p.ptr ());
+341c341
+<       14*:   42:  return *this;
+---
+>     #####:   42:  return *this;

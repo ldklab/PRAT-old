@@ -1,0 +1,322 @@
+77c77
+<       12*:   75:      operator()(_Tp* __ptr) const
+---
+>     #####:   75:      operator()(_Tp* __ptr) const
+83,84c83,84
+<       12*:   81:	delete __ptr;
+<       12*:   82:      }
+---
+>     #####:   81:	delete __ptr;
+>     #####:   82:      }
+117c117
+<         6:   75:      operator()(_Tp* __ptr) const
+---
+>     #####:   75:      operator()(_Tp* __ptr) const
+123,124c123,124
+<         6:   81:	delete __ptr;
+<         6:   82:      }
+---
+>     #####:   81:	delete __ptr;
+>     #####:   82:      }
+137c137
+<         6:   75:      operator()(_Tp* __ptr) const
+---
+>     #####:   75:      operator()(_Tp* __ptr) const
+143,144c143,144
+<         6:   81:	delete __ptr;
+<         6:   82:      }
+---
+>     #####:   81:	delete __ptr;
+>     #####:   82:      }
+225c225
+<       12*:  142:      __uniq_ptr_impl() = default;
+---
+>     #####:  142:      __uniq_ptr_impl() = default;
+237c237
+<         6:  142:      __uniq_ptr_impl() = default;
+---
+>     #####:  142:      __uniq_ptr_impl() = default;
+252c252
+<         6:  142:      __uniq_ptr_impl() = default;
+---
+>     #####:  142:      __uniq_ptr_impl() = default;
+260c260
+<        6*:  143:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
+---
+>     #####:  143:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
+263c263
+<         6:  143:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
+---
+>     #####:  143:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
+314c314
+<       30*:  149:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+---
+>     #####:  149:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+326c326
+<        12:  149:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+---
+>     #####:  149:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+374c374
+<        12:  149:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+---
+>     #####:  149:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+380c380
+<         6:  149:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+---
+>     #####:  149:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+388c388
+<      161*:  150:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+---
+>     #####:  150:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+397c397
+<        12:  150:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+---
+>     #####:  150:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+406c406
+<        12:  150:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+---
+>     #####:  150:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+436c436
+<       137:  150:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+---
+>     #####:  150:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+462c462
+<       12*:  151:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+---
+>     #####:  151:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+474c474
+<         6:  151:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+---
+>     #####:  151:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+504c504
+<         6:  151:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+---
+>     #####:  151:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+563,565c563,565
+<       12*:  191:	constexpr unique_ptr() noexcept
+<       12*:  192:	: _M_t()
+<       12*:  193:	{ }
+---
+>     #####:  191:	constexpr unique_ptr() noexcept
+>     #####:  192:	: _M_t()
+>     #####:  193:	{ }
+583,585c583,585
+<         6:  191:	constexpr unique_ptr() noexcept
+<         6:  192:	: _M_t()
+<         6:  193:	{ }
+---
+>     #####:  191:	constexpr unique_ptr() noexcept
+>     #####:  192:	: _M_t()
+>     #####:  193:	{ }
+608,610c608,610
+<         6:  191:	constexpr unique_ptr() noexcept
+<         6:  192:	: _M_t()
+<         6:  193:	{ }
+---
+>     #####:  191:	constexpr unique_ptr() noexcept
+>     #####:  192:	: _M_t()
+>     #####:  193:	{ }
+632,634c632,634
+<        6*:  204:	unique_ptr(pointer __p) noexcept
+<        6*:  205:	: _M_t(__p)
+<        6*:  206:        { }
+---
+>     #####:  204:	unique_ptr(pointer __p) noexcept
+>     #####:  205:	: _M_t(__p)
+>     #####:  206:        { }
+637,639c637,639
+<         6:  204:	unique_ptr(pointer __p) noexcept
+<         6:  205:	: _M_t(__p)
+<         6:  206:        { }
+---
+>     #####:  204:	unique_ptr(pointer __p) noexcept
+>     #####:  205:	: _M_t(__p)
+>     #####:  206:        { }
+766c766
+<       18*:  270:      ~unique_ptr() noexcept
+---
+>     #####:  270:      ~unique_ptr() noexcept
+768,772c768,772
+<       18*:  272:	auto& __ptr = _M_t._M_ptr();
+<       18*:  273:	if (__ptr != nullptr)
+<       12*:  274:	  get_deleter()(__ptr);
+<       18*:  275:	__ptr = pointer();
+<       18*:  276:      }
+---
+>     #####:  272:	auto& __ptr = _M_t._M_ptr();
+>     #####:  273:	if (__ptr != nullptr)
+>     #####:  274:	  get_deleter()(__ptr);
+>     #####:  275:	__ptr = pointer();
+>     #####:  276:      }
+802c802
+<         6:  270:      ~unique_ptr() noexcept
+---
+>     #####:  270:      ~unique_ptr() noexcept
+804,808c804,808
+<         6:  272:	auto& __ptr = _M_t._M_ptr();
+<         6:  273:	if (__ptr != nullptr)
+<         6:  274:	  get_deleter()(__ptr);
+<         6:  275:	__ptr = pointer();
+<         6:  276:      }
+---
+>     #####:  272:	auto& __ptr = _M_t._M_ptr();
+>     #####:  273:	if (__ptr != nullptr)
+>     #####:  274:	  get_deleter()(__ptr);
+>     #####:  275:	__ptr = pointer();
+>     #####:  276:      }
+892c892
+<         6:  270:      ~unique_ptr() noexcept
+---
+>     #####:  270:      ~unique_ptr() noexcept
+894,898c894,898
+<         6:  272:	auto& __ptr = _M_t._M_ptr();
+<         6:  273:	if (__ptr != nullptr)
+<         6:  274:	  get_deleter()(__ptr);
+<         6:  275:	__ptr = pointer();
+<         6:  276:      }
+---
+>     #####:  272:	auto& __ptr = _M_t._M_ptr();
+>     #####:  273:	if (__ptr != nullptr)
+>     #####:  274:	  get_deleter()(__ptr);
+>     #####:  275:	__ptr = pointer();
+>     #####:  276:      }
+928c928
+<         6:  270:      ~unique_ptr() noexcept
+---
+>     #####:  270:      ~unique_ptr() noexcept
+930,931c930,931
+<         6:  272:	auto& __ptr = _M_t._M_ptr();
+<         6:  273:	if (__ptr != nullptr)
+---
+>     #####:  272:	auto& __ptr = _M_t._M_ptr();
+>     #####:  273:	if (__ptr != nullptr)
+933,934c933,934
+<         6:  275:	__ptr = pointer();
+<         6:  276:      }
+---
+>     #####:  275:	__ptr = pointer();
+>     #####:  276:      }
+1011c1011
+<       18*:  334:      operator->() const noexcept
+---
+>     #####:  334:      operator->() const noexcept
+1014c1014
+<       18*:  337:	return get();
+---
+>     #####:  337:	return get();
+1088c1088
+<        12:  334:      operator->() const noexcept
+---
+>     #####:  334:      operator->() const noexcept
+1091c1091
+<        12:  337:	return get();
+---
+>     #####:  337:	return get();
+1095c1095
+<         6:  334:      operator->() const noexcept
+---
+>     #####:  334:      operator->() const noexcept
+1098c1098
+<         6:  337:	return get();
+---
+>     #####:  337:	return get();
+1104,1105c1104,1105
+<      161*:  342:      get() const noexcept
+<      161*:  343:      { return _M_t._M_ptr(); }
+---
+>     #####:  342:      get() const noexcept
+>     #####:  343:      { return _M_t._M_ptr(); }
+1116,1117c1116,1117
+<        12:  342:      get() const noexcept
+<        12:  343:      { return _M_t._M_ptr(); }
+---
+>     #####:  342:      get() const noexcept
+>     #####:  343:      { return _M_t._M_ptr(); }
+1128,1129c1128,1129
+<        12:  342:      get() const noexcept
+<        12:  343:      { return _M_t._M_ptr(); }
+---
+>     #####:  342:      get() const noexcept
+>     #####:  343:      { return _M_t._M_ptr(); }
+1168,1169c1168,1169
+<       137:  342:      get() const noexcept
+<       137:  343:      { return _M_t._M_ptr(); }
+---
+>     #####:  342:      get() const noexcept
+>     #####:  343:      { return _M_t._M_ptr(); }
+1206,1207c1206,1207
+<       12*:  347:      get_deleter() noexcept
+<       12*:  348:      { return _M_t._M_deleter(); }
+---
+>     #####:  347:      get_deleter() noexcept
+>     #####:  348:      { return _M_t._M_deleter(); }
+1222,1223c1222,1223
+<         6:  347:      get_deleter() noexcept
+<         6:  348:      { return _M_t._M_deleter(); }
+---
+>     #####:  347:      get_deleter() noexcept
+>     #####:  348:      { return _M_t._M_deleter(); }
+1262,1263c1262,1263
+<         6:  347:      get_deleter() noexcept
+<         6:  348:      { return _M_t._M_deleter(); }
+---
+>     #####:  347:      get_deleter() noexcept
+>     #####:  348:      { return _M_t._M_deleter(); }
+1296,1297c1296,1297
+<      143*:  356:      explicit operator bool() const noexcept
+<      143*:  357:      { return get() == pointer() ? false : true; }
+---
+>     #####:  356:      explicit operator bool() const noexcept
+>     #####:  357:      { return get() == pointer() ? false : true; }
+1312,1313c1312,1313
+<       137:  356:      explicit operator bool() const noexcept
+<       137:  357:      { return get() == pointer() ? false : true; }
+---
+>     #####:  356:      explicit operator bool() const noexcept
+>     #####:  357:      { return get() == pointer() ? false : true; }
+1320,1321c1320,1321
+<         6:  356:      explicit operator bool() const noexcept
+<         6:  357:      { return get() == pointer() ? false : true; }
+---
+>     #####:  356:      explicit operator bool() const noexcept
+>     #####:  357:      { return get() == pointer() ? false : true; }
+1407c1407
+<        6*:  377:      reset(pointer __p = pointer()) noexcept
+---
+>     #####:  377:      reset(pointer __p = pointer()) noexcept
+1410,1411c1410,1411
+<        6*:  380:	swap(_M_t._M_ptr(), __p);
+<        6*:  381:	if (__p != pointer())
+---
+>     #####:  380:	swap(_M_t._M_ptr(), __p);
+>     #####:  381:	if (__p != pointer())
+1413c1413
+<        6*:  383:      }
+---
+>     #####:  383:      }
+1497c1497
+<         6:  377:      reset(pointer __p = pointer()) noexcept
+---
+>     #####:  377:      reset(pointer __p = pointer()) noexcept
+1500,1501c1500,1501
+<         6:  380:	swap(_M_t._M_ptr(), __p);
+<         6:  381:	if (__p != pointer())
+---
+>     #####:  380:	swap(_M_t._M_ptr(), __p);
+>     #####:  381:	if (__p != pointer())
+1503c1503
+<         6:  383:      }
+---
+>     #####:  383:      }
+1833,1834c1833,1834
+<      137*:  712:    operator!=(const unique_ptr<_Tp, _Dp>& __x, nullptr_t) noexcept
+<      137*:  713:    { return (bool)__x; }
+---
+>     #####:  712:    operator!=(const unique_ptr<_Tp, _Dp>& __x, nullptr_t) noexcept
+>     #####:  713:    { return (bool)__x; }
+1841,1842c1841,1842
+<       137:  712:    operator!=(const unique_ptr<_Tp, _Dp>& __x, nullptr_t) noexcept
+<       137:  713:    { return (bool)__x; }
+---
+>     #####:  712:    operator!=(const unique_ptr<_Tp, _Dp>& __x, nullptr_t) noexcept
+>     #####:  713:    { return (bool)__x; }

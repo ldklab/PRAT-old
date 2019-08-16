@@ -1,0 +1,300 @@
+66,67c66,67
+<     2573*:   64:      _M_addr() noexcept
+<     2573*:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     1138*:   64:      _M_addr() noexcept
+>     1138*:   65:      { return static_cast<void*>(&_M_storage); }
+86,87c86,87
+<       712:   64:      _M_addr() noexcept
+<       712:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>       536:   64:      _M_addr() noexcept
+>       536:   65:      { return static_cast<void*>(&_M_storage); }
+98,99c98,99
+<       624:   64:      _M_addr() noexcept
+<       624:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>       468:   64:      _M_addr() noexcept
+>       468:   65:      { return static_cast<void*>(&_M_storage); }
+110,111c110,111
+<       178:   64:      _M_addr() noexcept
+<       178:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>       134:   64:      _M_addr() noexcept
+>       134:   65:      { return static_cast<void*>(&_M_storage); }
+126,127c126,127
+<         2:   64:      _M_addr() noexcept
+<         2:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   64:      _M_addr() noexcept
+>     #####:   65:      { return static_cast<void*>(&_M_storage); }
+142,143c142,143
+<        73:   64:      _M_addr() noexcept
+<        73:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   64:      _M_addr() noexcept
+>     #####:   65:      { return static_cast<void*>(&_M_storage); }
+146,147c146,147
+<        80:   64:      _M_addr() noexcept
+<        80:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   64:      _M_addr() noexcept
+>     #####:   65:      { return static_cast<void*>(&_M_storage); }
+150,151c150,151
+<        54:   64:      _M_addr() noexcept
+<        54:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   64:      _M_addr() noexcept
+>     #####:   65:      { return static_cast<void*>(&_M_storage); }
+154,155c154,155
+<        18:   64:      _M_addr() noexcept
+<        18:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   64:      _M_addr() noexcept
+>     #####:   65:      { return static_cast<void*>(&_M_storage); }
+158,159c158,159
+<       188:   64:      _M_addr() noexcept
+<       188:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   64:      _M_addr() noexcept
+>     #####:   65:      { return static_cast<void*>(&_M_storage); }
+162,163c162,163
+<       134:   64:      _M_addr() noexcept
+<       134:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   64:      _M_addr() noexcept
+>     #####:   65:      { return static_cast<void*>(&_M_storage); }
+170,171c170,171
+<       415:   64:      _M_addr() noexcept
+<       415:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   64:      _M_addr() noexcept
+>     #####:   65:      { return static_cast<void*>(&_M_storage); }
+186,187c186,187
+<        95:   64:      _M_addr() noexcept
+<        95:   65:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   64:      _M_addr() noexcept
+>     #####:   65:      { return static_cast<void*>(&_M_storage); }
+195,196c195,196
+<     2965*:   68:      _M_addr() const noexcept
+<     2965*:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>     1563*:   68:      _M_addr() const noexcept
+>     1563*:   69:      { return static_cast<const void*>(&_M_storage); }
+227,228c227,228
+<       623:   68:      _M_addr() const noexcept
+<       623:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>       469:   68:      _M_addr() const noexcept
+>       469:   69:      { return static_cast<const void*>(&_M_storage); }
+231,232c231,232
+<       924:   68:      _M_addr() const noexcept
+<       924:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>       692:   68:      _M_addr() const noexcept
+>       692:   69:      { return static_cast<const void*>(&_M_storage); }
+235,236c235,236
+<       534:   68:      _M_addr() const noexcept
+<       534:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>       402:   68:      _M_addr() const noexcept
+>       402:   69:      { return static_cast<const void*>(&_M_storage); }
+255,256c255,256
+<        61:   68:      _M_addr() const noexcept
+<        61:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>     #####:   68:      _M_addr() const noexcept
+>     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+263,264c263,264
+<        18:   68:      _M_addr() const noexcept
+<        18:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>     #####:   68:      _M_addr() const noexcept
+>     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+275,276c275,276
+<        72:   68:      _M_addr() const noexcept
+<        72:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>     #####:   68:      _M_addr() const noexcept
+>     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+279,280c279,280
+<        90:   68:      _M_addr() const noexcept
+<        90:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>     #####:   68:      _M_addr() const noexcept
+>     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+283,284c283,284
+<       300:   68:      _M_addr() const noexcept
+<       300:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>     #####:   68:      _M_addr() const noexcept
+>     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+287,288c287,288
+<        79:   68:      _M_addr() const noexcept
+<        79:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>     #####:   68:      _M_addr() const noexcept
+>     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+299,300c299,300
+<       102:   68:      _M_addr() const noexcept
+<       102:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>     #####:   68:      _M_addr() const noexcept
+>     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+315,316c315,316
+<       162:   68:      _M_addr() const noexcept
+<       162:   69:      { return static_cast<const void*>(&_M_storage); }
+---
+>     #####:   68:      _M_addr() const noexcept
+>     #####:   69:      { return static_cast<const void*>(&_M_storage); }
+324,325c324,325
+<     2573*:   72:      _M_ptr() noexcept
+<     2573*:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     1138*:   72:      _M_ptr() noexcept
+>     1138*:   73:      { return static_cast<_Tp*>(_M_addr()); }
+344,345c344,345
+<       712:   72:      _M_ptr() noexcept
+<       712:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>       536:   72:      _M_ptr() noexcept
+>       536:   73:      { return static_cast<_Tp*>(_M_addr()); }
+356,357c356,357
+<       624:   72:      _M_ptr() noexcept
+<       624:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>       468:   72:      _M_ptr() noexcept
+>       468:   73:      { return static_cast<_Tp*>(_M_addr()); }
+368,369c368,369
+<       178:   72:      _M_ptr() noexcept
+<       178:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>       134:   72:      _M_ptr() noexcept
+>       134:   73:      { return static_cast<_Tp*>(_M_addr()); }
+384,385c384,385
+<         2:   72:      _M_ptr() noexcept
+<         2:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   72:      _M_ptr() noexcept
+>     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+400,401c400,401
+<        73:   72:      _M_ptr() noexcept
+<        73:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   72:      _M_ptr() noexcept
+>     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+404,405c404,405
+<        80:   72:      _M_ptr() noexcept
+<        80:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   72:      _M_ptr() noexcept
+>     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+408,409c408,409
+<        54:   72:      _M_ptr() noexcept
+<        54:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   72:      _M_ptr() noexcept
+>     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+412,413c412,413
+<        18:   72:      _M_ptr() noexcept
+<        18:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   72:      _M_ptr() noexcept
+>     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+416,417c416,417
+<       188:   72:      _M_ptr() noexcept
+<       188:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   72:      _M_ptr() noexcept
+>     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+420,421c420,421
+<       134:   72:      _M_ptr() noexcept
+<       134:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   72:      _M_ptr() noexcept
+>     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+428,429c428,429
+<       415:   72:      _M_ptr() noexcept
+<       415:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   72:      _M_ptr() noexcept
+>     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+444,445c444,445
+<        95:   72:      _M_ptr() noexcept
+<        95:   73:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   72:      _M_ptr() noexcept
+>     #####:   73:      { return static_cast<_Tp*>(_M_addr()); }
+453,454c453,454
+<     2965*:   76:      _M_ptr() const noexcept
+<     2965*:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     1563*:   76:      _M_ptr() const noexcept
+>     1563*:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+485,486c485,486
+<       623:   76:      _M_ptr() const noexcept
+<       623:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>       469:   76:      _M_ptr() const noexcept
+>       469:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+489,490c489,490
+<       924:   76:      _M_ptr() const noexcept
+<       924:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>       692:   76:      _M_ptr() const noexcept
+>       692:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+493,494c493,494
+<       534:   76:      _M_ptr() const noexcept
+<       534:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>       402:   76:      _M_ptr() const noexcept
+>       402:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+513,514c513,514
+<        61:   76:      _M_ptr() const noexcept
+<        61:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     #####:   76:      _M_ptr() const noexcept
+>     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+521,522c521,522
+<        18:   76:      _M_ptr() const noexcept
+<        18:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     #####:   76:      _M_ptr() const noexcept
+>     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+533,534c533,534
+<        72:   76:      _M_ptr() const noexcept
+<        72:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     #####:   76:      _M_ptr() const noexcept
+>     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+537,538c537,538
+<        90:   76:      _M_ptr() const noexcept
+<        90:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     #####:   76:      _M_ptr() const noexcept
+>     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+541,542c541,542
+<       300:   76:      _M_ptr() const noexcept
+<       300:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     #####:   76:      _M_ptr() const noexcept
+>     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+545,546c545,546
+<        79:   76:      _M_ptr() const noexcept
+<        79:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     #####:   76:      _M_ptr() const noexcept
+>     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+557,558c557,558
+<       102:   76:      _M_ptr() const noexcept
+<       102:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     #####:   76:      _M_ptr() const noexcept
+>     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+573,574c573,574
+<       162:   76:      _M_ptr() const noexcept
+<       162:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     #####:   76:      _M_ptr() const noexcept
+>     #####:   77:      { return static_cast<const _Tp*>(_M_addr()); }

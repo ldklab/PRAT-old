@@ -1,0 +1,132 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:15
+79,109c79
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
+<     #####:   68:  inline CORBA::Boolean release() const {
+<     #####:   69:    return impl_.release();
+<         -:   70:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
+<     #####:   68:  inline CORBA::Boolean release() const {
+<     #####:   69:    return impl_.release();
+<         -:   70:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
+<     #####:   68:  inline CORBA::Boolean release() const {
+<     #####:   69:    return impl_.release();
+<         -:   70:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
+<     #####:   68:  inline CORBA::Boolean release() const {
+<     #####:   69:    return impl_.release();
+<         -:   70:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
+<     #####:   68:  inline CORBA::Boolean release() const {
+<     #####:   69:    return impl_.release();
+<         -:   70:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
+<     #####:   68:  inline CORBA::Boolean release() const {
+<     #####:   69:    return impl_.release();
+<         -:   70:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
+---
+> _ZNK3TAO31unbounded_basic_string_sequenceIwE7releaseEv:
+124,159c94
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
+<     #####:   72:  inline CORBA::ULong length() const {
+<     #####:   73:    return impl_.length();
+<         -:   74:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
+<     #####:   72:  inline CORBA::ULong length() const {
+<     #####:   73:    return impl_.length();
+<         -:   74:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
+<     #####:   72:  inline CORBA::ULong length() const {
+<     #####:   73:    return impl_.length();
+<         -:   74:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
+<     #####:   72:  inline CORBA::ULong length() const {
+<     #####:   73:    return impl_.length();
+<         -:   74:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
+<     #####:   72:  inline CORBA::ULong length() const {
+<     #####:   73:    return impl_.length();
+<         -:   74:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
+<     #####:   72:  inline CORBA::ULong length() const {
+<     #####:   73:    return impl_.length();
+<         -:   74:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
+<     #####:   72:  inline CORBA::ULong length() const {
+<     #####:   73:    return impl_.length();
+<         -:   74:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
+---
+> _ZNK3TAO31unbounded_basic_string_sequenceIwE6lengthEv:
+168,171d102
+<         -:   79:  /// @copydoc TAO::details::generic_sequence::operator[]
+<     #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
+<     #####:   81:    return const_element_type (impl_[i], release());
+<         -:   82:  }
+173,186c104,107
+< _ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
+<     #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
+<     #####:   81:    return const_element_type (impl_[i], release());
+<         -:   82:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
+<     #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
+<     #####:   81:    return const_element_type (impl_[i], release());
+<         -:   82:  }
+< ------------------
+< _ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
+<     #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
+<     #####:   81:    return const_element_type (impl_[i], release());
+<         -:   82:  }
+---
+> _ZN3TAO31unbounded_basic_string_sequenceIcE6lengthEj:
+>     #####:   76:  inline void length(CORBA::ULong length) {
+>     #####:   77:    impl_.length(length);
+>     #####:   78:  }
+188,191c109,112
+< _ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
+<     #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
+<     #####:   81:    return const_element_type (impl_[i], release());
+<         -:   82:  }
+---
+> _ZN3TAO31unbounded_basic_string_sequenceIwE6lengthEj:
+>     #####:   76:  inline void length(CORBA::ULong length) {
+>     #####:   77:    impl_.length(length);
+>     #####:   78:  }
+193c114
+< _ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
+---
+>         -:   79:  /// @copydoc TAO::details::generic_sequence::operator[]
+203c124
+< _ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
+---
+> _ZNK3TAO31unbounded_basic_string_sequenceIwEixEj:
+209,210c130,131
+<     #####:   84:  inline element_type operator[](CORBA::ULong i) {
+<     #####:   85:    return element_type(impl_[i], release());
+---
+>         -:   84:  inline element_type operator[](CORBA::ULong i) {
+>         -:   85:    return element_type(impl_[i], release());
+213,214c134,135
+<     #####:   88:  inline const_value_type const * get_buffer() const {
+<     #####:   89:    return impl_.get_buffer();
+---
+>         -:   88:  inline const_value_type const * get_buffer() const {
+>         -:   89:    return impl_.get_buffer();
