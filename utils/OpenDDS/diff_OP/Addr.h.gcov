@@ -1,0 +1,4 @@
+34c34
+<         1:   32:class ACE_Export ACE_Addr
+---
+>         3:   32:class ACE_Export ACE_Addr

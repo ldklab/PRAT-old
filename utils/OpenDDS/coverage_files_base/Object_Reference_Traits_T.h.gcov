@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Object_Reference_Traits_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Object_Reference_Traits_T.h
         -:    0:Programs:70
         -:    1:#ifndef guard_object_reference_traits_hpp
         -:    2:#define guard_object_reference_traits_hpp
@@ -8,7 +8,7 @@
         -:    6: * @brief Implement the element manipulation traits for object
         -:    7: *        reference types.
         -:    8: *
-        -:    9: * $Id$
+        -:    9: * $Id: Object_Reference_Traits_T.h 1861 2011-08-31 16:18:08Z mesnierp $
         -:   10: *
         -:   11: * @author Carlos O'Ryan
         -:   12: */
@@ -38,56 +38,12 @@
         -:   36:  {
     #####:   37:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (object_type*));
     #####:   38:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE10zero_rangeEPPS3_SA_:
-    #####:   34:  inline static void zero_range(
-        -:   35:      object_type ** begin, object_type ** end)
-        -:   36:  {
-    #####:   37:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (object_type*));
-    #####:   38:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE10zero_rangeEPPS3_SA_:
-    #####:   34:  inline static void zero_range(
-        -:   35:      object_type ** begin, object_type ** end)
-        -:   36:  {
-    #####:   37:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (object_type*));
-    #####:   38:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS9ConditionE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE10zero_rangeEPPS3_SA_:
-    #####:   34:  inline static void zero_range(
-        -:   35:      object_type ** begin, object_type ** end)
-        -:   36:  {
-    #####:   37:    ACE_OS::memset (begin, 0, (end - begin) * sizeof (object_type*));
-    #####:   38:  }
-------------------
         -:   39:
     #####:   40:  inline static void initialize_range(
         -:   41:      object_type ** begin, object_type ** end)
         -:   42:  {
     #####:   43:    std::generate(begin, end, &derived::default_initializer);
     #####:   44:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE16initialize_rangeEPPS3_SA_:
-    #####:   40:  inline static void initialize_range(
-        -:   41:      object_type ** begin, object_type ** end)
-        -:   42:  {
-    #####:   43:    std::generate(begin, end, &derived::default_initializer);
-    #####:   44:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE16initialize_rangeEPPS3_SA_:
-    #####:   40:  inline static void initialize_range(
-        -:   41:      object_type ** begin, object_type ** end)
-        -:   42:  {
-    #####:   43:    std::generate(begin, end, &derived::default_initializer);
-    #####:   44:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS9ConditionE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE16initialize_rangeEPPS3_SA_:
-    #####:   40:  inline static void initialize_range(
-        -:   41:      object_type ** begin, object_type ** end)
-        -:   42:  {
-    #####:   43:    std::generate(begin, end, &derived::default_initializer);
-    #####:   44:  }
-------------------
         -:   45:
         -:   46:  // Allow MSVC++ >= 8 checked iterators to be used.
         -:   47:  template <typename iter>
@@ -99,61 +55,17 @@ _ZN3TAO7details33object_reference_traits_decoratorIN3DDS9ConditionE16TAO_Objref_
         -:   53:
         -:   54:  // Allow MSVC++ >= 8 checked iterators to be used.
         -:   55:  template <typename iter>
-       2*:   56:  inline static void copy_swap_range(
-        -:   57:      object_type ** begin, object_type ** end, iter dst)
-        -:   58:  {
-       2*:   59:    std::swap_ranges(begin, end, dst);
-       2*:   60:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE15copy_swap_rangeIPPS3_EEvSB_SB_T_:
     #####:   56:  inline static void copy_swap_range(
         -:   57:      object_type ** begin, object_type ** end, iter dst)
         -:   58:  {
     #####:   59:    std::swap_ranges(begin, end, dst);
     #####:   60:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE15copy_swap_rangeIPPS3_EEvSB_SB_T_:
-    #####:   56:  inline static void copy_swap_range(
-        -:   57:      object_type ** begin, object_type ** end, iter dst)
-        -:   58:  {
-    #####:   59:    std::swap_ranges(begin, end, dst);
-    #####:   60:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS9ConditionE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE15copy_swap_rangeIPPS3_EEvSB_SB_T_:
-        2:   56:  inline static void copy_swap_range(
-        -:   57:      object_type ** begin, object_type ** end, iter dst)
-        -:   58:  {
-        2:   59:    std::swap_ranges(begin, end, dst);
-        2:   60:  }
-------------------
         -:   61:
     #####:   62:  inline static void release_range(
         -:   63:      object_type ** begin, object_type ** end)
         -:   64:  {
     #####:   65:    std::for_each(begin, end, &derived::release);
     #####:   66:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE13release_rangeEPPS3_SA_:
-    #####:   62:  inline static void release_range(
-        -:   63:      object_type ** begin, object_type ** end)
-        -:   64:  {
-    #####:   65:    std::for_each(begin, end, &derived::release);
-    #####:   66:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS10DataReaderE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE13release_rangeEPPS3_SA_:
-    #####:   62:  inline static void release_range(
-        -:   63:      object_type ** begin, object_type ** end)
-        -:   64:  {
-    #####:   65:    std::for_each(begin, end, &derived::release);
-    #####:   66:  }
-------------------
-_ZN3TAO7details33object_reference_traits_decoratorIN3DDS9ConditionE16TAO_Objref_Var_TIS3_ENS0_23object_reference_traitsIS3_S5_Lb1EEEE13release_rangeEPPS3_SA_:
-    #####:   62:  inline static void release_range(
-        -:   63:      object_type ** begin, object_type ** end)
-        -:   64:  {
-    #####:   65:    std::for_each(begin, end, &derived::release);
-    #####:   66:  }
-------------------
         -:   67:
         -:   68:  inline static object_type const * initialize_if_zero(object_type * & element)
         -:   69:  {

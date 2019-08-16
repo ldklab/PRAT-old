@@ -1,0 +1,97 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Recursive_Thread_Mutex.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: Recursive_Thread_Mutex.inl 1861 2011-08-31 16:18:08Z mesnierp $
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:ACE_INLINE ACE_recursive_thread_mutex_t &
+        -:    8:ACE_Recursive_Thread_Mutex::lock (void)
+        -:    9:{
+        -:   10:  return lock_;
+        -:   11:}
+        -:   12:
+        -:   13:ACE_INLINE ACE_thread_mutex_t &
+        -:   14:ACE_Recursive_Thread_Mutex::get_nesting_mutex (void)
+        -:   15:{
+        -:   16:#if defined (ACE_HAS_RECURSIVE_MUTEXES)
+        -:   17:  return static_cast<ACE_thread_mutex_t &> (lock_);
+        -:   18:#else
+        -:   19:  return lock_.nesting_mutex_;
+        -:   20:#endif /* ACE_HAS_RECURSIVE_MUTEXES */
+        -:   21:}
+        -:   22:
+        -:   23:ACE_INLINE void
+        -:   24:ACE_Recursive_Thread_Mutex::set_thread_id (ACE_thread_t t)
+        -:   25:{
+        -:   26:// ACE_TRACE ("ACE_Recursive_Thread_Mutex::set_thread_id");
+        -:   27:#if defined (ACE_HAS_RECURSIVE_MUTEXES)
+        -:   28:  ACE_UNUSED_ARG (t);
+        -:   29:#else  /* ! ACE_HAS_RECURSIVE_MUTEXES */
+        -:   30:  this->lock_.owner_id_ = t;
+        -:   31:#endif /* ! ACE_HAS_RECURSIVE_MUTEXES */
+        -:   32:}
+        -:   33:
+        -:   34:ACE_INLINE int
+    #####:   35:ACE_Recursive_Thread_Mutex::acquire (void)
+        -:   36:{
+    #####:   37:  return ACE_OS::recursive_mutex_lock (&this->lock_);
+        -:   38:}
+        -:   39:
+        -:   40:ACE_INLINE int
+    #####:   41:ACE_Recursive_Thread_Mutex::release (void)
+        -:   42:{
+    #####:   43:  return ACE_OS::recursive_mutex_unlock (&this->lock_);
+        -:   44:}
+        -:   45:
+        -:   46:ACE_INLINE int
+        -:   47:ACE_Recursive_Thread_Mutex::tryacquire (void)
+        -:   48:{
+        -:   49:  return ACE_OS::recursive_mutex_trylock (&this->lock_);
+        -:   50:}
+        -:   51:
+        -:   52:ACE_INLINE int
+        -:   53:ACE_Recursive_Thread_Mutex::acquire (ACE_Time_Value &tv)
+        -:   54:{
+        -:   55:  return ACE_OS::recursive_mutex_lock (&this->lock_, tv);
+        -:   56:}
+        -:   57:
+        -:   58:ACE_INLINE int
+        -:   59:ACE_Recursive_Thread_Mutex::acquire (ACE_Time_Value *tv)
+        -:   60:{
+        -:   61:  return ACE_OS::recursive_mutex_lock (&this->lock_, tv);
+        -:   62:}
+        -:   63:
+        -:   64:ACE_INLINE int
+    #####:   65:ACE_Recursive_Thread_Mutex::acquire_read (void)
+        -:   66:{
+    #####:   67:  return this->acquire ();
+        -:   68:}
+        -:   69:
+        -:   70:ACE_INLINE int
+    #####:   71:ACE_Recursive_Thread_Mutex::acquire_write (void)
+        -:   72:{
+    #####:   73:  return this->acquire ();
+        -:   74:}
+        -:   75:
+        -:   76:ACE_INLINE int
+        -:   77:ACE_Recursive_Thread_Mutex::tryacquire_read (void)
+        -:   78:{
+        -:   79:  return this->tryacquire ();
+        -:   80:}
+        -:   81:
+        -:   82:ACE_INLINE int
+        -:   83:ACE_Recursive_Thread_Mutex::tryacquire_write (void)
+        -:   84:{
+        -:   85:  return this->tryacquire ();
+        -:   86:}
+        -:   87:
+        -:   88:ACE_INLINE int
+        -:   89:ACE_Recursive_Thread_Mutex::tryacquire_write_upgrade (void)
+        -:   90:{
+        -:   91:  return 0;
+        -:   92:}
+        -:   93:
+        -:   94:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:   95:

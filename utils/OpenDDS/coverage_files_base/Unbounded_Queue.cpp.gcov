@@ -1,6 +1,6 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Unbounded_Queue.cpp
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Unbounded_Queue.cpp
         -:    0:Programs:51
-        -:    1:// $Id$
+        -:    1:// $Id: Unbounded_Queue.cpp 2622 2015-08-13 18:30:00Z mitza $
         -:    2:
         -:    3:#ifndef ACE_UNBOUNDED_QUEUE_CPP
         -:    4:#define ACE_UNBOUNDED_QUEUE_CPP
@@ -24,21 +24,21 @@
         -:   22:ACE_ALLOC_HOOK_DEFINE_Tc(ACE_Unbounded_Queue)
         -:   23:
         -:   24:template <class T>
-        5:   25:ACE_Unbounded_Queue<T>::ACE_Unbounded_Queue (ACE_Allocator *alloc)
+        4:   25:ACE_Unbounded_Queue<T>::ACE_Unbounded_Queue (ACE_Allocator *alloc)
         -:   26:  : head_ (0),
         -:   27:    cur_size_ (0),
-        5:   28:    allocator_ (alloc)
+        4:   28:    allocator_ (alloc)
         -:   29:{
         -:   30:  //   ACE_TRACE ("ACE_Unbounded_Queue<T>::ACE_Unbounded_Queue (void)");
         -:   31:
-        5:   32:  if (this->allocator_ == 0)
-        5:   33:    this->allocator_ = ACE_Allocator::instance ();
+        4:   32:  if (this->allocator_ == 0)
+        4:   33:    this->allocator_ = ACE_Allocator::instance ();
         -:   34:
-       5*:   35:  ACE_NEW_MALLOC (this->head_,
+        4:   35:  ACE_NEW_MALLOC (this->head_,
         -:   36:                  (ACE_Node<T> *) this->allocator_->malloc (sizeof (ACE_Node<T>)),
         -:   37:                  ACE_Node<T>);
         -:   38:  // Make the list circular by pointing it back to itself.
-        5:   39:  this->head_->next_ = this->head_;
+        4:   39:  this->head_->next_ = this->head_;
         -:   40:}
         -:   41:
         -:   42:template <class T>
@@ -122,11 +122,11 @@
         -:  120:}
         -:  121:
         -:  122:template <class T> void
-        5:  123:ACE_Unbounded_Queue<T>::delete_nodes (void)
+        4:  123:ACE_Unbounded_Queue<T>::delete_nodes (void)
         -:  124:{
-       5*:  125:  for (ACE_Node<T> *curr = this->head_->next_;
+        4:  125:  for (ACE_Node<T> *curr = this->head_->next_;
         -:  126:       // Keep looking until we've hit the dummy node.
-        5:  127:       curr != this->head_;
+        4:  127:       curr != this->head_;
         -:  128:       )
         -:  129:    {
     #####:  130:      ACE_Node<T> *temp = curr;
@@ -143,20 +143,20 @@
         -:  141:    }
         -:  142:
         -:  143:  // Reset the list to be a circular list with just a dummy node.
-        5:  144:  this->head_->next_ = this->head_;
-        5:  145:}
+        4:  144:  this->head_->next_ = this->head_;
+        4:  145:}
         -:  146:
         -:  147:template <class T>
-        5:  148:ACE_Unbounded_Queue<T>::~ACE_Unbounded_Queue (void)
+        4:  148:ACE_Unbounded_Queue<T>::~ACE_Unbounded_Queue (void)
         -:  149:{
         -:  150:  //   ACE_TRACE ("ACE_Unbounded_Queue<T>::~ACE_Unbounded_Queue (void)");
         -:  151:
-        5:  152:  this->delete_nodes ();
-        5:  153:  ACE_DES_FREE_TEMPLATE (head_,
+        4:  152:  this->delete_nodes ();
+        4:  153:  ACE_DES_FREE_TEMPLATE (head_,
         -:  154:                         this->allocator_->free,
         -:  155:                         ACE_Node,
         -:  156:                         <T>);
-        5:  157:}
+        4:  157:}
         -:  158:
         -:  159:template <class T> int
         -:  160:ACE_Unbounded_Queue<T>::enqueue_head (const T &new_item)
@@ -180,51 +180,51 @@
         -:  178:}
         -:  179:
         -:  180:template <class T> int
-    #####:  181:ACE_Unbounded_Queue<T>::enqueue_tail (const T &new_item)
+        8:  181:ACE_Unbounded_Queue<T>::enqueue_tail (const T &new_item)
         -:  182:{
         -:  183:  //   ACE_TRACE ("ACE_Unbounded_Queue<T>::enqueue_tail");
         -:  184:
         -:  185:  // Insert <item> into the old dummy node location.  Note that this
         -:  186:  // isn't actually the "head" item in the queue, it's a dummy node at
         -:  187:  // the "tail" of the queue...
-    #####:  188:  this->head_->item_ = new_item;
+        8:  188:  this->head_->item_ = new_item;
         -:  189:
-    #####:  190:  ACE_Node<T> *temp = 0;
+        8:  190:  ACE_Node<T> *temp = 0;
         -:  191:
         -:  192:  // Create a new dummy node.
-    #####:  193:  ACE_NEW_MALLOC_RETURN (temp,
+        8:  193:  ACE_NEW_MALLOC_RETURN (temp,
         -:  194:                         static_cast<ACE_Node<T> *> (this->allocator_->malloc (sizeof (ACE_Node<T>))),
         -:  195:                         ACE_Node<T> (this->head_->next_),
         -:  196:                         -1);
         -:  197:  // Link this dummy pointer into the list.
-    #####:  198:  this->head_->next_ = temp;
+        8:  198:  this->head_->next_ = temp;
         -:  199:
         -:  200:  // Point the head to the new dummy node.
-    #####:  201:  this->head_ = temp;
+        8:  201:  this->head_ = temp;
         -:  202:
-    #####:  203:  ++this->cur_size_;
-    #####:  204:  return 0;
+        8:  203:  ++this->cur_size_;
+        8:  204:  return 0;
         -:  205:}
         -:  206:
         -:  207:template <class T> int
-    #####:  208:ACE_Unbounded_Queue<T>::dequeue_head (T &item)
+        8:  208:ACE_Unbounded_Queue<T>::dequeue_head (T &item)
         -:  209:{
         -:  210:  //   ACE_TRACE ("ACE_Unbounded_Queue<T>::dequeue_head");
         -:  211:
         -:  212:  // Check for empty queue.
-    #####:  213:  if (this->is_empty ())
+        8:  213:  if (this->is_empty ())
     #####:  214:    return -1;
         -:  215:
-    #####:  216:  ACE_Node<T> *temp = this->head_->next_;
+        8:  216:  ACE_Node<T> *temp = this->head_->next_;
         -:  217:
-    #####:  218:  item = temp->item_;
-    #####:  219:  this->head_->next_ = temp->next_;
-    #####:  220:  ACE_DES_FREE_TEMPLATE (temp,
+        8:  218:  item = temp->item_;
+        8:  219:  this->head_->next_ = temp->next_;
+        8:  220:  ACE_DES_FREE_TEMPLATE (temp,
         -:  221:                         this->allocator_->free,
         -:  222:                         ACE_Node,
         -:  223:                         <T>);
-    #####:  224:  --this->cur_size_;
-    #####:  225:  return 0;
+        8:  224:  --this->cur_size_;
+        8:  225:  return 0;
         -:  226:}
         -:  227:
         -:  228:template <class T> void

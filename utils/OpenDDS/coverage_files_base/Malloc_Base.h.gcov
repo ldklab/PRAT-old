@@ -1,0 +1,237 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Malloc_Base.h
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file    Malloc_Base.h
+        -:    6: *
+        -:    7: *  $Id: Malloc_Base.h 2629 2015-08-14 19:30:56Z mitza $
+        -:    8: *
+        -:    9: *  @author Doug Schmidt and Irfan Pyarali
+        -:   10: */
+        -:   11://=============================================================================
+        -:   12:
+        -:   13:
+        -:   14:#ifndef ACE_MALLOC_BASE_H
+        -:   15:#define ACE_MALLOC_BASE_H
+        -:   16:#include /**/ "ace/pre.h"
+        -:   17:
+        -:   18:#include /**/ "ace/ACE_export.h"
+        -:   19:
+        -:   20:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   21:# pragma once
+        -:   22:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   23:
+        -:   24:#include "ace/os_include/sys/os_types.h"
+        -:   25:#include "ace/os_include/sys/os_mman.h"
+        -:   26:#include "ace/os_include/sys/os_types.h"
+        -:   27:#include <limits>
+        -:   28:#include <new>
+        -:   29:
+        -:   30:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   31:
+        -:   32:// The definition of this class is located in Malloc.cpp.
+        -:   33:
+        -:   34:/**
+        -:   35: * @class ACE_Allocator
+        -:   36: *
+        -:   37: * @brief Interface for a dynamic memory allocator that uses inheritance
+        -:   38: * and dynamic binding to provide extensible mechanisms for
+        -:   39: * allocating and deallocating memory.
+        -:   40: */
+    #####:   41:class ACE_Export ACE_Allocator
+        -:   42:{
+        -:   43:public:
+        -:   44:
+        -:   45:  /// Unsigned integer type used for specifying memory block lengths.
+        -:   46:  typedef size_t size_type;
+        -:   47:
+        -:   48:  // = Memory Management
+        -:   49:
+        -:   50:  /// Get pointer to a default ACE_Allocator.
+        -:   51:  static ACE_Allocator *instance (void);
+        -:   52:
+        -:   53:  /// Set pointer to a process-wide ACE_Allocator and return existing
+        -:   54:  /// pointer.
+        -:   55:  static ACE_Allocator *instance (ACE_Allocator *);
+        -:   56:
+        -:   57:  /// Delete the dynamically allocated Singleton
+        -:   58:  static void close_singleton (void);
+        -:   59:
+        -:   60:  /// "No-op" constructor (needed to make certain compilers happy).
+        -:   61:  ACE_Allocator (void);
+        -:   62:
+        -:   63:  /// Virtual destructor
+        -:   64:  virtual ~ACE_Allocator (void);
+        -:   65:
+        -:   66:  /// Allocate @a nbytes, but don't give them any initial value.
+        -:   67:  virtual void *malloc (size_type nbytes) = 0;
+        -:   68:
+        -:   69:  /// Allocate @a nbytes, giving them @a initial_value.
+        -:   70:  virtual void *calloc (size_type nbytes, char initial_value = '\0') = 0;
+        -:   71:
+        -:   72:  /// Allocate <n_elem> each of size @a elem_size, giving them
+        -:   73:  /// @a initial_value.
+        -:   74:  virtual void *calloc (size_type n_elem,
+        -:   75:                        size_type elem_size,
+        -:   76:                        char initial_value = '\0') = 0;
+        -:   77:
+        -:   78:  /// Free @a ptr (must have been allocated by ACE_Allocator::malloc()).
+        -:   79:  virtual void free (void *ptr) = 0;
+        -:   80:
+        -:   81:  /// Remove any resources associated with this memory manager.
+        -:   82:  virtual int remove (void) = 0;
+        -:   83:
+        -:   84:  // = Map manager like functions
+        -:   85:
+        -:   86:  /**
+        -:   87:   * Associate @a name with @a pointer.  If @a duplicates == 0 then do
+        -:   88:   * not allow duplicate @a name/@a pointer associations, else if
+        -:   89:   * @a duplicates != 0 then allow duplicate @a name/@a pointer
+        -:   90:   * associations.  Returns 0 if successfully binds (1) a previously
+        -:   91:   * unbound @a name or (2) @a duplicates != 0, returns 1 if trying to
+        -:   92:   * bind a previously bound @a name and @a duplicates == 0, else
+        -:   93:   * returns -1 if a resource failure occurs.
+        -:   94:   */
+        -:   95:  virtual int bind (const char *name, void *pointer, int duplicates = 0) = 0;
+        -:   96:
+        -:   97:  /**
+        -:   98:   * Associate @a name with @a pointer.  Does not allow duplicate
+        -:   99:   * @a name/@a pointer associations.  Returns 0 if successfully binds
+        -:  100:   * (1) a previously unbound @a name, 1 if trying to bind a previously
+        -:  101:   * bound @a name, or returns -1 if a resource failure occurs.  When
+        -:  102:   * this call returns @a pointer's value will always reference the
+        -:  103:   * void * that @a name is associated with.  Thus, if the caller needs
+        -:  104:   * to use @a pointer (e.g., to free it) a copy must be maintained by
+        -:  105:   * the caller.
+        -:  106:   */
+        -:  107:  virtual int trybind (const char *name, void *&pointer) = 0;
+        -:  108:
+        -:  109:  /// Locate @a name and pass out parameter via pointer.  If found,
+        -:  110:  /// return 0, returns -1 if failure occurs.
+        -:  111:  virtual int find (const char *name, void *&pointer) = 0;
+        -:  112:
+        -:  113:  /// Returns 0 if the name is in the mapping. -1, otherwise.
+        -:  114:  virtual int find (const char *name) = 0;
+        -:  115:
+        -:  116:  /// Unbind (remove) the name from the map.  Don't return the pointer
+        -:  117:  /// to the caller
+        -:  118:  virtual int unbind (const char *name) = 0;
+        -:  119:
+        -:  120:  /// Break any association of name.  Returns the value of pointer in
+        -:  121:  /// case the caller needs to deallocate memory.
+        -:  122:  virtual int unbind (const char *name, void *&pointer) = 0;
+        -:  123:
+        -:  124:  // = Protection and "sync" (i.e., flushing memory to persistent
+        -:  125:  // backing store).
+        -:  126:
+        -:  127:  /**
+        -:  128:   * Sync @a len bytes of the memory region to the backing store
+        -:  129:   * starting at @c this->base_addr_.  If @a len == -1 then sync the
+        -:  130:   * whole region.
+        -:  131:   */
+        -:  132:  virtual int sync (ssize_t len = -1, int flags = MS_SYNC) = 0;
+        -:  133:
+        -:  134:  /// Sync @a len bytes of the memory region to the backing store
+        -:  135:  /// starting at @a addr.
+        -:  136:  virtual int sync (void *addr, size_type len, int flags = MS_SYNC) = 0;
+        -:  137:
+        -:  138:  /**
+        -:  139:   * Change the protection of the pages of the mapped region to @a prot
+        -:  140:   * starting at <this->base_addr_> up to @a len bytes.  If @a len == -1
+        -:  141:   * then change protection of all pages in the mapped region.
+        -:  142:   */
+        -:  143:  virtual int protect (ssize_t len = -1, int prot = PROT_RDWR) = 0;
+        -:  144:
+        -:  145:  /// Change the protection of the pages of the mapped region to @a prot
+        -:  146:  /// starting at @a addr up to @a len bytes.
+        -:  147:  virtual int protect (void *addr, size_type len, int prot = PROT_RDWR) = 0;
+        -:  148:
+        -:  149:#if defined (ACE_HAS_MALLOC_STATS)
+        -:  150:  /// Dump statistics of how malloc is behaving.
+        -:  151:  virtual void print_stats (void) const = 0;
+        -:  152:#endif /* ACE_HAS_MALLOC_STATS */
+        -:  153:
+        -:  154:  /// Dump the state of the object.
+        -:  155:  virtual void dump (void) const = 0;
+        -:  156:private:
+        -:  157:  // DO NOT ADD ANY STATE (DATA MEMBERS) TO THIS CLASS!!!!  See the
+        -:  158:  // <ACE_Allocator::instance> implementation for explanation.
+        -:  159:
+        -:  160:  /// Pointer to a process-wide ACE_Allocator instance.
+        -:  161:  static ACE_Allocator *allocator_;
+        -:  162:
+        -:  163:  /// Must delete the <allocator_> if non-0.
+        -:  164:  static int delete_allocator_;
+        -:  165:};
+        -:  166:
+        -:  167:/**
+        -:  168: * @class ACE_Allocator_Std_Adapter
+        -:  169: *
+        -:  170: * @brief Model of std::allocator that forwards requests to
+        -:  171:#  ACE_Allocator::instance.  To be used with STL containers.
+        -:  172: */
+        -:  173:
+        -:  174:template <typename T>
+        -:  175:class ACE_Export ACE_Allocator_Std_Adapter
+        -:  176:{
+        -:  177:public:
+        -:  178:  typedef T value_type;
+        -:  179:  typedef T* pointer;
+        -:  180:  typedef const T* const_pointer;
+        -:  181:  typedef T& reference;
+        -:  182:  typedef const T& const_reference;
+        -:  183:  typedef std::size_t size_type;
+        -:  184:  typedef std::ptrdiff_t difference_type;
+        -:  185:  template <typename U> struct rebind { typedef ACE_Allocator_Std_Adapter<U> other; };
+        -:  186:
+        -:  187:  ACE_Allocator_Std_Adapter() {}
+        -:  188:
+        -:  189:  template <typename U>
+        -:  190:  ACE_Allocator_Std_Adapter(const ACE_Allocator_Std_Adapter<U>&) {}
+        -:  191:
+        -:  192:  static T* allocate(std::size_t n)
+        -:  193:  {
+        -:  194:    void* raw_mem = ACE_Allocator::instance()->malloc(n * sizeof(T));
+        -:  195:    if (!raw_mem) throw std::bad_alloc();
+        -:  196:    return static_cast<T*>(raw_mem);
+        -:  197:  }
+        -:  198:
+        -:  199:  static void deallocate(T* ptr, std::size_t)
+        -:  200:  {
+        -:  201:    ACE_Allocator::instance()->free(ptr);
+        -:  202:  }
+        -:  203:
+        -:  204:  static void construct(T* ptr, const T& value)
+        -:  205:  {
+        -:  206:    new (static_cast<void*>(ptr)) T(value);
+        -:  207:  }
+        -:  208:
+        -:  209:  static void destroy(T* ptr)
+        -:  210:  {
+        -:  211:    ptr->~T();
+        -:  212:  }
+        -:  213:
+        -:  214:  static size_type max_size()
+        -:  215:  {
+        -:  216:    return (std::numeric_limits<size_type>::max)();
+        -:  217:  }
+        -:  218:};
+        -:  219:
+        -:  220:template <typename T, typename U>
+        -:  221:bool operator==(const ACE_Allocator_Std_Adapter<T>&, const ACE_Allocator_Std_Adapter<U>&)
+        -:  222:{
+        -:  223:  return true;
+        -:  224:}
+        -:  225:
+        -:  226:template <typename T, typename U>
+        -:  227:bool operator!=(const ACE_Allocator_Std_Adapter<T>&, const ACE_Allocator_Std_Adapter<U>&)
+        -:  228:{
+        -:  229:  return false;
+        -:  230:}
+        -:  231:
+        -:  232:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  233:
+        -:  234:#include /**/ "ace/post.h"
+        -:  235:#endif /* ACE_MALLOC_BASE_H */

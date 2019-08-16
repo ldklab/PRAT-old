@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Time_Value_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Time_Value_T.h
         -:    0:Programs:51
         -:    1:// -*- C++ -*-
         -:    2:
@@ -6,7 +6,7 @@
         -:    4:/**
         -:    5: *  @file    Time_Value_T.h
         -:    6: *
-        -:    7: *  $Id$
+        -:    7: *  $Id: Time_Value_T.h 2179 2013-05-28 22:16:51Z mesnierp $
         -:    8: *
         -:    9: *  @author Martin Corino <mcorino@remedy.nl>
         -:   10: */
@@ -75,13 +75,6 @@
         -:   73:
         -:   74:  /// Destructor
     #####:   75:  virtual ~ACE_Time_Value_T () {}
-------------------
-_ZN16ACE_Time_Value_TI24ACE_FPointer_Time_PolicyED0Ev:
-    #####:   75:  virtual ~ACE_Time_Value_T () {}
-------------------
-_ZN16ACE_Time_Value_TI24ACE_FPointer_Time_PolicyED2Ev:
-    #####:   75:  virtual ~ACE_Time_Value_T () {}
-------------------
         -:   76:
         -:   77:  /// Add @a tv to this.
         -:   78:  ACE_Time_Value_T<TIME_POLICY> &operator += (const ACE_Time_Value &tv);

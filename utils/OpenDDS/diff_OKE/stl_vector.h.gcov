@@ -1,0 +1,250 @@
+83c83
+<       108:   81:      struct _Vector_impl
+---
+>       156:   81:      struct _Vector_impl
+90,92c90,92
+<       109:   88:	_Vector_impl()
+<       109:   89:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
+<       109:   90:	{ }
+---
+>       156:   88:	_Vector_impl()
+>       156:   89:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
+>       156:   90:	{ }
+117,118c117,118
+<       276:  115:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
+<       276:  116:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
+---
+>       390:  115:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
+>       390:  116:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
+121,122c121,122
+<        82:  119:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
+<        82:  120:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
+---
+>       110:  119:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
+>       110:  120:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
+128,129c128,129
+<       109:  126:      _Vector_base()
+<       109:  127:      : _M_impl() { }
+---
+>       156:  126:      _Vector_base()
+>       156:  127:      : _M_impl() { }
+163,165c163,165
+<       108:  161:      ~_Vector_base() _GLIBCXX_NOEXCEPT
+<       216:  162:      { _M_deallocate(this->_M_impl._M_start, this->_M_impl._M_end_of_storage
+<       216:  163:		      - this->_M_impl._M_start); }
+---
+>       156:  161:      ~_Vector_base() _GLIBCXX_NOEXCEPT
+>       312:  162:      { _M_deallocate(this->_M_impl._M_start, this->_M_impl._M_end_of_storage
+>       312:  163:		      - this->_M_impl._M_start); }
+171c171
+<        52:  169:      _M_allocate(size_t __n)
+---
+>        74:  169:      _M_allocate(size_t __n)
+174c174
+<        52:  172:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
+---
+>        74:  172:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
+178c178
+<       160:  176:      _M_deallocate(pointer __p, size_t __n)
+---
+>       230:  176:      _M_deallocate(pointer __p, size_t __n)
+181,183c181,183
+<       160:  179:	if (__p)
+<        53:  180:	  _Tr::deallocate(_M_impl, __p, __n);
+<       160:  181:      }
+---
+>       230:  179:	if (__p)
+>        76:  180:	  _Tr::deallocate(_M_impl, __p, __n);
+>       230:  181:      }
+261c261
+<       109:  259:      vector()
+---
+>       156:  259:      vector()
+265c265
+<       109:  263:      : _Base() { }
+---
+>       156:  263:      : _Base() { }
+435,437c435,437
+<       108:  433:      ~vector() _GLIBCXX_NOEXCEPT
+<       108:  434:      { std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
+<       216:  435:		      _M_get_Tp_allocator()); }
+---
+>       156:  433:      ~vector() _GLIBCXX_NOEXCEPT
+>       156:  434:      { std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
+>       312:  435:		      _M_get_Tp_allocator()); }
+565,566c565,566
+<        54:  563:      begin() _GLIBCXX_NOEXCEPT
+<        54:  564:      { return iterator(this->_M_impl._M_start); }
+---
+>        71:  563:      begin() _GLIBCXX_NOEXCEPT
+>        71:  564:      { return iterator(this->_M_impl._M_start); }
+574,575c574,575
+<        75:  572:      begin() const _GLIBCXX_NOEXCEPT
+<        75:  573:      { return const_iterator(this->_M_impl._M_start); }
+---
+>       127:  572:      begin() const _GLIBCXX_NOEXCEPT
+>       127:  573:      { return const_iterator(this->_M_impl._M_start); }
+583,584c583,584
+<        55:  581:      end() _GLIBCXX_NOEXCEPT
+<        55:  582:      { return iterator(this->_M_impl._M_finish); }
+---
+>        77:  581:      end() _GLIBCXX_NOEXCEPT
+>        77:  582:      { return iterator(this->_M_impl._M_finish); }
+592,593c592,593
+<        75:  590:      end() const _GLIBCXX_NOEXCEPT
+<        75:  591:      { return const_iterator(this->_M_impl._M_finish); }
+---
+>       127:  590:      end() const _GLIBCXX_NOEXCEPT
+>       127:  591:      { return const_iterator(this->_M_impl._M_finish); }
+638,639c638,639
+<         5:  636:      cbegin() const noexcept
+<         5:  637:      { return const_iterator(this->_M_impl._M_start); }
+---
+>         6:  636:      cbegin() const noexcept
+>         6:  637:      { return const_iterator(this->_M_impl._M_start); }
+672,673c672,673
+<       262:  670:      size() const _GLIBCXX_NOEXCEPT
+<       262:  671:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+---
+>       345:  670:      size() const _GLIBCXX_NOEXCEPT
+>       345:  671:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+677,678c677,678
+<        82:  675:      max_size() const _GLIBCXX_NOEXCEPT
+<        82:  676:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
+---
+>       110:  675:      max_size() const _GLIBCXX_NOEXCEPT
+>       110:  676:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
+752,754c752,754
+<        22:  750:      capacity() const _GLIBCXX_NOEXCEPT
+<        22:  751:      { return size_type(this->_M_impl._M_end_of_storage
+<        22:  752:			 - this->_M_impl._M_start); }
+---
+>        38:  750:      capacity() const _GLIBCXX_NOEXCEPT
+>        38:  751:      { return size_type(this->_M_impl._M_end_of_storage
+>        38:  752:			 - this->_M_impl._M_start); }
+761,762c761,762
+<        75:  759:      empty() const _GLIBCXX_NOEXCEPT
+<        75:  760:      { return begin() == end(); }
+---
+>       127:  759:      empty() const _GLIBCXX_NOEXCEPT
+>       127:  760:      { return begin() == end(); }
+797c797
+<        57:  795:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
+---
+>        69:  795:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
+800c800
+<        57:  798:	return *(this->_M_impl._M_start + __n);
+---
+>        69:  798:	return *(this->_M_impl._M_start + __n);
+824c824
+<        12:  822:      _M_range_check(size_type __n) const
+---
+>        20:  822:      _M_range_check(size_type __n) const
+826c826
+<        12:  824:	if (__n >= this->size())
+---
+>        20:  824:	if (__n >= this->size())
+831c831
+<        12:  829:      }
+---
+>        20:  829:      }
+846c846
+<        12:  844:      at(size_type __n)
+---
+>        20:  844:      at(size_type __n)
+848,849c848,849
+<        12:  846:	_M_range_check(__n);
+<        12:  847:	return (*this)[__n];
+---
+>        20:  846:	_M_range_check(__n);
+>        20:  847:	return (*this)[__n];
+897c897
+<        13:  895:      back() _GLIBCXX_NOEXCEPT
+---
+>        21:  895:      back() _GLIBCXX_NOEXCEPT
+900c900
+<        13:  898:	return *(end() - 1);
+---
+>        21:  898:	return *(end() - 1);
+941c941
+<        33:  939:      push_back(const value_type& __x)
+---
+>        46:  939:      push_back(const value_type& __x)
+943c943
+<        33:  941:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
+---
+>        46:  941:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
+945c945
+<        10:  943:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
+---
+>        18:  943:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
+947c947
+<        10:  945:	    ++this->_M_impl._M_finish;
+---
+>        18:  945:	    ++this->_M_impl._M_finish;
+950,951c950,951
+<        23:  948:	  _M_realloc_insert(end(), __x);
+<        33:  949:      }
+---
+>        28:  948:	  _M_realloc_insert(end(), __x);
+>        46:  949:      }
+977c977
+<        11:  975:      pop_back() _GLIBCXX_NOEXCEPT
+---
+>        19:  975:      pop_back() _GLIBCXX_NOEXCEPT
+980,982c980,982
+<        11:  978:	--this->_M_impl._M_finish;
+<        11:  979:	_Alloc_traits::destroy(this->_M_impl, this->_M_impl._M_finish);
+<        11:  980:      }
+---
+>        19:  978:	--this->_M_impl._M_finish;
+>        19:  979:	_Alloc_traits::destroy(this->_M_impl, this->_M_impl._M_finish);
+>        19:  980:      }
+1249,1250c1249,1250
+<        34: 1247:      clear() _GLIBCXX_NOEXCEPT
+<        34: 1248:      { _M_erase_at_end(this->_M_impl._M_start); }
+---
+>        50: 1247:      clear() _GLIBCXX_NOEXCEPT
+>        50: 1248:      { _M_erase_at_end(this->_M_impl._M_start); }
+1259c1259
+<        22: 1257:	_M_allocate_and_copy(size_type __n,
+---
+>        38: 1257:	_M_allocate_and_copy(size_type __n,
+1262c1262
+<        22: 1260:	  pointer __result = this->_M_allocate(__n);
+---
+>        38: 1260:	  pointer __result = this->_M_allocate(__n);
+1265,1267c1265,1267
+<        22: 1263:	      std::__uninitialized_copy_a(__first, __last, __result,
+<        22: 1264:					  _M_get_Tp_allocator());
+<        22: 1265:	      return __result;
+---
+>        38: 1263:	      std::__uninitialized_copy_a(__first, __last, __result,
+>        38: 1264:					  _M_get_Tp_allocator());
+>        38: 1265:	      return __result;
+1504c1504
+<        30: 1502:      _M_check_len(size_type __n, const char* __s) const
+---
+>        36: 1502:      _M_check_len(size_type __n, const char* __s) const
+1506c1506
+<        30: 1504:	if (max_size() - size() < __n)
+---
+>        36: 1504:	if (max_size() - size() < __n)
+1509,1510c1509,1510
+<        30: 1507:	const size_type __len = size() + std::max(size(), __n);
+<        30: 1508:	return (__len < size() || __len > max_size()) ? max_size() : __len;
+---
+>        36: 1507:	const size_type __len = size() + std::max(size(), __n);
+>        36: 1508:	return (__len < size() || __len > max_size()) ? max_size() : __len;
+1518c1518
+<        34: 1516:      _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
+---
+>        50: 1516:      _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
+1520,1522c1520,1522
+<        34: 1518:	std::_Destroy(__pos, this->_M_impl._M_finish, _M_get_Tp_allocator());
+<        34: 1519:	this->_M_impl._M_finish = __pos;
+<        34: 1520:      }
+---
+>        50: 1518:	std::_Destroy(__pos, this->_M_impl._M_finish, _M_get_Tp_allocator());
+>        50: 1519:	this->_M_impl._M_finish = __pos;
+>        50: 1520:      }

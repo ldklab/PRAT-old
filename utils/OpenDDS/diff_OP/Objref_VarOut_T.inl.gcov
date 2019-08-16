@@ -1,0 +1,68 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+11,12c11,12
+<        48:    9:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (void)
+<        48:   10:  : ptr_ (TAO::Objref_Traits<T>::nil ())
+---
+>        92:    9:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (void)
+>        92:   10:  : ptr_ (TAO::Objref_Traits<T>::nil ())
+14c14
+<        48:   12:}
+---
+>        92:   12:}
+18c18
+<       152:   16:TAO_Objref_Var_T<T>::~TAO_Objref_Var_T (void)
+---
+>       309:   16:TAO_Objref_Var_T<T>::~TAO_Objref_Var_T (void)
+20,21c20,21
+<       152:   18:  TAO::Objref_Traits<T>::release (this->ptr_);
+<       152:   19:}
+---
+>       309:   18:  TAO::Objref_Traits<T>::release (this->ptr_);
+>       309:   19:}
+26c26
+<         7:   24:TAO_Objref_Var_T<T>::operator-> (void) const
+---
+>        16:   24:TAO_Objref_Var_T<T>::operator-> (void) const
+28c28
+<         7:   26:  return this->ptr_;
+---
+>        16:   26:  return this->ptr_;
+40c40
+<        23:   38:TAO_Objref_Var_T<T>::operator T *& ()
+---
+>        49:   38:TAO_Objref_Var_T<T>::operator T *& ()
+42c42
+<        23:   40:  return this->ptr_;
+---
+>        49:   40:  return this->ptr_;
+48c48
+<        94:   46:TAO_Objref_Var_T<T>::in (void) const
+---
+>       145:   46:TAO_Objref_Var_T<T>::in (void) const
+50c50
+<        94:   48:  return this->ptr_;
+---
+>       145:   48:  return this->ptr_;
+74c74
+<         7:   72:TAO_Objref_Var_T<T>::_retn (void)
+---
+>        16:   72:TAO_Objref_Var_T<T>::_retn (void)
+76,78c76,78
+<         7:   74:  T * val = this->ptr_;
+<         7:   75:  this->ptr_ = TAO::Objref_Traits<T>::nil ();
+<         7:   76:  return val;
+---
+>        16:   74:  T * val = this->ptr_;
+>        16:   75:  this->ptr_ = TAO::Objref_Traits<T>::nil ();
+>        16:   76:  return val;
+84c84
+<        48:   82:TAO_Objref_Var_T<T>::ptr (void) const
+---
+>       105:   82:TAO_Objref_Var_T<T>::ptr (void) const
+86c86
+<        48:   84:  return this->ptr_;
+---
+>       105:   84:  return this->ptr_;

@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Value_Sequence_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Value_Sequence_T.h
         -:    0:Programs:51
         -:    1:#ifndef guard_unbounded_value_sequence_hpp
         -:    2:#define guard_unbounded_value_sequence_hpp
@@ -8,7 +8,7 @@
         -:    6: * @brief Implement unbounded sequences for types with value-like
         -:    7: * semantics.
         -:    8: *
-        -:    9: * $Id$
+        -:    9: * $Id: Unbounded_Value_Sequence_T.h 1861 2011-08-31 16:18:08Z mesnierp $
         -:   10: *
         -:   11: * @author Carlos O'Ryan
         -:   12: */
@@ -23,7 +23,7 @@
         -:   21:{
         -:   22:
         -:   23:template<class T>
-        -:   24:class unbounded_value_sequence
+    #####:   24:class unbounded_value_sequence
         -:   25:{
         -:   26:public:
         -:   27:  typedef T value_type;
@@ -60,70 +60,12 @@
     #####:   58:  inline CORBA::ULong length() const {
     #####:   59:    return impl_.length();
         -:   60:  }
-------------------
-_ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEv:
-    #####:   58:  inline CORBA::ULong length() const {
-    #####:   59:    return impl_.length();
-        -:   60:  }
-------------------
-_ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEv:
-    #####:   58:  inline CORBA::ULong length() const {
-    #####:   59:    return impl_.length();
-        -:   60:  }
-------------------
-_ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEv:
-    #####:   58:  inline CORBA::ULong length() const {
-    #####:   59:    return impl_.length();
-        -:   60:  }
-------------------
-_ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEv:
-    #####:   58:  inline CORBA::ULong length() const {
-    #####:   59:    return impl_.length();
-        -:   60:  }
-------------------
-_ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEv:
-    #####:   58:  inline CORBA::ULong length() const {
-    #####:   59:    return impl_.length();
-        -:   60:  }
-------------------
     #####:   61:  inline void length(CORBA::ULong length) {
     #####:   62:    impl_.length(length);
     #####:   63:  }
-------------------
-_ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEj:
-    #####:   61:  inline void length(CORBA::ULong length) {
-    #####:   62:    impl_.length(length);
-    #####:   63:  }
-------------------
-_ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEE6lengthEj:
-    #####:   61:  inline void length(CORBA::ULong length) {
-    #####:   62:    impl_.length(length);
-    #####:   63:  }
-------------------
-_ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEj:
-    #####:   61:  inline void length(CORBA::ULong length) {
-    #####:   62:    impl_.length(length);
-    #####:   63:  }
-------------------
-_ZN3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEE6lengthEj:
-    #####:   61:  inline void length(CORBA::ULong length) {
-    #####:   62:    impl_.length(length);
-    #####:   63:  }
-------------------
     #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
     #####:   65:    return impl_[i];
         -:   66:  }
-------------------
-_ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS6GUID_tEEixEj:
-    #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
-    #####:   65:    return impl_[i];
-        -:   66:  }
-------------------
-_ZNK3TAO24unbounded_value_sequenceIN7OpenDDS4DCPS16TransportLocatorEEixEj:
-    #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
-    #####:   65:    return impl_[i];
-        -:   66:  }
-------------------
     #####:   67:  inline value_type & operator[](CORBA::ULong i) {
     #####:   68:    return impl_[i];
         -:   69:  }

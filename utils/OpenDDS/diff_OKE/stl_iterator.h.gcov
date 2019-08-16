@@ -1,0 +1,156 @@
+469,470c469,470
+<        10:  467:      back_insert_iterator(_Container& __x)
+<        10:  468:      : container(std::__addressof(__x)) { }
+---
+>        18:  467:      back_insert_iterator(_Container& __x)
+>        18:  468:      : container(std::__addressof(__x)) { }
+492c492
+<        10:  490:      operator=(const typename _Container::value_type& __value)
+---
+>        18:  490:      operator=(const typename _Container::value_type& __value)
+494,495c494,495
+<        10:  492:	container->push_back(__value);
+<        10:  493:	return *this;
+---
+>        18:  492:	container->push_back(__value);
+>        18:  493:	return *this;
+508,509c508,509
+<        10:  506:      operator*()
+<        10:  507:      { return *this; }
+---
+>        18:  506:      operator*()
+>        18:  507:      { return *this; }
+513,514c513,514
+<        10:  511:      operator++()
+<        10:  512:      { return *this; }
+---
+>        18:  511:      operator++()
+>        18:  512:      { return *this; }
+535,536c535,536
+<        10:  533:    back_inserter(_Container& __x)
+<        10:  534:    { return back_insert_iterator<_Container>(__x); }
+---
+>        18:  533:    back_inserter(_Container& __x)
+>        18:  534:    { return back_insert_iterator<_Container>(__x); }
+784,785c784,785
+<       287:  782:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+<       287:  783:      : _M_current(__i) { }
+---
+>       441:  782:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+>       441:  783:      : _M_current(__i) { }
+789c789
+<         6:  787:        __normal_iterator(const __normal_iterator<_Iter,
+---
+>         7:  787:        __normal_iterator(const __normal_iterator<_Iter,
+793c793
+<         6:  791:        : _M_current(__i.base()) { }
+---
+>         7:  791:        : _M_current(__i.base()) { }
+797,798c797,798
+<        23:  795:      operator*() const _GLIBCXX_NOEXCEPT
+<        23:  796:      { return *_M_current; }
+---
+>        39:  795:      operator*() const _GLIBCXX_NOEXCEPT
+>        39:  796:      { return *_M_current; }
+817c817
+<        10:  815:      operator--() _GLIBCXX_NOEXCEPT
+---
+>        18:  815:      operator--() _GLIBCXX_NOEXCEPT
+819,820c819,820
+<        10:  817:	--_M_current;
+<        10:  818:	return *this;
+---
+>        18:  817:	--_M_current;
+>        18:  818:	return *this;
+837,838c837,838
+<         6:  835:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+<         6:  836:      { return __normal_iterator(_M_current + __n); }
+---
+>         7:  835:      operator+(difference_type __n) const _GLIBCXX_NOEXCEPT
+>         7:  836:      { return __normal_iterator(_M_current + __n); }
+845,846c845,846
+<        13:  843:      operator-(difference_type __n) const _GLIBCXX_NOEXCEPT
+<        13:  844:      { return __normal_iterator(_M_current - __n); }
+---
+>        21:  843:      operator-(difference_type __n) const _GLIBCXX_NOEXCEPT
+>        21:  844:      { return __normal_iterator(_M_current - __n); }
+849,850c849,850
+<       352:  847:      base() const _GLIBCXX_NOEXCEPT
+<       352:  848:      { return _M_current; }
+---
+>       519:  847:      base() const _GLIBCXX_NOEXCEPT
+>       519:  848:      { return _M_current; }
+871c871
+<        76:  869:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>       128:  869:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+874c874
+<        76:  872:    { return __lhs.base() == __rhs.base(); }
+---
+>       128:  872:    { return __lhs.base() == __rhs.base(); }
+885c885
+<        25:  883:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>        42:  883:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+888c888
+<        25:  886:    { return __lhs.base() != __rhs.base(); }
+---
+>        42:  886:    { return __lhs.base() != __rhs.base(); }
+955c955
+<         4:  953:    operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+---
+>         5:  953:    operator-(const __normal_iterator<_IteratorL, _Container>& __lhs,
+963c963
+<         4:  961:    { return __lhs.base() - __rhs.base(); }
+---
+>         5:  961:    { return __lhs.base() - __rhs.base(); }
+967c967
+<        38:  965:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+---
+>        45:  965:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+970c970
+<        38:  968:    { return __lhs.base() - __rhs.base(); }
+---
+>        45:  968:    { return __lhs.base() - __rhs.base(); }
+1041,1042c1041,1042
+<        84: 1039:      move_iterator(iterator_type __i)
+<        84: 1040:      : _M_current(__i) { }
+---
+>       136: 1039:      move_iterator(iterator_type __i)
+>       136: 1040:      : _M_current(__i) { }
+1050,1051c1050,1051
+<        84: 1048:      base() const
+<        84: 1049:      { return _M_current; }
+---
+>       136: 1048:      base() const
+>       136: 1049:      { return _M_current; }
+1129c1129
+<        14: 1127:    operator==(const move_iterator<_Iterator>& __x,
+---
+>        24: 1127:    operator==(const move_iterator<_Iterator>& __x,
+1131c1131
+<        14: 1129:    { return __x.base() == __y.base(); }
+---
+>        24: 1129:    { return __x.base() == __y.base(); }
+1141c1141
+<        14: 1139:    operator!=(const move_iterator<_Iterator>& __x,
+---
+>        24: 1139:    operator!=(const move_iterator<_Iterator>& __x,
+1143c1143
+<        14: 1141:    { return !(__x == __y); }
+---
+>        24: 1141:    { return !(__x == __y); }
+1226,1227c1226,1227
+<       164: 1224:    __make_move_if_noexcept_iterator(_Tp* __i)
+<       164: 1225:    { return _ReturnType(__i); }
+---
+>       220: 1224:    __make_move_if_noexcept_iterator(_Tp* __i)
+>       220: 1225:    { return _ReturnType(__i); }
+1246c1246
+<        56: 1244:    __miter_base(move_iterator<_Iterator> __it)
+---
+>        88: 1244:    __miter_base(move_iterator<_Iterator> __it)
+1248c1248
+<        56: 1246:    { return __miter_base(__it.base()); }
+---
+>        88: 1246:    { return __miter_base(__it.base()); }

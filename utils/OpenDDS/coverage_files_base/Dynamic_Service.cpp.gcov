@@ -1,6 +1,6 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Dynamic_Service.cpp
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Dynamic_Service.cpp
         -:    0:Programs:70
-        -:    1:// $Id$
+        -:    1:// $Id: Dynamic_Service.cpp 935 2008-12-10 21:47:27Z mitza $
         -:    2:
         -:    3:#ifndef ACE_DYNAMIC_SERVICE_CPP
         -:    4:#define ACE_DYNAMIC_SERVICE_CPP
@@ -21,12 +21,12 @@
         -:   19:
         -:   20:
         -:   21:template <class TYPE> TYPE *
-      118:   22:ACE_Dynamic_Service<TYPE>::instance (const ACE_TCHAR *name)
+        8:   22:ACE_Dynamic_Service<TYPE>::instance (const ACE_TCHAR *name)
         -:   23:{
-        -:   24:  ACE_Service_Object * svc_obj =
+        8:   24:  ACE_Service_Object * svc_obj =
         -:   25:    static_cast<ACE_Service_Object *>
-      118:   26:    (ACE_Dynamic_Service_Base::instance (name,false));
-     118*:   27:  return dynamic_cast<TYPE *> (svc_obj);
+        -:   26:    (ACE_Dynamic_Service_Base::instance (name,false));
+        8:   27:  return dynamic_cast<TYPE *> (svc_obj);
         -:   28:}
         -:   29:
         -:   30:template <class TYPE> TYPE *

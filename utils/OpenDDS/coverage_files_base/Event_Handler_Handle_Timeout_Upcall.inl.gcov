@@ -1,0 +1,73 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Event_Handler_Handle_Timeout_Upcall.inl
+        -:    0:Programs:51
+        -:    1:// $Id: Event_Handler_Handle_Timeout_Upcall.inl 2179 2013-05-28 22:16:51Z mesnierp $
+        -:    2:
+        -:    3:#include "ace/Event_Handler.h"
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:ACE_INLINE int
+    #####:    8:ACE_Event_Handler_Handle_Timeout_Upcall::
+        -:    9:registration (ACE_Timer_Queue &,
+        -:   10:              ACE_Event_Handler *event_handler,
+        -:   11:              const void *)
+        -:   12:{
+    #####:   13:  event_handler->add_reference ();
+    #####:   14:  return 0;
+        -:   15:}
+        -:   16:
+        -:   17:ACE_INLINE int
+    #####:   18:ACE_Event_Handler_Handle_Timeout_Upcall::
+        -:   19:preinvoke (ACE_Timer_Queue &,
+        -:   20:          ACE_Event_Handler *event_handler,
+        -:   21:          const void *,
+        -:   22:          int,
+        -:   23:          const ACE_Time_Value &,
+        -:   24:          const void * & upcall_act)
+        -:   25:{
+        -:   26:  bool const requires_reference_counting =
+    #####:   27:    event_handler->reference_counting_policy ().value () ==
+    #####:   28:    ACE_Event_Handler::Reference_Counting_Policy::ENABLED;
+        -:   29:
+    #####:   30:  if (requires_reference_counting)
+        -:   31:    {
+    #####:   32:      event_handler->add_reference ();
+        -:   33:
+    #####:   34:      upcall_act = &this->requires_reference_counting_;
+        -:   35:    }
+        -:   36:
+    #####:   37:  return 0;
+        -:   38:}
+        -:   39:
+        -:   40:ACE_INLINE int
+    #####:   41:ACE_Event_Handler_Handle_Timeout_Upcall::
+        -:   42:postinvoke (ACE_Timer_Queue & /* timer_queue */,
+        -:   43:            ACE_Event_Handler *event_handler,
+        -:   44:            const void * /* timer_act */,
+        -:   45:            int /* recurring_timer */,
+        -:   46:            const ACE_Time_Value & /* cur_time */,
+        -:   47:            const void *upcall_act)
+        -:   48:{
+    #####:   49:  if (upcall_act == &this->requires_reference_counting_)
+        -:   50:    {
+    #####:   51:      event_handler->remove_reference ();
+        -:   52:    }
+        -:   53:
+    #####:   54:  return 0;
+        -:   55:}
+        -:   56:
+        -:   57:ACE_INLINE int
+    #####:   58:ACE_Event_Handler_Handle_Timeout_Upcall::
+        -:   59:cancel_timer (ACE_Timer_Queue &,
+        -:   60:              ACE_Event_Handler *event_handler,
+        -:   61:              int,
+        -:   62:              int requires_reference_counting)
+        -:   63:{
+    #####:   64:  if (requires_reference_counting)
+    #####:   65:    event_handler->remove_reference ();
+        -:   66:
+    #####:   67:  return 0;
+        -:   68:}
+        -:   69:
+        -:   70:
+        -:   71:ACE_END_VERSIONED_NAMESPACE_DECL

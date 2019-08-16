@@ -1,0 +1,30 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+133c133
+<       396:  131:      allocator() throw() { }
+---
+>     #####:  131:      allocator() throw() { }
+139c139
+<       208:  137:	allocator(const allocator<_Tp1>&) throw() { }
+---
+>         -:  137:	allocator(const allocator<_Tp1>&) throw() { }
+141c141
+<       599:  139:      ~allocator() throw() { }
+---
+>     #####:  139:      ~allocator() throw() { }
+166c166
+<     #####:  164:    operator!=(const allocator<_Tp>&, const allocator<_Tp>&)
+---
+>         -:  164:    operator!=(const allocator<_Tp>&, const allocator<_Tp>&)
+168c168
+<     #####:  166:    { return false; }
+---
+>         -:  166:    { return false; }
+204,205c204,205
+<     #####:  202:      _S_do_it(const _Alloc&, const _Alloc&)
+<     #####:  203:      { return false; }
+---
+>         -:  202:      _S_do_it(const _Alloc&, const _Alloc&)
+>         -:  203:      { return false; }

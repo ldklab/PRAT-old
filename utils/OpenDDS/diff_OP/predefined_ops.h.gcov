@@ -1,0 +1,14 @@
+236,238c236,238
+<         4:  234:      _Iter_equals_val(_Value& __value)
+<         4:  235:	: _M_value(__value)
+<         4:  236:      { }
+---
+>         5:  234:      _Iter_equals_val(_Value& __value)
+>         5:  235:	: _M_value(__value)
+>         5:  236:      { }
+248,249c248,249
+<         4:  246:    __iter_equals_val(_Value& __val)
+<         4:  247:    { return _Iter_equals_val<_Value>(__val); }
+---
+>         5:  246:    __iter_equals_val(_Value& __val)
+>         5:  247:    { return _Iter_equals_val<_Value>(__val); }

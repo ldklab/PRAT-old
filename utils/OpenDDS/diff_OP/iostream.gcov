@@ -1,0 +1,4 @@
+76c76
+<       120:   74:  static ios_base::Init __ioinit;
+---
+>       195:   74:  static ios_base::Init __ioinit;

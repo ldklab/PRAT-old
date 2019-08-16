@@ -1,0 +1,15 @@
+1,2c1,2
+<         -:    0:Source:DCPS/InstanceState.h
+<         -:    0:Programs:70
+---
+>         -:    0:Source:../dds/DCPS/InstanceState.h
+>         -:    0:Programs:24
+134c134,139
+<     #####:  132:/*EOF*/
+---
+>         -:  132:/*EOF*/
+>         -:  133:/*EOF*/
+>         -:  134:/*EOF*/
+>     #####:  135:/*EOF*/
+>         -:  136:/*EOF*/
+>     #####:  137:/*EOF*/

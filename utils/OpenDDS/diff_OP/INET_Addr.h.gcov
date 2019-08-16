@@ -1,0 +1,4 @@
+35c35
+<         1:   33:class ACE_Export ACE_INET_Addr : public ACE_Addr
+---
+>         3:   33:class ACE_Export ACE_INET_Addr : public ACE_Addr

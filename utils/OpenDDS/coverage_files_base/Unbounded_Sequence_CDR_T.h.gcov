@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Sequence_CDR_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Sequence_CDR_T.h
         -:    0:Programs:24
         -:    1:#ifndef guard_unbounded_sequence_cdr
         -:    2:#define guard_unbounded_sequence_cdr
@@ -7,7 +7,7 @@
         -:    5: *
         -:    6: * @brief Extract the sequence
         -:    7: *
-        -:    8: * $Id$
+        -:    8: * $Id: Unbounded_Sequence_CDR_T.h 1861 2011-08-31 16:18:08Z mesnierp $
         -:    9: *
         -:   10: * @author Carlos O'Ryan
         -:   11: * @author Johnny Willemsen
@@ -102,36 +102,36 @@
         -:  100:
         -:  101:#if (TAO_NO_COPY_OCTET_SEQUENCES == 1)
         -:  102:  template <typename stream>
-       57:  103:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <CORBA::Octet> & target) {
+       82:  103:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <CORBA::Octet> & target) {
         -:  104:    typedef TAO::unbounded_value_sequence <CORBA::Octet> sequence;
-       57:  105:    ::CORBA::ULong new_length = 0;
-       57:  106:    if (!(strm >> new_length)) {
+       82:  105:    ::CORBA::ULong new_length = 0;
+       82:  106:    if (!(strm >> new_length)) {
     #####:  107:      return false;
         -:  108:    }
-       57:  109:    if (new_length > strm.length()) {
+       82:  109:    if (new_length > strm.length()) {
     #####:  110:      return false;
         -:  111:    }
-      114:  112:    sequence tmp(new_length);
-       57:  113:    tmp.length(new_length);
-       57:  114:    if (ACE_BIT_DISABLED (strm.start ()->flags (), ACE_Message_Block::DONT_DELETE))
+      164:  112:    sequence tmp(new_length);
+       82:  113:    tmp.length(new_length);
+       82:  114:    if (ACE_BIT_DISABLED (strm.start ()->flags (), ACE_Message_Block::DONT_DELETE))
         -:  115:    {
-       12:  116:      TAO_ORB_Core* orb_core = strm.orb_core ();
-      24*:  117:      if (orb_core != 0 && strm.orb_core ()->resource_factory ()->
-       12:  118:        input_cdr_allocator_type_locked () == 1)
+    #####:  116:      TAO_ORB_Core* orb_core = strm.orb_core ();
+    #####:  117:      if (orb_core != 0 && strm.orb_core ()->resource_factory ()->
+    #####:  118:        input_cdr_allocator_type_locked () == 1)
         -:  119:      {
-       12:  120:        tmp.replace (new_length, strm.start ());
-       12:  121:        tmp.mb ()->wr_ptr (tmp.mb()->rd_ptr () + new_length);
-       12:  122:        strm.skip_bytes (new_length);
-       12:  123:        tmp.swap(target);
-       12:  124:        return true;
+    #####:  120:        tmp.replace (new_length, strm.start ());
+    #####:  121:        tmp.mb ()->wr_ptr (tmp.mb()->rd_ptr () + new_length);
+    #####:  122:        strm.skip_bytes (new_length);
+    #####:  123:        tmp.swap(target);
+    #####:  124:        return true;
         -:  125:      }
         -:  126:    }
-       45:  127:    typename sequence::value_type * buffer = tmp.get_buffer();
-       45:  128:    if (!strm.read_octet_array (buffer, new_length)) {
+       82:  127:    typename sequence::value_type * buffer = tmp.get_buffer();
+       82:  128:    if (!strm.read_octet_array (buffer, new_length)) {
     #####:  129:      return false;
         -:  130:    }
-       45:  131:    tmp.swap(target);
-       45:  132:    return true;
+       82:  131:    tmp.swap(target);
+       82:  132:    return true;
         -:  133:  }
         -:  134:#else
         -:  135:  template <typename stream>
@@ -318,242 +318,43 @@
         -:  316:  }
         -:  317:
         -:  318:  template <typename stream, typename value_t>
-      19*:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
+       36:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
         -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-      19*:  321:    ::CORBA::ULong new_length = 0;
-      19*:  322:    if (!(strm >> new_length)) {
+       36:  321:    ::CORBA::ULong new_length = 0;
+       36:  322:    if (!(strm >> new_length)) {
     #####:  323:      return false;
         -:  324:    }
-      19*:  325:    if (new_length > strm.length()) {
+       36:  325:    if (new_length > strm.length()) {
     #####:  326:      return false;
         -:  327:    }
-      38*:  328:    sequence tmp(new_length);
-      19*:  329:    tmp.length(new_length);
-      19*:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-      34*:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-      15*:  332:      if (!(strm >> buffer[i])) {
+       72:  328:    sequence tmp(new_length);
+       36:  329:    tmp.length(new_length);
+       36:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
+       58:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
+       22:  332:      if (!(strm >> buffer[i])) {
     #####:  333:        return false;
         -:  334:      }
         -:  335:    }
-      19*:  336:    tmp.swap(target);
-      19*:  337:    return true;
+       36:  336:    tmp.swap(target);
+       36:  337:    return true;
         -:  338:  }
-------------------
-_ZN3TAO18demarshal_sequenceI12TAO_InputCDRN3DDS10SampleInfoEEEbRT_RNS_24unbounded_value_sequenceIT0_EE:
-    #####:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
-        -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-    #####:  321:    ::CORBA::ULong new_length = 0;
-    #####:  322:    if (!(strm >> new_length)) {
-    #####:  323:      return false;
-        -:  324:    }
-    #####:  325:    if (new_length > strm.length()) {
-    #####:  326:      return false;
-        -:  327:    }
-    #####:  328:    sequence tmp(new_length);
-    #####:  329:    tmp.length(new_length);
-    #####:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-    #####:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-    #####:  332:      if (!(strm >> buffer[i])) {
-    #####:  333:        return false;
-        -:  334:      }
-        -:  335:    }
-    #####:  336:    tmp.swap(target);
-    #####:  337:    return true;
-        -:  338:  }
-------------------
-_ZN3TAO18demarshal_sequenceI12TAO_InputCDRN3DDS16BinaryProperty_tEEEbRT_RNS_24unbounded_value_sequenceIT0_EE:
-        2:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
-        -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-        2:  321:    ::CORBA::ULong new_length = 0;
-        2:  322:    if (!(strm >> new_length)) {
-    #####:  323:      return false;
-        -:  324:    }
-        2:  325:    if (new_length > strm.length()) {
-    #####:  326:      return false;
-        -:  327:    }
-        4:  328:    sequence tmp(new_length);
-        2:  329:    tmp.length(new_length);
-        2:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-       2*:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-    #####:  332:      if (!(strm >> buffer[i])) {
-    #####:  333:        return false;
-        -:  334:      }
-        -:  335:    }
-        2:  336:    tmp.swap(target);
-        2:  337:    return true;
-        -:  338:  }
-------------------
-_ZN3TAO18demarshal_sequenceI12TAO_InputCDRN3DDS10Property_tEEEbRT_RNS_24unbounded_value_sequenceIT0_EE:
-        2:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
-        -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-        2:  321:    ::CORBA::ULong new_length = 0;
-        2:  322:    if (!(strm >> new_length)) {
-    #####:  323:      return false;
-        -:  324:    }
-        2:  325:    if (new_length > strm.length()) {
-    #####:  326:      return false;
-        -:  327:    }
-        4:  328:    sequence tmp(new_length);
-        2:  329:    tmp.length(new_length);
-        2:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-       2*:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-    #####:  332:      if (!(strm >> buffer[i])) {
-    #####:  333:        return false;
-        -:  334:      }
-        -:  335:    }
-        2:  336:    tmp.swap(target);
-        2:  337:    return true;
-        -:  338:  }
-------------------
-_ZN3TAO18demarshal_sequenceI12TAO_InputCDRN3DDS14QosPolicyCountEEEbRT_RNS_24unbounded_value_sequenceIT0_EE:
-    #####:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
-        -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-    #####:  321:    ::CORBA::ULong new_length = 0;
-    #####:  322:    if (!(strm >> new_length)) {
-    #####:  323:      return false;
-        -:  324:    }
-    #####:  325:    if (new_length > strm.length()) {
-    #####:  326:      return false;
-        -:  327:    }
-    #####:  328:    sequence tmp(new_length);
-    #####:  329:    tmp.length(new_length);
-    #####:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-    #####:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-    #####:  332:      if (!(strm >> buffer[i])) {
-    #####:  333:        return false;
-        -:  334:      }
-        -:  335:    }
-    #####:  336:    tmp.swap(target);
-    #####:  337:    return true;
-        -:  338:  }
-------------------
-_ZN3TAO18demarshal_sequenceI12TAO_InputCDRN7OpenDDS4DCPS6GUID_tEEEbRT_RNS_24unbounded_value_sequenceIT0_EE:
-    #####:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
-        -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-    #####:  321:    ::CORBA::ULong new_length = 0;
-    #####:  322:    if (!(strm >> new_length)) {
-    #####:  323:      return false;
-        -:  324:    }
-    #####:  325:    if (new_length > strm.length()) {
-    #####:  326:      return false;
-        -:  327:    }
-    #####:  328:    sequence tmp(new_length);
-    #####:  329:    tmp.length(new_length);
-    #####:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-    #####:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-    #####:  332:      if (!(strm >> buffer[i])) {
-    #####:  333:        return false;
-        -:  334:      }
-        -:  335:    }
-    #####:  336:    tmp.swap(target);
-    #####:  337:    return true;
-        -:  338:  }
-------------------
-_ZN3TAO18demarshal_sequenceI12TAO_InputCDRN7OpenDDS4DCPS9Locator_tEEEbRT_RNS_24unbounded_value_sequenceIT0_EE:
-    #####:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
-        -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-    #####:  321:    ::CORBA::ULong new_length = 0;
-    #####:  322:    if (!(strm >> new_length)) {
-    #####:  323:      return false;
-        -:  324:    }
-    #####:  325:    if (new_length > strm.length()) {
-    #####:  326:      return false;
-        -:  327:    }
-    #####:  328:    sequence tmp(new_length);
-    #####:  329:    tmp.length(new_length);
-    #####:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-    #####:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-    #####:  332:      if (!(strm >> buffer[i])) {
-    #####:  333:        return false;
-        -:  334:      }
-        -:  335:    }
-    #####:  336:    tmp.swap(target);
-    #####:  337:    return true;
-        -:  338:  }
-------------------
-_ZN3TAO18demarshal_sequenceI12TAO_InputCDRN7OpenDDS4DCPS6GUID_tEEEbRT_RNS_24unbounded_value_sequenceIT0_EE:
-    #####:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
-        -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-    #####:  321:    ::CORBA::ULong new_length = 0;
-    #####:  322:    if (!(strm >> new_length)) {
-    #####:  323:      return false;
-        -:  324:    }
-    #####:  325:    if (new_length > strm.length()) {
-    #####:  326:      return false;
-        -:  327:    }
-    #####:  328:    sequence tmp(new_length);
-    #####:  329:    tmp.length(new_length);
-    #####:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-    #####:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-    #####:  332:      if (!(strm >> buffer[i])) {
-    #####:  333:        return false;
-        -:  334:      }
-        -:  335:    }
-    #####:  336:    tmp.swap(target);
-    #####:  337:    return true;
-        -:  338:  }
-------------------
-_ZN3TAO18demarshal_sequenceI12TAO_InputCDRN7OpenDDS4DCPS16TransportLocatorEEEbRT_RNS_24unbounded_value_sequenceIT0_EE:
-       15:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
-        -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-       15:  321:    ::CORBA::ULong new_length = 0;
-       15:  322:    if (!(strm >> new_length)) {
-    #####:  323:      return false;
-        -:  324:    }
-       15:  325:    if (new_length > strm.length()) {
-    #####:  326:      return false;
-        -:  327:    }
-       30:  328:    sequence tmp(new_length);
-       15:  329:    tmp.length(new_length);
-       15:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-       30:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-       15:  332:      if (!(strm >> buffer[i])) {
-    #####:  333:        return false;
-        -:  334:      }
-        -:  335:    }
-       15:  336:    tmp.swap(target);
-       15:  337:    return true;
-        -:  338:  }
-------------------
-_ZN3TAO18demarshal_sequenceI12TAO_InputCDRN7OpenDDS4DCPS17LatencyStatisticsEEEbRT_RNS_24unbounded_value_sequenceIT0_EE:
-    #####:  319:  bool demarshal_sequence(stream & strm, TAO::unbounded_value_sequence <value_t> & target) {
-        -:  320:    typedef TAO::unbounded_value_sequence <value_t> sequence;
-    #####:  321:    ::CORBA::ULong new_length = 0;
-    #####:  322:    if (!(strm >> new_length)) {
-    #####:  323:      return false;
-        -:  324:    }
-    #####:  325:    if (new_length > strm.length()) {
-    #####:  326:      return false;
-        -:  327:    }
-    #####:  328:    sequence tmp(new_length);
-    #####:  329:    tmp.length(new_length);
-    #####:  330:    typename sequence::value_type * buffer = tmp.get_buffer();
-    #####:  331:    for(CORBA::ULong i = 0; i < new_length; ++i) {
-    #####:  332:      if (!(strm >> buffer[i])) {
-    #####:  333:        return false;
-        -:  334:      }
-        -:  335:    }
-    #####:  336:    tmp.swap(target);
-    #####:  337:    return true;
-        -:  338:  }
-------------------
         -:  339:
         -:  340:  template <typename stream, typename charT>
-       25:  341:  bool demarshal_sequence(stream & strm, TAO::unbounded_basic_string_sequence <charT> & target) {
+       34:  341:  bool demarshal_sequence(stream & strm, TAO::unbounded_basic_string_sequence <charT> & target) {
         -:  342:    typedef TAO::unbounded_basic_string_sequence <charT> sequence;
         -:  343:    typedef typename sequence::element_traits::string_var string_var;
         -:  344:    typedef typename sequence::allocation_traits sequence_allocation_traits;
-       25:  345:    ::CORBA::ULong new_length = 0;
-       25:  346:    if (!(strm >> new_length)) {
+       34:  345:    ::CORBA::ULong new_length = 0;
+       34:  346:    if (!(strm >> new_length)) {
     #####:  347:      return false;
         -:  348:    }
-       25:  349:    if (new_length > strm.length()) {
+       34:  349:    if (new_length > strm.length()) {
     #####:  350:      return false;
         -:  351:    }
-       50:  352:    sequence tmp(new_length, new_length,
+       68:  352:    sequence tmp(new_length, new_length,
         -:  353:                 sequence_allocation_traits::allocbuf_noinit(new_length),
         -:  354:                 true);
-      25*:  355:    for(CORBA::ULong i = 0; i < new_length; ++i) {
+       34:  355:    for(CORBA::ULong i = 0; i < new_length; ++i) {
     #####:  356:      string_var string;
     #####:  357:      if (!(strm >> string.inout ())) {
     #####:  358:        return false;
@@ -562,8 +363,8 @@ _ZN3TAO18demarshal_sequenceI12TAO_InputCDRN7OpenDDS4DCPS17LatencyStatisticsEEEbR
     #####:  361:        tmp[i] = string._retn ();
         -:  362:      }
         -:  363:    }
-       25:  364:    tmp.swap(target);
-       25:  365:    return true;
+       34:  364:    tmp.swap(target);
+       34:  365:    return true;
         -:  366:  }
         -:  367:
         -:  368:  template <typename stream, typename charT, CORBA::ULong BD_STR_MAX>
@@ -662,15 +463,15 @@ _ZN3TAO18demarshal_sequenceI12TAO_InputCDRN7OpenDDS4DCPS17LatencyStatisticsEEEbR
         -:  461:
         -:  462:#if (TAO_NO_COPY_OCTET_SEQUENCES == 1)
         -:  463:  template <typename stream>
-       51:  464:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <CORBA::Octet> & source) {
-       51:  465:    ::CORBA::ULong const length = source.length ();
-       51:  466:    if (!(strm << length)) {
+       78:  464:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <CORBA::Octet> & source) {
+       78:  465:    ::CORBA::ULong const length = source.length ();
+       78:  466:    if (!(strm << length)) {
     #####:  467:      return false;
         -:  468:    }
-       51:  469:    if (source.mb ()) {
+       78:  469:    if (source.mb ()) {
     #####:  470:      return strm.write_octet_array_mb (source.mb ());
         -:  471:    }
-       51:  472:    return strm.write_octet_array (source.get_buffer (), length);
+       78:  472:    return strm.write_octet_array (source.get_buffer (), length);
         -:  473:  }
         -:  474:#else
         -:  475:  template <typename stream>
@@ -758,158 +559,31 @@ _ZN3TAO18demarshal_sequenceI12TAO_InputCDRN7OpenDDS4DCPS17LatencyStatisticsEEEbR
         -:  557:  }
         -:  558:
         -:  559:  template <typename stream, typename value_t>
-      18*:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-      18*:  561:    ::CORBA::ULong const length = source.length ();
-      18*:  562:    if (!(strm << length)) {
+       40:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
+       40:  561:    ::CORBA::ULong const length = source.length ();
+       40:  562:    if (!(strm << length)) {
     #####:  563:      return false;
         -:  564:    }
-      34*:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-      16*:  566:      if (!(strm << source[i])) {
+       68:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
+       28:  566:      if (!(strm << source[i])) {
     #####:  567:        return false;
         -:  568:      }
         -:  569:    }
-      18*:  570:    return true;
+       40:  570:    return true;
         -:  571:  }
-------------------
-_ZN3TAO16marshal_sequenceI13TAO_OutputCDRN3DDS10SampleInfoEEEbRT_RKNS_24unbounded_value_sequenceIT0_EE:
-    #####:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-    #####:  561:    ::CORBA::ULong const length = source.length ();
-    #####:  562:    if (!(strm << length)) {
-    #####:  563:      return false;
-        -:  564:    }
-    #####:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-    #####:  566:      if (!(strm << source[i])) {
-    #####:  567:        return false;
-        -:  568:      }
-        -:  569:    }
-    #####:  570:    return true;
-        -:  571:  }
-------------------
-_ZN3TAO16marshal_sequenceI13TAO_OutputCDRN3DDS16BinaryProperty_tEEEbRT_RKNS_24unbounded_value_sequenceIT0_EE:
-        1:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-        1:  561:    ::CORBA::ULong const length = source.length ();
-        1:  562:    if (!(strm << length)) {
-    #####:  563:      return false;
-        -:  564:    }
-       1*:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-    #####:  566:      if (!(strm << source[i])) {
-    #####:  567:        return false;
-        -:  568:      }
-        -:  569:    }
-        1:  570:    return true;
-        -:  571:  }
-------------------
-_ZN3TAO16marshal_sequenceI13TAO_OutputCDRN3DDS10Property_tEEEbRT_RKNS_24unbounded_value_sequenceIT0_EE:
-        1:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-        1:  561:    ::CORBA::ULong const length = source.length ();
-        1:  562:    if (!(strm << length)) {
-    #####:  563:      return false;
-        -:  564:    }
-       1*:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-    #####:  566:      if (!(strm << source[i])) {
-    #####:  567:        return false;
-        -:  568:      }
-        -:  569:    }
-        1:  570:    return true;
-        -:  571:  }
-------------------
-_ZN3TAO16marshal_sequenceI13TAO_OutputCDRN3DDS14QosPolicyCountEEEbRT_RKNS_24unbounded_value_sequenceIT0_EE:
-    #####:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-    #####:  561:    ::CORBA::ULong const length = source.length ();
-    #####:  562:    if (!(strm << length)) {
-    #####:  563:      return false;
-        -:  564:    }
-    #####:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-    #####:  566:      if (!(strm << source[i])) {
-    #####:  567:        return false;
-        -:  568:      }
-        -:  569:    }
-    #####:  570:    return true;
-        -:  571:  }
-------------------
-_ZN3TAO16marshal_sequenceI13TAO_OutputCDRN7OpenDDS4DCPS6GUID_tEEEbRT_RKNS_24unbounded_value_sequenceIT0_EE:
-        1:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-        1:  561:    ::CORBA::ULong const length = source.length ();
-        1:  562:    if (!(strm << length)) {
-    #####:  563:      return false;
-        -:  564:    }
-        2:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-        1:  566:      if (!(strm << source[i])) {
-    #####:  567:        return false;
-        -:  568:      }
-        -:  569:    }
-        1:  570:    return true;
-        -:  571:  }
-------------------
-_ZN3TAO16marshal_sequenceI13TAO_OutputCDRN7OpenDDS4DCPS9Locator_tEEEbRT_RKNS_24unbounded_value_sequenceIT0_EE:
-    #####:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-    #####:  561:    ::CORBA::ULong const length = source.length ();
-    #####:  562:    if (!(strm << length)) {
-    #####:  563:      return false;
-        -:  564:    }
-    #####:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-    #####:  566:      if (!(strm << source[i])) {
-    #####:  567:        return false;
-        -:  568:      }
-        -:  569:    }
-    #####:  570:    return true;
-        -:  571:  }
-------------------
-_ZN3TAO16marshal_sequenceI13TAO_OutputCDRN7OpenDDS4DCPS6GUID_tEEEbRT_RKNS_24unbounded_value_sequenceIT0_EE:
-    #####:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-    #####:  561:    ::CORBA::ULong const length = source.length ();
-    #####:  562:    if (!(strm << length)) {
-    #####:  563:      return false;
-        -:  564:    }
-    #####:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-    #####:  566:      if (!(strm << source[i])) {
-    #####:  567:        return false;
-        -:  568:      }
-        -:  569:    }
-    #####:  570:    return true;
-        -:  571:  }
-------------------
-_ZN3TAO16marshal_sequenceI13TAO_OutputCDRN7OpenDDS4DCPS16TransportLocatorEEEbRT_RKNS_24unbounded_value_sequenceIT0_EE:
-       15:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-       15:  561:    ::CORBA::ULong const length = source.length ();
-       15:  562:    if (!(strm << length)) {
-    #####:  563:      return false;
-        -:  564:    }
-       30:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-       15:  566:      if (!(strm << source[i])) {
-    #####:  567:        return false;
-        -:  568:      }
-        -:  569:    }
-       15:  570:    return true;
-        -:  571:  }
-------------------
-_ZN3TAO16marshal_sequenceI13TAO_OutputCDRN7OpenDDS4DCPS17LatencyStatisticsEEEbRT_RKNS_24unbounded_value_sequenceIT0_EE:
-    #####:  560:  bool marshal_sequence(stream & strm, const TAO::unbounded_value_sequence <value_t> & source) {
-    #####:  561:    ::CORBA::ULong const length = source.length ();
-    #####:  562:    if (!(strm << length)) {
-    #####:  563:      return false;
-        -:  564:    }
-    #####:  565:    for(CORBA::ULong i = 0; i < length; ++i) {
-    #####:  566:      if (!(strm << source[i])) {
-    #####:  567:        return false;
-        -:  568:      }
-        -:  569:    }
-    #####:  570:    return true;
-        -:  571:  }
-------------------
         -:  572:
         -:  573:  template <typename stream, typename charT>
-       20:  574:  bool marshal_sequence(stream & strm, const TAO::unbounded_basic_string_sequence <charT> & source) {
-       20:  575:    ::CORBA::ULong const length = source.length ();
-       20:  576:    if (!(strm << length)) {
+       30:  574:  bool marshal_sequence(stream & strm, const TAO::unbounded_basic_string_sequence <charT> & source) {
+       30:  575:    ::CORBA::ULong const length = source.length ();
+       30:  576:    if (!(strm << length)) {
     #####:  577:      return false;
         -:  578:    }
-      20*:  579:    for(CORBA::ULong i = 0; i < length; ++i) {
+       30:  579:    for(CORBA::ULong i = 0; i < length; ++i) {
     #####:  580:      if (!(strm << source[i])) {
     #####:  581:        return false;
         -:  582:      }
         -:  583:    }
-       20:  584:    return true;
+       30:  584:    return true;
         -:  585:  }
         -:  586:
         -:  587:  template <typename stream, typename charT, CORBA::ULong BD_STR_MAX>

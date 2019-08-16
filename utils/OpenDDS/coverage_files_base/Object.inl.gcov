@@ -1,0 +1,94 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Object.inl
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: Object.inl 1861 2011-08-31 16:18:08Z mesnierp $
+        -:    4:
+        -:    5:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:// ****************************************************************
+        -:    8:
+        -:    9:template<>
+        -:   10:ACE_INLINE
+        -:   11:CORBA::Boolean
+        -:   12:CORBA::is_nil<> (CORBA::Object_ptr obj)
+        -:   13:{
+        -:   14:  if (obj == 0)
+        -:   15:    {
+        -:   16:      return true;
+        -:   17:    }
+        -:   18:
+        -:   19:  return CORBA::Object::is_nil_i (obj);
+        -:   20:}
+        -:   21:
+        -:   22:// ****************************************************************
+        -:   23:
+        -:   24:ACE_INLINE
+    #####:   25:CORBA::Object::Object (int)
+        -:   26:  : refcount_ (1),
+        -:   27:    is_local_ (true),
+        -:   28:    is_evaluated_ (true),
+        -:   29:    ior_ (),
+        -:   30:    orb_core_ (0),
+    #####:   31:    protocol_proxy_ (0)
+        -:   32:{
+    #####:   33:}
+        -:   34:
+        -:   35:ACE_INLINE CORBA::Object_ptr
+        -:   36:CORBA::Object::_duplicate (CORBA::Object_ptr obj)
+        -:   37:{
+        -:   38:  if (obj)
+        -:   39:    {
+        -:   40:      obj->_add_ref ();
+        -:   41:    }
+        -:   42:
+        -:   43:  return obj;
+        -:   44:}
+        -:   45:
+        -:   46:// Null pointers represent nil objects.
+        -:   47:
+        -:   48:ACE_INLINE
+        -:   49:CORBA::Object_ptr
+        -:   50:CORBA::Object::_nil (void)
+        -:   51:{
+        -:   52:  return 0;
+        -:   53:}
+        -:   54:
+        -:   55:ACE_INLINE
+        -:   56:CORBA::Object_ptr
+        -:   57:CORBA::Object::_narrow (CORBA::Object_ptr obj)
+        -:   58:{
+        -:   59:  return CORBA::Object::_duplicate (obj);
+        -:   60:}
+        -:   61:
+        -:   62:ACE_INLINE CORBA::Boolean
+        -:   63:CORBA::Object::is_evaluated (void) const
+        -:   64:{
+        -:   65:  return this->is_evaluated_;
+        -:   66:}
+        -:   67:
+        -:   68:ACE_INLINE TAO_ORB_Core *
+        -:   69:CORBA::Object::orb_core (void) const
+        -:   70:{
+        -:   71:  return this->orb_core_;
+        -:   72:}
+        -:   73:
+        -:   74:ACE_INLINE IOP::IOR *
+        -:   75:CORBA::Object::steal_ior (void)
+        -:   76:{
+        -:   77:  return this->ior_._retn ();
+        -:   78:}
+        -:   79:
+        -:   80:ACE_INLINE const IOP::IOR &
+        -:   81:CORBA::Object::ior (void) const
+        -:   82:{
+        -:   83:  return this->ior_.in ();
+        -:   84:}
+        -:   85:
+        -:   86:ACE_INLINE void
+    #####:   87:CORBA::Object::_decr_refcount (void)
+        -:   88:{
+    #####:   89:  this->_remove_ref ();
+    #####:   90:}
+        -:   91:
+        -:   92:TAO_END_VERSIONED_NAMESPACE_DECL

@@ -1,94 +1,94 @@
 48c48
-<       119:   46:ACE_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+<         7:   46:ACE_Singleton<TYPE, ACE_LOCK>::instance_i (void)
 ---
->        89:   46:ACE_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+>        12:   46:ACE_Singleton<TYPE, ACE_LOCK>::instance_i (void)
 57c57
-<       119:   55:  return ACE_Singleton<TYPE, ACE_LOCK>::singleton_;
+<         7:   55:  return ACE_Singleton<TYPE, ACE_LOCK>::singleton_;
 ---
->        89:   55:  return ACE_Singleton<TYPE, ACE_LOCK>::singleton_;
+>        12:   55:  return ACE_Singleton<TYPE, ACE_LOCK>::singleton_;
 122c122
-<       119:  120:ACE_Singleton<TYPE, ACE_LOCK>::cleanup (void *param)
+<         7:  120:ACE_Singleton<TYPE, ACE_LOCK>::cleanup (void *param)
 ---
->        89:  120:ACE_Singleton<TYPE, ACE_LOCK>::cleanup (void *param)
+>        12:  120:ACE_Singleton<TYPE, ACE_LOCK>::cleanup (void *param)
 124,126c124,126
-<       119:  122:  ACE_Object_Manager::remove_at_exit (this);
-<       119:  123:  delete this;
-<       119:  124:  ACE_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+<         7:  122:  ACE_Object_Manager::remove_at_exit (this);
+<         7:  123:  delete this;
+<         7:  124:  ACE_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
 ---
->        89:  122:  ACE_Object_Manager::remove_at_exit (this);
->        89:  123:  delete this;
->        89:  124:  ACE_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+>        12:  122:  ACE_Object_Manager::remove_at_exit (this);
+>        12:  123:  delete this;
+>        12:  124:  ACE_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
 131c131
-<       119:  129:  if (param)
+<         7:  129:  if (param)
 ---
->        89:  129:  if (param)
+>        12:  129:  if (param)
 137c137
-<       119:  135:}
+<         7:  135:}
 ---
->        89:  135:}
+>        12:  135:}
 177c177
-<       647:  175:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+<        60:  175:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i (void)
 ---
->       468:  175:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+>       114:  175:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i (void)
 186c186
-<       647:  184:  return ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::singleton_;
+<        60:  184:  return ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::singleton_;
 ---
->       468:  184:  return ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::singleton_;
+>       114:  184:  return ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::singleton_;
 191c191
-<       409:  189:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance (void)
+<        46:  189:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance (void)
 ---
->       290:  189:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance (void)
-196c196
-<       409:  194:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
+>        90:  189:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance (void)
+195c195
+<        46:  193:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
 ---
->       290:  194:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
+>        90:  193:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
 199c199
-<       409:  197:  if (singleton == 0)
+<        46:  197:  if (singleton == 0)
 ---
->       290:  197:  if (singleton == 0)
+>        90:  197:  if (singleton == 0)
 201,202c201,202
-<      238*:  199:      if (ACE_Object_Manager::starting_up () ||
-<       119:  200:          ACE_Object_Manager::shutting_down ())
+<        16:  199:      if (ACE_Object_Manager::starting_up () ||
+<         8:  200:          ACE_Object_Manager::shutting_down ())
 ---
->      178*:  199:      if (ACE_Object_Manager::starting_up () ||
->        89:  200:          ACE_Object_Manager::shutting_down ())
+>        26:  199:      if (ACE_Object_Manager::starting_up () ||
+>        13:  200:          ACE_Object_Manager::shutting_down ())
 226c226
-<       119:  224:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
+<         8:  224:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
 ---
->        89:  224:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
+>        13:  224:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
 230c230
-<      119*:  228:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
+<        16:  228:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
 ---
->       89*:  228:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
+>        26:  228:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
 233,234c233,234
-<       119:  231:          if (singleton == 0)
-<      119*:  232:            ACE_NEW_RETURN (singleton,
+<         8:  231:          if (singleton == 0)
+<         8:  232:            ACE_NEW_RETURN (singleton,
 ---
->        89:  231:          if (singleton == 0)
->       89*:  232:            ACE_NEW_RETURN (singleton,
+>        13:  231:          if (singleton == 0)
+>        13:  232:            ACE_NEW_RETURN (singleton,
 240c240
-<       409:  238:  return &singleton->instance_;
+<        46:  238:  return &singleton->instance_;
 ---
->       290:  238:  return &singleton->instance_;
+>        90:  238:  return &singleton->instance_;
 244c244
-<       119:  242:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::close (void)
+<         7:  242:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::close (void)
 ---
->        89:  242:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::close (void)
-247c247
-<       119:  245:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
+>        12:  242:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::close (void)
+246c246
+<         7:  244:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
 ---
->        89:  245:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
+>        12:  244:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
 249c249
-<       119:  247:  if (singleton)
+<         7:  247:  if (singleton)
 ---
->        89:  247:  if (singleton)
+>        12:  247:  if (singleton)
 251,252c251,252
-<       119:  249:      singleton->cleanup ();
-<       119:  250:      ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+<         7:  249:      singleton->cleanup ();
+<         7:  250:      ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
 ---
->        89:  249:      singleton->cleanup ();
->        89:  250:      ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+>        12:  249:      singleton->cleanup ();
+>        12:  250:      ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
 254c254
-<       119:  252:}
+<         7:  252:}
 ---
->        89:  252:}
+>        12:  252:}

@@ -1,0 +1,20 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+26c26
+<     #####:   24:class unbounded_value_sequence
+---
+>         -:   24:class unbounded_value_sequence
+60,61c60,61
+<     #####:   58:  inline CORBA::ULong length() const {
+<     #####:   59:    return impl_.length();
+---
+>         -:   58:  inline CORBA::ULong length() const {
+>         -:   59:    return impl_.length();
+66,67c66,67
+<     #####:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+<     #####:   65:    return impl_[i];
+---
+>         -:   64:  inline value_type const & operator[](CORBA::ULong i) const {
+>         -:   65:    return impl_[i];

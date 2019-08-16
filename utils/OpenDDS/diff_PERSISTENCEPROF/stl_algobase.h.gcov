@@ -1,0 +1,182 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+197c197
+<        10:  195:    min(const _Tp& __a, const _Tp& __b)
+---
+>         -:  195:    min(const _Tp& __a, const _Tp& __b)
+202,204c202,204
+<        10:  200:      if (__b < __a)
+<        10:  201:	return __b;
+<     #####:  202:      return __a;
+---
+>         -:  200:      if (__b < __a)
+>         -:  201:	return __b;
+>         -:  202:      return __a;
+221c221
+<        10:  219:    max(const _Tp& __a, const _Tp& __b)
+---
+>     #####:  219:    max(const _Tp& __a, const _Tp& __b)
+226c226
+<        10:  224:      if (__a < __b)
+---
+>     #####:  224:      if (__a < __b)
+228c228
+<        10:  226:      return __a;
+---
+>     #####:  226:      return __a;
+279,280c279,280
+<       162:  277:    __niter_base(_Iterator __it)
+<       162:  278:    { return __it; }
+---
+>     #####:  277:    __niter_base(_Iterator __it)
+>     #####:  278:    { return __it; }
+340c340
+<     #####:  338:        __copy_m(_II __first, _II __last, _OI __result)
+---
+>         -:  338:        __copy_m(_II __first, _II __last, _OI __result)
+343c343
+<     #####:  341:	  for(_Distance __n = __last - __first; __n > 0; --__n)
+---
+>         -:  341:	  for(_Distance __n = __last - __first; __n > 0; --__n)
+345,347c345,347
+<     #####:  343:	      *__result = std::move(*__first);
+<     #####:  344:	      ++__first;
+<     #####:  345:	      ++__result;
+---
+>         -:  343:	      *__result = std::move(*__first);
+>         -:  344:	      ++__first;
+>         -:  345:	      ++__result;
+349c349
+<     #####:  347:	  return __result;
+---
+>         -:  347:	  return __result;
+359c359
+<        28:  357:        __copy_m(const _Tp* __first, const _Tp* __last, _Tp* __result)
+---
+>         -:  357:        __copy_m(const _Tp* __first, const _Tp* __last, _Tp* __result)
+368,371c368,371
+<        28:  366:	  const ptrdiff_t _Num = __last - __first;
+<        28:  367:	  if (_Num)
+<     #####:  368:	    __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+<        28:  369:	  return __result + _Num;
+---
+>         -:  366:	  const ptrdiff_t _Num = __last - __first;
+>         -:  367:	  if (_Num)
+>         -:  368:	    __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+>         -:  369:	  return __result + _Num;
+377c377
+<        52:  375:    __copy_move_a(_II __first, _II __last, _OI __result)
+---
+>     #####:  375:    __copy_move_a(_II __first, _II __last, _OI __result)
+382c382
+<        52:  380:      const bool __simple = (__is_trivial(_ValueTypeI)
+---
+>     #####:  380:      const bool __simple = (__is_trivial(_ValueTypeI)
+388c388
+<        52:  386:	                      _Category>::__copy_m(__first, __last, __result);
+---
+>     #####:  386:	                      _Category>::__copy_m(__first, __last, __result);
+422c422
+<        52:  420:    __copy_move_a2(_II __first, _II __last, _OI __result)
+---
+>     #####:  420:    __copy_move_a2(_II __first, _II __last, _OI __result)
+424c424
+<        52:  422:      return _OI(std::__copy_move_a<_IsMove>(std::__niter_base(__first),
+---
+>     #####:  422:      return _OI(std::__copy_move_a<_IsMove>(std::__niter_base(__first),
+426c426
+<        52:  424:					     std::__niter_base(__result)));
+---
+>     #####:  424:					     std::__niter_base(__result)));
+448c448
+<        52:  446:    copy(_II __first, _II __last, _OI __result)
+---
+>     #####:  446:    copy(_II __first, _II __last, _OI __result)
+457,458c457,458
+<        52:  455:	      (std::__miter_base(__first), std::__miter_base(__last),
+<        52:  456:	       __result));
+---
+>     #####:  455:	      (std::__miter_base(__first), std::__miter_base(__last),
+>     #####:  456:	       __result));
+481c481
+<     #####:  479:    move(_II __first, _II __last, _OI __result)
+---
+>         -:  479:    move(_II __first, _II __last, _OI __result)
+489,490c489,490
+<     #####:  487:      return std::__copy_move_a2<true>(std::__miter_base(__first),
+<     #####:  488:				       std::__miter_base(__last), __result);
+---
+>         -:  487:      return std::__copy_move_a2<true>(std::__miter_base(__first),
+>         -:  488:				       std::__miter_base(__last), __result);
+546c546
+<     #####:  544:        __copy_move_b(_BI1 __first, _BI1 __last, _BI2 __result)
+---
+>         -:  544:        __copy_move_b(_BI1 __first, _BI1 __last, _BI2 __result)
+549,551c549,551
+<     #####:  547:	  for (__n = __last - __first; __n > 0; --__n)
+<     #####:  548:	    *--__result = std::move(*--__last);
+<     #####:  549:	  return __result;
+---
+>         -:  547:	  for (__n = __last - __first; __n > 0; --__n)
+>         -:  548:	    *--__result = std::move(*--__last);
+>         -:  549:	  return __result;
+561c561
+<     #####:  559:        __copy_move_b(const _Tp* __first, const _Tp* __last, _Tp* __result)
+---
+>         -:  559:        __copy_move_b(const _Tp* __first, const _Tp* __last, _Tp* __result)
+570,573c570,573
+<     #####:  568:	  const ptrdiff_t _Num = __last - __first;
+<     #####:  569:	  if (_Num)
+<     #####:  570:	    __builtin_memmove(__result - _Num, __first, sizeof(_Tp) * _Num);
+<     #####:  571:	  return __result - _Num;
+---
+>         -:  568:	  const ptrdiff_t _Num = __last - __first;
+>         -:  569:	  if (_Num)
+>         -:  570:	    __builtin_memmove(__result - _Num, __first, sizeof(_Tp) * _Num);
+>         -:  571:	  return __result - _Num;
+579c579
+<     #####:  577:    __copy_move_backward_a(_BI1 __first, _BI1 __last, _BI2 __result)
+---
+>         -:  577:    __copy_move_backward_a(_BI1 __first, _BI1 __last, _BI2 __result)
+584c584
+<     #####:  582:      const bool __simple = (__is_trivial(_ValueType1)
+---
+>         -:  582:      const bool __simple = (__is_trivial(_ValueType1)
+592c592
+<     #####:  590:								 __result);
+---
+>         -:  590:								 __result);
+597c597
+<     #####:  595:    __copy_move_backward_a2(_BI1 __first, _BI1 __last, _BI2 __result)
+---
+>         -:  595:    __copy_move_backward_a2(_BI1 __first, _BI1 __last, _BI2 __result)
+600,601c600,601
+<     #####:  598:		  (std::__niter_base(__first), std::__niter_base(__last),
+<     #####:  599:		   std::__niter_base(__result)));
+---
+>         -:  598:		  (std::__niter_base(__first), std::__niter_base(__last),
+>         -:  599:		   std::__niter_base(__result)));
+624c624
+<     #####:  622:    copy_backward(_BI1 __first, _BI1 __last, _BI2 __result)
+---
+>         -:  622:    copy_backward(_BI1 __first, _BI1 __last, _BI2 __result)
+635,636c635,636
+<     #####:  633:	      (std::__miter_base(__first), std::__miter_base(__last),
+<     #####:  634:	       __result));
+---
+>         -:  633:	      (std::__miter_base(__first), std::__miter_base(__last),
+>         -:  634:	       __result));
+660c660
+<     #####:  658:    move_backward(_BI1 __first, _BI1 __last, _BI2 __result)
+---
+>         -:  658:    move_backward(_BI1 __first, _BI1 __last, _BI2 __result)
+670c670
+<     #####:  668:      return std::__copy_move_backward_a2<true>(std::__miter_base(__first),
+---
+>         -:  668:      return std::__copy_move_backward_a2<true>(std::__miter_base(__first),
+672c672
+<     #####:  670:						__result);
+---
+>         -:  670:						__result);

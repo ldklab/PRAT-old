@@ -1,0 +1,130 @@
+101c101
+<         8:   99:    class map
+---
+>        20:   99:    class map
+179c179
+<       164:  177:      map() = default;
+---
+>       336:  177:      map() = default;
+296c296
+<       160:  294:      ~map() = default;
+---
+>       332:  294:      ~map() = default;
+350,351c350,351
+<       107:  348:      begin() _GLIBCXX_NOEXCEPT
+<       107:  349:      { return _M_t.begin(); }
+---
+>       204:  348:      begin() _GLIBCXX_NOEXCEPT
+>       204:  349:      { return _M_t.begin(); }
+368,369c368,369
+<       265:  366:      end() _GLIBCXX_NOEXCEPT
+<       265:  367:      { return _M_t.end(); }
+---
+>       400:  366:      end() _GLIBCXX_NOEXCEPT
+>       400:  367:      { return _M_t.end(); }
+377,378c377,378
+<        19:  375:      end() const _GLIBCXX_NOEXCEPT
+<        19:  376:      { return _M_t.end(); }
+---
+>        33:  375:      end() const _GLIBCXX_NOEXCEPT
+>        33:  376:      { return _M_t.end(); }
+459,460c459,460
+<        60:  457:      empty() const _GLIBCXX_NOEXCEPT
+<        60:  458:      { return _M_t.empty(); }
+---
+>       128:  457:      empty() const _GLIBCXX_NOEXCEPT
+>       128:  458:      { return _M_t.empty(); }
+486c486
+<        36:  484:      operator[](const key_type& __k)
+---
+>        46:  484:      operator[](const key_type& __k)
+491c491
+<        36:  489:	iterator __i = lower_bound(__k);
+---
+>        46:  489:	iterator __i = lower_bound(__k);
+493c493
+<        36:  491:	if (__i == end() || key_comp()(__k, (*__i).first))
+---
+>        46:  491:	if (__i == end() || key_comp()(__k, (*__i).first))
+495c495
+<        28:  493:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+---
+>        38:  493:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+501c501
+<        36:  499:	return (*__i).second;
+---
+>        46:  499:	return (*__i).second;
+506c506
+<         8:  504:      operator[](key_type&& __k)
+---
+>        13:  504:      operator[](key_type&& __k)
+511c511
+<         8:  509:	iterator __i = lower_bound(__k);
+---
+>        13:  509:	iterator __i = lower_bound(__k);
+513,515c513,515
+<         8:  511:	if (__i == end() || key_comp()(__k, (*__i).first))
+<        16:  512:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+<         8:  513:					std::forward_as_tuple(std::move(__k)),
+---
+>        13:  511:	if (__i == end() || key_comp()(__k, (*__i).first))
+>        26:  512:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+>        13:  513:					std::forward_as_tuple(std::move(__k)),
+517c517
+<         8:  515:	return (*__i).second;
+---
+>        13:  515:	return (*__i).second;
+804,805c804,805
+<        22:  802:      insert(value_type&& __x)
+<        22:  803:      { return _M_t._M_insert_unique(std::move(__x)); }
+---
+>        25:  802:      insert(value_type&& __x)
+>        25:  803:      { return _M_t._M_insert_unique(std::move(__x)); }
+810,811c810,811
+<        20:  808:	insert(_Pair&& __x)
+<        20:  809:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+---
+>        36:  808:	insert(_Pair&& __x)
+>        36:  809:	{ return _M_t._M_emplace_unique(std::forward<_Pair>(__x)); }
+1063,1064c1063,1064
+<        18: 1061:      erase(const key_type& __x)
+<        18: 1062:      { return _M_t.erase(__x); }
+---
+>        22: 1061:      erase(const key_type& __x)
+>        22: 1062:      { return _M_t.erase(__x); }
+1128,1129c1128,1129
+<        91: 1126:      clear() _GLIBCXX_NOEXCEPT
+<        91: 1127:      { _M_t.clear(); }
+---
+>       187: 1126:      clear() _GLIBCXX_NOEXCEPT
+>       187: 1127:      { _M_t.clear(); }
+1137,1138c1137,1138
+<         8: 1135:      key_comp() const
+<         8: 1136:      { return _M_t.key_comp(); }
+---
+>         9: 1135:      key_comp() const
+>         9: 1136:      { return _M_t.key_comp(); }
+1164,1165c1164,1165
+<        64: 1162:      find(const key_type& __x)
+<        64: 1163:      { return _M_t.find(__x); }
+---
+>        83: 1162:      find(const key_type& __x)
+>        83: 1163:      { return _M_t.find(__x); }
+1189,1190c1189,1190
+<        19: 1187:      find(const key_type& __x) const
+<        19: 1188:      { return _M_t.find(__x); }
+---
+>        33: 1187:      find(const key_type& __x) const
+>        33: 1188:      { return _M_t.find(__x); }
+1210,1211c1210,1211
+<        12: 1208:      count(const key_type& __x) const
+<        12: 1209:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+---
+>        22: 1208:      count(const key_type& __x) const
+>        22: 1209:      { return _M_t.find(__x) == _M_t.end() ? 0 : 1; }
+1234,1235c1234,1235
+<        44: 1232:      lower_bound(const key_type& __x)
+<        44: 1233:      { return _M_t.lower_bound(__x); }
+---
+>        59: 1232:      lower_bound(const key_type& __x)
+>        59: 1233:      { return _M_t.lower_bound(__x); }

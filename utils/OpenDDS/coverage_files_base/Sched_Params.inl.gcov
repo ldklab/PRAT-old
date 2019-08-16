@@ -1,0 +1,136 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Sched_Params.inl
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file    Sched_Params.inl
+        -:    6: *
+        -:    7: *  $Id: Sched_Params.inl 935 2008-12-10 21:47:27Z mitza $
+        -:    8: *
+        -:    9: *  @author David Levine
+        -:   10: */
+        -:   11://=============================================================================
+        -:   12:
+        -:   13:
+        -:   14:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   15:
+        -:   16:ACE_INLINE
+    #####:   17:ACE_Sched_Params::ACE_Sched_Params (
+        -:   18:      const Policy policy,
+        -:   19:      const ACE_Sched_Priority priority,
+        -:   20:      const int scope,
+    #####:   21:      const ACE_Time_Value &quantum)
+        -:   22:  : policy_ (policy),
+        -:   23:    priority_ (priority),
+        -:   24:    scope_ (scope),
+    #####:   25:    quantum_ (quantum)
+        -:   26:{
+    #####:   27:}
+        -:   28:
+    #####:   29:ACE_INLINE ACE_Sched_Params::~ACE_Sched_Params (void)
+        -:   30:{
+    #####:   31:}
+        -:   32:
+        -:   33:ACE_INLINE ACE_Sched_Params::Policy
+        -:   34:ACE_Sched_Params::policy (void) const
+        -:   35:{
+        -:   36:  return this->policy_;
+        -:   37:}
+        -:   38:
+        -:   39:ACE_INLINE void
+        -:   40:ACE_Sched_Params::policy (const ACE_Sched_Params::Policy policy)
+        -:   41:{
+        -:   42:  this->policy_ = policy;
+        -:   43:}
+        -:   44:
+        -:   45:ACE_INLINE ACE_Sched_Priority
+        -:   46:ACE_Sched_Params::priority (void) const
+        -:   47:{
+        -:   48:  return this->priority_;
+        -:   49:}
+        -:   50:
+        -:   51:ACE_INLINE void
+        -:   52:ACE_Sched_Params::priority (const ACE_Sched_Priority priority)
+        -:   53:{
+        -:   54:  this->priority_ = priority;
+        -:   55:}
+        -:   56:
+        -:   57:ACE_INLINE int
+        -:   58:ACE_Sched_Params::scope (void) const
+        -:   59:{
+        -:   60:  return this->scope_;
+        -:   61:}
+        -:   62:
+        -:   63:ACE_INLINE void
+        -:   64:ACE_Sched_Params::scope (const int scope)
+        -:   65:{
+        -:   66:  this->scope_ = scope;
+        -:   67:}
+        -:   68:
+        -:   69:ACE_INLINE const ACE_Time_Value &
+        -:   70:ACE_Sched_Params::quantum (void) const
+        -:   71:{
+        -:   72:  return this->quantum_;
+        -:   73:}
+        -:   74:
+        -:   75:ACE_INLINE void
+        -:   76:ACE_Sched_Params::quantum (const ACE_Time_Value &quant)
+        -:   77:{
+        -:   78:  this->quantum_ = quant;
+        -:   79:}
+        -:   80:
+        -:   81:ACE_INLINE const ACE_Sched_Params::Policy &
+        -:   82:ACE_Sched_Priority_Iterator::policy (void) const
+        -:   83:{
+        -:   84:  return this->policy_;
+        -:   85:}
+        -:   86:
+        -:   87:ACE_INLINE int
+        -:   88:ACE_Sched_Priority_Iterator::scope (void) const
+        -:   89:{
+        -:   90:  return this->scope_;
+        -:   91:}
+        -:   92:
+        -:   93:ACE_INLINE
+        -:   94:ACE_Sched_Priority_Iterator::ACE_Sched_Priority_Iterator (const ACE_Sched_Params::Policy &policy,
+        -:   95:                                                          int scope)
+        -:   96: : policy_ (policy),
+        -:   97:   scope_ (scope),
+        -:   98:   priority_ (0),
+        -:   99:   done_ (0)
+        -:  100:{
+        -:  101:  priority_ = ACE_Sched_Params::priority_min (this->policy (), this->scope ());
+        -:  102:}
+        -:  103:
+        -:  104:ACE_INLINE
+        -:  105:ACE_Sched_Priority_Iterator::~ACE_Sched_Priority_Iterator (void)
+        -:  106:{
+        -:  107:}
+        -:  108:
+        -:  109:ACE_INLINE int
+        -:  110:ACE_Sched_Priority_Iterator::more (void) const
+        -:  111:{
+        -:  112:  return !this->done_;
+        -:  113:}
+        -:  114:
+        -:  115:ACE_INLINE int
+        -:  116:ACE_Sched_Priority_Iterator::priority (void) const
+        -:  117:{
+        -:  118:  return this->priority_;
+        -:  119:}
+        -:  120:
+        -:  121:ACE_INLINE void
+        -:  122:ACE_Sched_Priority_Iterator::next (void)
+        -:  123:{
+        -:  124:  if (this->done_)
+        -:  125:    return;
+        -:  126:
+        -:  127:  int old_priority = this->priority_;
+        -:  128:  priority_ = ACE_Sched_Params::next_priority (this->policy (),
+        -:  129:                                               this->priority (),
+        -:  130:                                               this->scope ());
+        -:  131:  this->done_ = old_priority == priority_;
+        -:  132:}
+        -:  133:
+        -:  134:ACE_END_VERSIONED_NAMESPACE_DECL

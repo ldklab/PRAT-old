@@ -1,6 +1,6 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/String_Base.cpp
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/String_Base.cpp
         -:    0:Programs:51
-        -:    1:// $Id$
+        -:    1:// $Id: String_Base.cpp 2622 2015-08-13 18:30:00Z mitza $
         -:    2:
         -:    3:#ifndef ACE_STRING_BASE_CPP
         -:    4:#define ACE_STRING_BASE_CPP
@@ -28,7 +28,7 @@
         -:   26:
         -:   27:template <class ACE_CHAR_T>
     #####:   28:ACE_String_Base<ACE_CHAR_T>::ACE_String_Base (ACE_Allocator *the_allocator)
-    #####:   29:  : allocator_ (the_allocator ? the_allocator : ACE_Allocator::instance ()),
+        -:   29:  : allocator_ (the_allocator ? the_allocator : ACE_Allocator::instance ()),
         -:   30:    len_ (0),
         -:   31:    buf_len_ (0),
         -:   32:    rep_ (&ACE_String_Base<ACE_CHAR_T>::NULL_String_),
@@ -36,29 +36,6 @@
         -:   34:{
         -:   35:  ACE_TRACE ("ACE_String_Base<ACE_CHAR_T>::ACE_String_Base");
     #####:   36:}
-------------------
-_ZN15ACE_String_BaseIcEC2EP13ACE_Allocator:
-    #####:   28:ACE_String_Base<ACE_CHAR_T>::ACE_String_Base (ACE_Allocator *the_allocator)
-    #####:   29:  : allocator_ (the_allocator ? the_allocator : ACE_Allocator::instance ()),
-        -:   30:    len_ (0),
-        -:   31:    buf_len_ (0),
-        -:   32:    rep_ (&ACE_String_Base<ACE_CHAR_T>::NULL_String_),
-    #####:   33:    release_ (false)
-        -:   34:{
-        -:   35:  ACE_TRACE ("ACE_String_Base<ACE_CHAR_T>::ACE_String_Base");
-    #####:   36:}
-------------------
-_ZN15ACE_String_BaseIcEC2EP13ACE_Allocator:
-    #####:   28:ACE_String_Base<ACE_CHAR_T>::ACE_String_Base (ACE_Allocator *the_allocator)
-    #####:   29:  : allocator_ (the_allocator ? the_allocator : ACE_Allocator::instance ()),
-        -:   30:    len_ (0),
-        -:   31:    buf_len_ (0),
-        -:   32:    rep_ (&ACE_String_Base<ACE_CHAR_T>::NULL_String_),
-    #####:   33:    release_ (false)
-        -:   34:{
-        -:   35:  ACE_TRACE ("ACE_String_Base<ACE_CHAR_T>::ACE_String_Base");
-    #####:   36:}
-------------------
         -:   37:
         -:   38:// Constructor that actually copies memory.
         -:   39:
@@ -66,7 +43,7 @@ _ZN15ACE_String_BaseIcEC2EP13ACE_Allocator:
     #####:   41:ACE_String_Base<ACE_CHAR_T>::ACE_String_Base (const ACE_CHAR_T *s,
         -:   42:                                        ACE_Allocator *the_allocator,
         -:   43:                                        bool release)
-    #####:   44:  : allocator_ (the_allocator ? the_allocator : ACE_Allocator::instance ()),
+        -:   44:  : allocator_ (the_allocator ? the_allocator : ACE_Allocator::instance ()),
         -:   45:    len_ (0),
         -:   46:    buf_len_ (0),
         -:   47:    rep_ (0),
@@ -148,25 +125,6 @@ _ZN15ACE_String_BaseIcEC2EP13ACE_Allocator:
     #####:  123:  if (this->buf_len_ != 0 && this->release_)
     #####:  124:      this->allocator_->free (this->rep_);
     #####:  125:}
-------------------
-_ZN15ACE_String_BaseIcED2Ev:
-    #####:  119:ACE_String_Base<ACE_CHAR_T>::~ACE_String_Base (void)
-        -:  120:{
-        -:  121:  ACE_TRACE ("ACE_String_Base<ACE_CHAR_T>::~ACE_String_Base");
-        -:  122:
-    #####:  123:  if (this->buf_len_ != 0 && this->release_)
-    #####:  124:      this->allocator_->free (this->rep_);
-    #####:  125:}
-------------------
-_ZN15ACE_String_BaseIcED2Ev:
-    #####:  119:ACE_String_Base<ACE_CHAR_T>::~ACE_String_Base (void)
-        -:  120:{
-        -:  121:  ACE_TRACE ("ACE_String_Base<ACE_CHAR_T>::~ACE_String_Base");
-        -:  122:
-    #####:  123:  if (this->buf_len_ != 0 && this->release_)
-    #####:  124:      this->allocator_->free (this->rep_);
-    #####:  125:}
-------------------
         -:  126:
         -:  127:// this method might benefit from a little restructuring.
         -:  128:template <class ACE_CHAR_T> void

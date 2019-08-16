@@ -1,8 +1,8 @@
-        -:    0:Source:/usr/include/c++/8/ext/type_traits.h
-        -:    0:Programs:51
+        -:    0:Source:/usr/include/c++/7/ext/type_traits.h
+        -:    0:Programs:70
         -:    1:// -*- C++ -*-
         -:    2:
-        -:    3:// Copyright (C) 2005-2018 Free Software Foundation, Inc.
+        -:    3:// Copyright (C) 2005-2017 Free Software Foundation, Inc.
         -:    4://
         -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
         -:    6:// software; you can redistribute it and/or modify it under the terms
@@ -151,41 +151,8 @@
         -:  149:  // For use in string and vstring.
         -:  150:  template<typename _Type>
         -:  151:    inline bool
-    #####:  152:    __is_null_pointer(_Type* __ptr)
-    #####:  153:    { return __ptr == 0; }
-------------------
-_ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_:
-    #####:  152:    __is_null_pointer(_Type* __ptr)
-    #####:  153:    { return __ptr == 0; }
-------------------
-_ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_:
-    #####:  152:    __is_null_pointer(_Type* __ptr)
-    #####:  153:    { return __ptr == 0; }
-------------------
-_ZN9__gnu_cxx17__is_null_pointerIcEEbPT_:
-    #####:  152:    __is_null_pointer(_Type* __ptr)
-    #####:  153:    { return __ptr == 0; }
-------------------
-_ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_:
-    #####:  152:    __is_null_pointer(_Type* __ptr)
-    #####:  153:    { return __ptr == 0; }
-------------------
-_ZN9__gnu_cxx17__is_null_pointerIcEEbPT_:
-    #####:  152:    __is_null_pointer(_Type* __ptr)
-    #####:  153:    { return __ptr == 0; }
-------------------
-_ZN9__gnu_cxx17__is_null_pointerIcEEbPT_:
-    #####:  152:    __is_null_pointer(_Type* __ptr)
-    #####:  153:    { return __ptr == 0; }
-------------------
-_ZN9__gnu_cxx17__is_null_pointerIcEEbPT_:
-    #####:  152:    __is_null_pointer(_Type* __ptr)
-    #####:  153:    { return __ptr == 0; }
-------------------
-_ZN9__gnu_cxx17__is_null_pointerIKcEEbPT_:
-    #####:  152:    __is_null_pointer(_Type* __ptr)
-    #####:  153:    { return __ptr == 0; }
-------------------
+      619:  152:    __is_null_pointer(_Type* __ptr)
+      619:  153:    { return __ptr == 0; }
         -:  154:
         -:  155:  template<typename _Type>
         -:  156:    inline bool

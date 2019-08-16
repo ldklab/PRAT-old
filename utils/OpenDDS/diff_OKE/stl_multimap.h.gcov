@@ -1,0 +1,8 @@
+176c176
+<         4:  174:      multimap() = default;
+---
+>         5:  174:      multimap() = default;
+291c291
+<         4:  289:      ~multimap() = default;
+---
+>         5:  289:      ~multimap() = default;

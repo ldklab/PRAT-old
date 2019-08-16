@@ -1,36 +1,18 @@
 23c23
-<        5*:   21:ACE_Node<T, C>::~ACE_Node (void)
+<        12:   21:ACE_Node<T, C>::~ACE_Node (void)
 ---
->     #####:   21:ACE_Node<T, C>::~ACE_Node (void)
+>        26:   21:ACE_Node<T, C>::~ACE_Node (void)
 25c25
-<        5*:   23:}
+<        12:   23:}
 ---
->     #####:   23:}
-28c28
-<         5:   21:ACE_Node<T, C>::~ACE_Node (void)
+>        26:   23:}
+36,37c36,37
+<        12:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
+<        12:   35:  : next_ (n)
 ---
->     #####:   21:ACE_Node<T, C>::~ACE_Node (void)
-30c30
-<         5:   23:}
+>        26:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
+>        26:   35:  : next_ (n)
+40c40
+<        12:   38:}
 ---
->     #####:   23:}
-47,48c47,48
-<        5*:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
-<        5*:   35:  : next_ (n)
----
->     #####:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
->     #####:   35:  : next_ (n)
-51c51
-<        5*:   38:}
----
->     #####:   38:}
-61,62c61,62
-<         5:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
-<         5:   35:  : next_ (n)
----
->     #####:   34:ACE_Node<T, C>::ACE_Node (ACE_Node<T, C> *n, int)
->     #####:   35:  : next_ (n)
-65c65
-<         5:   38:}
----
->     #####:   38:}
+>        26:   38:}

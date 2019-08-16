@@ -1,0 +1,28 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+64,65c64,65
+<       337:   62:      _M_addr() noexcept
+<       337:   63:      { return static_cast<void*>(&_M_storage); }
+---
+>     #####:   62:      _M_addr() noexcept
+>     #####:   63:      { return static_cast<void*>(&_M_storage); }
+68,69c68,69
+<       301:   66:      _M_addr() const noexcept
+<       301:   67:      { return static_cast<const void*>(&_M_storage); }
+---
+>     #####:   66:      _M_addr() const noexcept
+>     #####:   67:      { return static_cast<const void*>(&_M_storage); }
+72,73c72,73
+<       337:   70:      _M_ptr() noexcept
+<       337:   71:      { return static_cast<_Tp*>(_M_addr()); }
+---
+>     #####:   70:      _M_ptr() noexcept
+>     #####:   71:      { return static_cast<_Tp*>(_M_addr()); }
+76,77c76,77
+<       301:   74:      _M_ptr() const noexcept
+<       301:   75:      { return static_cast<const _Tp*>(_M_addr()); }
+---
+>     #####:   74:      _M_ptr() const noexcept
+>     #####:   75:      { return static_cast<const _Tp*>(_M_addr()); }

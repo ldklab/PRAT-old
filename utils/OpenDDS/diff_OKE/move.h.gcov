@@ -1,0 +1,32 @@
+49,50c49,50
+<        32:   47:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+<        32:   48:    { return __builtin_addressof(__r); }
+---
+>        43:   47:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+>        43:   48:    { return __builtin_addressof(__r); }
+75,76c75,76
+<       741:   73:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+<       741:   74:    { return static_cast<_Tp&&>(__t); }
+---
+>       879:   73:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+>       879:   74:    { return static_cast<_Tp&&>(__t); }
+100,101c100,101
+<       794:   98:    move(_Tp&& __t) noexcept
+<       794:   99:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+---
+>      1359:   98:    move(_Tp&& __t) noexcept
+>      1359:   99:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+189c189
+<       252:  187:    swap(_Tp& __a, _Tp& __b)
+---
+>       440:  187:    swap(_Tp& __a, _Tp& __b)
+200,203c200,203
+<       252:  198:      _Tp __tmp = _GLIBCXX_MOVE(__a);
+<       252:  199:      __a = _GLIBCXX_MOVE(__b);
+<       252:  200:      __b = _GLIBCXX_MOVE(__tmp);
+<       252:  201:    }
+---
+>       440:  198:      _Tp __tmp = _GLIBCXX_MOVE(__a);
+>       440:  199:      __a = _GLIBCXX_MOVE(__b);
+>       440:  200:      __b = _GLIBCXX_MOVE(__tmp);
+>       440:  201:    }

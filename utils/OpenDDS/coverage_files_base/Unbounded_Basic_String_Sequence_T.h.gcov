@@ -1,5 +1,5 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Basic_String_Sequence_T.h
-        -:    0:Programs:70
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Basic_String_Sequence_T.h
+        -:    0:Programs:51
         -:    1:#ifndef guard_unbounded_basic_string_sequence_hpp
         -:    2:#define guard_unbounded_basic_string_sequence_hpp
         -:    3:/**
@@ -7,7 +7,7 @@
         -:    5: *
         -:    6: * @brief Implement unbounded sequences for strings and wide-strings.
         -:    7: *
-        -:    8: * $Id$
+        -:    8: * $Id: Unbounded_Basic_String_Sequence_T.h 1861 2011-08-31 16:18:08Z mesnierp $
         -:    9: *
         -:   10: * @author Carlos O'Ryan
         -:   11: */
@@ -23,7 +23,7 @@
         -:   21:namespace TAO
         -:   22:{
         -:   23:template<typename charT>
-        -:   24:class unbounded_basic_string_sequence
+    #####:   24:class unbounded_basic_string_sequence
         -:   25:{
         -:   26:public:
         -:   27:  typedef charT character_type;
@@ -67,151 +67,28 @@
         -:   65:    return impl_.maximum();
         -:   66:  }
         -:   67:  /// @copydoc TAO::details::generic_sequence::release()
-    #####:   68:  inline CORBA::Boolean release() const {
-    #####:   69:    return impl_.release();
+        -:   68:  inline CORBA::Boolean release() const {
+        -:   69:    return impl_.release();
         -:   70:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
-    #####:   68:  inline CORBA::Boolean release() const {
-    #####:   69:    return impl_.release();
-        -:   70:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
-    #####:   68:  inline CORBA::Boolean release() const {
-    #####:   69:    return impl_.release();
-        -:   70:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
-    #####:   68:  inline CORBA::Boolean release() const {
-    #####:   69:    return impl_.release();
-        -:   70:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
-    #####:   68:  inline CORBA::Boolean release() const {
-    #####:   69:    return impl_.release();
-        -:   70:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
-    #####:   68:  inline CORBA::Boolean release() const {
-    #####:   69:    return impl_.release();
-        -:   70:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
-    #####:   68:  inline CORBA::Boolean release() const {
-    #####:   69:    return impl_.release();
-        -:   70:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
-    #####:   68:  inline CORBA::Boolean release() const {
-    #####:   69:    return impl_.release();
-        -:   70:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE7releaseEv:
-    #####:   68:  inline CORBA::Boolean release() const {
-    #####:   69:    return impl_.release();
-        -:   70:  }
-------------------
         -:   71:  /// @copydoc TAO::details::generic_sequence::length()
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
+        -:   72:  inline CORBA::ULong length() const {
+        -:   73:    return impl_.length();
         -:   74:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
-        -:   74:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
-        -:   74:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
-        -:   74:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
-        -:   74:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
-        -:   74:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
-        -:   74:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
-        -:   74:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
-        -:   74:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcE6lengthEv:
-    #####:   72:  inline CORBA::ULong length() const {
-    #####:   73:    return impl_.length();
-        -:   74:  }
-------------------
         -:   75:  /// @copydoc TAO::details::generic_sequence::length()
-    #####:   76:  inline void length(CORBA::ULong length) {
-    #####:   77:    impl_.length(length);
-    #####:   78:  }
+        -:   76:  inline void length(CORBA::ULong length) {
+        -:   77:    impl_.length(length);
+        -:   78:  }
         -:   79:  /// @copydoc TAO::details::generic_sequence::operator[]
-    #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
-    #####:   81:    return const_element_type (impl_[i], release());
+        -:   80:  inline const_element_type operator[](CORBA::ULong i) const {
+        -:   81:    return const_element_type (impl_[i], release());
         -:   82:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
-    #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
-    #####:   81:    return const_element_type (impl_[i], release());
-        -:   82:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
-    #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
-    #####:   81:    return const_element_type (impl_[i], release());
-        -:   82:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
-    #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
-    #####:   81:    return const_element_type (impl_[i], release());
-        -:   82:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
-    #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
-    #####:   81:    return const_element_type (impl_[i], release());
-        -:   82:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
-    #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
-    #####:   81:    return const_element_type (impl_[i], release());
-        -:   82:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
-    #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
-    #####:   81:    return const_element_type (impl_[i], release());
-        -:   82:  }
-------------------
-_ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
-    #####:   80:  inline const_element_type operator[](CORBA::ULong i) const {
-    #####:   81:    return const_element_type (impl_[i], release());
-        -:   82:  }
-------------------
         -:   83:  /// @copydoc TAO::details::generic_sequence::operator[]
-    #####:   84:  inline element_type operator[](CORBA::ULong i) {
-    #####:   85:    return element_type(impl_[i], release());
+        -:   84:  inline element_type operator[](CORBA::ULong i) {
+        -:   85:    return element_type(impl_[i], release());
         -:   86:  }
         -:   87:  /// @copydoc TAO::details::generic_sequence::get_buffer()
-    #####:   88:  inline const_value_type const * get_buffer() const {
-    #####:   89:    return impl_.get_buffer();
+        -:   88:  inline const_value_type const * get_buffer() const {
+        -:   89:    return impl_.get_buffer();
         -:   90:  }
         -:   91:  /// @copydoc TAO::details::generic_sequence::replace()
         -:   92:  inline void replace(
@@ -222,8 +99,8 @@ _ZNK3TAO31unbounded_basic_string_sequenceIcEixEj:
         -:   97:    impl_.replace(maximum, length, data, release);
         -:   98:  }
         -:   99:  /// @copydoc TAO::details::generic_sequence::get_buffer(CORBA::Boolean)
-    #####:  100:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
-    #####:  101:    return impl_.get_buffer(orphan);
+        -:  100:  inline value_type * get_buffer(CORBA::Boolean orphan = false) {
+        -:  101:    return impl_.get_buffer(orphan);
         -:  102:  }
         -:  103:  /// @copydoc TAO::details::generic_sequence::swap
         -:  104:  inline void swap(unbounded_basic_string_sequence & rhs) throw() {

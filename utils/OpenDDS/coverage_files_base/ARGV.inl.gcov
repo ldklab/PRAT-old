@@ -1,0 +1,106 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/ARGV.inl
+        -:    0:Programs:70
+        -:    1:/* -*- C++ -*- */
+        -:    2:// $Id: ARGV.inl 14 2007-02-01 15:49:12Z mitza $
+        -:    3:
+        -:    4:#include "ace/Global_Macros.h"
+        -:    5:
+        -:    6:// Open versioned namespace, if enabled by the user.
+        -:    7:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    8:
+        -:    9:template <typename CHAR_TYPE> ACE_INLINE
+       16:   10:ACE_ARGV_Queue_Entry_T<CHAR_TYPE>::ACE_ARGV_Queue_Entry_T (void)
+        -:   11:  : arg_(0),
+       16:   12:    quote_arg_(false)
+        -:   13:{
+        -:   14:  // No-op
+       16:   15:}
+        -:   16:
+        -:   17:template <typename CHAR_TYPE> ACE_INLINE
+        8:   18:ACE_ARGV_Queue_Entry_T<CHAR_TYPE>::ACE_ARGV_Queue_Entry_T (const CHAR_TYPE *arg,
+        -:   19:                                                           bool quote_arg)
+        -:   20:  : arg_(arg),
+        8:   21:    quote_arg_(quote_arg)
+        -:   22:{
+        -:   23:  // No-op
+        8:   24:}
+        -:   25:
+        -:   26:template <typename CHAR_TYPE> ACE_INLINE
+        -:   27:ACE_ARGV_Queue_Entry_T<CHAR_TYPE>::ACE_ARGV_Queue_Entry_T (const ACE_ARGV_Queue_Entry_T<CHAR_TYPE> &entry)
+        -:   28:  : arg_(entry.arg_),
+        -:   29:    quote_arg_(entry.quote_arg_)
+        -:   30:{
+        -:   31:  // No-op
+        -:   32:}
+        -:   33:
+        -:   34:template <typename CHAR_TYPE> ACE_INLINE
+        8:   35:ACE_ARGV_Queue_Entry_T<CHAR_TYPE>::~ACE_ARGV_Queue_Entry_T (void)
+        -:   36:{
+        -:   37:  // No-op just to keep some compilers happy...
+        8:   38:}
+        -:   39:
+        -:   40:// Return the number of args
+        -:   41:template <typename CHAR_TYPE>
+        -:   42:ACE_INLINE int
+        -:   43:ACE_ARGV_T<CHAR_TYPE>::argc (void) const
+        -:   44:{
+        -:   45:  ACE_TRACE ("ACE_ARGV_T::argc");
+        -:   46: // Try to create the argv_ if it isn't there
+        -:   47:  ACE_ARGV_T<CHAR_TYPE> *nonconst_this =
+        -:   48:    const_cast <ACE_ARGV_T<CHAR_TYPE> *> (this);
+        -:   49: (void) nonconst_this->argv ();
+        -:   50:  return this->argc_;
+        -:   51:}
+        -:   52:
+        -:   53:// Return the arguments in a space-separated string
+        -:   54:template <typename CHAR_TYPE>
+        -:   55:ACE_INLINE const CHAR_TYPE *
+        -:   56:ACE_ARGV_T<CHAR_TYPE>::buf (void)
+        -:   57:{
+        -:   58:  ACE_TRACE ("ACE_ARGV_T::buf");
+        -:   59:
+        -:   60:  if (this->buf_ == 0 && this->iterative_)
+        -:   61:    this->create_buf_from_queue ();
+        -:   62:
+        -:   63:  return (const CHAR_TYPE *) this->buf_;
+        -:   64:}
+        -:   65:
+        -:   66:// Return the arguments in an entry-per-argument array
+        -:   67:
+        -:   68:template <typename CHAR_TYPE>
+        -:   69:ACE_INLINE CHAR_TYPE **
+        -:   70:ACE_ARGV_T<CHAR_TYPE>::argv (void)
+        -:   71:{
+        -:   72:  ACE_TRACE ("ACE_ARGV_T::argv");
+        -:   73:
+        -:   74:  // Try to create the argv_ if it isn't there
+        -:   75:  if (this->argv_ == 0)
+        -:   76:    {
+        -:   77:      if (this->iterative_ && this->buf_ == 0)
+        -:   78:        this->create_buf_from_queue ();
+        -:   79:
+        -:   80:      // Convert buf_ to argv_
+        -:   81:      if (this->string_to_argv () == -1)
+        -:   82:        return (CHAR_TYPE **) 0;
+        -:   83:    }
+        -:   84:
+        -:   85:  return (CHAR_TYPE **) this->argv_;
+        -:   86:}
+        -:   87:
+        -:   88:// Subscript operator.
+        -:   89:
+        -:   90:template <typename CHAR_TYPE>
+        -:   91:ACE_INLINE const CHAR_TYPE *
+        -:   92:ACE_ARGV_T<CHAR_TYPE>::operator[] (size_t i)
+        -:   93:{
+        -:   94:  ACE_TRACE ("ACE_ARGV_T::operator[]");
+        -:   95:
+        -:   96:  // Don't go out of bounds.
+        -:   97:  if (i >= static_cast<size_t> (this->argc_))
+        -:   98:    return 0;
+        -:   99:
+        -:  100:  return (const CHAR_TYPE *) this->argv ()[i];
+        -:  101:}
+        -:  102:
+        -:  103:// Close versioned namespace, if enabled by the user.
+        -:  104:ACE_END_VERSIONED_NAMESPACE_DECL

@@ -1,6 +1,6 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Select_Reactor_T.cpp
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Select_Reactor_T.cpp
         -:    0:Programs:51
-        -:    1:// $Id$
+        -:    1:// $Id: Select_Reactor_T.cpp 2622 2015-08-13 18:30:00Z mitza $
         -:    2:
         -:    3:#ifndef ACE_SELECT_REACTOR_T_CPP
         -:    4:#define ACE_SELECT_REACTOR_T_CPP
@@ -243,7 +243,7 @@
         -:  241:
     #####:  242:  for (ACE_Select_Reactor_Handler_Repository_Iterator iter (&this->handler_rep_);
     #####:  243:       iter.next (eh) != 0;
-    #####:  244:       iter.advance ())
+        -:  244:       iter.advance ())
         -:  245:    {
     #####:  246:      this->suspend_i (eh->get_handle ());
         -:  247:    }
@@ -261,7 +261,7 @@
         -:  259:
     #####:  260:  for (ACE_Select_Reactor_Handler_Repository_Iterator iter (&this->handler_rep_);
     #####:  261:       iter.next (eh) != 0;
-    #####:  262:       iter.advance ())
+        -:  262:       iter.advance ())
         -:  263:    {
     #####:  264:      this->resume_i (eh->get_handle ());
         -:  265:    }
@@ -363,7 +363,7 @@
     #####:  361:  ACE_MT (ACE_GUARD_RETURN (ACE_SELECT_REACTOR_TOKEN, ace_mon, this->token_, -1));
     #####:  362:  return this->bit_ops (handle,
         -:  363:                        mask,
-    #####:  364:                        this->ready_set_,
+        -:  364:                        this->ready_set_,
     #####:  365:                        ops);
         -:  366:}
         -:  367:
@@ -486,7 +486,7 @@
         -:  484:   int s_queue)
         -:  485:    : ACE_Select_Reactor_Impl (mask_signals)
         -:  486:    , token_ (s_queue)
-    #####:  487:    , lock_adapter_ (token_)
+        -:  487:    , lock_adapter_ (token_)
     #####:  488:    , deactivated_ (0)
         -:  489:{
         -:  490:  ACE_TRACE ("ACE_Select_Reactor_T::ACE_Select_Reactor_T");
@@ -619,21 +619,6 @@
         -:  617:  ACE_TRACE ("ACE_Select_Reactor_T::~ACE_Select_Reactor_T");
     #####:  618:  this->close ();
     #####:  619:}
-------------------
-_ZN20ACE_Select_Reactor_TI19ACE_Reactor_Token_TI9ACE_TokenEED0Ev:
-    #####:  615:ACE_Select_Reactor_T<ACE_SELECT_REACTOR_TOKEN>::~ACE_Select_Reactor_T (void)
-        -:  616:{
-        -:  617:  ACE_TRACE ("ACE_Select_Reactor_T::~ACE_Select_Reactor_T");
-        -:  618:  this->close ();
-    #####:  619:}
-------------------
-_ZN20ACE_Select_Reactor_TI19ACE_Reactor_Token_TI9ACE_TokenEED2Ev:
-    #####:  615:ACE_Select_Reactor_T<ACE_SELECT_REACTOR_TOKEN>::~ACE_Select_Reactor_T (void)
-        -:  616:{
-        -:  617:  ACE_TRACE ("ACE_Select_Reactor_T::~ACE_Select_Reactor_T");
-    #####:  618:  this->close ();
-    #####:  619:}
-------------------
         -:  620:
         -:  621:template <class ACE_SELECT_REACTOR_TOKEN> int
     #####:  622:ACE_Select_Reactor_T<ACE_SELECT_REACTOR_TOKEN>::remove_handler_i
@@ -1057,7 +1042,7 @@ _ZN20ACE_Select_Reactor_TI19ACE_Reactor_Token_TI9ACE_TokenEED2Ev:
     #####: 1040:  ACE_MT (countdown.update ());
         -: 1041:
     #####: 1042:  ACE_Time_Value timer_buf (0);
-        -: 1043:  ACE_Time_Value *this_timeout =
+    #####: 1043:  ACE_Time_Value *this_timeout =
     #####: 1044:    this->timer_queue_->calculate_timeout (&mwt, &timer_buf);
         -: 1045:
         -: 1046:  // Check if we have timers to fire.
@@ -1111,7 +1096,7 @@ _ZN20ACE_Select_Reactor_TI19ACE_Reactor_Token_TI9ACE_TokenEED2Ev:
     #####: 1094:          if (this->timer_queue_ == 0)
     #####: 1095:            return 0;
         -: 1096:
-        -: 1097:          this_timeout =
+    #####: 1097:          this_timeout =
     #####: 1098:            this->timer_queue_->calculate_timeout (max_wait_time,
         -: 1099:                                                   &timer_buf);
         -: 1100:#ifdef ACE_WIN32
@@ -1186,9 +1171,9 @@ _ZN20ACE_Select_Reactor_TI19ACE_Reactor_Token_TI9ACE_TokenEED2Ev:
         -: 1169:  // ACE_Select_Reactor_T's internal tables or the notify pipe is
         -: 1170:  // enabled.  We'll handle all these threads and notifications, and
         -: 1171:  // then break out to continue the event loop.
-        -: 1172:  int const n =
+    #####: 1172:  int const n =
     #####: 1173:    this->notify_handler_->dispatch_notifications (number_of_active_handles,
-    #####: 1174:                                                   dispatch_set.rd_mask_);
+        -: 1174:                                                   dispatch_set.rd_mask_);
         -: 1175:
     #####: 1176:  if (n == -1)
     #####: 1177:    return -1;
@@ -1263,8 +1248,8 @@ _ZN20ACE_Select_Reactor_TI19ACE_Reactor_Token_TI9ACE_TokenEED2Ev:
     #####: 1246:  if (this->dispatch_io_set (number_of_active_handles,
         -: 1247:                             number_of_handlers_dispatched,
         -: 1248:                             ACE_Event_Handler::WRITE_MASK,
-    #####: 1249:                             dispatch_set.wr_mask_,
-    #####: 1250:                             this->ready_set_.wr_mask_,
+        -: 1249:                             dispatch_set.wr_mask_,
+        -: 1250:                             this->ready_set_.wr_mask_,
     #####: 1251:                             &ACE_Event_Handler::handle_output) == -1)
         -: 1252:    {
     #####: 1253:      number_of_active_handles -= number_of_handlers_dispatched;
@@ -1275,8 +1260,8 @@ _ZN20ACE_Select_Reactor_TI19ACE_Reactor_Token_TI9ACE_TokenEED2Ev:
     #####: 1258:  if (this->dispatch_io_set (number_of_active_handles,
         -: 1259:                             number_of_handlers_dispatched,
         -: 1260:                             ACE_Event_Handler::EXCEPT_MASK,
-    #####: 1261:                             dispatch_set.ex_mask_,
-    #####: 1262:                             this->ready_set_.ex_mask_,
+        -: 1261:                             dispatch_set.ex_mask_,
+        -: 1262:                             this->ready_set_.ex_mask_,
     #####: 1263:                             &ACE_Event_Handler::handle_exception) == -1)
         -: 1264:    {
     #####: 1265:      number_of_active_handles -= number_of_handlers_dispatched;
@@ -1287,8 +1272,8 @@ _ZN20ACE_Select_Reactor_TI19ACE_Reactor_Token_TI9ACE_TokenEED2Ev:
     #####: 1270:  if (this->dispatch_io_set (number_of_active_handles,
         -: 1271:                             number_of_handlers_dispatched,
         -: 1272:                             ACE_Event_Handler::READ_MASK,
-    #####: 1273:                             dispatch_set.rd_mask_,
-    #####: 1274:                             this->ready_set_.rd_mask_,
+        -: 1273:                             dispatch_set.rd_mask_,
+        -: 1274:                             this->ready_set_.rd_mask_,
     #####: 1275:                             &ACE_Event_Handler::handle_input) == -1)
         -: 1276:    {
     #####: 1277:      number_of_active_handles -= number_of_handlers_dispatched;
@@ -1475,12 +1460,12 @@ _ZN20ACE_Select_Reactor_TI19ACE_Reactor_Token_TI9ACE_TokenEED2Ev:
     #####: 1458:      this->dispatch_set_.ex_mask_.reset ();
         -: 1459:
     #####: 1460:      int number_of_active_handles =
-    #####: 1461:        this->wait_for_multiple_events (this->dispatch_set_,
+        -: 1461:        this->wait_for_multiple_events (this->dispatch_set_,
         -: 1462:                                        max_wait_time);
         -: 1463:
     #####: 1464:      result =
         -: 1465:        this->dispatch (number_of_active_handles,
-    #####: 1466:                        this->dispatch_set_);
+        -: 1466:                        this->dispatch_set_);
         -: 1467:    }
         -: 1468:  ACE_SEH_EXCEPT (this->release_token ())
         -: 1469:    {

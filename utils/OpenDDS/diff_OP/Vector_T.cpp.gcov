@@ -2,23 +2,3 @@
 <         -:    0:Programs:70
 ---
 >         -:    0:Programs:69
-102c102
-<         9:   34:void ACE_Vector<T, DEFAULT_SIZE>::push_back (const T& elem)
----
->     #####:   34:void ACE_Vector<T, DEFAULT_SIZE>::push_back (const T& elem)
-104c104
-<         9:   36:  if (length_ == curr_max_size_)
----
->     #####:   36:  if (length_ == curr_max_size_)
-110c110
-<         9:   42:    ACE_Array<T>::size (length_ + 1);
----
->     #####:   42:    ACE_Array<T>::size (length_ + 1);
-112,114c112,114
-<         9:   44:  ++length_;
-<         9:   45:  (*this)[length_-1] = elem;
-<         9:   46:}
----
->     #####:   44:  ++length_;
->     #####:   45:  (*this)[length_-1] = elem;
->     #####:   46:}

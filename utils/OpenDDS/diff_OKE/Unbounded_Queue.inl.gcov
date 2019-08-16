@@ -1,0 +1,8 @@
+16c16
+<        20:   14:ACE_Unbounded_Queue<T>::is_empty (void) const
+---
+>        35:   14:ACE_Unbounded_Queue<T>::is_empty (void) const
+19c19
+<        20:   17:  return this->head_ == this->head_->next_;
+---
+>        35:   17:  return this->head_ == this->head_->next_;

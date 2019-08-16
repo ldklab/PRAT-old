@@ -1,0 +1,184 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+16,17c16,17
+<     #####:   14:ACE_OutputCDR::from_boolean::from_boolean (ACE_CDR::Boolean b)
+<     #####:   15:  : val_ (b)
+---
+>         -:   14:ACE_OutputCDR::from_boolean::from_boolean (ACE_CDR::Boolean b)
+>         -:   15:  : val_ (b)
+19c19
+<     #####:   17:}
+---
+>         -:   17:}
+22,23c22,23
+<     #####:   20:ACE_InputCDR::to_boolean::to_boolean (ACE_CDR::Boolean &b)
+<     #####:   21:  : ref_ (b)
+---
+>         -:   20:ACE_InputCDR::to_boolean::to_boolean (ACE_CDR::Boolean &b)
+>         -:   21:  : ref_ (b)
+25c25
+<     #####:   23:}
+---
+>         -:   23:}
+28,29c28,29
+<     #####:   26:ACE_OutputCDR::from_octet::from_octet (ACE_CDR::Octet o)
+<     #####:   27:  : val_ (o)
+---
+>         -:   26:ACE_OutputCDR::from_octet::from_octet (ACE_CDR::Octet o)
+>         -:   27:  : val_ (o)
+31c31
+<     #####:   29:}
+---
+>         -:   29:}
+34,35c34,35
+<     #####:   32:ACE_InputCDR::to_octet::to_octet (ACE_CDR::Octet &o)
+<     #####:   33:  : ref_ (o)
+---
+>         -:   32:ACE_InputCDR::to_octet::to_octet (ACE_CDR::Octet &o)
+>         -:   33:  : ref_ (o)
+37c37
+<     #####:   35:}
+---
+>         -:   35:}
+189c189
+<     #####:  187:ACE_OutputCDR::write_octet (ACE_CDR::Octet x)
+---
+>         -:  187:ACE_OutputCDR::write_octet (ACE_CDR::Octet x)
+191c191
+<     #####:  189:  return this->write_1 (&x);
+---
+>         -:  189:  return this->write_1 (&x);
+195c195
+<     #####:  193:ACE_OutputCDR::write_boolean (ACE_CDR::Boolean x)
+---
+>         -:  193:ACE_OutputCDR::write_boolean (ACE_CDR::Boolean x)
+199c199
+<     #####:  197:      this->write_octet (
+---
+>         -:  197:      this->write_octet (
+202c202
+<     #####:  200:        : static_cast<ACE_CDR::Octet> (0)));
+---
+>         -:  200:        : static_cast<ACE_CDR::Octet> (0)));
+284c284
+<     #####:  282:ACE_OutputCDR::write_string (const ACE_CDR::Char *x)
+---
+>         -:  282:ACE_OutputCDR::write_string (const ACE_CDR::Char *x)
+286c286
+<     #####:  284:  if (x)
+---
+>         -:  284:  if (x)
+289,290c289,290
+<     #####:  287:        static_cast<ACE_CDR::ULong> (ACE_OS::strlen (x));
+<     #####:  288:      return this->write_string (len, x);
+---
+>         -:  287:        static_cast<ACE_CDR::ULong> (ACE_OS::strlen (x));
+>         -:  288:      return this->write_string (len, x);
+293c293
+<     #####:  291:  return this->write_string (0, 0);
+---
+>         -:  291:  return this->write_string (0, 0);
+446c446
+<     #####:  444:ACE_OutputCDR::good_bit (void) const
+---
+>         -:  444:ACE_OutputCDR::good_bit (void) const
+448c448
+<     #####:  446:  return this->good_bit_;
+---
+>         -:  446:  return this->good_bit_;
+637c637
+<     #####:  635:ACE_InputCDR::read_octet (ACE_CDR::Octet& x)
+---
+>         -:  635:ACE_InputCDR::read_octet (ACE_CDR::Octet& x)
+639c639
+<     #####:  637:  return this->read_1 (&x);
+---
+>         -:  637:  return this->read_1 (&x);
+643c643
+<     #####:  641:ACE_InputCDR::read_boolean (ACE_CDR::Boolean& x)
+---
+>         -:  641:ACE_InputCDR::read_boolean (ACE_CDR::Boolean& x)
+645,648c645,648
+<     #####:  643:  ACE_CDR::Octet tmp = 0;
+<     #####:  644:  (void) this->read_octet (tmp);
+<     #####:  645:  x = tmp ? true : false;
+<     #####:  646:  return (ACE_CDR::Boolean) this->good_bit_;
+---
+>         -:  643:  ACE_CDR::Octet tmp = 0;
+>         -:  644:  (void) this->read_octet (tmp);
+>         -:  645:  x = tmp ? true : false;
+>         -:  646:  return (ACE_CDR::Boolean) this->good_bit_;
+1130c1130
+<     #####: 1128:ACE_InputCDR::good_bit (void) const
+---
+>         -: 1128:ACE_InputCDR::good_bit (void) const
+1132c1132
+<     #####: 1130:  return this->good_bit_;
+---
+>         -: 1130:  return this->good_bit_;
+1215c1215
+<     #####: 1213:operator<< (ACE_OutputCDR &os, const ACE_CDR::Char *x)
+---
+>         -: 1213:operator<< (ACE_OutputCDR &os, const ACE_CDR::Char *x)
+1217,1218c1217,1218
+<     #####: 1215:  os.write_string (x);
+<     #####: 1216:  return (ACE_CDR::Boolean) os.good_bit ();
+---
+>         -: 1215:  os.write_string (x);
+>         -: 1216:  return (ACE_CDR::Boolean) os.good_bit ();
+1230c1230
+<     #####: 1228:operator<< (ACE_OutputCDR &os, ACE_OutputCDR::from_boolean x)
+---
+>         -: 1228:operator<< (ACE_OutputCDR &os, ACE_OutputCDR::from_boolean x)
+1232,1233c1232,1233
+<     #####: 1230:  (void) os.write_boolean (x.val_);
+<     #####: 1231:  return (ACE_CDR::Boolean) os.good_bit ();
+---
+>         -: 1230:  (void) os.write_boolean (x.val_);
+>         -: 1231:  return (ACE_CDR::Boolean) os.good_bit ();
+1251c1251
+<     #####: 1249:operator<< (ACE_OutputCDR &os, ACE_OutputCDR::from_octet x)
+---
+>         -: 1249:operator<< (ACE_OutputCDR &os, ACE_OutputCDR::from_octet x)
+1253,1254c1253,1254
+<     #####: 1251:  os.write_octet (x.val_);
+<     #####: 1252:  return (ACE_CDR::Boolean) os.good_bit ();
+---
+>         -: 1251:  os.write_octet (x.val_);
+>         -: 1252:  return (ACE_CDR::Boolean) os.good_bit ();
+1356c1356
+<     #####: 1354:operator>> (ACE_InputCDR &is, ACE_CDR::Char *&x)
+---
+>         -: 1354:operator>> (ACE_InputCDR &is, ACE_CDR::Char *&x)
+1358c1358
+<     #####: 1356:  return is.read_string (x) && is.good_bit ();
+---
+>         -: 1356:  return is.read_string (x) && is.good_bit ();
+1369c1369
+<     #####: 1367:operator>> (ACE_InputCDR &is, ACE_InputCDR::to_boolean x)
+---
+>         -: 1367:operator>> (ACE_InputCDR &is, ACE_InputCDR::to_boolean x)
+1371c1371
+<     #####: 1369:  return is.read_boolean (x.ref_);
+---
+>         -: 1369:  return is.read_boolean (x.ref_);
+1387c1387
+<     #####: 1385:operator>> (ACE_InputCDR &is, ACE_InputCDR::to_octet x)
+---
+>         -: 1385:operator>> (ACE_InputCDR &is, ACE_InputCDR::to_octet x)
+1389c1389
+<     #####: 1387:  return is.read_octet (x.ref_) && is.good_bit ();
+---
+>         -: 1387:  return is.read_octet (x.ref_) && is.good_bit ();
+1546c1546
+<       107: 1544:ACE_InputCDR::reset_byte_order (int byte_order)
+---
+>         -: 1544:ACE_InputCDR::reset_byte_order (int byte_order)
+1548,1549c1548,1549
+<       107: 1546:  this->do_byte_swap_ = (byte_order != ACE_CDR_BYTE_ORDER);
+<       107: 1547:}
+---
+>         -: 1546:  this->do_byte_swap_ = (byte_order != ACE_CDR_BYTE_ORDER);
+>         -: 1547:}

@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Min_Max.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Min_Max.h
         -:    0:Programs:70
         -:    1:// -*- C++ -*-
         -:    2:
@@ -6,7 +6,7 @@
         -:    4:/**
         -:    5: *  @file   Min_Max.h
         -:    6: *
-        -:    7: *  $Id$
+        -:    7: *  $Id: Min_Max.h 14 2007-02-01 15:49:12Z mitza $
         -:    8: *
         -:    9: * Define an appropriate set of min()/max() functions using templates.
         -:   10: *
@@ -36,9 +36,9 @@
         -:   34:
         -:   35:template <class T>
         -:   36:inline const T &
-     236*:   37:ace_max (const T &t1, const T &t2)
+       16:   37:ace_max (const T &t1, const T &t2)
         -:   38:{
-     236*:   39:  return t1 > t2 ? t1 : t2;
+       16:   39:  return t1 > t2 ? t1 : t2;
         -:   40:}
         -:   41:
         -:   42:template <class T>

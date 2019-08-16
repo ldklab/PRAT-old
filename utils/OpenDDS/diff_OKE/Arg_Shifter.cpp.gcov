@@ -1,315 +1,204 @@
-1,3c1,3
-<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Arg_Shifter.cpp
+2c2
 <         -:    0:Programs:70
-<         -:    1:// $Id$
 ---
->         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Arg_Shifter.cpp
 >         -:    0:Programs:69
->         -:    1:// $Id: Arg_Shifter.cpp 2622 2015-08-13 18:30:00Z mitza $
 35c35
-<       236:   33:ACE_Arg_Shifter_T<CHAR_TYPE>::ACE_Arg_Shifter_T (int& argc,
+<        16:   33:ACE_Arg_Shifter_T<CHAR_TYPE>::ACE_Arg_Shifter_T (int& argc,
 ---
->        18:   33:ACE_Arg_Shifter_T<CHAR_TYPE>::ACE_Arg_Shifter_T (int& argc,
+>        20:   33:ACE_Arg_Shifter_T<CHAR_TYPE>::ACE_Arg_Shifter_T (int& argc,
 43,44c43,44
-<       236:   41:    back_ (argc - 1),
-<       472:   42:    front_ (0)
+<        16:   41:    back_ (argc - 1),
+<        32:   42:    front_ (0)
 ---
->        18:   41:    back_ (argc - 1),
->        36:   42:    front_ (0)
+>        20:   41:    back_ (argc - 1),
+>        40:   42:    front_ (0)
 46,47c46,47
-<       236:   44:  this->init ();
-<       236:   45:}
+<        16:   44:  this->init ();
+<        16:   45:}
 ---
->        18:   44:  this->init ();
->        18:   45:}
+>        20:   44:  this->init ();
+>        20:   45:}
 51c51
-<       236:   49:ACE_Arg_Shifter_T<CHAR_TYPE>::init (void)
+<        16:   49:ACE_Arg_Shifter_T<CHAR_TYPE>::init (void)
 ---
->        18:   49:ACE_Arg_Shifter_T<CHAR_TYPE>::init (void)
+>        20:   49:ACE_Arg_Shifter_T<CHAR_TYPE>::init (void)
 54c54
-<       236:   52:  if (this->temp_ == 0)
+<        16:   52:  if (this->temp_ == 0)
 ---
->        18:   52:  if (this->temp_ == 0)
+>        20:   52:  if (this->temp_ == 0)
 59c59
-<      236*:   57:    ACE_NEW (this->temp_,
+<        16:   57:    ACE_NEW (this->temp_,
 ---
->        18:   57:    ACE_NEW (this->temp_,
+>        20:   57:    ACE_NEW (this->temp_,
 62c62
-<       236:   60:  if (this->temp_ != 0)
+<        16:   60:  if (this->temp_ != 0)
 ---
->        18:   60:  if (this->temp_ != 0)
+>        20:   60:  if (this->temp_ != 0)
 65,66c65,66
-<       236:   63:      this->argc_ = 0;
-<      1306:   64:      for (int i = 0; i < this->total_size_; i++)
+<        16:   63:      this->argc_ = 0;
+<        82:   64:      for (int i = 0; i < this->total_size_; i++)
 ---
->        18:   63:      this->argc_ = 0;
->        98:   64:      for (int i = 0; i < this->total_size_; i++)
+>        20:   63:      this->argc_ = 0;
+>       106:   64:      for (int i = 0; i < this->total_size_; i++)
 68,69c68,69
-<      1070:   66:          this->temp_[i] = this->argv_[i];
-<      1070:   67:          this->argv_[i] = 0;
+<        66:   66:          this->temp_[i] = this->argv_[i];
+<        66:   67:          this->argv_[i] = 0;
 ---
->        80:   66:          this->temp_[i] = this->argv_[i];
->        80:   67:          this->argv_[i] = 0;
+>        86:   66:          this->temp_[i] = this->argv_[i];
+>        86:   67:          this->argv_[i] = 0;
 81c81
-<       236:   79:ACE_Arg_Shifter_T<CHAR_TYPE>::~ACE_Arg_Shifter_T (void)
+<        16:   79:ACE_Arg_Shifter_T<CHAR_TYPE>::~ACE_Arg_Shifter_T (void)
 ---
->        18:   79:ACE_Arg_Shifter_T<CHAR_TYPE>::~ACE_Arg_Shifter_T (void)
+>        20:   79:ACE_Arg_Shifter_T<CHAR_TYPE>::~ACE_Arg_Shifter_T (void)
 88c88
-<       236:   86:  delete [] temp_;
+<        16:   86:  delete [] temp_;
 ---
->        18:   86:  delete [] temp_;
+>        20:   86:  delete [] temp_;
 90c90
-<       236:   88:}
+<        16:   88:}
 ---
->        18:   88:}
-94c94
-<         4:   92:ACE_Arg_Shifter_T<CHAR_TYPE>::get_current (void) const
----
->     #####:   92:ACE_Arg_Shifter_T<CHAR_TYPE>::get_current (void) const
-96c96
-<         4:   94:  const CHAR_TYPE * retval = 0;
----
->     #####:   94:  const CHAR_TYPE * retval = 0;
-98,99c98,99
-<         4:   96:  if (this->is_anything_left ())
-<         4:   97:    retval =  this->temp_[current_index_];
----
->     #####:   96:  if (this->is_anything_left ())
->     #####:   97:    retval =  this->temp_[current_index_];
-101c101
-<         4:   99:  return retval;
----
->     #####:   99:  return retval;
+>        20:   88:}
 106c106
-<     10894:  104:ACE_Arg_Shifter_T<CHAR_TYPE>::get_the_parameter (const CHAR_TYPE *flag)
+<       563:  104:ACE_Arg_Shifter_T<CHAR_TYPE>::get_the_parameter (const CHAR_TYPE *flag)
 ---
->       671:  104:ACE_Arg_Shifter_T<CHAR_TYPE>::get_the_parameter (const CHAR_TYPE *flag)
+>       749:  104:ACE_Arg_Shifter_T<CHAR_TYPE>::get_the_parameter (const CHAR_TYPE *flag)
 112c112
-<     10894:  110:  if (!this->is_anything_left())
+<       563:  110:  if (!this->is_anything_left())
 ---
->       671:  110:  if (!this->is_anything_left())
+>       749:  110:  if (!this->is_anything_left())
 116,118c116,118
-<     10894:  114:  int const offset = this->cur_arg_strncasecmp (flag);
-<     10894:  115:  if (offset == -1)
-<     10817:  116:    return 0;
+<       563:  114:  int const offset = this->cur_arg_strncasecmp (flag);
+<       563:  115:  if (offset == -1)
+<       556:  116:    return 0;
 ---
->       671:  114:  int const offset = this->cur_arg_strncasecmp (flag);
->       671:  115:  if (offset == -1)
->       662:  116:    return 0;
+>       749:  114:  int const offset = this->cur_arg_strncasecmp (flag);
+>       749:  115:  if (offset == -1)
+>       740:  116:    return 0;
 120c120
-<        77:  118:  if (offset == 0)
+<         7:  118:  if (offset == 0)
 ---
 >         9:  118:  if (offset == 0)
 122c122
-<        77:  120:      this->consume_arg ();
+<         7:  120:      this->consume_arg ();
 ---
 >         9:  120:      this->consume_arg ();
 124c124
-<        77:  122:      if (!this->is_parameter_next())
+<         7:  122:      if (!this->is_parameter_next())
 ---
 >         9:  122:      if (!this->is_parameter_next())
 130c130
-<        77:  128:  return this->temp_[current_index_] + offset;
+<         7:  128:  return this->temp_[current_index_] + offset;
 ---
 >         9:  128:  return this->temp_[current_index_] + offset;
 135c135
-<     12495:  133:ACE_Arg_Shifter_T<CHAR_TYPE>::cur_arg_strncasecmp (const CHAR_TYPE *flag)
+<       662:  133:ACE_Arg_Shifter_T<CHAR_TYPE>::cur_arg_strncasecmp (const CHAR_TYPE *flag)
 ---
->       791:  133:ACE_Arg_Shifter_T<CHAR_TYPE>::cur_arg_strncasecmp (const CHAR_TYPE *flag)
-137,178c137,178
-<     12495:  135:  if (!this->is_anything_left ())
-<     #####:  136:    return -1;
-<         -:  137:
-<     12495:  138:  const size_t flag_length = ACE_OS::strlen (flag);
-<     12495:  139:  const CHAR_TYPE *arg = this->temp_[this->current_index_];
-<         -:  140:
-<     12495:  141:  if (ACE_OS::strncasecmp (arg, flag, flag_length) != 0)
-<     12414:  142:    return -1;
-<         -:  143:
-<        81:  144:  const size_t arg_length = ACE_OS::strlen (arg);
-<        81:  145:  size_t remaining = flag_length;
-<       81*:  146:  while (remaining < arg_length && arg[remaining] == CHAR_TYPE (' '))
-<     #####:  147:    ++remaining;
-<        81:  148:  return (arg_length == flag_length) ? 0 : static_cast<int> (remaining);
-<         -:  149:}
-<         -:  150:
-<         -:  151:template <typename CHAR_TYPE>
-<         -:  152:int
-<       158:  153:ACE_Arg_Shifter_T<CHAR_TYPE>::consume_arg (int number)
-<         -:  154:{
-<       158:  155:  int retval = 0;
-<         -:  156:
-<         -:  157:  // Stick knowns at the end of the vector (consumed).
-<       158:  158:  if (this->is_anything_left() >= number)
-<         -:  159:    {
-<       158:  160:      for (int i = 0, j = this->back_ - (number - 1);
-<       316:  161:           i < number;
-<       158:  162:           ++i, ++j, ++this->current_index_)
-<       158:  163:        this->argv_[j] = this->temp_[this->current_index_];
-<         -:  164:
-<       158:  165:      this->back_ -= number;
-<       158:  166:      retval = 1;
-<         -:  167:    }
-<         -:  168:
-<       158:  169:  return retval;
-<         -:  170:}
-<         -:  171:
-<         -:  172:template <typename CHAR_TYPE>
-<         -:  173:int
-<       912:  174:ACE_Arg_Shifter_T<CHAR_TYPE>::ignore_arg (int number)
-<         -:  175:{
-<       912:  176:  int retval = 0;
+>       878:  133:ACE_Arg_Shifter_T<CHAR_TYPE>::cur_arg_strncasecmp (const CHAR_TYPE *flag)
+138c138
+<       662:  136:  if (this->is_anything_left())
 ---
->         -:  135:  // Check for a current argument
->       791:  136:  if (this->is_anything_left())
->         -:  137:    {
->       791:  138:      size_t const flag_length = ACE_OS::strlen (flag);
->         -:  139:
->         -:  140:      // Check for presence of the flag
->      1582:  141:      if (ACE_OS::strncasecmp(this->temp_[current_index_],
->         -:  142:                              flag,
->       791:  143:                              flag_length) == 0)
->         -:  144:        {
+>       878:  136:  if (this->is_anything_left())
+140c140
+<       662:  138:      size_t const flag_length = ACE_OS::strlen (flag);
+---
+>       878:  138:      size_t const flag_length = ACE_OS::strlen (flag);
+143c143
+<      1324:  141:      if (ACE_OS::strncasecmp(this->temp_[current_index_],
+---
+>      1756:  141:      if (ACE_OS::strncasecmp(this->temp_[current_index_],
+145c145
+<       662:  143:                              flag_length) == 0)
+---
+>       878:  143:                              flag_length) == 0)
+147c147
+<         7:  145:          if (ACE_OS::strlen(temp_[current_index_]) == flag_length)
+---
 >         9:  145:          if (ACE_OS::strlen(temp_[current_index_]) == flag_length)
->         -:  146:            {
->         -:  147:              // match and lengths are equal
+150c150
+<         7:  148:              return 0;
+---
 >         9:  148:              return 0;
->         -:  149:            }
->         -:  150:          else
->         -:  151:            {
->         -:  152:              // matches, with more info to boot!
->     #####:  153:              size_t const remaining = ACE_OS::strspn
->     #####:  154:                (this->temp_[current_index_] + flag_length,
->         -:  155:                ACE_TEXT (" ")) + flag_length;
->     #####:  156:              return static_cast<int> (remaining);
->         -:  157:            }
->         -:  158:        }
->         -:  159:    }
->         -:  160:  // failure
->       782:  161:  return -1;
->         -:  162:}
->         -:  163:
->         -:  164:template <typename CHAR_TYPE>
->         -:  165:int
+163c163
+<       655:  161:  return -1;
+---
+>       869:  161:  return -1;
+168c168
+<        14:  166:ACE_Arg_Shifter_T<CHAR_TYPE>::consume_arg (int number)
+---
 >        18:  166:ACE_Arg_Shifter_T<CHAR_TYPE>::consume_arg (int number)
->         -:  167:{
+170c170
+<        14:  168:  int retval = 0;
+---
 >        18:  168:  int retval = 0;
->         -:  169:
->         -:  170:  // Stick knowns at the end of the vector (consumed).
+173c173
+<        14:  171:  if (this->is_anything_left() >= number)
+---
 >        18:  171:  if (this->is_anything_left() >= number)
->         -:  172:    {
+175,178c175,178
+<        42:  173:      for (int i = 0, j = this->back_ - (number - 1);
+<        28:  174:           i < number;
+<        14:  175:           ++i, ++j, ++this->current_index_)
+<        14:  176:        this->argv_[j] = this->temp_[this->current_index_];
+---
 >        54:  173:      for (int i = 0, j = this->back_ - (number - 1);
 >        36:  174:           i < number;
 >        18:  175:           ++i, ++j, ++this->current_index_)
 >        18:  176:        this->argv_[j] = this->temp_[this->current_index_];
-180,227c180,240
-<         -:  178:  // Keep unknowns at the head of the vector.
-<       912:  179:  if (this->is_anything_left () >= number)
-<         -:  180:    {
-<       912:  181:      for (int i = 0;
-<      1824:  182:           i < number;
-<      1824:  183:           i++, this->current_index_++, this->front_++)
-<       912:  184:        this->argv_[this->front_] = this->temp_[this->current_index_];
-<         -:  185:
-<       912:  186:      retval = 1;
-<       912:  187:      this->argc_ += number;
-<         -:  188:    }
-<         -:  189:
-<       912:  190:  return retval;
-<         -:  191:}
-<         -:  192:
-<         -:  193:template <typename CHAR_TYPE>
-<         -:  194:int
-<     25769:  195:ACE_Arg_Shifter_T<CHAR_TYPE>::is_anything_left (void) const
-<         -:  196:{
-<     25769:  197:  return this->total_size_ - this->current_index_;
-<         -:  198:}
-<         -:  199:
-<         -:  200:template <typename CHAR_TYPE>
-<         -:  201:int
-<         -:  202:ACE_Arg_Shifter_T<CHAR_TYPE>::is_option_next (void) const
-<         -:  203:{
-<         -:  204:  return this->is_anything_left () &&
-<         -:  205:    this->temp_[this->current_index_][0] == '-';
-<         -:  206:}
-<         -:  207:
-<         -:  208:template <typename CHAR_TYPE>
-<         -:  209:int
-<        79:  210:ACE_Arg_Shifter_T<CHAR_TYPE>::is_parameter_next (void) const
-<         -:  211:{
-<         -:  212:  return this->is_anything_left ()
-<       79*:  213:    && this->temp_[this->current_index_][0] != '-';
-<         -:  214:}
-<         -:  215:
-<         -:  216:template <typename CHAR_TYPE>
-<         -:  217:int
-<         -:  218:ACE_Arg_Shifter_T<CHAR_TYPE>::num_ignored_args (void) const
-<         -:  219:{
-<         -:  220:  return this->front_;
-<         -:  221:}
-<         -:  222:
-<         -:  223:ACE_END_VERSIONED_NAMESPACE_DECL
-<         -:  224:
-<         -:  225:#endif /* ACE_ATOMIC_OP_T_CPP */
+180,181c180,181
+<        14:  178:      this->back_ -= number;
+<        14:  179:      retval = 1;
 ---
 >        18:  178:      this->back_ -= number;
 >        18:  179:      retval = 1;
->         -:  180:    }
->         -:  181:
+184c184
+<        14:  182:  return retval;
+---
 >        18:  182:  return retval;
->         -:  183:}
->         -:  184:
->         -:  185:template <typename CHAR_TYPE>
->         -:  186:int
->        62:  187:ACE_Arg_Shifter_T<CHAR_TYPE>::ignore_arg (int number)
->         -:  188:{
->        62:  189:  int retval = 0;
->         -:  190:
->         -:  191:  // Keep unknowns at the head of the vector.
->        62:  192:  if (this->is_anything_left () >= number)
->         -:  193:    {
->       248:  194:      for (int i = 0;
->       124:  195:           i < number;
->       124:  196:           i++, this->current_index_++, this->front_++)
->        62:  197:        this->argv_[this->front_] = this->temp_[this->current_index_];
->         -:  198:
->        62:  199:      retval = 1;
->        62:  200:      this->argc_ += number;
->         -:  201:    }
->         -:  202:
->        62:  203:  return retval;
->         -:  204:}
->         -:  205:
->         -:  206:template <typename CHAR_TYPE>
->         -:  207:int
->      1640:  208:ACE_Arg_Shifter_T<CHAR_TYPE>::is_anything_left (void) const
->         -:  209:{
->      1640:  210:  return this->total_size_ - this->current_index_;
->         -:  211:}
->         -:  212:
->         -:  213:template <typename CHAR_TYPE>
->         -:  214:int
->         -:  215:ACE_Arg_Shifter_T<CHAR_TYPE>::is_option_next (void) const
->         -:  216:{
->         -:  217:  return this->is_anything_left () &&
->         -:  218:    this->temp_[this->current_index_][0] == '-';
->         -:  219:}
->         -:  220:
->         -:  221:template <typename CHAR_TYPE>
->         -:  222:int
+189c189
+<        52:  187:ACE_Arg_Shifter_T<CHAR_TYPE>::ignore_arg (int number)
+---
+>        68:  187:ACE_Arg_Shifter_T<CHAR_TYPE>::ignore_arg (int number)
+191c191
+<        52:  189:  int retval = 0;
+---
+>        68:  189:  int retval = 0;
+194c194
+<        52:  192:  if (this->is_anything_left () >= number)
+---
+>        68:  192:  if (this->is_anything_left () >= number)
+196,199c196,199
+<       208:  194:      for (int i = 0;
+<       104:  195:           i < number;
+<       104:  196:           i++, this->current_index_++, this->front_++)
+<        52:  197:        this->argv_[this->front_] = this->temp_[this->current_index_];
+---
+>       272:  194:      for (int i = 0;
+>       136:  195:           i < number;
+>       136:  196:           i++, this->current_index_++, this->front_++)
+>        68:  197:        this->argv_[this->front_] = this->temp_[this->current_index_];
+201,202c201,202
+<        52:  199:      retval = 1;
+<        52:  200:      this->argc_ += number;
+---
+>        68:  199:      retval = 1;
+>        68:  200:      this->argc_ += number;
+205c205
+<        52:  203:  return retval;
+---
+>        68:  203:  return retval;
+210c210
+<      1373:  208:ACE_Arg_Shifter_T<CHAR_TYPE>::is_anything_left (void) const
+---
+>      1819:  208:ACE_Arg_Shifter_T<CHAR_TYPE>::is_anything_left (void) const
+212c212
+<      1373:  210:  return this->total_size_ - this->current_index_;
+---
+>      1819:  210:  return this->total_size_ - this->current_index_;
+225c225
+<         7:  223:ACE_Arg_Shifter_T<CHAR_TYPE>::is_parameter_next (void) const
+---
 >         9:  223:ACE_Arg_Shifter_T<CHAR_TYPE>::is_parameter_next (void) const
->         -:  224:{
->         -:  225:  return this->is_anything_left ()
+228c228
+<         7:  226:    && this->temp_[this->current_index_][0] != '-';
+---
 >         9:  226:    && this->temp_[this->current_index_][0] != '-';
->         -:  227:}
->         -:  228:
->         -:  229:template <typename CHAR_TYPE>
->         -:  230:int
->         -:  231:ACE_Arg_Shifter_T<CHAR_TYPE>::num_ignored_args (void) const
->         -:  232:{
->         -:  233:  return this->front_;
->         -:  234:}
->         -:  235:
->         -:  236:ACE_END_VERSIONED_NAMESPACE_DECL
->         -:  237:
->         -:  238:#endif /* ACE_ATOMIC_OP_T_CPP */

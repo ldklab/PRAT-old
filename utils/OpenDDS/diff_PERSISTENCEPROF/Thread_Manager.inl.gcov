@@ -1,0 +1,12 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+218c218
+<     #####:  216:ACE_Thread_Manager::thr_self (void)
+---
+>         -:  216:ACE_Thread_Manager::thr_self (void)
+221c221
+<     #####:  219:  return ACE_Thread::self ();
+---
+>         -:  219:  return ACE_Thread::self ();

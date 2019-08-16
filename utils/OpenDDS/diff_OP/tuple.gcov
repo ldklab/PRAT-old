@@ -1,0 +1,100 @@
+78,79c78,79
+<        36:   76:      constexpr _Head_base()
+<        36:   77:      : _Head() { }
+---
+>        84:   76:      constexpr _Head_base()
+>        84:   77:      : _Head() { }
+115c115
+<        24:  113:      _M_head(_Head_base& __b) noexcept { return __b; }
+---
+>        56:  113:      _M_head(_Head_base& __b) noexcept { return __b; }
+124,125c124,125
+<        36:  122:      constexpr _Head_base()
+<        36:  123:      : _M_head_impl() { }
+---
+>        84:  122:      constexpr _Head_base()
+>        84:  123:      : _M_head_impl() { }
+162c162
+<        60:  160:      _M_head(_Head_base& __b) noexcept { return __b._M_head_impl; }
+---
+>       140:  160:      _M_head(_Head_base& __b) noexcept { return __b._M_head_impl; }
+165c165
+<        86:  163:      _M_head(const _Head_base& __b) noexcept { return __b._M_head_impl; }
+---
+>       150:  163:      _M_head(const _Head_base& __b) noexcept { return __b._M_head_impl; }
+197c197
+<        60:  195:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+---
+>       140:  195:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+200c200
+<        86:  198:      _M_head(const _Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+---
+>       150:  198:      _M_head(const _Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+208,209c208,209
+<        36:  206:      constexpr _Tuple_impl()
+<        36:  207:      : _Inherited(), _Base() { }
+---
+>        84:  206:      constexpr _Tuple_impl()
+>        84:  207:      : _Inherited(), _Base() { }
+353c353
+<        24:  351:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+---
+>        56:  351:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+358,359c358,359
+<        36:  356:      constexpr _Tuple_impl()
+<        36:  357:      : _Base() { }
+---
+>        84:  356:      constexpr _Tuple_impl()
+>        84:  357:      : _Base() { }
+921,922c921,922
+<        36:  919:      constexpr tuple()
+<        36:  920:      : _Inherited() { }
+---
+>        84:  919:      constexpr tuple()
+>        84:  920:      : _Inherited() { }
+1305,1306c1305,1306
+<        84: 1303:    __get_helper(_Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
+<        84: 1304:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
+---
+>       196: 1303:    __get_helper(_Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
+>       196: 1304:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
+1310,1311c1310,1311
+<        86: 1308:    __get_helper(const _Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
+<        86: 1309:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
+---
+>       150: 1308:    __get_helper(const _Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
+>       150: 1309:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
+1316,1317c1316,1317
+<        84: 1314:    get(tuple<_Elements...>& __t) noexcept
+<        84: 1315:    { return std::__get_helper<__i>(__t); }
+---
+>       196: 1314:    get(tuple<_Elements...>& __t) noexcept
+>       196: 1315:    { return std::__get_helper<__i>(__t); }
+1322,1323c1322,1323
+<        86: 1320:    get(const tuple<_Elements...>& __t) noexcept
+<        86: 1321:    { return std::__get_helper<__i>(__t); }
+---
+>       150: 1320:    get(const tuple<_Elements...>& __t) noexcept
+>       150: 1321:    { return std::__get_helper<__i>(__t); }
+1638c1638
+<        36: 1636:      pair<_T1, _T2>::
+---
+>        51: 1636:      pair<_T1, _T2>::
+1643,1644c1643,1644
+<        36: 1641:	     typename _Build_index_tuple<sizeof...(_Args2)>::__type())
+<        36: 1642:      { }
+---
+>        51: 1641:	     typename _Build_index_tuple<sizeof...(_Args2)>::__type())
+>        51: 1642:      { }
+1650c1650
+<        36: 1648:      pair<_T1, _T2>::
+---
+>        51: 1648:      pair<_T1, _T2>::
+1653,1655c1653,1655
+<        36: 1651:      : first(std::forward<_Args1>(std::get<_Indexes1>(__tuple1))...),
+<        56: 1652:        second(std::forward<_Args2>(std::get<_Indexes2>(__tuple2))...)
+<        36: 1653:      { }
+---
+>        51: 1651:      : first(std::forward<_Args1>(std::get<_Indexes1>(__tuple1))...),
+>        86: 1652:        second(std::forward<_Args2>(std::get<_Indexes2>(__tuple2))...)
+>        51: 1653:      { }

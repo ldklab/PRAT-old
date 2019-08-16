@@ -1,6 +1,6 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Vector_T.cpp
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Vector_T.cpp
         -:    0:Programs:70
-        -:    1:// $Id$
+        -:    1:// $Id: Vector_T.cpp 2622 2015-08-13 18:30:00Z mitza $
         -:    2:
         -:    3:#ifndef ACE_VECTOR_T_CPP
         -:    4:#define ACE_VECTOR_T_CPP
@@ -31,87 +31,21 @@
     #####:   29:  curr_max_size_ = this->max_size ();
     #####:   30:  length_ = new_size;
     #####:   31:}
-------------------
-_ZN10ACE_VectorIPN7OpenDDS4DCPS19ReceivedDataElementELm20EE6resizeEmRKS3_:
-    #####:   21:void ACE_Vector<T, DEFAULT_SIZE>::resize (const size_t new_size,
-        -:   22:                                          const T& t)
-        -:   23:{
-    #####:   24:  ACE_Array<T>::size (new_size);
-    #####:   25:  if (new_size > length_)
-    #####:   26:    for (size_t i = length_; i < new_size; ++i)
-    #####:   27:      (*this)[i]=t;
-        -:   28:
-    #####:   29:  curr_max_size_ = this->max_size ();
-    #####:   30:  length_ = new_size;
-    #####:   31:}
-------------------
-_ZN10ACE_VectorIPN7OpenDDS4DCPS19ReceivedDataElementELm20EE6resizeEmRKS3_:
-    #####:   21:void ACE_Vector<T, DEFAULT_SIZE>::resize (const size_t new_size,
-        -:   22:                                          const T& t)
-        -:   23:{
-    #####:   24:  ACE_Array<T>::size (new_size);
-    #####:   25:  if (new_size > length_)
-    #####:   26:    for (size_t i = length_; i < new_size; ++i)
-    #####:   27:      (*this)[i]=t;
-        -:   28:
-    #####:   29:  curr_max_size_ = this->max_size ();
-    #####:   30:  length_ = new_size;
-    #####:   31:}
-------------------
-_ZN10ACE_VectorIPN7OpenDDS4DCPS19ReceivedDataElementELm20EE6resizeEmRKS3_:
-    #####:   21:void ACE_Vector<T, DEFAULT_SIZE>::resize (const size_t new_size,
-        -:   22:                                          const T& t)
-        -:   23:{
-    #####:   24:  ACE_Array<T>::size (new_size);
-    #####:   25:  if (new_size > length_)
-    #####:   26:    for (size_t i = length_; i < new_size; ++i)
-    #####:   27:      (*this)[i]=t;
-        -:   28:
-    #####:   29:  curr_max_size_ = this->max_size ();
-    #####:   30:  length_ = new_size;
-    #####:   31:}
-------------------
-_ZN10ACE_VectorIcLm32EE6resizeEmRKc:
-    #####:   21:void ACE_Vector<T, DEFAULT_SIZE>::resize (const size_t new_size,
-        -:   22:                                          const T& t)
-        -:   23:{
-    #####:   24:  ACE_Array<T>::size (new_size);
-    #####:   25:  if (new_size > length_)
-    #####:   26:    for (size_t i = length_; i < new_size; ++i)
-    #####:   27:      (*this)[i]=t;
-        -:   28:
-    #####:   29:  curr_max_size_ = this->max_size ();
-    #####:   30:  length_ = new_size;
-    #####:   31:}
-------------------
-_ZN10ACE_VectorIPN7OpenDDS4DCPS19ReceivedDataElementELm20EE6resizeEmRKS3_:
-    #####:   21:void ACE_Vector<T, DEFAULT_SIZE>::resize (const size_t new_size,
-        -:   22:                                          const T& t)
-        -:   23:{
-    #####:   24:  ACE_Array<T>::size (new_size);
-    #####:   25:  if (new_size > length_)
-    #####:   26:    for (size_t i = length_; i < new_size; ++i)
-    #####:   27:      (*this)[i]=t;
-        -:   28:
-    #####:   29:  curr_max_size_ = this->max_size ();
-    #####:   30:  length_ = new_size;
-    #####:   31:}
-------------------
         -:   32:
         -:   33:template <class T, size_t DEFAULT_SIZE>
-        9:   34:void ACE_Vector<T, DEFAULT_SIZE>::push_back (const T& elem)
+        2:   34:void ACE_Vector<T, DEFAULT_SIZE>::push_back (const T& elem)
         -:   35:{
-        9:   36:  if (length_ == curr_max_size_)
+        2:   36:  if (length_ == curr_max_size_)
         -:   37:    {
     #####:   38:      ACE_Array<T>::size (curr_max_size_ * 2);
     #####:   39:      curr_max_size_ = this->max_size ();
         -:   40:    }
         -:   41:  else
-        9:   42:    ACE_Array<T>::size (length_ + 1);
+        2:   42:    ACE_Array<T>::size (length_ + 1);
         -:   43:
-        9:   44:  ++length_;
-        9:   45:  (*this)[length_-1] = elem;
-        9:   46:}
+        2:   44:  ++length_;
+        2:   45:  (*this)[length_-1] = elem;
+        2:   46:}
         -:   47:
         -:   48:template <class T, size_t DEFAULT_SIZE>
         -:   49:void ACE_Vector<T, DEFAULT_SIZE>::dump (void) const

@@ -1,6 +1,6 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Singleton.cpp
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Singleton.cpp
         -:    0:Programs:51
-        -:    1:// $Id$
+        -:    1:// $Id: Singleton.cpp 2955 2018-01-02 23:42:23Z mitza $
         -:    2:
         -:    3:#ifndef ACE_SINGLETON_CPP
         -:    4:#define ACE_SINGLETON_CPP
@@ -45,7 +45,7 @@
         -:   43:}
         -:   44:
         -:   45:template <class TYPE, class ACE_LOCK> ACE_Singleton<TYPE, ACE_LOCK> *&
-      119:   46:ACE_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+        7:   46:ACE_Singleton<TYPE, ACE_LOCK>::instance_i (void)
         -:   47:{
         -:   48:#if defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
         -:   49:  // Pointer to the Singleton instance.  This works around a bug with
@@ -54,7 +54,7 @@
         -:   52:
         -:   53:  return singleton_;
         -:   54:#else
-      119:   55:  return ACE_Singleton<TYPE, ACE_LOCK>::singleton_;
+        7:   55:  return ACE_Singleton<TYPE, ACE_LOCK>::singleton_;
         -:   56:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
         -:   57:}
         -:   58:
@@ -119,22 +119,22 @@
         -:  117:}
         -:  118:
         -:  119:template <class TYPE, class ACE_LOCK> void
-      119:  120:ACE_Singleton<TYPE, ACE_LOCK>::cleanup (void *param)
+        7:  120:ACE_Singleton<TYPE, ACE_LOCK>::cleanup (void *param)
         -:  121:{
-      119:  122:  ACE_Object_Manager::remove_at_exit (this);
-      119:  123:  delete this;
-      119:  124:  ACE_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+        7:  122:  ACE_Object_Manager::remove_at_exit (this);
+        7:  123:  delete this;
+        7:  124:  ACE_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
         -:  125:
         -:  126:#if !defined ACE_MT_SAFE || ACE_MT_SAFE == 0 || defined ACE_FACE_SAFETY_BASE
         -:  127:  ACE_UNUSED_ARG (param);
         -:  128:#else
-      119:  129:  if (param)
+        7:  129:  if (param)
         -:  130:    {
     #####:  131:      ACE_LOCK **lock = static_cast<ACE_LOCK **> (param);
     #####:  132:      *lock = 0;
         -:  133:    }
         -:  134:#endif
-      119:  135:}
+        7:  135:}
         -:  136:
         -:  137:template <class TYPE, class ACE_LOCK> void
         -:  138:ACE_Singleton<TYPE, ACE_LOCK>::close (void)
@@ -174,7 +174,7 @@
         -:  172:
         -:  173:template <class TYPE, class ACE_LOCK>
         -:  174:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&
-      647:  175:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i (void)
+       60:  175:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i (void)
         -:  176:{
         -:  177:#if defined (ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES)
         -:  178:  // Pointer to the Singleton instance.  This works around a bug with
@@ -183,23 +183,23 @@
         -:  181:
         -:  182:  return singleton_;
         -:  183:#else
-      647:  184:  return ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::singleton_;
+       60:  184:  return ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::singleton_;
         -:  185:#endif /* ACE_LACKS_STATIC_DATA_MEMBER_TEMPLATES */
         -:  186:}
         -:  187:
         -:  188:template <class TYPE, class ACE_LOCK> TYPE *
-      409:  189:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance (void)
+       46:  189:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance (void)
         -:  190:{
         -:  191:  ACE_TRACE ("ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance");
         -:  192:
-        -:  193:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
-      409:  194:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
+       46:  193:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
+        -:  194:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
         -:  195:
         -:  196:  // Perform the Double-Check pattern...
-      409:  197:  if (singleton == 0)
+       46:  197:  if (singleton == 0)
         -:  198:    {
-     238*:  199:      if (ACE_Object_Manager::starting_up () ||
-      119:  200:          ACE_Object_Manager::shutting_down ())
+       16:  199:      if (ACE_Object_Manager::starting_up () ||
+        8:  200:          ACE_Object_Manager::shutting_down ())
         -:  201:        {
         -:  202:          // The program is still starting up, and therefore assumed
         -:  203:          // to be single threaded.  There's no need to double-check.
@@ -223,35 +223,35 @@
         -:  221:#else /* ACE_FACE_SAFETY_BASE */
         -:  222:          static ACE_LOCK *lock = 0;
         -:  223:#endif /* ACE_FACE_SAFETY_BASE */
-      119:  224:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
+        8:  224:          if (ACE_Object_Manager::get_singleton_lock (lock) != 0)
         -:  225:            // Failed to acquire the lock!
     #####:  226:            return 0;
         -:  227:
-     119*:  228:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
+       16:  228:          ACE_GUARD_RETURN (ACE_LOCK, ace_mon, *lock, 0);
         -:  229:#endif /* ACE_MT_SAFE */
         -:  230:
-      119:  231:          if (singleton == 0)
-     119*:  232:            ACE_NEW_RETURN (singleton,
+        8:  231:          if (singleton == 0)
+        8:  232:            ACE_NEW_RETURN (singleton,
         -:  233:                            (ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>),
         -:  234:                            0);
         -:  235:        }
         -:  236:    }
         -:  237:
-      409:  238:  return &singleton->instance_;
+       46:  238:  return &singleton->instance_;
         -:  239:}
         -:  240:
         -:  241:template <class TYPE, class ACE_LOCK> void
-      119:  242:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::close (void)
+        7:  242:ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::close (void)
         -:  243:{
-        -:  244:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
-      119:  245:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
+        7:  244:  ACE_Unmanaged_Singleton<TYPE, ACE_LOCK> *&singleton =
+        -:  245:    ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i ();
         -:  246:
-      119:  247:  if (singleton)
+        7:  247:  if (singleton)
         -:  248:    {
-      119:  249:      singleton->cleanup ();
-      119:  250:      ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
+        7:  249:      singleton->cleanup ();
+        7:  250:      ACE_Unmanaged_Singleton<TYPE, ACE_LOCK>::instance_i () = 0;
         -:  251:    }
-      119:  252:}
+        7:  252:}
         -:  253:
         -:  254:template <class TYPE, class ACE_LOCK> void
         -:  255:ACE_TSS_Singleton<TYPE, ACE_LOCK>::dump (void)

@@ -1,0 +1,16 @@
+856c856
+<       139:  854:ACE_OS::setsockopt (ACE_HANDLE handle,
+---
+>       259:  854:ACE_OS::setsockopt (ACE_HANDLE handle,
+893c893
+<       139:  891:  ACE_SOCKCALL (::setsockopt ((ACE_SOCKET) handle,
+---
+>       259:  891:  ACE_SOCKCALL (::setsockopt ((ACE_SOCKET) handle,
+904c904
+<       139:  902:  if (result == -1)
+---
+>       259:  902:  if (result == -1)
+907c907
+<       139:  905:  return result;
+---
+>       259:  905:  return result;

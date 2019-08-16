@@ -1,0 +1,148 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Malloc_Allocator.h
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://==========================================================================
+        -:    4:/**
+        -:    5: *  @file   Malloc_Allocator.h
+        -:    6: *
+        -:    7: *  $Id: Malloc_Allocator.h 935 2008-12-10 21:47:27Z mitza $
+        -:    8: *
+        -:    9: *  @author Based on code that formerly existed in another ACE file.
+        -:   10: */
+        -:   11://==========================================================================
+        -:   12:
+        -:   13:#ifndef ACE_MALLOC_ALLOCATOR_H
+        -:   14:#define ACE_MALLOC_ALLOCATOR_H
+        -:   15:
+        -:   16:#include /**/ "ace/pre.h"
+        -:   17:
+        -:   18:#include /**/ "ace/ACE_export.h"
+        -:   19:
+        -:   20:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   21:# pragma once
+        -:   22:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   23:
+        -:   24:#include "ace/Malloc_Base.h"
+        -:   25:
+        -:   26:#if defined (ACE_HAS_MALLOC_STATS)
+        -:   27:#if defined (ACE_HAS_THREADS)
+        -:   28:#include "ace/Process_Mutex.h"
+        -:   29:#define ACE_PROCESS_MUTEX ACE_Process_Mutex
+        -:   30:#else
+        -:   31:#include "ace/SV_Semaphore_Simple.h"
+        -:   32:#define ACE_PROCESS_MUTEX ACE_SV_Semaphore_Simple
+        -:   33:#endif /* ACE_HAS_THREADS */
+        -:   34:
+        -:   35:#endif /* ACE_HAS_MALLOC_STATS */
+        -:   36:
+        -:   37:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   38:
+        -:   39:/**
+        -:   40: * @class ACE_New_Allocator
+        -:   41: *
+        -:   42: * @brief Defines a class that provided a simple implementation of
+        -:   43: * memory allocation.
+        -:   44: *
+        -:   45: * This class uses the new/delete operators to allocate and free up
+        -:   46: * memory.  Please note that the only methods that are supported are
+        -:   47: * <malloc>, <calloc>, and <free>. All other methods are no-ops that
+        -:   48: * return -1 and set @c errno to <ENOTSUP>.  If you require this
+        -:   49: * functionality, please use: ACE_Allocator_Adapter <ACE_Malloc
+        -:   50: * <ACE_LOCAL_MEMORY_POOL, MUTEX> >, which will allow you to use the
+        -:   51: * added functionality of bind/find/etc. while using the new/delete
+        -:   52: * operators.
+        -:   53: */
+    #####:   54:class ACE_Export ACE_New_Allocator : public ACE_Allocator
+        -:   55:{
+        -:   56:public:
+        -:   57:  /// These methods are defined.
+        -:   58:  virtual void *malloc (size_t nbytes);
+        -:   59:  virtual void *calloc (size_t nbytes, char initial_value = '\0');
+        -:   60:  virtual void *calloc (size_t n_elem, size_t elem_size, char initial_value = '\0');
+        -:   61:  virtual void free (void *ptr);
+        -:   62:
+        -:   63:  /// These methods are no-ops.
+        -:   64:  virtual int remove (void);
+        -:   65:  virtual int bind (const char *name, void *pointer, int duplicates = 0);
+        -:   66:  virtual int trybind (const char *name, void *&pointer);
+        -:   67:  virtual int find (const char *name, void *&pointer);
+        -:   68:  virtual int find (const char *name);
+        -:   69:  virtual int unbind (const char *name);
+        -:   70:  virtual int unbind (const char *name, void *&pointer);
+        -:   71:  virtual int sync (ssize_t len = -1, int flags = MS_SYNC);
+        -:   72:  virtual int sync (void *addr, size_t len, int flags = MS_SYNC);
+        -:   73:  virtual int protect (ssize_t len = -1, int prot = PROT_RDWR);
+        -:   74:  virtual int protect (void *addr, size_t len, int prot = PROT_RDWR);
+        -:   75:#if defined (ACE_HAS_MALLOC_STATS)
+        -:   76:  virtual void print_stats (void) const;
+        -:   77:#endif /* ACE_HAS_MALLOC_STATS */
+        -:   78:  virtual void dump (void) const;
+        -:   79:
+        -:   80:private:
+        -:   81:  // DO NOT ADD ANY STATE (DATA MEMBERS) TO THIS CLASS!!!!  See the
+        -:   82:  // <ACE_Allocator::instance> implementation for explanation.
+        -:   83:};
+        -:   84:
+        -:   85:/**
+        -:   86: * @class ACE_Static_Allocator_Base
+        -:   87: *
+        -:   88: * @brief Defines a class that provided a highly optimized memory
+        -:   89: * management scheme for allocating memory statically.
+        -:   90: *
+        -:   91: * This class manages a fixed-size <POOL_SIZE> of memory.  Every
+        -:   92: * time <malloc>/<calloc> is called, it simply moves an internal
+        -:   93: * index forward and returns a pointer to the requested chunk.
+        -:   94: * All memory is allocated statically (typically via the
+        -:   95: * ACE_Static_Allocator template) and <free> is a no-op.  This
+        -:   96: * behavior is useful for use-cases where all the memory
+        -:   97: * allocation needs are known in advance and no deletions ever
+        -:   98: * occur.
+        -:   99: */
+        -:  100:class ACE_Export ACE_Static_Allocator_Base : public ACE_Allocator
+        -:  101:{
+        -:  102:public:
+        -:  103:  ACE_Static_Allocator_Base (char *buffer, size_t size);
+        -:  104:  virtual void *malloc (size_t nbytes);
+        -:  105:  virtual void *calloc (size_t nbytes, char initial_value = '\0');
+        -:  106:  virtual void *calloc (size_t n_elem, size_t elem_size, char initial_value = '\0');
+        -:  107:  virtual void free (void *ptr);
+        -:  108:  virtual int remove (void);
+        -:  109:  virtual int bind (const char *name, void *pointer, int duplicates = 0);
+        -:  110:  virtual int trybind (const char *name, void *&pointer);
+        -:  111:  virtual int find (const char *name, void *&pointer);
+        -:  112:  virtual int find (const char *name);
+        -:  113:  virtual int unbind (const char *name);
+        -:  114:  virtual int unbind (const char *name, void *&pointer);
+        -:  115:  virtual int sync (ssize_t len = -1, int flags = MS_SYNC);
+        -:  116:  virtual int sync (void *addr, size_t len, int flags = MS_SYNC);
+        -:  117:  virtual int protect (ssize_t len = -1, int prot = PROT_RDWR);
+        -:  118:  virtual int protect (void *addr, size_t len, int prot = PROT_RDWR);
+        -:  119:#if defined (ACE_HAS_MALLOC_STATS)
+        -:  120:  virtual void print_stats (void) const;
+        -:  121:#endif /* ACE_HAS_MALLOC_STATS */
+        -:  122:  virtual void dump (void) const;
+        -:  123:
+        -:  124:protected:
+        -:  125:  /// Don't allow direct instantiations of this class.
+        -:  126:  ACE_Static_Allocator_Base (void);
+        -:  127:
+        -:  128:  /// Pointer to the buffer.
+        -:  129:  char *buffer_;
+        -:  130:
+        -:  131:  /// Size of the buffer.
+        -:  132:  size_t size_;
+        -:  133:
+        -:  134:  /// Pointer to the current offset in the <buffer_>.
+        -:  135:  size_t offset_;
+        -:  136:};
+        -:  137:
+        -:  138:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  139:
+        -:  140:#if defined (__ACE_INLINE__)
+        -:  141:#include "ace/Malloc_Allocator.inl"
+        -:  142:#endif /* __ACE_INLINE__ */
+        -:  143:
+        -:  144:#include /**/ "ace/post.h"
+        -:  145:
+        -:  146:#endif /* MALLOC_ALLOCATOR_H */

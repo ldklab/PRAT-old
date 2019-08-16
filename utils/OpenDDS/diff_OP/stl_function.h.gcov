@@ -1,0 +1,12 @@
+888,889c888,889
+<        26:  886:      operator()(_Pair& __x) const
+<        26:  887:      { return __x.first; }
+---
+>        30:  886:      operator()(_Pair& __x) const
+>        30:  887:      { return __x.first; }
+892,893c892,893
+<       240:  890:      operator()(const _Pair& __x) const
+<       240:  891:      { return __x.first; }
+---
+>       385:  890:      operator()(const _Pair& __x) const
+>       385:  891:      { return __x.first; }

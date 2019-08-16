@@ -1,0 +1,20 @@
+1209c1209
+<        20: 1207:    reverse_copy(_BidirectionalIterator __first, _BidirectionalIterator __last,
+---
+>        36: 1207:    reverse_copy(_BidirectionalIterator __first, _BidirectionalIterator __last,
+1219c1219
+<        30: 1217:      while (__first != __last)
+---
+>        54: 1217:      while (__first != __last)
+1221,1223c1221,1223
+<        10: 1219:	  --__last;
+<        10: 1220:	  *__result = *__last;
+<        10: 1221:	  ++__result;
+---
+>        18: 1219:	  --__last;
+>        18: 1220:	  *__result = *__last;
+>        18: 1221:	  ++__result;
+1225c1225
+<        10: 1223:      return __result;
+---
+>        18: 1223:      return __result;

@@ -1,0 +1,54 @@
+78c78
+<        54:   76:        __uninit_copy(_InputIterator __first, _InputIterator __last,
+---
+>        66:   76:        __uninit_copy(_InputIterator __first, _InputIterator __last,
+81c81
+<        54:   79:	  _ForwardIterator __cur = __result;
+---
+>        66:   79:	  _ForwardIterator __cur = __result;
+84c84
+<        54:   82:	      for (; __first != __last; ++__first, (void)++__cur)
+---
+>        66:   82:	      for (; __first != __last; ++__first, (void)++__cur)
+86c86
+<        54:   84:	      return __cur;
+---
+>        66:   84:	      return __cur;
+101c101
+<        28:   99:        __uninit_copy(_InputIterator __first, _InputIterator __last,
+---
+>        44:   99:        __uninit_copy(_InputIterator __first, _InputIterator __last,
+103c103
+<        28:  101:        { return std::copy(__first, __last, __result); }
+---
+>        44:  101:        { return std::copy(__first, __last, __result); }
+117c117
+<        82:  115:    uninitialized_copy(_InputIterator __first, _InputIterator __last,
+---
+>       110:  115:    uninitialized_copy(_InputIterator __first, _InputIterator __last,
+130c130
+<        82:  128:      const bool __assignable = is_assignable<_RefType2, _RefType1>::value;
+---
+>       110:  128:      const bool __assignable = is_assignable<_RefType2, _RefType1>::value;
+136c136
+<        82:  134:	__uninit_copy(__first, __last, __result);
+---
+>       110:  134:	__uninit_copy(__first, __last, __result);
+289c289
+<        82:  287:    __uninitialized_copy_a(_InputIterator __first, _InputIterator __last,
+---
+>       110:  287:    __uninitialized_copy_a(_InputIterator __first, _InputIterator __last,
+291c291
+<        82:  289:    { return std::uninitialized_copy(__first, __last, __result); }
+---
+>       110:  289:    { return std::uninitialized_copy(__first, __last, __result); }
+307c307
+<        60:  305:    __uninitialized_move_if_noexcept_a(_InputIterator __first,
+---
+>        72:  305:    __uninitialized_move_if_noexcept_a(_InputIterator __first,
+313,314c313,314
+<        60:  311:	(_GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(__first),
+<        60:  312:	 _GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(__last), __result, __alloc);
+---
+>        72:  311:	(_GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(__first),
+>        72:  312:	 _GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(__last), __result, __alloc);

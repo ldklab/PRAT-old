@@ -1,7 +1,7 @@
-        -:    0:Source:/usr/include/c++/8/typeinfo
+        -:    0:Source:/usr/include/c++/7/typeinfo
         -:    0:Programs:70
         -:    1:// RTTI support for -*- C++ -*-
-        -:    2:// Copyright (C) 1994-2018 Free Software Foundation, Inc.
+        -:    2:// Copyright (C) 1994-2017 Free Software Foundation, Inc.
         -:    3://
         -:    4:// This file is part of GCC.
         -:    5://
@@ -98,21 +98,8 @@
         -:   96:
         -:   97:    /** Returns an @e implementation-defined byte string; this is not
         -:   98:     *  portable between compilers!  */
-     124*:   99:    const char* name() const _GLIBCXX_NOEXCEPT
-     124*:  100:    { return __name[0] == '*' ? __name + 1 : __name; }
-------------------
-_ZNKSt9type_info4nameEv:
-    #####:   99:    const char* name() const _GLIBCXX_NOEXCEPT
-    #####:  100:    { return __name[0] == '*' ? __name + 1 : __name; }
-------------------
-_ZNKSt9type_info4nameEv:
-    #####:   99:    const char* name() const _GLIBCXX_NOEXCEPT
-    #####:  100:    { return __name[0] == '*' ? __name + 1 : __name; }
-------------------
-_ZNKSt9type_info4nameEv:
-      124:   99:    const char* name() const _GLIBCXX_NOEXCEPT
-     124*:  100:    { return __name[0] == '*' ? __name + 1 : __name; }
-------------------
+       16:   99:    const char* name() const _GLIBCXX_NOEXCEPT
+       16:  100:    { return __name[0] == '*' ? __name + 1 : __name; }
         -:  101:
         -:  102:#if !__GXX_TYPEINFO_EQUALITY_INLINE
         -:  103:    // In old abi, or when weak symbols are not supported, there can

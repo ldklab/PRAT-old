@@ -1,0 +1,183 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Objref_VarOut_T.inl
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id$
+        -:    4:
+        -:    5:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:template <typename T>
+        -:    8:ACE_INLINE
+       48:    9:TAO_Objref_Var_T<T>::TAO_Objref_Var_T (void)
+       48:   10:  : ptr_ (TAO::Objref_Traits<T>::nil ())
+        -:   11:{
+       48:   12:}
+        -:   13:
+        -:   14:template <typename T>
+        -:   15:ACE_INLINE
+      152:   16:TAO_Objref_Var_T<T>::~TAO_Objref_Var_T (void)
+        -:   17:{
+      152:   18:  TAO::Objref_Traits<T>::release (this->ptr_);
+      152:   19:}
+        -:   20:
+        -:   21:template <typename T>
+        -:   22:ACE_INLINE
+        -:   23:T *
+        7:   24:TAO_Objref_Var_T<T>::operator-> (void) const
+        -:   25:{
+        7:   26:  return this->ptr_;
+        -:   27:}
+        -:   28:
+        -:   29:template <typename T>
+        -:   30:ACE_INLINE
+        -:   31:TAO_Objref_Var_T<T>::operator T * const & () const
+        -:   32:{
+        -:   33:  return this->ptr_;
+        -:   34:}
+        -:   35:
+        -:   36:template <typename T>
+        -:   37:ACE_INLINE
+       23:   38:TAO_Objref_Var_T<T>::operator T *& ()
+        -:   39:{
+       23:   40:  return this->ptr_;
+        -:   41:}
+        -:   42:
+        -:   43:template <typename T>
+        -:   44:ACE_INLINE
+        -:   45:T *
+       94:   46:TAO_Objref_Var_T<T>::in (void) const
+        -:   47:{
+       94:   48:  return this->ptr_;
+        -:   49:}
+        -:   50:
+        -:   51:template <typename T>
+        -:   52:ACE_INLINE
+        -:   53:T *&
+        -:   54:TAO_Objref_Var_T<T>::inout (void)
+        -:   55:{
+        -:   56:  return this->ptr_;
+        -:   57:}
+        -:   58:
+        -:   59:template <typename T>
+        -:   60:ACE_INLINE
+        -:   61:T *&
+        -:   62:TAO_Objref_Var_T<T>::out (void)
+        -:   63:{
+        -:   64:  TAO::Objref_Traits<T>::release (this->ptr_);
+        -:   65:  this->ptr_ = TAO::Objref_Traits<T>::nil ();
+        -:   66:  return this->ptr_;
+        -:   67:}
+        -:   68:
+        -:   69:template <typename T>
+        -:   70:ACE_INLINE
+        -:   71:T *
+        7:   72:TAO_Objref_Var_T<T>::_retn (void)
+        -:   73:{
+        7:   74:  T * val = this->ptr_;
+        7:   75:  this->ptr_ = TAO::Objref_Traits<T>::nil ();
+        7:   76:  return val;
+        -:   77:}
+        -:   78:
+        -:   79:template <typename T>
+        -:   80:ACE_INLINE
+        -:   81:T *
+       48:   82:TAO_Objref_Var_T<T>::ptr (void) const
+        -:   83:{
+       48:   84:  return this->ptr_;
+        -:   85:}
+        -:   86:
+        -:   87:template <typename T>
+        -:   88:ACE_INLINE
+        -:   89:void
+        -:   90:TAO_Objref_Var_T<T>::free (void)
+        -:   91:{
+        -:   92:  TAO::Objref_Traits<T>::release (this->ptr_);
+        -:   93:}
+        -:   94:
+        -:   95:template <typename T>
+        -:   96:ACE_INLINE
+        -:   97:void
+        -:   98:TAO_Objref_Var_T<T>::reset (T * p)
+        -:   99:{
+        -:  100:  TAO::Objref_Traits<T>::release (this->ptr_);
+        -:  101:  this->ptr_ = p;
+        -:  102:}
+        -:  103:
+        -:  104:// ******************************************************
+        -:  105:
+        -:  106:template <typename T>
+        -:  107:ACE_INLINE
+        -:  108:TAO_Objref_Out_T<T>::TAO_Objref_Out_T (T *& p)
+        -:  109:  : ptr_ (p)
+        -:  110:{
+        -:  111:  this->ptr_ = TAO::Objref_Traits<T>::nil ();
+        -:  112:}
+        -:  113:
+        -:  114:template <typename T>
+        -:  115:ACE_INLINE
+        -:  116:TAO_Objref_Out_T<T>::TAO_Objref_Out_T (TAO_Objref_Var_T<T> & p)
+        -:  117:  : ptr_ (p.out ())
+        -:  118:{
+        -:  119:  TAO::Objref_Traits<T>::release (this->ptr_);
+        -:  120:  this->ptr_ = TAO::Objref_Traits<T>::nil ();
+        -:  121:}
+        -:  122:
+        -:  123:template <typename T>
+        -:  124:ACE_INLINE
+        -:  125:TAO_Objref_Out_T<T>::TAO_Objref_Out_T (const TAO_Objref_Out_T<T> & p)
+        -:  126:  : ptr_ (p.ptr_)
+        -:  127:{
+        -:  128:}
+        -:  129:
+        -:  130:template <typename T>
+        -:  131:ACE_INLINE
+        -:  132:TAO_Objref_Out_T<T> &
+        -:  133:TAO_Objref_Out_T<T>::operator= (const TAO_Objref_Out_T<T> & p)
+        -:  134:{
+        -:  135:  this->ptr_ = p.ptr_;
+        -:  136:  return *this;
+        -:  137:}
+        -:  138:
+        -:  139:template <typename T>
+        -:  140:ACE_INLINE
+        -:  141:TAO_Objref_Out_T<T> &
+        -:  142:TAO_Objref_Out_T<T>::operator= (const TAO_Objref_Var_T<T> & p)
+        -:  143:{
+        -:  144:  this->ptr_ = TAO::Objref_Traits<T>::duplicate (p.ptr ());
+        -:  145:  return *this;
+        -:  146:}
+        -:  147:
+        -:  148:template <typename T>
+        -:  149:ACE_INLINE
+        -:  150:TAO_Objref_Out_T<T> &
+        -:  151:TAO_Objref_Out_T<T>::operator= (T * p)
+        -:  152:{
+        -:  153:  this->ptr_ = p;
+        -:  154:  return *this;
+        -:  155:}
+        -:  156:
+        -:  157:template <typename T>
+        -:  158:ACE_INLINE
+        -:  159:T *&
+        -:  160:TAO_Objref_Out_T<T>::ptr (void)
+        -:  161:{
+        -:  162:  return this->ptr_;
+        -:  163:}
+        -:  164:
+        -:  165:template <typename T>
+        -:  166:ACE_INLINE
+        -:  167:TAO_Objref_Out_T<T>::operator T *& ()
+        -:  168:{
+        -:  169:  return this->ptr_;
+        -:  170:}
+        -:  171:
+        -:  172:template <typename T>
+        -:  173:ACE_INLINE
+        -:  174:T *
+        -:  175:TAO_Objref_Out_T<T>::operator-> (void)
+        -:  176:{
+        -:  177:  return this->ptr_;
+        -:  178:}
+        -:  179:
+        -:  180:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  181:

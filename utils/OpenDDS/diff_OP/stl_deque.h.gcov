@@ -1,0 +1,280 @@
+130,131c130,131
+<       268:  128:      static size_t _S_buffer_size() _GLIBCXX_NOEXCEPT
+<       268:  129:      { return __deque_buf_size(sizeof(_Tp)); }
+---
+>       556:  128:      static size_t _S_buffer_size() _GLIBCXX_NOEXCEPT
+>       556:  129:      { return __deque_buf_size(sizeof(_Tp)); }
+150,151c150,151
+<       208:  148:      _Deque_iterator() _GLIBCXX_NOEXCEPT
+<       208:  149:      : _M_cur(), _M_first(), _M_last(), _M_node() { }
+---
+>       496:  148:      _Deque_iterator() _GLIBCXX_NOEXCEPT
+>       496:  149:      : _M_cur(), _M_first(), _M_last(), _M_node() { }
+153,155c153,155
+<       508:  151:      _Deque_iterator(const iterator& __x) _GLIBCXX_NOEXCEPT
+<      1016:  152:      : _M_cur(__x._M_cur), _M_first(__x._M_first),
+<      1016:  153:	_M_last(__x._M_last), _M_node(__x._M_node) { }
+---
+>      1132:  151:      _Deque_iterator(const iterator& __x) _GLIBCXX_NOEXCEPT
+>      2264:  152:      : _M_cur(__x._M_cur), _M_first(__x._M_first),
+>      2264:  153:	_M_last(__x._M_last), _M_node(__x._M_node) { }
+256c256
+<       208:  254:      _M_set_node(_Map_pointer __new_node) _GLIBCXX_NOEXCEPT
+---
+>       496:  254:      _M_set_node(_Map_pointer __new_node) _GLIBCXX_NOEXCEPT
+258,261c258,261
+<       208:  256:	_M_node = __new_node;
+<       208:  257:	_M_first = *__new_node;
+<       208:  258:	_M_last = _M_first + difference_type(_S_buffer_size());
+<       208:  259:      }
+---
+>       496:  256:	_M_node = __new_node;
+>       496:  257:	_M_first = *__new_node;
+>       496:  258:	_M_last = _M_first + difference_type(_S_buffer_size());
+>       496:  259:      }
+269c269
+<        60:  267:    operator==(const _Deque_iterator<_Tp, _Ref, _Ptr>& __x,
+---
+>       116:  267:    operator==(const _Deque_iterator<_Tp, _Ref, _Ptr>& __x,
+271c271
+<        60:  269:    { return __x._M_cur == __y._M_cur; }
+---
+>       116:  269:    { return __x._M_cur == __y._M_cur; }
+282c282
+<        60:  280:    operator!=(const _Deque_iterator<_Tp, _Ref, _Ptr>& __x,
+---
+>       116:  280:    operator!=(const _Deque_iterator<_Tp, _Ref, _Ptr>& __x,
+284c284
+<        60:  282:    { return !(__x == __y); }
+---
+>       116:  282:    { return !(__x == __y); }
+492,494c492,494
+<       104:  490:      _Deque_base()
+<       104:  491:      : _M_impl()
+<       104:  492:      { _M_initialize_map(0); }
+---
+>       248:  490:      _Deque_base()
+>       248:  491:      : _M_impl()
+>       248:  492:      { _M_initialize_map(0); }
+551c551
+<       104:  549:      struct _Deque_impl
+---
+>       248:  549:      struct _Deque_impl
+559c559
+<       104:  557:	_Deque_impl()
+---
+>       248:  557:	_Deque_impl()
+561,562c561,562
+<       104:  559:	  _M_start(), _M_finish()
+<       104:  560:	{ }
+---
+>       248:  559:	  _M_start(), _M_finish()
+>       248:  560:	{ }
+578c578
+<        80:  576:	void _M_swap_data(_Deque_impl& __x) _GLIBCXX_NOEXCEPT
+---
+>       192:  576:	void _M_swap_data(_Deque_impl& __x) _GLIBCXX_NOEXCEPT
+581,585c581,585
+<        80:  579:	  swap(this->_M_start, __x._M_start);
+<        80:  580:	  swap(this->_M_finish, __x._M_finish);
+<        80:  581:	  swap(this->_M_map, __x._M_map);
+<        80:  582:	  swap(this->_M_map_size, __x._M_map_size);
+<        80:  583:	}
+---
+>       192:  579:	  swap(this->_M_start, __x._M_start);
+>       192:  580:	  swap(this->_M_finish, __x._M_finish);
+>       192:  581:	  swap(this->_M_map, __x._M_map);
+>       192:  582:	  swap(this->_M_map_size, __x._M_map_size);
+>       192:  583:	}
+589,590c589,590
+<       264:  587:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
+<       264:  588:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
+---
+>       632:  587:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
+>       632:  588:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
+593,594c593,594
+<       208:  591:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
+<       208:  592:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
+---
+>       496:  591:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
+>       496:  592:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
+597,598c597,598
+<       208:  595:      _M_get_map_allocator() const _GLIBCXX_NOEXCEPT
+<       208:  596:      { return _Map_alloc_type(_M_get_Tp_allocator()); }
+---
+>       496:  595:      _M_get_map_allocator() const _GLIBCXX_NOEXCEPT
+>       496:  596:      { return _Map_alloc_type(_M_get_Tp_allocator()); }
+601c601
+<       104:  599:      _M_allocate_node()
+---
+>       248:  599:      _M_allocate_node()
+604c604
+<       104:  602:	return _Traits::allocate(_M_impl, __deque_buf_size(sizeof(_Tp)));
+---
+>       248:  602:	return _Traits::allocate(_M_impl, __deque_buf_size(sizeof(_Tp)));
+608c608
+<       104:  606:      _M_deallocate_node(_Ptr __p) _GLIBCXX_NOEXCEPT
+---
+>       248:  606:      _M_deallocate_node(_Ptr __p) _GLIBCXX_NOEXCEPT
+611,612c611,612
+<       104:  609:	_Traits::deallocate(_M_impl, __p, __deque_buf_size(sizeof(_Tp)));
+<       104:  610:      }
+---
+>       248:  609:	_Traits::deallocate(_M_impl, __p, __deque_buf_size(sizeof(_Tp)));
+>       248:  610:      }
+615c615
+<       104:  613:      _M_allocate_map(size_t __n)
+---
+>       248:  613:      _M_allocate_map(size_t __n)
+617,618c617,618
+<       208:  615:	_Map_alloc_type __map_alloc = _M_get_map_allocator();
+<       208:  616:	return _Map_alloc_traits::allocate(__map_alloc, __n);
+---
+>       496:  615:	_Map_alloc_type __map_alloc = _M_get_map_allocator();
+>       496:  616:	return _Map_alloc_traits::allocate(__map_alloc, __n);
+622c622
+<       104:  620:      _M_deallocate_map(_Map_pointer __p, size_t __n) _GLIBCXX_NOEXCEPT
+---
+>       248:  620:      _M_deallocate_map(_Map_pointer __p, size_t __n) _GLIBCXX_NOEXCEPT
+624,626c624,626
+<       208:  622:	_Map_alloc_type __map_alloc = _M_get_map_allocator();
+<       104:  623:	_Map_alloc_traits::deallocate(__map_alloc, __p, __n);
+<       104:  624:      }
+---
+>       496:  622:	_Map_alloc_type __map_alloc = _M_get_map_allocator();
+>       248:  623:	_Map_alloc_traits::deallocate(__map_alloc, __p, __n);
+>       248:  624:      }
+662c662
+<       104:  660:    _Deque_base<_Tp, _Alloc>::
+---
+>       248:  660:    _Deque_base<_Tp, _Alloc>::
+665c665
+<       104:  663:      if (this->_M_impl._M_map)
+---
+>       248:  663:      if (this->_M_impl._M_map)
+667,669c667,669
+<       104:  665:	  _M_destroy_nodes(this->_M_impl._M_start._M_node,
+<       104:  666:			   this->_M_impl._M_finish._M_node + 1);
+<       104:  667:	  _M_deallocate_map(this->_M_impl._M_map, this->_M_impl._M_map_size);
+---
+>       248:  665:	  _M_destroy_nodes(this->_M_impl._M_start._M_node,
+>       248:  666:			   this->_M_impl._M_finish._M_node + 1);
+>       248:  667:	  _M_deallocate_map(this->_M_impl._M_map, this->_M_impl._M_map_size);
+671c671
+<       104:  669:    }
+---
+>       248:  669:    }
+683c683
+<       104:  681:    _Deque_base<_Tp, _Alloc>::
+---
+>       248:  681:    _Deque_base<_Tp, _Alloc>::
+686c686
+<       104:  684:      const size_t __num_nodes = (__num_elements/ __deque_buf_size(sizeof(_Tp))
+---
+>       248:  684:      const size_t __num_nodes = (__num_elements/ __deque_buf_size(sizeof(_Tp))
+689,691c689,691
+<       104:  687:      this->_M_impl._M_map_size = std::max((size_t) _S_initial_map_size,
+<       208:  688:					   size_t(__num_nodes + 2));
+<       104:  689:      this->_M_impl._M_map = _M_allocate_map(this->_M_impl._M_map_size);
+---
+>       248:  687:      this->_M_impl._M_map_size = std::max((size_t) _S_initial_map_size,
+>       496:  688:					   size_t(__num_nodes + 2));
+>       248:  689:      this->_M_impl._M_map = _M_allocate_map(this->_M_impl._M_map_size);
+698,700c698,700
+<       208:  696:      _Map_pointer __nstart = (this->_M_impl._M_map
+<       104:  697:			       + (this->_M_impl._M_map_size - __num_nodes) / 2);
+<       104:  698:      _Map_pointer __nfinish = __nstart + __num_nodes;
+---
+>       496:  696:      _Map_pointer __nstart = (this->_M_impl._M_map
+>       248:  697:			       + (this->_M_impl._M_map_size - __num_nodes) / 2);
+>       248:  698:      _Map_pointer __nfinish = __nstart + __num_nodes;
+703c703
+<       104:  701:	{ _M_create_nodes(__nstart, __nfinish); }
+---
+>       248:  701:	{ _M_create_nodes(__nstart, __nfinish); }
+712,718c712,718
+<       104:  710:      this->_M_impl._M_start._M_set_node(__nstart);
+<       104:  711:      this->_M_impl._M_finish._M_set_node(__nfinish - 1);
+<       104:  712:      this->_M_impl._M_start._M_cur = _M_impl._M_start._M_first;
+<       208:  713:      this->_M_impl._M_finish._M_cur = (this->_M_impl._M_finish._M_first
+<       104:  714:					+ __num_elements
+<       104:  715:					% __deque_buf_size(sizeof(_Tp)));
+<       104:  716:    }
+---
+>       248:  710:      this->_M_impl._M_start._M_set_node(__nstart);
+>       248:  711:      this->_M_impl._M_finish._M_set_node(__nfinish - 1);
+>       248:  712:      this->_M_impl._M_start._M_cur = _M_impl._M_start._M_first;
+>       496:  713:      this->_M_impl._M_finish._M_cur = (this->_M_impl._M_finish._M_first
+>       248:  714:					+ __num_elements
+>       248:  715:					% __deque_buf_size(sizeof(_Tp)));
+>       248:  716:    }
+722c722
+<       104:  720:    _Deque_base<_Tp, _Alloc>::
+---
+>       248:  720:    _Deque_base<_Tp, _Alloc>::
+728,729c728,729
+<       208:  726:	  for (__cur = __nstart; __cur < __nfinish; ++__cur)
+<       104:  727:	    *__cur = this->_M_allocate_node();
+---
+>       496:  726:	  for (__cur = __nstart; __cur < __nfinish; ++__cur)
+>       248:  727:	    *__cur = this->_M_allocate_node();
+736c736
+<       104:  734:    }
+---
+>       248:  734:    }
+740c740
+<       104:  738:    _Deque_base<_Tp, _Alloc>::
+---
+>       248:  738:    _Deque_base<_Tp, _Alloc>::
+744,746c744,746
+<       208:  742:      for (_Map_pointer __n = __nstart; __n < __nfinish; ++__n)
+<       104:  743:	_M_deallocate_node(*__n);
+<       104:  744:    }
+---
+>       496:  742:      for (_Map_pointer __n = __nstart; __n < __nfinish; ++__n)
+>       248:  743:	_M_deallocate_node(*__n);
+>       248:  744:    }
+890c890
+<       104:  888:      deque() : _Base() { }
+---
+>       248:  888:      deque() : _Base() { }
+1046,1047c1046,1047
+<       104: 1044:      ~deque()
+<       104: 1045:      { _M_destroy_data(begin(), end(), _M_get_Tp_allocator()); }
+---
+>       248: 1044:      ~deque()
+>       248: 1045:      { _M_destroy_data(begin(), end(), _M_get_Tp_allocator()); }
+1168,1169c1168,1169
+<       154: 1166:      begin() _GLIBCXX_NOEXCEPT
+<       154: 1167:      { return this->_M_impl._M_start; }
+---
+>       354: 1166:      begin() _GLIBCXX_NOEXCEPT
+>       354: 1167:      { return this->_M_impl._M_start; }
+1185,1186c1185,1186
+<       144: 1183:      end() _GLIBCXX_NOEXCEPT
+<       144: 1184:      { return this->_M_impl._M_finish; }
+---
+>       344: 1183:      end() _GLIBCXX_NOEXCEPT
+>       344: 1184:      { return this->_M_impl._M_finish; }
+1824c1824
+<        80: 1822:      swap(deque& __x) _GLIBCXX_NOEXCEPT
+---
+>       192: 1822:      swap(deque& __x) _GLIBCXX_NOEXCEPT
+1830,1831c1830,1831
+<        80: 1828:	_M_impl._M_swap_data(__x._M_impl);
+<        80: 1829:	_Alloc_traits::_S_on_swap(_M_get_Tp_allocator(),
+---
+>       192: 1828:	_M_impl._M_swap_data(__x._M_impl);
+>       192: 1829:	_Alloc_traits::_S_on_swap(_M_get_Tp_allocator(),
+1833c1833
+<        80: 1831:      }
+---
+>       192: 1831:      }
+2070c2070
+<       104: 2068:      _M_destroy_data(iterator __first, iterator __last,
+---
+>       248: 2068:      _M_destroy_data(iterator __first, iterator __last,
+2075c2075
+<       104: 2073:      }
+---
+>       248: 2073:      }

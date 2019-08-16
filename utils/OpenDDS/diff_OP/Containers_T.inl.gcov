@@ -1,0 +1,16 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+274c274
+<         9:  272:ACE_Array<T>::ACE_Array (size_t size,
+---
+>        17:  272:ACE_Array<T>::ACE_Array (size_t size,
+276c276
+<         9:  274:  : ACE_Array_Base<T> (size, alloc)
+---
+>        17:  274:  : ACE_Array_Base<T> (size, alloc)
+278c278
+<         9:  276:}
+---
+>        17:  276:}

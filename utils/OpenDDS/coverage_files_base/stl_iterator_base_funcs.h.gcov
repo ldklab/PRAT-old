@@ -1,8 +1,8 @@
-        -:    0:Source:/usr/include/c++/8/bits/stl_iterator_base_funcs.h
+        -:    0:Source:/usr/include/c++/7/bits/stl_iterator_base_funcs.h
         -:    0:Programs:51
         -:    1:// Functions used by iterators -*- C++ -*-
         -:    2:
-        -:    3:// Copyright (C) 2001-2018 Free Software Foundation, Inc.
+        -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
         -:    4://
         -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
         -:    6:// software; you can redistribute it and/or modify it under the
@@ -68,13 +68,13 @@
         -:   66:
         -:   67:namespace std _GLIBCXX_VISIBILITY(default)
         -:   68:{
-        -:   69:_GLIBCXX_BEGIN_NAMESPACE_VERSION
-        -:   70:
-        -:   71:_GLIBCXX_BEGIN_NAMESPACE_CONTAINER
-        -:   72:  // Forward declaration for the overloads of __distance.
-        -:   73:  template <typename> struct _List_iterator;
-        -:   74:  template <typename> struct _List_const_iterator;
-        -:   75:_GLIBCXX_END_NAMESPACE_CONTAINER
+        -:   69:_GLIBCXX_BEGIN_NAMESPACE_CONTAINER
+        -:   70:  // Forward declaration for the overloads of __distance.
+        -:   71:  template <typename> struct _List_iterator;
+        -:   72:  template <typename> struct _List_const_iterator;
+        -:   73:_GLIBCXX_END_NAMESPACE_CONTAINER
+        -:   74:
+        -:   75:_GLIBCXX_BEGIN_NAMESPACE_VERSION
         -:   76:
         -:   77:  template<typename _InputIterator>
         -:   78:    inline _GLIBCXX14_CONSTEXPR
@@ -97,95 +97,14 @@
         -:   95:  template<typename _RandomAccessIterator>
         -:   96:    inline _GLIBCXX14_CONSTEXPR
         -:   97:    typename iterator_traits<_RandomAccessIterator>::difference_type
-    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
+        -:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
         -:   99:               random_access_iterator_tag)
         -:  100:    {
         -:  101:      // concept requirements
         -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
         -:  103:				  _RandomAccessIterator>)
-    #####:  104:      return __last - __first;
+        -:  104:      return __last - __first;
         -:  105:    }
-------------------
-_ZSt10__distanceIPKcENSt15iterator_traitsIT_E15difference_typeES3_S3_St26random_access_iterator_tag:
-    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
-        -:   99:               random_access_iterator_tag)
-        -:  100:    {
-        -:  101:      // concept requirements
-        -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
-        -:  103:				  _RandomAccessIterator>)
-    #####:  104:      return __last - __first;
-        -:  105:    }
-------------------
-_ZSt10__distanceIPKcENSt15iterator_traitsIT_E15difference_typeES3_S3_St26random_access_iterator_tag:
-    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
-        -:   99:               random_access_iterator_tag)
-        -:  100:    {
-        -:  101:      // concept requirements
-        -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
-        -:  103:				  _RandomAccessIterator>)
-    #####:  104:      return __last - __first;
-        -:  105:    }
-------------------
-_ZSt10__distanceIPcENSt15iterator_traitsIT_E15difference_typeES2_S2_St26random_access_iterator_tag:
-    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
-        -:   99:               random_access_iterator_tag)
-        -:  100:    {
-        -:  101:      // concept requirements
-        -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
-        -:  103:				  _RandomAccessIterator>)
-    #####:  104:      return __last - __first;
-        -:  105:    }
-------------------
-_ZSt10__distanceIPKcENSt15iterator_traitsIT_E15difference_typeES3_S3_St26random_access_iterator_tag:
-    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
-        -:   99:               random_access_iterator_tag)
-        -:  100:    {
-        -:  101:      // concept requirements
-        -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
-        -:  103:				  _RandomAccessIterator>)
-    #####:  104:      return __last - __first;
-        -:  105:    }
-------------------
-_ZSt10__distanceIPcENSt15iterator_traitsIT_E15difference_typeES2_S2_St26random_access_iterator_tag:
-    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
-        -:   99:               random_access_iterator_tag)
-        -:  100:    {
-        -:  101:      // concept requirements
-        -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
-        -:  103:				  _RandomAccessIterator>)
-    #####:  104:      return __last - __first;
-        -:  105:    }
-------------------
-_ZSt10__distanceIPcENSt15iterator_traitsIT_E15difference_typeES2_S2_St26random_access_iterator_tag:
-    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
-        -:   99:               random_access_iterator_tag)
-        -:  100:    {
-        -:  101:      // concept requirements
-        -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
-        -:  103:				  _RandomAccessIterator>)
-    #####:  104:      return __last - __first;
-        -:  105:    }
-------------------
-_ZSt10__distanceIPcENSt15iterator_traitsIT_E15difference_typeES2_S2_St26random_access_iterator_tag:
-    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
-        -:   99:               random_access_iterator_tag)
-        -:  100:    {
-        -:  101:      // concept requirements
-        -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
-        -:  103:				  _RandomAccessIterator>)
-    #####:  104:      return __last - __first;
-        -:  105:    }
-------------------
-_ZSt10__distanceIPKcENSt15iterator_traitsIT_E15difference_typeES3_S3_St26random_access_iterator_tag:
-    #####:   98:    __distance(_RandomAccessIterator __first, _RandomAccessIterator __last,
-        -:   99:               random_access_iterator_tag)
-        -:  100:    {
-        -:  101:      // concept requirements
-        -:  102:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
-        -:  103:				  _RandomAccessIterator>)
-    #####:  104:      return __last - __first;
-        -:  105:    }
-------------------
         -:  106:
         -:  107:#if _GLIBCXX_USE_CXX11_ABI
         -:  108:  // Forward declaration because of the qualified call in distance.
@@ -260,63 +179,59 @@ _ZSt10__distanceIPKcENSt15iterator_traitsIT_E15difference_typeES3_S3_St26random_
         -:  177:      // concept requirements
         -:  178:      __glibcxx_function_requires(_RandomAccessIteratorConcept<
         -:  179:				  _RandomAccessIterator>)
-        -:  180:      if (__builtin_constant_p(__n) && __n == 1)
-        -:  181:	++__i;
-        -:  182:      else if (__builtin_constant_p(__n) && __n == -1)
-        -:  183:	--__i;
-        -:  184:      else
-        -:  185:	__i += __n;
-        -:  186:    }
-        -:  187:
-        -:  188:  /**
-        -:  189:   *  @brief A generalization of pointer arithmetic.
-        -:  190:   *  @param  __i  An input iterator.
-        -:  191:   *  @param  __n  The @a delta by which to change @p __i.
-        -:  192:   *  @return  Nothing.
-        -:  193:   *
-        -:  194:   *  This increments @p i by @p n.  For bidirectional and random access
-        -:  195:   *  iterators, @p __n may be negative, in which case @p __i is decremented.
-        -:  196:   *
-        -:  197:   *  For random access iterators, this uses their @c + and @c - operations
-        -:  198:   *  and are constant time.  For other %iterator classes they are linear time.
-        -:  199:  */
-        -:  200:  template<typename _InputIterator, typename _Distance>
-        -:  201:    inline _GLIBCXX17_CONSTEXPR void
-        -:  202:    advance(_InputIterator& __i, _Distance __n)
-        -:  203:    {
-        -:  204:      // concept requirements -- taken care of in __advance
-        -:  205:      typename iterator_traits<_InputIterator>::difference_type __d = __n;
-        -:  206:      std::__advance(__i, __d, std::__iterator_category(__i));
-        -:  207:    }
-        -:  208:
-        -:  209:#if __cplusplus >= 201103L
-        -:  210:
-        -:  211:  template<typename _InputIterator>
-        -:  212:    inline _GLIBCXX17_CONSTEXPR _InputIterator
-        -:  213:    next(_InputIterator __x, typename
-        -:  214:	 iterator_traits<_InputIterator>::difference_type __n = 1)
-        -:  215:    {
-        -:  216:      // concept requirements
-        -:  217:      __glibcxx_function_requires(_InputIteratorConcept<_InputIterator>)
-        -:  218:      std::advance(__x, __n);
-        -:  219:      return __x;
-        -:  220:    }
-        -:  221:
-        -:  222:  template<typename _BidirectionalIterator>
-        -:  223:    inline _GLIBCXX17_CONSTEXPR _BidirectionalIterator
-        -:  224:    prev(_BidirectionalIterator __x, typename
-        -:  225:	 iterator_traits<_BidirectionalIterator>::difference_type __n = 1) 
-        -:  226:    {
-        -:  227:      // concept requirements
-        -:  228:      __glibcxx_function_requires(_BidirectionalIteratorConcept<
-        -:  229:				  _BidirectionalIterator>)
-        -:  230:      std::advance(__x, -__n);
-        -:  231:      return __x;
-        -:  232:    }
-        -:  233:
-        -:  234:#endif // C++11
-        -:  235:
-        -:  236:_GLIBCXX_END_NAMESPACE_VERSION
-        -:  237:} // namespace
-        -:  238:
-        -:  239:#endif /* _STL_ITERATOR_BASE_FUNCS_H */
+        -:  180:      __i += __n;
+        -:  181:    }
+        -:  182:
+        -:  183:  /**
+        -:  184:   *  @brief A generalization of pointer arithmetic.
+        -:  185:   *  @param  __i  An input iterator.
+        -:  186:   *  @param  __n  The @a delta by which to change @p __i.
+        -:  187:   *  @return  Nothing.
+        -:  188:   *
+        -:  189:   *  This increments @p i by @p n.  For bidirectional and random access
+        -:  190:   *  iterators, @p __n may be negative, in which case @p __i is decremented.
+        -:  191:   *
+        -:  192:   *  For random access iterators, this uses their @c + and @c - operations
+        -:  193:   *  and are constant time.  For other %iterator classes they are linear time.
+        -:  194:  */
+        -:  195:  template<typename _InputIterator, typename _Distance>
+        -:  196:    inline _GLIBCXX17_CONSTEXPR void
+        -:  197:    advance(_InputIterator& __i, _Distance __n)
+        -:  198:    {
+        -:  199:      // concept requirements -- taken care of in __advance
+        -:  200:      typename iterator_traits<_InputIterator>::difference_type __d = __n;
+        -:  201:      std::__advance(__i, __d, std::__iterator_category(__i));
+        -:  202:    }
+        -:  203:
+        -:  204:#if __cplusplus >= 201103L
+        -:  205:
+        -:  206:  template<typename _ForwardIterator>
+        -:  207:    inline _GLIBCXX17_CONSTEXPR _ForwardIterator
+        -:  208:    next(_ForwardIterator __x, typename
+        -:  209:	 iterator_traits<_ForwardIterator>::difference_type __n = 1)
+        -:  210:    {
+        -:  211:      // concept requirements
+        -:  212:      __glibcxx_function_requires(_ForwardIteratorConcept<
+        -:  213:				  _ForwardIterator>)
+        -:  214:      std::advance(__x, __n);
+        -:  215:      return __x;
+        -:  216:    }
+        -:  217:
+        -:  218:  template<typename _BidirectionalIterator>
+        -:  219:    inline _GLIBCXX17_CONSTEXPR _BidirectionalIterator
+        -:  220:    prev(_BidirectionalIterator __x, typename
+        -:  221:	 iterator_traits<_BidirectionalIterator>::difference_type __n = 1) 
+        -:  222:    {
+        -:  223:      // concept requirements
+        -:  224:      __glibcxx_function_requires(_BidirectionalIteratorConcept<
+        -:  225:				  _BidirectionalIterator>)
+        -:  226:      std::advance(__x, -__n);
+        -:  227:      return __x;
+        -:  228:    }
+        -:  229:
+        -:  230:#endif // C++11
+        -:  231:
+        -:  232:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  233:} // namespace
+        -:  234:
+        -:  235:#endif /* _STL_ITERATOR_BASE_FUNCS_H */

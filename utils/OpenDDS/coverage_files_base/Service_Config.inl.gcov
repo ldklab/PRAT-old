@@ -1,0 +1,210 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Service_Config.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: Service_Config.inl 1861 2011-08-31 16:18:08Z mesnierp $
+        -:    4:
+        -:    5:#include "ace/OS_NS_string.h"
+        -:    6:
+        -:    7:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    8:
+        -:    9:// This is the primary entry point into the ACE_Service_Config (the
+        -:   10:// constructor just handles simple initializations).
+        -:   11:ACE_INLINE int
+        -:   12:ACE_Service_Config::open (const ACE_TCHAR program_name[],
+        -:   13:                          const ACE_TCHAR *logger_key,
+        -:   14:                          bool ignore_static_svcs,
+        -:   15:                          bool ignore_default_svc_conf,
+        -:   16:                          bool ignore_debug_flag)
+        -:   17:{
+        -:   18:  ACE_TRACE ("ACE_Service_Config::open");
+        -:   19:  if (singleton()->open_i (program_name,
+        -:   20:                           logger_key,
+        -:   21:                           ignore_static_svcs,
+        -:   22:                           ignore_default_svc_conf,
+        -:   23:                           ignore_debug_flag) == -1)
+        -:   24:    return -1;
+        -:   25:
+        -:   26:  return current()->open (program_name,
+        -:   27:                          logger_key,
+        -:   28:                          ignore_static_svcs,
+        -:   29:                          ignore_default_svc_conf,
+        -:   30:                          ignore_debug_flag);
+        -:   31:}
+        -:   32:
+        -:   33:
+        -:   34:ACE_INLINE int
+        -:   35:ACE_Service_Config::open (int argc,
+        -:   36:                          ACE_TCHAR *argv[],
+        -:   37:                          const ACE_TCHAR *logger_key,
+        -:   38:                          bool ignore_static_svcs,
+        -:   39:                          bool ignore_default_svc_conf,
+        -:   40:                          bool ignore_debug_flag)
+        -:   41:{
+        -:   42:  ACE_TRACE ("ACE_Service_Config::open");
+        -:   43:
+        -:   44:  if (singleton()->parse_args_i(argc, argv) == -1)
+        -:   45:    return -1;
+        -:   46:
+        -:   47:  if (singleton()->open_i (argv[0],
+        -:   48:                           logger_key,
+        -:   49:                           ignore_static_svcs,
+        -:   50:                           ignore_default_svc_conf,
+        -:   51:                           ignore_debug_flag) == -1)
+        -:   52:    return -1;
+        -:   53:
+        -:   54:  return current()->open (argc,
+        -:   55:                          argv,
+        -:   56:                          logger_key,
+        -:   57:                          ignore_static_svcs,
+        -:   58:                          ignore_default_svc_conf,
+        -:   59:                          ignore_debug_flag);
+        -:   60:}
+        -:   61:
+        -:   62:// Handle the command-line options intended for the
+        -:   63:// ACE_Service_Config.
+        -:   64:ACE_INLINE int
+        -:   65:ACE_Service_Config::parse_args (int argc, ACE_TCHAR *argv[])
+        -:   66:{
+        -:   67:  return ACE_Service_Config::current ()->parse_args (argc, argv);
+        -:   68:}
+        -:   69:
+        -:   70:/// Return the global configuration instance. Allways returns the same
+        -:   71:/// instance
+        -:   72:ACE_INLINE ACE_Service_Gestalt *
+        -:   73:ACE_Service_Config::global (void)
+        -:   74:{
+        -:   75:  return ACE_Service_Config::singleton()->instance_.get ();
+        -:   76:}
+        -:   77:
+        -:   78:/// Return the configuration instance, considered "global" in the
+        -:   79:/// current thread. This may be the same as instance(), but on some
+        -:   80:/// occasions, it may be a different one. For example,
+        -:   81:/// ACE_Service_Config_Guard provides a way of temporarily replacing
+        -:   82:/// the "current" configuration instance in the context of a thread.
+        -:   83:ACE_INLINE ACE_Service_Gestalt *
+        -:   84:ACE_Service_Config::instance (void)
+        -:   85:{
+        -:   86:  return ACE_Service_Config::current ();
+        -:   87:}
+        -:   88:
+        -:   89:// This method has changed to return the gestalt instead of the
+        -:   90:// container, underlying the service repository and defined
+        -:   91:// ACE_Service_Gestalt::insert (ACE_Static_Svc_Descriptor*). This way
+        -:   92:// the existing source code can keep using
+        -:   93:// ACE_Service_Config::static_svcs(), however now it is not necessary
+        -:   94:// to expose the repository storage *and* it is much easier to debug
+        -:   95:// service registration problems.
+        -:   96:
+        -:   97:ACE_INLINE ACE_Service_Gestalt*
+        -:   98:ACE_Service_Config::static_svcs (void)
+        -:   99:{
+        -:  100:  return ACE_Service_Config::current ();
+        -:  101:}
+        -:  102:
+        -:  103:/// Compare two service descriptors for equality.
+        -:  104:ACE_INLINE bool
+        -:  105:ACE_Static_Svc_Descriptor::operator== (ACE_Static_Svc_Descriptor &d) const
+        -:  106:{
+        -:  107:  return ACE_OS::strcmp (name_, d.name_) == 0;
+        -:  108:}
+        -:  109:
+        -:  110:/// Compare two service descriptors for inequality.
+        -:  111:ACE_INLINE bool
+        -:  112:ACE_Static_Svc_Descriptor::operator!= (ACE_Static_Svc_Descriptor &d) const
+        -:  113:{
+        -:  114:  return !(*this == d);
+        -:  115:}
+        -:  116:
+        -:  117:ACE_INLINE void
+        -:  118:ACE_Service_Config::signal_handler (ACE_Sig_Adapter *signal_handler)
+        -:  119:{
+        -:  120:  signal_handler_ = signal_handler;
+        -:  121:}
+        -:  122:
+        -:  123:/// Initialize and activate a statically linked service.
+        -:  124:ACE_INLINE int
+        -:  125:ACE_Service_Config::initialize (const ACE_TCHAR *svc_name,
+        -:  126:                                const ACE_TCHAR *parameters)
+        -:  127:{
+        -:  128:  ACE_TRACE ("ACE_Service_Config::initialize");
+        -:  129:  return ACE_Service_Config::current ()->initialize (svc_name,
+        -:  130:                                                     parameters);
+        -:  131:}
+        -:  132:
+        -:  133:/// Dynamically link the shared object file and retrieve a pointer to
+        -:  134:/// the designated shared object in this file.
+        -:  135:ACE_INLINE int
+        -:  136:ACE_Service_Config::initialize (const ACE_Service_Type *sr,
+        -:  137:                                const ACE_TCHAR *parameters)
+        -:  138:{
+        -:  139:  ACE_TRACE ("ACE_Service_Config::initialize");
+        -:  140:  return ACE_Service_Config::current ()->initialize (sr, parameters);
+        -:  141:}
+        -:  142:
+        -:  143:/// Process a file containing a list of service configuration
+        -:  144:/// directives.
+        -:  145:ACE_INLINE int ACE_Service_Config::process_file (const ACE_TCHAR file[])
+        -:  146:{
+        -:  147:  return ACE_Service_Config::current ()->process_file (file);
+        -:  148:}
+        -:  149:
+        -:  150:///
+        -:  151:ACE_INLINE int
+    #####:  152:ACE_Service_Config::process_directive (const ACE_TCHAR directive[])
+        -:  153:{
+    #####:  154:  return ACE_Service_Config::current ()->process_directive (directive);
+        -:  155:}
+        -:  156:
+        -:  157:/// Process service configuration requests as indicated in the queue of
+        -:  158:/// svc.conf files.
+        -:  159:ACE_INLINE int
+        -:  160:ACE_Service_Config::process_directives (void)
+        -:  161:{
+        -:  162:  return ACE_Service_Config::current ()->process_directives (false);
+        -:  163:}
+        -:  164:
+        -:  165:ACE_INLINE int
+        -:  166:ACE_Service_Config::process_directive (const ACE_Static_Svc_Descriptor &ssd,
+        -:  167:                                       bool force_replace)
+        -:  168:{
+        -:  169:  return ACE_Service_Config::current ()->process_directive (ssd, force_replace);
+        -:  170:}
+        -:  171:
+        -:  172:
+        -:  173:#if defined (ACE_HAS_WINCE) && defined (ACE_USES_WCHAR)
+        -:  174:// We must provide these function to bridge Svc_Conf parser with ACE.
+        -:  175:
+        -:  176:ACE_INLINE int
+        -:  177:ACE_Service_Config::initialize (const ACE_Service_Type *sp, ACE_ANTI_TCHAR parameters[])
+        -:  178:{
+        -:  179:  return ACE_Service_Config::initialize (sp, ACE_TEXT_ANTI_TO_TCHAR (parameters));
+        -:  180:}
+        -:  181:
+        -:  182:ACE_INLINE int
+        -:  183:ACE_Service_Config::initialize (const ACE_ANTI_TCHAR svc_name[], ACE_ANTI_TCHAR parameters[])
+        -:  184:{
+        -:  185:  return ACE_Service_Config::initialize (ACE_TEXT_ANTI_TO_TCHAR (svc_name),
+        -:  186:                                         ACE_TEXT_ANTI_TO_TCHAR (parameters));
+        -:  187:}
+        -:  188:
+        -:  189:ACE_INLINE int
+        -:  190:ACE_Service_Config::resume (const ACE_ANTI_TCHAR svc_name[])
+        -:  191:{
+        -:  192:  return ACE_Service_Config::resume (ACE_TEXT_ANTI_TO_TCHAR (svc_name));
+        -:  193:}
+        -:  194:
+        -:  195:ACE_INLINE int
+        -:  196:ACE_Service_Config::suspend (const ACE_ANTI_TCHAR svc_name[])
+        -:  197:{
+        -:  198:  return ACE_Service_Config::suspend (ACE_TEXT_ANTI_TO_TCHAR (svc_name));
+        -:  199:}
+        -:  200:
+        -:  201:ACE_INLINE int
+        -:  202:ACE_Service_Config::remove (const ACE_ANTI_TCHAR svc_name[])
+        -:  203:{
+        -:  204:  return ACE_Service_Config::remove (ACE_TEXT_ANTI_TO_TCHAR (svc_name));
+        -:  205:}
+        -:  206:#endif /* ACE_HAS_WINCE && !ACE_USES_WCHAR */
+        -:  207:
+        -:  208:ACE_END_VERSIONED_NAMESPACE_DECL

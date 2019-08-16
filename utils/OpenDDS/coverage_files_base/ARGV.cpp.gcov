@@ -1,6 +1,6 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/ARGV.cpp
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/ARGV.cpp
         -:    0:Programs:70
-        -:    1:// $Id$
+        -:    1:// $Id: ARGV.cpp 2622 2015-08-13 18:30:00Z mitza $
         -:    2:
         -:    3:#ifndef ACE_ARGV_CPP
         -:    4:#define ACE_ARGV_CPP
@@ -221,34 +221,34 @@
         -:  219:}
         -:  220:
         -:  221:template <typename CHAR_TYPE>
-      118:  222:ACE_ARGV_T<CHAR_TYPE>::ACE_ARGV_T (bool substitute_env_args)
+        8:  222:ACE_ARGV_T<CHAR_TYPE>::ACE_ARGV_T (bool substitute_env_args)
         -:  223:  : substitute_env_args_ (substitute_env_args),
         -:  224:    iterative_ (true),
         -:  225:    argc_ (0),
         -:  226:    argv_ (0),
         -:  227:    buf_ (0),
         -:  228:    length_ (0),
-      118:  229:    queue_ ()
+        8:  229:    queue_ ()
         -:  230:{
         -:  231:  ACE_TRACE ("ACE_ARGV_T::ACE_ARGV_T Iterative");
         -:  232:
         -:  233:  // Nothing to do yet -- the user puts in arguments via add ()
-      118:  234:}
+        8:  234:}
         -:  235:
         -:  236:template <typename CHAR_TYPE>
         -:  237:int
-      122:  238:ACE_ARGV_T<CHAR_TYPE>::add (const CHAR_TYPE *next_arg, bool quote_arg)
+        8:  238:ACE_ARGV_T<CHAR_TYPE>::add (const CHAR_TYPE *next_arg, bool quote_arg)
         -:  239:{
         -:  240:  // Only allow this to work in the "iterative" verion -- the
         -:  241:  // ACE_ARGVs created with the one argument constructor.
-      122:  242:  if (!this->iterative_)
+        8:  242:  if (!this->iterative_)
         -:  243:    {
     #####:  244:      errno = EINVAL;
     #####:  245:      return -1;
         -:  246:    }
         -:  247:
-      122:  248:  this->length_ += ACE_OS::strlen (next_arg);
-     122*:  249:  if (quote_arg && ACE_OS::strchr (next_arg, ' ') != 0)
+        8:  248:  this->length_ += ACE_OS::strlen (next_arg);
+        8:  249:  if (quote_arg && ACE_OS::strchr (next_arg, ' ') != 0)
         -:  250:    {
     #####:  251:      this->length_ += 2;
     #####:  252:      if (ACE_OS::strchr (next_arg, '"') != 0)
@@ -257,20 +257,20 @@
         -:  255:    }
         -:  256:  else
         -:  257:    {
-      122:  258:      quote_arg = false;
+        8:  258:      quote_arg = false;
         -:  259:    }
         -:  260:
         -:  261:  // Put the new argument at the end of the queue.
-      122:  262:  if (this->queue_.enqueue_tail (ACE_ARGV_Queue_Entry_T<CHAR_TYPE> (next_arg, quote_arg)) == -1)
+        8:  262:  if (this->queue_.enqueue_tail (ACE_ARGV_Queue_Entry_T<CHAR_TYPE> (next_arg, quote_arg)) == -1)
     #####:  263:    ACELIB_ERROR_RETURN ((LM_ERROR,
         -:  264:                       ACE_TEXT ("Can't add more to ARGV queue")),
         -:  265:                      -1);
         -:  266:
-      122:  267:  ++this->argc_;
+        8:  267:  ++this->argc_;
         -:  268:
         -:  269:  // Wipe argv_ and buf_ away so that they will be recreated if the
         -:  270:  // user calls argv () or buf ().
-      122:  271:  if (this->argv_ != 0)
+        8:  271:  if (this->argv_ != 0)
         -:  272:    {
     #####:  273:      for (int i = 0; this->argv_[i] != 0; i++)
     #####:  274:        ACE_OS::free ((void *) this->argv_[i]);
@@ -286,11 +286,11 @@
         -:  284:#if defined (ACE_HAS_ALLOC_HOOKS)
         -:  285:  ACE_Allocator::instance()->free (this->buf_);
         -:  286:#else
-     122*:  287:  delete [] this->buf_;
+        8:  287:  delete [] this->buf_;
         -:  288:#endif /* ACE_HAS_ALLOC_HOOKS */
-      122:  289:  this->buf_ = 0;
+        8:  289:  this->buf_ = 0;
         -:  290:
-      122:  291:  return 0;
+        8:  291:  return 0;
         -:  292:}
         -:  293:
         -:  294:template <typename CHAR_TYPE>

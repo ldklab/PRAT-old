@@ -1,0 +1,8 @@
+6033c6033
+<        12: 6031:    operator==(const _CharT* __lhs,
+---
+>        20: 6031:    operator==(const _CharT* __lhs,
+6035c6035
+<        12: 6033:    { return __rhs.compare(__lhs) == 0; }
+---
+>        20: 6033:    { return __rhs.compare(__lhs) == 0; }

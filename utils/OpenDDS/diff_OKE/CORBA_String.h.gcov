@@ -1,0 +1,16 @@
+2c2
+<         -:    0:Programs:70
+---
+>         -:    0:Programs:69
+85c85
+<        10:   83:    inline String_var &operator= (character_type *p)
+---
+>        18:   83:    inline String_var &operator= (character_type *p)
+87,89c87,89
+<        20:   85:      String_var <charT> tmp (p);
+<        10:   86:      std::swap (this->ptr_, tmp.ptr_);
+<        20:   87:      return *this;
+---
+>        36:   85:      String_var <charT> tmp (p);
+>        18:   86:      std::swap (this->ptr_, tmp.ptr_);
+>        36:   87:      return *this;

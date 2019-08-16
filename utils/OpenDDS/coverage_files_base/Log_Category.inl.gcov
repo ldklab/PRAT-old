@@ -1,0 +1,180 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Log_Category.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: Log_Category.inl 2762 2015-11-12 18:54:50Z mitza $
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:ACE_INLINE unsigned int
+        -:    8:ACE_Log_Category::id()
+        -:    9:{
+        -:   10:  return id_;
+        -:   11:}
+        -:   12:
+        -:   13:ACE_INLINE const char*
+        -:   14:ACE_Log_Category::name ()
+        -:   15:{
+        -:   16:  return name_;
+        -:   17:}
+        -:   18:
+        -:   19:ACE_INLINE unsigned int
+        -:   20:ACE_Log_Category_TSS::id()
+        -:   21:{
+        -:   22:  return category_->id_;
+        -:   23:}
+        -:   24:
+        -:   25:ACE_INLINE const char*
+        -:   26:ACE_Log_Category_TSS::name ()
+        -:   27:{
+        -:   28:  return category_->name_;
+        -:   29:}
+        -:   30:
+        -:   31:ACE_INLINE ACE_Log_Msg*
+        -:   32:ACE_Log_Category_TSS::logger ()
+        -:   33:{
+        -:   34:  return logger_;
+        -:   35:}
+        -:   36:
+        -:   37:/// Get the current ACE_Log_Priority mask.
+        -:   38:ACE_INLINE u_long
+        -:   39:ACE_Log_Category_TSS::priority_mask ()
+        -:   40:{
+        -:   41:  return priority_mask_;
+        -:   42:}
+        -:   43:
+        -:   44:/// Set the ACE_Log_Priority mask, returns original mask.
+        -:   45:ACE_INLINE u_long
+        -:   46:ACE_Log_Category_TSS::priority_mask (u_long n_mask)
+        -:   47:{
+        -:   48:  u_long o_mask = this->priority_mask_;
+        -:   49:  this->priority_mask_ = n_mask;
+        -:   50:  return o_mask;
+        -:   51:}
+        -:   52:/// Return true if the requested priority is enabled.
+        -:   53:ACE_INLINE int
+    #####:   54:ACE_Log_Category_TSS::log_priority_enabled (ACE_Log_Priority log_priority)
+        -:   55:{
+    #####:   56:  return ACE_BIT_ENABLED (this->priority_mask_ |
+        -:   57:                          category_->priority_mask(),
+        -:   58:                          log_priority);
+        -:   59:}
+        -:   60:
+        -:   61:ACE_INLINE void
+        -:   62:ACE_Log_Category_TSS::set (const char *file,
+        -:   63:                           int line,
+        -:   64:                           int op_status,
+        -:   65:                           int errnum)
+        -:   66:{
+        -:   67:  logger_->set(file, line, op_status, errnum, logger_->restart (), logger_->msg_ostream (), logger_->msg_callback ());
+        -:   68:}
+        -:   69:
+        -:   70:/// These values are only actually set if the requested priority is
+        -:   71:/// enabled.
+        -:   72:ACE_INLINE
+    #####:   73:void ACE_Log_Category_TSS::conditional_set (const char *file,
+        -:   74:                                            int line,
+        -:   75:                                            int op_status,
+        -:   76:                                            int errnum)
+        -:   77:{
+    #####:   78:  logger_->conditional_set(file, line, op_status, errnum);
+    #####:   79:}
+        -:   80:
+        -:   81:#if !defined (ACE_LACKS_VA_FUNCTIONS)
+        -:   82:ACE_INLINE ssize_t
+    #####:   83:ACE_Log_Category_TSS::log (ACE_Log_Priority priority, const ACE_TCHAR *format_str, ...)
+        -:   84:{
+        -:   85:  // Start of variable args section.
+        -:   86:  va_list argp;
+        -:   87:
+    #####:   88:  va_start (argp, format_str);
+        -:   89:
+        -:   90:  ssize_t const result = this->log (format_str,
+        -:   91:                                    priority,
+    #####:   92:                                    argp);
+    #####:   93:  va_end (argp);
+        -:   94:
+    #####:   95:  return result;
+        -:   96:}
+        -:   97:
+        -:   98:#if defined (ACE_HAS_WCHAR)
+        -:   99:ACE_INLINE ssize_t
+        -:  100:ACE_Log_Category_TSS::log (ACE_Log_Priority priority, const ACE_ANTI_TCHAR *format_str, ...)
+        -:  101:{
+        -:  102:  // Start of variable args section.
+        -:  103:  va_list argp;
+        -:  104:
+        -:  105:  va_start (argp, format_str);
+        -:  106:
+        -:  107:  ssize_t const result = this->log (ACE_TEXT_ANTI_TO_TCHAR (format_str),
+        -:  108:                                    priority,
+        -:  109:                                    argp);
+        -:  110:  va_end (argp);
+        -:  111:
+        -:  112:  return result;
+        -:  113:}
+        -:  114:#endif /* ACE_HAS_WCHAR */
+        -:  115:#else /* ACE_LACKS_VA_FUNCTIONS */
+        -:  116:
+        -:  117:ACE_INLINE ssize_t
+        -:  118:ACE_Log_Category_TSS::log (const ACE_Log_Formatter &formatter)
+        -:  119:{
+        -:  120:  if (this->log_priority_enabled (formatter.priority ()))
+        -:  121:    return logger_->log (formatter);
+        -:  122:
+        -:  123:  return 0;
+        -:  124:}
+        -:  125:
+        -:  126:#endif /* ACE_LACKS_VA_FUNCTIONS */
+        -:  127:
+        -:  128:/**
+        -:  129: * An alternative logging mechanism that makes it possible to
+        -:  130: * integrate variable argument lists from other logging mechanisms
+        -:  131: * into the ACE mechanism.
+        -:  132: */
+        -:  133:
+        -:  134:ACE_INLINE ssize_t
+    #####:  135:ACE_Log_Category_TSS::log (const ACE_TCHAR *format,
+        -:  136:                           ACE_Log_Priority priority,
+        -:  137:                           va_list argp)
+        -:  138:{
+    #####:  139:  if (this->log_priority_enabled (priority) == 0)
+    #####:  140:    return 0;
+    #####:  141:  return logger_->log(format, priority, argp, this);
+        -:  142:}
+        -:  143:
+        -:  144:ACE_INLINE ssize_t
+        -:  145:ACE_Log_Category_TSS::log (ACE_Log_Record &log_record,
+        -:  146:                           int suppress_stderr)
+        -:  147:{
+        -:  148:  return logger_->log(log_record, suppress_stderr);
+        -:  149:}
+        -:  150:
+        -:  151:ACE_INLINE int
+        -:  152:ACE_Log_Category_TSS::log_hexdump (ACE_Log_Priority priority,
+        -:  153:                                   const char *buffer,
+        -:  154:                                   size_t size,
+        -:  155:                                   const ACE_TCHAR *text)
+        -:  156:{
+        -:  157:  if (this->log_priority_enabled (priority) == 0)
+        -:  158:    return 0;
+        -:  159:  return logger_->log_hexdump(priority, buffer, size, text, this);
+        -:  160:}
+        -:  161:
+        -:  162:/// Get the current ACE_Log_Priority mask.
+        -:  163:ACE_INLINE u_long
+    #####:  164:ACE_Log_Category::priority_mask ()
+        -:  165:{
+    #####:  166:  return priority_mask_;
+        -:  167:}
+        -:  168:
+        -:  169:/// Set the ACE_Log_Priority mask, returns original mask.
+        -:  170:ACE_INLINE u_long
+        -:  171:ACE_Log_Category::priority_mask (u_long n_mask)
+        -:  172:{
+        -:  173:  u_long o_mask = this->priority_mask_;
+        -:  174:  this->priority_mask_ = n_mask;
+        -:  175:  return o_mask;
+        -:  176:}
+        -:  177:
+        -:  178:ACE_END_VERSIONED_NAMESPACE_DECL

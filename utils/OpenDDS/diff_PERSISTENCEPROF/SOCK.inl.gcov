@@ -1,0 +1,10 @@
+18c18
+<        91:   16:ACE_SOCK::set_option (int level,
+---
+>        97:   16:ACE_SOCK::set_option (int level,
+24,25c24,25
+<        91:   22:  return ACE_OS::setsockopt (this->get_handle (), level,
+<        91:   23:                             option, (char *) optval, optlen);
+---
+>        97:   22:  return ACE_OS::setsockopt (this->get_handle (), level,
+>        97:   23:                             option, (char *) optval, optlen);

@@ -1,10 +1,4 @@
-1,2c1,2
-<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Hash_Map_Manager_T.cpp
+2c2
 <         -:    0:Programs:70
 ---
->         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Hash_Map_Manager_T.cpp
 >         -:    0:Programs:69
-8c8
-<         -:    6: *  $Id$
----
->         -:    6: *  $Id: Hash_Map_Manager_T.cpp 2622 2015-08-13 18:30:00Z mitza $

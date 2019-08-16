@@ -1,0 +1,300 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/VarOut_T.inl
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: VarOut_T.inl 2179 2013-05-28 22:16:51Z mesnierp $
+        -:    4:
+        -:    5:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:template<typename T>
+        -:    8:ACE_INLINE
+    #####:    9:TAO_Var_Base_T<T>::TAO_Var_Base_T (void)
+    #####:   10:  : ptr_ (0)
+    #####:   11:{}
+        -:   12:
+        -:   13:template<typename T>
+        -:   14:ACE_INLINE
+        -:   15:TAO_Var_Base_T<T>::TAO_Var_Base_T (T * p)
+        -:   16:  : ptr_ (p)
+        -:   17:{}
+        -:   18:
+        -:   19:template<typename T>
+        -:   20:ACE_INLINE
+    #####:   21:TAO_Var_Base_T<T>::~TAO_Var_Base_T (void)
+        -:   22:{
+    #####:   23:  delete this->ptr_;
+    #####:   24:}
+        -:   25:
+        -:   26:template<typename T>
+        -:   27:ACE_INLINE
+        -:   28:const T *
+        -:   29:TAO_Var_Base_T<T>::operator-> (void) const
+        -:   30:{
+        -:   31:  return this->ptr_;
+        -:   32:}
+        -:   33:
+        -:   34:template<typename T>
+        -:   35:ACE_INLINE
+        -:   36:T *
+        -:   37:TAO_Var_Base_T<T>::operator-> (void)
+        -:   38:{
+        -:   39:  return this->ptr_;
+        -:   40:}
+        -:   41:
+        -:   42:template<typename T>
+        -:   43:ACE_INLINE
+        -:   44:const T &
+        -:   45:TAO_Var_Base_T<T>::in (void) const
+        -:   46:{
+        -:   47:  return *this->ptr_;
+        -:   48:}
+        -:   49:
+        -:   50:template<typename T>
+        -:   51:ACE_INLINE
+        -:   52:T &
+        -:   53:TAO_Var_Base_T<T>::inout (void)
+        -:   54:{
+        -:   55:  return *this->ptr_;
+        -:   56:}
+        -:   57:
+        -:   58:template<typename T>
+        -:   59:ACE_INLINE
+        -:   60:T *
+        -:   61:TAO_Var_Base_T<T>::ptr (void) const
+        -:   62:{
+        -:   63:  return this->ptr_;
+        -:   64:}
+        -:   65:
+        -:   66:template<typename T>
+        -:   67:ACE_INLINE
+        -:   68:TAO_Var_Base_T<T>::operator T *& ()
+        -:   69:{
+        -:   70:  return this->ptr_;
+        -:   71:}
+        -:   72:
+        -:   73:// *************************************************************
+        -:   74:
+        -:   75:template<typename T>
+        -:   76:ACE_INLINE
+        -:   77:TAO_Fixed_Var_T<T>::TAO_Fixed_Var_T (void)
+        -:   78:{}
+        -:   79:
+        -:   80:template<typename T>
+        -:   81:ACE_INLINE
+        -:   82:TAO_Fixed_Var_T<T>::TAO_Fixed_Var_T (T * p)
+        -:   83:  : TAO_Var_Base_T<T> (p)
+        -:   84:{}
+        -:   85:
+        -:   86:template<typename T>
+        -:   87:ACE_INLINE
+        -:   88:TAO_Fixed_Var_T<T>::TAO_Fixed_Var_T (const TAO_Fixed_Var_T<T> & p)
+        -:   89:  : TAO_Var_Base_T<T> (p)
+        -:   90:{}
+        -:   91:
+        -:   92:// Fixed-size types only.
+        -:   93:template<typename T>
+        -:   94:ACE_INLINE
+        -:   95:TAO_Fixed_Var_T<T>::TAO_Fixed_Var_T (const T & p)
+        -:   96:{
+        -:   97:  ACE_NEW (this->ptr_,
+        -:   98:           T (p));
+        -:   99:}
+        -:  100:
+        -:  101:template<typename T>
+        -:  102:ACE_INLINE
+        -:  103:TAO_Fixed_Var_T<T> &
+        -:  104:TAO_Fixed_Var_T<T>::operator= (T * p)
+        -:  105:{
+        -:  106:  delete this->ptr_;
+        -:  107:  this->ptr_ = p;
+        -:  108:  return *this;
+        -:  109:}
+        -:  110:
+        -:  111:template<typename T>
+        -:  112:ACE_INLINE
+        -:  113:TAO_Fixed_Var_T<T>::operator const T & () const
+        -:  114:{
+        -:  115:  return *this->ptr_;
+        -:  116:}
+        -:  117:
+        -:  118:template<typename T>
+        -:  119:ACE_INLINE
+        -:  120:TAO_Fixed_Var_T<T>::operator T & ()
+        -:  121:{
+        -:  122:  // Use plain new, using the ACE_NEW macros will mean we dereference a
+        -:  123:  // nil pointer and crash which is more bad then plain new which could
+        -:  124:  // lead to a bad_alloc exception
+        -:  125:  if (this->ptr_ == 0)
+        -:  126:    this->ptr_ = new T;
+        -:  127:
+        -:  128:  return *this->ptr_;
+        -:  129:}
+        -:  130:
+        -:  131:template<typename T>
+        -:  132:ACE_INLINE
+        -:  133:TAO_Fixed_Var_T<T>::operator T & () const
+        -:  134:{
+        -:  135:  return *this->ptr_;
+        -:  136:}
+        -:  137:
+        -:  138:// Mapping for fixed size.
+        -:  139:template<typename T>
+        -:  140:ACE_INLINE
+        -:  141:T &
+        -:  142:TAO_Fixed_Var_T<T>::out (void)
+        -:  143:{
+        -:  144:  // Use plain new, using the ACE_NEW macros will mean we dereference a
+        -:  145:  // nil pointer and crash which is more bad then plain new which could
+        -:  146:  // lead to a bad_alloc exception
+        -:  147:  if (this->ptr_ == 0)
+        -:  148:    this->ptr_ = new T;
+        -:  149:
+        -:  150:  return *this->ptr_;
+        -:  151:}
+        -:  152:
+        -:  153:template<typename T>
+        -:  154:ACE_INLINE
+        -:  155:T
+        -:  156:TAO_Fixed_Var_T<T>::_retn (void)
+        -:  157:{
+        -:  158:  return *this->ptr_;
+        -:  159:}
+        -:  160:
+        -:  161:// *************************************************************
+        -:  162:
+        -:  163:template<typename T>
+        -:  164:ACE_INLINE
+    #####:  165:TAO_Var_Var_T<T>::TAO_Var_Var_T (void)
+    #####:  166:{}
+        -:  167:
+        -:  168:template<typename T>
+        -:  169:ACE_INLINE
+        -:  170:TAO_Var_Var_T<T>::TAO_Var_Var_T (T * p)
+        -:  171:  : TAO_Var_Base_T<T> (p)
+        -:  172:{}
+        -:  173:
+        -:  174:template<typename T>
+        -:  175:ACE_INLINE
+        -:  176:TAO_Var_Var_T<T>::TAO_Var_Var_T (const TAO_Var_Var_T<T> & p)
+        -:  177:  : TAO_Var_Base_T<T> (p)
+        -:  178:{}
+        -:  179:
+        -:  180:template<typename T>
+        -:  181:ACE_INLINE
+        -:  182:TAO_Var_Var_T<T> &
+        -:  183:TAO_Var_Var_T<T>::operator= (T * p)
+        -:  184:{
+        -:  185:  delete this->ptr_;
+        -:  186:  this->ptr_ = p;
+        -:  187:  return *this;
+        -:  188:}
+        -:  189:
+        -:  190:template<typename T>
+        -:  191:ACE_INLINE
+        -:  192:TAO_Var_Var_T<T>::operator const T & () const
+        -:  193:{
+        -:  194:  return *this->ptr_;
+        -:  195:}
+        -:  196:
+        -:  197:template<typename T>
+        -:  198:ACE_INLINE
+    #####:  199:TAO_Var_Var_T<T>::operator T & ()
+        -:  200:{
+    #####:  201:  return *this->ptr_;
+        -:  202:}
+        -:  203:
+        -:  204:template<typename T>
+        -:  205:ACE_INLINE
+        -:  206:TAO_Var_Var_T<T>::operator T & () const
+        -:  207:{
+        -:  208:  return *this->ptr_;
+        -:  209:}
+        -:  210:
+        -:  211:// Mapping for variable size.
+        -:  212:template<typename T>
+        -:  213:ACE_INLINE
+        -:  214:T *&
+    #####:  215:TAO_Var_Var_T<T>::out (void)
+        -:  216:{
+    #####:  217:  delete this->ptr_;
+    #####:  218:  this->ptr_ = 0;
+    #####:  219:  return this->ptr_;
+        -:  220:}
+        -:  221:
+        -:  222:template<typename T>
+        -:  223:ACE_INLINE
+        -:  224:T *
+        -:  225:TAO_Var_Var_T<T>::_retn (void)
+        -:  226:{
+        -:  227:  T * tmp = this->ptr_;
+        -:  228:  this->ptr_ = 0;
+        -:  229:  return tmp;
+        -:  230:}
+        -:  231:
+        -:  232:// *************************************************************
+        -:  233:
+        -:  234:template<typename T>
+        -:  235:ACE_INLINE
+    #####:  236:TAO_Out_T<T>::TAO_Out_T (T *& p)
+    #####:  237:  : ptr_ (p)
+        -:  238:{
+    #####:  239:  this->ptr_ = 0;
+    #####:  240:}
+        -:  241:
+        -:  242:template<typename T>
+        -:  243:ACE_INLINE
+        -:  244:TAO_Out_T<T>::TAO_Out_T (T_var & p)
+        -:  245:  : ptr_ (p.out ())
+        -:  246:{
+        -:  247:  delete this->ptr_;
+        -:  248:  this->ptr_ = 0;
+        -:  249:}
+        -:  250:
+        -:  251:template<typename T>
+        -:  252:ACE_INLINE
+    #####:  253:TAO_Out_T<T>::TAO_Out_T (const TAO_Out_T<T> & p)
+    #####:  254:  : ptr_ (p.ptr_)
+    #####:  255:{}
+        -:  256:
+        -:  257:template<typename T>
+        -:  258:ACE_INLINE
+        -:  259:TAO_Out_T<T> &
+        -:  260:TAO_Out_T<T>::operator= (const TAO_Out_T<T> & p)
+        -:  261:{
+        -:  262:  this->ptr_ = p.ptr_;
+        -:  263:  return *this;
+        -:  264:}
+        -:  265:
+        -:  266:template<typename T>
+        -:  267:ACE_INLINE
+        -:  268:TAO_Out_T<T> &
+    #####:  269:TAO_Out_T<T>::operator= (T * p)
+        -:  270:{
+    #####:  271:  this->ptr_ = p;
+    #####:  272:  return *this;
+        -:  273:}
+        -:  274:
+        -:  275:template<typename T>
+        -:  276:ACE_INLINE
+        -:  277:TAO_Out_T<T>::operator T *& ()
+        -:  278:{
+        -:  279:  return this->ptr_;
+        -:  280:}
+        -:  281:
+        -:  282:template<typename T>
+        -:  283:ACE_INLINE
+        -:  284:T *&
+        -:  285:TAO_Out_T<T>::ptr (void)
+        -:  286:{
+        -:  287:  return this->ptr_;
+        -:  288:}
+        -:  289:
+        -:  290:template<typename T>
+        -:  291:ACE_INLINE
+        -:  292:T *
+        -:  293:TAO_Out_T<T>::operator-> (void)
+        -:  294:{
+        -:  295:  return this->ptr_;
+        -:  296:}
+        -:  297:
+        -:  298:TAO_END_VERSIONED_NAMESPACE_DECL

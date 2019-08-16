@@ -1,0 +1,30 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Lock_Adapter_T.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: Lock_Adapter_T.inl 1861 2011-08-31 16:18:08Z mesnierp $
+        -:    4:
+        -:    5:#include "ace/OS_Memory.h"
+        -:    6:
+        -:    7:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    8:
+        -:    9:template <class ACE_LOCKING_MECHANISM>
+        -:   10:ACE_INLINE
+    #####:   11:ACE_Lock_Adapter<ACE_LOCKING_MECHANISM>::ACE_Lock_Adapter (
+        -:   12:  ACE_LOCKING_MECHANISM &lock)
+        -:   13:  : lock_ (&lock),
+    #####:   14:    delete_lock_ (false)
+        -:   15:{
+    #####:   16:}
+        -:   17:
+        -:   18:template <class ACE_LOCKING_MECHANISM>
+        -:   19:ACE_INLINE
+        -:   20:ACE_Lock_Adapter<ACE_LOCKING_MECHANISM>::ACE_Lock_Adapter (void)
+        -:   21:  : lock_ (0),
+        -:   22:    delete_lock_ (true)
+        -:   23:{
+        -:   24:  ACE_NEW (this->lock_,
+        -:   25:           ACE_LOCKING_MECHANISM);
+        -:   26:}
+        -:   27:
+        -:   28:ACE_END_VERSIONED_NAMESPACE_DECL

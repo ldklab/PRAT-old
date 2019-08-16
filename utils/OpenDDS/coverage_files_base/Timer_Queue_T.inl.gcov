@@ -1,0 +1,96 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Timer_Queue_T.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: Timer_Queue_T.inl 2179 2013-05-28 22:16:51Z mesnierp $
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:template <class TYPE, class FUNCTOR> ACE_INLINE FUNCTOR &
+    #####:    8:ACE_Timer_Queue_Upcall_Base<TYPE, FUNCTOR>::upcall_functor (void)
+        -:    9:{
+    #####:   10:  return *this->upcall_functor_;
+        -:   11:}
+        -:   12:
+        -:   13:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_INLINE void
+        -:   14:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::timer_skew (const ACE_Time_Value &skew)
+        -:   15:{
+        -:   16:  timer_skew_ = skew;
+        -:   17:}
+        -:   18:
+        -:   19:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_INLINE const ACE_Time_Value &
+    #####:   20:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::timer_skew (void) const
+        -:   21:{
+    #####:   22:  return timer_skew_;
+        -:   23:}
+        -:   24:
+        -:   25:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_INLINE int
+    #####:   26:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::expire (void)
+        -:   27:{
+    #####:   28:  if (!this->is_empty ())
+    #####:   29:    return this->expire (this->gettimeofday_static () + timer_skew_);
+        -:   30:  else
+    #####:   31:    return 0;
+        -:   32:}
+        -:   33:
+        -:   34:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> int
+    #####:   35:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::dispatch_info (const ACE_Time_Value &cur_time,
+        -:   36:                                                           ACE_Timer_Node_Dispatch_Info_T<TYPE> &info)
+        -:   37:{
+        -:   38:  ACE_TRACE ("ACE_Timer_Queue_T::dispatch_info");
+    #####:   39:  ACE_MT (ACE_GUARD_RETURN (ACE_LOCK, ace_mon, this->mutex_, 0));
+        -:   40:
+    #####:   41:  return this->dispatch_info_i (cur_time, info);
+        -:   42:}
+        -:   43:
+        -:   44:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_INLINE void
+    #####:   45:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::upcall (ACE_Timer_Node_Dispatch_Info_T<TYPE> &info,
+        -:   46:                                                    const ACE_Time_Value &cur_time)
+        -:   47:{
+    #####:   48:  this->upcall_functor ().timeout (*this,
+        -:   49:                                   info.type_,
+        -:   50:                                   info.act_,
+        -:   51:                                   info.recurring_timer_,
+        -:   52:                                   cur_time);
+    #####:   53:}
+        -:   54:
+        -:   55:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_INLINE void
+    #####:   56:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::preinvoke (ACE_Timer_Node_Dispatch_Info_T<TYPE> &info,
+        -:   57:                                                       const ACE_Time_Value &cur_time,
+        -:   58:                                                       const void *&upcall_act)
+        -:   59:{
+    #####:   60:  this->upcall_functor ().preinvoke (*this,
+        -:   61:                                     info.type_,
+        -:   62:                                     info.act_,
+        -:   63:                                     info.recurring_timer_,
+        -:   64:                                     cur_time,
+        -:   65:                                     upcall_act);
+    #####:   66:}
+        -:   67:
+        -:   68:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_INLINE void
+    #####:   69:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::postinvoke (ACE_Timer_Node_Dispatch_Info_T<TYPE> &info,
+        -:   70:                                                        const ACE_Time_Value &cur_time,
+        -:   71:                                                        const void *upcall_act)
+        -:   72:{
+    #####:   73:  this->upcall_functor ().postinvoke (*this,
+        -:   74:                                      info.type_,
+        -:   75:                                      info.act_,
+        -:   76:                                      info.recurring_timer_,
+        -:   77:                                      cur_time,
+        -:   78:                                      upcall_act);
+    #####:   79:}
+        -:   80:
+        -:   81:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_INLINE ACE_Time_Value
+    #####:   82:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::gettimeofday_static (void)
+        -:   83:{
+        -:   84:  // Get the current time according to the time policy.
+    #####:   85:  return this->time_policy_ ();
+        -:   86:}
+        -:   87:
+        -:   88:template <class TYPE, class FUNCTOR, class ACE_LOCK, typename TIME_POLICY> ACE_INLINE void
+        -:   89:ACE_Timer_Queue_T<TYPE, FUNCTOR, ACE_LOCK, TIME_POLICY>::set_time_policy (TIME_POLICY const & rhs)
+        -:   90:{
+        -:   91:  this->time_policy_ = rhs;
+        -:   92:}
+        -:   93:
+        -:   94:ACE_END_VERSIONED_NAMESPACE_DECL

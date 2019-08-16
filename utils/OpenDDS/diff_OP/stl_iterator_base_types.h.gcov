@@ -1,0 +1,6 @@
+207,208c207,208
+<         1:  205:    __iterator_category(const _Iter&)
+<         1:  206:    { return typename iterator_traits<_Iter>::iterator_category(); }
+---
+>         2:  205:    __iterator_category(const _Iter&)
+>         2:  206:    { return typename iterator_traits<_Iter>::iterator_category(); }

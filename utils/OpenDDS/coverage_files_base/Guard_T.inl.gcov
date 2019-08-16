@@ -1,0 +1,173 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Guard_T.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2:// $Id: Guard_T.inl 1861 2011-08-31 16:18:08Z mesnierp $
+        -:    3:
+        -:    4:// FUZZ: disable check_for_ACE_Guard
+        -:    5:
+        -:    6:#include "ace/RW_Thread_Mutex.h"
+        -:    7:
+        -:    8:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    9:
+        -:   10:template <class ACE_LOCK> ACE_INLINE int
+    #####:   11:ACE_Guard<ACE_LOCK>::acquire (void)
+        -:   12:{
+    #####:   13:  return this->owner_ = this->lock_->acquire ();
+        -:   14:}
+        -:   15:
+        -:   16:template <class ACE_LOCK> ACE_INLINE int
+        -:   17:ACE_Guard<ACE_LOCK>::tryacquire (void)
+        -:   18:{
+        -:   19:  return this->owner_ = this->lock_->tryacquire ();
+        -:   20:}
+        -:   21:
+        -:   22:template <class ACE_LOCK> ACE_INLINE int
+    #####:   23:ACE_Guard<ACE_LOCK>::release (void)
+        -:   24:{
+    #####:   25:  if (this->owner_ == -1)
+    #####:   26:    return -1;
+        -:   27:  else
+        -:   28:    {
+    #####:   29:      this->owner_ = -1;
+    #####:   30:      return this->lock_->release ();
+        -:   31:    }
+        -:   32:}
+        -:   33:
+        -:   34:template <class ACE_LOCK> ACE_INLINE
+    #####:   35:ACE_Guard<ACE_LOCK>::ACE_Guard (ACE_LOCK &l)
+        -:   36:  : lock_ (&l),
+    #####:   37:    owner_ (0)
+        -:   38:{
+    #####:   39:  this->acquire ();
+    #####:   40:}
+        -:   41:
+        -:   42:template <class ACE_LOCK> ACE_INLINE
+        -:   43:ACE_Guard<ACE_LOCK>::ACE_Guard (ACE_LOCK &l, bool block)
+        -:   44:  : lock_ (&l),
+        -:   45:    owner_ (0)
+        -:   46:{
+        -:   47:  if (block)
+        -:   48:    this->acquire ();
+        -:   49:  else
+        -:   50:    this->tryacquire ();
+        -:   51:}
+        -:   52:
+        -:   53:template <class ACE_LOCK> ACE_INLINE
+        -:   54:ACE_Guard<ACE_LOCK>::ACE_Guard (ACE_LOCK &l, bool /* block */, int become_owner)
+        -:   55:  : lock_ (&l),
+        -:   56:    owner_ (become_owner == 0 ? -1 : 0)
+        -:   57:{
+        -:   58:}
+        -:   59:
+        -:   60:// Implicitly and automatically acquire (or try to acquire) the
+        -:   61:// lock.
+        -:   62:
+        -:   63:template <class ACE_LOCK> ACE_INLINE
+    #####:   64:ACE_Guard<ACE_LOCK>::~ACE_Guard (void)
+        -:   65:{
+    #####:   66:  this->release ();
+    #####:   67:}
+        -:   68:
+        -:   69:template <class ACE_LOCK> ACE_INLINE bool
+    #####:   70:ACE_Guard<ACE_LOCK>::locked (void) const
+        -:   71:{
+    #####:   72:  return this->owner_ != -1;
+        -:   73:}
+        -:   74:
+        -:   75:template <class ACE_LOCK> ACE_INLINE int
+        -:   76:ACE_Guard<ACE_LOCK>::remove (void)
+        -:   77:{
+        -:   78:  return this->lock_->remove ();
+        -:   79:}
+        -:   80:
+        -:   81:template <class ACE_LOCK> ACE_INLINE void
+        -:   82:ACE_Guard<ACE_LOCK>::disown (void)
+        -:   83:{
+        -:   84:  this->owner_ = -1;
+        -:   85:}
+        -:   86:
+        -:   87:template <class ACE_LOCK> ACE_INLINE
+        -:   88:ACE_Write_Guard<ACE_LOCK>::ACE_Write_Guard (ACE_LOCK &m)
+        -:   89:  : ACE_Guard<ACE_LOCK> (&m)
+        -:   90:{
+        -:   91:  this->acquire_write ();
+        -:   92:}
+        -:   93:
+        -:   94:template <class ACE_LOCK> ACE_INLINE int
+        -:   95:ACE_Write_Guard<ACE_LOCK>::acquire_write (void)
+        -:   96:{
+        -:   97:  return this->owner_ = this->lock_->acquire_write ();
+        -:   98:}
+        -:   99:
+        -:  100:template <class ACE_LOCK> ACE_INLINE int
+        -:  101:ACE_Write_Guard<ACE_LOCK>::acquire (void)
+        -:  102:{
+        -:  103:  return this->owner_ = this->lock_->acquire_write ();
+        -:  104:}
+        -:  105:
+        -:  106:template <class ACE_LOCK> ACE_INLINE int
+        -:  107:ACE_Write_Guard<ACE_LOCK>::tryacquire_write (void)
+        -:  108:{
+        -:  109:  return this->owner_ = this->lock_->tryacquire_write ();
+        -:  110:}
+        -:  111:
+        -:  112:template <class ACE_LOCK> ACE_INLINE int
+        -:  113:ACE_Write_Guard<ACE_LOCK>::tryacquire (void)
+        -:  114:{
+        -:  115:  return this->owner_ = this->lock_->tryacquire_write ();
+        -:  116:}
+        -:  117:
+        -:  118:template <class ACE_LOCK> ACE_INLINE
+        -:  119:ACE_Write_Guard<ACE_LOCK>::ACE_Write_Guard (ACE_LOCK &m,
+        -:  120:                                            bool block)
+        -:  121:  : ACE_Guard<ACE_LOCK> (&m)
+        -:  122:{
+        -:  123:  if (block)
+        -:  124:    this->acquire_write ();
+        -:  125:  else
+        -:  126:    this->tryacquire_write ();
+        -:  127:}
+        -:  128:
+        -:  129:template <class ACE_LOCK> ACE_INLINE int
+        -:  130:ACE_Read_Guard<ACE_LOCK>::acquire_read (void)
+        -:  131:{
+        -:  132:  return this->owner_ = this->lock_->acquire_read ();
+        -:  133:}
+        -:  134:
+        -:  135:template <class ACE_LOCK> ACE_INLINE int
+        -:  136:ACE_Read_Guard<ACE_LOCK>::acquire (void)
+        -:  137:{
+        -:  138:  return this->owner_ = this->lock_->acquire_read ();
+        -:  139:}
+        -:  140:
+        -:  141:template <class ACE_LOCK> ACE_INLINE int
+        -:  142:ACE_Read_Guard<ACE_LOCK>::tryacquire_read (void)
+        -:  143:{
+        -:  144:  return this->owner_ = this->lock_->tryacquire_read ();
+        -:  145:}
+        -:  146:
+        -:  147:template <class ACE_LOCK> ACE_INLINE int
+        -:  148:ACE_Read_Guard<ACE_LOCK>::tryacquire (void)
+        -:  149:{
+        -:  150:  return this->owner_ = this->lock_->tryacquire_read ();
+        -:  151:}
+        -:  152:
+        -:  153:template <class ACE_LOCK> ACE_INLINE
+        -:  154:ACE_Read_Guard<ACE_LOCK>::ACE_Read_Guard (ACE_LOCK &m)
+        -:  155:  : ACE_Guard<ACE_LOCK> (&m)
+        -:  156:{
+        -:  157:  this->acquire_read ();
+        -:  158:}
+        -:  159:
+        -:  160:template <class ACE_LOCK> ACE_INLINE
+        -:  161:ACE_Read_Guard<ACE_LOCK>::ACE_Read_Guard (ACE_LOCK &m,
+        -:  162:                                          bool block)
+        -:  163:  : ACE_Guard<ACE_LOCK> (&m)
+        -:  164:{
+        -:  165:  if (block)
+        -:  166:    this->acquire_read ();
+        -:  167:  else
+        -:  168:    this->tryacquire_read ();
+        -:  169:}
+        -:  170:
+        -:  171:ACE_END_VERSIONED_NAMESPACE_DECL

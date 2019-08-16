@@ -1,6 +1,6 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Hash_Map_With_Allocator_T.cpp
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Hash_Map_With_Allocator_T.cpp
         -:    0:Programs:70
-        -:    1:// $Id$
+        -:    1:// $Id: Hash_Map_With_Allocator_T.cpp 14 2007-02-01 15:49:12Z mitza $
         -:    2:
         -:    3:#ifndef ACE_HASH_MAP_WITH_ALLOCATOR_T_CPP
         -:    4:#define ACE_HASH_MAP_WITH_ALLOCATOR_T_CPP

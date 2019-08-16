@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Manager_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Manager_T.h
         -:    0:Programs:51
         -:    1:// -*- C++ -*-
         -:    2:
@@ -6,7 +6,7 @@
         -:    4:/**
         -:    5: *  @file    String_Manager_T.h
         -:    6: *
-        -:    7: *  $Id$
+        -:    7: *  $Id: String_Manager_T.h 935 2008-12-10 21:47:27Z mitza $
         -:    8: *
         -:    9: *  @author Johnny Willemsen  <jwillemsen@remedy.nl>
         -:   10: */
@@ -46,36 +46,12 @@
     #####:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
         -:   45:  {
     #####:   46:  }
-------------------
-_ZN3TAO16String_Manager_TIcEC2Ev:
-    #####:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
-        -:   45:  {
-    #####:   46:  }
-------------------
-_ZN3TAO16String_Manager_TIcEC2Ev:
-    #####:   44:  inline String_Manager_T (void) : ptr_ (s_traits::default_initializer())
-        -:   45:  {
-    #####:   46:  }
-------------------
         -:   47:
         -:   48:  /// Copy constructor
     #####:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
     #####:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
         -:   51:  {
     #####:   52:  }
-------------------
-_ZN3TAO16String_Manager_TIcEC2ERKS1_:
-    #####:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
-    #####:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
-        -:   51:  {
-    #####:   52:  }
-------------------
-_ZN3TAO16String_Manager_TIcEC2ERKS1_:
-    #####:   49:  inline String_Manager_T (const String_Manager_T<charT> &rhs) :
-    #####:   50:    ptr_ (s_traits::duplicate (rhs.ptr_))
-        -:   51:  {
-    #####:   52:  }
-------------------
         -:   53:
         -:   54:  /// Constructor from const char* makes a copy.
         -:   55:  inline String_Manager_T (const character_type *s) :
@@ -87,17 +63,6 @@ _ZN3TAO16String_Manager_TIcEC2ERKS1_:
     #####:   61:  inline ~String_Manager_T (void) {
     #####:   62:    s_traits::release (this->ptr_);
     #####:   63:  }
-------------------
-_ZN3TAO16String_Manager_TIcED2Ev:
-    #####:   61:  inline ~String_Manager_T (void) {
-    #####:   62:    s_traits::release (this->ptr_);
-    #####:   63:  }
-------------------
-_ZN3TAO16String_Manager_TIcED2Ev:
-    #####:   61:  inline ~String_Manager_T (void) {
-    #####:   62:    s_traits::release (this->ptr_);
-    #####:   63:  }
-------------------
         -:   64:
         -:   65:  /// Assignment from another managed type
     #####:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
@@ -107,25 +72,6 @@ _ZN3TAO16String_Manager_TIcED2Ev:
     #####:   70:    std::swap (this->ptr_, tmp.ptr_);
     #####:   71:    return *this;
         -:   72:  }
-------------------
-_ZN3TAO16String_Manager_TIcEaSERKS1_:
-    #####:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
-        -:   67:    // Strongly exception safe by means of copy and non-throwing swap
-        -:   68:    // technique.
-    #####:   69:    String_Manager_T <character_type> tmp (rhs);
-    #####:   70:    std::swap (this->ptr_, tmp.ptr_);
-    #####:   71:    return *this;
-        -:   72:  }
-------------------
-_ZN3TAO16String_Manager_TIcEaSERKS1_:
-    #####:   66:  inline String_Manager_T &operator= (const String_Manager_T<charT> &rhs) {
-        -:   67:    // Strongly exception safe by means of copy and non-throwing swap
-        -:   68:    // technique.
-    #####:   69:    String_Manager_T <character_type> tmp (rhs);
-    #####:   70:    std::swap (this->ptr_, tmp.ptr_);
-    #####:   71:    return *this;
-        -:   72:  }
-------------------
         -:   73:
         -:   74:  /// Assignment from var type will make a copy
         -:   75:  inline String_Manager_T &operator= (const typename s_traits::string_var& value) {

@@ -1,0 +1,481 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Containers_T.inl
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: Containers_T.inl 14 2007-02-01 15:49:12Z mitza $
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:template <class T> ACE_INLINE int
+        -:    8:ACE_Bounded_Stack<T>::is_empty (void) const
+        -:    9:{
+        -:   10:  ACE_TRACE ("ACE_Bounded_Stack<T>::is_empty");
+        -:   11:  return this->top_ == 0;
+        -:   12:}
+        -:   13:
+        -:   14:template <class T> ACE_INLINE int
+        -:   15:ACE_Bounded_Stack<T>::is_full (void) const
+        -:   16:{
+        -:   17:  ACE_TRACE ("ACE_Bounded_Stack<T>::is_full");
+        -:   18:  return this->top_ >= this->size_;
+        -:   19:}
+        -:   20:
+        -:   21:template <class T> ACE_INLINE int
+        -:   22:ACE_Bounded_Stack<T>::push (const T &new_item)
+        -:   23:{
+        -:   24:  ACE_TRACE ("ACE_Bounded_Stack<T>::push");
+        -:   25:  if (this->is_full () == 0)
+        -:   26:    {
+        -:   27:      this->stack_[this->top_++] = new_item;
+        -:   28:      return 0;
+        -:   29:    }
+        -:   30:  else
+        -:   31:    return -1;
+        -:   32:}
+        -:   33:
+        -:   34:template <class T> ACE_INLINE int
+        -:   35:ACE_Bounded_Stack<T>::pop (T &item)
+        -:   36:{
+        -:   37:  ACE_TRACE ("ACE_Bounded_Stack<T>::pop");
+        -:   38:  if (this->is_empty () == 0)
+        -:   39:    {
+        -:   40:      item = this->stack_[--this->top_];
+        -:   41:      return 0;
+        -:   42:    }
+        -:   43:  else
+        -:   44:    return -1;
+        -:   45:}
+        -:   46:
+        -:   47:template <class T> ACE_INLINE int
+        -:   48:ACE_Bounded_Stack<T>::top (T &item) const
+        -:   49:{
+        -:   50:  ACE_TRACE ("ACE_Bounded_Stack<T>::top");
+        -:   51:  if (this->is_empty () == 0)
+        -:   52:    {
+        -:   53:      item = this->stack_[this->top_ - 1];
+        -:   54:      return 0;
+        -:   55:    }
+        -:   56:  else
+        -:   57:    return -1;
+        -:   58:}
+        -:   59:
+        -:   60:template <class T> ACE_INLINE size_t
+        -:   61:ACE_Bounded_Stack<T>::size (void) const
+        -:   62:{
+        -:   63:  return this->size_;
+        -:   64:}
+        -:   65:
+        -:   66://----------------------------------------
+        -:   67:
+        -:   68:template <class T, size_t ACE_SIZE> ACE_INLINE int
+        -:   69:ACE_Fixed_Stack<T, ACE_SIZE>::is_empty (void) const
+        -:   70:{
+        -:   71:  ACE_TRACE ("ACE_Fixed_Stack<T, ACE_SIZE>::is_empty");
+        -:   72:  return this->top_ == 0;
+        -:   73:}
+        -:   74:
+        -:   75:template <class T, size_t ACE_SIZE> ACE_INLINE int
+        -:   76:ACE_Fixed_Stack<T, ACE_SIZE>::is_full (void) const
+        -:   77:{
+        -:   78:  ACE_TRACE ("ACE_Fixed_Stack<T, ACE_SIZE>::is_full");
+        -:   79:  return this->top_ >= this->size_;
+        -:   80:}
+        -:   81:
+        -:   82:template <class T, size_t ACE_SIZE> ACE_INLINE int
+        -:   83:ACE_Fixed_Stack<T, ACE_SIZE>::push (const T &new_item)
+        -:   84:{
+        -:   85:  ACE_TRACE ("ACE_Fixed_Stack<T, ACE_SIZE>::push");
+        -:   86:  if (this->is_full () == 0)
+        -:   87:    {
+        -:   88:      this->stack_[this->top_++] = new_item;
+        -:   89:      return 0;
+        -:   90:    }
+        -:   91:  else
+        -:   92:    return -1;
+        -:   93:}
+        -:   94:
+        -:   95:template <class T, size_t ACE_SIZE> ACE_INLINE int
+        -:   96:ACE_Fixed_Stack<T, ACE_SIZE>::pop (T &item)
+        -:   97:{
+        -:   98:  ACE_TRACE ("ACE_Fixed_Stack<T, ACE_SIZE>::pop");
+        -:   99:  if (this->is_empty () == 0)
+        -:  100:    {
+        -:  101:      item = this->stack_[--this->top_];
+        -:  102:      return 0;
+        -:  103:    }
+        -:  104:  else
+        -:  105:    return -1;
+        -:  106:}
+        -:  107:
+        -:  108:template <class T, size_t ACE_SIZE> ACE_INLINE int
+        -:  109:ACE_Fixed_Stack<T, ACE_SIZE>::top (T &item) const
+        -:  110:{
+        -:  111:  ACE_TRACE ("ACE_Fixed_Stack<T, ACE_SIZE>::top");
+        -:  112:  if (this->is_empty () == 0)
+        -:  113:    {
+        -:  114:      item = this->stack_[this->top_ - 1];
+        -:  115:      return 0;
+        -:  116:    }
+        -:  117:  else
+        -:  118:    return -1;
+        -:  119:}
+        -:  120:
+        -:  121:template <class T, size_t ACE_SIZE> ACE_INLINE size_t
+        -:  122:ACE_Fixed_Stack<T, ACE_SIZE>::size (void) const
+        -:  123:{
+        -:  124:  return this->size_;
+        -:  125:}
+        -:  126:
+        -:  127:template <class T> ACE_INLINE int
+        -:  128:ACE_Unbounded_Stack<T>::is_empty (void) const
+        -:  129:{
+        -:  130:  //  ACE_TRACE ("ACE_Unbounded_Stack<T>::is_empty");
+        -:  131:  return this->head_ == this->head_->next_;
+        -:  132:}
+        -:  133:
+        -:  134:template <class T> ACE_INLINE int
+        -:  135:ACE_Unbounded_Stack<T>::top (T &item) const
+        -:  136:{
+        -:  137:  ACE_TRACE ("ACE_Unbounded_Stack<T>::top");
+        -:  138:  if (this->is_empty () == 0)
+        -:  139:    {
+        -:  140:      item = this->head_->next_->item_;
+        -:  141:      return 0;
+        -:  142:    }
+        -:  143:  else
+        -:  144:    return -1;
+        -:  145:}
+        -:  146:
+        -:  147:template <class T> ACE_INLINE int
+        -:  148:ACE_Unbounded_Stack<T>::is_full (void) const
+        -:  149:{
+        -:  150:  ACE_TRACE ("ACE_Unbounded_Stack<T>::is_full");
+        -:  151:  return 0; // ???
+        -:  152:}
+        -:  153:
+        -:  154:template <class T> ACE_INLINE size_t
+        -:  155:ACE_Unbounded_Stack<T>::size (void) const
+        -:  156:{
+        -:  157:  return this->cur_size_;
+        -:  158:}
+        -:  159:
+        -:  160:// ---
+        -:  161:
+        -:  162:
+        -:  163:// ---
+        -:  164:
+        -:  165:template <class T, size_t ACE_SIZE> ACE_INLINE int
+        -:  166:ACE_Fixed_Set<T, ACE_SIZE>::is_empty (void) const
+        -:  167:{
+        -:  168:  ACE_TRACE ("ACE_Fixed_Set<T>::is_empty");
+        -:  169:  return this->cur_size_ == 0;
+        -:  170:}
+        -:  171:
+        -:  172:template <class T, size_t ACE_SIZE> ACE_INLINE int
+        -:  173:ACE_Fixed_Set<T, ACE_SIZE>::is_full (void) const
+        -:  174:{
+        -:  175:  ACE_TRACE ("ACE_Fixed_Set<T, ACE_SIZE>::is_full");
+        -:  176:  return this->cur_size_ == this->max_size_;
+        -:  177:}
+        -:  178:
+        -:  179:// ---
+        -:  180:
+        -:  181:template <class T> ACE_INLINE int
+        -:  182:ACE_Bounded_Set<T>::is_empty (void) const
+        -:  183:{
+        -:  184:  ACE_TRACE ("ACE_Bounded_Set<T>::is_empty");
+        -:  185:  return this->cur_size_ == 0;
+        -:  186:}
+        -:  187:
+        -:  188:template <class T> ACE_INLINE int
+        -:  189:ACE_Bounded_Set<T>::is_full (void) const
+        -:  190:{
+        -:  191:  ACE_TRACE ("ACE_Bounded_Set<T>::is_full");
+        -:  192:  return this->cur_size_ == this->max_size_;
+        -:  193:}
+        -:  194:
+        -:  195:// --
+        -:  196:
+        -:  197:template <class T> ACE_INLINE int
+        -:  198:ACE_Ordered_MultiSet_Iterator<T>::first (void)
+        -:  199:{
+        -:  200:  ACE_TRACE ("ACE_Ordered_MultiSet_Iterator<T>::first");
+        -:  201:  current_ = set_.head_;
+        -:  202:
+        -:  203:  return (current_ ? 1 : 0);
+        -:  204:}
+        -:  205:
+        -:  206:template <class T> ACE_INLINE int
+        -:  207:ACE_Ordered_MultiSet_Iterator<T>::last (void)
+        -:  208:{
+        -:  209:  ACE_TRACE ("ACE_Ordered_MultiSet_Iterator<T>::last");
+        -:  210:  current_ = set_.tail_;
+        -:  211:
+        -:  212:  return (current_ ? 1 : 0);
+        -:  213:}
+        -:  214:
+        -:  215:template <class T> ACE_INLINE int
+        -:  216:ACE_Ordered_MultiSet_Iterator<T>::advance (void)
+        -:  217:{
+        -:  218:  ACE_TRACE ("ACE_Ordered_MultiSet_Iterator<T>::advance");
+        -:  219:
+        -:  220:  current_ = current_ ? current_->next_ : 0;
+        -:  221:
+        -:  222:  return (current_ ? 1 : 0);
+        -:  223:}
+        -:  224:
+        -:  225:template <class T> ACE_INLINE int
+        -:  226:ACE_Ordered_MultiSet_Iterator<T>::retreat (void)
+        -:  227:{
+        -:  228:  ACE_TRACE ("ACE_Ordered_MultiSet_Iterator<T>::retreat");
+        -:  229:
+        -:  230:  current_ = current_ ? current_->prev_ : 0;
+        -:  231:
+        -:  232:  return (current_ ? 1 : 0);
+        -:  233:}
+        -:  234:
+        -:  235:template <class T> ACE_INLINE int
+        -:  236:ACE_Ordered_MultiSet_Iterator<T>::done (void) const
+        -:  237:{
+        -:  238:  ACE_TRACE ("ACE_Ordered_MultiSet_Iterator<T>::done");
+        -:  239:
+        -:  240:  return (current_ ? 0 : 1);
+        -:  241:}
+        -:  242:
+        -:  243:template <class T> ACE_INLINE void
+        -:  244:ACE_Ordered_MultiSet_Iterator<T>::dump (void) const
+        -:  245:{
+        -:  246:#if defined (ACE_HAS_DUMP)
+        -:  247:// ACE_TRACE ("ACE_Ordered_MultiSet_Iterator<T>::dump");
+        -:  248:#endif /* ACE_HAS_DUMP */
+        -:  249:}
+        -:  250:
+        -:  251:
+        -:  252:
+        -:  253:// --
+        -:  254:
+        -:  255:template <class T> ACE_INLINE int
+        -:  256:ACE_Ordered_MultiSet<T>::is_empty (void) const
+        -:  257:{
+        -:  258:  ACE_TRACE ("ACE_Ordered_MultiSet<T>::is_empty");
+        -:  259:  return this->cur_size_ > 0 ? 0 : 1;
+        -:  260:}
+        -:  261:
+        -:  262:template <class T> ACE_INLINE size_t
+        -:  263:ACE_Ordered_MultiSet<T>::size (void) const
+        -:  264:{
+        -:  265:// ACE_TRACE ("ACE_Ordered_MultiSet<T>::size");
+        -:  266:  return this->cur_size_;
+        -:  267:}
+        -:  268:
+        -:  269:// ****************************************************************
+        -:  270:
+        -:  271:template <class T> ACE_INLINE
+        9:  272:ACE_Array<T>::ACE_Array (size_t size,
+        -:  273:                         ACE_Allocator *alloc)
+        9:  274:  : ACE_Array_Base<T> (size, alloc)
+        -:  275:{
+        9:  276:}
+        -:  277:
+        -:  278:template <class T> ACE_INLINE
+        -:  279:ACE_Array<T>::ACE_Array (size_t size,
+        -:  280:                         const T &default_value,
+        -:  281:                         ACE_Allocator *alloc)
+        -:  282:  : ACE_Array_Base<T> (size, default_value, alloc)
+        -:  283:{
+        -:  284:}
+        -:  285:
+        -:  286:// The copy constructor (performs initialization).
+        -:  287:
+        -:  288:template <class T> ACE_INLINE
+        -:  289:ACE_Array<T>::ACE_Array (const ACE_Array<T> &s)
+        -:  290:   : ACE_Array_Base<T> (s)
+        -:  291:{
+        -:  292:}
+        -:  293:
+        -:  294:// Assignment operator (performs assignment).
+        -:  295:
+        -:  296:template <class T> ACE_INLINE void
+        -:  297:ACE_Array<T>::operator= (const ACE_Array<T> &s)
+        -:  298:{
+        -:  299:  // Check for "self-assignment".
+        -:  300:
+        -:  301:  if (this != &s)
+        -:  302:    this->ACE_Array_Base<T>::operator= (s);
+        -:  303:}
+        -:  304:
+        -:  305:// Compare this array with <s> for inequality.
+        -:  306:
+        -:  307:template <class T> ACE_INLINE bool
+        -:  308:ACE_Array<T>::operator!= (const ACE_Array<T> &s) const
+        -:  309:{
+        -:  310:  return !(*this == s);
+        -:  311:}
+        -:  312:
+        -:  313:// ****************************************************************
+        -:  314:
+        -:  315:
+        -:  316:// ****************************************************************
+        -:  317:
+        -:  318:template <class T> ACE_INLINE void
+        -:  319:ACE_DLList<T>::operator= (const ACE_DLList<T> &l)
+        -:  320:{
+        -:  321:  *(ACE_DLList_Base *) this = l;
+        -:  322:}
+        -:  323:
+        -:  324:template <class T> ACE_INLINE int
+        -:  325:ACE_DLList<T>::get (T *&item, size_t index)
+        -:  326:{
+        -:  327:  ACE_DLList_Node *node;
+        -:  328:  int result = ACE_DLList_Base::get (node, index);
+        -:  329:  if (result != -1)
+        -:  330:    item = (T *) node->item_;
+        -:  331:  return result;
+        -:  332:}
+        -:  333:
+        -:  334:template <class T> ACE_INLINE void
+        -:  335:ACE_DLList<T>::dump (void) const
+        -:  336:{
+        -:  337:#if defined (ACE_HAS_DUMP)
+        -:  338:  ACE_DLList_Base::dump ();
+        -:  339:#endif /* ACE_HAS_DUMP */
+        -:  340:}
+        -:  341:
+        -:  342:template <class T> ACE_INLINE int
+        -:  343:ACE_DLList<T>::remove (ACE_DLList_Node *n)
+        -:  344:{
+        -:  345:  int result = ACE_DLList_Base::remove (n);
+        -:  346:  ACE_DES_FREE (n,
+        -:  347:                this->allocator_->free,
+        -:  348:                ACE_DLList_Node);
+        -:  349:  return result;
+        -:  350:}
+        -:  351:
+        -:  352:template <class T> ACE_INLINE
+        -:  353:ACE_DLList<T>::ACE_DLList (ACE_Allocator *alloc)
+        -:  354:  : ACE_DLList_Base (alloc)
+        -:  355:{
+        -:  356:}
+        -:  357:
+        -:  358:template <class T> ACE_INLINE
+        -:  359:ACE_DLList<T>::ACE_DLList (const ACE_DLList<T> &l)
+        -:  360:  : ACE_DLList_Base ((ACE_DLList<T> &) l)
+        -:  361:{
+        -:  362:}
+        -:  363:
+        -:  364:template <class T> ACE_INLINE
+        -:  365:ACE_DLList<T>::~ACE_DLList (void)
+        -:  366:{
+        -:  367:  while (this->delete_head ()) ;
+        -:  368:}
+        -:  369:
+        -:  370:template <class T> ACE_INLINE int
+        -:  371:ACE_DLList_Iterator<T>::remove (void)
+        -:  372:{
+        -:  373:  ACE_DLList_Node *temp = this->ACE_Double_Linked_List_Iterator <ACE_DLList_Node>::next ();
+        -:  374:  this->ACE_Double_Linked_List_Iterator <ACE_DLList_Node>::advance ();
+        -:  375:  return list_->remove (temp);
+        -:  376:}
+        -:  377:
+        -:  378:template <class T> ACE_INLINE
+        -:  379:ACE_DLList_Iterator<T>::ACE_DLList_Iterator (ACE_DLList<T> &l)
+        -:  380:  : ACE_Double_Linked_List_Iterator <ACE_DLList_Node> ((ACE_DLList_Base &)l),
+        -:  381:    list_ (&l)
+        -:  382:{
+        -:  383:}
+        -:  384:
+        -:  385:template <class T> ACE_INLINE void
+        -:  386:ACE_DLList_Iterator<T>::reset (ACE_DLList<T> &l)
+        -:  387:{
+        -:  388:  list_ = &l;
+        -:  389:  this->ACE_Double_Linked_List_Iterator <ACE_DLList_Node>::reset ((ACE_DLList_Base &)l);
+        -:  390:}
+        -:  391:
+        -:  392:template <class T> ACE_INLINE int
+        -:  393:ACE_DLList_Iterator<T>::next (T *&ptr)
+        -:  394:{
+        -:  395:  ACE_DLList_Node *temp =
+        -:  396:    ACE_Double_Linked_List_Iterator <ACE_DLList_Node>::next ();
+        -:  397:  if (temp)
+        -:  398:    ptr = (T *) temp->item_;
+        -:  399:  return temp ? 1 : 0;
+        -:  400:}
+        -:  401:
+        -:  402:template <class T> ACE_INLINE T *
+        -:  403:ACE_DLList_Iterator<T>::next (void) const
+        -:  404:{
+        -:  405:  ACE_DLList_Node *temp = ACE_Double_Linked_List_Iterator <ACE_DLList_Node>::next ();
+        -:  406:  return (T *) (temp ? temp->item_ : 0);
+        -:  407:}
+        -:  408:
+        -:  409:template <class T> ACE_INLINE int
+        -:  410:ACE_DLList_Iterator<T>::advance (void)
+        -:  411:{
+        -:  412:  return this->ACE_Double_Linked_List_Iterator <ACE_DLList_Node>::advance ();
+        -:  413:}
+        -:  414:
+        -:  415:template <class T> ACE_INLINE void
+        -:  416:ACE_DLList_Iterator<T>::dump (void) const
+        -:  417:{
+        -:  418:#if defined (ACE_HAS_DUMP)
+        -:  419:  ACE_Double_Linked_List_Iterator <ACE_DLList_Node>::dump ();
+        -:  420:#endif /* ACE_HAS_DUMP */
+        -:  421:}
+        -:  422:
+        -:  423:
+        -:  424:template <class T> ACE_INLINE int
+        -:  425:ACE_DLList_Reverse_Iterator<T>::remove (void)
+        -:  426:{
+        -:  427:  ACE_DLList_Node *temp = ACE_Double_Linked_List_Reverse_Iterator <ACE_DLList_Node>::next ();
+        -:  428:  this->ACE_Double_Linked_List_Reverse_Iterator <ACE_DLList_Node>::advance ();
+        -:  429:  return list_->remove (temp);
+        -:  430:}
+        -:  431:
+        -:  432:template <class T> ACE_INLINE
+        -:  433:ACE_DLList_Reverse_Iterator<T>::ACE_DLList_Reverse_Iterator (ACE_DLList<T> &l)
+        -:  434:  : ACE_Double_Linked_List_Reverse_Iterator <ACE_DLList_Node> ((ACE_DLList_Base &)l),
+        -:  435:    list_ (&l)
+        -:  436:{
+        -:  437:}
+        -:  438:
+        -:  439:template <class T> ACE_INLINE void
+        -:  440:ACE_DLList_Reverse_Iterator<T>::reset (ACE_DLList<T> &l)
+        -:  441:{
+        -:  442:  list_ = &l;
+        -:  443:  this->ACE_Double_Linked_List_Reverse_Iterator <ACE_DLList_Node>::reset ((ACE_DLList_Base &)l);
+        -:  444:}
+        -:  445:
+        -:  446:template <class T> ACE_INLINE int
+        -:  447:ACE_DLList_Reverse_Iterator<T>::advance (void)
+        -:  448:{
+        -:  449:  return ACE_Double_Linked_List_Reverse_Iterator <ACE_DLList_Node>::advance ();
+        -:  450:}
+        -:  451:
+        -:  452:template <class T> ACE_INLINE int
+        -:  453:ACE_DLList_Reverse_Iterator<T>::next (T *&ptr)
+        -:  454:{
+        -:  455:  ACE_DLList_Node *temp =
+        -:  456:    ACE_Double_Linked_List_Reverse_Iterator <ACE_DLList_Node>::next ();
+        -:  457:  if (temp == 0)
+        -:  458:    return 0;
+        -:  459:  ptr = (T *) temp->item_;
+        -:  460:  return 1;
+        -:  461:}
+        -:  462:
+        -:  463:template <class T> ACE_INLINE T *
+        -:  464:ACE_DLList_Reverse_Iterator<T>::next (void) const
+        -:  465:{
+        -:  466:  ACE_DLList_Node *temp = ACE_Double_Linked_List_Reverse_Iterator <ACE_DLList_Node>::next ();
+        -:  467:  return (T *) (temp ? temp->item_ : 0);
+        -:  468:}
+        -:  469:
+        -:  470:
+        -:  471:template <class T> ACE_INLINE void
+        -:  472:ACE_DLList_Reverse_Iterator<T>::dump (void) const
+        -:  473:{
+        -:  474:#if defined (ACE_HAS_DUMP)
+        -:  475:  ACE_Double_Linked_List_Reverse_Iterator <ACE_DLList_Node>::dump ();
+        -:  476:#endif /* ACE_HAS_DUMP */
+        -:  477:}
+        -:  478:
+        -:  479:ACE_END_VERSIONED_NAMESPACE_DECL

@@ -1,0 +1,1148 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+114c114
+<     #####:  112:    _S_minimum(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+---
+>         -:  112:    _S_minimum(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+116,117c116,117
+<     #####:  114:      while (__x->_M_left != 0) __x = __x->_M_left;
+<     #####:  115:      return __x;
+---
+>         -:  114:      while (__x->_M_left != 0) __x = __x->_M_left;
+>         -:  115:      return __x;
+128c128
+<     #####:  126:    _S_maximum(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+---
+>         -:  126:    _S_maximum(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+130,131c130,131
+<     #####:  128:      while (__x->_M_right != 0) __x = __x->_M_right;
+<     #####:  129:      return __x;
+---
+>         -:  128:      while (__x->_M_right != 0) __x = __x->_M_right;
+>         -:  129:      return __x;
+148c148
+<         4:  146:      _Rb_tree_key_compare()
+---
+>     #####:  146:      _Rb_tree_key_compare()
+152c152
+<         4:  150:      { }
+---
+>     #####:  150:      { }
+154c154
+<     #####:  152:      _Rb_tree_key_compare(const _Key_compare& __comp)
+---
+>         -:  152:      _Rb_tree_key_compare(const _Key_compare& __comp)
+156c156
+<     #####:  154:      { }
+---
+>         -:  154:      { }
+236,237c236,237
+<       331:  234:      _M_valptr()
+<       331:  235:      { return _M_storage._M_ptr(); }
+---
+>     #####:  234:      _M_valptr()
+>     #####:  235:      { return _M_storage._M_ptr(); }
+240,241c240,241
+<       258:  238:      _M_valptr() const
+<       258:  239:      { return _M_storage._M_ptr(); }
+---
+>     #####:  238:      _M_valptr() const
+>     #####:  239:      { return _M_storage._M_ptr(); }
+271,272c271,272
+<     #####:  269:      _Rb_tree_iterator() _GLIBCXX_NOEXCEPT
+<     #####:  270:      : _M_node() { }
+---
+>         -:  269:      _Rb_tree_iterator() _GLIBCXX_NOEXCEPT
+>         -:  270:      : _M_node() { }
+275,276c275,276
+<       911:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+<       911:  274:      : _M_node(__x) { }
+---
+>     #####:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+>     #####:  274:      : _M_node(__x) { }
+279,280c279,280
+<        52:  277:      operator*() const _GLIBCXX_NOEXCEPT
+<        52:  278:      { return *static_cast<_Link_type>(_M_node)->_M_valptr(); }
+---
+>     #####:  277:      operator*() const _GLIBCXX_NOEXCEPT
+>     #####:  278:      { return *static_cast<_Link_type>(_M_node)->_M_valptr(); }
+283,284c283,284
+<       128:  281:      operator->() const _GLIBCXX_NOEXCEPT
+<       128:  282:      { return static_cast<_Link_type> (_M_node)->_M_valptr(); }
+---
+>     #####:  281:      operator->() const _GLIBCXX_NOEXCEPT
+>     #####:  282:      { return static_cast<_Link_type> (_M_node)->_M_valptr(); }
+287c287
+<        62:  285:      operator++() _GLIBCXX_NOEXCEPT
+---
+>     #####:  285:      operator++() _GLIBCXX_NOEXCEPT
+289,290c289,290
+<        62:  287:	_M_node = _Rb_tree_increment(_M_node);
+<        62:  288:	return *this;
+---
+>     #####:  287:	_M_node = _Rb_tree_increment(_M_node);
+>     #####:  288:	return *this;
+294c294
+<     #####:  292:      operator++(int) _GLIBCXX_NOEXCEPT
+---
+>         -:  292:      operator++(int) _GLIBCXX_NOEXCEPT
+296,298c296,298
+<     #####:  294:	_Self __tmp = *this;
+<     #####:  295:	_M_node = _Rb_tree_increment(_M_node);
+<     #####:  296:	return __tmp;
+---
+>         -:  294:	_Self __tmp = *this;
+>         -:  295:	_M_node = _Rb_tree_increment(_M_node);
+>         -:  296:	return __tmp;
+317,318c317,318
+<       222:  315:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+<       222:  316:      { return _M_node == __x._M_node; }
+---
+>     #####:  315:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+>     #####:  316:      { return _M_node == __x._M_node; }
+321,322c321,322
+<       180:  319:      operator!=(const _Self& __x) const _GLIBCXX_NOEXCEPT
+<       180:  320:      { return _M_node != __x._M_node; }
+---
+>     #####:  319:      operator!=(const _Self& __x) const _GLIBCXX_NOEXCEPT
+>     #####:  320:      { return _M_node != __x._M_node; }
+347,348c347,348
+<       108:  345:      _Rb_tree_const_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+<       108:  346:      : _M_node(__x) { }
+---
+>     #####:  345:      _Rb_tree_const_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+>     #####:  346:      : _M_node(__x) { }
+350,351c350,351
+<       128:  348:      _Rb_tree_const_iterator(const iterator& __it) _GLIBCXX_NOEXCEPT
+<       128:  349:      : _M_node(__it._M_node) { }
+---
+>     #####:  348:      _Rb_tree_const_iterator(const iterator& __it) _GLIBCXX_NOEXCEPT
+>     #####:  349:      : _M_node(__it._M_node) { }
+354,355c354,355
+<        36:  352:      _M_const_cast() const _GLIBCXX_NOEXCEPT
+<        36:  353:      { return iterator(const_cast<typename iterator::_Base_ptr>(_M_node)); }
+---
+>     #####:  352:      _M_const_cast() const _GLIBCXX_NOEXCEPT
+>     #####:  353:      { return iterator(const_cast<typename iterator::_Base_ptr>(_M_node)); }
+358,359c358,359
+<     #####:  356:      operator*() const _GLIBCXX_NOEXCEPT
+<     #####:  357:      { return *static_cast<_Link_type>(_M_node)->_M_valptr(); }
+---
+>         -:  356:      operator*() const _GLIBCXX_NOEXCEPT
+>         -:  357:      { return *static_cast<_Link_type>(_M_node)->_M_valptr(); }
+362,363c362,363
+<        18:  360:      operator->() const _GLIBCXX_NOEXCEPT
+<        18:  361:      { return static_cast<_Link_type>(_M_node)->_M_valptr(); }
+---
+>     #####:  360:      operator->() const _GLIBCXX_NOEXCEPT
+>     #####:  361:      { return static_cast<_Link_type>(_M_node)->_M_valptr(); }
+373c373
+<         1:  371:      operator++(int) _GLIBCXX_NOEXCEPT
+---
+>         -:  371:      operator++(int) _GLIBCXX_NOEXCEPT
+375,377c375,377
+<         1:  373:	_Self __tmp = *this;
+<         1:  374:	_M_node = _Rb_tree_increment(_M_node);
+<         1:  375:	return __tmp;
+---
+>         -:  373:	_Self __tmp = *this;
+>         -:  374:	_M_node = _Rb_tree_increment(_M_node);
+>         -:  375:	return __tmp;
+381c381
+<     #####:  379:      operator--() _GLIBCXX_NOEXCEPT
+---
+>         -:  379:      operator--() _GLIBCXX_NOEXCEPT
+383,384c383,384
+<     #####:  381:	_M_node = _Rb_tree_decrement(_M_node);
+<     #####:  382:	return *this;
+---
+>         -:  381:	_M_node = _Rb_tree_decrement(_M_node);
+>         -:  382:	return *this;
+396,397c396,397
+<        90:  394:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+<        90:  395:      { return _M_node == __x._M_node; }
+---
+>     #####:  394:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+>     #####:  395:      { return _M_node == __x._M_node; }
+400,401c400,401
+<        14:  398:      operator!=(const _Self& __x) const _GLIBCXX_NOEXCEPT
+<        14:  399:      { return _M_node != __x._M_node; }
+---
+>     #####:  398:      operator!=(const _Self& __x) const _GLIBCXX_NOEXCEPT
+>     #####:  399:      { return _M_node != __x._M_node; }
+464,465c464,465
+<         8:  462:	_Reuse_or_alloc_node(_Rb_tree& __t)
+<         8:  463:	  : _M_root(__t._M_root()), _M_nodes(__t._M_rightmost()), _M_t(__t)
+---
+>         -:  462:	_Reuse_or_alloc_node(_Rb_tree& __t)
+>         -:  463:	  : _M_root(__t._M_root()), _M_nodes(__t._M_rightmost()), _M_t(__t)
+467c467
+<         8:  465:	  if (_M_root)
+---
+>         -:  465:	  if (_M_root)
+469c469
+<     #####:  467:	      _M_root->_M_parent = 0;
+---
+>         -:  467:	      _M_root->_M_parent = 0;
+471,472c471,472
+<     #####:  469:	      if (_M_nodes->_M_left)
+<     #####:  470:		_M_nodes = _M_nodes->_M_left;
+---
+>         -:  469:	      if (_M_nodes->_M_left)
+>         -:  470:		_M_nodes = _M_nodes->_M_left;
+475,476c475,476
+<         8:  473:	    _M_nodes = 0;
+<         8:  474:	}
+---
+>         -:  473:	    _M_nodes = 0;
+>         -:  474:	}
+482,483c482,483
+<         8:  480:	~_Reuse_or_alloc_node()
+<         8:  481:	{ _M_t._M_erase(static_cast<_Link_type>(_M_root)); }
+---
+>         -:  480:	~_Reuse_or_alloc_node()
+>         -:  481:	{ _M_t._M_erase(static_cast<_Link_type>(_M_root)); }
+490c490
+<     #####:  488:	  operator()(_Arg&& __arg)
+---
+>         -:  488:	  operator()(_Arg&& __arg)
+493,494c493,494
+<     #####:  491:	    _Link_type __node = static_cast<_Link_type>(_M_extract());
+<     #####:  492:	    if (__node)
+---
+>         -:  491:	    _Link_type __node = static_cast<_Link_type>(_M_extract());
+>         -:  492:	    if (__node)
+496,498c496,498
+<     #####:  494:		_M_t._M_destroy_node(__node);
+<     #####:  495:		_M_t._M_construct_node(__node, _GLIBCXX_FORWARD(_Arg, __arg));
+<     #####:  496:		return __node;
+---
+>         -:  494:		_M_t._M_destroy_node(__node);
+>         -:  495:		_M_t._M_construct_node(__node, _GLIBCXX_FORWARD(_Arg, __arg));
+>         -:  496:		return __node;
+501c501
+<     #####:  499:	    return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg));
+---
+>         -:  499:	    return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg));
+506c506
+<     #####:  504:	_M_extract()
+---
+>         -:  504:	_M_extract()
+508,509c508,509
+<     #####:  506:	  if (!_M_nodes)
+<     #####:  507:	    return _M_nodes;
+---
+>         -:  506:	  if (!_M_nodes)
+>         -:  507:	    return _M_nodes;
+511,513c511,513
+<     #####:  509:	  _Base_ptr __node = _M_nodes;
+<     #####:  510:	  _M_nodes = _M_nodes->_M_parent;
+<     #####:  511:	  if (_M_nodes)
+---
+>         -:  509:	  _Base_ptr __node = _M_nodes;
+>         -:  510:	  _M_nodes = _M_nodes->_M_parent;
+>         -:  511:	  if (_M_nodes)
+515c515
+<     #####:  513:	      if (_M_nodes->_M_right == __node)
+---
+>         -:  513:	      if (_M_nodes->_M_right == __node)
+517c517
+<     #####:  515:		  _M_nodes->_M_right = 0;
+---
+>         -:  515:		  _M_nodes->_M_right = 0;
+519c519
+<     #####:  517:		  if (_M_nodes->_M_left)
+---
+>         -:  517:		  if (_M_nodes->_M_left)
+521c521
+<     #####:  519:		      _M_nodes = _M_nodes->_M_left;
+---
+>         -:  519:		      _M_nodes = _M_nodes->_M_left;
+523,524c523,524
+<     #####:  521:		      while (_M_nodes->_M_right)
+<     #####:  522:			_M_nodes = _M_nodes->_M_right;
+---
+>         -:  521:		      while (_M_nodes->_M_right)
+>         -:  522:			_M_nodes = _M_nodes->_M_right;
+526,527c526,527
+<     #####:  524:		      if (_M_nodes->_M_left)
+<     #####:  525:			_M_nodes = _M_nodes->_M_left;
+---
+>         -:  524:		      if (_M_nodes->_M_left)
+>         -:  525:			_M_nodes = _M_nodes->_M_left;
+531c531
+<     #####:  529:		_M_nodes->_M_left = 0;
+---
+>         -:  529:		_M_nodes->_M_left = 0;
+534c534
+<     #####:  532:	    _M_root = 0;
+---
+>         -:  532:	    _M_root = 0;
+536c536
+<     #####:  534:	  return __node;
+---
+>         -:  534:	  return __node;
+548,549c548,549
+<        25:  546:	_Alloc_node(_Rb_tree& __t)
+<        25:  547:	  : _M_t(__t) { }
+---
+>         -:  546:	_Alloc_node(_Rb_tree& __t)
+>         -:  547:	  : _M_t(__t) { }
+556c556
+<        25:  554:	  operator()(_Arg&& __arg) const
+---
+>         -:  554:	  operator()(_Arg&& __arg) const
+558c558
+<        25:  556:	  { return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg)); }
+---
+>         -:  556:	  { return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg)); }
+576,577c576,577
+<       316:  574:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
+<       316:  575:      { return *static_cast<_Node_allocator*>(&this->_M_impl); }
+---
+>     #####:  574:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
+>     #####:  575:      { return *static_cast<_Node_allocator*>(&this->_M_impl); }
+580,581c580,581
+<     #####:  578:      _M_get_Node_allocator() const _GLIBCXX_NOEXCEPT
+<     #####:  579:      { return *static_cast<const _Node_allocator*>(&this->_M_impl); }
+---
+>         -:  578:      _M_get_Node_allocator() const _GLIBCXX_NOEXCEPT
+>         -:  579:      { return *static_cast<const _Node_allocator*>(&this->_M_impl); }
+589,590c589,590
+<        81:  587:      _M_get_node()
+<        81:  588:      { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
+---
+>     #####:  587:      _M_get_node()
+>     #####:  588:      { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
+593,594c593,594
+<        77:  591:      _M_put_node(_Link_type __p) _GLIBCXX_NOEXCEPT
+<        77:  592:      { _Alloc_traits::deallocate(_M_get_Node_allocator(), __p, 1); }
+---
+>     #####:  591:      _M_put_node(_Link_type __p) _GLIBCXX_NOEXCEPT
+>     #####:  592:      { _Alloc_traits::deallocate(_M_get_Node_allocator(), __p, 1); }
+623c623
+<        81:  621:	_M_construct_node(_Link_type __node, _Args&&... __args)
+---
+>     #####:  621:	_M_construct_node(_Link_type __node, _Args&&... __args)
+627,628c627,628
+<        81:  625:	      ::new(__node) _Rb_tree_node<_Val>;
+<        81:  626:	      _Alloc_traits::construct(_M_get_Node_allocator(),
+---
+>     #####:  625:	      ::new(__node) _Rb_tree_node<_Val>;
+>     #####:  626:	      _Alloc_traits::construct(_M_get_Node_allocator(),
+638c638
+<        81:  636:	}
+---
+>     #####:  636:	}
+642c642
+<        81:  640:        _M_create_node(_Args&&... __args)
+---
+>     #####:  640:        _M_create_node(_Args&&... __args)
+644,646c644,646
+<        81:  642:	  _Link_type __tmp = _M_get_node();
+<        81:  643:	  _M_construct_node(__tmp, std::forward<_Args>(__args)...);
+<        81:  644:	  return __tmp;
+---
+>     #####:  642:	  _Link_type __tmp = _M_get_node();
+>     #####:  643:	  _M_construct_node(__tmp, std::forward<_Args>(__args)...);
+>     #####:  644:	  return __tmp;
+650c650
+<        77:  648:      _M_destroy_node(_Link_type __p) noexcept
+---
+>     #####:  648:      _M_destroy_node(_Link_type __p) noexcept
+652c652
+<        77:  650:	_Alloc_traits::destroy(_M_get_Node_allocator(), __p->_M_valptr());
+---
+>     #####:  650:	_Alloc_traits::destroy(_M_get_Node_allocator(), __p->_M_valptr());
+654c654
+<        77:  652:      }
+---
+>     #####:  652:      }
+658c658
+<        77:  656:      _M_drop_node(_Link_type __p) _GLIBCXX_NOEXCEPT
+---
+>     #####:  656:      _M_drop_node(_Link_type __p) _GLIBCXX_NOEXCEPT
+660,662c660,662
+<        77:  658:	_M_destroy_node(__p);
+<        77:  659:	_M_put_node(__p);
+<        77:  660:      }
+---
+>     #####:  658:	_M_destroy_node(__p);
+>     #####:  659:	_M_put_node(__p);
+>     #####:  660:      }
+666c666
+<     #####:  664:	_M_clone_node(_Const_Link_type __x, _NodeGen& __node_gen)
+---
+>         -:  664:	_M_clone_node(_Const_Link_type __x, _NodeGen& __node_gen)
+668,672c668,672
+<     #####:  666:	  _Link_type __tmp = __node_gen(*__x->_M_valptr());
+<     #####:  667:	  __tmp->_M_color = __x->_M_color;
+<     #####:  668:	  __tmp->_M_left = 0;
+<     #####:  669:	  __tmp->_M_right = 0;
+<     #####:  670:	  return __tmp;
+---
+>         -:  666:	  _Link_type __tmp = __node_gen(*__x->_M_valptr());
+>         -:  667:	  __tmp->_M_color = __x->_M_color;
+>         -:  668:	  __tmp->_M_left = 0;
+>         -:  669:	  __tmp->_M_right = 0;
+>         -:  670:	  return __tmp;
+679c679
+<       164:  677:        struct _Rb_tree_impl
+---
+>     #####:  677:        struct _Rb_tree_impl
+690c690
+<       168:  688:	  _Rb_tree_impl() = default;
+---
+>     #####:  688:	  _Rb_tree_impl() = default;
+694c694
+<     #####:  692:	  _Rb_tree_impl(const _Rb_tree_impl& __x)
+---
+>         -:  692:	  _Rb_tree_impl(const _Rb_tree_impl& __x)
+696,697c696,697
+<     #####:  694:	  , _Base_key_compare(__x._M_key_compare)
+<     #####:  695:	  { }
+---
+>         -:  694:	  , _Base_key_compare(__x._M_key_compare)
+>         -:  695:	  { }
+714,715c714,715
+<         8:  712:      _M_root() _GLIBCXX_NOEXCEPT
+<         8:  713:      { return this->_M_impl._M_header._M_parent; }
+---
+>         -:  712:      _M_root() _GLIBCXX_NOEXCEPT
+>         -:  713:      { return this->_M_impl._M_header._M_parent; }
+718,719c718,719
+<         8:  716:      _M_root() const _GLIBCXX_NOEXCEPT
+<         8:  717:      { return this->_M_impl._M_header._M_parent; }
+---
+>         -:  716:      _M_root() const _GLIBCXX_NOEXCEPT
+>         -:  717:      { return this->_M_impl._M_header._M_parent; }
+730,731c730,731
+<        24:  728:      _M_rightmost() _GLIBCXX_NOEXCEPT
+<        24:  729:      { return this->_M_impl._M_header._M_right; }
+---
+>     #####:  728:      _M_rightmost() _GLIBCXX_NOEXCEPT
+>     #####:  729:      { return this->_M_impl._M_header._M_right; }
+738,739c738,739
+<       457:  736:      _M_begin() _GLIBCXX_NOEXCEPT
+<       457:  737:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
+---
+>     #####:  736:      _M_begin() _GLIBCXX_NOEXCEPT
+>     #####:  737:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
+742c742
+<        31:  740:      _M_begin() const _GLIBCXX_NOEXCEPT
+---
+>     #####:  740:      _M_begin() const _GLIBCXX_NOEXCEPT
+745c745
+<        31:  743:	  (this->_M_impl._M_header._M_parent);
+---
+>     #####:  743:	  (this->_M_impl._M_header._M_parent);
+749,750c749,750
+<       316:  747:      _M_end() _GLIBCXX_NOEXCEPT
+<       316:  748:      { return &this->_M_impl._M_header; }
+---
+>     #####:  747:      _M_end() _GLIBCXX_NOEXCEPT
+>     #####:  748:      { return &this->_M_impl._M_header; }
+753,754c753,754
+<        31:  751:      _M_end() const _GLIBCXX_NOEXCEPT
+<        31:  752:      { return &this->_M_impl._M_header; }
+---
+>     #####:  751:      _M_end() const _GLIBCXX_NOEXCEPT
+>     #####:  752:      { return &this->_M_impl._M_header; }
+757,758c757,758
+<       173:  755:      _S_value(_Const_Link_type __x)
+<       173:  756:      { return *__x->_M_valptr(); }
+---
+>     #####:  755:      _S_value(_Const_Link_type __x)
+>     #####:  756:      { return *__x->_M_valptr(); }
+761,762c761,762
+<       173:  759:      _S_key(_Const_Link_type __x)
+<       173:  760:      { return _KeyOfValue()(_S_value(__x)); }
+---
+>     #####:  759:      _S_key(_Const_Link_type __x)
+>     #####:  760:      { return _KeyOfValue()(_S_value(__x)); }
+765,766c765,766
+<       119:  763:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+<       119:  764:      { return static_cast<_Link_type>(__x->_M_left); }
+---
+>     #####:  763:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+>     #####:  764:      { return static_cast<_Link_type>(__x->_M_left); }
+769,770c769,770
+<        16:  767:      _S_left(_Const_Base_ptr __x) _GLIBCXX_NOEXCEPT
+<        16:  768:      { return static_cast<_Const_Link_type>(__x->_M_left); }
+---
+>     #####:  767:      _S_left(_Const_Base_ptr __x) _GLIBCXX_NOEXCEPT
+>     #####:  768:      { return static_cast<_Const_Link_type>(__x->_M_left); }
+773,774c773,774
+<        85:  771:      _S_right(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+<        85:  772:      { return static_cast<_Link_type>(__x->_M_right); }
+---
+>     #####:  771:      _S_right(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+>     #####:  772:      { return static_cast<_Link_type>(__x->_M_right); }
+777,778c777,778
+<        12:  775:      _S_right(_Const_Base_ptr __x) _GLIBCXX_NOEXCEPT
+<        12:  776:      { return static_cast<_Const_Link_type>(__x->_M_right); }
+---
+>     #####:  775:      _S_right(_Const_Base_ptr __x) _GLIBCXX_NOEXCEPT
+>     #####:  776:      { return static_cast<_Const_Link_type>(__x->_M_right); }
+781,782c781,782
+<        67:  779:      _S_value(_Const_Base_ptr __x)
+<        67:  780:      { return *static_cast<_Const_Link_type>(__x)->_M_valptr(); }
+---
+>     #####:  779:      _S_value(_Const_Base_ptr __x)
+>     #####:  780:      { return *static_cast<_Const_Link_type>(__x)->_M_valptr(); }
+785,786c785,786
+<        67:  783:      _S_key(_Const_Base_ptr __x)
+<        67:  784:      { return _KeyOfValue()(_S_value(__x)); }
+---
+>     #####:  783:      _S_key(_Const_Base_ptr __x)
+>     #####:  784:      { return _KeyOfValue()(_S_value(__x)); }
+789,790c789,790
+<     #####:  787:      _S_minimum(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+<     #####:  788:      { return _Rb_tree_node_base::_S_minimum(__x); }
+---
+>         -:  787:      _S_minimum(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+>         -:  788:      { return _Rb_tree_node_base::_S_minimum(__x); }
+797,798c797,798
+<     #####:  795:      _S_maximum(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+<     #####:  796:      { return _Rb_tree_node_base::_S_maximum(__x); }
+---
+>         -:  795:      _S_maximum(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+>         -:  796:      { return _Rb_tree_node_base::_S_maximum(__x); }
+875c875
+<     #####:  873:	_M_copy(const _Rb_tree& __x, _NodeGen& __gen)
+---
+>         -:  873:	_M_copy(const _Rb_tree& __x, _NodeGen& __gen)
+877,881c877,881
+<     #####:  875:	  _Link_type __root = _M_copy(__x._M_begin(), _M_end(), __gen);
+<     #####:  876:	  _M_leftmost() = _S_minimum(__root);
+<     #####:  877:	  _M_rightmost() = _S_maximum(__root);
+<     #####:  878:	  _M_impl._M_node_count = __x._M_impl._M_node_count;
+<     #####:  879:	  return __root;
+---
+>         -:  875:	  _Link_type __root = _M_copy(__x._M_begin(), _M_end(), __gen);
+>         -:  876:	  _M_leftmost() = _S_minimum(__root);
+>         -:  877:	  _M_rightmost() = _S_maximum(__root);
+>         -:  878:	  _M_impl._M_node_count = __x._M_impl._M_node_count;
+>         -:  879:	  return __root;
+885c885
+<     #####:  883:      _M_copy(const _Rb_tree& __x)
+---
+>         -:  883:      _M_copy(const _Rb_tree& __x)
+887,888c887,888
+<     #####:  885:	_Alloc_node __an(*this);
+<     #####:  886:	return _M_copy(__x, __an);
+---
+>         -:  885:	_Alloc_node __an(*this);
+>         -:  886:	return _M_copy(__x, __an);
+915c915
+<       168:  913:      _Rb_tree() = default;
+---
+>     #####:  913:      _Rb_tree() = default;
+922,923c922,923
+<     #####:  920:      _Rb_tree(const _Rb_tree& __x)
+<     #####:  921:      : _M_impl(__x._M_impl)
+---
+>         -:  920:      _Rb_tree(const _Rb_tree& __x)
+>         -:  921:      : _M_impl(__x._M_impl)
+925,927c925,927
+<     #####:  923:	if (__x._M_root() != 0)
+<     #####:  924:	  _M_root() = _M_copy(__x);
+<     #####:  925:      }
+---
+>         -:  923:	if (__x._M_root() != 0)
+>         -:  924:	  _M_root() = _M_copy(__x);
+>         -:  925:      }
+950,951c950,951
+<       164:  948:      ~_Rb_tree() _GLIBCXX_NOEXCEPT
+<       164:  949:      { _M_erase(_M_begin()); }
+---
+>     #####:  948:      ~_Rb_tree() _GLIBCXX_NOEXCEPT
+>     #####:  949:      { _M_erase(_M_begin()); }
+958,959c958,959
+<         8:  956:      key_comp() const
+<         8:  957:      { return _M_impl._M_key_compare; }
+---
+>     #####:  956:      key_comp() const
+>     #####:  957:      { return _M_impl._M_key_compare; }
+962,963c962,963
+<       195:  960:      begin() _GLIBCXX_NOEXCEPT
+<       195:  961:      { return iterator(this->_M_impl._M_header._M_left); }
+---
+>     #####:  960:      begin() _GLIBCXX_NOEXCEPT
+>     #####:  961:      { return iterator(this->_M_impl._M_header._M_left); }
+966,967c966,967
+<     #####:  964:      begin() const _GLIBCXX_NOEXCEPT
+<     #####:  965:      { return const_iterator(this->_M_impl._M_header._M_left); }
+---
+>         -:  964:      begin() const _GLIBCXX_NOEXCEPT
+>         -:  965:      { return const_iterator(this->_M_impl._M_header._M_left); }
+970,971c970,971
+<       385:  968:      end() _GLIBCXX_NOEXCEPT
+<       385:  969:      { return iterator(&this->_M_impl._M_header); }
+---
+>     #####:  968:      end() _GLIBCXX_NOEXCEPT
+>     #####:  969:      { return iterator(&this->_M_impl._M_header); }
+974,975c974,975
+<        77:  972:      end() const _GLIBCXX_NOEXCEPT
+<        77:  973:      { return const_iterator(&this->_M_impl._M_header); }
+---
+>     #####:  972:      end() const _GLIBCXX_NOEXCEPT
+>     #####:  973:      { return const_iterator(&this->_M_impl._M_header); }
+982,983c982,983
+<     #####:  980:      rbegin() const _GLIBCXX_NOEXCEPT
+<     #####:  981:      { return const_reverse_iterator(end()); }
+---
+>         -:  980:      rbegin() const _GLIBCXX_NOEXCEPT
+>         -:  981:      { return const_reverse_iterator(end()); }
+994,995c994,995
+<        60:  992:      empty() const _GLIBCXX_NOEXCEPT
+<        60:  993:      { return _M_impl._M_node_count == 0; }
+---
+>         -:  992:      empty() const _GLIBCXX_NOEXCEPT
+>         -:  993:      { return _M_impl._M_node_count == 0; }
+998,999c998,999
+<        86:  996:      size() const _GLIBCXX_NOEXCEPT 
+<        86:  997:      { return _M_impl._M_node_count; }
+---
+>     #####:  996:      size() const _GLIBCXX_NOEXCEPT 
+>     #####:  997:      { return _M_impl._M_node_count; }
+1122c1122
+<        12: 1120:      erase(iterator __position)
+---
+>         -: 1120:      erase(iterator __position)
+1125,1128c1125,1128
+<        12: 1123:	iterator __result = __position;
+<        12: 1124:	++__result;
+<        12: 1125:	_M_erase_aux(__position);
+<        12: 1126:	return __result;
+---
+>         -: 1123:	iterator __result = __position;
+>         -: 1124:	++__result;
+>         -: 1125:	_M_erase_aux(__position);
+>         -: 1126:	return __result;
+1171c1171
+<       108: 1169:      clear() _GLIBCXX_NOEXCEPT
+---
+>     #####: 1169:      clear() _GLIBCXX_NOEXCEPT
+1173,1175c1173,1175
+<       108: 1171:        _M_erase(_M_begin());
+<       108: 1172:	_M_impl._M_reset();
+<       108: 1173:      }
+---
+>     #####: 1171:        _M_erase(_M_begin());
+>     #####: 1172:	_M_impl._M_reset();
+>     #####: 1173:      }
+1188,1189c1188,1189
+<        44: 1186:      lower_bound(const key_type& __k)
+<        44: 1187:      { return _M_lower_bound(_M_begin(), _M_end(), __k); }
+---
+>     #####: 1186:      lower_bound(const key_type& __k)
+>     #####: 1187:      { return _M_lower_bound(_M_begin(), _M_end(), __k); }
+1192,1193c1192,1193
+<     #####: 1190:      lower_bound(const key_type& __k) const
+<     #####: 1191:      { return _M_lower_bound(_M_begin(), _M_end(), __k); }
+---
+>         -: 1190:      lower_bound(const key_type& __k) const
+>         -: 1191:      { return _M_lower_bound(_M_begin(), _M_end(), __k); }
+1702c1702
+<         8: 1700:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 1700:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+1705c1705
+<         8: 1703:      if (this != &__x)
+---
+>         -: 1703:      if (this != &__x)
+1709c1709
+<         8: 1707:	  if (_Alloc_traits::_S_propagate_on_copy_assign())
+---
+>         -: 1707:	  if (_Alloc_traits::_S_propagate_on_copy_assign())
+1711,1714c1711,1714
+<     #####: 1709:	      auto& __this_alloc = this->_M_get_Node_allocator();
+<     #####: 1710:	      auto& __that_alloc = __x._M_get_Node_allocator();
+<     #####: 1711:	      if (!_Alloc_traits::_S_always_equal()
+<     #####: 1712:		  && __this_alloc != __that_alloc)
+---
+>         -: 1709:	      auto& __this_alloc = this->_M_get_Node_allocator();
+>         -: 1710:	      auto& __that_alloc = __x._M_get_Node_allocator();
+>         -: 1711:	      if (!_Alloc_traits::_S_always_equal()
+>         -: 1712:		  && __this_alloc != __that_alloc)
+1718,1719c1718,1719
+<     #####: 1716:		  clear();
+<     #####: 1717:		  std::__alloc_on_copy(__this_alloc, __that_alloc);
+---
+>         -: 1716:		  clear();
+>         -: 1717:		  std::__alloc_on_copy(__this_alloc, __that_alloc);
+1724,1725c1724,1725
+<        16: 1722:	  _Reuse_or_alloc_node __roan(*this);
+<         8: 1723:	  _M_impl._M_reset();
+---
+>         -: 1722:	  _Reuse_or_alloc_node __roan(*this);
+>         -: 1723:	  _M_impl._M_reset();
+1727,1728c1727,1728
+<         8: 1725:	  if (__x._M_root() != 0)
+<     #####: 1726:	    _M_root() = _M_copy(__x, __roan);
+---
+>         -: 1725:	  if (__x._M_root() != 0)
+>         -: 1726:	    _M_root() = _M_copy(__x, __roan);
+1731c1731
+<         8: 1729:      return *this;
+---
+>         -: 1729:      return *this;
+1742c1742
+<        25: 1740:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 1740:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+1751,1752c1751,1752
+<        50: 1749:	bool __insert_left = (__x != 0 || __p == _M_end()
+<        51: 1750:			      || _M_impl._M_key_compare(_KeyOfValue()(__v),
+---
+>         -: 1749:	bool __insert_left = (__x != 0 || __p == _M_end()
+>         -: 1750:			      || _M_impl._M_key_compare(_KeyOfValue()(__v),
+1755c1755
+<        25: 1753:	_Link_type __z = __node_gen(_GLIBCXX_FORWARD(_Arg, __v));
+---
+>         -: 1753:	_Link_type __z = __node_gen(_GLIBCXX_FORWARD(_Arg, __v));
+1757c1757
+<        25: 1755:	_Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
+---
+>         -: 1755:	_Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
+1759,1760c1759,1760
+<        25: 1757:	++_M_impl._M_node_count;
+<        25: 1758:	return iterator(__z);
+---
+>         -: 1757:	++_M_impl._M_node_count;
+>         -: 1758:	return iterator(__z);
+1816c1816
+<     #####: 1814:      _Rb_tree<_Key, _Val, _KoV, _Compare, _Alloc>::
+---
+>         -: 1814:      _Rb_tree<_Key, _Val, _KoV, _Compare, _Alloc>::
+1820,1821c1820,1821
+<     #####: 1818:	_Link_type __top = _M_clone_node(__x, __node_gen);
+<     #####: 1819:	__top->_M_parent = __p;
+---
+>         -: 1818:	_Link_type __top = _M_clone_node(__x, __node_gen);
+>         -: 1819:	__top->_M_parent = __p;
+1825,1828c1825,1828
+<     #####: 1823:	    if (__x->_M_right)
+<     #####: 1824:	      __top->_M_right = _M_copy(_S_right(__x), __top, __node_gen);
+<     #####: 1825:	    __p = __top;
+<     #####: 1826:	    __x = _S_left(__x);
+---
+>         -: 1823:	    if (__x->_M_right)
+>         -: 1824:	      __top->_M_right = _M_copy(_S_right(__x), __top, __node_gen);
+>         -: 1825:	    __p = __top;
+>         -: 1826:	    __x = _S_left(__x);
+1830c1830
+<     #####: 1828:	    while (__x != 0)
+---
+>         -: 1828:	    while (__x != 0)
+1832,1838c1832,1838
+<     #####: 1830:		_Link_type __y = _M_clone_node(__x, __node_gen);
+<     #####: 1831:		__p->_M_left = __y;
+<     #####: 1832:		__y->_M_parent = __p;
+<     #####: 1833:		if (__x->_M_right)
+<     #####: 1834:		  __y->_M_right = _M_copy(_S_right(__x), __y, __node_gen);
+<     #####: 1835:		__p = __y;
+<     #####: 1836:		__x = _S_left(__x);
+---
+>         -: 1830:		_Link_type __y = _M_clone_node(__x, __node_gen);
+>         -: 1831:		__p->_M_left = __y;
+>         -: 1832:		__y->_M_parent = __p;
+>         -: 1833:		if (__x->_M_right)
+>         -: 1834:		  __y->_M_right = _M_copy(_S_right(__x), __y, __node_gen);
+>         -: 1835:		__p = __y;
+>         -: 1836:		__x = _S_left(__x);
+1841c1841
+<     =====: 1839:	__catch(...)
+---
+>         -: 1839:	__catch(...)
+1843,1844c1843,1844
+<     =====: 1841:	    _M_erase(__top);
+<     =====: 1842:	    __throw_exception_again;
+---
+>         -: 1841:	    _M_erase(__top);
+>         -: 1842:	    __throw_exception_again;
+1846c1846
+<     #####: 1844:	return __top;
+---
+>         -: 1844:	return __top;
+1852c1852
+<       408: 1850:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 1850:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+1856c1856
+<       472: 1854:      while (__x != 0)
+---
+>     #####: 1854:      while (__x != 0)
+1858,1861c1858,1861
+<        64: 1856:	  _M_erase(_S_right(__x));
+<        64: 1857:	  _Link_type __y = _S_left(__x);
+<        64: 1858:	  _M_drop_node(__x);
+<        64: 1859:	  __x = __y;
+---
+>     #####: 1856:	  _M_erase(_S_right(__x));
+>     #####: 1857:	  _Link_type __y = _S_left(__x);
+>     #####: 1858:	  _M_drop_node(__x);
+>     #####: 1859:	  __x = __y;
+1863c1863
+<       344: 1861:    }
+---
+>     #####: 1861:    }
+1869c1869
+<       166: 1867:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 1867:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+1873,1875c1873,1875
+<       212: 1871:      while (__x != 0)
+<        46: 1872:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
+<        38: 1873:	  __y = __x, __x = _S_left(__x);
+---
+>     #####: 1871:      while (__x != 0)
+>     #####: 1872:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
+>     #####: 1873:	  __y = __x, __x = _S_left(__x);
+1877,1878c1877,1878
+<         8: 1875:	  __x = _S_right(__x);
+<       120: 1876:      return iterator(__y);
+---
+>     #####: 1875:	  __x = _S_right(__x);
+>     #####: 1876:      return iterator(__y);
+1885c1885
+<        59: 1883:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 1883:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+1889,1891c1889,1891
+<        87: 1887:      while (__x != 0)
+<        28: 1888:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
+<        16: 1889:	  __y = __x, __x = _S_left(__x);
+---
+>     #####: 1887:      while (__x != 0)
+>     #####: 1888:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
+>     #####: 1889:	  __y = __x, __x = _S_left(__x);
+1893,1894c1893,1894
+<        12: 1891:	  __x = _S_right(__x);
+<        31: 1892:      return const_iterator(__y);
+---
+>     #####: 1891:	  __x = _S_right(__x);
+>     #####: 1892:      return const_iterator(__y);
+1901c1901
+<        12: 1899:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 1899:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+1905,1907c1905,1907
+<        12: 1903:      while (__x != 0)
+<     #####: 1904:	if (_M_impl._M_key_compare(__k, _S_key(__x)))
+<     #####: 1905:	  __y = __x, __x = _S_left(__x);
+---
+>         -: 1903:      while (__x != 0)
+>         -: 1904:	if (_M_impl._M_key_compare(__k, _S_key(__x)))
+>         -: 1905:	  __y = __x, __x = _S_left(__x);
+1909,1910c1909,1910
+<     #####: 1907:	  __x = _S_right(__x);
+<        12: 1908:      return iterator(__y);
+---
+>         -: 1907:	  __x = _S_right(__x);
+>         -: 1908:      return iterator(__y);
+1935c1935
+<        18: 1933:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 1933:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+1938,1940c1938,1940
+<        18: 1936:      _Link_type __x = _M_begin();
+<        18: 1937:      _Base_ptr __y = _M_end();
+<        20: 1938:      while (__x != 0)
+---
+>         -: 1936:      _Link_type __x = _M_begin();
+>         -: 1937:      _Base_ptr __y = _M_end();
+>         -: 1938:      while (__x != 0)
+1942,1945c1942,1945
+<        13: 1940:	  if (_M_impl._M_key_compare(_S_key(__x), __k))
+<     #####: 1941:	    __x = _S_right(__x);
+<        13: 1942:	  else if (_M_impl._M_key_compare(__k, _S_key(__x)))
+<         1: 1943:	    __y = __x, __x = _S_left(__x);
+---
+>         -: 1940:	  if (_M_impl._M_key_compare(_S_key(__x), __k))
+>         -: 1941:	    __x = _S_right(__x);
+>         -: 1942:	  else if (_M_impl._M_key_compare(__k, _S_key(__x)))
+>         -: 1943:	    __y = __x, __x = _S_left(__x);
+1948,1951c1948,1951
+<        12: 1946:	      _Link_type __xu(__x);
+<        12: 1947:	      _Base_ptr __yu(__y);
+<        12: 1948:	      __y = __x, __x = _S_left(__x);
+<        12: 1949:	      __xu = _S_right(__xu);
+---
+>         -: 1946:	      _Link_type __xu(__x);
+>         -: 1947:	      _Base_ptr __yu(__y);
+>         -: 1948:	      __y = __x, __x = _S_left(__x);
+>         -: 1949:	      __xu = _S_right(__xu);
+1953,1954c1953,1954
+<        24: 1951:		          iterator>(_M_lower_bound(__x, __y, __k),
+<        36: 1952:				    _M_upper_bound(__xu, __yu, __k));
+---
+>         -: 1951:		          iterator>(_M_lower_bound(__x, __y, __k),
+>         -: 1952:				    _M_upper_bound(__xu, __yu, __k));
+1958c1958
+<         6: 1956:				      iterator(__y));
+---
+>         -: 1956:				      iterator(__y));
+2030c2030
+<        70: 2028:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 2028:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2034,2037c2034,2037
+<        70: 2032:      _Link_type __x = _M_begin();
+<        70: 2033:      _Base_ptr __y = _M_end();
+<        70: 2034:      bool __comp = true;
+<        78: 2035:      while (__x != 0)
+---
+>     #####: 2032:      _Link_type __x = _M_begin();
+>     #####: 2033:      _Base_ptr __y = _M_end();
+>     #####: 2034:      bool __comp = true;
+>     #####: 2035:      while (__x != 0)
+2039,2041c2039,2041
+<         4: 2037:	  __y = __x;
+<         4: 2038:	  __comp = _M_impl._M_key_compare(__k, _S_key(__x));
+<         4: 2039:	  __x = __comp ? _S_left(__x) : _S_right(__x);
+---
+>     #####: 2037:	  __y = __x;
+>     #####: 2038:	  __comp = _M_impl._M_key_compare(__k, _S_key(__x));
+>     #####: 2039:	  __x = __comp ? _S_left(__x) : _S_right(__x);
+2043,2044c2043,2044
+<        70: 2041:      iterator __j = iterator(__y);
+<        70: 2042:      if (__comp)
+---
+>     #####: 2041:      iterator __j = iterator(__y);
+>     #####: 2042:      if (__comp)
+2046,2047c2046,2047
+<        70: 2044:	  if (__j == begin())
+<        70: 2045:	    return _Res(__x, __y);
+---
+>     #####: 2044:	  if (__j == begin())
+>     #####: 2045:	    return _Res(__x, __y);
+2062c2062
+<         3: 2060:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 2060:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2066,2068c2066,2068
+<         3: 2064:      _Link_type __x = _M_begin();
+<         3: 2065:      _Base_ptr __y = _M_end();
+<         5: 2066:      while (__x != 0)
+---
+>         -: 2064:      _Link_type __x = _M_begin();
+>         -: 2065:      _Base_ptr __y = _M_end();
+>         -: 2066:      while (__x != 0)
+2070,2072c2070,2072
+<         1: 2068:	  __y = __x;
+<         2: 2069:	  __x = _M_impl._M_key_compare(__k, _S_key(__x)) ?
+<         1: 2070:	        _S_left(__x) : _S_right(__x);
+---
+>         -: 2068:	  __y = __x;
+>         -: 2069:	  __x = _M_impl._M_key_compare(__k, _S_key(__x)) ?
+>         -: 2070:	        _S_left(__x) : _S_right(__x);
+2074c2074
+<         3: 2072:      return _Res(__x, __y);
+---
+>         -: 2072:      return _Res(__x, __y);
+2084c2084
+<        22: 2082:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 2082:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2092,2093c2092,2093
+<        22: 2090:      pair<_Base_ptr, _Base_ptr> __res
+<        44: 2091:	= _M_get_insert_unique_pos(_KeyOfValue()(__v));
+---
+>         -: 2090:      pair<_Base_ptr, _Base_ptr> __res
+>         -: 2091:	= _M_get_insert_unique_pos(_KeyOfValue()(__v));
+2095c2095
+<        22: 2093:      if (__res.second)
+---
+>         -: 2093:      if (__res.second)
+2097,2098c2097,2098
+<        22: 2095:	  _Alloc_node __an(*this);
+<        44: 2096:	  return _Res(_M_insert_(__res.first, __res.second,
+---
+>         -: 2095:	  _Alloc_node __an(*this);
+>         -: 2096:	  return _Res(_M_insert_(__res.first, __res.second,
+2100c2100
+<        66: 2098:		      true);
+---
+>         -: 2098:		      true);
+2103c2103
+<     #####: 2101:      return _Res(iterator(__res.first), false);
+---
+>         -: 2101:      return _Res(iterator(__res.first), false);
+2112c2112
+<         3: 2110:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 2110:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2119,2123c2119,2123
+<         3: 2117:      pair<_Base_ptr, _Base_ptr> __res
+<         6: 2118:	= _M_get_insert_equal_pos(_KeyOfValue()(__v));
+<         3: 2119:      _Alloc_node __an(*this);
+<         3: 2120:      return _M_insert_(__res.first, __res.second,
+<         3: 2121:			_GLIBCXX_FORWARD(_Arg, __v), __an);
+---
+>         -: 2117:      pair<_Base_ptr, _Base_ptr> __res
+>         -: 2118:	= _M_get_insert_equal_pos(_KeyOfValue()(__v));
+>         -: 2119:      _Alloc_node __an(*this);
+>         -: 2120:      return _M_insert_(__res.first, __res.second,
+>         -: 2121:			_GLIBCXX_FORWARD(_Arg, __v), __an);
+2132c2132
+<        36: 2130:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 2130:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2136c2136
+<        36: 2134:      iterator __pos = __position._M_const_cast();
+---
+>     #####: 2134:      iterator __pos = __position._M_const_cast();
+2140c2140
+<        36: 2138:      if (__pos._M_node == _M_end())
+---
+>     #####: 2138:      if (__pos._M_node == _M_end())
+2142,2144c2142,2144
+<        72: 2140:	  if (size() > 0
+<        36: 2141:	      && _M_impl._M_key_compare(_S_key(_M_rightmost()), __k))
+<         8: 2142:	    return _Res(0, _M_rightmost());
+---
+>     #####: 2140:	  if (size() > 0
+>     #####: 2141:	      && _M_impl._M_key_compare(_S_key(_M_rightmost()), __k))
+>     #####: 2142:	    return _Res(0, _M_rightmost());
+2146c2146
+<        28: 2144:	    return _M_get_insert_unique_pos(__k);
+---
+>     #####: 2144:	    return _M_get_insert_unique_pos(__k);
+2299c2299
+<        56: 2297:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 2297:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2302,2303c2302,2303
+<       112: 2300:      bool __insert_left = (__x != 0 || __p == _M_end()
+<        68: 2301:			    || _M_impl._M_key_compare(_S_key(__z),
+---
+>     #####: 2300:      bool __insert_left = (__x != 0 || __p == _M_end()
+>     #####: 2301:			    || _M_impl._M_key_compare(_S_key(__z),
+2306c2306
+<        56: 2304:      _Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
+---
+>     #####: 2304:      _Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
+2308,2309c2308,2309
+<        56: 2306:      ++_M_impl._M_node_count;
+<        56: 2307:      return iterator(__z);
+---
+>     #####: 2306:      ++_M_impl._M_node_count;
+>     #####: 2307:      return iterator(__z);
+2350c2350
+<        20: 2348:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 2348:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2353c2353
+<        20: 2351:	_Link_type __z = _M_create_node(std::forward<_Args>(__args)...);
+---
+>     #####: 2351:	_Link_type __z = _M_create_node(std::forward<_Args>(__args)...);
+2358,2360c2358,2360
+<        20: 2356:	    auto __res = _M_get_insert_unique_pos(_S_key(__z));
+<        20: 2357:	    if (__res.second)
+<        20: 2358:	      return _Res(_M_insert_node(__res.first, __res.second, __z), true);
+---
+>     #####: 2356:	    auto __res = _M_get_insert_unique_pos(_S_key(__z));
+>     #####: 2357:	    if (__res.second)
+>     #####: 2358:	      return _Res(_M_insert_node(__res.first, __res.second, __z), true);
+2397c2397
+<        36: 2395:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 2395:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2400c2400
+<        36: 2398:	_Link_type __z = _M_create_node(std::forward<_Args>(__args)...);
+---
+>     #####: 2398:	_Link_type __z = _M_create_node(std::forward<_Args>(__args)...);
+2404c2404
+<        36: 2402:	    auto __res = _M_get_insert_hint_unique_pos(__pos, _S_key(__z));
+---
+>     #####: 2402:	    auto __res = _M_get_insert_hint_unique_pos(__pos, _S_key(__z));
+2406,2407c2406,2407
+<        36: 2404:	    if (__res.second)
+<        36: 2405:	      return _M_insert_node(__res.first, __res.second, __z);
+---
+>     #####: 2404:	    if (__res.second)
+>     #####: 2405:	      return _M_insert_node(__res.first, __res.second, __z);
+2472c2472
+<        13: 2470:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 2470:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2475c2475
+<        13: 2473:      _Link_type __y =
+---
+>         -: 2473:      _Link_type __y =
+2477c2477
+<        13: 2475:				(const_cast<_Base_ptr>(__position._M_node),
+---
+>         -: 2475:				(const_cast<_Base_ptr>(__position._M_node),
+2479,2481c2479,2481
+<        13: 2477:      _M_drop_node(__y);
+<        13: 2478:      --_M_impl._M_node_count;
+<        13: 2479:    }
+---
+>         -: 2477:      _M_drop_node(__y);
+>         -: 2478:      --_M_impl._M_node_count;
+>         -: 2479:    }
+2486c2486
+<        18: 2484:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 2484:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2489,2490c2489,2490
+<        18: 2487:      if (__first == begin() && __last == end())
+<        17: 2488:	clear();
+---
+>         -: 2487:      if (__first == begin() && __last == end())
+>         -: 2488:	clear();
+2492,2494c2492,2494
+<         1: 2490:	while (__first != __last)
+<         1: 2491:	  _M_erase_aux(__first++);
+<        18: 2492:    }
+---
+>         -: 2490:	while (__first != __last)
+>         -: 2491:	  _M_erase_aux(__first++);
+>         -: 2492:    }
+2499c2499
+<        18: 2497:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>         -: 2497:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2502,2505c2502,2505
+<        18: 2500:      pair<iterator, iterator> __p = equal_range(__x);
+<        18: 2501:      const size_type __old_size = size();
+<        18: 2502:      _M_erase_aux(__p.first, __p.second);
+<        18: 2503:      return __old_size - size();
+---
+>         -: 2500:      pair<iterator, iterator> __p = equal_range(__x);
+>         -: 2501:      const size_type __old_size = size();
+>         -: 2502:      _M_erase_aux(__p.first, __p.second);
+>         -: 2503:      return __old_size - size();
+2522c2522
+<        64: 2520:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 2520:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2525,2528c2525,2528
+<        64: 2523:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
+<       128: 2524:      return (__j == end()
+<        60: 2525:	      || _M_impl._M_key_compare(__k,
+<       196: 2526:					_S_key(__j._M_node))) ? end() : __j;
+---
+>     #####: 2523:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
+>     #####: 2524:      return (__j == end()
+>     #####: 2525:	      || _M_impl._M_key_compare(__k,
+>     #####: 2526:					_S_key(__j._M_node))) ? end() : __j;
+2535c2535
+<        31: 2533:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+---
+>     #####: 2533:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+2538,2541c2538,2541
+<        31: 2536:      const_iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
+<        62: 2537:      return (__j == end()
+<        16: 2538:	      || _M_impl._M_key_compare(__k, 
+<        77: 2539:					_S_key(__j._M_node))) ? end() : __j;
+---
+>     #####: 2536:      const_iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
+>     #####: 2537:      return (__j == end()
+>     #####: 2538:	      || _M_impl._M_key_compare(__k, 
+>     #####: 2539:					_S_key(__j._M_node))) ? end() : __j;

@@ -1,0 +1,148 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Array_Base.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: Array_Base.inl 14 2007-02-01 15:49:12Z mitza $
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:// Clean up the array (e.g., delete dynamically allocated memory).
+        -:    8:template <class T> ACE_INLINE
+    #####:    9:ACE_Array_Base<T>::~ACE_Array_Base (void)
+        -:   10:{
+    #####:   11:  ACE_DES_ARRAY_FREE (this->array_,
+        -:   12:                      this->max_size_,
+        -:   13:                      this->allocator_->free,
+        -:   14:                      T);
+    #####:   15:}
+        -:   16:
+        -:   17:template <class T>
+        -:   18:ACE_INLINE typename ACE_Array_Base<T>::iterator
+        -:   19:ACE_Array_Base<T>::begin (void)
+        -:   20:{
+        -:   21:  return this->array_;
+        -:   22:}
+        -:   23:
+        -:   24:template <class T>
+        -:   25:ACE_INLINE typename ACE_Array_Base<T>::iterator
+    #####:   26:ACE_Array_Base<T>::end (void)
+        -:   27:{
+    #####:   28:  return this->array_ + this->cur_size_;
+        -:   29:}
+        -:   30:
+        -:   31:template <class T>
+        -:   32:ACE_INLINE typename ACE_Array_Base<T>::const_iterator
+        -:   33:ACE_Array_Base<T>::begin (void) const
+        -:   34:{
+        -:   35:  return this->array_;
+        -:   36:}
+        -:   37:
+        -:   38:template <class T>
+        -:   39:ACE_INLINE typename ACE_Array_Base<T>::const_iterator
+        -:   40:ACE_Array_Base<T>::end (void) const
+        -:   41:{
+        -:   42:  return this->array_ + this->cur_size_;
+        -:   43:}
+        -:   44:
+        -:   45:template <class T>
+        -:   46:ACE_INLINE typename ACE_Array_Base<T>::reverse_iterator
+        -:   47:ACE_Array_Base<T>::rbegin (void)
+        -:   48:{
+        -:   49:  return reverse_iterator (this->end ());
+        -:   50:}
+        -:   51:
+        -:   52:template <class T>
+        -:   53:ACE_INLINE typename ACE_Array_Base<T>::reverse_iterator
+        -:   54:ACE_Array_Base<T>::rend (void)
+        -:   55:{
+        -:   56:  return reverse_iterator (this->begin ());
+        -:   57:}
+        -:   58:
+        -:   59:template <class T>
+        -:   60:ACE_INLINE typename ACE_Array_Base<T>::const_reverse_iterator
+        -:   61:ACE_Array_Base<T>::rbegin (void) const
+        -:   62:{
+        -:   63:  return const_reverse_iterator (this->end ());
+        -:   64:}
+        -:   65:
+        -:   66:template <class T>
+        -:   67:ACE_INLINE typename ACE_Array_Base<T>::const_reverse_iterator
+        -:   68:ACE_Array_Base<T>::rend (void) const
+        -:   69:{
+        -:   70:  return const_reverse_iterator (this->begin ());
+        -:   71:}
+        -:   72:
+        -:   73:template <class T> ACE_INLINE typename ACE_Array_Base<T>::size_type
+    #####:   74:ACE_Array_Base<T>::size (void) const
+        -:   75:{
+    #####:   76:  return this->cur_size_;
+        -:   77:}
+        -:   78:
+        -:   79:template <class T> ACE_INLINE typename ACE_Array_Base<T>::size_type
+        -:   80:ACE_Array_Base<T>::max_size (void) const
+        -:   81:{
+        -:   82:  return this->max_size_;
+        -:   83:}
+        -:   84:
+        -:   85:template <class T> ACE_INLINE bool
+        -:   86:ACE_Array_Base<T>::in_range (typename ACE_Array_Base<T>::size_type index) const
+        -:   87:{
+        -:   88:  return index < this->cur_size_;
+        -:   89:}
+        -:   90:
+        -:   91:template <class T> ACE_INLINE T &
+        -:   92:ACE_Array_Base<T>::operator[] (typename ACE_Array_Base<T>::size_type index)
+        -:   93:{
+        -:   94:  return this->array_[index];
+        -:   95:}
+        -:   96:
+        -:   97:template <class T> ACE_INLINE const T &
+        -:   98:ACE_Array_Base<T>::operator[] (typename ACE_Array_Base<T>::size_type index) const
+        -:   99:{
+        -:  100:  return this->array_[index];
+        -:  101:}
+        -:  102:
+        -:  103:// ****************************************************************
+        -:  104:
+        -:  105:template <class T> ACE_INLINE void
+        -:  106:ACE_Array_Iterator<T>::dump (void) const
+        -:  107:{
+        -:  108:#if defined (ACE_HAS_DUMP)
+        -:  109:  // ACE_TRACE ("ACE_Array_Iterator<T>::dump");
+        -:  110:#endif /* ACE_HAS_DUMP */
+        -:  111:}
+        -:  112:
+        -:  113:template <class T> ACE_INLINE
+        -:  114:ACE_Array_Iterator<T>::ACE_Array_Iterator (ACE_Array_Base<T> &a)
+        -:  115:    : current_ (0),
+        -:  116:      array_ (a)
+        -:  117:{
+        -:  118:  // ACE_TRACE ("ACE_Array_Iterator<T>::ACE_Array_Iterator");
+        -:  119:}
+        -:  120:
+        -:  121:template <class T> ACE_INLINE int
+        -:  122:ACE_Array_Iterator<T>::advance (void)
+        -:  123:{
+        -:  124:  // ACE_TRACE ("ACE_Array_Iterator<T>::advance");
+        -:  125:
+        -:  126:  if (this->current_ < array_.size ())
+        -:  127:    {
+        -:  128:      ++this->current_;
+        -:  129:      return 1;
+        -:  130:    }
+        -:  131:  else
+        -:  132:    {
+        -:  133:      // Already finished iterating.
+        -:  134:      return 0;
+        -:  135:    }
+        -:  136:}
+        -:  137:
+        -:  138:template <class T> ACE_INLINE int
+        -:  139:ACE_Array_Iterator<T>::done (void) const
+        -:  140:{
+        -:  141:  ACE_TRACE ("ACE_Array_Iterator<T>::done");
+        -:  142:
+        -:  143:  return this->current_ >= array_.size ();
+        -:  144:}
+        -:  145:
+        -:  146:ACE_END_VERSIONED_NAMESPACE_DECL

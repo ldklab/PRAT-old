@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Traits_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Traits_T.h
         -:    0:Programs:51
         -:    1:#ifndef guard_string_traits_hpp
         -:    2:#define guard_string_traits_hpp
@@ -7,7 +7,7 @@
         -:    5: *
         -:    6: * @brief Implement the element manipulation traits for string types.
         -:    7: *
-        -:    8: * $Id$
+        -:    8: * $Id: String_Traits_T.h 1861 2011-08-31 16:18:08Z mesnierp $
         -:    9: *
         -:   10: * @author Carlos O'Ryan
         -:   11: */

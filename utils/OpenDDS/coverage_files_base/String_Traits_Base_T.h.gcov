@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Traits_Base_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Traits_Base_T.h
         -:    0:Programs:51
         -:    1:#ifndef guard_string_traits_base_hpp
         -:    2:#define guard_string_traits_base_hpp
@@ -8,7 +8,7 @@
         -:    6: * @brief Isolate the string_traits from the accidental differences
         -:    7: * between wstring and string.
         -:    8: *
-        -:    9: * $Id$
+        -:    9: * $Id: String_Traits_Base_T.h 14 2007-02-01 15:49:12Z mitza $
         -:   10: *
         -:   11: * @author Carlos O'Ryan
         -:   12: */
@@ -51,73 +51,16 @@
         -:   49:  {
     #####:   50:    return CORBA::string_dup("");
         -:   51:  }
-------------------
-_ZN3TAO7details18string_traits_baseIcE19default_initializerEv:
-    #####:   48:  inline static char_type * default_initializer()
-        -:   49:  {
-    #####:   50:    return CORBA::string_dup("");
-        -:   51:  }
-------------------
-_ZN3TAO7details18string_traits_baseIcE19default_initializerEv:
-    #####:   48:  inline static char_type * default_initializer()
-        -:   49:  {
-    #####:   50:    return CORBA::string_dup("");
-        -:   51:  }
-------------------
-_ZN3TAO7details18string_traits_baseIcE19default_initializerEv:
-    #####:   48:  inline static char_type * default_initializer()
-        -:   49:  {
-    #####:   50:    return CORBA::string_dup("");
-        -:   51:  }
-------------------
         -:   52:
     #####:   53:  inline static char_type * duplicate(char_type const * s)
         -:   54:  {
     #####:   55:    return CORBA::string_dup(s);
         -:   56:  }
-------------------
-_ZN3TAO7details18string_traits_baseIcE9duplicateEPKc:
-    #####:   53:  inline static char_type * duplicate(char_type const * s)
-        -:   54:  {
-    #####:   55:    return CORBA::string_dup(s);
-        -:   56:  }
-------------------
-_ZN3TAO7details18string_traits_baseIcE9duplicateEPKc:
-    #####:   53:  inline static char_type * duplicate(char_type const * s)
-        -:   54:  {
-    #####:   55:    return CORBA::string_dup(s);
-        -:   56:  }
-------------------
-_ZN3TAO7details18string_traits_baseIcE9duplicateEPKc:
-    #####:   53:  inline static char_type * duplicate(char_type const * s)
-        -:   54:  {
-    #####:   55:    return CORBA::string_dup(s);
-        -:   56:  }
-------------------
         -:   57:
     #####:   58:  inline static void release(char_type * s)
         -:   59:  {
     #####:   60:    CORBA::string_free(s);
     #####:   61:  }
-------------------
-_ZN3TAO7details18string_traits_baseIcE7releaseEPc:
-    #####:   58:  inline static void release(char_type * s)
-        -:   59:  {
-    #####:   60:    CORBA::string_free(s);
-    #####:   61:  }
-------------------
-_ZN3TAO7details18string_traits_baseIcE7releaseEPc:
-    #####:   58:  inline static void release(char_type * s)
-        -:   59:  {
-    #####:   60:    CORBA::string_free(s);
-    #####:   61:  }
-------------------
-_ZN3TAO7details18string_traits_baseIcE7releaseEPc:
-    #####:   58:  inline static void release(char_type * s)
-        -:   59:  {
-    #####:   60:    CORBA::string_free(s);
-    #####:   61:  }
-------------------
         -:   62:
         -:   63:  inline static char_type * allocate (CORBA::ULong len)
         -:   64:  {

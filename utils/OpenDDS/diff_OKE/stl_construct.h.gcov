@@ -1,0 +1,42 @@
+99,100c99,100
+<        19:   97:    _Destroy(_Tp* __pointer)
+<        19:   98:    { __pointer->~_Tp(); }
+---
+>        22:   97:    _Destroy(_Tp* __pointer)
+>        22:   98:    { __pointer->~_Tp(); }
+107c107
+<        77:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>        95:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+109,111c109,111
+<        96:  107:	  for (; __first != __last; ++__first)
+<        19:  108:	    std::_Destroy(std::__addressof(*__first));
+<        58:  109:	}
+---
+>       117:  107:	  for (; __first != __last; ++__first)
+>        22:  108:	    std::_Destroy(std::__addressof(*__first));
+>        73:  109:	}
+119c119
+<       136:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+---
+>       207:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+129c129
+<       194:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+---
+>       280:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+139,140c139,140
+<       194:  137:	__destroy(__first, __last);
+<       194:  138:    }
+---
+>       280:  137:	__destroy(__first, __last);
+>       280:  138:    }
+205c205
+<       194:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+---
+>       280:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+208,209c208,209
+<       194:  206:      _Destroy(__first, __last);
+<       194:  207:    }
+---
+>       280:  206:      _Destroy(__first, __last);
+>       280:  207:    }

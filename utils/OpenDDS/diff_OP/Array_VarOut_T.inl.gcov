@@ -1,0 +1,34 @@
+255c255
+<       502:  253:TAO_Array_Forany_T<T,T_slice,TAG>::TAO_Array_Forany_T (
+---
+>       980:  253:TAO_Array_Forany_T<T,T_slice,TAG>::TAO_Array_Forany_T (
+260,261c260,261
+<       502:  258:    nocopy_ (nocopy)
+<       502:  259:{}
+---
+>       980:  258:    nocopy_ (nocopy)
+>       980:  259:{}
+275c275
+<       502:  273:TAO_Array_Forany_T<T,T_slice,TAG>::~TAO_Array_Forany_T (void)
+---
+>       980:  273:TAO_Array_Forany_T<T,T_slice,TAG>::~TAO_Array_Forany_T (void)
+277c277
+<       502:  275:}
+---
+>       980:  275:}
+334c334
+<       282:  332:TAO_Array_Forany_T<T,T_slice,TAG>::in (void) const
+---
+>       598:  332:TAO_Array_Forany_T<T,T_slice,TAG>::in (void) const
+336c336
+<       282:  334:  return this->ptr_;
+---
+>       598:  334:  return this->ptr_;
+350c350
+<       192:  348:TAO_Array_Forany_T<T,T_slice,TAG>::out (void)
+---
+>       338:  348:TAO_Array_Forany_T<T,T_slice,TAG>::out (void)
+352c352
+<       192:  350:  return this->ptr_;
+---
+>       338:  350:  return this->ptr_;

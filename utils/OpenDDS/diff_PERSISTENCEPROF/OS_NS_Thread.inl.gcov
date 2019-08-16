@@ -1,0 +1,36 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+114c114
+<     #####:  112:ACE_OS::thr_equal (ACE_thread_t t1, ACE_thread_t t2)
+---
+>         -:  112:ACE_OS::thr_equal (ACE_thread_t t1, ACE_thread_t t2)
+121c121
+<     #####:  119:  return pthread_equal (t1, t2);
+---
+>         -:  119:  return pthread_equal (t1, t2);
+3179c3179
+<     #####: 3177:ACE_OS::thr_self (void)
+---
+>         -: 3177:ACE_OS::thr_self (void)
+3185c3185
+<     #####: 3183:  return pthread_self ();
+---
+>         -: 3183:  return pthread_self ();
+3428c3428
+<     #####: 3426:ACE_OS::thr_sigsetmask (int how,
+---
+>         -: 3426:ACE_OS::thr_sigsetmask (int how,
+3461c3461
+<     #####: 3459:  ACE_OSCALL_RETURN (ACE_ADAPT_RETVAL (::pthread_sigmask (how, nsm, osm),
+---
+>         -: 3459:  ACE_OSCALL_RETURN (ACE_ADAPT_RETVAL (::pthread_sigmask (how, nsm, osm),
+3594c3594
+<     #####: 3592:ACE_OS::thread_mutex_destroy (ACE_thread_mutex_t *m)
+---
+>         -: 3592:ACE_OS::thread_mutex_destroy (ACE_thread_mutex_t *m)
+3602c3602
+<     #####: 3600:  return ACE_OS::mutex_destroy (m);
+---
+>         -: 3600:  return ACE_OS::mutex_destroy (m);

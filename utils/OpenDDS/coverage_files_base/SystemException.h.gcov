@@ -1,0 +1,260 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/SystemException.h
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file    SystemException.h
+        -:    6: *
+        -:    7: *  $Id: SystemException.h 935 2008-12-10 21:47:27Z mitza $
+        -:    8: *
+        -:    9: *  CORBA::SystemException class header.
+        -:   10: *
+        -:   11: *  @author DOC Group at Vanderbilt U, Wash U, and UCI
+        -:   12: *  @author Ossama Othman <ossama@dre.vanderbilt.edu>
+        -:   13: */
+        -:   14://=============================================================================
+        -:   15:
+        -:   16:#ifndef TAO_SYSTEM_EXCEPTION_H
+        -:   17:#define TAO_SYSTEM_EXCEPTION_H
+        -:   18:
+        -:   19:#include /**/ "ace/pre.h"
+        -:   20:
+        -:   21:// Do not try removing this. If you remove this for subsetting lots of
+        -:   22:// things go wrong in TAO.
+        -:   23:#include "tao/orbconf.h"
+        -:   24:
+        -:   25:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   26:# pragma once
+        -:   27:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   28:
+        -:   29:#include "tao/Exception.h"
+        -:   30:
+        -:   31:#ifndef TAO_Exception_Export
+        -:   32:# if (__GNUC__ > 3)
+        -:   33:// Exceptions found in DLL A but potentially thrown in DLL B must
+        -:   34:// always be exported.
+        -:   35:#  define TAO_Exception_Export ACE_Proper_Export_Flag
+        -:   36:# else
+        -:   37:#  define TAO_Exception_Export TAO_Export
+        -:   38:# endif  /* __GNUC__ > 3*/
+        -:   39:#endif  /* !TAO_Exception_Export */
+        -:   40:
+        -:   41:#ifdef THREAD_CANCELLED
+        -:   42:# undef THREAD_CANCELLED
+        -:   43:#endif /* THREAD_CANCELLED */
+        -:   44:
+        -:   45:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   46:
+        -:   47:class TAO_OutputCDR;
+        -:   48:class TAO_InputCDR;
+        -:   49:
+        -:   50:// This is already done in orbconf.h. But this file is totally
+        -:   51:// decoupled from its contents that we have to do this here. Including
+        -:   52:// orbconf.h is probably going to be a overhead.
+        -:   53:#if defined (minor)
+        -:   54:#undef minor
+        -:   55:#endif /* minor */
+        -:   56:
+        -:   57:namespace CORBA
+        -:   58:{
+        -:   59:  class SystemException;
+        -:   60:}
+        -:   61:
+        -:   62:namespace TAO
+        -:   63:{
+        -:   64:  typedef CORBA::SystemException* (*excp_factory)(void);
+        -:   65:}
+        -:   66:
+        -:   67:namespace CORBA
+        -:   68:{
+        -:   69:  /**
+        -:   70:   * @enum CompletionStatus
+        -:   71:   *
+        -:   72:   * @brief Completion status for CORBA system exceptions
+        -:   73:   *
+        -:   74:   * Enumerations that denote how an operation was (not) completed
+        -:   75:   * when a @c CORBA::SystemException is thrown.
+        -:   76:   */
+        -:   77:  enum CompletionStatus
+        -:   78:  {
+        -:   79:    COMPLETED_YES,     ///< Successful or exceptional completion.
+        -:   80:    COMPLETED_NO,      ///< Didn't change any state; retry is OK.
+        -:   81:    COMPLETED_MAYBE    ///< Can't say what happened; retry unsafe.
+        -:   82:  };
+        -:   83:
+        -:   84:  /**
+        -:   85:   * @class SystemException
+        -:   86:   *
+        -:   87:   * @brief SystemException
+        -:   88:   *
+        -:   89:   * System exceptions are those defined in the CORBA specification;
+        -:   90:   * OMG-IDL defines these.
+        -:   91:   */
+        -:   92:  class TAO_Export SystemException : public Exception
+        -:   93:  {
+        -:   94:  public:
+        -:   95:
+        -:   96:    /// Copy constructor.
+        -:   97:    /**
+        -:   98:     * @note This constructor should be protected, but VC7.1 at
+        -:   99:     *       warning level 4 complains about the inaccessible copy
+        -:  100:     *       constructor preventing it from being caught.  However,
+        -:  101:     *       that probably isn't true for most cases since CORBA
+        -:  102:     *       exceptions are typically caught by reference, not by
+        -:  103:     *       copy.
+        -:  104:     */
+        -:  105:    SystemException (const SystemException & src);
+        -:  106:
+        -:  107:    /// Destructor.
+        -:  108:    virtual ~SystemException (void);
+        -:  109:
+        -:  110:    /// Get the minor status.
+        -:  111:    ULong minor (void) const;
+        -:  112:
+        -:  113:    /// Set the minor status.
+        -:  114:    void minor (ULong m);
+        -:  115:
+        -:  116:    /// Get the completion status.
+        -:  117:    CORBA::CompletionStatus completed (void) const;
+        -:  118:
+        -:  119:    /// Set the operation completion status.
+        -:  120:    void completed (CORBA::CompletionStatus c);
+        -:  121:
+        -:  122:    /// Narrow to a SystemException.
+        -:  123:    static SystemException *_downcast (CORBA::Exception *exception);
+        -:  124:
+        -:  125:    /// The const version of narrow operation to a SystemException
+        -:  126:    static const SystemException *_downcast(const CORBA::Exception *exception);
+        -:  127:
+        -:  128:    virtual void _raise (void) const = 0;
+        -:  129:
+        -:  130:    // = TAO-specific extension.
+        -:  131:
+        -:  132:    /// Print the system exception @c ex to output determined by @c f.
+        -:  133:    /// This function is not CORBA compliant.
+        -:  134:    void _tao_print_system_exception (FILE *f = stdout) const;
+        -:  135:
+        -:  136:    /// Returns a string containing information about the exception. This
+        -:  137:    /// function is not CORBA compliant.
+        -:  138:    virtual ACE_CString _info (void) const;
+        -:  139:
+        -:  140:    virtual void _tao_encode (TAO_OutputCDR &cdr) const;
+        -:  141:
+        -:  142:    virtual void _tao_decode (TAO_InputCDR &cdr);
+        -:  143:
+        -:  144:    /// Helper to create a minor status value.
+        -:  145:    static CORBA::ULong _tao_minor_code (u_int location, int errno_value);
+        -:  146:
+        -:  147:    /// Helper to translate a platform-specific errno to a TAO errno
+        -:  148:    /// value.
+        -:  149:    static CORBA::ULong _tao_errno (int errno_value);
+        -:  150:
+        -:  151:    /// Deep copy
+        -:  152:    virtual CORBA::Exception *_tao_duplicate (void) const;
+        -:  153:
+        -:  154:  protected:
+        -:  155:
+        -:  156:    /// Default constructor.
+        -:  157:    SystemException (void);
+        -:  158:
+        -:  159:    /// Assignment operator.
+        -:  160:    SystemException & operator= (const SystemException &src);
+        -:  161:
+        -:  162:    /// Constructor using a repository id.
+        -:  163:    SystemException (CORBA::ULong code, CORBA::CompletionStatus completed);
+        -:  164:
+        -:  165:    /// Constructor using a repository id.
+        -:  166:    SystemException (const char *repository_id,
+        -:  167:                     const char *local_name,
+        -:  168:                     CORBA::ULong code,
+        -:  169:                     CORBA::CompletionStatus completed);
+        -:  170:
+        -:  171:    /// Return the exception description associated with the given OMG
+        -:  172:    /// minor code.
+        -:  173:    static const char *_tao_get_omg_exception_description (
+        -:  174:      const CORBA::SystemException &exc, CORBA::ULong minor_code);
+        -:  175:
+        -:  176:  private:
+        -:  177:    /// Minor code.
+        -:  178:    CORBA::ULong minor_;
+        -:  179:
+        -:  180:    /// Completion status.
+        -:  181:    CORBA::CompletionStatus completed_;
+        -:  182:  };
+        -:  183:
+        -:  184:  // Declarations for all of the CORBA standard exceptions.
+        -:  185:  //
+        -:  186:  // @@ - shouldn't have a default minor code, at least for code that's
+        -:  187:  // inside the ORB.  All minor codes should be symbolically catalogued.
+        -:  188:
+        -:  189:#define TAO_SYSTEM_EXCEPTION(name) \
+        -:  190:    class TAO_Exception_Export name : public SystemException \
+        -:  191:    { \
+        -:  192:    public: \
+        -:  193:      name (void); \
+        -:  194:      name (CORBA::ULong code, \
+        -:  195:            CORBA::CompletionStatus completed); \
+        -:  196:      static name * _downcast (CORBA::Exception* exception); \
+        -:  197:      static name const * _downcast (CORBA::Exception const * exception); \
+        -:  198:      virtual void _raise (void) const; \
+        -:  199:      virtual CORBA::TypeCode_ptr _tao_type (void) const; \
+        -:  200:      static void _tao_any_destructor (void*); \
+        -:  201:      virtual CORBA::Exception *_tao_duplicate (void) const; \
+        -:  202:      static CORBA::SystemException *_tao_create (void); \
+        -:  203:    }; \
+        -:  204:
+        -:  205:  TAO_SYSTEM_EXCEPTION(UNKNOWN)          // the unknown exception
+    #####:  206:  TAO_SYSTEM_EXCEPTION(BAD_PARAM)        // an invalid parameter was passed
+        -:  207:  TAO_SYSTEM_EXCEPTION(NO_MEMORY)        // memory allocation failure
+        -:  208:  TAO_SYSTEM_EXCEPTION(IMP_LIMIT)        // violated implementation limit
+        -:  209:  TAO_SYSTEM_EXCEPTION(COMM_FAILURE)     // communication failure
+        -:  210:  TAO_SYSTEM_EXCEPTION(INV_OBJREF)       // invalid object reference
+        -:  211:  TAO_SYSTEM_EXCEPTION(OBJECT_NOT_EXIST) // no such object
+        -:  212:  TAO_SYSTEM_EXCEPTION(NO_PERMISSION)    // no permission for operation
+        -:  213:  TAO_SYSTEM_EXCEPTION(INTERNAL)         // ORB internal error
+        -:  214:  TAO_SYSTEM_EXCEPTION(MARSHAL)          // error marshaling param/result
+        -:  215:  TAO_SYSTEM_EXCEPTION(INITIALIZE)       // ORB initialization failure
+        -:  216:  TAO_SYSTEM_EXCEPTION(NO_IMPLEMENT)     // implementation unavailable
+        -:  217:  TAO_SYSTEM_EXCEPTION(BAD_TYPECODE)     // bad typecode
+        -:  218:  TAO_SYSTEM_EXCEPTION(BAD_OPERATION)    // invalid operation
+        -:  219:  TAO_SYSTEM_EXCEPTION(NO_RESOURCES)     // out of resources for request
+        -:  220:  TAO_SYSTEM_EXCEPTION(NO_RESPONSE)      // response not yet available
+        -:  221:  TAO_SYSTEM_EXCEPTION(PERSIST_STORE)    // persistent storage failure
+        -:  222:  TAO_SYSTEM_EXCEPTION(BAD_INV_ORDER)    // routine invocations out of order
+        -:  223:  TAO_SYSTEM_EXCEPTION(TRANSIENT)        // transient error, try again later
+        -:  224:  TAO_SYSTEM_EXCEPTION(FREE_MEM)         // cannot free memory
+        -:  225:  TAO_SYSTEM_EXCEPTION(INV_IDENT)        // invalid identifier syntax
+        -:  226:  TAO_SYSTEM_EXCEPTION(INV_FLAG)         // invalid flag was specified
+        -:  227:  TAO_SYSTEM_EXCEPTION(INTF_REPOS)       // interface repository unavailable
+        -:  228:  TAO_SYSTEM_EXCEPTION(BAD_CONTEXT)      // error processing context object
+        -:  229:  TAO_SYSTEM_EXCEPTION(OBJ_ADAPTER)      // object adapter failure
+        -:  230:  TAO_SYSTEM_EXCEPTION(DATA_CONVERSION)  // data conversion error
+        -:  231:  TAO_SYSTEM_EXCEPTION(INV_POLICY)       // invalid policies present
+        -:  232:  TAO_SYSTEM_EXCEPTION(REBIND)           // rebind needed
+        -:  233:  TAO_SYSTEM_EXCEPTION(TIMEOUT)          // operation timed out
+        -:  234:  TAO_SYSTEM_EXCEPTION(TRANSACTION_UNAVAILABLE) // no transaction
+        -:  235:  TAO_SYSTEM_EXCEPTION(TRANSACTION_MODE)        // invalid transaction mode
+        -:  236:  TAO_SYSTEM_EXCEPTION(TRANSACTION_REQUIRED)    // operation needs transaction
+        -:  237:  TAO_SYSTEM_EXCEPTION(TRANSACTION_ROLLEDBACK)  // operation was a no-op
+        -:  238:  TAO_SYSTEM_EXCEPTION(INVALID_TRANSACTION)     // invalid TP context passed
+        -:  239:  TAO_SYSTEM_EXCEPTION(CODESET_INCOMPATIBLE)    // incompatible code set
+        -:  240:  TAO_SYSTEM_EXCEPTION(BAD_QOS)          // bad quality of service
+        -:  241:  TAO_SYSTEM_EXCEPTION(INVALID_ACTIVITY)
+        -:  242:  TAO_SYSTEM_EXCEPTION(ACTIVITY_COMPLETED)
+        -:  243:  TAO_SYSTEM_EXCEPTION(ACTIVITY_REQUIRED)
+        -:  244:  TAO_SYSTEM_EXCEPTION(THREAD_CANCELLED)
+        -:  245:
+        -:  246:#undef TAO_SYSTEM_EXCEPTION
+        -:  247:
+        -:  248:} // End CORBA namespace
+        -:  249:
+        -:  250:TAO_END_VERSIONED_NAMESPACE_DECL
+        -:  251:
+        -:  252:#if defined (__ACE_INLINE__)
+        -:  253:# include "tao/SystemException.inl"
+        -:  254:#endif /* __ACE_INLINE__ */
+        -:  255:
+        -:  256:#include /**/"ace/post.h"
+        -:  257:
+        -:  258:#endif /* TAO_SYSTEM_EXCEPTION_H */

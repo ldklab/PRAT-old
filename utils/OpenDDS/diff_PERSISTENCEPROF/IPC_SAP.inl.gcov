@@ -1,0 +1,8 @@
+18c18
+<       329:   16:ACE_IPC_SAP::get_handle (void) const
+---
+>       311:   16:ACE_IPC_SAP::get_handle (void) const
+21c21
+<       329:   19:  return this->handle_;
+---
+>       311:   19:  return this->handle_;

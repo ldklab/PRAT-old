@@ -1,0 +1,307 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Thread_Manager.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: Thread_Manager.inl 1861 2011-08-31 16:18:08Z mesnierp $
+        -:    4:
+        -:    5:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:ACE_INLINE
+        -:    8:ACE_At_Thread_Exit::ACE_At_Thread_Exit (void)
+        -:    9:  : next_ (0),
+        -:   10:    td_ (0),
+        -:   11:    was_applied_ (false),
+        -:   12:    is_owner_ (true)
+        -:   13:{
+        -:   14:}
+        -:   15:
+        -:   16:ACE_INLINE bool
+        -:   17:ACE_At_Thread_Exit::was_applied() const
+        -:   18:{
+        -:   19:   return was_applied_;
+        -:   20:}
+        -:   21:
+        -:   22:ACE_INLINE bool
+        -:   23:ACE_At_Thread_Exit::was_applied (bool applied)
+        -:   24:{
+        -:   25:  was_applied_ = applied;
+        -:   26:  if (was_applied_)
+        -:   27:    td_ = 0;
+        -:   28:  return was_applied_;
+        -:   29:}
+        -:   30:
+        -:   31:ACE_INLINE bool
+        -:   32:ACE_At_Thread_Exit::is_owner() const
+        -:   33:{
+        -:   34:  return is_owner_;
+        -:   35:}
+        -:   36:
+        -:   37:ACE_INLINE bool
+        -:   38:ACE_At_Thread_Exit::is_owner (bool owner)
+        -:   39:{
+        -:   40:  is_owner_ = owner;
+        -:   41:  return is_owner_;
+        -:   42:}
+        -:   43:
+        -:   44:ACE_INLINE void
+        -:   45:ACE_At_Thread_Exit::do_apply (void)
+        -:   46:{
+        -:   47:  if (!this->was_applied_ && this->is_owner_)
+        -:   48:    td_->at_pop();
+        -:   49:}
+        -:   50:
+        -:   51:ACE_INLINE
+        -:   52:ACE_At_Thread_Exit_Func::ACE_At_Thread_Exit_Func (void *object,
+        -:   53:                                                  ACE_CLEANUP_FUNC func,
+        -:   54:                                                  void *param)
+        -:   55:  : object_(object),
+        -:   56:    func_(func),
+        -:   57:    param_(param)
+        -:   58:{
+        -:   59:}
+        -:   60:
+        -:   61:ACE_INLINE
+        -:   62:ACE_Thread_Descriptor_Base::ACE_Thread_Descriptor_Base (void)
+        -:   63:  : ACE_OS_Thread_Descriptor (),
+        -:   64:    thr_id_ (ACE_OS::NULL_thread),
+        -:   65:    thr_handle_ (ACE_OS::NULL_hthread),
+        -:   66:    grp_id_ (0),
+        -:   67:    thr_state_ (ACE_Thread_Manager::ACE_THR_IDLE),
+        -:   68:    task_ (0),
+        -:   69:    next_ (0),
+        -:   70:    prev_ (0)
+        -:   71:{
+        -:   72:}
+        -:   73:
+        -:   74:ACE_INLINE
+    #####:   75:ACE_Thread_Descriptor_Base::~ACE_Thread_Descriptor_Base (void)
+        -:   76:{
+    #####:   77:}
+        -:   78:
+        -:   79:ACE_INLINE bool
+        -:   80:ACE_Thread_Descriptor_Base::operator== (
+        -:   81:  const ACE_Thread_Descriptor_Base &rhs) const
+        -:   82:{
+        -:   83:  return
+        -:   84:    ACE_OS::thr_cmp (this->thr_handle_, rhs.thr_handle_)
+        -:   85:    && ACE_OS::thr_equal (this->thr_id_, rhs.thr_id_);
+        -:   86:}
+        -:   87:
+        -:   88:ACE_INLINE bool
+        -:   89:ACE_Thread_Descriptor_Base::operator!=(const ACE_Thread_Descriptor_Base &rhs) const
+        -:   90:{
+        -:   91:  return !(*this == rhs);
+        -:   92:}
+        -:   93:
+        -:   94:ACE_INLINE ACE_Task_Base *
+        -:   95:ACE_Thread_Descriptor_Base::task (void) const
+        -:   96:{
+        -:   97:  ACE_TRACE ("ACE_Thread_Descriptor_Base::task");
+        -:   98:  return this->task_;
+        -:   99:}
+        -:  100:
+        -:  101:// Group ID.
+        -:  102:
+        -:  103:ACE_INLINE int
+        -:  104:ACE_Thread_Descriptor_Base::grp_id (void) const
+        -:  105:{
+        -:  106:  ACE_TRACE ("ACE_Thread_Descriptor_Base::grp_id");
+        -:  107:  return grp_id_;
+        -:  108:}
+        -:  109:
+        -:  110:// Current state of the thread.
+        -:  111:ACE_INLINE ACE_UINT32
+        -:  112:ACE_Thread_Descriptor_Base::state (void) const
+        -:  113:{
+        -:  114:  ACE_TRACE ("ACE_Thread_Descriptor_Base::state");
+        -:  115:  return thr_state_;
+        -:  116:}
+        -:  117:
+        -:  118:// Reset this base descriptor.
+        -:  119:ACE_INLINE void
+        -:  120:ACE_Thread_Descriptor_Base::reset (void)
+        -:  121:{
+        -:  122:  ACE_TRACE ("ACE_Thread_Descriptor_Base::reset");
+        -:  123:  this->thr_id_ = ACE_OS::NULL_thread;
+        -:  124:  this->thr_handle_ = ACE_OS::NULL_hthread;
+        -:  125:  this->grp_id_ = 0;
+        -:  126:  this->thr_state_ = ACE_Thread_Manager::ACE_THR_IDLE;
+        -:  127:  this->task_ = 0;
+        -:  128:  this->flags_ = 0;
+        -:  129:}
+        -:  130:
+        -:  131:// Unique thread id.
+        -:  132:ACE_INLINE ACE_thread_t
+        -:  133:ACE_Thread_Descriptor::self (void) const
+        -:  134:{
+        -:  135:  ACE_TRACE ("ACE_Thread_Descriptor::self");
+        -:  136:  return this->thr_id_;
+        -:  137:}
+        -:  138:
+        -:  139:// Unique kernel-level thread handle.
+        -:  140:
+        -:  141:ACE_INLINE void
+        -:  142:ACE_Thread_Descriptor::self (ACE_hthread_t &handle)
+        -:  143:{
+        -:  144:  ACE_TRACE ("ACE_Thread_Descriptor::self");
+        -:  145:  handle = this->thr_handle_;
+        -:  146:}
+        -:  147:
+        -:  148:ACE_INLINE void
+        -:  149:ACE_Thread_Descriptor::log_msg_cleanup (ACE_Log_Msg* log_msg)
+        -:  150:
+        -:  151:{
+        -:  152:  log_msg_ = log_msg;
+        -:  153:}
+        -:  154:
+        -:  155:// Set the <next_> pointer
+        -:  156:ACE_INLINE void
+        -:  157:ACE_Thread_Descriptor::set_next (ACE_Thread_Descriptor *td)
+        -:  158:{
+        -:  159:  ACE_TRACE ("ACE_Thread_Descriptor::set_next");
+        -:  160:  this->next_ = td;
+        -:  161:}
+        -:  162:
+        -:  163:// Get the <next_> pointer
+        -:  164:ACE_INLINE ACE_Thread_Descriptor *
+        -:  165:ACE_Thread_Descriptor::get_next (void) const
+        -:  166:{
+        -:  167:  ACE_TRACE ("ACE_Thread_Descriptor::get_next");
+        -:  168:  return static_cast<ACE_Thread_Descriptor * ACE_CAST_CONST> (this->next_);
+        -:  169:}
+        -:  170:
+        -:  171:// Reset this thread descriptor
+        -:  172:ACE_INLINE void
+        -:  173:ACE_Thread_Descriptor::reset (ACE_Thread_Manager *tm)
+        -:  174:{
+        -:  175:  ACE_TRACE ("ACE_Thread_Descriptor::reset");
+        -:  176:  this->ACE_Thread_Descriptor_Base::reset ();
+        -:  177:  this->at_exit_list_ = 0;
+        -:  178:    // Start the at_exit hook list.
+        -:  179:  this->tm_ = tm;
+        -:  180:    // Setup the Thread_Manager.
+        -:  181:  this->log_msg_ = 0;
+        -:  182:  this->terminated_ = false;
+        -:  183:}
+        -:  184:
+        -:  185:ACE_INLINE ACE_Thread_Descriptor *
+        -:  186:ACE_Thread_Manager::thread_desc_self (void)
+        -:  187:{
+        -:  188:  // This method must be called with lock held.
+        -:  189:
+        -:  190:  // Try to get it from cache.
+        -:  191:  ACE_Thread_Descriptor *desc = ACE_LOG_MSG->thr_desc ();
+        -:  192:
+        -:  193:#if 1
+        -:  194:  //  ACE_ASSERT (desc != 0);
+        -:  195:  // Thread descriptor should always get cached.
+        -:  196:#else
+        -:  197:  if (desc == 0)
+        -:  198:    {
+        -:  199:      ACE_thread_t id = ACE_OS::thr_self ();
+        -:  200:
+        -:  201:      desc = this->find_thread (id);
+        -:  202:
+        -:  203:      // Thread descriptor adapter might not have been put into the
+        -:  204:      // list yet.
+        -:  205:      if (desc != 0)
+        -:  206:        // Update the TSS cache.
+        -:  207:        ACE_LOG_MSG->thr_desc (desc);
+        -:  208:    }
+        -:  209:#endif
+        -:  210:  return desc;
+        -:  211:}
+        -:  212:
+        -:  213:// Return the unique ID of the thread.
+        -:  214:
+        -:  215:ACE_INLINE ACE_thread_t
+    #####:  216:ACE_Thread_Manager::thr_self (void)
+        -:  217:{
+        -:  218:  ACE_TRACE ("ACE_Thread_Manager::thr_self");
+    #####:  219:  return ACE_Thread::self ();
+        -:  220:}
+        -:  221:
+        -:  222:ACE_INLINE ACE_Task_Base *
+        -:  223:ACE_Thread_Manager::task (void)
+        -:  224:{
+        -:  225:  ACE_TRACE ("ACE_Thread_Manager::task");
+        -:  226:
+        -:  227:  ACE_Thread_Descriptor *td = this->thread_desc_self () ;
+        -:  228:
+        -:  229:  if (td == 0)
+        -:  230:    return 0;
+        -:  231:  else
+        -:  232:    return td->task ();
+        -:  233:}
+        -:  234:
+        -:  235:ACE_INLINE int
+        -:  236:ACE_Thread_Manager::open (size_t)
+        -:  237:{
+        -:  238:  // Currently no-op.
+        -:  239:  return 0;
+        -:  240:}
+        -:  241:
+        -:  242:ACE_INLINE int
+        -:  243:ACE_Thread_Manager::at_exit (ACE_At_Thread_Exit* at)
+        -:  244:{
+        -:  245:  ACE_Thread_Descriptor *td = this->thread_desc_self ();
+        -:  246:  if (td == 0)
+        -:  247:    return -1;
+        -:  248:  else
+        -:  249:    return td->at_exit (at);
+        -:  250:}
+        -:  251:
+        -:  252:ACE_INLINE int
+        -:  253:ACE_Thread_Manager::at_exit (ACE_At_Thread_Exit& at)
+        -:  254:{
+        -:  255:  ACE_Thread_Descriptor *td = this->thread_desc_self ();
+        -:  256:  if (td == 0)
+        -:  257:    return -1;
+        -:  258:  else
+        -:  259:    return td->at_exit (at);
+        -:  260:}
+        -:  261:
+        -:  262:ACE_INLINE int
+        -:  263:ACE_Thread_Manager::at_exit (void *object,
+        -:  264:                             ACE_CLEANUP_FUNC cleanup_hook,
+        -:  265:                             void *param)
+        -:  266:{
+        -:  267:  ACE_Thread_Descriptor *td = this->thread_desc_self ();
+        -:  268:  if (td == 0)
+        -:  269:    return -1;
+        -:  270:  else
+        -:  271:    return td->at_exit (object, cleanup_hook, param);
+        -:  272:}
+        -:  273:
+        -:  274:ACE_INLINE void
+        -:  275:ACE_Thread_Manager::wait_on_exit (int do_wait)
+        -:  276:{
+        -:  277:  this->automatic_wait_ = do_wait;
+        -:  278:}
+        -:  279:
+        -:  280:ACE_INLINE int
+        -:  281:ACE_Thread_Manager::wait_on_exit (void)
+        -:  282:{
+        -:  283:  return this->automatic_wait_;
+        -:  284:}
+        -:  285:
+        -:  286:ACE_INLINE int
+        -:  287:ACE_Thread_Manager::register_as_terminated (ACE_Thread_Descriptor *td)
+        -:  288:{
+        -:  289:#if defined (ACE_HAS_VXTHREADS)
+        -:  290:  ACE_UNUSED_ARG (td);
+        -:  291:#else  /* ! ACE_HAS_VXTHREADS */
+        -:  292:  ACE_Thread_Descriptor_Base *tdb = 0;
+        -:  293:  ACE_NEW_RETURN (tdb, ACE_Thread_Descriptor_Base (*td), -1);
+        -:  294:  this->terminated_thr_list_.insert_tail (tdb);
+        -:  295:#endif /* !ACE_HAS_VXTHREADS */
+        -:  296:  return 0;
+        -:  297:}
+        -:  298:
+        -:  299:ACE_INLINE size_t
+        -:  300:ACE_Thread_Manager::count_threads (void) const
+        -:  301:{
+        -:  302:  return this->thr_list_.size ();
+        -:  303:}
+        -:  304:
+        -:  305:ACE_END_VERSIONED_NAMESPACE_DECL

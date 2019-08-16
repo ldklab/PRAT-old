@@ -1,8 +1,8 @@
-        -:    0:Source:/usr/include/c++/8/bits/allocated_ptr.h
+        -:    0:Source:/usr/include/c++/7/bits/allocated_ptr.h
         -:    0:Programs:51
         -:    1:// Guarded Allocation -*- C++ -*-
         -:    2:
-        -:    3:// Copyright (C) 2014-2018 Free Software Foundation, Inc.
+        -:    3:// Copyright (C) 2014-2017 Free Software Foundation, Inc.
         -:    4://
         -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
         -:    6:// software; you can redistribute it and/or modify it under the
@@ -51,20 +51,9 @@
         -:   49:      using value_type = typename allocator_traits<_Alloc>::value_type;
         -:   50:
         -:   51:      /// Take ownership of __ptr
-    #####:   52:      __allocated_ptr(_Alloc& __a, pointer __ptr) noexcept
-    #####:   53:      : _M_alloc(std::__addressof(__a)), _M_ptr(__ptr)
-    #####:   54:      { }
-------------------
-_ZNSt15__allocated_ptrISaISt10_List_nodeIN7OpenDDS4DCPS19TransportReassembly9FragRangeEEEEC2ERS6_PS5_:
-    #####:   52:      __allocated_ptr(_Alloc& __a, pointer __ptr) noexcept
-    #####:   53:      : _M_alloc(std::__addressof(__a)), _M_ptr(__ptr)
-    #####:   54:      { }
-------------------
-_ZNSt15__allocated_ptrISaISt10_List_nodeIN7OpenDDS4DCPS8RcHandleINS2_13TransportInstEEEEEEC2ERS7_PS6_:
-    #####:   52:      __allocated_ptr(_Alloc& __a, pointer __ptr) noexcept
-    #####:   53:      : _M_alloc(std::__addressof(__a)), _M_ptr(__ptr)
-    #####:   54:      { }
-------------------
+        3:   52:      __allocated_ptr(_Alloc& __a, pointer __ptr) noexcept
+        3:   53:      : _M_alloc(std::__addressof(__a)), _M_ptr(__ptr)
+        3:   54:      { }
         -:   55:
         -:   56:      /// Convert __ptr to allocator's pointer type and take ownership of it
         -:   57:      template<typename _Ptr,
@@ -80,53 +69,45 @@ _ZNSt15__allocated_ptrISaISt10_List_nodeIN7OpenDDS4DCPS8RcHandleINS2_13Transport
         -:   67:      { __gd._M_ptr = nullptr; }
         -:   68:
         -:   69:      /// Deallocate the owned pointer
-    #####:   70:      ~__allocated_ptr()
+        3:   70:      ~__allocated_ptr()
         -:   71:      {
-    #####:   72:	if (_M_ptr != nullptr)
+        3:   72:	if (_M_ptr != nullptr)
     #####:   73:	  std::allocator_traits<_Alloc>::deallocate(*_M_alloc, _M_ptr, 1);
-    #####:   74:      }
-------------------
-_ZNSt15__allocated_ptrISaISt10_List_nodeIN7OpenDDS4DCPS19TransportReassembly9FragRangeEEEED2Ev:
-    #####:   70:      ~__allocated_ptr()
-        -:   71:      {
-    #####:   72:	if (_M_ptr != nullptr)
-    #####:   73:	  std::allocator_traits<_Alloc>::deallocate(*_M_alloc, _M_ptr, 1);
-    #####:   74:      }
-------------------
-_ZNSt15__allocated_ptrISaISt10_List_nodeIN7OpenDDS4DCPS8RcHandleINS2_13TransportInstEEEEEED2Ev:
-    #####:   70:      ~__allocated_ptr()
-        -:   71:      {
-    #####:   72:	if (_M_ptr != nullptr)
-    #####:   73:	  std::allocator_traits<_Alloc>::deallocate(*_M_alloc, _M_ptr, 1);
-    #####:   74:      }
-------------------
+        3:   74:      }
         -:   75:
         -:   76:      /// Release ownership of the owned pointer
         -:   77:      __allocated_ptr&
-    #####:   78:      operator=(std::nullptr_t) noexcept
+        3:   78:      operator=(std::nullptr_t) noexcept
         -:   79:      {
-    #####:   80:	_M_ptr = nullptr;
-    #####:   81:	return *this;
+        3:   80:	_M_ptr = nullptr;
+        3:   81:	return *this;
         -:   82:      }
         -:   83:
         -:   84:      /// Get the address that the owned pointer refers to.
-        -:   85:      value_type* get() { return std::__to_address(_M_ptr); }
+        -:   85:      value_type* get() { return _S_raw_ptr(_M_ptr); }
         -:   86:
         -:   87:    private:
-        -:   88:      _Alloc* _M_alloc;
-        -:   89:      pointer _M_ptr;
-        -:   90:    };
-        -:   91:
-        -:   92:  /// Allocate space for a single object using __a
-        -:   93:  template<typename _Alloc>
-        -:   94:    __allocated_ptr<_Alloc>
-        -:   95:    __allocate_guarded(_Alloc& __a)
-        -:   96:    {
-        -:   97:      return { __a, std::allocator_traits<_Alloc>::allocate(__a, 1) };
-        -:   98:    }
-        -:   99:
-        -:  100:_GLIBCXX_END_NAMESPACE_VERSION
-        -:  101:} // namespace std
-        -:  102:
-        -:  103:#endif
-        -:  104:#endif
+        -:   88:      static value_type* _S_raw_ptr(value_type* __ptr) { return __ptr; }
+        -:   89:
+        -:   90:      template<typename _Ptr>
+        -:   91:	static auto
+        -:   92:	_S_raw_ptr(_Ptr __ptr) -> decltype(_S_raw_ptr(__ptr.operator->()))
+        -:   93:	{ return _S_raw_ptr(__ptr.operator->()); }
+        -:   94:
+        -:   95:      _Alloc* _M_alloc;
+        -:   96:      pointer _M_ptr;
+        -:   97:    };
+        -:   98:
+        -:   99:  /// Allocate space for a single object using __a
+        -:  100:  template<typename _Alloc>
+        -:  101:    __allocated_ptr<_Alloc>
+        -:  102:    __allocate_guarded(_Alloc& __a)
+        -:  103:    {
+        -:  104:      return { __a, std::allocator_traits<_Alloc>::allocate(__a, 1) };
+        -:  105:    }
+        -:  106:
+        -:  107:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  108:} // namespace std
+        -:  109:
+        -:  110:#endif
+        -:  111:#endif

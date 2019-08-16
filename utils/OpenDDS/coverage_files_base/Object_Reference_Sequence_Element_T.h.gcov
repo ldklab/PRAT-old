@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Object_Reference_Sequence_Element_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Object_Reference_Sequence_Element_T.h
         -:    0:Programs:70
         -:    1:#ifndef guard_object_reference_sequence_element_hpp
         -:    2:#define guard_object_reference_sequence_element_hpp
@@ -8,7 +8,7 @@
         -:    6: * @brief Implement the type returned by operator[] in object_reference
         -:    7: * sequences.
         -:    8: *
-        -:    9: * $Id$
+        -:    9: * $Id: Object_Reference_Sequence_Element_T.h 1861 2011-08-31 16:18:08Z mesnierp $
         -:   10: *
         -:   11: * @author Carlos O'Ryan
         -:   12: */
@@ -33,18 +33,6 @@
         -:   31:  typedef typename obj_ref_traits::object_type_var object_reference_var;
         -:   32:
         -:   33:private:
-       3*:   34:  inline object_reference_sequence_element<obj_ref_traits> & pseudo_copy_swap(
-        -:   35:      object_reference_var & rhs)
-        -:   36:  {
-       3*:   37:    if (release())
-        -:   38:    {
-       3*:   39:      obj_ref_traits::release(*element_);
-        -:   40:    }
-       3*:   41:    *element_ = rhs._retn();
-       3*:   42:    return *this;
-        -:   43:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS10DataReaderE16TAO_Objref_Var_TIS4_ELb1EEEE16pseudo_copy_swapERS6_:
     #####:   34:  inline object_reference_sequence_element<obj_ref_traits> & pseudo_copy_swap(
         -:   35:      object_reference_var & rhs)
         -:   36:  {
@@ -55,64 +43,14 @@ _ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traits
     #####:   41:    *element_ = rhs._retn();
     #####:   42:    return *this;
         -:   43:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS10DataReaderE16TAO_Objref_Var_TIS4_ELb1EEEE16pseudo_copy_swapERS6_:
-    #####:   34:  inline object_reference_sequence_element<obj_ref_traits> & pseudo_copy_swap(
-        -:   35:      object_reference_var & rhs)
-        -:   36:  {
-    #####:   37:    if (release())
-        -:   38:    {
-    #####:   39:      obj_ref_traits::release(*element_);
-        -:   40:    }
-    #####:   41:    *element_ = rhs._retn();
-    #####:   42:    return *this;
-        -:   43:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS9ConditionE16TAO_Objref_Var_TIS4_ELb1EEEE16pseudo_copy_swapERS6_:
-        3:   34:  inline object_reference_sequence_element<obj_ref_traits> & pseudo_copy_swap(
-        -:   35:      object_reference_var & rhs)
-        -:   36:  {
-        3:   37:    if (release())
-        -:   38:    {
-        3:   39:      obj_ref_traits::release(*element_);
-        -:   40:    }
-        3:   41:    *element_ = rhs._retn();
-        3:   42:    return *this;
-        -:   43:  }
-------------------
         -:   44:
         -:   45:public:
-       3*:   46:  object_reference_sequence_element(
-        -:   47:      value_type & e, CORBA::Boolean release)
-        -:   48:    : element_(&e)
-       3*:   49:    , release_(release)
-        -:   50:  {
-       3*:   51:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS10DataReaderE16TAO_Objref_Var_TIS4_ELb1EEEEC2ERPS4_b:
     #####:   46:  object_reference_sequence_element(
         -:   47:      value_type & e, CORBA::Boolean release)
         -:   48:    : element_(&e)
     #####:   49:    , release_(release)
         -:   50:  {
     #####:   51:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS10DataReaderE16TAO_Objref_Var_TIS4_ELb1EEEEC2ERPS4_b:
-    #####:   46:  object_reference_sequence_element(
-        -:   47:      value_type & e, CORBA::Boolean release)
-        -:   48:    : element_(&e)
-    #####:   49:    , release_(release)
-        -:   50:  {
-    #####:   51:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS9ConditionE16TAO_Objref_Var_TIS4_ELb1EEEEC2ERPS4_b:
-        3:   46:  object_reference_sequence_element(
-        -:   47:      value_type & e, CORBA::Boolean release)
-        -:   48:    : element_(&e)
-        3:   49:    , release_(release)
-        -:   50:  {
-        3:   51:  }
-------------------
         -:   52:
         -:   53:  object_reference_sequence_element(
         -:   54:      object_reference_sequence_element const & rhs)
@@ -121,31 +59,15 @@ _ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traits
         -:   57:  {
         -:   58:  }
         -:   59:
-       3*:   60:  ~object_reference_sequence_element()
-        -:   61:  {
-       3*:   62:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS10DataReaderE16TAO_Objref_Var_TIS4_ELb1EEEED2Ev:
     #####:   60:  ~object_reference_sequence_element()
         -:   61:  {
     #####:   62:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS10DataReaderE16TAO_Objref_Var_TIS4_ELb1EEEED2Ev:
-    #####:   60:  ~object_reference_sequence_element()
-        -:   61:  {
-    #####:   62:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS9ConditionE16TAO_Objref_Var_TIS4_ELb1EEEED2Ev:
-        3:   60:  ~object_reference_sequence_element()
-        -:   61:  {
-        3:   62:  }
-------------------
         -:   63:
-        3:   64:  object_reference_sequence_element & operator=(
+    #####:   64:  object_reference_sequence_element & operator=(
         -:   65:      object_reference_var const & rhs)
         -:   66:  {
-        3:   67:    object_reference_var tmp(rhs);
-        6:   68:    return pseudo_copy_swap(tmp);
+    #####:   67:    object_reference_var tmp(rhs);
+    #####:   68:    return pseudo_copy_swap(tmp);
         -:   69:  }
         -:   70:
         -:   71:  object_reference_sequence_element & operator=(
@@ -160,21 +82,6 @@ _ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traits
     #####:   80:    object_reference_var tmp(rhs);
     #####:   81:    return pseudo_copy_swap(tmp);
         -:   82:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS10DataReaderE16TAO_Objref_Var_TIS4_ELb1EEEEaSEPS4_:
-    #####:   78:  object_reference_sequence_element & operator=(value_type rhs)
-        -:   79:  {
-    #####:   80:    object_reference_var tmp(rhs);
-    #####:   81:    return pseudo_copy_swap(tmp);
-        -:   82:  }
-------------------
-_ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traitsIN3DDS10DataReaderE16TAO_Objref_Var_TIS4_ELb1EEEEaSEPS4_:
-    #####:   78:  object_reference_sequence_element & operator=(value_type rhs)
-        -:   79:  {
-    #####:   80:    object_reference_var tmp(rhs);
-    #####:   81:    return pseudo_copy_swap(tmp);
-        -:   82:  }
-------------------
         -:   83:
         -:   84:  inline operator value_type()
         -:   85:  {
@@ -210,9 +117,9 @@ _ZN3TAO7details33object_reference_sequence_elementINS0_23object_reference_traits
         -:  115:    std::swap(this->release_, rhs.release_);
         -:  116:  }
         -:  117:
-       3*:  118:  inline CORBA::Boolean release() const
+    #####:  118:  inline CORBA::Boolean release() const
         -:  119:  {
-       3*:  120:    return this->release_;
+    #####:  120:    return this->release_;
         -:  121:  }
         -:  122:
         -:  123:private:

@@ -1,0 +1,436 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Time_Value.h
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file    Time_Value.h
+        -:    6: *
+        -:    7: *  $Id: Time_Value.h 2622 2015-08-13 18:30:00Z mitza $
+        -:    8: *
+        -:    9: *  @author Douglas C. Schmidt <schmidt@cs.wustl.edu>
+        -:   10: */
+        -:   11://=============================================================================
+        -:   12:
+        -:   13:#ifndef ACE_TIME_VALUE_H
+        -:   14:#define ACE_TIME_VALUE_H
+        -:   15:
+        -:   16:#include /**/ "ace/pre.h"
+        -:   17:
+        -:   18:#include /**/ "ace/ACE_export.h"
+        -:   19:
+        -:   20:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   21:# pragma once
+        -:   22:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   23:
+        -:   24:# include "ace/os_include/os_time.h"
+        -:   25:
+        -:   26:// Define some helpful constants.
+        -:   27:// Not type-safe, and signed.  For backward compatibility.
+        -:   28:#define ACE_ONE_SECOND_IN_MSECS 1000L
+        -:   29:suseconds_t const ACE_ONE_SECOND_IN_USECS = 1000000;
+        -:   30:#define ACE_ONE_SECOND_IN_NSECS 1000000000L
+        -:   31:
+        -:   32:// needed for ACE_UINT64
+        -:   33:#include "ace/Basic_Types.h"
+        -:   34:
+        -:   35:// needed to determine if iostreams are present
+        -:   36:#include "ace/iosfwd.h"
+        -:   37:
+        -:   38:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   39:
+        -:   40:/**
+        -:   41: * @class ACE_Time_Value
+        -:   42: *
+        -:   43: * @brief Operations on "timeval" structures, which express time in
+        -:   44: * seconds (secs) and microseconds (usecs).
+        -:   45: *
+        -:   46: * This class centralizes all the time related processing in
+        -:   47: * ACE.  These time values are typically used in conjunction with OS
+        -:   48: * mechanisms like <select>, <poll>, or <cond_timedwait>.
+        -:   49: */
+    #####:   50:class ACE_Export ACE_Time_Value
+        -:   51:{
+        -:   52:public:
+        -:   53:
+        -:   54:  /// Constant "0".
+        -:   55:  static const ACE_Time_Value zero;
+        -:   56:
+        -:   57:  /**
+        -:   58:   * Constant for maximum time representable.  Note that this time is
+        -:   59:   * not intended for use with <select> or other calls that may have
+        -:   60:   * *their own* implementation-specific maximum time representations.
+        -:   61:   * Its primary use is in time computations such as those used by the
+        -:   62:   * dynamic subpriority strategies in the ACE_Dynamic_Message_Queue
+        -:   63:   * class.
+        -:   64:   */
+        -:   65:  static const ACE_Time_Value max_time;
+        -:   66:
+        -:   67:  // = Initialization methods.
+        -:   68:
+        -:   69:  /// Default Constructor.
+        -:   70:  ACE_Time_Value (void);
+        -:   71:
+        -:   72:  /// Constructor.
+        -:   73:  explicit ACE_Time_Value (time_t sec, suseconds_t usec = 0);
+        -:   74:
+        -:   75:  // = Methods for converting to/from various time formats.
+        -:   76:
+        -:   77:  /// Construct the ACE_Time_Value from a timeval.
+        -:   78:  explicit ACE_Time_Value (const struct timeval &t);
+        -:   79:
+        -:   80:  /// Construct the ACE_Time_Value object from a timespec_t.
+        -:   81:  explicit ACE_Time_Value (const timespec_t &t);
+        -:   82:
+        -:   83:  /// Destructor
+        -:   84:  virtual ~ACE_Time_Value ();
+        -:   85:
+        -:   86:  /// Declare the dynamic allocation hooks.
+        -:   87:  ACE_ALLOC_HOOK_DECLARE;
+        -:   88:
+        -:   89:# if defined (ACE_WIN32)
+        -:   90:  /// Construct the ACE_Time_Value object from a Win32 FILETIME
+        -:   91:  explicit ACE_Time_Value (const FILETIME &ft);
+        -:   92:# endif /* ACE_WIN32 */
+        -:   93:
+        -:   94:  /// Initializes the ACE_Time_Value from seconds and useconds.
+        -:   95:  void set (time_t sec, suseconds_t usec);
+        -:   96:
+        -:   97:  /// Initializes the ACE_Time_Value from a double, which is assumed to be
+        -:   98:  /// in second format, with any remainder treated as microseconds.
+        -:   99:  void set (double d);
+        -:  100:
+        -:  101:  /// Initializes the ACE_Time_Value from a timeval.
+        -:  102:  void set (const timeval &t);
+        -:  103:
+        -:  104:  /// Initializes the ACE_Time_Value object from a timespec_t.
+        -:  105:  void set (const timespec_t &t);
+        -:  106:
+        -:  107:# if defined (ACE_WIN32)
+        -:  108:  ///  Initializes the ACE_Time_Value object from a Win32 FILETIME.
+        -:  109:  void set (const FILETIME &ft);
+        -:  110:# endif /* ACE_WIN32 */
+        -:  111:
+        -:  112:  /// Converts from ACE_Time_Value format into milliseconds format.
+        -:  113:  /**
+        -:  114:   * @return Sum of second field (in milliseconds) and microsecond field
+        -:  115:   *         (in milliseconds).  Note that this method can overflow if
+        -:  116:   *         the second and microsecond field values are large, so use
+        -:  117:   *         the msec (ACE_UINT64 &ms) method instead.
+        -:  118:   *
+        -:  119:   * @note The semantics of this method differs from the sec() and
+        -:  120:   *       usec() methods.  There is no analogous "millisecond"
+        -:  121:   *       component in an ACE_Time_Value.
+        -:  122:   */
+        -:  123:  unsigned long msec (void) const;
+        -:  124:
+        -:  125:  /// Converts from ACE_Time_Value format into milliseconds format.
+        -:  126:  /**
+        -:  127:   * @return Sum of second field (in milliseconds) and microsecond field
+        -:  128:   *         (in milliseconds).
+        -:  129:   *
+        -:  130:   * @note The semantics of this method differs from the sec() and
+        -:  131:   *       usec() methods.  There is no analogous "millisecond"
+        -:  132:   *       component in an ACE_Time_Value.
+        -:  133:   */
+        -:  134:  ACE_UINT64 get_msec () const;
+        -:  135:
+        -:  136:  /// Converts from ACE_Time_Value format into milliseconds format.
+        -:  137:  /**
+        -:  138:   * @return Sum of second field (in milliseconds) and microsecond field
+        -:  139:   *         (in milliseconds) and return them via the @param ms parameter.
+        -:  140:   *
+        -:  141:   * @note The semantics of this method differs from the sec() and
+        -:  142:   *       usec() methods.  There is no analogous "millisecond"
+        -:  143:   *       component in an ACE_Time_Value.
+        -:  144:   *
+        -:  145:   * @deprecated Use get_msec() instead.
+        -:  146:   */
+        -:  147:  void msec (ACE_UINT64 &ms) const;
+        -:  148:
+        -:  149:  /// Converts from ACE_Time_Value format into milliseconds format.
+        -:  150:  /**
+        -:  151:   * @return Sum of second field (in milliseconds) and microsecond field
+        -:  152:   *         (in milliseconds) and return them via the @param ms parameter.
+        -:  153:   *
+        -:  154:   * @note The semantics of this method differs from the sec() and
+        -:  155:   *       usec() methods.  There is no analogous "millisecond"
+        -:  156:   *       component in an ACE_Time_Value.
+        -:  157:   *
+        -:  158:   * @deprecated Use get_msec() instead.
+        -:  159:   */
+        -:  160:  void msec (ACE_UINT64 &ms) /* const */;
+        -:  161:
+        -:  162:  /// Converts from milli-seconds format into ACE_Time_Value format.
+        -:  163:  /**
+        -:  164:   * @note The semantics of this method differs from the sec() and
+        -:  165:   *       usec() methods.  There is no analogous "millisecond"
+        -:  166:   *       component in an ACE_Time_Value.
+        -:  167:   */
+        -:  168:  void set_msec (const ACE_UINT64 &ms);
+        -:  169:
+        -:  170:  /// Converts from milli-seconds format into ACE_Time_Value format.
+        -:  171:  /**
+        -:  172:   * @note The semantics of this method differs from the sec() and
+        -:  173:   *       usec() methods.  There is no analogous "millisecond"
+        -:  174:   *       component in an ACE_Time_Value.
+        -:  175:   */
+        -:  176:  void msec (long);
+        -:  177:
+        -:  178:  /// Converts from milli-seconds format into ACE_Time_Value format.
+        -:  179:  /**
+        -:  180:   * @note The semantics of this method differs from the sec() and
+        -:  181:   *       usec() methods.  There is no analogous "millisecond"
+        -:  182:   *       component in an ACE_Time_Value.
+        -:  183:   */
+        -:  184:  void msec (int);  // converted to long then calls above.
+        -:  185:
+        -:  186:  /// Returns the value of the object as a timespec_t.
+        -:  187:  operator timespec_t () const;
+        -:  188:
+        -:  189:  /// Returns the value of the object as a timeval.
+        -:  190:  operator timeval () const;
+        -:  191:
+        -:  192:  /// Returns a pointer to the object as a timeval.
+        -:  193:  operator const timeval *() const;
+        -:  194:
+        -:  195:# if defined (ACE_WIN32)
+        -:  196:  /// Returns the value of the object as a Win32 FILETIME.
+        -:  197:  operator FILETIME () const;
+        -:  198:# endif /* ACE_WIN32 */
+        -:  199:
+        -:  200:  // = The following are accessor/mutator methods.
+        -:  201:
+        -:  202:  /// Get seconds.
+        -:  203:  /**
+        -:  204:   * @return The second field/component of this ACE_Time_Value.
+        -:  205:   *
+        -:  206:   * @note The semantics of this method differs from the msec()
+        -:  207:   *       method.
+        -:  208:   */
+        -:  209:  time_t sec (void) const;
+        -:  210:
+        -:  211:  /// Set seconds.
+        -:  212:  void sec (time_t sec);
+        -:  213:
+        -:  214:  /// Get microseconds.
+        -:  215:  /**
+        -:  216:   * @return The microsecond field/component of this ACE_Time_Value.
+        -:  217:   *
+        -:  218:   * @note The semantics of this method differs from the msec()
+        -:  219:   *       method.
+        -:  220:   */
+        -:  221:  suseconds_t usec (void) const;
+        -:  222:
+        -:  223:  /// Set microseconds.
+        -:  224:  void usec (suseconds_t usec);
+        -:  225:
+        -:  226:  /**
+        -:  227:   * @return Sum of second field (in microseconds) and microsecond field
+        -:  228:   *         and return them via the @param usec parameter.
+        -:  229:   */
+        -:  230:  void to_usec (ACE_UINT64 &usec) const;
+        -:  231:
+        -:  232:  // = The following arithmetic methods operate on ACE_Time_Value's.
+        -:  233:
+        -:  234:  /// Add @a tv to this.
+        -:  235:  ACE_Time_Value &operator += (const ACE_Time_Value &tv);
+        -:  236:
+        -:  237:  /// Add @a tv to this.
+        -:  238:  ACE_Time_Value &operator += (time_t tv);
+        -:  239:
+        -:  240:  /// Assign @ tv to this
+        -:  241:  ACE_Time_Value &operator = (const ACE_Time_Value &tv);
+        -:  242:
+        -:  243:  /// Assign @ tv to this
+        -:  244:  ACE_Time_Value &operator = (time_t tv);
+        -:  245:
+        -:  246:  /// Subtract @a tv to this.
+        -:  247:  ACE_Time_Value &operator -= (const ACE_Time_Value &tv);
+        -:  248:
+        -:  249:  /// Subtract @a tv to this.
+        -:  250:  ACE_Time_Value &operator -= (time_t tv);
+        -:  251:
+        -:  252:  /**
+        -:  253:    \brief Multiply the time value by the @a d factor.
+        -:  254:    \note The result of the operator is valid for results from range
+        -:  255:    < (ACE_INT32_MIN, -999999), (ACE_INT32_MAX, 999999) >. Result
+        -:  256:    outside this range are saturated to a limit.
+        -:  257:     */
+        -:  258:  ACE_Time_Value &operator *= (double d);
+        -:  259:
+        -:  260:  /// Increment microseconds as postfix.
+        -:  261:  /**
+        -:  262:   * @note The only reason this is here is to allow the use of ACE_Atomic_Op
+        -:  263:   * with ACE_Time_Value.
+        -:  264:   */
+        -:  265:  ACE_Time_Value operator++ (int);
+        -:  266:
+        -:  267:  /// Increment microseconds as prefix.
+        -:  268:  /**
+        -:  269:   * @note The only reason this is here is to allow the use of ACE_Atomic_Op
+        -:  270:   * with ACE_Time_Value.
+        -:  271:   */
+        -:  272:  ACE_Time_Value &operator++ (void);
+        -:  273:
+        -:  274:  /// Decrement microseconds as postfix.
+        -:  275:  /**
+        -:  276:   * @note The only reason this is here is to allow the use of ACE_Atomic_Op
+        -:  277:   * with ACE_Time_Value.
+        -:  278:   */
+        -:  279:  ACE_Time_Value operator-- (int);
+        -:  280:
+        -:  281:  /// Decrement microseconds as prefix.
+        -:  282:  /**
+        -:  283:   * @note The only reason this is here is to allow the use of ACE_Atomic_Op
+        -:  284:   * with ACE_Time_Value.
+        -:  285:   */
+        -:  286:  ACE_Time_Value &operator-- (void);
+        -:  287:
+        -:  288:  /// Adds two ACE_Time_Value objects together, returns the sum.
+        -:  289:  friend ACE_Export ACE_Time_Value operator + (const ACE_Time_Value &tv1,
+        -:  290:                                               const ACE_Time_Value &tv2);
+        -:  291:
+        -:  292:  /// Subtracts two ACE_Time_Value objects, returns the difference.
+        -:  293:  friend ACE_Export ACE_Time_Value operator - (const ACE_Time_Value &tv1,
+        -:  294:                                               const ACE_Time_Value &tv2);
+        -:  295:
+        -:  296:  /// True if @a tv1 < @a tv2.
+        -:  297:  friend ACE_Export bool operator < (const ACE_Time_Value &tv1,
+        -:  298:                                     const ACE_Time_Value &tv2);
+        -:  299:
+        -:  300:  /// True if @a tv1 > @a tv2.
+        -:  301:  friend ACE_Export bool operator > (const ACE_Time_Value &tv1,
+        -:  302:                                     const ACE_Time_Value &tv2);
+        -:  303:
+        -:  304:  /// True if @a tv1 <= @a tv2.
+        -:  305:  friend ACE_Export bool operator <= (const ACE_Time_Value &tv1,
+        -:  306:                                      const ACE_Time_Value &tv2);
+        -:  307:
+        -:  308:  /// True if @a tv1 >= @a tv2.
+        -:  309:  friend ACE_Export bool operator >= (const ACE_Time_Value &tv1,
+        -:  310:                                      const ACE_Time_Value &tv2);
+        -:  311:
+        -:  312:  /// True if @a tv1 == @a tv2.
+        -:  313:  friend ACE_Export bool operator == (const ACE_Time_Value &tv1,
+        -:  314:                                      const ACE_Time_Value &tv2);
+        -:  315:
+        -:  316:  /// True if @a tv1 != @a tv2.
+        -:  317:  friend ACE_Export bool operator != (const ACE_Time_Value &tv1,
+        -:  318:                                      const ACE_Time_Value &tv2);
+        -:  319:
+        -:  320:  //@{
+        -:  321:  /// Multiplies the time value by @a d
+        -:  322:  friend ACE_Export ACE_Time_Value operator * (double d,
+        -:  323:                                               const ACE_Time_Value &tv);
+        -:  324:
+        -:  325:  friend ACE_Export ACE_Time_Value operator * (const ACE_Time_Value &tv,
+        -:  326:                                               double d);
+        -:  327:  //@}
+        -:  328:
+        -:  329:  /// Get current time of day.
+        -:  330:  /**
+        -:  331:   * @return  Time value representing current time of day.
+        -:  332:   *
+        -:  333:   * @note    This method is overloaded in the time policy based template
+        -:  334:   *          instantiations derived from this class. Allows for time policy
+        -:  335:   *          aware time values.
+        -:  336:   */
+        -:  337:  virtual ACE_Time_Value now () const;
+        -:  338:
+        -:  339:  /// Converts absolute time value to time value relative to current time of day.
+        -:  340:  /**
+        -:  341:   * @return  Relative time value.
+        -:  342:   *
+        -:  343:   * @note    This method is overloaded in the time policy based template
+        -:  344:   *          instantiations derived from this class. Allows for time policy
+        -:  345:   *          aware time values.
+        -:  346:   *          The developer is responsible for making sure this is an absolute
+        -:  347:   *          time value compatible with the active time policy (which is system
+        -:  348:   *          time for the base class).
+        -:  349:   */
+        -:  350:  virtual ACE_Time_Value to_relative_time () const;
+        -:  351:
+        -:  352:  /// Converts relative time value to absolute time value based on current time of day.
+        -:  353:  /**
+        -:  354:   * @return  Absolute time value.
+        -:  355:   *
+        -:  356:   * @note    This method is overloaded in the time policy based template
+        -:  357:   *          instantiations derived from this class. Allows for time policy
+        -:  358:   *          aware time values.
+        -:  359:   *          The developer is responsible for making sure this is a relative
+        -:  360:   *          time value. Current time of day is determined based on time policy
+        -:  361:   *          (which is system time for the base class).
+        -:  362:   */
+        -:  363:  virtual ACE_Time_Value to_absolute_time () const;
+        -:  364:
+        -:  365:  /// Duplicates this time value (incl. time policy).
+        -:  366:  /**
+        -:  367:   * @return  Dynamically allocated time value copy.
+        -:  368:   *
+        -:  369:   * @note    The caller is responsible for freeing the copy when it's not needed
+        -:  370:   *          anymore.
+        -:  371:   */
+        -:  372:  virtual ACE_Time_Value * duplicate () const;
+        -:  373:
+        -:  374:  /// Dump is a no-op.
+        -:  375:  /**
+        -:  376:   * The dump() method is a no-op.  It's here for backwards compatibility
+        -:  377:   * only, but does not dump anything. Invoking logging methods here
+        -:  378:   * violates layering restrictions in ACE because this class is part
+        -:  379:   * of the OS layer and @c ACE_Log_Msg is at a higher level.
+        -:  380:   */
+        -:  381:  void dump (void) const;
+        -:  382:
+        -:  383:# if defined (ACE_WIN32)
+        -:  384:  /// Const time difference between FILETIME and POSIX time.
+        -:  385:  static const DWORDLONG FILETIME_to_timval_skew;
+        -:  386:# endif /* ACE_WIN32 */
+        -:  387:
+        -:  388:private:
+        -:  389:  /// Put the timevalue into a canonical form.
+        -:  390:  void normalize (bool saturate = false);
+        -:  391:
+        -:  392:  /// Store the values as a timeval.
+        -:  393:#if defined (ACE_HAS_TIME_T_LONG_MISMATCH)
+        -:  394:  // Windows' timeval is non-conformant, so swap in a struct that conforms
+        -:  395:  // to the proper data types to represent the entire time range that this
+        -:  396:  // class's API can accept.
+        -:  397:  // Also, since this class can supply a pointer to a timeval that things
+        -:  398:  // like select() expect, we need the OS-defined one as well. To make this
+        -:  399:  // available, use a real timeval called ext_tv_ and set it up when needed.
+        -:  400:  // Since this is most often for relative times that don't approach 32 bits
+        -:  401:  // in size, reducing a time_t to fit should be no problem.
+        -:  402:  struct {
+        -:  403:    time_t tv_sec;
+        -:  404:    suseconds_t tv_usec;
+        -:  405:  } tv_;
+        -:  406:  timeval ext_tv_;
+        -:  407:#else
+        -:  408:  timeval tv_;
+        -:  409:#endif /* ACE_HAS_TIME_T_LONG_MISMATCH */
+        -:  410:};
+        -:  411:
+        -:  412:#ifdef ACE_HAS_CPP98_IOSTREAMS
+        -:  413:extern ACE_Export ostream &operator<<( ostream &o, const ACE_Time_Value &v );
+        -:  414:#endif
+        -:  415:
+        -:  416:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  417:
+        -:  418:#if defined (__ACE_INLINE__)
+        -:  419:#include "ace/Time_Value.inl"
+        -:  420:#endif /* __ACE_INLINE__ */
+        -:  421:
+        -:  422:#if defined (__MINGW32__)
+        -:  423:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:  424:// The MingW linker has problems with the exported statics
+        -:  425:// zero and max_time with these two statics the linker will be able to
+        -:  426:// resolve the static exported symbols.
+        -:  427:static const ACE_Time_Value& __zero_time = ACE_Time_Value::zero;
+        -:  428:static const ACE_Time_Value& __max_time = ACE_Time_Value::max_time;
+        -:  429:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:  430:#endif /* __MINGW32__ */
+        -:  431:
+        -:  432:#include /**/ "ace/post.h"
+        -:  433:
+        -:  434:#endif /* ACE_TIME_VALUE_H */

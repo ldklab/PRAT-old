@@ -1,0 +1,32 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+57,58c57,58
+<         -:   55:  inline String_Manager_T (const character_type *s) :
+<         -:   56:    ptr_ (s_traits::duplicate (s))
+---
+>     #####:   55:  inline String_Manager_T (const character_type *s) :
+>     #####:   56:    ptr_ (s_traits::duplicate (s))
+60c60
+<         -:   58:  }
+---
+>     #####:   58:  }
+86c86
+<         -:   84:  inline String_Manager_T &operator= (const character_type *p) {
+---
+>     #####:   84:  inline String_Manager_T &operator= (const character_type *p) {
+89,91c89,91
+<         -:   87:    String_Manager_T <character_type> tmp (p);
+<         -:   88:    std::swap (this->ptr_, tmp.ptr_);
+<         -:   89:    return *this;
+---
+>     #####:   87:    String_Manager_T <character_type> tmp (p);
+>     #####:   88:    std::swap (this->ptr_, tmp.ptr_);
+>     #####:   89:    return *this;
+108,109c108,109
+<     #####:  106:  inline const character_type *in (void) const {
+<     #####:  107:    return this->ptr_;
+---
+>         -:  106:  inline const character_type *in (void) const {
+>         -:  107:    return this->ptr_;

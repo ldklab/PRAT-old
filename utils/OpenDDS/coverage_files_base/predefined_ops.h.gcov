@@ -1,8 +1,8 @@
-        -:    0:Source:/usr/include/c++/8/bits/predefined_ops.h
+        -:    0:Source:/usr/include/c++/7/bits/predefined_ops.h
         -:    0:Programs:51
         -:    1:// Default predicates for internal use -*- C++ -*-
         -:    2:
-        -:    3:// Copyright (C) 2013-2018 Free Software Foundation, Inc.
+        -:    3:// Copyright (C) 2013-2017 Free Software Foundation, Inc.
         -:    4://
         -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
         -:    6:// software; you can redistribute it and/or modify it under the
@@ -233,49 +233,20 @@
         -:  231:      _Value& _M_value;
         -:  232:
         -:  233:      explicit
-        3:  234:      _Iter_equals_val(_Value& __value)
-        3:  235:	: _M_value(__value)
-        3:  236:      { }
-------------------
-_ZN9__gnu_cxx5__ops16_Iter_equals_valIKSt4pairIN7OpenDDS4DCPS12WeakRcHandleINS4_15TransportClientEEENS4_6GUID_tEEEC2ERSA_:
-        1:  234:      _Iter_equals_val(_Value& __value)
-        1:  235:	: _M_value(__value)
-        1:  236:      { }
-------------------
-_ZN9__gnu_cxx5__ops16_Iter_equals_valIKcEC2ERS2_:
-        2:  234:      _Iter_equals_val(_Value& __value)
-        2:  235:	: _M_value(__value)
-        2:  236:      { }
-------------------
+        4:  234:      _Iter_equals_val(_Value& __value)
+        4:  235:	: _M_value(__value)
+        4:  236:      { }
         -:  237:
         -:  238:      template<typename _Iterator>
         -:  239:	bool
-    #####:  240:	operator()(_Iterator __it)
-    #####:  241:	{ return *__it == _M_value; }
-------------------
-_ZN9__gnu_cxx5__ops16_Iter_equals_valIKSt4pairIN7OpenDDS4DCPS12WeakRcHandleINS4_15TransportClientEEENS4_6GUID_tEEEclINS_17__normal_iteratorIPS9_St6vectorIS9_SaIS9_EEEEEEbT_:
-    #####:  240:	operator()(_Iterator __it)
-    #####:  241:	{ return *__it == _M_value; }
-------------------
-_ZN9__gnu_cxx5__ops16_Iter_equals_valIKcEclINS_17__normal_iteratorIPcNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEEEbT_:
-    #####:  240:	operator()(_Iterator __it)
-    #####:  241:	{ return *__it == _M_value; }
-------------------
+       30:  240:	operator()(_Iterator __it)
+       30:  241:	{ return *__it == _M_value; }
         -:  242:    };
         -:  243:
         -:  244:  template<typename _Value>
         -:  245:    inline _Iter_equals_val<_Value>
-        3:  246:    __iter_equals_val(_Value& __val)
-        3:  247:    { return _Iter_equals_val<_Value>(__val); }
-------------------
-_ZN9__gnu_cxx5__ops17__iter_equals_valIKSt4pairIN7OpenDDS4DCPS12WeakRcHandleINS4_15TransportClientEEENS4_6GUID_tEEEENS0_16_Iter_equals_valIT_EERSC_:
-        1:  246:    __iter_equals_val(_Value& __val)
-        1:  247:    { return _Iter_equals_val<_Value>(__val); }
-------------------
-_ZN9__gnu_cxx5__ops17__iter_equals_valIKcEENS0_16_Iter_equals_valIT_EERS4_:
-        2:  246:    __iter_equals_val(_Value& __val)
-        2:  247:    { return _Iter_equals_val<_Value>(__val); }
-------------------
+        4:  246:    __iter_equals_val(_Value& __val)
+        4:  247:    { return _Iter_equals_val<_Value>(__val); }
         -:  248:
         -:  249:  template<typename _Iterator1>
         -:  250:    struct _Iter_equals_iter

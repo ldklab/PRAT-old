@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Object_Reference_Sequence_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Object_Reference_Sequence_T.h
         -:    0:Programs:70
         -:    1:#ifndef guard_unbounded_object_reference_sequence_hpp
         -:    2:#define guard_unbounded_object_reference_sequence_hpp
@@ -7,7 +7,7 @@
         -:    5: *
         -:    6: * @brief Implement unbounded sequences for object references.
         -:    7: *
-        -:    8: * $Id$
+        -:    8: * $Id: Unbounded_Object_Reference_Sequence_T.h 1861 2011-08-31 16:18:08Z mesnierp $
         -:    9: *
         -:   10: * @author Carlos O'Ryan
         -:   11: */
@@ -61,68 +61,25 @@
         -:   59:    return impl_.maximum();
         -:   60:  }
         -:   61:  /// @copydoc TAO::details::generic_sequence::release()
-       3*:   62:  inline CORBA::Boolean release() const {
-       3*:   63:    return impl_.release();
-        -:   64:  }
-------------------
-_ZNK3TAO35unbounded_object_reference_sequenceIN3DDS10DataReaderE16TAO_Objref_Var_TIS2_EE7releaseEv:
     #####:   62:  inline CORBA::Boolean release() const {
     #####:   63:    return impl_.release();
         -:   64:  }
-------------------
-_ZNK3TAO35unbounded_object_reference_sequenceIN3DDS10DataReaderE16TAO_Objref_Var_TIS2_EE7releaseEv:
-    #####:   62:  inline CORBA::Boolean release() const {
-    #####:   63:    return impl_.release();
-        -:   64:  }
-------------------
-_ZNK3TAO35unbounded_object_reference_sequenceIN3DDS9ConditionE16TAO_Objref_Var_TIS2_EE7releaseEv:
-        3:   62:  inline CORBA::Boolean release() const {
-        3:   63:    return impl_.release();
-        -:   64:  }
-------------------
         -:   65:  /// @copydoc TAO::details::generic_sequence::length()
     #####:   66:  inline CORBA::ULong length() const {
     #####:   67:    return impl_.length();
         -:   68:  }
-------------------
-_ZNK3TAO35unbounded_object_reference_sequenceIN3DDS10DataReaderE16TAO_Objref_Var_TIS2_EE6lengthEv:
-    #####:   66:  inline CORBA::ULong length() const {
-    #####:   67:    return impl_.length();
-        -:   68:  }
-------------------
-_ZNK3TAO35unbounded_object_reference_sequenceIN3DDS9ConditionE16TAO_Objref_Var_TIS2_EE6lengthEv:
-    #####:   66:  inline CORBA::ULong length() const {
-    #####:   67:    return impl_.length();
-        -:   68:  }
-------------------
         -:   69:
         -:   70:  /// @copydoc TAO::details::generic_sequence::length()
-       3*:   71:  inline void length(CORBA::ULong length) {
-       3*:   72:    impl_.length(length);
-       3*:   73:  }
-------------------
-_ZN3TAO35unbounded_object_reference_sequenceIN3DDS10DataReaderE16TAO_Objref_Var_TIS2_EE6lengthEj:
     #####:   71:  inline void length(CORBA::ULong length) {
     #####:   72:    impl_.length(length);
     #####:   73:  }
-------------------
-_ZN3TAO35unbounded_object_reference_sequenceIN3DDS10DataReaderE16TAO_Objref_Var_TIS2_EE6lengthEj:
-    #####:   71:  inline void length(CORBA::ULong length) {
-    #####:   72:    impl_.length(length);
-    #####:   73:  }
-------------------
-_ZN3TAO35unbounded_object_reference_sequenceIN3DDS9ConditionE16TAO_Objref_Var_TIS2_EE6lengthEj:
-        3:   71:  inline void length(CORBA::ULong length) {
-        3:   72:    impl_.length(length);
-        3:   73:  }
-------------------
         -:   74:  /// @copydoc TAO::details::generic_sequence::operator[]
     #####:   75:  inline const_element_type operator[](CORBA::ULong i) const {
     #####:   76:    return const_element_type (impl_[i], release());
         -:   77:  }
         -:   78:  /// @copydoc TAO::details::generic_sequence::operator[]
-       3*:   79:  inline element_type operator[](CORBA::ULong i) {
-       3*:   80:    return element_type(impl_[i], release());
+    #####:   79:  inline element_type operator[](CORBA::ULong i) {
+    #####:   80:    return element_type(impl_[i], release());
         -:   81:  }
         -:   82:  /// @copydoc TAO::details::generic_sequence::get_buffer()
         -:   83:  inline value_type const * get_buffer() const {

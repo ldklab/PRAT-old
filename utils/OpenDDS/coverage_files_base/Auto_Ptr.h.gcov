@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/ace/Auto_Ptr.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Auto_Ptr.h
         -:    0:Programs:51
         -:    1:/* -*- C++ -*- */
         -:    2:
@@ -6,7 +6,7 @@
         -:    4:/**
         -:    5: *  @file    Auto_Ptr.h
         -:    6: *
-        -:    7: *  $Id$
+        -:    7: *  $Id: Auto_Ptr.h 1861 2011-08-31 16:18:08Z mesnierp $
         -:    8: *
         -:    9: *  @author Doug Schmidt <schmidt@uci.edu>
         -:   10: *  @author Irfan Pyarali <irfan@cs.wustl.edu>
@@ -111,7 +111,7 @@
         -:  109: * This version can be used instead of auto_ptr<T>
         -:  110: */
         -:  111:template <typename X>
-        -:  112:class ACE_Auto_Ptr : public ACE_Auto_Basic_Ptr <X>
+    #####:  112:class ACE_Auto_Ptr : public ACE_Auto_Basic_Ptr <X>
         -:  113:{
         -:  114:public:
         -:  115:  typedef X element_type;

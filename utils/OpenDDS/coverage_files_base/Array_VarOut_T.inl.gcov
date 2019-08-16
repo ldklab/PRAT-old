@@ -1,0 +1,387 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Array_VarOut_T.inl
+        -:    0:Programs:24
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3://$Id: Array_VarOut_T.inl 14 2007-02-01 15:49:12Z mitza $
+        -:    4:
+        -:    5:TAO_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:    6:
+        -:    7:template<typename T, typename T_slice, typename TAG>
+        -:    8:ACE_INLINE
+        -:    9:TAO_Array_Var_Base_T<T,T_slice,TAG>::TAO_Array_Var_Base_T (void)
+        -:   10:  : ptr_ (0)
+        -:   11:{}
+        -:   12:
+        -:   13:template<typename T, typename T_slice, typename TAG>
+        -:   14:ACE_INLINE
+        -:   15:TAO_Array_Var_Base_T<T,T_slice,TAG>::TAO_Array_Var_Base_T (T_slice * p)
+        -:   16:  : ptr_ (p)
+        -:   17:{}
+        -:   18:
+        -:   19:template<typename T, typename T_slice, typename TAG>
+        -:   20:ACE_INLINE
+        -:   21:TAO_Array_Var_Base_T<T,T_slice,TAG>::TAO_Array_Var_Base_T (
+        -:   22:    const TAO_Array_Var_Base_T & p
+        -:   23:  )
+        -:   24:{
+        -:   25:  this->ptr_ = TAO::Array_Traits<FORANY>::dup (p.in ());
+        -:   26:}
+        -:   27:
+        -:   28:template<typename T, typename T_slice, typename TAG>
+        -:   29:ACE_INLINE
+        -:   30:TAO_Array_Var_Base_T<T,T_slice,TAG>::~TAO_Array_Var_Base_T (void)
+        -:   31:{
+        -:   32:  TAO::Array_Traits<FORANY>::free (this->ptr_);
+        -:   33:}
+        -:   34:
+        -:   35:template<typename T, typename T_slice, typename TAG>
+        -:   36:ACE_INLINE
+        -:   37:TAO_Array_Var_Base_T<T,T_slice,TAG>::operator T_slice * const & () const
+        -:   38:{
+        -:   39:  return this->ptr_;
+        -:   40:}
+        -:   41:
+        -:   42:template<typename T, typename T_slice, typename TAG>
+        -:   43:ACE_INLINE
+        -:   44:T_slice const &
+        -:   45:TAO_Array_Var_Base_T<T,T_slice,TAG>::operator[] (CORBA::ULong index) const
+        -:   46:{
+        -:   47:  return this->ptr_[index];
+        -:   48:}
+        -:   49:
+        -:   50:template<typename T, typename T_slice, typename TAG>
+        -:   51:ACE_INLINE
+        -:   52:T_slice &
+        -:   53:TAO_Array_Var_Base_T<T,T_slice,TAG>::operator[] (CORBA::ULong index)
+        -:   54:{
+        -:   55:  return this->ptr_[index];
+        -:   56:}
+        -:   57:
+        -:   58:template<typename T, typename T_slice, typename TAG>
+        -:   59:ACE_INLINE
+        -:   60:const T_slice *
+        -:   61:TAO_Array_Var_Base_T<T,T_slice,TAG>::in (void) const
+        -:   62:{
+        -:   63:  // @todo Replace with C++ cast after vc6 has been dropped,
+        -:   64:  // vc6 can't handle this as const cast
+        -:   65:  return (const T_slice *) this->ptr_;
+        -:   66:}
+        -:   67:
+        -:   68:template<typename T, typename T_slice, typename TAG>
+        -:   69:ACE_INLINE
+        -:   70:T_slice *
+        -:   71:TAO_Array_Var_Base_T<T,T_slice,TAG>::inout (void)
+        -:   72:{
+        -:   73:  return this->ptr_;
+        -:   74:}
+        -:   75:
+        -:   76:template<typename T, typename T_slice, typename TAG>
+        -:   77:ACE_INLINE
+        -:   78:T_slice *&
+        -:   79:TAO_Array_Var_Base_T<T,T_slice,TAG>::_retn_arg (void)
+        -:   80:{
+        -:   81:  TAO::Array_Traits<FORANY>::free (this->ptr_);
+        -:   82:  this->ptr_ = 0;
+        -:   83:  return this->ptr_;
+        -:   84:}
+        -:   85:
+        -:   86:template<typename T, typename T_slice, typename TAG>
+        -:   87:ACE_INLINE
+        -:   88:T_slice *
+        -:   89:TAO_Array_Var_Base_T<T,T_slice,TAG>::_retn (void)
+        -:   90:{
+        -:   91:  T_slice * tmp = this->ptr_;
+        -:   92:  this->ptr_ = 0;
+        -:   93:  return tmp;
+        -:   94:}
+        -:   95:
+        -:   96:template<typename T, typename T_slice, typename TAG>
+        -:   97:ACE_INLINE
+        -:   98:T_slice *
+        -:   99:TAO_Array_Var_Base_T<T,T_slice,TAG>::ptr (void) const
+        -:  100:{
+        -:  101:  return this->ptr_;
+        -:  102:}
+        -:  103:
+        -:  104:// *************************************************************
+        -:  105:
+        -:  106:template<typename T, typename T_slice, typename TAG>
+        -:  107:ACE_INLINE
+        -:  108:TAO_FixedArray_Var_T<T,T_slice,TAG>::TAO_FixedArray_Var_T (void)
+        -:  109:{}
+        -:  110:
+        -:  111:template<typename T, typename T_slice, typename TAG>
+        -:  112:ACE_INLINE
+        -:  113:TAO_FixedArray_Var_T<T,T_slice,TAG>::TAO_FixedArray_Var_T (T_slice * p)
+        -:  114:  : TAO_Array_Var_Base_T<T,T_slice,TAG> (p)
+        -:  115:{}
+        -:  116:
+        -:  117:template<typename T, typename T_slice, typename TAG>
+        -:  118:ACE_INLINE
+        -:  119:TAO_FixedArray_Var_T<T,T_slice,TAG>::TAO_FixedArray_Var_T (
+        -:  120:    const TAO_FixedArray_Var_T & p
+        -:  121:  )
+        -:  122:  : TAO_Array_Var_Base_T<T,T_slice,TAG> (p)
+        -:  123:{}
+        -:  124:
+        -:  125:
+        -:  126:template<typename T, typename T_slice, typename TAG>
+        -:  127:ACE_INLINE
+        -:  128:T_slice *
+        -:  129:TAO_FixedArray_Var_T<T,T_slice,TAG>::out (void)
+        -:  130:{
+        -:  131:  return this->ptr_;
+        -:  132:}
+        -:  133:
+        -:  134:// *************************************************************
+        -:  135:
+        -:  136:template<typename T, typename T_slice, typename TAG>
+        -:  137:ACE_INLINE
+        -:  138:TAO_VarArray_Var_T<T,T_slice,TAG>::TAO_VarArray_Var_T (void)
+        -:  139:{}
+        -:  140:
+        -:  141:template<typename T, typename T_slice, typename TAG>
+        -:  142:ACE_INLINE
+        -:  143:TAO_VarArray_Var_T<T,T_slice,TAG>::TAO_VarArray_Var_T (T_slice * p)
+        -:  144:  : TAO_Array_Var_Base_T<T,T_slice,TAG> (p)
+        -:  145:{}
+        -:  146:
+        -:  147:template<typename T, typename T_slice, typename TAG>
+        -:  148:ACE_INLINE
+        -:  149:TAO_VarArray_Var_T<T,T_slice,TAG>::TAO_VarArray_Var_T (
+        -:  150:    const TAO_VarArray_Var_T & p
+        -:  151:  )
+        -:  152:  : TAO_Array_Var_Base_T<T,T_slice,TAG> (p)
+        -:  153:{}
+        -:  154:
+        -:  155:template<typename T, typename T_slice, typename TAG>
+        -:  156:ACE_INLINE
+        -:  157:TAO_VarArray_Var_T<T,T_slice,TAG>::operator T_slice *& ()
+        -:  158:{
+        -:  159:  return this->ptr_;
+        -:  160:}
+        -:  161:
+        -:  162:template<typename T, typename T_slice, typename TAG>
+        -:  163:ACE_INLINE
+        -:  164:T_slice *&
+        -:  165:TAO_VarArray_Var_T<T,T_slice,TAG>::out (void)
+        -:  166:{
+        -:  167:  TAO::Array_Traits<FORANY>::free (this->ptr_);
+        -:  168:  this->ptr_ = 0;
+        -:  169:  return this->ptr_;
+        -:  170:}
+        -:  171:
+        -:  172:// *************************************************************
+        -:  173:
+        -:  174:template<typename T, typename T_var, typename T_slice, typename TAG>
+        -:  175:ACE_INLINE
+        -:  176:TAO_Array_Out_T<T,T_var,T_slice,TAG>::TAO_Array_Out_T (T_slice *& p)
+        -:  177:  : ptr_ (p)
+        -:  178:{
+        -:  179:  this->ptr_ = 0;
+        -:  180:}
+        -:  181:
+        -:  182:template<typename T, typename T_var, typename T_slice, typename TAG>
+        -:  183:ACE_INLINE
+        -:  184:TAO_Array_Out_T<T,T_var,T_slice,TAG>::TAO_Array_Out_T (T_var & p)
+        -:  185:  : ptr_ (p.out ())
+        -:  186:{
+        -:  187:  TAO::Array_Traits<FORANY>::free (this->ptr_);
+        -:  188:  this->ptr_ = 0;
+        -:  189:}
+        -:  190:
+        -:  191:template<typename T, typename T_var, typename T_slice, typename TAG>
+        -:  192:ACE_INLINE
+        -:  193:TAO_Array_Out_T<T,T_var,T_slice,TAG>::TAO_Array_Out_T (
+        -:  194:    const TAO_Array_Out_T<T,T_var,T_slice,TAG> & p
+        -:  195:  )
+        -:  196:  : ptr_ (const_cast<THIS_OUT_TYPE &> (p).ptr_)
+        -:  197:{}
+        -:  198:
+        -:  199:template<typename T, typename T_var, typename T_slice, typename TAG>
+        -:  200:ACE_INLINE
+        -:  201:TAO_Array_Out_T<T,T_var,T_slice,TAG> &
+        -:  202:TAO_Array_Out_T<T,T_var,T_slice,TAG>::operator= (
+        -:  203:    const TAO_Array_Out_T<T,T_var,T_slice,TAG> & p
+        -:  204:  )
+        -:  205:{
+        -:  206:  this->ptr_ = const_cast<THIS_OUT_TYPE &> (p).ptr_;
+        -:  207:  return *this;
+        -:  208:}
+        -:  209:
+        -:  210:template<typename T, typename T_var, typename T_slice, typename TAG>
+        -:  211:ACE_INLINE
+        -:  212:TAO_Array_Out_T<T,T_var,T_slice,TAG> &
+        -:  213:TAO_Array_Out_T<T,T_var,T_slice,TAG>::operator= (T_slice *p)
+        -:  214:{
+        -:  215:  this->ptr_ = p;
+        -:  216:  return *this;
+        -:  217:}
+        -:  218:
+        -:  219:template<typename T, typename T_var, typename T_slice, typename TAG>
+        -:  220:ACE_INLINE
+        -:  221:TAO_Array_Out_T<T,T_var,T_slice,TAG>::operator T_slice *& ()
+        -:  222:{
+        -:  223:  return this->ptr_;
+        -:  224:}
+        -:  225:
+        -:  226:template<typename T, typename T_var, typename T_slice, typename TAG>
+        -:  227:ACE_INLINE
+        -:  228:T_slice &
+        -:  229:TAO_Array_Out_T<T,T_var,T_slice,TAG>::operator[] (CORBA::ULong index)
+        -:  230:{
+        -:  231:  return this->ptr_[index];
+        -:  232:}
+        -:  233:
+        -:  234:template<typename T, typename T_var, typename T_slice, typename TAG>
+        -:  235:ACE_INLINE
+        -:  236:T_slice *&
+        -:  237:TAO_Array_Out_T<T,T_var,T_slice,TAG>::ptr (void)
+        -:  238:{
+        -:  239:  return this->ptr_;
+        -:  240:}
+        -:  241:
+        -:  242:// *************************************************************
+        -:  243:
+        -:  244:template<typename T, typename T_slice, typename TAG>
+        -:  245:ACE_INLINE
+        -:  246:TAO_Array_Forany_T<T,T_slice,TAG>::TAO_Array_Forany_T (void)
+        -:  247:  : ptr_ (0),
+        -:  248:    nocopy_ (false)
+        -:  249:{}
+        -:  250:
+        -:  251:template<typename T, typename T_slice, typename TAG>
+        -:  252:ACE_INLINE
+      502:  253:TAO_Array_Forany_T<T,T_slice,TAG>::TAO_Array_Forany_T (
+        -:  254:    T_slice * p,
+        -:  255:    CORBA::Boolean nocopy
+        -:  256:  )
+        -:  257:  : ptr_ (p),
+      502:  258:    nocopy_ (nocopy)
+      502:  259:{}
+        -:  260:
+        -:  261:template<typename T, typename T_slice, typename TAG>
+        -:  262:ACE_INLINE
+        -:  263:TAO_Array_Forany_T<T,T_slice,TAG>::TAO_Array_Forany_T (
+        -:  264:    const TAO_Array_Forany_T<T,T_slice,TAG> & p
+        -:  265:  )
+        -:  266:  : ptr_ (p.ptr_),
+        -:  267:    nocopy_ (p.nocopy_)
+        -:  268:{
+        -:  269:}
+        -:  270:
+        -:  271:template<typename T, typename T_slice, typename TAG>
+        -:  272:ACE_INLINE
+      502:  273:TAO_Array_Forany_T<T,T_slice,TAG>::~TAO_Array_Forany_T (void)
+        -:  274:{
+      502:  275:}
+        -:  276:
+        -:  277:template<typename T, typename T_slice, typename TAG>
+        -:  278:ACE_INLINE
+        -:  279:TAO_Array_Forany_T<T,T_slice,TAG> &
+        -:  280:TAO_Array_Forany_T<T,T_slice,TAG>::operator= (T_slice * p)
+        -:  281:{
+        -:  282:  this->ptr_ = p;
+        -:  283:  return *this;
+        -:  284:}
+        -:  285:
+        -:  286:template<typename T, typename T_slice, typename TAG>
+        -:  287:ACE_INLINE
+        -:  288:TAO_Array_Forany_T<T,T_slice,TAG> &
+        -:  289:TAO_Array_Forany_T<T,T_slice,TAG>::operator= (
+        -:  290:    const TAO_Array_Forany_T<T,T_slice,TAG> & p
+        -:  291:  )
+        -:  292:{
+        -:  293:  this->ptr_ = p.ptr_;
+        -:  294:  this->nocopy_ = p.nocopy_;
+        -:  295:  return *this;
+        -:  296:}
+        -:  297:
+        -:  298:template<typename T, typename T_slice, typename TAG>
+        -:  299:ACE_INLINE
+        -:  300:TAO_Array_Forany_T<T,T_slice,TAG>::operator T_slice * const & () const
+        -:  301:{
+        -:  302:  return this->ptr_;
+        -:  303:}
+        -:  304:
+        -:  305:template<typename T, typename T_slice, typename TAG>
+        -:  306:ACE_INLINE
+        -:  307:TAO_Array_Forany_T<T,T_slice,TAG>::operator T_slice *& ()
+        -:  308:{
+        -:  309:  return this->ptr_;
+        -:  310:}
+        -:  311:
+        -:  312:template<typename T, typename T_slice, typename TAG>
+        -:  313:ACE_INLINE
+        -:  314:const T_slice &
+        -:  315:TAO_Array_Forany_T<T,T_slice,TAG>::operator[] (CORBA::ULong index) const
+        -:  316:{
+        -:  317:  const T_slice & tmp = this->ptr_[index];
+        -:  318:  return tmp;
+        -:  319:}
+        -:  320:
+        -:  321:template<typename T, typename T_slice, typename TAG>
+        -:  322:ACE_INLINE
+        -:  323:T_slice &
+        -:  324:TAO_Array_Forany_T<T,T_slice,TAG>::operator[] (CORBA::ULong index)
+        -:  325:{
+        -:  326:  return this->ptr_[index];
+        -:  327:}
+        -:  328:
+        -:  329:template<typename T, typename T_slice, typename TAG>
+        -:  330:ACE_INLINE
+        -:  331:const T_slice *
+      282:  332:TAO_Array_Forany_T<T,T_slice,TAG>::in (void) const
+        -:  333:{
+      282:  334:  return this->ptr_;
+        -:  335:}
+        -:  336:
+        -:  337:template<typename T, typename T_slice, typename TAG>
+        -:  338:ACE_INLINE
+        -:  339:T_slice *
+        -:  340:TAO_Array_Forany_T<T,T_slice,TAG>::inout (void)
+        -:  341:{
+        -:  342:  return this->ptr_;
+        -:  343:}
+        -:  344:
+        -:  345:template<typename T, typename T_slice, typename TAG>
+        -:  346:ACE_INLINE
+        -:  347:T_slice *&
+      192:  348:TAO_Array_Forany_T<T,T_slice,TAG>::out (void)
+        -:  349:{
+      192:  350:  return this->ptr_;
+        -:  351:}
+        -:  352:
+        -:  353:template<typename T, typename T_slice, typename TAG>
+        -:  354:ACE_INLINE
+        -:  355:T_slice *
+        -:  356:TAO_Array_Forany_T<T,T_slice,TAG>::_retn (void)
+        -:  357:{
+        -:  358:  return this->ptr_;
+        -:  359:}
+        -:  360:
+        -:  361:template<typename T, typename T_slice, typename TAG>
+        -:  362:ACE_INLINE
+        -:  363:CORBA::Boolean
+        -:  364:TAO_Array_Forany_T<T,T_slice,TAG>::nocopy (void) const
+        -:  365:{
+        -:  366:  return this->nocopy_;
+        -:  367:}
+        -:  368:
+        -:  369:template<typename T, typename T_slice, typename TAG>
+        -:  370:ACE_INLINE
+        -:  371:T_slice *
+        -:  372:TAO_Array_Forany_T<T,T_slice,TAG>::ptr (void) const
+        -:  373:{
+        -:  374:  return this->ptr_;
+        -:  375:}
+        -:  376:
+        -:  377:template<typename T, typename T_slice, typename TAG>
+        -:  378:ACE_INLINE
+        -:  379:T_slice *
+        -:  380:TAO_Array_Forany_T<T,T_slice,TAG>::tao_alloc (void)
+        -:  381:{
+        -:  382:  return TAO::Array_Traits<FORANY>::alloc ();
+        -:  383:}
+        -:  384:
+        -:  385:TAO_END_VERSIONED_NAMESPACE_DECL

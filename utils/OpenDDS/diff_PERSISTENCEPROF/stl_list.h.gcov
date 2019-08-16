@@ -1,0 +1,486 @@
+2c2
+<         -:    0:Programs:51
+---
+>         -:    0:Programs:3
+115,116c115,116
+<         6:  113:      _Tp*       _M_valptr()       { return _M_storage._M_ptr(); }
+<        43:  114:      _Tp const* _M_valptr() const { return _M_storage._M_ptr(); }
+---
+>     #####:  113:      _Tp*       _M_valptr()       { return _M_storage._M_ptr(); }
+>     #####:  114:      _Tp const* _M_valptr() const { return _M_storage._M_ptr(); }
+145,146c145,146
+<        12:  143:      _List_iterator(__detail::_List_node_base* __x) _GLIBCXX_NOEXCEPT
+<        12:  144:      : _M_node(__x) { }
+---
+>     #####:  143:      _List_iterator(__detail::_List_node_base* __x) _GLIBCXX_NOEXCEPT
+>     #####:  144:      : _M_node(__x) { }
+154,155c154,155
+<     #####:  152:      operator*() const _GLIBCXX_NOEXCEPT
+<     #####:  153:      { return *static_cast<_Node*>(_M_node)->_M_valptr(); }
+---
+>         -:  152:      operator*() const _GLIBCXX_NOEXCEPT
+>         -:  153:      { return *static_cast<_Node*>(_M_node)->_M_valptr(); }
+158,159c158,159
+<     #####:  156:      operator->() const _GLIBCXX_NOEXCEPT
+<     #####:  157:      { return static_cast<_Node*>(_M_node)->_M_valptr(); }
+---
+>         -:  156:      operator->() const _GLIBCXX_NOEXCEPT
+>         -:  157:      { return static_cast<_Node*>(_M_node)->_M_valptr(); }
+162c162
+<     #####:  160:      operator++() _GLIBCXX_NOEXCEPT
+---
+>         -:  160:      operator++() _GLIBCXX_NOEXCEPT
+164,165c164,165
+<     #####:  162:	_M_node = _M_node->_M_next;
+<     #####:  163:	return *this;
+---
+>         -:  162:	_M_node = _M_node->_M_next;
+>         -:  163:	return *this;
+177c177
+<     #####:  175:      operator--() _GLIBCXX_NOEXCEPT
+---
+>         -:  175:      operator--() _GLIBCXX_NOEXCEPT
+179,180c179,180
+<     #####:  177:	_M_node = _M_node->_M_prev;
+<     #####:  178:	return *this;
+---
+>         -:  177:	_M_node = _M_node->_M_prev;
+>         -:  178:	return *this;
+192,193c192,193
+<     #####:  190:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+<     #####:  191:      { return _M_node == __x._M_node; }
+---
+>         -:  190:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+>         -:  191:      { return _M_node == __x._M_node; }
+196,197c196,197
+<     #####:  194:      operator!=(const _Self& __x) const _GLIBCXX_NOEXCEPT
+<     #####:  195:      { return _M_node != __x._M_node; }
+---
+>         -:  194:      operator!=(const _Self& __x) const _GLIBCXX_NOEXCEPT
+>         -:  195:      { return _M_node != __x._M_node; }
+225c225
+<     #####:  223:      _List_const_iterator(const __detail::_List_node_base* __x)
+---
+>         -:  223:      _List_const_iterator(const __detail::_List_node_base* __x)
+227c227
+<     #####:  225:      : _M_node(__x) { }
+---
+>         -:  225:      : _M_node(__x) { }
+229,230c229,230
+<         9:  227:      _List_const_iterator(const iterator& __x) _GLIBCXX_NOEXCEPT
+<         9:  228:      : _M_node(__x._M_node) { }
+---
+>     #####:  227:      _List_const_iterator(const iterator& __x) _GLIBCXX_NOEXCEPT
+>     #####:  228:      : _M_node(__x._M_node) { }
+233,234c233,234
+<     #####:  231:      _M_const_cast() const _GLIBCXX_NOEXCEPT
+<     #####:  232:      { return iterator(const_cast<__detail::_List_node_base*>(_M_node)); }
+---
+>         -:  231:      _M_const_cast() const _GLIBCXX_NOEXCEPT
+>         -:  232:      { return iterator(const_cast<__detail::_List_node_base*>(_M_node)); }
+238,239c238,239
+<         3:  236:      operator*() const _GLIBCXX_NOEXCEPT
+<         3:  237:      { return *static_cast<_Node*>(_M_node)->_M_valptr(); }
+---
+>         -:  236:      operator*() const _GLIBCXX_NOEXCEPT
+>         -:  237:      { return *static_cast<_Node*>(_M_node)->_M_valptr(); }
+246c246
+<         3:  244:      operator++() _GLIBCXX_NOEXCEPT
+---
+>     #####:  244:      operator++() _GLIBCXX_NOEXCEPT
+248,249c248,249
+<         3:  246:	_M_node = _M_node->_M_next;
+<         3:  247:	return *this;
+---
+>     #####:  246:	_M_node = _M_node->_M_next;
+>     #####:  247:	return *this;
+276,277c276,277
+<     #####:  274:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+<     #####:  275:      { return _M_node == __x._M_node; }
+---
+>         -:  274:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+>         -:  275:      { return _M_node == __x._M_node; }
+280,281c280,281
+<         6:  278:      operator!=(const _Self& __x) const _GLIBCXX_NOEXCEPT
+<         6:  279:      { return _M_node != __x._M_node; }
+---
+>     #####:  278:      operator!=(const _Self& __x) const _GLIBCXX_NOEXCEPT
+>     #####:  279:      { return _M_node != __x._M_node; }
+325c325
+<         3:  323:      struct _List_impl
+---
+>     #####:  323:      struct _List_impl
+334,336c334,336
+<         3:  332:	_List_impl() _GLIBCXX_NOEXCEPT
+<         3:  333:	: _Node_alloc_type(), _M_node()
+<         3:  334:	{ }
+---
+>     #####:  332:	_List_impl() _GLIBCXX_NOEXCEPT
+>     #####:  333:	: _Node_alloc_type(), _M_node()
+>     #####:  334:	{ }
+352c352
+<     #####:  350:      size_t _M_get_size() const { return *_M_impl._M_node._M_valptr(); }
+---
+>         -:  350:      size_t _M_get_size() const { return *_M_impl._M_node._M_valptr(); }
+354c354
+<         3:  352:      void _M_set_size(size_t __n) { *_M_impl._M_node._M_valptr() = __n; }
+---
+>     #####:  352:      void _M_set_size(size_t __n) { *_M_impl._M_node._M_valptr() = __n; }
+356c356
+<         3:  354:      void _M_inc_size(size_t __n) { *_M_impl._M_node._M_valptr() += __n; }
+---
+>         -:  354:      void _M_inc_size(size_t __n) { *_M_impl._M_node._M_valptr() += __n; }
+358c358
+<     #####:  356:      void _M_dec_size(size_t __n) { *_M_impl._M_node._M_valptr() -= __n; }
+---
+>         -:  356:      void _M_dec_size(size_t __n) { *_M_impl._M_node._M_valptr() -= __n; }
+366c366
+<     #####:  364:      size_t _M_node_count() const { return *_M_impl._M_node._M_valptr(); }
+---
+>         -:  364:      size_t _M_node_count() const { return *_M_impl._M_node._M_valptr(); }
+384,385c384,385
+<         3:  382:      _M_get_node()
+<         3:  383:      { return _Node_alloc_traits::allocate(_M_impl, 1); }
+---
+>         -:  382:      _M_get_node()
+>         -:  383:      { return _Node_alloc_traits::allocate(_M_impl, 1); }
+388,389c388,389
+<         3:  386:      _M_put_node(typename _Node_alloc_traits::pointer __p) _GLIBCXX_NOEXCEPT
+<         3:  387:      { _Node_alloc_traits::deallocate(_M_impl, __p, 1); }
+---
+>     #####:  386:      _M_put_node(typename _Node_alloc_traits::pointer __p) _GLIBCXX_NOEXCEPT
+>     #####:  387:      { _Node_alloc_traits::deallocate(_M_impl, __p, 1); }
+395,396c395,396
+<         6:  393:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
+<         6:  394:      { return _M_impl; }
+---
+>     #####:  393:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
+>     #####:  394:      { return _M_impl; }
+402,404c402,404
+<         3:  400:      _List_base()
+<         3:  401:      : _M_impl()
+<         3:  402:      { _M_init(); }
+---
+>     #####:  400:      _List_base()
+>     #####:  401:      : _M_impl()
+>     #####:  402:      { _M_init(); }
+443,444c443,444
+<         3:  441:      ~_List_base() _GLIBCXX_NOEXCEPT
+<         3:  442:      { _M_clear(); }
+---
+>     #####:  441:      ~_List_base() _GLIBCXX_NOEXCEPT
+>     #####:  442:      { _M_clear(); }
+450c450
+<         3:  448:      _M_init() _GLIBCXX_NOEXCEPT
+---
+>     #####:  448:      _M_init() _GLIBCXX_NOEXCEPT
+452,455c452,455
+<         3:  450:	this->_M_impl._M_node._M_next = &this->_M_impl._M_node;
+<         3:  451:	this->_M_impl._M_node._M_prev = &this->_M_impl._M_node;
+<         3:  452:	_M_set_size(0);
+<         3:  453:      }
+---
+>     #####:  450:	this->_M_impl._M_node._M_next = &this->_M_impl._M_node;
+>     #####:  451:	this->_M_impl._M_node._M_prev = &this->_M_impl._M_node;
+>     #####:  452:	_M_set_size(0);
+>     #####:  453:      }
+572c572
+<         3:  570:	_M_create_node(_Args&&... __args)
+---
+>         -:  570:	_M_create_node(_Args&&... __args)
+574,577c574,577
+<         3:  572:	  auto __p = this->_M_get_node();
+<         3:  573:	  auto& __alloc = _M_get_Node_allocator();
+<         6:  574:	  __allocated_ptr<_Node_alloc_type> __guard{__alloc, __p};
+<         3:  575:	  _Node_alloc_traits::construct(__alloc, __p->_M_valptr(),
+---
+>         -:  572:	  auto __p = this->_M_get_node();
+>         -:  573:	  auto& __alloc = _M_get_Node_allocator();
+>         -:  574:	  __allocated_ptr<_Node_alloc_type> __guard{__alloc, __p};
+>         -:  575:	  _Node_alloc_traits::construct(__alloc, __p->_M_valptr(),
+579,580c579,580
+<         3:  577:	  __guard = nullptr;
+<         6:  578:	  return __p;
+---
+>         -:  577:	  __guard = nullptr;
+>         -:  578:	  return __p;
+591c591
+<         3:  589:      list()
+---
+>     #####:  589:      list()
+595c595
+<         3:  593:      : _Base() { }
+---
+>     #####:  593:      : _Base() { }
+735c735
+<         3:  733:      ~list() = default;
+---
+>     #####:  733:      ~list() = default;
+853,854c853,854
+<         3:  851:      begin() _GLIBCXX_NOEXCEPT
+<         3:  852:      { return iterator(this->_M_impl._M_node._M_next); }
+---
+>     #####:  851:      begin() _GLIBCXX_NOEXCEPT
+>     #####:  852:      { return iterator(this->_M_impl._M_node._M_next); }
+862,863c862,863
+<     #####:  860:      begin() const _GLIBCXX_NOEXCEPT
+<     #####:  861:      { return const_iterator(this->_M_impl._M_node._M_next); }
+---
+>         -:  860:      begin() const _GLIBCXX_NOEXCEPT
+>         -:  861:      { return const_iterator(this->_M_impl._M_node._M_next); }
+871,872c871,872
+<         9:  869:      end() _GLIBCXX_NOEXCEPT
+<         9:  870:      { return iterator(&this->_M_impl._M_node); }
+---
+>     #####:  869:      end() _GLIBCXX_NOEXCEPT
+>     #####:  870:      { return iterator(&this->_M_impl._M_node); }
+880,881c880,881
+<     #####:  878:      end() const _GLIBCXX_NOEXCEPT
+<     #####:  879:      { return const_iterator(&this->_M_impl._M_node); }
+---
+>         -:  878:      end() const _GLIBCXX_NOEXCEPT
+>         -:  879:      { return const_iterator(&this->_M_impl._M_node); }
+963,964c963,964
+<         3:  961:      empty() const _GLIBCXX_NOEXCEPT
+<         3:  962:      { return this->_M_impl._M_node._M_next == &this->_M_impl._M_node; }
+---
+>         -:  961:      empty() const _GLIBCXX_NOEXCEPT
+>         -:  962:      { return this->_M_impl._M_node._M_next == &this->_M_impl._M_node; }
+968,969c968,969
+<     #####:  966:      size() const _GLIBCXX_NOEXCEPT
+<     #####:  967:      { return this->_M_node_count(); }
+---
+>         -:  966:      size() const _GLIBCXX_NOEXCEPT
+>         -:  967:      { return this->_M_node_count(); }
+1022,1023c1022,1023
+<     #####: 1020:      front() _GLIBCXX_NOEXCEPT
+<     #####: 1021:      { return *begin(); }
+---
+>         -: 1020:      front() _GLIBCXX_NOEXCEPT
+>         -: 1021:      { return *begin(); }
+1030,1031c1030,1031
+<     #####: 1028:      front() const _GLIBCXX_NOEXCEPT
+<     #####: 1029:      { return *begin(); }
+---
+>         -: 1028:      front() const _GLIBCXX_NOEXCEPT
+>         -: 1029:      { return *begin(); }
+1038c1038
+<     #####: 1036:      back() _GLIBCXX_NOEXCEPT
+---
+>         -: 1036:      back() _GLIBCXX_NOEXCEPT
+1040,1042c1040,1042
+<     #####: 1038:	iterator __tmp = end();
+<     #####: 1039:	--__tmp;
+<     #####: 1040:	return *__tmp;
+---
+>         -: 1038:	iterator __tmp = end();
+>         -: 1039:	--__tmp;
+>         -: 1040:	return *__tmp;
+1119,1120c1119,1120
+<         3: 1117:      push_back(const value_type& __x)
+<         3: 1118:      { this->_M_insert(end(), __x); }
+---
+>         -: 1117:      push_back(const value_type& __x)
+>         -: 1118:      { this->_M_insert(end(), __x); }
+1124,1125c1124,1125
+<     #####: 1122:      push_back(value_type&& __x)
+<     #####: 1123:      { this->_M_insert(end(), std::move(__x)); }
+---
+>         -: 1122:      push_back(value_type&& __x)
+>         -: 1123:      { this->_M_insert(end(), std::move(__x)); }
+1216,1217c1216,1217
+<     #####: 1214:      insert(const_iterator __position, value_type&& __x)
+<     #####: 1215:      { return emplace(__position, std::move(__x)); }
+---
+>         -: 1214:      insert(const_iterator __position, value_type&& __x)
+>         -: 1215:      { return emplace(__position, std::move(__x)); }
+1386c1386
+<     #####: 1384:      swap(list& __x) _GLIBCXX_NOEXCEPT
+---
+>         -: 1384:      swap(list& __x) _GLIBCXX_NOEXCEPT
+1388c1388
+<     #####: 1386:	__detail::_List_node_base::swap(this->_M_impl._M_node,
+---
+>         -: 1386:	__detail::_List_node_base::swap(this->_M_impl._M_node,
+1391,1393c1391,1393
+<     #####: 1389:	size_t __xsize = __x._M_get_size();
+<     #####: 1390:	__x._M_set_size(this->_M_get_size());
+<     #####: 1391:	this->_M_set_size(__xsize);
+---
+>         -: 1389:	size_t __xsize = __x._M_get_size();
+>         -: 1390:	__x._M_set_size(this->_M_get_size());
+>         -: 1391:	this->_M_set_size(__xsize);
+1395c1395
+<     #####: 1393:	_Node_alloc_traits::_S_on_swap(this->_M_get_Node_allocator(),
+---
+>         -: 1393:	_Node_alloc_traits::_S_on_swap(this->_M_get_Node_allocator(),
+1397c1397
+<     #####: 1395:      }
+---
+>         -: 1395:      }
+1426c1426
+<     #####: 1424:      splice(const_iterator __position, list&& __x) noexcept
+---
+>         -: 1424:      splice(const_iterator __position, list&& __x) noexcept
+1431c1431
+<     #####: 1429:	if (!__x.empty())
+---
+>         -: 1429:	if (!__x.empty())
+1433c1433
+<     #####: 1431:	    _M_check_equal_allocators(__x);
+---
+>         -: 1431:	    _M_check_equal_allocators(__x);
+1435c1435
+<     #####: 1433:	    this->_M_transfer(__position._M_const_cast(),
+---
+>         -: 1433:	    this->_M_transfer(__position._M_const_cast(),
+1438,1439c1438,1439
+<     #####: 1436:	    this->_M_inc_size(__x._M_get_size());
+<     #####: 1437:	    __x._M_set_size(0);
+---
+>         -: 1436:	    this->_M_inc_size(__x._M_get_size());
+>         -: 1437:	    __x._M_set_size(0);
+1441c1441
+<     #####: 1439:      }
+---
+>         -: 1439:      }
+1445,1446c1445,1446
+<     #####: 1443:      splice(const_iterator __position, list& __x) noexcept
+<     #####: 1444:      { splice(__position, std::move(__x)); }
+---
+>         -: 1443:      splice(const_iterator __position, list& __x) noexcept
+>         -: 1444:      { splice(__position, std::move(__x)); }
+1461c1461
+<     #####: 1459:      splice(const_iterator __position, list&& __x, const_iterator __i) noexcept
+---
+>         -: 1459:      splice(const_iterator __position, list&& __x, const_iterator __i) noexcept
+1476,1479c1476,1479
+<     #####: 1474:	iterator __j = __i._M_const_cast();
+<     #####: 1475:	++__j;
+<     #####: 1476:	if (__position == __i || __position == __j)
+<     #####: 1477:	  return;
+---
+>         -: 1474:	iterator __j = __i._M_const_cast();
+>         -: 1475:	++__j;
+>         -: 1476:	if (__position == __i || __position == __j)
+>         -: 1477:	  return;
+1481,1482c1481,1482
+<     #####: 1479:	if (this != std::__addressof(__x))
+<     #####: 1480:	  _M_check_equal_allocators(__x);
+---
+>         -: 1479:	if (this != std::__addressof(__x))
+>         -: 1480:	  _M_check_equal_allocators(__x);
+1484c1484
+<     #####: 1482:	this->_M_transfer(__position._M_const_cast(),
+---
+>         -: 1482:	this->_M_transfer(__position._M_const_cast(),
+1487,1488c1487,1488
+<     #####: 1485:	this->_M_inc_size(1);
+<     #####: 1486:	__x._M_dec_size(1);
+---
+>         -: 1485:	this->_M_inc_size(1);
+>         -: 1486:	__x._M_dec_size(1);
+1503,1504c1503,1504
+<     #####: 1501:      splice(const_iterator __position, list& __x, const_iterator __i) noexcept
+<     #####: 1502:      { splice(__position, std::move(__x), __i); }
+---
+>         -: 1501:      splice(const_iterator __position, list& __x, const_iterator __i) noexcept
+>         -: 1502:      { splice(__position, std::move(__x), __i); }
+1676,1677c1676,1677
+<     #####: 1674:	merge(list& __x, _StrictWeakOrdering __comp)
+<     #####: 1675:	{ merge(std::move(__x), __comp); }
+---
+>         -: 1674:	merge(list& __x, _StrictWeakOrdering __comp)
+>         -: 1675:	{ merge(std::move(__x), __comp); }
+1786,1787c1786,1787
+<     #####: 1784:      _M_transfer(iterator __position, iterator __first, iterator __last)
+<     #####: 1785:      { __position._M_node->_M_transfer(__first._M_node, __last._M_node); }
+---
+>         -: 1784:      _M_transfer(iterator __position, iterator __first, iterator __last)
+>         -: 1785:      { __position._M_node->_M_transfer(__first._M_node, __last._M_node); }
+1801c1801
+<         3: 1799:       _M_insert(iterator __position, _Args&&... __args)
+---
+>         -: 1799:       _M_insert(iterator __position, _Args&&... __args)
+1803,1806c1803,1806
+<         3: 1801:	 _Node* __tmp = _M_create_node(std::forward<_Args>(__args)...);
+<         3: 1802:	 __tmp->_M_hook(__position._M_node);
+<         3: 1803:	 this->_M_inc_size(1);
+<         3: 1804:       }
+---
+>         -: 1801:	 _Node* __tmp = _M_create_node(std::forward<_Args>(__args)...);
+>         -: 1802:	 __tmp->_M_hook(__position._M_node);
+>         -: 1803:	 this->_M_inc_size(1);
+>         -: 1804:       }
+1811c1811
+<     #####: 1809:      _M_erase(iterator __position) _GLIBCXX_NOEXCEPT
+---
+>         -: 1809:      _M_erase(iterator __position) _GLIBCXX_NOEXCEPT
+1813,1815c1813,1815
+<     #####: 1811:	this->_M_dec_size(1);
+<     #####: 1812:	__position._M_node->_M_unhook();
+<     #####: 1813:	_Node* __n = static_cast<_Node*>(__position._M_node);
+---
+>         -: 1811:	this->_M_dec_size(1);
+>         -: 1812:	__position._M_node->_M_unhook();
+>         -: 1813:	_Node* __n = static_cast<_Node*>(__position._M_node);
+1817c1817
+<     #####: 1815:	_Node_alloc_traits::destroy(_M_get_Node_allocator(), __n->_M_valptr());
+---
+>         -: 1815:	_Node_alloc_traits::destroy(_M_get_Node_allocator(), __n->_M_valptr());
+1822,1823c1822,1823
+<     #####: 1820:	_M_put_node(__n);
+<     #####: 1821:      }
+---
+>         -: 1820:	_M_put_node(__n);
+>         -: 1821:      }
+1827c1827
+<     #####: 1825:      _M_check_equal_allocators(list& __x) _GLIBCXX_NOEXCEPT
+---
+>         -: 1825:      _M_check_equal_allocators(list& __x) _GLIBCXX_NOEXCEPT
+1829,1832c1829,1832
+<     #####: 1827:	if (std::__alloc_neq<typename _Base::_Node_alloc_type>::
+<     #####: 1828:	    _S_do_it(_M_get_Node_allocator(), __x._M_get_Node_allocator()))
+<     #####: 1829:	  __builtin_abort();
+<     #####: 1830:      }
+---
+>         -: 1827:	if (std::__alloc_neq<typename _Base::_Node_alloc_type>::
+>         -: 1828:	    _S_do_it(_M_get_Node_allocator(), __x._M_get_Node_allocator()))
+>         -: 1829:	  __builtin_abort();
+>         -: 1830:      }
+1963c1963
+<     #####: 1961:    __distance(_GLIBCXX_STD_C::_List_iterator<_Tp> __first,
+---
+>         -: 1961:    __distance(_GLIBCXX_STD_C::_List_iterator<_Tp> __first,
+1968c1968
+<     #####: 1966:      return std::__distance(_CIter(__first), _CIter(__last), __tag);
+---
+>         -: 1966:      return std::__distance(_CIter(__first), _CIter(__last), __tag);
+1973c1973
+<     #####: 1971:    __distance(_GLIBCXX_STD_C::_List_const_iterator<_Tp> __first,
+---
+>         -: 1971:    __distance(_GLIBCXX_STD_C::_List_const_iterator<_Tp> __first,
+1978,1980c1978,1980
+<     #####: 1976:      _GLIBCXX_STD_C::_List_const_iterator<_Tp> __beyond = __last;
+<     #####: 1977:      ++__beyond;
+<     #####: 1978:      bool __whole = __first == __beyond;
+---
+>         -: 1976:      _GLIBCXX_STD_C::_List_const_iterator<_Tp> __beyond = __last;
+>         -: 1977:      ++__beyond;
+>         -: 1978:      bool __whole = __first == __beyond;
+1984,1985c1984,1985
+<     #####: 1982:      ptrdiff_t __n = 0;
+<     #####: 1983:      while (__first != __last)
+---
+>         -: 1982:      ptrdiff_t __n = 0;
+>         -: 1983:      while (__first != __last)
+1987,1988c1987,1988
+<     #####: 1985:	  ++__first;
+<     #####: 1986:	  ++__n;
+---
+>         -: 1985:	  ++__first;
+>         -: 1986:	  ++__n;
+1990c1990
+<     #####: 1988:      return __n;
+---
+>         -: 1988:      return __n;

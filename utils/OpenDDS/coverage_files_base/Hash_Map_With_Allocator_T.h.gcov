@@ -1,0 +1,114 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/Hash_Map_With_Allocator_T.h
+        -:    0:Programs:70
+        -:    1:// -*- C++ -*-
+        -:    2:
+        -:    3://=============================================================================
+        -:    4:/**
+        -:    5: *  @file   Hash_Map_With_Allocator_T.h
+        -:    6: *
+        -:    7: *  $Id: Hash_Map_With_Allocator_T.h 1861 2011-08-31 16:18:08Z mesnierp $
+        -:    8: *
+        -:    9: *  @author Marina Spivak <marina@cs.wustl.edu>
+        -:   10: *  @author Irfan Pyarali <irfan@cs.wustl.edu>
+        -:   11: */
+        -:   12://=============================================================================
+        -:   13:
+        -:   14:#ifndef ACE_HASH_MAP_WITH_ALLOCATOR_T_H
+        -:   15:#define ACE_HASH_MAP_WITH_ALLOCATOR_T_H
+        -:   16:#include /**/ "ace/pre.h"
+        -:   17:
+        -:   18:#include "ace/Hash_Map_Manager_T.h"
+        -:   19:#include "ace/Null_Mutex.h"
+        -:   20:
+        -:   21:#if !defined (ACE_LACKS_PRAGMA_ONCE)
+        -:   22:# pragma once
+        -:   23:#endif /* ACE_LACKS_PRAGMA_ONCE */
+        -:   24:
+        -:   25:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   26:
+        -:   27:/**
+        -:   28: * @class ACE_Hash_Map_With_Allocator
+        -:   29: *
+        -:   30: * @brief This class is a thin wrapper around ACE_Hash_Map_Manager,
+        -:   31: *     which comes handy when ACE_Hash_Map_Manager is to be used with a
+        -:   32: *     non-nil ACE_Allocator.  This wrapper insures that the appropriate
+        -:   33: *     allocator is in place for every operation that accesses or
+        -:   34: *     updates the hash map.
+        -:   35: *
+        -:   36: *     If we use ACE_Hash_Map_Manager with a shared memory allocator
+        -:   37: *     (or memory-mapped file allocator, for example), the allocator
+        -:   38: *     pointer used by ACE_Hash_Map_Manager gets stored with it, in
+        -:   39: *     shared memory (or memory-mapped file).  Naturally, this will
+        -:   40: *     cause horrible problems, since only the first process to set
+        -:   41: *     that pointer will be guaranteed the address of the allocator
+        -:   42: *     is meaningful!  That is why we need this wrapper, which
+        -:   43: *     insures that appropriate allocator pointer is in place for
+        -:   44: *     each call.
+        -:   45: *
+        -:   46: *     At some point it would be a good idea to update this class to
+        -:   47: *     use the new "two allocator" technique provided by @c
+        -:   48: *     ACE_Hash_Map_Manager_Ex.
+        -:   49: */
+        -:   50:template <class EXT_ID, class INT_ID>
+    #####:   51:class ACE_Hash_Map_With_Allocator :
+        -:   52:  public ACE_Hash_Map_Manager_Ex<EXT_ID, INT_ID, ACE_Hash<EXT_ID>, ACE_Equal_To<EXT_ID>, ACE_Null_Mutex>
+        -:   53:{
+        -:   54:public:
+        -:   55:  /// Constructor.
+        -:   56:  ACE_Hash_Map_With_Allocator (ACE_Allocator *alloc);
+        -:   57:
+        -:   58:  /// Constructor that specifies hash table size.
+        -:   59:  ACE_Hash_Map_With_Allocator (size_t size,
+        -:   60:                               ACE_Allocator *alloc);
+        -:   61:
+        -:   62:  // = The following methods are Proxies to the corresponding methods
+        -:   63:  // in ACE_Hash_Map_Manager.  Each method sets the allocator to
+        -:   64:  // the one specified by the invoking entity, and then calls the
+        -:   65:  // corresponding method in ACE_Hash_Map_Manager to do the
+        -:   66:  // actual work.
+        -:   67:
+        -:   68:  int bind (const EXT_ID &,
+        -:   69:            const INT_ID &,
+        -:   70:            ACE_Allocator *alloc);
+        -:   71:
+        -:   72:  int unbind (const EXT_ID &,
+        -:   73:              INT_ID &,
+        -:   74:              ACE_Allocator *alloc);
+        -:   75:
+        -:   76:  int unbind (const EXT_ID &,
+        -:   77:              ACE_Allocator *alloc);
+        -:   78:
+        -:   79:  int rebind (const EXT_ID &,
+        -:   80:              const INT_ID &,
+        -:   81:              EXT_ID &,
+        -:   82:              INT_ID &,
+        -:   83:              ACE_Allocator *alloc);
+        -:   84:
+        -:   85:  int find (const EXT_ID &,
+        -:   86:            INT_ID &,
+        -:   87:            ACE_Allocator *alloc);
+        -:   88:
+        -:   89:  /// Returns 0 if the @a ext_id is in the mapping, otherwise -1.
+        -:   90:  int find (const EXT_ID &ext_id,
+        -:   91:            ACE_Allocator *alloc);
+        -:   92:
+        -:   93:  int close (ACE_Allocator *alloc);
+        -:   94:};
+        -:   95:
+        -:   96:ACE_END_VERSIONED_NAMESPACE_DECL
+        -:   97:
+        -:   98:#if defined (__ACE_INLINE__)
+        -:   99:#include "ace/Hash_Map_With_Allocator_T.inl"
+        -:  100:#endif /* __ACE_INLINE__ */
+        -:  101:
+        -:  102:#if defined (ACE_TEMPLATES_REQUIRE_SOURCE)
+        -:  103:#include "ace/Hash_Map_With_Allocator_T.cpp"
+        -:  104:#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
+        -:  105:
+        -:  106:#if defined (ACE_TEMPLATES_REQUIRE_PRAGMA)
+        -:  107:#pragma implementation ("Hash_Map_With_Allocator_T.cpp")
+        -:  108:#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
+        -:  109:
+        -:  110:
+        -:  111:#include /**/ "ace/post.h"
+        -:  112:#endif /* ACE_HASH_MAP_WITH_ALLOCATOR_T_H */

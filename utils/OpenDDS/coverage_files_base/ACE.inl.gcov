@@ -1,0 +1,339 @@
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/ace/ACE.inl
+        -:    0:Programs:51
+        -:    1:// -*- C++ -*-
+        -:    2://
+        -:    3:// $Id: ACE.inl 2622 2015-08-13 18:30:00Z mitza $
+        -:    4:
+        -:    5:#include "ace/OS_NS_unistd.h"
+        -:    6:#include "ace/OS_NS_Thread.h"
+        -:    7:#include "ace/OS_NS_ctype.h"
+        -:    8:#include "ace/OS_NS_sys_socket.h"
+        -:    9:
+        -:   10:// Open versioned namespace, if enabled by the user.
+        -:   11:ACE_BEGIN_VERSIONED_NAMESPACE_DECL
+        -:   12:
+        -:   13:
+        -:   14:// Wrappers for methods that have been moved to ACE_OS.
+        -:   15:
+        -:   16:ACE_INLINE ssize_t
+        -:   17:ACE::read_n (ACE_HANDLE handle,
+        -:   18:             void *buf,
+        -:   19:             size_t len,
+        -:   20:             size_t *bytes_transferred)
+        -:   21:{
+        -:   22:  return ACE_OS::read_n (handle,
+        -:   23:                         buf,
+        -:   24:                         len,
+        -:   25:                         bytes_transferred);
+        -:   26:}
+        -:   27:
+        -:   28:ACE_INLINE ssize_t
+        -:   29:ACE::write_n (ACE_HANDLE handle,
+        -:   30:              const void *buf,
+        -:   31:              size_t len,
+        -:   32:              size_t *bytes_transferred)
+        -:   33:{
+        -:   34:  return ACE_OS::write_n (handle,
+        -:   35:                          buf,
+        -:   36:                          len,
+        -:   37:                          bytes_transferred);
+        -:   38:}
+        -:   39:
+        -:   40:ACE_INLINE ssize_t
+        -:   41:ACE::recv_n (ACE_HANDLE handle,
+        -:   42:             void *buf,
+        -:   43:             size_t len,
+        -:   44:             int flags,
+        -:   45:             const ACE_Time_Value *timeout,
+        -:   46:             size_t *bytes_transferred)
+        -:   47:{
+        -:   48:  if (timeout == 0)
+        -:   49:    return ACE::recv_n_i (handle,
+        -:   50:                          buf,
+        -:   51:                          len,
+        -:   52:                          flags,
+        -:   53:                          bytes_transferred);
+        -:   54:  else
+        -:   55:    return ACE::recv_n_i (handle,
+        -:   56:                          buf,
+        -:   57:                          len,
+        -:   58:                          flags,
+        -:   59:                          timeout,
+        -:   60:                          bytes_transferred);
+        -:   61:}
+        -:   62:
+        -:   63:#if defined (ACE_HAS_TLI)
+        -:   64:
+        -:   65:ACE_INLINE ssize_t
+        -:   66:ACE::t_rcv_n (ACE_HANDLE handle,
+        -:   67:              void *buf,
+        -:   68:              size_t len,
+        -:   69:              int *flags,
+        -:   70:              const ACE_Time_Value *timeout,
+        -:   71:              size_t *bytes_transferred)
+        -:   72:{
+        -:   73:  if (timeout == 0)
+        -:   74:    return ACE::t_rcv_n_i (handle,
+        -:   75:                           buf,
+        -:   76:                           len,
+        -:   77:                           flags,
+        -:   78:                           bytes_transferred);
+        -:   79:  else
+        -:   80:    return ACE::t_rcv_n_i (handle,
+        -:   81:                           buf,
+        -:   82:                           len,
+        -:   83:                           flags,
+        -:   84:                           timeout,
+        -:   85:                           bytes_transferred);
+        -:   86:}
+        -:   87:
+        -:   88:#endif /* ACE_HAS_TLI */
+        -:   89:
+        -:   90:ACE_INLINE ssize_t
+        -:   91:ACE::recv_n (ACE_HANDLE handle,
+        -:   92:             void *buf,
+        -:   93:             size_t len,
+        -:   94:             const ACE_Time_Value *timeout,
+        -:   95:             size_t *bytes_transferred)
+        -:   96:{
+        -:   97:  if (timeout == 0)
+        -:   98:    return ACE::recv_n_i (handle,
+        -:   99:                          buf,
+        -:  100:                          len,
+        -:  101:                          bytes_transferred);
+        -:  102:  else
+        -:  103:    return ACE::recv_n_i (handle,
+        -:  104:                          buf,
+        -:  105:                          len,
+        -:  106:                          timeout,
+        -:  107:                          bytes_transferred);
+        -:  108:}
+        -:  109:
+        -:  110:ACE_INLINE ssize_t
+        -:  111:ACE::recvv_n (ACE_HANDLE handle,
+        -:  112:              iovec *iov,
+        -:  113:              int iovcnt,
+        -:  114:              const ACE_Time_Value *timeout,
+        -:  115:              size_t *bytes_transferred)
+        -:  116:{
+        -:  117:  if (timeout == 0)
+        -:  118:    return ACE::recvv_n_i (handle,
+        -:  119:                           iov,
+        -:  120:                           iovcnt,
+        -:  121:                           bytes_transferred);
+        -:  122:  else
+        -:  123:    return ACE::recvv_n_i (handle,
+        -:  124:                           iov,
+        -:  125:                           iovcnt,
+        -:  126:                           timeout,
+        -:  127:                           bytes_transferred);
+        -:  128:}
+        -:  129:
+        -:  130:ACE_INLINE ssize_t
+        -:  131:ACE::send_n (ACE_HANDLE handle,
+        -:  132:             const void *buf,
+        -:  133:             size_t len,
+        -:  134:             int flags,
+        -:  135:             const ACE_Time_Value *timeout,
+        -:  136:             size_t *bytes_transferred)
+        -:  137:{
+        -:  138:  if (timeout == 0)
+        -:  139:    return ACE::send_n_i (handle,
+        -:  140:                          buf,
+        -:  141:                          len,
+        -:  142:                          flags,
+        -:  143:                          bytes_transferred);
+        -:  144:  else
+        -:  145:    return ACE::send_n_i (handle,
+        -:  146:                          buf,
+        -:  147:                          len,
+        -:  148:                          flags,
+        -:  149:                          timeout,
+        -:  150:                          bytes_transferred);
+        -:  151:}
+        -:  152:
+        -:  153:#if defined (ACE_HAS_TLI)
+        -:  154:
+        -:  155:ACE_INLINE ssize_t
+        -:  156:ACE::t_snd_n (ACE_HANDLE handle,
+        -:  157:              const void *buf,
+        -:  158:              size_t len,
+        -:  159:              int flags,
+        -:  160:              const ACE_Time_Value *timeout,
+        -:  161:              size_t *bytes_transferred)
+        -:  162:{
+        -:  163:  if (timeout == 0)
+        -:  164:    return ACE::t_snd_n_i (handle,
+        -:  165:                           buf,
+        -:  166:                           len,
+        -:  167:                           flags,
+        -:  168:                           bytes_transferred);
+        -:  169:  else
+        -:  170:    return ACE::t_snd_n_i (handle,
+        -:  171:                           buf,
+        -:  172:                           len,
+        -:  173:                           flags,
+        -:  174:                           timeout,
+        -:  175:                           bytes_transferred);
+        -:  176:}
+        -:  177:
+        -:  178:#endif /* ACE_HAS_TLI */
+        -:  179:
+        -:  180:ACE_INLINE ssize_t
+        -:  181:ACE::send_n (ACE_HANDLE handle,
+        -:  182:             const void *buf,
+        -:  183:             size_t len,
+        -:  184:             const ACE_Time_Value *timeout,
+        -:  185:             size_t *bytes_transferred)
+        -:  186:{
+        -:  187:  if (timeout == 0)
+        -:  188:    return ACE::send_n_i (handle,
+        -:  189:                          buf,
+        -:  190:                          len,
+        -:  191:                          bytes_transferred);
+        -:  192:  else
+        -:  193:    return ACE::send_n_i (handle,
+        -:  194:                          buf,
+        -:  195:                          len,
+        -:  196:                          timeout,
+        -:  197:                          bytes_transferred);
+        -:  198:}
+        -:  199:
+        -:  200:ACE_INLINE ssize_t
+        -:  201:ACE::sendv_n (ACE_HANDLE handle,
+        -:  202:              const iovec *iov,
+        -:  203:              int iovcnt,
+        -:  204:              const ACE_Time_Value *timeout,
+        -:  205:              size_t *bytes_transferred)
+        -:  206:{
+        -:  207:  if (timeout == 0)
+        -:  208:    return ACE::sendv_n_i (handle,
+        -:  209:                           iov,
+        -:  210:                           iovcnt,
+        -:  211:                           bytes_transferred);
+        -:  212:  else
+        -:  213:    return ACE::sendv_n_i (handle,
+        -:  214:                           iov,
+        -:  215:                           iovcnt,
+        -:  216:                           timeout,
+        -:  217:                           bytes_transferred);
+        -:  218:}
+        -:  219:
+        -:  220:ACE_INLINE ssize_t
+        -:  221:ACE::send_i (ACE_HANDLE handle, const void *buf, size_t len)
+        -:  222:{
+        -:  223:#if defined (ACE_WIN32) || defined (HPUX)
+        -:  224:  return ACE_OS::send (handle, (const char *) buf, len);
+        -:  225:#else
+        -:  226:  return ACE_OS::write (handle, (const char *) buf, len);
+        -:  227:#endif /* ACE_WIN32 */
+        -:  228:}
+        -:  229:
+        -:  230:ACE_INLINE ssize_t
+        -:  231:ACE::recv_i (ACE_HANDLE handle, void *buf, size_t len)
+        -:  232:{
+        -:  233:#if defined (ACE_WIN32) || defined (ACE_OPENVMS)
+        -:  234:  return ACE_OS::recv (handle, (char *) buf, len);
+        -:  235:#else
+        -:  236:  return ACE_OS::read (handle, (char *) buf, len);
+        -:  237:#endif /* ACE_WIN32 */
+        -:  238:}
+        -:  239:
+        -:  240:ACE_INLINE int
+        -:  241:ACE::handle_read_ready (ACE_HANDLE handle, const ACE_Time_Value *timeout)
+        -:  242:{
+        -:  243:  return ACE::handle_ready (handle, timeout, 1, 0, 0);
+        -:  244:}
+        -:  245:
+        -:  246:ACE_INLINE int
+       90:  247:ACE::handle_write_ready (ACE_HANDLE handle, const ACE_Time_Value *timeout)
+        -:  248:{
+       90:  249:  return ACE::handle_ready (handle, timeout, 0, 1, 0);
+        -:  250:}
+        -:  251:
+        -:  252:ACE_INLINE int
+        -:  253:ACE::handle_exception_ready (ACE_HANDLE handle, const ACE_Time_Value *timeout)
+        -:  254:{
+        -:  255:  return ACE::handle_ready (handle, timeout, 0, 0, 1);
+        -:  256:}
+        -:  257:
+        -:  258:ACE_INLINE void
+        -:  259:ACE::strdelete (char *s)
+        -:  260:{
+        -:  261:#if defined (ACE_HAS_ALLOC_HOOKS)
+        -:  262:  ACE_Allocator::instance()->free(s);
+        -:  263:#else
+        -:  264:  delete [] s;
+        -:  265:#endif /* ACE_HAS_ALLOC_HOOKS */
+        -:  266:}
+        -:  267:
+        -:  268:#if defined (ACE_HAS_WCHAR)
+        -:  269:ACE_INLINE void
+        -:  270:ACE::strdelete (wchar_t *s)
+        -:  271:{
+        -:  272:  delete [] s;
+        -:  273:}
+        -:  274:#endif /* ACE_HAS_WCHAR */
+        -:  275:
+        -:  276:ACE_INLINE bool
+        -:  277:ACE::isdotdir (const char *s)
+        -:  278:{
+        -:  279:  return (s[0] == '.' &&
+        -:  280:          ((s[1] == 0) || (s[1] == '.' && s[2] == 0)));
+        -:  281:}
+        -:  282:
+        -:  283:#if defined (ACE_HAS_WCHAR)
+        -:  284:ACE_INLINE bool
+        -:  285:ACE::isdotdir (const wchar_t *s)
+        -:  286:{
+        -:  287:  return (s[0] == ACE_TEXT ('.') &&
+        -:  288:          ((s[1] == 0) || (s[1] == ACE_TEXT ('.') && s[2] == 0)));
+        -:  289:}
+        -:  290:#endif /* ACE_HAS_WCHAR */
+        -:  291:
+        -:  292:ACE_INLINE void
+        -:  293:ACE::unique_name (const void *object,
+        -:  294:                  ACE_TCHAR *name,
+        -:  295:                  size_t length)
+        -:  296:{
+        -:  297:  ACE_OS::unique_name (object, name, length);
+        -:  298:}
+        -:  299:
+        -:  300:ACE_INLINE u_long
+        -:  301:ACE::log2 (u_long num)
+        -:  302:{
+        -:  303:  u_long log = 0;
+        -:  304:
+        -:  305:  for (; num > 1; ++log)
+        -:  306:    num >>= 1;
+        -:  307:
+        -:  308:  return log;
+        -:  309:}
+        -:  310:
+        -:  311:ACE_INLINE int
+        -:  312:ACE::map_errno (int error)
+        -:  313:{
+        -:  314:#if defined (ACE_WIN32)
+        -:  315:  switch (error)
+        -:  316:    {
+        -:  317:    case WSAEWOULDBLOCK:
+        -:  318:      return EAGAIN; // Same as UNIX errno EWOULDBLOCK.
+        -:  319:    }
+        -:  320:#endif /* ACE_WIN32 */
+        -:  321:
+        -:  322:  return error;
+        -:  323:}
+        -:  324:
+        -:  325:ACE_INLINE u_char
+        -:  326:ACE::hex2byte (ACE_TCHAR c)
+        -:  327:{
+        -:  328:  if (ACE_OS::ace_isdigit (c))
+        -:  329:    return (u_char) (c - ACE_TEXT ('0'));
+        -:  330:  else if (ACE_OS::ace_islower (c))
+        -:  331:    return (u_char) (10 + c - ACE_TEXT ('a'));
+        -:  332:  else
+        -:  333:    return (u_char) (10 + c - ACE_TEXT ('A'));
+        -:  334:}
+        -:  335:
+        -:  336:// Close versioned namespace, if enabled by the user.
+        -:  337:ACE_END_VERSIONED_NAMESPACE_DECL

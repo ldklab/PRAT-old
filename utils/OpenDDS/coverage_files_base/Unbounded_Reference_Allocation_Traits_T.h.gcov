@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Reference_Allocation_Traits_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Unbounded_Reference_Allocation_Traits_T.h
         -:    0:Programs:51
         -:    1:#ifndef guard_unbounded_reference_allocation_traits_hpp
         -:    2:#define guard_unbounded_reference_allocation_traits_hpp
@@ -8,7 +8,7 @@
         -:    6: * @brief Details can be found in the documentation for
         -:    7: * TAO::details::generic_sequence
         -:    8: *
-        -:    9: * $Id$
+        -:    9: * $Id: Unbounded_Reference_Allocation_Traits_T.h 2476 2015-02-26 23:23:49Z mesnierp $
         -:   10: *
         -:   11: * @author Carlos O'Ryan
         -:   12: */

@@ -1,4 +1,4 @@
-        -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Sequence_Element_T.h
+        -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/String_Sequence_Element_T.h
         -:    0:Programs:70
         -:    1:#ifndef guard_string_sequence_element_hpp
         -:    2:#define guard_string_sequence_element_hpp
@@ -8,7 +8,7 @@
         -:    6: * @brief Implement the type returned by operator[] in string
         -:    7: * sequences.
         -:    8: *
-        -:    9: * $Id$
+        -:    9: * $Id: String_Sequence_Element_T.h 1861 2011-08-31 16:18:08Z mesnierp $
         -:   10: *
         -:   11: * @author Carlos O'Ryan
         -:   12: */

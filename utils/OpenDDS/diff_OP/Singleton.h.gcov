@@ -1,0 +1,8 @@
+81c81
+<         7:   79:class ACE_Singleton : public ACE_Cleanup
+---
+>        12:   79:class ACE_Singleton : public ACE_Cleanup
+134c134
+<        14:  132:class ACE_Unmanaged_Singleton : public ACE_Singleton <TYPE, ACE_LOCK>
+---
+>        24:  132:class ACE_Unmanaged_Singleton : public ACE_Singleton <TYPE, ACE_LOCK>

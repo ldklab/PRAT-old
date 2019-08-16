@@ -1,662 +1,156 @@
-68c68
-<        15:   66:    vector<_Tp, _Alloc>::
+67c67
+<        22:   65:    vector<_Tp, _Alloc>::
 ---
->     #####:   66:    vector<_Tp, _Alloc>::
-71c71
-<        15:   69:      if (__n > this->max_size())
+>        54:   65:    vector<_Tp, _Alloc>::
+70c70
+<        22:   68:      if (__n > this->max_size())
 ---
->     #####:   69:      if (__n > this->max_size())
-73c73
-<        15:   71:      if (this->capacity() < __n)
+>        54:   68:      if (__n > this->max_size())
+72c72
+<        22:   70:      if (this->capacity() < __n)
 ---
->     #####:   71:      if (this->capacity() < __n)
-75,76c75,76
-<        15:   73:	  const size_type __old_size = size();
-<        15:   74:	  pointer __tmp = _M_allocate_and_copy(__n,
+>        54:   70:      if (this->capacity() < __n)
+74,75c74,75
+<        22:   72:	  const size_type __old_size = size();
+<        22:   73:	  pointer __tmp = _M_allocate_and_copy(__n,
 ---
->     #####:   73:	  const size_type __old_size = size();
->     #####:   74:	  pointer __tmp = _M_allocate_and_copy(__n,
-80,87c80,87
-<        15:   78:	  std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
-<        15:   79:			_M_get_Tp_allocator());
-<        30:   80:	  _M_deallocate(this->_M_impl._M_start,
-<        15:   81:			this->_M_impl._M_end_of_storage
-<        15:   82:			- this->_M_impl._M_start);
-<        15:   83:	  this->_M_impl._M_start = __tmp;
-<        15:   84:	  this->_M_impl._M_finish = __tmp + __old_size;
-<        15:   85:	  this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __n;
+>        54:   72:	  const size_type __old_size = size();
+>        54:   73:	  pointer __tmp = _M_allocate_and_copy(__n,
+78,85c78,85
+<        22:   76:	  std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
+<        22:   77:			_M_get_Tp_allocator());
+<        44:   78:	  _M_deallocate(this->_M_impl._M_start,
+<        22:   79:			this->_M_impl._M_end_of_storage
+<        22:   80:			- this->_M_impl._M_start);
+<        22:   81:	  this->_M_impl._M_start = __tmp;
+<        22:   82:	  this->_M_impl._M_finish = __tmp + __old_size;
+<        22:   83:	  this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __n;
 ---
->     #####:   78:	  std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
->     #####:   79:			_M_get_Tp_allocator());
->     #####:   80:	  _M_deallocate(this->_M_impl._M_start,
->     #####:   81:			this->_M_impl._M_end_of_storage
->     #####:   82:			- this->_M_impl._M_start);
->     #####:   83:	  this->_M_impl._M_start = __tmp;
->     #####:   84:	  this->_M_impl._M_finish = __tmp + __old_size;
->     #####:   85:	  this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __n;
-89c89
-<        15:   87:    }
+>        54:   76:	  std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
+>        54:   77:			_M_get_Tp_allocator());
+>       108:   78:	  _M_deallocate(this->_M_impl._M_start,
+>        54:   79:			this->_M_impl._M_end_of_storage
+>        54:   80:			- this->_M_impl._M_start);
+>        54:   81:	  this->_M_impl._M_start = __tmp;
+>        54:   82:	  this->_M_impl._M_finish = __tmp + __old_size;
+>        54:   83:	  this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __n;
+87c87
+<        22:   85:    }
 ---
->     #####:   87:    }
-92c92
-<         9:   66:    vector<_Tp, _Alloc>::
----
->     #####:   66:    vector<_Tp, _Alloc>::
-95c95
-<         9:   69:      if (__n > this->max_size())
----
->     #####:   69:      if (__n > this->max_size())
+>        54:   85:    }
 97c97
-<         9:   71:      if (this->capacity() < __n)
+<        13:   95:      vector<_Tp, _Alloc>::
 ---
->     #####:   71:      if (this->capacity() < __n)
-99,100c99,100
-<         9:   73:	  const size_type __old_size = size();
-<         9:   74:	  pointer __tmp = _M_allocate_and_copy(__n,
+>        14:   95:      vector<_Tp, _Alloc>::
+100c100
+<        13:   98:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
 ---
->     #####:   73:	  const size_type __old_size = size();
->     #####:   74:	  pointer __tmp = _M_allocate_and_copy(__n,
-104,111c104,111
-<         9:   78:	  std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
-<         9:   79:			_M_get_Tp_allocator());
-<        18:   80:	  _M_deallocate(this->_M_impl._M_start,
-<         9:   81:			this->_M_impl._M_end_of_storage
-<         9:   82:			- this->_M_impl._M_start);
-<         9:   83:	  this->_M_impl._M_start = __tmp;
-<         9:   84:	  this->_M_impl._M_finish = __tmp + __old_size;
-<         9:   85:	  this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __n;
+>        14:   98:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
+107c107
+<         3:  105:	  _M_realloc_insert(end(), std::forward<_Args>(__args)...);
 ---
->     #####:   78:	  std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
->     #####:   79:			_M_get_Tp_allocator());
->     #####:   80:	  _M_deallocate(this->_M_impl._M_start,
->     #####:   81:			this->_M_impl._M_end_of_storage
->     #####:   82:			- this->_M_impl._M_start);
->     #####:   83:	  this->_M_impl._M_start = __tmp;
->     #####:   84:	  this->_M_impl._M_finish = __tmp + __old_size;
->     #####:   85:	  this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __n;
-113c113
-<         9:   87:    }
+>         4:  105:	  _M_realloc_insert(end(), std::forward<_Args>(__args)...);
+111c111
+<        13:  109:      }
 ---
->     #####:   87:    }
+>        14:  109:      }
 116c116
-<         6:   66:    vector<_Tp, _Alloc>::
+<         4:  114:    vector<_Tp, _Alloc>::
 ---
->     #####:   66:    vector<_Tp, _Alloc>::
-119c119
-<         6:   69:      if (__n > this->max_size())
----
->     #####:   69:      if (__n > this->max_size())
-121c121
-<         6:   71:      if (this->capacity() < __n)
----
->     #####:   71:      if (this->capacity() < __n)
+>         8:  114:    vector<_Tp, _Alloc>::
 123,124c123,124
-<         6:   73:	  const size_type __old_size = size();
-<         6:   74:	  pointer __tmp = _M_allocate_and_copy(__n,
+<         4:  121:      const size_type __n = __position - begin();
+<         4:  122:      if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
 ---
->     #####:   73:	  const size_type __old_size = size();
->     #####:   74:	  pointer __tmp = _M_allocate_and_copy(__n,
-128,135c128,135
-<         6:   78:	  std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
-<         6:   79:			_M_get_Tp_allocator());
-<        12:   80:	  _M_deallocate(this->_M_impl._M_start,
-<         6:   81:			this->_M_impl._M_end_of_storage
-<         6:   82:			- this->_M_impl._M_start);
-<         6:   83:	  this->_M_impl._M_start = __tmp;
-<         6:   84:	  this->_M_impl._M_finish = __tmp + __old_size;
-<         6:   85:	  this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __n;
+>         8:  121:      const size_type __n = __position - begin();
+>         8:  122:      if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
+145c145
+<         4:  143:	_M_realloc_insert(begin() + (__position - cbegin()), __x);
 ---
->     #####:   78:	  std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
->     #####:   79:			_M_get_Tp_allocator());
->     #####:   80:	  _M_deallocate(this->_M_impl._M_start,
->     #####:   81:			this->_M_impl._M_end_of_storage
->     #####:   82:			- this->_M_impl._M_start);
->     #####:   83:	  this->_M_impl._M_start = __tmp;
->     #####:   84:	  this->_M_impl._M_finish = __tmp + __old_size;
->     #####:   85:	  this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __n;
-137c137
-<         6:   87:    }
+>         8:  143:	_M_realloc_insert(begin() + (__position - cbegin()), __x);
+150c150
+<         4:  148:      return iterator(this->_M_impl._M_start + __n);
 ---
->     #####:   87:    }
-148c148
-<        47:   97:      vector<_Tp, _Alloc>::
----
->     #####:   97:      vector<_Tp, _Alloc>::
-151c151
-<        47:  100:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
----
->     #####:  100:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
-154c154
-<       45*:  103:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
----
->     #####:  103:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
-156c156
-<       45*:  105:	    ++this->_M_impl._M_finish;
----
->     #####:  105:	    ++this->_M_impl._M_finish;
-160c160
-<        2*:  109:	  _M_realloc_insert(end(), std::forward<_Args>(__args)...);
----
->     #####:  109:	  _M_realloc_insert(end(), std::forward<_Args>(__args)...);
-164c164
-<        47:  113:      }
----
->     #####:  113:      }
+>         8:  148:      return iterator(this->_M_impl._M_start + __n);
 167c167
-<         2:   97:      vector<_Tp, _Alloc>::
+<         1:  165:    vector<_Tp, _Alloc>::
 ---
->     #####:   97:      vector<_Tp, _Alloc>::
+>         2:  165:    vector<_Tp, _Alloc>::
 170c170
-<         2:  100:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
----
->     #####:  100:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
-179c179
-<         2:  109:	  _M_realloc_insert(end(), std::forward<_Args>(__args)...);
----
->     #####:  109:	  _M_realloc_insert(end(), std::forward<_Args>(__args)...);
-183c183
-<         2:  113:      }
----
->     #####:  113:      }
-186c186
-<        45:   97:      vector<_Tp, _Alloc>::
----
->     #####:   97:      vector<_Tp, _Alloc>::
-189c189
-<        45:  100:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
----
->     #####:  100:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
-192c192
-<        45:  103:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
----
->     #####:  103:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
-194c194
-<        45:  105:	    ++this->_M_impl._M_finish;
----
->     #####:  105:	    ++this->_M_impl._M_finish;
-202c202
-<        45:  113:      }
----
->     #####:  113:      }
-208c208
-<        89:  118:    vector<_Tp, _Alloc>::
----
->        67:  118:    vector<_Tp, _Alloc>::
-215,216c215,216
-<        89:  125:      const size_type __n = __position - begin();
-<        89:  126:      if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
----
->        67:  125:      const size_type __n = __position - begin();
->        67:  126:      if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
-239c239
-<        89:  149:	_M_realloc_insert(begin() + (__position - cbegin()), __x);
----
->        67:  149:	_M_realloc_insert(begin() + (__position - cbegin()), __x);
-244c244
-<        89:  154:      return iterator(this->_M_impl._M_start + __n);
----
->        67:  154:      return iterator(this->_M_impl._M_start + __n);
-249c249
-<         4:  159:    vector<_Tp, _Alloc>::
----
->     #####:  159:    vector<_Tp, _Alloc>::
-252,255c252,255
-<         4:  162:      if (__position + 1 != end())
-<         2:  163:	_GLIBCXX_MOVE3(__position + 1, end(), __position);
-<         4:  164:      --this->_M_impl._M_finish;
-<         4:  165:      _Alloc_traits::destroy(this->_M_impl, this->_M_impl._M_finish);
----
->     #####:  162:      if (__position + 1 != end())
->     #####:  163:	_GLIBCXX_MOVE3(__position + 1, end(), __position);
->     #####:  164:      --this->_M_impl._M_finish;
->     #####:  165:      _Alloc_traits::destroy(this->_M_impl, this->_M_impl._M_finish);
-257c257
-<         4:  167:      return __position;
----
->     #####:  167:      return __position;
-262c262
-<         1:  172:    vector<_Tp, _Alloc>::
----
->     #####:  172:    vector<_Tp, _Alloc>::
-265c265
-<         1:  175:      if (__first != __last)
----
->     #####:  175:      if (__first != __last)
-271c271
-<         1:  181:      return __first;
----
->     #####:  181:      return __first;
-503c503
-<      166*:  413:      vector<_Tp, _Alloc>::
----
->       67*:  413:      vector<_Tp, _Alloc>::
-512c512
-<      166*:  422:      const size_type __len =
----
->       67*:  422:      const size_type __len =
-514,518c514,518
-<      166*:  424:      pointer __old_start = this->_M_impl._M_start;
-<      166*:  425:      pointer __old_finish = this->_M_impl._M_finish;
-<      166*:  426:      const size_type __elems_before = __position - begin();
-<      166*:  427:      pointer __new_start(this->_M_allocate(__len));
-<      166*:  428:      pointer __new_finish(__new_start);
----
->       67*:  424:      pointer __old_start = this->_M_impl._M_start;
->       67*:  425:      pointer __old_finish = this->_M_impl._M_finish;
->       67*:  426:      const size_type __elems_before = __position - begin();
->       67*:  427:      pointer __new_start(this->_M_allocate(__len));
->       67*:  428:      pointer __new_finish(__new_start);
-526,527c526,527
-<      166*:  436:	  _Alloc_traits::construct(this->_M_impl,
-<      166*:  437:				   __new_start + __elems_before,
----
->       67*:  436:	  _Alloc_traits::construct(this->_M_impl,
->       67*:  437:				   __new_start + __elems_before,
-533c533
-<      166*:  443:	  __new_finish = pointer();
----
->       67*:  443:	  __new_finish = pointer();
-537,538c537,538
-<      166*:  447:	    (__old_start, __position.base(),
-<      166*:  448:	     __new_start, _M_get_Tp_allocator());
----
->       67*:  447:	    (__old_start, __position.base(),
->       67*:  448:	     __new_start, _M_get_Tp_allocator());
-540c540
-<      166*:  450:	  ++__new_finish;
----
->       67*:  450:	  ++__new_finish;
-544,545c544,545
-<      166*:  454:	    (__position.base(), __old_finish,
-<      166*:  455:	     __new_finish, _M_get_Tp_allocator());
----
->       67*:  454:	    (__position.base(), __old_finish,
->       67*:  455:	     __new_finish, _M_get_Tp_allocator());
-558,564c558,564
-<      166*:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
-<      332*:  469:      _M_deallocate(__old_start,
-<      166*:  470:		    this->_M_impl._M_end_of_storage - __old_start);
-<      166*:  471:      this->_M_impl._M_start = __new_start;
-<      166*:  472:      this->_M_impl._M_finish = __new_finish;
-<      166*:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
-<      166*:  474:    }
----
->       67*:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
->      134*:  469:      _M_deallocate(__old_start,
->       67*:  470:		    this->_M_impl._M_end_of_storage - __old_start);
->       67*:  471:      this->_M_impl._M_start = __new_start;
->       67*:  472:      this->_M_impl._M_finish = __new_finish;
->       67*:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
->       67*:  474:    }
-567c567
-<         2:  413:      vector<_Tp, _Alloc>::
----
->     #####:  413:      vector<_Tp, _Alloc>::
-576c576
-<         2:  422:      const size_type __len =
----
->     #####:  422:      const size_type __len =
-578,582c578,582
-<         2:  424:      pointer __old_start = this->_M_impl._M_start;
-<         2:  425:      pointer __old_finish = this->_M_impl._M_finish;
-<         2:  426:      const size_type __elems_before = __position - begin();
-<         2:  427:      pointer __new_start(this->_M_allocate(__len));
-<         2:  428:      pointer __new_finish(__new_start);
----
->     #####:  424:      pointer __old_start = this->_M_impl._M_start;
->     #####:  425:      pointer __old_finish = this->_M_impl._M_finish;
->     #####:  426:      const size_type __elems_before = __position - begin();
->     #####:  427:      pointer __new_start(this->_M_allocate(__len));
->     #####:  428:      pointer __new_finish(__new_start);
-590,591c590,591
-<         2:  436:	  _Alloc_traits::construct(this->_M_impl,
-<         2:  437:				   __new_start + __elems_before,
----
->     #####:  436:	  _Alloc_traits::construct(this->_M_impl,
->     #####:  437:				   __new_start + __elems_before,
-597c597
-<         2:  443:	  __new_finish = pointer();
----
->     #####:  443:	  __new_finish = pointer();
-601,602c601,602
-<         2:  447:	    (__old_start, __position.base(),
-<         2:  448:	     __new_start, _M_get_Tp_allocator());
----
->     #####:  447:	    (__old_start, __position.base(),
->     #####:  448:	     __new_start, _M_get_Tp_allocator());
-604c604
-<         2:  450:	  ++__new_finish;
----
->     #####:  450:	  ++__new_finish;
-608,609c608,609
-<         2:  454:	    (__position.base(), __old_finish,
-<         2:  455:	     __new_finish, _M_get_Tp_allocator());
----
->     #####:  454:	    (__position.base(), __old_finish,
->     #####:  455:	     __new_finish, _M_get_Tp_allocator());
-622,628c622,628
-<         2:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
-<         4:  469:      _M_deallocate(__old_start,
-<         2:  470:		    this->_M_impl._M_end_of_storage - __old_start);
-<         2:  471:      this->_M_impl._M_start = __new_start;
-<         2:  472:      this->_M_impl._M_finish = __new_finish;
-<         2:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
-<         2:  474:    }
----
->     #####:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
->     #####:  469:      _M_deallocate(__old_start,
->     #####:  470:		    this->_M_impl._M_end_of_storage - __old_start);
->     #####:  471:      this->_M_impl._M_start = __new_start;
->     #####:  472:      this->_M_impl._M_finish = __new_finish;
->     #####:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
->     #####:  474:    }
-695c695
-<         6:  413:      vector<_Tp, _Alloc>::
----
->     #####:  413:      vector<_Tp, _Alloc>::
-704c704
-<         6:  422:      const size_type __len =
----
->     #####:  422:      const size_type __len =
-706,710c706,710
-<         6:  424:      pointer __old_start = this->_M_impl._M_start;
-<         6:  425:      pointer __old_finish = this->_M_impl._M_finish;
-<         6:  426:      const size_type __elems_before = __position - begin();
-<         6:  427:      pointer __new_start(this->_M_allocate(__len));
-<         6:  428:      pointer __new_finish(__new_start);
----
->     #####:  424:      pointer __old_start = this->_M_impl._M_start;
->     #####:  425:      pointer __old_finish = this->_M_impl._M_finish;
->     #####:  426:      const size_type __elems_before = __position - begin();
->     #####:  427:      pointer __new_start(this->_M_allocate(__len));
->     #####:  428:      pointer __new_finish(__new_start);
-718,719c718,719
-<         6:  436:	  _Alloc_traits::construct(this->_M_impl,
-<         6:  437:				   __new_start + __elems_before,
----
->     #####:  436:	  _Alloc_traits::construct(this->_M_impl,
->     #####:  437:				   __new_start + __elems_before,
-725c725
-<         6:  443:	  __new_finish = pointer();
----
->     #####:  443:	  __new_finish = pointer();
-729,730c729,730
-<         6:  447:	    (__old_start, __position.base(),
-<         6:  448:	     __new_start, _M_get_Tp_allocator());
----
->     #####:  447:	    (__old_start, __position.base(),
->     #####:  448:	     __new_start, _M_get_Tp_allocator());
-732c732
-<         6:  450:	  ++__new_finish;
----
->     #####:  450:	  ++__new_finish;
-736,737c736,737
-<         6:  454:	    (__position.base(), __old_finish,
-<         6:  455:	     __new_finish, _M_get_Tp_allocator());
----
->     #####:  454:	    (__position.base(), __old_finish,
->     #####:  455:	     __new_finish, _M_get_Tp_allocator());
-750,756c750,756
-<         6:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
-<        12:  469:      _M_deallocate(__old_start,
-<         6:  470:		    this->_M_impl._M_end_of_storage - __old_start);
-<         6:  471:      this->_M_impl._M_start = __new_start;
-<         6:  472:      this->_M_impl._M_finish = __new_finish;
-<         6:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
-<         6:  474:    }
----
->     #####:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
->     #####:  469:      _M_deallocate(__old_start,
->     #####:  470:		    this->_M_impl._M_end_of_storage - __old_start);
->     #####:  471:      this->_M_impl._M_start = __new_start;
->     #####:  472:      this->_M_impl._M_finish = __new_finish;
->     #####:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
->     #####:  474:    }
-759c759
-<        42:  413:      vector<_Tp, _Alloc>::
----
->     #####:  413:      vector<_Tp, _Alloc>::
-768c768
-<        42:  422:      const size_type __len =
----
->     #####:  422:      const size_type __len =
-770,774c770,774
-<        42:  424:      pointer __old_start = this->_M_impl._M_start;
-<        42:  425:      pointer __old_finish = this->_M_impl._M_finish;
-<        42:  426:      const size_type __elems_before = __position - begin();
-<        42:  427:      pointer __new_start(this->_M_allocate(__len));
-<        42:  428:      pointer __new_finish(__new_start);
----
->     #####:  424:      pointer __old_start = this->_M_impl._M_start;
->     #####:  425:      pointer __old_finish = this->_M_impl._M_finish;
->     #####:  426:      const size_type __elems_before = __position - begin();
->     #####:  427:      pointer __new_start(this->_M_allocate(__len));
->     #####:  428:      pointer __new_finish(__new_start);
-782,783c782,783
-<        42:  436:	  _Alloc_traits::construct(this->_M_impl,
-<        42:  437:				   __new_start + __elems_before,
----
->     #####:  436:	  _Alloc_traits::construct(this->_M_impl,
->     #####:  437:				   __new_start + __elems_before,
-789c789
-<        42:  443:	  __new_finish = pointer();
----
->     #####:  443:	  __new_finish = pointer();
-793,794c793,794
-<        42:  447:	    (__old_start, __position.base(),
-<        42:  448:	     __new_start, _M_get_Tp_allocator());
----
->     #####:  447:	    (__old_start, __position.base(),
->     #####:  448:	     __new_start, _M_get_Tp_allocator());
-796c796
-<        42:  450:	  ++__new_finish;
----
->     #####:  450:	  ++__new_finish;
-800,801c800,801
-<        42:  454:	    (__position.base(), __old_finish,
-<        42:  455:	     __new_finish, _M_get_Tp_allocator());
----
->     #####:  454:	    (__position.base(), __old_finish,
->     #####:  455:	     __new_finish, _M_get_Tp_allocator());
-814,820c814,820
-<        42:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
-<        84:  469:      _M_deallocate(__old_start,
-<        42:  470:		    this->_M_impl._M_end_of_storage - __old_start);
-<        42:  471:      this->_M_impl._M_start = __new_start;
-<        42:  472:      this->_M_impl._M_finish = __new_finish;
-<        42:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
-<        42:  474:    }
----
->     #####:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
->     #####:  469:      _M_deallocate(__old_start,
->     #####:  470:		    this->_M_impl._M_end_of_storage - __old_start);
->     #####:  471:      this->_M_impl._M_start = __new_start;
->     #####:  472:      this->_M_impl._M_finish = __new_finish;
->     #####:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
->     #####:  474:    }
-823c823
-<        23:  413:      vector<_Tp, _Alloc>::
----
->     #####:  413:      vector<_Tp, _Alloc>::
-832c832
-<        23:  422:      const size_type __len =
----
->     #####:  422:      const size_type __len =
-834,838c834,838
-<        23:  424:      pointer __old_start = this->_M_impl._M_start;
-<        23:  425:      pointer __old_finish = this->_M_impl._M_finish;
-<        23:  426:      const size_type __elems_before = __position - begin();
-<        23:  427:      pointer __new_start(this->_M_allocate(__len));
-<        23:  428:      pointer __new_finish(__new_start);
----
->     #####:  424:      pointer __old_start = this->_M_impl._M_start;
->     #####:  425:      pointer __old_finish = this->_M_impl._M_finish;
->     #####:  426:      const size_type __elems_before = __position - begin();
->     #####:  427:      pointer __new_start(this->_M_allocate(__len));
->     #####:  428:      pointer __new_finish(__new_start);
-846,847c846,847
-<        23:  436:	  _Alloc_traits::construct(this->_M_impl,
-<        23:  437:				   __new_start + __elems_before,
----
->     #####:  436:	  _Alloc_traits::construct(this->_M_impl,
->     #####:  437:				   __new_start + __elems_before,
-853c853
-<        23:  443:	  __new_finish = pointer();
----
->     #####:  443:	  __new_finish = pointer();
-857,858c857,858
-<        23:  447:	    (__old_start, __position.base(),
-<        23:  448:	     __new_start, _M_get_Tp_allocator());
----
->     #####:  447:	    (__old_start, __position.base(),
->     #####:  448:	     __new_start, _M_get_Tp_allocator());
-860c860
-<        23:  450:	  ++__new_finish;
----
->     #####:  450:	  ++__new_finish;
-864,865c864,865
-<        23:  454:	    (__position.base(), __old_finish,
-<        23:  455:	     __new_finish, _M_get_Tp_allocator());
----
->     #####:  454:	    (__position.base(), __old_finish,
->     #####:  455:	     __new_finish, _M_get_Tp_allocator());
-878,884c878,884
-<        23:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
-<        46:  469:      _M_deallocate(__old_start,
-<        23:  470:		    this->_M_impl._M_end_of_storage - __old_start);
-<        23:  471:      this->_M_impl._M_start = __new_start;
-<        23:  472:      this->_M_impl._M_finish = __new_finish;
-<        23:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
-<        23:  474:    }
----
->     #####:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
->     #####:  469:      _M_deallocate(__old_start,
->     #####:  470:		    this->_M_impl._M_end_of_storage - __old_start);
->     #####:  471:      this->_M_impl._M_start = __new_start;
->     #####:  472:      this->_M_impl._M_finish = __new_finish;
->     #####:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
->     #####:  474:    }
-951c951
-<        89:  413:      vector<_Tp, _Alloc>::
----
->        67:  413:      vector<_Tp, _Alloc>::
-960c960
-<        89:  422:      const size_type __len =
----
->        67:  422:      const size_type __len =
-962,966c962,966
-<        89:  424:      pointer __old_start = this->_M_impl._M_start;
-<        89:  425:      pointer __old_finish = this->_M_impl._M_finish;
-<        89:  426:      const size_type __elems_before = __position - begin();
-<        89:  427:      pointer __new_start(this->_M_allocate(__len));
-<        89:  428:      pointer __new_finish(__new_start);
----
->        67:  424:      pointer __old_start = this->_M_impl._M_start;
->        67:  425:      pointer __old_finish = this->_M_impl._M_finish;
->        67:  426:      const size_type __elems_before = __position - begin();
->        67:  427:      pointer __new_start(this->_M_allocate(__len));
->        67:  428:      pointer __new_finish(__new_start);
-974,975c974,975
-<        89:  436:	  _Alloc_traits::construct(this->_M_impl,
-<        89:  437:				   __new_start + __elems_before,
----
->        67:  436:	  _Alloc_traits::construct(this->_M_impl,
->        67:  437:				   __new_start + __elems_before,
-981c981
-<        89:  443:	  __new_finish = pointer();
----
->        67:  443:	  __new_finish = pointer();
-985,986c985,986
-<        89:  447:	    (__old_start, __position.base(),
-<        89:  448:	     __new_start, _M_get_Tp_allocator());
----
->        67:  447:	    (__old_start, __position.base(),
->        67:  448:	     __new_start, _M_get_Tp_allocator());
-988c988
-<        89:  450:	  ++__new_finish;
----
->        67:  450:	  ++__new_finish;
-992,993c992,993
-<        89:  454:	    (__position.base(), __old_finish,
-<        89:  455:	     __new_finish, _M_get_Tp_allocator());
----
->        67:  454:	    (__position.base(), __old_finish,
->        67:  455:	     __new_finish, _M_get_Tp_allocator());
-1006,1012c1006,1012
-<        89:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
-<       178:  469:      _M_deallocate(__old_start,
-<        89:  470:		    this->_M_impl._M_end_of_storage - __old_start);
-<        89:  471:      this->_M_impl._M_start = __new_start;
-<        89:  472:      this->_M_impl._M_finish = __new_finish;
-<        89:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
-<        89:  474:    }
----
->        67:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
->       134:  469:      _M_deallocate(__old_start,
->        67:  470:		    this->_M_impl._M_end_of_storage - __old_start);
->        67:  471:      this->_M_impl._M_start = __new_start;
->        67:  472:      this->_M_impl._M_finish = __new_finish;
->        67:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
->        67:  474:    }
-1207c1207
-<         4:  413:      vector<_Tp, _Alloc>::
----
->     #####:  413:      vector<_Tp, _Alloc>::
-1216c1216
-<         4:  422:      const size_type __len =
----
->     #####:  422:      const size_type __len =
-1218,1222c1218,1222
-<         4:  424:      pointer __old_start = this->_M_impl._M_start;
-<         4:  425:      pointer __old_finish = this->_M_impl._M_finish;
-<         4:  426:      const size_type __elems_before = __position - begin();
-<         4:  427:      pointer __new_start(this->_M_allocate(__len));
-<         4:  428:      pointer __new_finish(__new_start);
----
->     #####:  424:      pointer __old_start = this->_M_impl._M_start;
->     #####:  425:      pointer __old_finish = this->_M_impl._M_finish;
->     #####:  426:      const size_type __elems_before = __position - begin();
->     #####:  427:      pointer __new_start(this->_M_allocate(__len));
->     #####:  428:      pointer __new_finish(__new_start);
-1230,1231c1230,1231
-<         4:  436:	  _Alloc_traits::construct(this->_M_impl,
-<         4:  437:				   __new_start + __elems_before,
----
->     #####:  436:	  _Alloc_traits::construct(this->_M_impl,
->     #####:  437:				   __new_start + __elems_before,
-1237c1237
-<         4:  443:	  __new_finish = pointer();
----
->     #####:  443:	  __new_finish = pointer();
-1241,1242c1241,1242
-<         4:  447:	    (__old_start, __position.base(),
-<         4:  448:	     __new_start, _M_get_Tp_allocator());
----
->     #####:  447:	    (__old_start, __position.base(),
->     #####:  448:	     __new_start, _M_get_Tp_allocator());
-1244c1244
-<         4:  450:	  ++__new_finish;
----
->     #####:  450:	  ++__new_finish;
-1248,1249c1248,1249
-<         4:  454:	    (__position.base(), __old_finish,
-<         4:  455:	     __new_finish, _M_get_Tp_allocator());
----
->     #####:  454:	    (__position.base(), __old_finish,
->     #####:  455:	     __new_finish, _M_get_Tp_allocator());
-1262,1268c1262,1268
-<         4:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
-<         8:  469:      _M_deallocate(__old_start,
-<         4:  470:		    this->_M_impl._M_end_of_storage - __old_start);
-<         4:  471:      this->_M_impl._M_start = __new_start;
-<         4:  472:      this->_M_impl._M_finish = __new_finish;
-<         4:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
-<         4:  474:    }
----
->     #####:  468:      std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
->     #####:  469:      _M_deallocate(__old_start,
->     #####:  470:		    this->_M_impl._M_end_of_storage - __old_start);
->     #####:  471:      this->_M_impl._M_start = __new_start;
->     #####:  472:      this->_M_impl._M_finish = __new_finish;
->     #####:  473:      this->_M_impl._M_end_of_storage = __new_start + __len;
->     #####:  474:    }
+<         1:  168:      if (__first != __last)
+---
+>         2:  168:      if (__first != __last)
+176c176
+<         1:  174:      return __first;
+---
+>         2:  174:      return __first;
+396c396
+<        30:  394:      vector<_Tp, _Alloc>::
+---
+>        46:  394:      vector<_Tp, _Alloc>::
+405c405
+<        30:  403:      const size_type __len =
+---
+>        46:  403:      const size_type __len =
+407,409c407,409
+<        30:  405:      const size_type __elems_before = __position - begin();
+<        30:  406:      pointer __new_start(this->_M_allocate(__len));
+<        30:  407:      pointer __new_finish(__new_start);
+---
+>        46:  405:      const size_type __elems_before = __position - begin();
+>        46:  406:      pointer __new_start(this->_M_allocate(__len));
+>        46:  407:      pointer __new_finish(__new_start);
+417,418c417,418
+<        60:  415:	  _Alloc_traits::construct(this->_M_impl,
+<        30:  416:				   __new_start + __elems_before,
+---
+>        92:  415:	  _Alloc_traits::construct(this->_M_impl,
+>        46:  416:				   __new_start + __elems_before,
+424c424
+<        30:  422:	  __new_finish = pointer();
+---
+>        46:  422:	  __new_finish = pointer();
+426c426
+<        30:  424:	  __new_finish
+---
+>        46:  424:	  __new_finish
+428,429c428,429
+<        30:  426:	    (this->_M_impl._M_start, __position.base(),
+<        30:  427:	     __new_start, _M_get_Tp_allocator());
+---
+>        46:  426:	    (this->_M_impl._M_start, __position.base(),
+>        46:  427:	     __new_start, _M_get_Tp_allocator());
+431c431
+<        30:  429:	  ++__new_finish;
+---
+>        46:  429:	  ++__new_finish;
+433c433
+<        30:  431:	  __new_finish
+---
+>        46:  431:	  __new_finish
+435,436c435,436
+<        30:  433:	    (__position.base(), this->_M_impl._M_finish,
+<        30:  434:	     __new_finish, _M_get_Tp_allocator());
+---
+>        46:  433:	    (__position.base(), this->_M_impl._M_finish,
+>        46:  434:	     __new_finish, _M_get_Tp_allocator());
+448,456c448,456
+<        30:  446:      std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
+<        30:  447:		    _M_get_Tp_allocator());
+<        60:  448:      _M_deallocate(this->_M_impl._M_start,
+<        30:  449:		    this->_M_impl._M_end_of_storage
+<        30:  450:		    - this->_M_impl._M_start);
+<        30:  451:      this->_M_impl._M_start = __new_start;
+<        30:  452:      this->_M_impl._M_finish = __new_finish;
+<        30:  453:      this->_M_impl._M_end_of_storage = __new_start + __len;
+<        30:  454:    }
+---
+>        46:  446:      std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
+>        46:  447:		    _M_get_Tp_allocator());
+>        92:  448:      _M_deallocate(this->_M_impl._M_start,
+>        46:  449:		    this->_M_impl._M_end_of_storage
+>        46:  450:		    - this->_M_impl._M_start);
+>        46:  451:      this->_M_impl._M_start = __new_start;
+>        46:  452:      this->_M_impl._M_finish = __new_finish;
+>        46:  453:      this->_M_impl._M_end_of_storage = __new_start + __len;
+>        46:  454:    }

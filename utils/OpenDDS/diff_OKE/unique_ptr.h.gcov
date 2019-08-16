@@ -1,0 +1,102 @@
+74c74
+<        24:   72:      operator()(_Tp* __ptr) const
+---
+>        40:   72:      operator()(_Tp* __ptr) const
+80,81c80,81
+<        24:   78:	delete __ptr;
+<        24:   79:      }
+---
+>        40:   78:	delete __ptr;
+>        40:   79:      }
+141,142c141,142
+<        24:  139:      __uniq_ptr_impl() = default;
+<        12:  140:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
+---
+>        40:  139:      __uniq_ptr_impl() = default;
+>        20:  140:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
+148,150c148,150
+<        60:  146:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+<        86:  147:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+<        24:  148:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+---
+>       100:  146:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+>       118:  147:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+>        40:  148:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+190,192c190,192
+<        24:  188:	constexpr unique_ptr() noexcept
+<        24:  189:	: _M_t()
+<        24:  190:	{ }
+---
+>        40:  188:	constexpr unique_ptr() noexcept
+>        40:  189:	: _M_t()
+>        40:  190:	{ }
+203,205c203,205
+<        12:  201:	unique_ptr(pointer __p) noexcept
+<        12:  202:	: _M_t(__p)
+<        12:  203:        { }
+---
+>        20:  201:	unique_ptr(pointer __p) noexcept
+>        20:  202:	: _M_t(__p)
+>        20:  203:        { }
+266c266
+<        36:  264:      ~unique_ptr() noexcept
+---
+>        60:  264:      ~unique_ptr() noexcept
+268,272c268,272
+<        36:  266:	auto& __ptr = _M_t._M_ptr();
+<        36:  267:	if (__ptr != nullptr)
+<        24:  268:	  get_deleter()(__ptr);
+<        36:  269:	__ptr = pointer();
+<        36:  270:      }
+---
+>        60:  266:	auto& __ptr = _M_t._M_ptr();
+>        60:  267:	if (__ptr != nullptr)
+>        40:  268:	  get_deleter()(__ptr);
+>        60:  269:	__ptr = pointer();
+>        60:  270:      }
+330c330
+<        28:  328:      operator->() const noexcept
+---
+>        44:  328:      operator->() const noexcept
+333c333
+<        28:  331:	return get();
+---
+>        44:  331:	return get();
+338,339c338,339
+<        86:  336:      get() const noexcept
+<        86:  337:      { return _M_t._M_ptr(); }
+---
+>       118:  336:      get() const noexcept
+>       118:  337:      { return _M_t._M_ptr(); }
+343,344c343,344
+<        24:  341:      get_deleter() noexcept
+<        24:  342:      { return _M_t._M_deleter(); }
+---
+>        40:  341:      get_deleter() noexcept
+>        40:  342:      { return _M_t._M_deleter(); }
+352,353c352,353
+<        58:  350:      explicit operator bool() const noexcept
+<        58:  351:      { return get() == pointer() ? false : true; }
+---
+>        74:  350:      explicit operator bool() const noexcept
+>        74:  351:      { return get() == pointer() ? false : true; }
+373c373
+<        12:  371:      reset(pointer __p = pointer()) noexcept
+---
+>        20:  371:      reset(pointer __p = pointer()) noexcept
+376,377c376,377
+<        12:  374:	swap(_M_t._M_ptr(), __p);
+<        12:  375:	if (__p != pointer())
+---
+>        20:  374:	swap(_M_t._M_ptr(), __p);
+>        20:  375:	if (__p != pointer())
+379c379
+<        12:  377:      }
+---
+>        20:  377:      }
+708,709c708,709
+<        46:  706:    operator!=(const unique_ptr<_Tp, _Dp>& __x, nullptr_t) noexcept
+<        46:  707:    { return (bool)__x; }
+---
+>        54:  706:    operator!=(const unique_ptr<_Tp, _Dp>& __x, nullptr_t) noexcept
+>        54:  707:    { return (bool)__x; }

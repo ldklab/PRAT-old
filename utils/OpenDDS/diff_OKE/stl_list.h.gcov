@@ -1,0 +1,4 @@
+116c116
+<        43:  114:      _Tp const* _M_valptr() const { return _M_storage._M_ptr(); }
+---
+>        63:  114:      _Tp const* _M_valptr() const { return _M_storage._M_ptr(); }

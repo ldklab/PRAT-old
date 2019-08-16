@@ -1,20 +1,4 @@
-1,3c1,3
-<         -:    0:Source:/home/ryan/git/TARGETS/OpenDDS-debloat/ACE_wrappers/TAO/tao/Seq_Var_T.cpp
+2c2
 <         -:    0:Programs:70
-<         -:    1:// $Id$
 ---
->         -:    0:Source:/home/ryan/git/OpenDDS-debloat/ACE_wrappers/TAO/tao/Seq_Var_T.cpp
 >         -:    0:Programs:69
->         -:    1:// $Id: Seq_Var_T.cpp 14 2007-02-01 15:49:12Z mitza $
-17c17
-<         6:   15:TAO_Seq_Var_Base_T<T>::TAO_Seq_Var_Base_T (
----
->     #####:   15:TAO_Seq_Var_Base_T<T>::TAO_Seq_Var_Base_T (
-19c19
-<        6*:   17:  : ptr_ (p.ptr_ ? new T (*p.ptr_) : 0)
----
->     #####:   17:  : ptr_ (p.ptr_ ? new T (*p.ptr_) : 0)
-21c21
-<         6:   19:}
----
->     #####:   19:}

@@ -3,146 +3,30 @@
 ---
 >         -:    0:Programs:69
 27c27
-<       11*:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+<         9:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
 ---
->     #####:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
+>        17:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
 31c31
-<       11*:   29:    allocator_ (alloc)
+<         9:   29:    allocator_ (alloc)
 ---
->     #####:   29:    allocator_ (alloc)
+>        17:   29:    allocator_ (alloc)
 33,34c33,34
-<       11*:   31:  if (this->allocator_ == 0)
-<       11*:   32:    this->allocator_ = ACE_Allocator::instance ();
+<         9:   31:  if (this->allocator_ == 0)
+<         9:   32:    this->allocator_ = ACE_Allocator::instance ();
 ---
->     #####:   31:  if (this->allocator_ == 0)
->     #####:   32:    this->allocator_ = ACE_Allocator::instance ();
+>        17:   31:  if (this->allocator_ == 0)
+>        17:   32:    this->allocator_ = ACE_Allocator::instance ();
 36c36
-<       11*:   34:  if (size != 0)
+<         9:   34:  if (size != 0)
 ---
->     #####:   34:  if (size != 0)
+>        17:   34:  if (size != 0)
 38c38
-<       11*:   36:      ACE_ALLOCATOR (this->array_,
+<         9:   36:      ACE_ALLOCATOR (this->array_,
 ---
->     #####:   36:      ACE_ALLOCATOR (this->array_,
+>        17:   36:      ACE_ALLOCATOR (this->array_,
 40,41c40,41
-<      303*:   38:      for (size_type i = 0; i < size; ++i)
-<      292*:   39:        new (&array_[i]) T;
+<       237:   38:      for (size_type i = 0; i < size; ++i)
+<       228:   39:        new (&array_[i]) T;
 ---
->     #####:   38:      for (size_type i = 0; i < size; ++i)
->     #####:   39:        new (&array_[i]) T;
-90c90
-<         5:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
----
->     #####:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
-94c94
-<         5:   29:    allocator_ (alloc)
----
->     #####:   29:    allocator_ (alloc)
-96,97c96,97
-<         5:   31:  if (this->allocator_ == 0)
-<         5:   32:    this->allocator_ = ACE_Allocator::instance ();
----
->     #####:   31:  if (this->allocator_ == 0)
->     #####:   32:    this->allocator_ = ACE_Allocator::instance ();
-99c99
-<         5:   34:  if (size != 0)
----
->     #####:   34:  if (size != 0)
-101c101
-<        5*:   36:      ACE_ALLOCATOR (this->array_,
----
->     #####:   36:      ACE_ALLOCATOR (this->array_,
-103,104c103,104
-<       105:   38:      for (size_type i = 0; i < size; ++i)
-<       100:   39:        new (&array_[i]) T;
----
->     #####:   38:      for (size_type i = 0; i < size; ++i)
->     #####:   39:        new (&array_[i]) T;
-174c174
-<         6:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
----
->     #####:   25:ACE_Array_Base<T>::ACE_Array_Base (typename ACE_Array_Base<T>::size_type size,
-178c178
-<         6:   29:    allocator_ (alloc)
----
->     #####:   29:    allocator_ (alloc)
-180,181c180,181
-<         6:   31:  if (this->allocator_ == 0)
-<         6:   32:    this->allocator_ = ACE_Allocator::instance ();
----
->     #####:   31:  if (this->allocator_ == 0)
->     #####:   32:    this->allocator_ = ACE_Allocator::instance ();
-183c183
-<         6:   34:  if (size != 0)
----
->     #####:   34:  if (size != 0)
-185c185
-<        6*:   36:      ACE_ALLOCATOR (this->array_,
----
->     #####:   36:      ACE_ALLOCATOR (this->array_,
-187,188c187,188
-<       198:   38:      for (size_type i = 0; i < size; ++i)
-<       192:   39:        new (&array_[i]) T;
----
->     #####:   38:      for (size_type i = 0; i < size; ++i)
->     #####:   39:        new (&array_[i]) T;
-314c314
-<        9*:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
----
->     #####:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
-316c316
-<        9*:  166:  if (new_size > this->max_size_)
----
->     #####:  166:  if (new_size > this->max_size_)
-340c340
-<        9*:  190:  return 0;
----
->     #####:  190:  return 0;
-524c524
-<         9:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
----
->     #####:  164:ACE_Array_Base<T>::max_size (typename ACE_Array_Base<T>::size_type new_size)
-526c526
-<         9:  166:  if (new_size > this->max_size_)
----
->     #####:  166:  if (new_size > this->max_size_)
-550c550
-<         9:  190:  return 0;
----
->     #####:  190:  return 0;
-555c555
-<        9*:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
----
->     #####:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
-557c557
-<        9*:  196:  int const r = this->max_size (new_size);
----
->     #####:  196:  int const r = this->max_size (new_size);
-559,560c559,560
-<        9*:  198:  if (r == 0)
-<        9*:  199:    this->cur_size_ = new_size;
----
->     #####:  198:  if (r == 0)
->     #####:  199:    this->cur_size_ = new_size;
-562c562
-<        9*:  201:  return r;
----
->     #####:  201:  return r;
-632c632
-<         9:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
----
->     #####:  194:ACE_Array_Base<T>::size (typename ACE_Array_Base<T>::size_type new_size)
-634c634
-<         9:  196:  int const r = this->max_size (new_size);
----
->     #####:  196:  int const r = this->max_size (new_size);
-636,637c636,637
-<         9:  198:  if (r == 0)
-<         9:  199:    this->cur_size_ = new_size;
----
->     #####:  198:  if (r == 0)
->     #####:  199:    this->cur_size_ = new_size;
-639c639
-<         9:  201:  return r;
----
->     #####:  201:  return r;
+>       405:   38:      for (size_type i = 0; i < size; ++i)
+>       388:   39:        new (&array_[i]) T;
