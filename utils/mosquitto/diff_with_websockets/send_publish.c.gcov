@@ -1,0 +1,8 @@
+58c58
+<     #####:   56:	if(mosq->sock == INVALID_SOCKET && !mosq->wsi) return MOSQ_ERR_NO_CONN;
+---
+>         -:   56:	if(mosq->sock == INVALID_SOCKET && !mosq->wsi) return MOSQ_ERR_NO_CONN;
+60c60
+<         -:   58:	if(mosq->sock == INVALID_SOCKET) return MOSQ_ERR_NO_CONN;
+---
+>     #####:   58:	if(mosq->sock == INVALID_SOCKET) return MOSQ_ERR_NO_CONN;

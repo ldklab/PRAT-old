@@ -1,0 +1,480 @@
+2c2
+<         -:    0:Programs:9
+---
+>         -:    0:Programs:22
+127,133c127,133
+<         5:  125:	memset(cfg, 0, sizeof(*cfg));
+<         5:  126:	cfg->port = -1;
+<         5:  127:	cfg->max_inflight = 20;
+<         5:  128:	cfg->keepalive = 60;
+<         5:  129:	cfg->clean_session = true;
+<         5:  130:	cfg->eol = true;
+<         5:  131:	cfg->protocol_version = MQTT_PROTOCOL_V311;
+---
+>        10:  125:	memset(cfg, 0, sizeof(*cfg));
+>        10:  126:	cfg->port = -1;
+>        10:  127:	cfg->max_inflight = 20;
+>        10:  128:	cfg->keepalive = 60;
+>        10:  129:	cfg->clean_session = true;
+>        10:  130:	cfg->eol = true;
+>        10:  131:	cfg->protocol_version = MQTT_PROTOCOL_V311;
+188c188
+<         5:  186:int client_config_load(struct mosq_config *cfg, int pub_or_sub, int argc, char *argv[])
+---
+>        10:  186:int client_config_load(struct mosq_config *cfg, int pub_or_sub, int argc, char *argv[])
+194c194
+<         5:  192:	char *loc = NULL;
+---
+>        10:  192:	char *loc = NULL;
+203c203
+<         5:  201:	args[0] = NULL;
+---
+>        10:  201:	args[0] = NULL;
+205c205
+<         5:  203:	init_config(cfg);
+---
+>        10:  203:	init_config(cfg);
+209,210c209,210
+<         5:  207:	env = getenv("XDG_CONFIG_HOME");
+<         5:  208:	if(env){
+---
+>        10:  207:	env = getenv("XDG_CONFIG_HOME");
+>        10:  208:	if(env){
+224,228c224,228
+<         5:  222:		env = getenv("HOME");
+<         5:  223:		if(env){
+<         5:  224:			len = strlen(env) + strlen("/.config/mosquitto_pub") + 1;
+<         5:  225:			loc = malloc(len);
+<         5:  226:			if(!loc){
+---
+>        10:  222:		env = getenv("HOME");
+>        10:  223:		if(env){
+>        10:  224:			len = strlen(env) + strlen("/.config/mosquitto_pub") + 1;
+>        10:  225:			loc = malloc(len);
+>        10:  226:			if(!loc){
+232c232
+<         5:  230:			if(pub_or_sub == CLIENT_PUB){
+---
+>        10:  230:			if(pub_or_sub == CLIENT_PUB){
+235c235
+<     #####:  233:				snprintf(loc, len, "%s/.config/mosquitto_sub", env);
+---
+>         5:  233:				snprintf(loc, len, "%s/.config/mosquitto_sub", env);
+237c237
+<         5:  235:			loc[len-1] = '\0';
+---
+>        10:  235:			loc[len-1] = '\0';
+263,265c263,265
+<         5:  261:	if(loc){
+<         5:  262:		fptr = fopen(loc, "rt");
+<         5:  263:		if(fptr){
+---
+>        10:  261:	if(loc){
+>        10:  262:		fptr = fopen(loc, "rt");
+>        10:  263:		if(fptr){
+292c292
+<         5:  290:		free(loc);
+---
+>        10:  290:		free(loc);
+296,297c296,297
+<         5:  294:	rc = client_config_line_proc(cfg, pub_or_sub, argc, argv);
+<         5:  295:	if(rc) return rc;
+---
+>        10:  294:	rc = client_config_line_proc(cfg, pub_or_sub, argc, argv);
+>        10:  295:	if(rc) return rc;
+299c299
+<         5:  297:	if(cfg->will_payload && !cfg->will_topic){
+---
+>        10:  297:	if(cfg->will_payload && !cfg->will_topic){
+303c303
+<         5:  301:	if(cfg->will_retain && !cfg->will_topic){
+---
+>        10:  301:	if(cfg->will_retain && !cfg->will_topic){
+307c307
+<         5:  305:	if(cfg->password && !cfg->username){
+---
+>        10:  305:	if(cfg->password && !cfg->username){
+311c311
+<         5:  309:	if((cfg->certfile && !cfg->keyfile) || (cfg->keyfile && !cfg->certfile)){
+---
+>        10:  309:	if((cfg->certfile && !cfg->keyfile) || (cfg->keyfile && !cfg->certfile)){
+317c317
+<         5:  315:	if((cfg->cafile || cfg->capath) && cfg->psk){
+---
+>        10:  315:	if((cfg->cafile || cfg->capath) && cfg->psk){
+321c321
+<         5:  319:	if(cfg->psk && !cfg->psk_identity){
+---
+>        10:  319:	if(cfg->psk && !cfg->psk_identity){
+327c327
+<         5:  325:	if(cfg->clean_session == false && (cfg->id_prefix || !cfg->id)){
+---
+>        10:  325:	if(cfg->clean_session == false && (cfg->id_prefix || !cfg->id)){
+332,333c332,333
+<         5:  330:	if(pub_or_sub == CLIENT_SUB){
+<     #####:  331:		if(cfg->topic_count == 0){
+---
+>        10:  330:	if(pub_or_sub == CLIENT_SUB){
+>         5:  331:		if(cfg->topic_count == 0){
+339,340c339,340
+<         5:  337:	if(!cfg->host){
+<         5:  338:		cfg->host = "localhost";
+---
+>        10:  337:	if(!cfg->host){
+>        10:  338:		cfg->host = "localhost";
+345c345
+<         5:  343:int cfg_add_topic(struct mosq_config *cfg, int pub_or_sub, char *topic, const char *arg)
+---
+>        10:  343:int cfg_add_topic(struct mosq_config *cfg, int pub_or_sub, char *topic, const char *arg)
+347c347
+<         5:  345:	if(mosquitto_validate_utf8(topic, strlen(topic))){
+---
+>        10:  345:	if(mosquitto_validate_utf8(topic, strlen(topic))){
+351c351
+<         5:  349:	if(pub_or_sub == CLIENT_PUB){
+---
+>        10:  349:	if(pub_or_sub == CLIENT_PUB){
+358c358
+<     #####:  356:		if(mosquitto_sub_topic_check(topic) == MOSQ_ERR_INVAL){
+---
+>         5:  356:		if(mosquitto_sub_topic_check(topic) == MOSQ_ERR_INVAL){
+362,364c362,364
+<     #####:  360:		cfg->topic_count++;
+<     #####:  361:		cfg->topics = realloc(cfg->topics, cfg->topic_count*sizeof(char *));
+<     #####:  362:		if(!cfg->topics){
+---
+>         5:  360:		cfg->topic_count++;
+>         5:  361:		cfg->topics = realloc(cfg->topics, cfg->topic_count*sizeof(char *));
+>         5:  362:		if(!cfg->topics){
+368c368
+<     #####:  366:		cfg->topics[cfg->topic_count-1] = strdup(topic);
+---
+>         5:  366:		cfg->topics[cfg->topic_count-1] = strdup(topic);
+374c374
+<         5:  372:int client_config_line_proc(struct mosq_config *cfg, int pub_or_sub, int argc, char *argv[])
+---
+>        10:  372:int client_config_line_proc(struct mosq_config *cfg, int pub_or_sub, int argc, char *argv[])
+378,379c378,379
+<        15:  376:	for(i=1; i<argc; i++){
+<        10:  377:		if(!strcmp(argv[i], "-p") || !strcmp(argv[i], "--port")){
+---
+>        30:  376:	for(i=1; i<argc; i++){
+>        20:  377:		if(!strcmp(argv[i], "-p") || !strcmp(argv[i], "--port")){
+391c391
+<        10:  389:		}else if(!strcmp(argv[i], "-A")){
+---
+>        20:  389:		}else if(!strcmp(argv[i], "-A")){
+400c400
+<        10:  398:		}else if(!strcmp(argv[i], "--cafile")){
+---
+>        20:  398:		}else if(!strcmp(argv[i], "--cafile")){
+408c408
+<        10:  406:		}else if(!strcmp(argv[i], "--capath")){
+---
+>        20:  406:		}else if(!strcmp(argv[i], "--capath")){
+416c416
+<        10:  414:		}else if(!strcmp(argv[i], "--cert")){
+---
+>        20:  414:		}else if(!strcmp(argv[i], "--cert")){
+424c424
+<        10:  422:		}else if(!strcmp(argv[i], "--ciphers")){
+---
+>        20:  422:		}else if(!strcmp(argv[i], "--ciphers")){
+433c433
+<        10:  431:		}else if(!strcmp(argv[i], "-C")){
+---
+>        20:  431:		}else if(!strcmp(argv[i], "-C")){
+449c449
+<        10:  447:		}else if(!strcmp(argv[i], "-W")){
+---
+>        20:  447:		}else if(!strcmp(argv[i], "-W")){
+465c465
+<        10:  463:		}else if(!strcmp(argv[i], "-d") || !strcmp(argv[i], "--debug")){
+---
+>        20:  463:		}else if(!strcmp(argv[i], "-d") || !strcmp(argv[i], "--debug")){
+467c467
+<        10:  465:		}else if(!strcmp(argv[i], "-f") || !strcmp(argv[i], "--file")){
+---
+>        20:  465:		}else if(!strcmp(argv[i], "-f") || !strcmp(argv[i], "--file")){
+486c486
+<        10:  484:		}else if(!strcmp(argv[i], "-F")){
+---
+>        20:  484:		}else if(!strcmp(argv[i], "-F")){
+504c504
+<        10:  502:		}else if(!strcmp(argv[i], "--help")){
+---
+>        20:  502:		}else if(!strcmp(argv[i], "--help")){
+506c506
+<        10:  504:		}else if(!strcmp(argv[i], "-h") || !strcmp(argv[i], "--host")){
+---
+>        20:  504:		}else if(!strcmp(argv[i], "-h") || !strcmp(argv[i], "--host")){
+515c515
+<        10:  513:		}else if(!strcmp(argv[i], "--insecure")){
+---
+>        20:  513:		}else if(!strcmp(argv[i], "--insecure")){
+518c518
+<        10:  516:		}else if(!strcmp(argv[i], "-i") || !strcmp(argv[i], "--id")){
+---
+>        20:  516:		}else if(!strcmp(argv[i], "-i") || !strcmp(argv[i], "--id")){
+530c530
+<        10:  528:		}else if(!strcmp(argv[i], "-I") || !strcmp(argv[i], "--id-prefix")){
+---
+>        20:  528:		}else if(!strcmp(argv[i], "-I") || !strcmp(argv[i], "--id-prefix")){
+542c542
+<        10:  540:		}else if(!strcmp(argv[i], "-k") || !strcmp(argv[i], "--keepalive")){
+---
+>        20:  540:		}else if(!strcmp(argv[i], "-k") || !strcmp(argv[i], "--keepalive")){
+555c555
+<        10:  553:		}else if(!strcmp(argv[i], "--key")){
+---
+>        20:  553:		}else if(!strcmp(argv[i], "--key")){
+564c564
+<        10:  562:		}else if(!strcmp(argv[i], "-L") || !strcmp(argv[i], "--url")){
+---
+>        20:  562:		}else if(!strcmp(argv[i], "-L") || !strcmp(argv[i], "--url")){
+609c609
+<        10:  607:		}else if(!strcmp(argv[i], "-l") || !strcmp(argv[i], "--stdin-line")){
+---
+>        20:  607:		}else if(!strcmp(argv[i], "-l") || !strcmp(argv[i], "--stdin-line")){
+619c619
+<        10:  617:		}else if(!strcmp(argv[i], "-m") || !strcmp(argv[i], "--message")){
+---
+>        20:  617:		}else if(!strcmp(argv[i], "-m") || !strcmp(argv[i], "--message")){
+635c635
+<         5:  633:		}else if(!strcmp(argv[i], "-M")){
+---
+>        15:  633:		}else if(!strcmp(argv[i], "-M")){
+643c643
+<         5:  641:		}else if(!strcmp(argv[i], "-n") || !strcmp(argv[i], "--null-message")){
+---
+>        15:  641:		}else if(!strcmp(argv[i], "-n") || !strcmp(argv[i], "--null-message")){
+653c653
+<         5:  651:		}else if(!strcmp(argv[i], "-V") || !strcmp(argv[i], "--protocol-version")){
+---
+>        15:  651:		}else if(!strcmp(argv[i], "-V") || !strcmp(argv[i], "--protocol-version")){
+669c669
+<         5:  667:		}else if(!strcmp(argv[i], "--proxy")){
+---
+>        15:  667:		}else if(!strcmp(argv[i], "--proxy")){
+681c681
+<         5:  679:		}else if(!strcmp(argv[i], "--psk")){
+---
+>        15:  679:		}else if(!strcmp(argv[i], "--psk")){
+689c689
+<         5:  687:		}else if(!strcmp(argv[i], "--psk-identity")){
+---
+>        15:  687:		}else if(!strcmp(argv[i], "--psk-identity")){
+698c698
+<         5:  696:		}else if(!strcmp(argv[i], "-q") || !strcmp(argv[i], "--qos")){
+---
+>        15:  696:		}else if(!strcmp(argv[i], "-q") || !strcmp(argv[i], "--qos")){
+710c710
+<         5:  708:		}else if(!strcmp(argv[i], "--quiet")){
+---
+>        15:  708:		}else if(!strcmp(argv[i], "--quiet")){
+712c712
+<         5:  710:		}else if(!strcmp(argv[i], "-r") || !strcmp(argv[i], "--retain")){
+---
+>        15:  710:		}else if(!strcmp(argv[i], "-r") || !strcmp(argv[i], "--retain")){
+717c717
+<         5:  715:		}else if(!strcmp(argv[i], "--retained-only")){
+---
+>        15:  715:		}else if(!strcmp(argv[i], "--retained-only")){
+722c722
+<         5:  720:		}else if(!strcmp(argv[i], "-s") || !strcmp(argv[i], "--stdin-file")){
+---
+>        15:  720:		}else if(!strcmp(argv[i], "-s") || !strcmp(argv[i], "--stdin-file")){
+736,737c736,737
+<         5:  734:		}else if(!strcmp(argv[i], "-t") || !strcmp(argv[i], "--topic")){
+<        10:  735:			if(i==argc-1){
+---
+>        15:  734:		}else if(!strcmp(argv[i], "-t") || !strcmp(argv[i], "--topic")){
+>        20:  735:			if(i==argc-1){
+741c741
+<         5:  739:				if(cfg_add_topic(cfg, pub_or_sub, argv[i + 1], "-t"))
+---
+>        10:  739:				if(cfg_add_topic(cfg, pub_or_sub, argv[i + 1], "-t"))
+743c743
+<         5:  741:				i++;
+---
+>        10:  741:				i++;
+745c745
+<     #####:  743:		}else if(!strcmp(argv[i], "-T") || !strcmp(argv[i], "--filter-out")){
+---
+>         5:  743:		}else if(!strcmp(argv[i], "-T") || !strcmp(argv[i], "--filter-out")){
+770c770
+<     #####:  768:		}else if(!strcmp(argv[i], "-U") || !strcmp(argv[i], "--unsubscribe")){
+---
+>         5:  768:		}else if(!strcmp(argv[i], "-U") || !strcmp(argv[i], "--unsubscribe")){
+796c796
+<     #####:  794:		}else if(!strcmp(argv[i], "--tls-version")){
+---
+>         5:  794:		}else if(!strcmp(argv[i], "--tls-version")){
+805c805
+<     #####:  803:		}else if(!strcmp(argv[i], "-u") || !strcmp(argv[i], "--username")){
+---
+>         5:  803:		}else if(!strcmp(argv[i], "-u") || !strcmp(argv[i], "--username")){
+813c813
+<     #####:  811:		}else if(!strcmp(argv[i], "-P") || !strcmp(argv[i], "--pw")){
+---
+>         5:  811:		}else if(!strcmp(argv[i], "-P") || !strcmp(argv[i], "--pw")){
+821c821
+<     #####:  819:		}else if(!strcmp(argv[i], "--will-payload")){
+---
+>         5:  819:		}else if(!strcmp(argv[i], "--will-payload")){
+830c830
+<     #####:  828:		}else if(!strcmp(argv[i], "--will-qos")){
+---
+>         5:  828:		}else if(!strcmp(argv[i], "--will-qos")){
+842c842
+<     #####:  840:		}else if(!strcmp(argv[i], "--will-retain")){
+---
+>         5:  840:		}else if(!strcmp(argv[i], "--will-retain")){
+844c844
+<     #####:  842:		}else if(!strcmp(argv[i], "--will-topic")){
+---
+>         5:  842:		}else if(!strcmp(argv[i], "--will-topic")){
+860c860
+<     #####:  858:		}else if(!strcmp(argv[i], "-c") || !strcmp(argv[i], "--disable-clean-session")){
+---
+>         5:  858:		}else if(!strcmp(argv[i], "-c") || !strcmp(argv[i], "--disable-clean-session")){
+862c862
+<     #####:  860:		}else if(!strcmp(argv[i], "-N")){
+---
+>         5:  860:		}else if(!strcmp(argv[i], "-N")){
+867c867
+<     #####:  865:		}else if(!strcmp(argv[i], "-R")){
+---
+>         5:  865:		}else if(!strcmp(argv[i], "-R")){
+872,873c872,873
+<     #####:  870:		}else if(!strcmp(argv[i], "-v") || !strcmp(argv[i], "--verbose")){
+<     #####:  871:			if(pub_or_sub == CLIENT_PUB){
+---
+>         5:  870:		}else if(!strcmp(argv[i], "-v") || !strcmp(argv[i], "--verbose")){
+>         5:  871:			if(pub_or_sub == CLIENT_PUB){
+876c876
+<     #####:  874:			cfg->verbose = 1;
+---
+>         5:  874:			cfg->verbose = 1;
+889c889
+<         5:  887:int client_opts_set(struct mosquitto *mosq, struct mosq_config *cfg)
+---
+>        10:  887:int client_opts_set(struct mosquitto *mosq, struct mosq_config *cfg)
+895c895
+<         5:  893:	if(cfg->will_topic && mosquitto_will_set(mosq, cfg->will_topic,
+---
+>        10:  893:	if(cfg->will_topic && mosquitto_will_set(mosq, cfg->will_topic,
+903c903
+<         5:  901:	if(cfg->username && mosquitto_username_pw_set(mosq, cfg->username, cfg->password)){
+---
+>        10:  901:	if(cfg->username && mosquitto_username_pw_set(mosq, cfg->username, cfg->password)){
+909c909
+<         5:  907:	if((cfg->cafile || cfg->capath)
+---
+>        10:  907:	if((cfg->cafile || cfg->capath)
+916c916
+<         5:  914:	if(cfg->insecure && mosquitto_tls_insecure_set(mosq, true)){
+---
+>        10:  914:	if(cfg->insecure && mosquitto_tls_insecure_set(mosq, true)){
+922c922
+<         5:  920:	if(cfg->psk && mosquitto_tls_psk_set(mosq, cfg->psk, cfg->psk_identity, NULL)){
+---
+>        10:  920:	if(cfg->psk && mosquitto_tls_psk_set(mosq, cfg->psk, cfg->psk_identity, NULL)){
+928c928
+<         5:  926:	if((cfg->tls_version || cfg->ciphers) && mosquitto_tls_opts_set(mosq, 1, cfg->tls_version, cfg->ciphers)){
+---
+>        10:  926:	if((cfg->tls_version || cfg->ciphers) && mosquitto_tls_opts_set(mosq, 1, cfg->tls_version, cfg->ciphers)){
+934c934
+<         5:  932:	mosquitto_max_inflight_messages_set(mosq, cfg->max_inflight);
+---
+>        10:  932:	mosquitto_max_inflight_messages_set(mosq, cfg->max_inflight);
+936c936
+<         5:  934:	if(cfg->socks5_host){
+---
+>        10:  934:	if(cfg->socks5_host){
+944,945c944,945
+<         5:  942:	mosquitto_opts_set(mosq, MOSQ_OPT_PROTOCOL_VERSION, &(cfg->protocol_version));
+<         5:  943:	return MOSQ_ERR_SUCCESS;
+---
+>        10:  942:	mosquitto_opts_set(mosq, MOSQ_OPT_PROTOCOL_VERSION, &(cfg->protocol_version));
+>        10:  943:	return MOSQ_ERR_SUCCESS;
+948c948
+<         5:  946:int client_id_generate(struct mosq_config *cfg, const char *id_base)
+---
+>        10:  946:int client_id_generate(struct mosq_config *cfg, const char *id_base)
+953c953
+<         5:  951:	if(cfg->id_prefix){
+---
+>        10:  951:	if(cfg->id_prefix){
+961,967c961,967
+<         5:  959:	}else if(!cfg->id){
+<         5:  960:		hostname[0] = '\0';
+<         5:  961:		gethostname(hostname, 256);
+<         5:  962:		hostname[255] = '\0';
+<         5:  963:		len = strlen(id_base) + strlen("|-") + 6 + strlen(hostname);
+<         5:  964:		cfg->id = malloc(len);
+<         5:  965:		if(!cfg->id){
+---
+>        10:  959:	}else if(!cfg->id){
+>        10:  960:		hostname[0] = '\0';
+>        10:  961:		gethostname(hostname, 256);
+>        10:  962:		hostname[255] = '\0';
+>        10:  963:		len = strlen(id_base) + strlen("|-") + 6 + strlen(hostname);
+>        10:  964:		cfg->id = malloc(len);
+>        10:  965:		if(!cfg->id){
+972,973c972,973
+<        10:  970:		snprintf(cfg->id, len, "%s|%d-%s", id_base, getpid(), hostname);
+<         5:  971:		if(strlen(cfg->id) > MOSQ_MQTT_ID_MAX_LENGTH){
+---
+>        20:  970:		snprintf(cfg->id, len, "%s|%d-%s", id_base, getpid(), hostname);
+>        10:  971:		if(strlen(cfg->id) > MOSQ_MQTT_ID_MAX_LENGTH){
+975c975
+<         5:  973:			cfg->id[MOSQ_MQTT_ID_MAX_LENGTH] = '\0';
+---
+>        10:  973:			cfg->id[MOSQ_MQTT_ID_MAX_LENGTH] = '\0';
+981c981
+<         5:  979:int client_connect(struct mosquitto *mosq, struct mosq_config *cfg)
+---
+>        10:  979:int client_connect(struct mosquitto *mosq, struct mosq_config *cfg)
+991c991
+<         5:  989:	if(cfg->port < 0){
+---
+>        10:  989:	if(cfg->port < 0){
+993c993
+<         5:  991:		if(cfg->cafile || cfg->capath
+---
+>        10:  991:		if(cfg->cafile || cfg->capath
+995c995
+<         5:  993:				|| cfg->psk
+---
+>        10:  993:				|| cfg->psk
+1002c1002
+<         5: 1000:			port = 1883;
+---
+>        10: 1000:			port = 1883;
+1015c1015
+<         5: 1013:	rc = mosquitto_connect_bind(mosq, cfg->host, port, cfg->keepalive, cfg->bind_address);
+---
+>        10: 1013:	rc = mosquitto_connect_bind(mosq, cfg->host, port, cfg->keepalive, cfg->bind_address);
+1017,1019c1017,1019
+<         5: 1015:	if(rc>0){
+<         5: 1016:		if(!cfg->quiet){
+<         5: 1017:			if(rc == MOSQ_ERR_ERRNO){
+---
+>        10: 1015:	if(rc>0){
+>        10: 1016:		if(!cfg->quiet){
+>        10: 1017:			if(rc == MOSQ_ERR_ERRNO){
+1021c1021
+<         5: 1019:				err = strerror(errno);
+---
+>        10: 1019:				err = strerror(errno);
+1025c1025
+<         5: 1023:				fprintf(stderr, "Error: %s\n", err);
+---
+>        10: 1023:				fprintf(stderr, "Error: %s\n", err);
+1030,1031c1030,1031
+<         5: 1028:		mosquitto_lib_cleanup();
+<         5: 1029:		return rc;
+---
+>        10: 1028:		mosquitto_lib_cleanup();
+>        10: 1029:		return rc;

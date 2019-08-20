@@ -1,0 +1,118 @@
+75c75
+<     #####:   73:static void temp__expire_websockets_clients(struct mosquitto_db *db)
+---
+>         -:   73:static void temp__expire_websockets_clients(struct mosquitto_db *db)
+79c79
+<     #####:   77:	time_t now = mosquitto_time();
+---
+>         -:   77:	time_t now = mosquitto_time();
+82,88c82,88
+<     #####:   80:	if(now - last_check > 60){
+<     #####:   81:		HASH_ITER(hh_id, db->contexts_by_id, context, ctxt_tmp){
+<     #####:   82:			if(context->wsi && context->sock != INVALID_SOCKET){
+<     #####:   83:				if(context->keepalive && now - context->last_msg_in > (time_t)(context->keepalive)*3/2){
+<     #####:   84:					if(db->config->connection_messages == true){
+<     #####:   85:						if(context->id){
+<     #####:   86:							id = context->id;
+---
+>         -:   80:	if(now - last_check > 60){
+>         -:   81:		HASH_ITER(hh_id, db->contexts_by_id, context, ctxt_tmp){
+>         -:   82:			if(context->wsi && context->sock != INVALID_SOCKET){
+>         -:   83:				if(context->keepalive && now - context->last_msg_in > (time_t)(context->keepalive)*3/2){
+>         -:   84:					if(db->config->connection_messages == true){
+>         -:   85:						if(context->id){
+>         -:   86:							id = context->id;
+93c93
+<     #####:   91:							log__printf(NULL, MOSQ_LOG_NOTICE, "Client %s has exceeded timeout, disconnecting.", id);
+---
+>         -:   91:							log__printf(NULL, MOSQ_LOG_NOTICE, "Client %s has exceeded timeout, disconnecting.", id);
+97c97
+<     #####:   95:					do_disconnect(db, context);
+---
+>         -:   95:					do_disconnect(db, context);
+101c101
+<     #####:   99:		last_check = mosquitto_time();
+---
+>         -:   99:		last_check = mosquitto_time();
+103c103
+<     #####:  101:}
+---
+>         -:  101:}
+597c597
+<     #####:  595:		for(i=0; i<db->config->listener_count; i++){
+---
+>         -:  595:		for(i=0; i<db->config->listener_count; i++){
+602,603c602,603
+<     #####:  600:			if(db->config->listeners[i].ws_context){
+<     #####:  601:				libwebsocket_service(db->config->listeners[i].ws_context, 0);
+---
+>         -:  600:			if(db->config->listeners[i].ws_context){
+>         -:  601:				libwebsocket_service(db->config->listeners[i].ws_context, 0);
+606,607c606,607
+<     #####:  604:		if(db->config->have_websockets_listener){
+<     #####:  605:			temp__expire_websockets_clients(db);
+---
+>         -:  604:		if(db->config->have_websockets_listener){
+>         -:  605:			temp__expire_websockets_clients(db);
+632,634c632,634
+<     #####:  630:	if(context->wsi){
+<     #####:  631:		if(context->state != mosq_cs_disconnecting){
+<     #####:  632:			context->state = mosq_cs_disconnect_ws;
+---
+>         -:  630:	if(context->wsi){
+>         -:  631:		if(context->state != mosq_cs_disconnecting){
+>         -:  632:			context->state = mosq_cs_disconnect_ws;
+637c637
+<     #####:  635:			libwebsocket_callback_on_writable(context->ws_context, context->wsi);
+---
+>         -:  635:			libwebsocket_callback_on_writable(context->ws_context, context->wsi);
+639,640c639,640
+<     #####:  637:		if(context->sock != INVALID_SOCKET){
+<     #####:  638:			HASH_DELETE(hh_sock, db->contexts_by_sock, context);
+---
+>         -:  637:		if(context->sock != INVALID_SOCKET){
+>         -:  638:			HASH_DELETE(hh_sock, db->contexts_by_sock, context);
+642,643c642,643
+<     #####:  640:			if (epoll_ctl(db->epollfd, EPOLL_CTL_DEL, context->sock, &ev) == -1) {
+<     #####:  641:				log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll disconnecting websockets: %s", strerror(errno));
+---
+>         -:  640:			if (epoll_ctl(db->epollfd, EPOLL_CTL_DEL, context->sock, &ev) == -1) {
+>         -:  641:				log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll disconnecting websockets: %s", strerror(errno));
+646,647c646,647
+<     #####:  644:			context->sock = INVALID_SOCKET;
+<     #####:  645:			context->pollfd_index = -1;
+---
+>         -:  644:			context->sock = INVALID_SOCKET;
+>         -:  645:			context->pollfd_index = -1;
+649c649
+<     #####:  647:		context__remove_from_by_id(db, context);
+---
+>         -:  647:		context__remove_from_by_id(db, context);
+721c721
+<     #####:  719:		if(context->wsi){
+---
+>         -:  719:		if(context->wsi){
+724,726c724,726
+<     #####:  722:			wspoll.fd = context->sock;
+<     #####:  723:			wspoll.events = context->events;
+<     #####:  724:			wspoll.revents = events;
+---
+>         -:  722:			wspoll.fd = context->sock;
+>         -:  723:			wspoll.events = context->events;
+>         -:  724:			wspoll.revents = events;
+733c733
+<     #####:  731:			lws_service_fd(lws_get_context(context->wsi), &wspoll);
+---
+>         -:  731:			lws_service_fd(lws_get_context(context->wsi), &wspoll);
+737c737
+<     #####:  735:			continue;
+---
+>         -:  735:			continue;
+794c794
+<     #####:  792:		if(context->wsi){
+---
+>         -:  792:		if(context->wsi){
+796c796
+<     #####:  794:			continue;
+---
+>         -:  794:			continue;

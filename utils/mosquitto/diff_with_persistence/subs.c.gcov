@@ -1,0 +1,8 @@
+79c79
+<     #####:   77:		if(strncmp(topic, "$SYS", 4)){
+---
+>         -:   77:		if(strncmp(topic, "$SYS", 4)){
+82c82
+<     #####:   80:			db->persistence_changes++;
+---
+>         -:   80:			db->persistence_changes++;

@@ -1,0 +1,8 @@
+2c2
+<         -:    0:Programs:22
+---
+>         -:    0:Programs:9
+73c73
+<        18:   71:  return __builtin___memset_chk (__dest, __ch, __len, __bos0 (__dest));
+---
+>         9:   71:  return __builtin___memset_chk (__dest, __ch, __len, __bos0 (__dest));

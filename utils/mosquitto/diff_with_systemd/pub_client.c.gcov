@@ -1,0 +1,96 @@
+60c60
+<         4:   58:void my_connect_callback(struct mosquitto *mosq, void *obj, int result)
+---
+>     #####:   58:void my_connect_callback(struct mosquitto *mosq, void *obj, int result)
+62c62
+<         4:   60:	int rc = MOSQ_ERR_SUCCESS;
+---
+>     #####:   60:	int rc = MOSQ_ERR_SUCCESS;
+64,66c64,66
+<         4:   62:	if(!result){
+<         4:   63:		switch(mode){
+<         4:   64:			case MSGMODE_CMD:
+---
+>     #####:   62:	if(!result){
+>     #####:   63:		switch(mode){
+>     #####:   64:			case MSGMODE_CMD:
+69,70c69,70
+<         4:   67:				rc = mosquitto_publish(mosq, &mid_sent, topic, msglen, message, qos, retain);
+<         4:   68:				break;
+---
+>     #####:   67:				rc = mosquitto_publish(mosq, &mid_sent, topic, msglen, message, qos, retain);
+>     #####:   68:				break;
+78c78
+<         4:   76:		if(rc){
+---
+>     #####:   76:		if(rc){
+105c105
+<         4:  103:}
+---
+>     #####:  103:}
+107c107
+<         4:  105:void my_disconnect_callback(struct mosquitto *mosq, void *obj, int rc)
+---
+>     #####:  105:void my_disconnect_callback(struct mosquitto *mosq, void *obj, int rc)
+109,110c109,110
+<         4:  107:	connected = false;
+<         4:  108:}
+---
+>     #####:  107:	connected = false;
+>     #####:  108:}
+112c112
+<         4:  110:void my_publish_callback(struct mosquitto *mosq, void *obj, int mid)
+---
+>     #####:  110:void my_publish_callback(struct mosquitto *mosq, void *obj, int mid)
+114,115c114,115
+<         4:  112:	last_mid_sent = mid;
+<         4:  113:	if(mode == MSGMODE_STDIN_LINE){
+---
+>     #####:  112:	last_mid_sent = mid;
+>     #####:  113:	if(mode == MSGMODE_STDIN_LINE){
+120,122c120,122
+<         4:  118:	}else if(disconnect_sent == false){
+<         4:  119:		mosquitto_disconnect(mosq);
+<         4:  120:		disconnect_sent = true;
+---
+>     #####:  118:	}else if(disconnect_sent == false){
+>     #####:  119:		mosquitto_disconnect(mosq);
+>     #####:  120:		disconnect_sent = true;
+124c124
+<         4:  122:}
+---
+>     #####:  122:}
+405c405
+<         4:  403:	if(mode == MSGMODE_STDIN_LINE){
+---
+>     #####:  403:	if(mode == MSGMODE_STDIN_LINE){
+410c410
+<        12:  408:		if(mode == MSGMODE_STDIN_LINE){
+---
+>     #####:  408:		if(mode == MSGMODE_STDIN_LINE){
+464c464
+<        12:  462:			rc = mosquitto_loop(mosq, -1, 1);
+---
+>     #####:  462:			rc = mosquitto_loop(mosq, -1, 1);
+466c466
+<        12:  464:	}while(rc == MOSQ_ERR_SUCCESS && connected);
+---
+>     #####:  464:	}while(rc == MOSQ_ERR_SUCCESS && connected);
+468c468
+<         4:  466:	if(mode == MSGMODE_STDIN_LINE){
+---
+>     #####:  466:	if(mode == MSGMODE_STDIN_LINE){
+472c472
+<         4:  470:	if(message && mode == MSGMODE_FILE){
+---
+>     #####:  470:	if(message && mode == MSGMODE_FILE){
+475,476c475,476
+<         4:  473:	mosquitto_destroy(mosq);
+<         4:  474:	mosquitto_lib_cleanup();
+---
+>     #####:  473:	mosquitto_destroy(mosq);
+>     #####:  474:	mosquitto_lib_cleanup();
+478c478
+<         4:  476:	if(rc){
+---
+>     #####:  476:	if(rc){

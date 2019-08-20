@@ -1,0 +1,6 @@
+525,526c525,526
+<     #####:  523:	if(context->wsi && rc == 0){
+<     #####:  524:		return db__message_write(db, context);
+---
+>         -:  523:	if(context->wsi && rc == 0){
+>         -:  524:		return db__message_write(db, context);

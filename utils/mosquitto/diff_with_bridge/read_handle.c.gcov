@@ -1,0 +1,14 @@
+63,68c63,68
+<     #####:   61:		case CONNACK:
+<     #####:   62:			return handle__connack(db, context);
+<     #####:   63:		case SUBACK:
+<     #####:   64:			return handle__suback(context);
+<     #####:   65:		case UNSUBACK:
+<     #####:   66:			return handle__unsuback(context);
+---
+>         -:   61:		case CONNACK:
+>         -:   62:			return handle__connack(db, context);
+>         -:   63:		case SUBACK:
+>         -:   64:			return handle__suback(context);
+>         -:   65:		case UNSUBACK:
+>         -:   66:			return handle__unsuback(context);

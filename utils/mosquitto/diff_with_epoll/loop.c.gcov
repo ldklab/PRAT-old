@@ -1,0 +1,370 @@
+127c127
+<         -:  125:	struct pollfd *pollfds = NULL;
+---
+>     #####:  125:	struct pollfd *pollfds = NULL;
+152c152
+<         -:  150:	pollfd_max = sysconf(_SC_OPEN_MAX);
+---
+>     #####:  150:	pollfd_max = sysconf(_SC_OPEN_MAX);
+155,158c155,158
+<         -:  153:	pollfds = mosquitto__malloc(sizeof(struct pollfd)*pollfd_max);
+<         -:  154:	if(!pollfds){
+<         -:  155:		log__printf(NULL, MOSQ_LOG_ERR, "Error: Out of memory.");
+<         -:  156:		return MOSQ_ERR_NOMEM;
+---
+>     #####:  153:	pollfds = mosquitto__malloc(sizeof(struct pollfd)*pollfd_max);
+>     #####:  154:	if(!pollfds){
+>     #####:  155:		log__printf(NULL, MOSQ_LOG_ERR, "Error: Out of memory.");
+>     #####:  156:		return MOSQ_ERR_NOMEM;
+167,170c167,170
+<     #####:  165:	db->epollfd = 0;
+<     #####:  166:	if ((db->epollfd = epoll_create(MAX_EVENTS)) == -1) {
+<     #####:  167:		log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll creating: %s", strerror(errno));
+<     #####:  168:		return MOSQ_ERR_UNKNOWN;
+---
+>         -:  165:	db->epollfd = 0;
+>         -:  166:	if ((db->epollfd = epoll_create(MAX_EVENTS)) == -1) {
+>         -:  167:		log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll creating: %s", strerror(errno));
+>         -:  168:		return MOSQ_ERR_UNKNOWN;
+172,181c172,181
+<     #####:  170:	memset(&ev, 0, sizeof(struct epoll_event));
+<     #####:  171:	memset(&events, 0, sizeof(struct epoll_event)*MAX_EVENTS);
+<     #####:  172:	for(i=0; i<listensock_count; i++){
+<     #####:  173:		ev.data.fd = listensock[i];
+<     #####:  174:		ev.events = EPOLLIN;
+<     #####:  175:		if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, listensock[i], &ev) == -1) {
+<     #####:  176:			log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering: %s", strerror(errno));
+<     #####:  177:			(void)close(db->epollfd);
+<     #####:  178:			db->epollfd = 0;
+<     #####:  179:			return MOSQ_ERR_UNKNOWN;
+---
+>         -:  170:	memset(&ev, 0, sizeof(struct epoll_event));
+>         -:  171:	memset(&events, 0, sizeof(struct epoll_event)*MAX_EVENTS);
+>         -:  172:	for(i=0; i<listensock_count; i++){
+>         -:  173:		ev.data.fd = listensock[i];
+>         -:  174:		ev.events = EPOLLIN;
+>         -:  175:		if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, listensock[i], &ev) == -1) {
+>         -:  176:			log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering: %s", strerror(errno));
+>         -:  177:			(void)close(db->epollfd);
+>         -:  178:			db->epollfd = 0;
+>         -:  179:			return MOSQ_ERR_UNKNOWN;
+185,194c185,194
+<     #####:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+<     #####:  184:		if(context->bridge){
+<     #####:  185:			ev.data.fd = context->sock;
+<     #####:  186:			ev.events = EPOLLIN;
+<     #####:  187:			context->events = EPOLLIN;
+<     #####:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+<     #####:  190:				(void)close(db->epollfd);
+<     #####:  191:				db->epollfd = 0;
+<     #####:  192:				return MOSQ_ERR_UNKNOWN;
+---
+>         -:  183:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+>         -:  184:		if(context->bridge){
+>         -:  185:			ev.data.fd = context->sock;
+>         -:  186:			ev.events = EPOLLIN;
+>         -:  187:			context->events = EPOLLIN;
+>         -:  188:			if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  189:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll initial registering bridge: %s", strerror(errno));
+>         -:  190:				(void)close(db->epollfd);
+>         -:  191:				db->epollfd = 0;
+>         -:  192:				return MOSQ_ERR_UNKNOWN;
+210c210
+<         -:  208:		memset(pollfds, -1, sizeof(struct pollfd)*pollfd_max);
+---
+>     #####:  208:		memset(pollfds, -1, sizeof(struct pollfd)*pollfd_max);
+212,217c212,217
+<         -:  210:		pollfd_index = 0;
+<         -:  211:		for(i=0; i<listensock_count; i++){
+<         -:  212:			pollfds[pollfd_index].fd = listensock[i];
+<         -:  213:			pollfds[pollfd_index].events = POLLIN;
+<         -:  214:			pollfds[pollfd_index].revents = 0;
+<         -:  215:			pollfd_index++;
+---
+>     #####:  210:		pollfd_index = 0;
+>     #####:  211:		for(i=0; i<listensock_count; i++){
+>     #####:  212:			pollfds[pollfd_index].fd = listensock[i];
+>     #####:  213:			pollfds[pollfd_index].events = POLLIN;
+>     #####:  214:			pollfds[pollfd_index].revents = 0;
+>     #####:  215:			pollfd_index++;
+285,291c285,291
+<     #####:  283:						if(context->current_out_packet || context->state == mosq_cs_connect_pending || context->ws_want_write){
+<     #####:  284:							if(!(context->events & EPOLLOUT)) {
+<     #####:  285:								ev.data.fd = context->sock;
+<     #####:  286:								ev.events = EPOLLIN | EPOLLOUT;
+<     #####:  287:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  288:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+<     #####:  289:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering to EPOLLOUT: %s", strerror(errno));
+---
+>         -:  283:						if(context->current_out_packet || context->state == mosq_cs_connect_pending || context->ws_want_write){
+>         -:  284:							if(!(context->events & EPOLLOUT)) {
+>         -:  285:								ev.data.fd = context->sock;
+>         -:  286:								ev.events = EPOLLIN | EPOLLOUT;
+>         -:  287:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  288:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+>         -:  289:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering to EPOLLOUT: %s", strerror(errno));
+294c294
+<     #####:  292:								context->events = EPOLLIN | EPOLLOUT;
+---
+>         -:  292:								context->events = EPOLLIN | EPOLLOUT;
+296c296
+<     #####:  294:							context->ws_want_write = false;
+---
+>         -:  294:							context->ws_want_write = false;
+299,304c299,304
+<     #####:  297:							if(context->events & EPOLLOUT) {
+<     #####:  298:								ev.data.fd = context->sock;
+<     #####:  299:								ev.events = EPOLLIN;
+<     #####:  300:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  301:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+<     #####:  302:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering to EPOLLIN: %s", strerror(errno));
+---
+>         -:  297:							if(context->events & EPOLLOUT) {
+>         -:  298:								ev.data.fd = context->sock;
+>         -:  299:								ev.events = EPOLLIN;
+>         -:  300:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  301:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+>         -:  302:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering to EPOLLIN: %s", strerror(errno));
+307c307
+<     #####:  305:								context->events = EPOLLIN;
+---
+>         -:  305:								context->events = EPOLLIN;
+311,316c311,316
+<         -:  309:						pollfds[pollfd_index].fd = context->sock;
+<         -:  310:						pollfds[pollfd_index].events = POLLIN;
+<         -:  311:						pollfds[pollfd_index].revents = 0;
+<         -:  312:						if(context->current_out_packet || context->state == mosq_cs_connect_pending || context->ws_want_write){
+<         -:  313:							pollfds[pollfd_index].events |= POLLOUT;
+<         -:  314:							context->ws_want_write = false;
+---
+>     #####:  309:						pollfds[pollfd_index].fd = context->sock;
+>     #####:  310:						pollfds[pollfd_index].events = POLLIN;
+>     #####:  311:						pollfds[pollfd_index].revents = 0;
+>     #####:  312:						if(context->current_out_packet || context->state == mosq_cs_connect_pending || context->ws_want_write){
+>     #####:  313:							pollfds[pollfd_index].events |= POLLOUT;
+>     #####:  314:							context->ws_want_write = false;
+318,319c318,319
+<         -:  316:						context->pollfd_index = pollfd_index;
+<         -:  317:						pollfd_index++;
+---
+>     #####:  316:						context->pollfd_index = pollfd_index;
+>     #####:  317:						pollfd_index++;
+439,442c439,442
+<     #####:  437:								ev.data.fd = context->sock;
+<     #####:  438:								ev.events = EPOLLIN;
+<     #####:  439:								if(context->current_out_packet){
+<     #####:  440:									ev.events |= EPOLLOUT;
+---
+>         -:  437:								ev.data.fd = context->sock;
+>         -:  438:								ev.events = EPOLLIN;
+>         -:  439:								if(context->current_out_packet){
+>         -:  440:									ev.events |= EPOLLOUT;
+444,446c444,446
+<     #####:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+<     #####:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+<     #####:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+---
+>         -:  442:								if(epoll_ctl(db->epollfd, EPOLL_CTL_ADD, context->sock, &ev) == -1) {
+>         -:  443:									if((errno != EEXIST)||(epoll_ctl(db->epollfd, EPOLL_CTL_MOD, context->sock, &ev) == -1)) {
+>         -:  444:											log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll re-registering bridge: %s", strerror(errno));
+449c449
+<     #####:  447:									context->events = ev.events;
+---
+>         -:  447:									context->events = ev.events;
+452,456c452,456
+<         -:  450:								pollfds[pollfd_index].fd = context->sock;
+<         -:  451:								pollfds[pollfd_index].events = POLLIN;
+<         -:  452:								pollfds[pollfd_index].revents = 0;
+<         -:  453:								if(context->current_out_packet){
+<         -:  454:									pollfds[pollfd_index].events |= POLLOUT;
+---
+>     #####:  450:								pollfds[pollfd_index].fd = context->sock;
+>     #####:  451:								pollfds[pollfd_index].events = POLLIN;
+>     #####:  452:								pollfds[pollfd_index].revents = 0;
+>     #####:  453:								if(context->current_out_packet){
+>     #####:  454:									pollfds[pollfd_index].events |= POLLOUT;
+458,459c458,459
+<         -:  456:								context->pollfd_index = pollfd_index;
+<         -:  457:								pollfd_index++;
+---
+>     #####:  456:								context->pollfd_index = pollfd_index;
+>     #####:  457:								pollfd_index++;
+503c503
+<     #####:  501:		fdcount = epoll_wait(db->epollfd, events, MAX_EVENTS, 100);
+---
+>         -:  501:		fdcount = epoll_wait(db->epollfd, events, MAX_EVENTS, 100);
+505c505
+<         -:  503:		fdcount = poll(pollfds, pollfd_index, 100);
+---
+>     #####:  503:		fdcount = poll(pollfds, pollfd_index, 100);
+512,515c512,515
+<     #####:  510:		switch(fdcount){
+<     #####:  511:		case -1:
+<     #####:  512:			if(errno != EINTR){
+<     #####:  513:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll waiting: %s.", strerror(errno));
+---
+>         -:  510:		switch(fdcount){
+>         -:  511:		case -1:
+>         -:  512:			if(errno != EINTR){
+>         -:  513:				log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll waiting: %s.", strerror(errno));
+521,528c521,528
+<     #####:  519:			for(i=0; i<fdcount; i++){
+<     #####:  520:				for(j=0; j<listensock_count; j++){
+<     #####:  521:					if (events[i].data.fd == listensock[j]) {
+<     #####:  522:						if (events[i].events & (EPOLLIN | EPOLLPRI)){
+<     #####:  523:							while((ev.data.fd = net__socket_accept(db, listensock[j])) != -1){
+<     #####:  524:								ev.events = EPOLLIN;
+<     #####:  525:								if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, ev.data.fd, &ev) == -1) {
+<     #####:  526:									log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll accepting: %s", strerror(errno));
+---
+>         -:  519:			for(i=0; i<fdcount; i++){
+>         -:  520:				for(j=0; j<listensock_count; j++){
+>         -:  521:					if (events[i].data.fd == listensock[j]) {
+>         -:  522:						if (events[i].events & (EPOLLIN | EPOLLPRI)){
+>         -:  523:							while((ev.data.fd = net__socket_accept(db, listensock[j])) != -1){
+>         -:  524:								ev.events = EPOLLIN;
+>         -:  525:								if (epoll_ctl(db->epollfd, EPOLL_CTL_ADD, ev.data.fd, &ev) == -1) {
+>         -:  526:									log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll accepting: %s", strerror(errno));
+530,533c530,533
+<     #####:  528:								context = NULL;
+<     #####:  529:								HASH_FIND(hh_sock, db->contexts_by_sock, &(ev.data.fd), sizeof(mosq_sock_t), context);
+<     #####:  530:								if(!context) {
+<     #####:  531:									log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll accepting: no context");
+---
+>         -:  528:								context = NULL;
+>         -:  529:								HASH_FIND(hh_sock, db->contexts_by_sock, &(ev.data.fd), sizeof(mosq_sock_t), context);
+>         -:  530:								if(!context) {
+>         -:  531:									log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll accepting: no context");
+535c535
+<     #####:  533:								context->events = EPOLLIN;
+---
+>         -:  533:								context->events = EPOLLIN;
+541,542c541,542
+<     #####:  539:				if (j == listensock_count) {
+<     #####:  540:					loop_handle_reads_writes(db, events[i].data.fd, events[i].events);
+---
+>         -:  539:				if (j == listensock_count) {
+>         -:  540:					loop_handle_reads_writes(db, events[i].data.fd, events[i].events);
+547,548c547,548
+<         -:  545:		if(fdcount == -1){
+<         -:  546:			log__printf(NULL, MOSQ_LOG_ERR, "Error in poll: %s.", strerror(errno));
+---
+>     #####:  545:		if(fdcount == -1){
+>     #####:  546:			log__printf(NULL, MOSQ_LOG_ERR, "Error in poll: %s.", strerror(errno));
+550c550
+<         -:  548:			loop_handle_reads_writes(db, pollfds);
+---
+>     #####:  548:			loop_handle_reads_writes(db, pollfds);
+552,554c552,554
+<         -:  550:			for(i=0; i<listensock_count; i++){
+<         -:  551:				if(pollfds[i].revents & (POLLIN | POLLPRI)){
+<         -:  552:					while(net__socket_accept(db, listensock[i]) != -1){
+---
+>     #####:  550:			for(i=0; i<listensock_count; i++){
+>     #####:  551:				if(pollfds[i].revents & (POLLIN | POLLPRI)){
+>     #####:  552:					while(net__socket_accept(db, listensock[i]) != -1){
+613,614c613,614
+<     #####:  611:	(void) close(db->epollfd);
+<     #####:  612:	db->epollfd = 0;
+---
+>         -:  611:	(void) close(db->epollfd);
+>         -:  612:	db->epollfd = 0;
+616c616
+<         -:  614:	mosquitto__free(pollfds);
+---
+>     #####:  614:	mosquitto__free(pollfds);
+629c629
+<     #####:  627:		return;
+---
+>         -:  627:		return;
+666,668c666,668
+<     #####:  664:		if (context->sock != INVALID_SOCKET && epoll_ctl(db->epollfd, EPOLL_CTL_DEL, context->sock, &ev) == -1) {
+<     #####:  665:			if(db->config->connection_messages == true){
+<     #####:  666:				log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll disconnecting: %s", strerror(errno));
+---
+>         -:  664:		if (context->sock != INVALID_SOCKET && epoll_ctl(db->epollfd, EPOLL_CTL_DEL, context->sock, &ev) == -1) {
+>         -:  665:			if(db->config->connection_messages == true){
+>         -:  666:				log__printf(NULL, MOSQ_LOG_DEBUG, "Error in epoll disconnecting: %s", strerror(errno));
+691c691
+<     #####:  689:static void loop_handle_reads_writes(struct mosquitto_db *db, mosq_sock_t sock, uint32_t events)
+---
+>         -:  689:static void loop_handle_reads_writes(struct mosquitto_db *db, mosq_sock_t sock, uint32_t events)
+693c693
+<         -:  691:static void loop_handle_reads_writes(struct mosquitto_db *db, struct pollfd *pollfds)
+---
+>     #####:  691:static void loop_handle_reads_writes(struct mosquitto_db *db, struct pollfd *pollfds)
+705,708c705,708
+<     #####:  703:	context = NULL;
+<     #####:  704:	HASH_FIND(hh_sock, db->contexts_by_sock, &sock, sizeof(mosq_sock_t), context);
+<     #####:  705:	if(!context) {
+<     #####:  706:		return;
+---
+>         -:  703:	context = NULL;
+>         -:  704:	HASH_FIND(hh_sock, db->contexts_by_sock, &sock, sizeof(mosq_sock_t), context);
+>         -:  705:	if(!context) {
+>         -:  706:		return;
+710c710
+<     #####:  708:	for (i=0;i<1;i++) {
+---
+>         -:  708:	for (i=0;i<1;i++) {
+712,714c712,714
+<         -:  710:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+<         -:  711:		if(context->pollfd_index < 0){
+<         -:  712:			continue;
+---
+>     #####:  710:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+>     #####:  711:		if(context->pollfd_index < 0){
+>     #####:  712:			continue;
+717c717
+<         -:  715:		assert(pollfds[context->pollfd_index].fd == context->sock);
+---
+>     #####:  715:		assert(pollfds[context->pollfd_index].fd == context->sock);
+743c743
+<     #####:  741:		if(events & EPOLLOUT ||
+---
+>         -:  741:		if(events & EPOLLOUT ||
+745c745
+<         -:  743:		if(pollfds[context->pollfd_index].revents & POLLOUT ||
+---
+>     #####:  743:		if(pollfds[context->pollfd_index].revents & POLLOUT ||
+781,783c781,783
+<     #####:  779:	context = NULL;
+<     #####:  780:	HASH_FIND(hh_sock, db->contexts_by_sock, &sock, sizeof(mosq_sock_t), context);
+<     #####:  781:	if(!context) {
+---
+>         -:  779:	context = NULL;
+>         -:  780:	HASH_FIND(hh_sock, db->contexts_by_sock, &sock, sizeof(mosq_sock_t), context);
+>         -:  781:	if(!context) {
+786c786
+<     #####:  784:	for (i=0;i<1;i++) {
+---
+>         -:  784:	for (i=0;i<1;i++) {
+788,790c788,790
+<         -:  786:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+<         -:  787:		if(context->pollfd_index < 0){
+<         -:  788:			continue;
+---
+>     #####:  786:	HASH_ITER(hh_sock, db->contexts_by_sock, context, ctxt_tmp){
+>     #####:  787:		if(context->pollfd_index < 0){
+>     #####:  788:			continue;
+802c802
+<     #####:  800:		if(events & EPOLLIN ||
+---
+>         -:  800:		if(events & EPOLLIN ||
+804c804
+<         -:  802:		if(pollfds[context->pollfd_index].revents & POLLIN ||
+---
+>     #####:  802:		if(pollfds[context->pollfd_index].revents & POLLIN ||
+822c822
+<     #####:  820:			if(events & (EPOLLERR | EPOLLHUP)){
+---
+>         -:  820:			if(events & (EPOLLERR | EPOLLHUP)){
+824c824
+<         -:  822:			if(context->pollfd_index >= 0 && pollfds[context->pollfd_index].revents & (POLLERR | POLLNVAL | POLLHUP)){
+---
+>     #####:  822:			if(context->pollfd_index >= 0 && pollfds[context->pollfd_index].revents & (POLLERR | POLLNVAL | POLLHUP)){
+831c831
+<         -:  829:}
+---
+>     #####:  829:}

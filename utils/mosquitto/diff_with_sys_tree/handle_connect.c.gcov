@@ -1,0 +1,4 @@
+140c140
+<     #####:  138:	G_CONNECTION_COUNT_INC();
+---
+>         -:  138:	G_CONNECTION_COUNT_INC();

@@ -1,0 +1,8 @@
+114c114
+<     #####:  112:					G_PUB_BYTES_SENT_INC(payloadlen);
+---
+>         -:  112:					G_PUB_BYTES_SENT_INC(payloadlen);
+124c124
+<     #####:  122:	G_PUB_BYTES_SENT_INC(payloadlen);
+---
+>         -:  122:	G_PUB_BYTES_SENT_INC(payloadlen);

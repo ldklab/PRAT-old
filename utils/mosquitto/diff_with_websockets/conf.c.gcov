@@ -1,0 +1,48 @@
+308c308
+<     #####:  306:			if(!config->listeners[i].ws_context) /* libwebsockets frees its own SSL_CTX */
+---
+>         -:  306:			if(!config->listeners[i].ws_context) /* libwebsockets frees its own SSL_CTX */
+315c315
+<     #####:  313:			mosquitto__free(config->listeners[i].http_dir);
+---
+>         -:  313:			mosquitto__free(config->listeners[i].http_dir);
+582c582
+<     #####:  580:	dest->websockets_log_level = src->websockets_log_level;
+---
+>         -:  580:	dest->websockets_log_level = src->websockets_log_level;
+1187,1188c1187,1188
+<     #####: 1185:					if(reload) continue; // Listeners not valid for reloading.
+<     #####: 1186:					if(conf__parse_string(&token, "http_dir", &cur_listener->http_dir, saveptr)) return MOSQ_ERR_INVAL;
+---
+>         -: 1185:					if(reload) continue; // Listeners not valid for reloading.
+>         -: 1186:					if(conf__parse_string(&token, "http_dir", &cur_listener->http_dir, saveptr)) return MOSQ_ERR_INVAL;
+1190c1190
+<         -: 1188:					log__printf(NULL, MOSQ_LOG_WARNING, "Warning: Websockets support not available.");
+---
+>     #####: 1188:					log__printf(NULL, MOSQ_LOG_WARNING, "Warning: Websockets support not available.");
+1451,1452c1451,1452
+<     #####: 1449:						}else if(!strcmp(token, "websockets")){
+<     #####: 1450:							cr->log_type |= MOSQ_LOG_WEBSOCKETS;
+---
+>         -: 1449:						}else if(!strcmp(token, "websockets")){
+>         -: 1450:							cr->log_type |= MOSQ_LOG_WEBSOCKETS;
+1649,1650c1649,1650
+<     #####: 1647:							cur_listener->protocol = mp_websockets;
+<     #####: 1648:							config->have_websockets_listener = true;
+---
+>         -: 1647:							cur_listener->protocol = mp_websockets;
+>         -: 1648:							config->have_websockets_listener = true;
+1652,1653c1652,1653
+<         -: 1650:							log__printf(NULL, MOSQ_LOG_ERR, "Error: Websockets support not available.");
+<         -: 1651:							return MOSQ_ERR_INVAL;
+---
+>     #####: 1650:							log__printf(NULL, MOSQ_LOG_ERR, "Error: Websockets support not available.");
+>     #####: 1651:							return MOSQ_ERR_INVAL;
+1994c1994
+<     #####: 1992:					if(conf__parse_int(&token, "websockets_log_level", &config->websockets_log_level, saveptr)) return MOSQ_ERR_INVAL;
+---
+>         -: 1992:					if(conf__parse_int(&token, "websockets_log_level", &config->websockets_log_level, saveptr)) return MOSQ_ERR_INVAL;
+1996c1996
+<         -: 1994:					log__printf(NULL, MOSQ_LOG_WARNING, "Warning: Websockets support not available.");
+---
+>     #####: 1994:					log__printf(NULL, MOSQ_LOG_WARNING, "Warning: Websockets support not available.");
