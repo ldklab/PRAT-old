@@ -1,0 +1,4 @@
+85c85
+<     #####:   83:	context->ssl = NULL;
+---
+>         -:   83:	context->ssl = NULL;

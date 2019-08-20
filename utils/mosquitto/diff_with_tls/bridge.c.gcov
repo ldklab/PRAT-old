@@ -1,0 +1,22 @@
+80,86c80,86
+<     #####:   78:	new_context->tls_cafile = new_context->bridge->tls_cafile;
+<     #####:   79:	new_context->tls_capath = new_context->bridge->tls_capath;
+<     #####:   80:	new_context->tls_certfile = new_context->bridge->tls_certfile;
+<     #####:   81:	new_context->tls_keyfile = new_context->bridge->tls_keyfile;
+<     #####:   82:	new_context->tls_cert_reqs = SSL_VERIFY_PEER;
+<     #####:   83:	new_context->tls_version = new_context->bridge->tls_version;
+<     #####:   84:	new_context->tls_insecure = new_context->bridge->tls_insecure;
+---
+>         -:   78:	new_context->tls_cafile = new_context->bridge->tls_cafile;
+>         -:   79:	new_context->tls_capath = new_context->bridge->tls_capath;
+>         -:   80:	new_context->tls_certfile = new_context->bridge->tls_certfile;
+>         -:   81:	new_context->tls_keyfile = new_context->bridge->tls_keyfile;
+>         -:   82:	new_context->tls_cert_reqs = SSL_VERIFY_PEER;
+>         -:   83:	new_context->tls_version = new_context->bridge->tls_version;
+>         -:   84:	new_context->tls_insecure = new_context->bridge->tls_insecure;
+88,89c88,89
+<     #####:   86:	new_context->tls_psk_identity = new_context->bridge->tls_psk_identity;
+<     #####:   87:	new_context->tls_psk = new_context->bridge->tls_psk;
+---
+>         -:   86:	new_context->tls_psk_identity = new_context->bridge->tls_psk_identity;
+>         -:   87:	new_context->tls_psk = new_context->bridge->tls_psk;

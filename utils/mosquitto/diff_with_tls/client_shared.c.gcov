@@ -1,0 +1,262 @@
+152,157c152,157
+<     #####:  150:	free(cfg->cafile);
+<     #####:  151:	free(cfg->capath);
+<     #####:  152:	free(cfg->certfile);
+<     #####:  153:	free(cfg->keyfile);
+<     #####:  154:	free(cfg->ciphers);
+<     #####:  155:	free(cfg->tls_version);
+---
+>         -:  150:	free(cfg->cafile);
+>         -:  151:	free(cfg->capath);
+>         -:  152:	free(cfg->certfile);
+>         -:  153:	free(cfg->keyfile);
+>         -:  154:	free(cfg->ciphers);
+>         -:  155:	free(cfg->tls_version);
+159,160c159,160
+<     #####:  157:	free(cfg->psk);
+<     #####:  158:	free(cfg->psk_identity);
+---
+>         -:  157:	free(cfg->psk);
+>         -:  158:	free(cfg->psk_identity);
+311,313c311,313
+<         5:  309:	if((cfg->certfile && !cfg->keyfile) || (cfg->keyfile && !cfg->certfile)){
+<     #####:  310:		fprintf(stderr, "Error: Both certfile and keyfile must be provided if one of them is.\n");
+<     #####:  311:		return 1;
+---
+>         -:  309:	if((cfg->certfile && !cfg->keyfile) || (cfg->keyfile && !cfg->certfile)){
+>         -:  310:		fprintf(stderr, "Error: Both certfile and keyfile must be provided if one of them is.\n");
+>         -:  311:		return 1;
+317,318c317,318
+<         5:  315:	if((cfg->cafile || cfg->capath) && cfg->psk){
+<     #####:  316:		if(!cfg->quiet) fprintf(stderr, "Error: Only one of --psk or --cafile/--capath may be used at once.\n");
+---
+>         -:  315:	if((cfg->cafile || cfg->capath) && cfg->psk){
+>         -:  316:		if(!cfg->quiet) fprintf(stderr, "Error: Only one of --psk or --cafile/--capath may be used at once.\n");
+321,322c321,322
+<         5:  319:	if(cfg->psk && !cfg->psk_identity){
+<     #####:  320:		if(!cfg->quiet) fprintf(stderr, "Error: --psk-identity required if --psk used.\n");
+---
+>         -:  319:	if(cfg->psk && !cfg->psk_identity){
+>         -:  320:		if(!cfg->quiet) fprintf(stderr, "Error: --psk-identity required if --psk used.\n");
+400,403c400,403
+<        10:  398:		}else if(!strcmp(argv[i], "--cafile")){
+<     #####:  399:			if(i==argc-1){
+<     #####:  400:				fprintf(stderr, "Error: --cafile argument given but no file specified.\n\n");
+<     #####:  401:				return 1;
+---
+>         -:  398:		}else if(!strcmp(argv[i], "--cafile")){
+>         -:  399:			if(i==argc-1){
+>         -:  400:				fprintf(stderr, "Error: --cafile argument given but no file specified.\n\n");
+>         -:  401:				return 1;
+405c405
+<     #####:  403:				cfg->cafile = strdup(argv[i+1]);
+---
+>         -:  403:				cfg->cafile = strdup(argv[i+1]);
+407,411c407,411
+<     #####:  405:			i++;
+<        10:  406:		}else if(!strcmp(argv[i], "--capath")){
+<     #####:  407:			if(i==argc-1){
+<     #####:  408:				fprintf(stderr, "Error: --capath argument given but no directory specified.\n\n");
+<     #####:  409:				return 1;
+---
+>         -:  405:			i++;
+>         -:  406:		}else if(!strcmp(argv[i], "--capath")){
+>         -:  407:			if(i==argc-1){
+>         -:  408:				fprintf(stderr, "Error: --capath argument given but no directory specified.\n\n");
+>         -:  409:				return 1;
+413c413
+<     #####:  411:				cfg->capath = strdup(argv[i+1]);
+---
+>         -:  411:				cfg->capath = strdup(argv[i+1]);
+415,419c415,419
+<     #####:  413:			i++;
+<        10:  414:		}else if(!strcmp(argv[i], "--cert")){
+<     #####:  415:			if(i==argc-1){
+<     #####:  416:				fprintf(stderr, "Error: --cert argument given but no file specified.\n\n");
+<     #####:  417:				return 1;
+---
+>         -:  413:			i++;
+>         -:  414:		}else if(!strcmp(argv[i], "--cert")){
+>         -:  415:			if(i==argc-1){
+>         -:  416:				fprintf(stderr, "Error: --cert argument given but no file specified.\n\n");
+>         -:  417:				return 1;
+421c421
+<     #####:  419:				cfg->certfile = strdup(argv[i+1]);
+---
+>         -:  419:				cfg->certfile = strdup(argv[i+1]);
+423,427c423,427
+<     #####:  421:			i++;
+<        10:  422:		}else if(!strcmp(argv[i], "--ciphers")){
+<     #####:  423:			if(i==argc-1){
+<     #####:  424:				fprintf(stderr, "Error: --ciphers argument given but no ciphers specified.\n\n");
+<     #####:  425:				return 1;
+---
+>         -:  421:			i++;
+>         -:  422:		}else if(!strcmp(argv[i], "--ciphers")){
+>         -:  423:			if(i==argc-1){
+>         -:  424:				fprintf(stderr, "Error: --ciphers argument given but no ciphers specified.\n\n");
+>         -:  425:				return 1;
+429c429
+<     #####:  427:				cfg->ciphers = strdup(argv[i+1]);
+---
+>         -:  427:				cfg->ciphers = strdup(argv[i+1]);
+431c431
+<     #####:  429:			i++;
+---
+>         -:  429:			i++;
+515,516c515,516
+<        10:  513:		}else if(!strcmp(argv[i], "--insecure")){
+<     #####:  514:			cfg->insecure = true;
+---
+>         -:  513:		}else if(!strcmp(argv[i], "--insecure")){
+>         -:  514:			cfg->insecure = true;
+555,558c555,558
+<        10:  553:		}else if(!strcmp(argv[i], "--key")){
+<     #####:  554:			if(i==argc-1){
+<     #####:  555:				fprintf(stderr, "Error: --key argument given but no file specified.\n\n");
+<     #####:  556:				return 1;
+---
+>         -:  553:		}else if(!strcmp(argv[i], "--key")){
+>         -:  554:			if(i==argc-1){
+>         -:  555:				fprintf(stderr, "Error: --key argument given but no file specified.\n\n");
+>         -:  556:				return 1;
+560c560
+<     #####:  558:				cfg->keyfile = strdup(argv[i+1]);
+---
+>         -:  558:				cfg->keyfile = strdup(argv[i+1]);
+562c562
+<     #####:  560:			i++;
+---
+>         -:  560:			i++;
+681,684c681,684
+<         5:  679:		}else if(!strcmp(argv[i], "--psk")){
+<     #####:  680:			if(i==argc-1){
+<     #####:  681:				fprintf(stderr, "Error: --psk argument given but no key specified.\n\n");
+<     #####:  682:				return 1;
+---
+>         -:  679:		}else if(!strcmp(argv[i], "--psk")){
+>         -:  680:			if(i==argc-1){
+>         -:  681:				fprintf(stderr, "Error: --psk argument given but no key specified.\n\n");
+>         -:  682:				return 1;
+686c686
+<     #####:  684:				cfg->psk = strdup(argv[i+1]);
+---
+>         -:  684:				cfg->psk = strdup(argv[i+1]);
+688,692c688,692
+<     #####:  686:			i++;
+<         5:  687:		}else if(!strcmp(argv[i], "--psk-identity")){
+<     #####:  688:			if(i==argc-1){
+<     #####:  689:				fprintf(stderr, "Error: --psk-identity argument given but no identity specified.\n\n");
+<     #####:  690:				return 1;
+---
+>         -:  686:			i++;
+>         -:  687:		}else if(!strcmp(argv[i], "--psk-identity")){
+>         -:  688:			if(i==argc-1){
+>         -:  689:				fprintf(stderr, "Error: --psk-identity argument given but no identity specified.\n\n");
+>         -:  690:				return 1;
+694c694
+<     #####:  692:				cfg->psk_identity = strdup(argv[i+1]);
+---
+>         -:  692:				cfg->psk_identity = strdup(argv[i+1]);
+696c696
+<     #####:  694:			i++;
+---
+>         -:  694:			i++;
+796,799c796,799
+<     #####:  794:		}else if(!strcmp(argv[i], "--tls-version")){
+<     #####:  795:			if(i==argc-1){
+<     #####:  796:				fprintf(stderr, "Error: --tls-version argument given but no version specified.\n\n");
+<     #####:  797:				return 1;
+---
+>         -:  794:		}else if(!strcmp(argv[i], "--tls-version")){
+>         -:  795:			if(i==argc-1){
+>         -:  796:				fprintf(stderr, "Error: --tls-version argument given but no version specified.\n\n");
+>         -:  797:				return 1;
+801c801
+<     #####:  799:				cfg->tls_version = strdup(argv[i+1]);
+---
+>         -:  799:				cfg->tls_version = strdup(argv[i+1]);
+803c803
+<     #####:  801:			i++;
+---
+>         -:  801:			i++;
+909,910c909,910
+<         5:  907:	if((cfg->cafile || cfg->capath)
+<     #####:  908:			&& mosquitto_tls_set(mosq, cfg->cafile, cfg->capath, cfg->certfile, cfg->keyfile, NULL)){
+---
+>         -:  907:	if((cfg->cafile || cfg->capath)
+>         -:  908:			&& mosquitto_tls_set(mosq, cfg->cafile, cfg->capath, cfg->certfile, cfg->keyfile, NULL)){
+912,914c912,914
+<     #####:  910:		if(!cfg->quiet) fprintf(stderr, "Error: Problem setting TLS options.\n");
+<     #####:  911:		mosquitto_lib_cleanup();
+<     #####:  912:		return 1;
+---
+>         -:  910:		if(!cfg->quiet) fprintf(stderr, "Error: Problem setting TLS options.\n");
+>         -:  911:		mosquitto_lib_cleanup();
+>         -:  912:		return 1;
+916,919c916,919
+<         5:  914:	if(cfg->insecure && mosquitto_tls_insecure_set(mosq, true)){
+<     #####:  915:		if(!cfg->quiet) fprintf(stderr, "Error: Problem setting TLS insecure option.\n");
+<     #####:  916:		mosquitto_lib_cleanup();
+<     #####:  917:		return 1;
+---
+>         -:  914:	if(cfg->insecure && mosquitto_tls_insecure_set(mosq, true)){
+>         -:  915:		if(!cfg->quiet) fprintf(stderr, "Error: Problem setting TLS insecure option.\n");
+>         -:  916:		mosquitto_lib_cleanup();
+>         -:  917:		return 1;
+922,925c922,925
+<         5:  920:	if(cfg->psk && mosquitto_tls_psk_set(mosq, cfg->psk, cfg->psk_identity, NULL)){
+<     #####:  921:		if(!cfg->quiet) fprintf(stderr, "Error: Problem setting TLS-PSK options.\n");
+<     #####:  922:		mosquitto_lib_cleanup();
+<     #####:  923:		return 1;
+---
+>         -:  920:	if(cfg->psk && mosquitto_tls_psk_set(mosq, cfg->psk, cfg->psk_identity, NULL)){
+>         -:  921:		if(!cfg->quiet) fprintf(stderr, "Error: Problem setting TLS-PSK options.\n");
+>         -:  922:		mosquitto_lib_cleanup();
+>         -:  923:		return 1;
+928,931c928,931
+<         5:  926:	if((cfg->tls_version || cfg->ciphers) && mosquitto_tls_opts_set(mosq, 1, cfg->tls_version, cfg->ciphers)){
+<     #####:  927:		if(!cfg->quiet) fprintf(stderr, "Error: Problem setting TLS options.\n");
+<     #####:  928:		mosquitto_lib_cleanup();
+<     #####:  929:		return 1;
+---
+>         -:  926:	if((cfg->tls_version || cfg->ciphers) && mosquitto_tls_opts_set(mosq, 1, cfg->tls_version, cfg->ciphers)){
+>         -:  927:		if(!cfg->quiet) fprintf(stderr, "Error: Problem setting TLS options.\n");
+>         -:  928:		mosquitto_lib_cleanup();
+>         -:  929:		return 1;
+993c993
+<         5:  991:		if(cfg->cafile || cfg->capath
+---
+>         -:  991:		if(cfg->cafile || cfg->capath
+995c995
+<         5:  993:				|| cfg->psk
+---
+>         -:  993:				|| cfg->psk
+1002c1002
+<         5: 1000:			port = 1883;
+---
+>         -: 1000:			port = 1883;
+1005c1005
+<         -: 1003:		port = cfg->port;
+---
+>     #####: 1003:		port = cfg->port;
+1018,1019c1018,1019
+<         5: 1016:		if(!cfg->quiet){
+<         5: 1017:			if(rc == MOSQ_ERR_ERRNO){
+---
+>     #####: 1016:		if(!cfg->quiet){
+>     #####: 1017:			if(rc == MOSQ_ERR_ERRNO){
+1021c1021
+<         5: 1019:				err = strerror(errno);
+---
+>     #####: 1019:				err = strerror(errno);
+1025c1025
+<         5: 1023:				fprintf(stderr, "Error: %s\n", err);
+---
+>     #####: 1023:				fprintf(stderr, "Error: %s\n", err);
+1030,1031c1030,1031
+<         5: 1028:		mosquitto_lib_cleanup();
+<         5: 1029:		return rc;
+---
+>     #####: 1028:		mosquitto_lib_cleanup();
+>     #####: 1029:		return rc;

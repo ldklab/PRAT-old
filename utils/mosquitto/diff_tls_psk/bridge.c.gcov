@@ -1,6 +1,0 @@
-88,89c88,89
-<     #####:   86:	new_context->tls_psk_identity = new_context->bridge->tls_psk_identity;
-<     #####:   87:	new_context->tls_psk = new_context->bridge->tls_psk;
----
->         -:   86:	new_context->tls_psk_identity = new_context->bridge->tls_psk_identity;
->         -:   87:	new_context->tls_psk = new_context->bridge->tls_psk;
