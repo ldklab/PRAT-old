@@ -1,0 +1,36 @@
+333c333
+<     #####:  331:		}else if(config.listeners[i].protocol == mp_websockets){
+---
+>         -:  331:		}else if(config.listeners[i].protocol == mp_websockets){
+335,338c335,338
+<     #####:  333:			config.listeners[i].ws_context = mosq_websockets_init(&config.listeners[i], config.websockets_log_level);
+<     #####:  334:			if(!config.listeners[i].ws_context){
+<     #####:  335:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to create websockets listener on port %d.", config.listeners[i].port);
+<     #####:  336:				return 1;
+---
+>         -:  333:			config.listeners[i].ws_context = mosq_websockets_init(&config.listeners[i], config.websockets_log_level);
+>         -:  334:			if(!config.listeners[i].ws_context){
+>         -:  335:				log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to create websockets listener on port %d.", config.listeners[i].port);
+>         -:  336:				return 1;
+381,383c381,383
+<     #####:  379:	for(i=0; i<int_db.config->listener_count; i++){
+<     #####:  380:		if(int_db.config->listeners[i].ws_context){
+<     #####:  381:			libwebsocket_context_destroy(int_db.config->listeners[i].ws_context);
+---
+>         -:  379:	for(i=0; i<int_db.config->listener_count; i++){
+>         -:  380:		if(int_db.config->listeners[i].ws_context){
+>         -:  381:			libwebsocket_context_destroy(int_db.config->listeners[i].ws_context);
+385c385
+<     #####:  383:		mosquitto__free(int_db.config->listeners[i].ws_protocol);
+---
+>         -:  383:		mosquitto__free(int_db.config->listeners[i].ws_protocol);
+401,402c401,402
+<     #####:  399:		if(!ctxt->wsi){
+<     #####:  400:			context__cleanup(&int_db, ctxt, true);
+---
+>         -:  399:		if(!ctxt->wsi){
+>         -:  400:			context__cleanup(&int_db, ctxt, true);
+405c405
+<         -:  403:		context__cleanup(&int_db, ctxt, true);
+---
+>     #####:  403:		context__cleanup(&int_db, ctxt, true);

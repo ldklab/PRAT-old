@@ -1,0 +1,32 @@
+112c112
+<     #####:  110:	time_t last_backup = mosquitto_time();
+---
+>         -:  110:	time_t last_backup = mosquitto_time();
+561,565c561,565
+<     #####:  559:		if(db->config->persistence && db->config->autosave_interval){
+<     #####:  560:			if(db->config->autosave_on_changes){
+<     #####:  561:				if(db->persistence_changes >= db->config->autosave_interval){
+<     #####:  562:					persist__backup(db, false);
+<     #####:  563:					db->persistence_changes = 0;
+---
+>         -:  559:		if(db->config->persistence && db->config->autosave_interval){
+>         -:  560:			if(db->config->autosave_on_changes){
+>         -:  561:				if(db->persistence_changes >= db->config->autosave_interval){
+>         -:  562:					persist__backup(db, false);
+>         -:  563:					db->persistence_changes = 0;
+568,570c568,570
+<     #####:  566:				if(last_backup + db->config->autosave_interval < mosquitto_time()){
+<     #####:  567:					persist__backup(db, false);
+<     #####:  568:					last_backup = mosquitto_time();
+---
+>         -:  566:				if(last_backup + db->config->autosave_interval < mosquitto_time()){
+>         -:  567:					persist__backup(db, false);
+>         -:  568:					last_backup = mosquitto_time();
+577,579c577,579
+<     #####:  575:		if(flag_db_backup){
+<     #####:  576:			persist__backup(db, false);
+<     #####:  577:			flag_db_backup = false;
+---
+>         -:  575:		if(flag_db_backup){
+>         -:  576:			persist__backup(db, false);
+>         -:  577:			flag_db_backup = false;

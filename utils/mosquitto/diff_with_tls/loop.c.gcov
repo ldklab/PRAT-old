@@ -1,0 +1,30 @@
+743c743
+<     #####:  741:		if(events & EPOLLOUT ||
+---
+>         -:  741:		if(events & EPOLLOUT ||
+747,748c747,748
+<     #####:  745:				context->want_write ||
+<     #####:  746:				(context->ssl && context->state == mosq_cs_new)){
+---
+>         -:  745:				context->want_write ||
+>         -:  746:				(context->ssl && context->state == mosq_cs_new)){
+751c751
+<         -:  749:		if(events & EPOLLOUT){
+---
+>     #####:  749:		if(events & EPOLLOUT){
+802c802
+<     #####:  800:		if(events & EPOLLIN ||
+---
+>         -:  800:		if(events & EPOLLIN ||
+806c806
+<     #####:  804:				(context->ssl && context->state == mosq_cs_new)){
+---
+>         -:  804:				(context->ssl && context->state == mosq_cs_new)){
+809c809
+<         -:  807:		if(events & EPOLLIN){
+---
+>     #####:  807:		if(events & EPOLLIN){
+819c819
+<     #####:  817:			}while(SSL_DATA_PENDING(context));
+---
+>         -:  817:			}while(SSL_DATA_PENDING(context));

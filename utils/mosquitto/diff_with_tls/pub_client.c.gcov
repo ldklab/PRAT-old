@@ -1,0 +1,140 @@
+60c60
+<     #####:   58:void my_connect_callback(struct mosquitto *mosq, void *obj, int result)
+---
+>         4:   58:void my_connect_callback(struct mosquitto *mosq, void *obj, int result)
+62c62
+<     #####:   60:	int rc = MOSQ_ERR_SUCCESS;
+---
+>         4:   60:	int rc = MOSQ_ERR_SUCCESS;
+64,66c64,66
+<     #####:   62:	if(!result){
+<     #####:   63:		switch(mode){
+<     #####:   64:			case MSGMODE_CMD:
+---
+>         4:   62:	if(!result){
+>         4:   63:		switch(mode){
+>         4:   64:			case MSGMODE_CMD:
+69,70c69,70
+<     #####:   67:				rc = mosquitto_publish(mosq, &mid_sent, topic, msglen, message, qos, retain);
+<     #####:   68:				break;
+---
+>         4:   67:				rc = mosquitto_publish(mosq, &mid_sent, topic, msglen, message, qos, retain);
+>         4:   68:				break;
+78c78
+<     #####:   76:		if(rc){
+---
+>         4:   76:		if(rc){
+105c105
+<     #####:  103:}
+---
+>         4:  103:}
+107c107
+<     #####:  105:void my_disconnect_callback(struct mosquitto *mosq, void *obj, int rc)
+---
+>         4:  105:void my_disconnect_callback(struct mosquitto *mosq, void *obj, int rc)
+109,110c109,110
+<     #####:  107:	connected = false;
+<     #####:  108:}
+---
+>         4:  107:	connected = false;
+>         4:  108:}
+112c112
+<     #####:  110:void my_publish_callback(struct mosquitto *mosq, void *obj, int mid)
+---
+>         4:  110:void my_publish_callback(struct mosquitto *mosq, void *obj, int mid)
+114,115c114,115
+<     #####:  112:	last_mid_sent = mid;
+<     #####:  113:	if(mode == MSGMODE_STDIN_LINE){
+---
+>         4:  112:	last_mid_sent = mid;
+>         4:  113:	if(mode == MSGMODE_STDIN_LINE){
+120,122c120,122
+<     #####:  118:	}else if(disconnect_sent == false){
+<     #####:  119:		mosquitto_disconnect(mosq);
+<     #####:  120:		disconnect_sent = true;
+---
+>         4:  118:	}else if(disconnect_sent == false){
+>         4:  119:		mosquitto_disconnect(mosq);
+>         4:  120:		disconnect_sent = true;
+124c124
+<     #####:  122:}
+---
+>         4:  122:}
+226,227c226,227
+<     #####:  224:	printf("                     [{--cafile file | --capath dir} [--cert file] [--key file]\n");
+<     #####:  225:	printf("                      [--ciphers ciphers] [--insecure]]\n");
+---
+>         -:  224:	printf("                     [{--cafile file | --capath dir} [--cert file] [--key file]\n");
+>         -:  225:	printf("                      [--ciphers ciphers] [--insecure]]\n");
+229c229
+<     #####:  227:	printf("                     [--psk hex-key --psk-identity identity [--ciphers ciphers]]\n");
+---
+>         -:  227:	printf("                     [--psk hex-key --psk-identity identity [--ciphers ciphers]]\n");
+272,284c272,284
+<     #####:  270:	printf(" --cafile : path to a file containing trusted CA certificates to enable encrypted\n");
+<     #####:  271:	printf("            communication.\n");
+<     #####:  272:	printf(" --capath : path to a directory containing trusted CA certificates to enable encrypted\n");
+<     #####:  273:	printf("            communication.\n");
+<     #####:  274:	printf(" --cert : client certificate for authentication, if required by server.\n");
+<     #####:  275:	printf(" --key : client private key for authentication, if required by server.\n");
+<     #####:  276:	printf(" --ciphers : openssl compatible list of TLS ciphers to support.\n");
+<     #####:  277:	printf(" --tls-version : TLS protocol version, can be one of tlsv1.2 tlsv1.1 or tlsv1.\n");
+<     #####:  278:	printf("                 Defaults to tlsv1.2 if available.\n");
+<     #####:  279:	printf(" --insecure : do not check that the server certificate hostname matches the remote\n");
+<     #####:  280:	printf("              hostname. Using this option means that you cannot be sure that the\n");
+<     #####:  281:	printf("              remote host is the server you wish to connect to and so is insecure.\n");
+<     #####:  282:	printf("              Do not use this option in a production environment.\n");
+---
+>         -:  270:	printf(" --cafile : path to a file containing trusted CA certificates to enable encrypted\n");
+>         -:  271:	printf("            communication.\n");
+>         -:  272:	printf(" --capath : path to a directory containing trusted CA certificates to enable encrypted\n");
+>         -:  273:	printf("            communication.\n");
+>         -:  274:	printf(" --cert : client certificate for authentication, if required by server.\n");
+>         -:  275:	printf(" --key : client private key for authentication, if required by server.\n");
+>         -:  276:	printf(" --ciphers : openssl compatible list of TLS ciphers to support.\n");
+>         -:  277:	printf(" --tls-version : TLS protocol version, can be one of tlsv1.2 tlsv1.1 or tlsv1.\n");
+>         -:  278:	printf("                 Defaults to tlsv1.2 if available.\n");
+>         -:  279:	printf(" --insecure : do not check that the server certificate hostname matches the remote\n");
+>         -:  280:	printf("              hostname. Using this option means that you cannot be sure that the\n");
+>         -:  281:	printf("              remote host is the server you wish to connect to and so is insecure.\n");
+>         -:  282:	printf("              Do not use this option in a production environment.\n");
+286,287c286,287
+<     #####:  284:	printf(" --psk : pre-shared-key in hexadecimal (no leading 0x) to enable TLS-PSK mode.\n");
+<     #####:  285:	printf(" --psk-identity : client identity string for TLS-PSK mode.\n");
+---
+>         -:  284:	printf(" --psk : pre-shared-key in hexadecimal (no leading 0x) to enable TLS-PSK mode.\n");
+>         -:  285:	printf(" --psk-identity : client identity string for TLS-PSK mode.\n");
+405c405
+<     #####:  403:	if(mode == MSGMODE_STDIN_LINE){
+---
+>         4:  403:	if(mode == MSGMODE_STDIN_LINE){
+410c410
+<     #####:  408:		if(mode == MSGMODE_STDIN_LINE){
+---
+>        12:  408:		if(mode == MSGMODE_STDIN_LINE){
+464c464
+<     #####:  462:			rc = mosquitto_loop(mosq, -1, 1);
+---
+>        12:  462:			rc = mosquitto_loop(mosq, -1, 1);
+466c466
+<     #####:  464:	}while(rc == MOSQ_ERR_SUCCESS && connected);
+---
+>        12:  464:	}while(rc == MOSQ_ERR_SUCCESS && connected);
+468c468
+<     #####:  466:	if(mode == MSGMODE_STDIN_LINE){
+---
+>         4:  466:	if(mode == MSGMODE_STDIN_LINE){
+472c472
+<     #####:  470:	if(message && mode == MSGMODE_FILE){
+---
+>         4:  470:	if(message && mode == MSGMODE_FILE){
+475,476c475,476
+<     #####:  473:	mosquitto_destroy(mosq);
+<     #####:  474:	mosquitto_lib_cleanup();
+---
+>         4:  473:	mosquitto_destroy(mosq);
+>         4:  474:	mosquitto_lib_cleanup();
+478c478
+<     #####:  476:	if(rc){
+---
+>         4:  476:	if(rc){

@@ -1,0 +1,14 @@
+176,177c176,177
+<     #####:  174:			case MOSQ_LOG_WEBSOCKETS:
+<     #####:  175:				topic = "$SYS/broker/log/WS";
+---
+>         -:  174:			case MOSQ_LOG_WEBSOCKETS:
+>         -:  175:				topic = "$SYS/broker/log/WS";
+179c179
+<     #####:  177:				syslog_priority = LOG_DEBUG;
+---
+>         -:  177:				syslog_priority = LOG_DEBUG;
+183c183
+<     #####:  181:				break;
+---
+>         -:  181:				break;

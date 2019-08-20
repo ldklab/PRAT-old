@@ -63,9 +63,9 @@ makeCovFiles() {
 	(cd lib; gcov *; cd -)
 	(cd client; gcov *; cd -)
 	mkdir -p "coverage_files_${FEAT^^}$flag"
-	mv src/*.gcov "coverage_files_${FEAT^^}$flag"
-	mv lib/*.gcov "coverage_files_${FEAT^^}$flag"
-	mv client/*.gcov "coverage_files_${FEAT^^}$flag"
+	mv src/*.gcov "coverage_files_${FEAT^^}$flag" || true
+	mv lib/*.gcov "coverage_files_${FEAT^^}$flag" || true
+	mv client/*.gcov "coverage_files_${FEAT^^}$flag" || true
 	mv "coverage_files_${FEAT^^}$flag" $WORKDIR
 	printf "Running::${CYAN} make clean${NC}\n"
 	make clean

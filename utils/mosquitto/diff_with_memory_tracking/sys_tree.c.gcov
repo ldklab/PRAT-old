@@ -1,0 +1,36 @@
+112c112
+<     #####:  110:static void sys_tree__update_memory(struct mosquitto_db *db, char *buf)
+---
+>         -:  110:static void sys_tree__update_memory(struct mosquitto_db *db, char *buf)
+118,122c118,122
+<     #####:  116:	value_ul = mosquitto__memory_used();
+<     #####:  117:	if(current_heap != value_ul){
+<     #####:  118:		current_heap = value_ul;
+<     #####:  119:		snprintf(buf, BUFLEN, "%lu", current_heap);
+<     #####:  120:		db__messages_easy_queue(db, NULL, "$SYS/broker/heap/current", SYS_TREE_QOS, strlen(buf), buf, 1);
+---
+>         -:  116:	value_ul = mosquitto__memory_used();
+>         -:  117:	if(current_heap != value_ul){
+>         -:  118:		current_heap = value_ul;
+>         -:  119:		snprintf(buf, BUFLEN, "%lu", current_heap);
+>         -:  120:		db__messages_easy_queue(db, NULL, "$SYS/broker/heap/current", SYS_TREE_QOS, strlen(buf), buf, 1);
+124,128c124,128
+<     #####:  122:	value_ul =mosquitto__max_memory_used();
+<     #####:  123:	if(max_heap != value_ul){
+<     #####:  124:		max_heap = value_ul;
+<     #####:  125:		snprintf(buf, BUFLEN, "%lu", max_heap);
+<     #####:  126:		db__messages_easy_queue(db, NULL, "$SYS/broker/heap/maximum", SYS_TREE_QOS, strlen(buf), buf, 1);
+---
+>         -:  122:	value_ul =mosquitto__max_memory_used();
+>         -:  123:	if(max_heap != value_ul){
+>         -:  124:		max_heap = value_ul;
+>         -:  125:		snprintf(buf, BUFLEN, "%lu", max_heap);
+>         -:  126:		db__messages_easy_queue(db, NULL, "$SYS/broker/heap/maximum", SYS_TREE_QOS, strlen(buf), buf, 1);
+130c130
+<     #####:  128:}
+---
+>         -:  128:}
+315c315
+<     #####:  313:		sys_tree__update_memory(db, buf);
+---
+>         -:  313:		sys_tree__update_memory(db, buf);
