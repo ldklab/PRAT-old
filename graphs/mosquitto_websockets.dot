@@ -17,9 +17,6 @@ digraph G {
 
 	subgraph cluster_ws {
 		label="Websocket Support";
-		// Implementation in logging.c
-		"logging.c" -> "case MOSQ_LOG_WEBSOCKETS: 
-		topic = \"$SYS/broker/log/WS\";";
 
 		// Implementation in database.c
 		"database.c" -> "if(context->wsi && rc == 0){
@@ -32,22 +29,6 @@ digraph G {
 
 		// Implementation in websockets.c
 		"websockets.c" -> "websockets.c";
-
-		// Implementation in loop.c
-		"loop.c" -> "static void temp__expire_websockets_clients(struct mosquitto_db *db){...}";
-		"loop.c" -> "for(i=0; i<db->config->listener_count; i++){
-			if(db->config->listeners[i].ws_context){
-				libwebsocket_service(db->config->listeners[i].ws_context, 0);
-			}
-		}
-		if(db->config->have_websockets_listener){
-			temp__expire_websockets_clients(db);
-		}";
-		"loop.c" -> "if(context->wsi){
-			struct lws_pollfd wspoll;";
-
-		// Implementation in signals.c
-		"signals.c" -> "#  include <libwebsockets.h>";
 
 		// Implementation in .h
 		"mosquitto_broker_internal.h" -> "struct libwebsocket_context *ws_context;
@@ -67,37 +48,7 @@ struct lws_context *mosq_websockets_init(struct mosquitto__listener *listener, i
 #  else
 struct libwebsocket_context *mosq_websockets_init(struct mosquitto__listener *listener, int log_level);";
 
-		// Implementation in conf.c
-		"conf.c" -> "if(!config->listeners[i].ws_context) /* libwebsockets frees its own SSL_CTX */";
-		"conf.c" -> "mosquitto__free(config->listeners[i].http_dir);";
-		"conf.c" -> "dest->websockets_log_level = src->websockets_log_level;";
-		"conf.c" -> "if(reload) continue; // Listeners not valid for reloading.
-					if(conf__parse_string(&token, \"http_dir\", &cur_listener->http_dir, saveptr)) return MOSQ_ERR_INVAL;";
-		"conf.c" -> "}else if(!strcmp(token, \"websockets\")){
-							cr->log_type |= MOSQ_LOG_WEBSOCKETS;";
-		"conf.c" -> "cur_listener->protocol = mp_websockets;
-							config->have_websockets_listener = true;";
-		"conf.c" -> "if(conf__parse_int(&token, \"websockets_log_level\", &config->websockets_log_level, saveptr)) return MOSQ_ERR_INVAL;";
 
-
-		// Implementation in mosquitto.c
-		"mosquitto.c" -> "config.listeners[i].ws_context = mosq_websockets_init(&config.listeners[i], config.websockets_log_level);
-			if(!config.listeners[i].ws_context){
-				log__printf(NULL, MOSQ_LOG_ERR, \"Error: Unable to create websockets listener on port %d.\", config.listeners[i].port);
-				return 1;
-			}";
-		"mosquitto.c" -> "for(i=0; i<int_db.config->listener_count; i++){
-		if(int_db.config->listeners[i].ws_context){
-			libwebsocket_context_destroy(int_db.config->listeners[i].ws_context);
-		}
-		mosquitto__free(int_db.config->listeners[i].ws_protocol);
-	}";
-		"mosquitto.c" -> "if(!ctxt->wsi){
-			context__cleanup(&int_db, ctxt, true);
-		}";
-
-		// Implementation in handle_connect.c
-		"handle_connect.c" -> "#  include <libwebsockets.h>";
 	}
 
 	"Websocket Support" -> "mosquitto_broker_internal.h" [lhead=cluster_ws];
