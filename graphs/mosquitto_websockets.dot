@@ -1,15 +1,22 @@
 // Testing manually-constructing a simple digraph from the Make/config files.
 digraph G {
-	graph [fontsize=10 fontname="Verdana" compound=true];
+	graph [fontsize=10 fontname="Helvetica" compound=true];
 
 	subgraph cluster_components {
-		label="MQTT Components";
-		"WebSocket Support";
+		label="Mosquitto Components";
+		"Websocket Support";
 		"Bridge Support";
+		"TLS";
+		"systemd";
+		"Persistence";
+		"Memory Tracking";
+		"EPOLL";
+		"UUID";
+		"SYS_TREE";
 	}
 
 	subgraph cluster_ws {
-		label="WebSocket Support";
+		label="Websocket Support";
 		// Implementation in logging.c
 		"logging.c" -> "case MOSQ_LOG_WEBSOCKETS: 
 		topic = \"$SYS/broker/log/WS\";";
@@ -93,6 +100,6 @@ struct libwebsocket_context *mosq_websockets_init(struct mosquitto__listener *li
 		"handle_connect.c" -> "#  include <libwebsockets.h>";
 	}
 
-	"WebSocket Support" -> "mosquitto_broker_internal.h" [lhead=cluster_ws];
+	"Websocket Support" -> "mosquitto_broker_internal.h" [lhead=cluster_ws];
 
 }
