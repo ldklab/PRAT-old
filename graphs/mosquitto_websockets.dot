@@ -1,4 +1,4 @@
-// Testing manually-constructing a simple digraph from the Make/config files.
+// Testing auto-constructing a simple digraph from the feature identification process.
 digraph G {
 	graph [fontsize=10 fontname="Helvetica" compound=true];
 
