@@ -49,16 +49,15 @@ makeCovFiles() {
 	# Make the binary without the feature.
 	make binary ${FEAT^^}=$flag || exit 1
 	resloveDeps || exit 1 # Do this here because we need the shared lib.
-	./src/mosquitto &
-	broker_pid=$!
 	# Later this will invoke some comprehensive tests.
 	printf "${GREEN} Generating gcov files...${NC}\n"
 	# Tests seem to fail on certain distros with connection refused. Ignore 
-	# for now and update when we need to generalize more.
-	mosquittoTests || true
-	sleep 5s
-	printf "Stopping broker @ ${RED}$broker_pid${NC}...\n"
-	kill -KILL $broker_pid
+	# for now and update when we need to generalize more. (fixed?)
+	#mosquittoTests || true
+	mosquittoTests || exit 1
+	#sleep 5s
+	#printf "Stopping broker @ ${RED}$broker_pid${NC}...\n"
+	#kill -KILL $broker_pid
 	(cd src; llvm-cov gcov *; cd -)
 	(cd lib; llvm-cov gcov *; cd -)
 	(cd client; llvm-cov gcov *; cd -)
@@ -92,10 +91,18 @@ resloveDeps() {
 }
 
 mosquittoTests() {
+	printf "${CYAN}Running all unit tests...${NC}\n"
 	# Broker is running; spawn clients
 	# and run some tests.
+	cd test; make test
+
+	./src/mosquitto &
+	broker_pid=$!
+
 	./client/mosquitto_sub -t 'test/topic1' -v &
 	./client/mosquitto_pub -t 'test/topic1' -m 'hello, world'
+
+	kill -KILL $broker_pid
 	#exit 1
 }
 
