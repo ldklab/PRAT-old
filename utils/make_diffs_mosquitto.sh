@@ -59,9 +59,9 @@ makeCovFiles() {
 	sleep 5s
 	printf "Stopping broker @ ${RED}$broker_pid${NC}...\n"
 	kill -KILL $broker_pid
-	(cd src; gcov *; cd -)
-	(cd lib; gcov *; cd -)
-	(cd client; gcov *; cd -)
+	(cd src; llvm-cov gcov *; cd -)
+	(cd lib; llvm-cov gcov *; cd -)
+	(cd client; llvm-cov gcov *; cd -)
 	mkdir -p "coverage_files_${FEAT^^}$flag"
 	mv src/*.gcov "coverage_files_${FEAT^^}$flag" || true
 	mv lib/*.gcov "coverage_files_${FEAT^^}$flag" || true
