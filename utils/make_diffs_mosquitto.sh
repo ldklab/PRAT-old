@@ -94,7 +94,7 @@ mosquittoTests() {
 	printf "${CYAN}Running all unit tests...${NC}\n"
 	# Broker is running; spawn clients
 	# and run some tests.
-	cd test; make test
+	#cd test; make test; cd -
 
 	./src/mosquitto &
 	broker_pid=$!
@@ -152,7 +152,7 @@ usage() {
 if [[ $DIR =~ "mosquitto-debloat" ]] && containsElement "${FEAT^^}" "${featArr[@]}"
 then
 	# Run this guy in a subshell @ DIR.
-	(cd $DIR; makeCovFiles yes && makeCovFiles no; cd -; findMatches)
+	(cd $DIR; makeCovFiles yes && makeCovFiles no; cd $WORKDIR; findMatches)
 else
 	printf "${RED} Can't run in ${DIR} or ${FEAT^^} does not exist. Exiting.${NC}\n"
 	exit 1
