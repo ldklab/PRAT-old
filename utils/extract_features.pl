@@ -56,9 +56,13 @@ sub parse_file {
 		my @lines = <FILE>;
 
 		#print scalar @lines;
-		print "Lines to remove from ";
-		print colored(['bright_red on_black'], "$file");
-		print "\n------------------\n";
+		# Don't print the empty files.
+		if (@lines) {
+			print "\n------------------\n";
+			print "Lines to remove from ";
+			print colored(['bright_red on_black'], "$file");
+			print "\n------------------\n";
+		}
 
 		# Look for '#####'.
 		foreach my $line (@lines) {
@@ -79,11 +83,10 @@ sub parse_file {
 				$line_count++;
 			}
 		}
-		print "------------------\n";
-
 		close(FILE);
 	}
 
+	print "\n------------------\n";
 	print colored(['bright_green bold'], "Total lines to remove: " . $line_count . "\n");
 
 	# Print just the file + line numbers to remove.
