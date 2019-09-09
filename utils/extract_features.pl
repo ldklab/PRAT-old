@@ -94,6 +94,10 @@ sub parse_file {
 	foreach my $obj (keys %unused_code) {
 		print colored(['bright_cyan'], "\t$obj");
 		print ": @{$unused_code{$obj}}\n";
+
+		# TEST REMOVAL.
+		remove_feature($obj, \@{$unused_code{$obj}});
+		# END REMOVAL TEST.
 	}
 
 	foreach my $gobj (keys %graph_content) {
@@ -106,24 +110,25 @@ sub parse_file {
 
 	print $fh $bp_foot;
 	close $fh;
-
-	#remove_feature();
 }
 
 # Using the line numbers provided above, remove
 # the lines of code from the file then lint check
 # and recompile debloated binary.
 sub remove_feature {
+	my ($file, @lines) = @_;
+	print "Removing @lines from $file \n";
+
 	# Remove the LoC for a feature and save file.
 	# Create .bak of original in case.
-	my $sed_cmd = "sed -i.bak -e '174d;175d;177d;181d' ./src/logging.c";
+	#my $sed_cmd = "sed -i.bak -e '174d;175d;177d;181d' ./src/logging.c";
 
-	print "Attempting to run [$sed_cmd]\n";
+	#print "Attempting to run [$sed_cmd]\n";
 
-	system($sed_cmd) == 0
-		or die "Could not launch [$sed_cmd]: $! / $?\n";
+	#system($sed_cmd) == 0
+	#	or die "Could not launch [$sed_cmd]: $! / $?\n";
 
-	sanity_check('./src/logging.c');
+	#sanity_check('./src/logging.c');
 
 	return;
 }
