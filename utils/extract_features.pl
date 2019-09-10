@@ -96,7 +96,7 @@ sub parse_file {
 		print ": @{$unused_code{$obj}}\n";
 
 		# TEST REMOVAL.
-		remove_feature($obj, \@{$unused_code{$obj}});
+		remove_feature($obj, @{$unused_code{$obj}});
 		# END REMOVAL TEST.
 	}
 
@@ -117,16 +117,22 @@ sub parse_file {
 # and recompile debloated binary.
 sub remove_feature {
 	my ($file, @lines) = @_;
-	print "Removing @lines from $file \n";
+	#print "Removing @lines from $file \n";
+	my $cmd_substr = '';
+
+	# Construct the string to pass to sed.
+	foreach (@lines) {
+		$cmd_substr = $cmd_substr . $_ . 'd;';
+	}
 
 	# Remove the LoC for a feature and save file.
 	# Create .bak of original in case.
-	#my $sed_cmd = "sed -i.bak -e '174d;175d;177d;181d' ./src/logging.c";
+	my $sed_cmd = "sed -i.bak -e '$cmd_substr' ./src/$file";
 
 	#print "Attempting to run [$sed_cmd]\n";
 
-	#system($sed_cmd) == 0
-	#	or die "Could not launch [$sed_cmd]: $! / $?\n";
+	system($sed_cmd) == 0
+		or warn "Could not launch [$sed_cmd]: $! / $?\n"; # Change back to die later.
 
 	#sanity_check('./src/logging.c');
 
