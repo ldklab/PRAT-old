@@ -100,6 +100,9 @@ sub parse_file {
 		remove_feature($obj, @{$unused_code{$obj}});
 	}
 
+	# Run lint check and compile new binary.
+	sanity_check();
+
 	foreach my $gobj (keys %graph_content) {
 		# TODO: print block of code as node, but
 		# need to decide at what granularity.
@@ -134,9 +137,6 @@ sub remove_feature {
 	system($sed_cmd) == 0
 		or warn "Could not launch [$sed_cmd]: $! / $?\n"; # Change back to die later.
 
-	# Run lint check and compile new binary.
-	sanity_check();
-
 	return;
 }
 
@@ -145,7 +145,7 @@ sub remove_feature {
 # Then check whole source file before recompiling project
 # to check for any errors i nthe whole program.
 sub sanity_check {
-	print colored(['bright_cyan'], "Compiling debloated binary...\n");
+	print colored(['bright_cyan'], "\n\nCompiling debloated binary...\n");
 
 	my $mk_cmd = "make clean && make binary";
 
