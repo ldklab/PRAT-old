@@ -95,9 +95,9 @@ sub parse_file {
 		print colored(['bright_cyan'], "\t$obj");
 		print ": @{$unused_code{$obj}}\n";
 
-		# TEST REMOVAL.
+		# For each of the files, remove the extracted code.
+		# This will preserve original in a *.bak file.
 		remove_feature($obj, @{$unused_code{$obj}});
-		# END REMOVAL TEST.
 	}
 
 	foreach my $gobj (keys %graph_content) {
@@ -134,7 +134,8 @@ sub remove_feature {
 	system($sed_cmd) == 0
 		or warn "Could not launch [$sed_cmd]: $! / $?\n"; # Change back to die later.
 
-	#sanity_check('./src/logging.c');
+	# Run lint check and compile new binary.
+	sanity_check();
 
 	return;
 }
@@ -144,11 +145,14 @@ sub remove_feature {
 # Then check whole source file before recompiling project
 # to check for any errors i nthe whole program.
 sub sanity_check {
-	print "TODO\n";
-	my $mk_cmd = `make`;
+	print colored(['bright_cyan'], "Compiling debloated binary...\n");
+
+	my $mk_cmd = "make clean && make binary";
 
 	# Call make command.
-	print $mk_cmd;
+	system($mk_cmd) == 0
+		or die "Could not launch [$mk_cmd]: $! / $?\n";
+
 	return;
 }
 
