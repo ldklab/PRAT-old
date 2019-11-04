@@ -132,7 +132,7 @@ sub remove_feature {
 	# Create .bak of original in case.
 	my $sed_cmd = "sed -i.bak -e '$cmd_substr' ./src/$file";
 
-	#print "Attempting to run [$sed_cmd]\n";
+	print "Attempting to run [$sed_cmd]\n";
 
 	system($sed_cmd) == 0
 		or warn "Could not launch [$sed_cmd]: $! / $?\n"; # Change back to die later.
