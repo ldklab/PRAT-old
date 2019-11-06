@@ -49,7 +49,7 @@ sub make_ifdef_processor {
          }
 
          if ( $line =~ /#ifdef\s+(.*)$/ ) {
-            print "matched line $line\n";
+            print "matched line in $fn $line";
             my $symbol = $1;
             push @{ $map_symbols->{$fn} }, $symbol;
          }
