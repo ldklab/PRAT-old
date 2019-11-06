@@ -1,11 +1,12 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 use strict;
 use warnings;
 
 use File::Find;
 
-my $path = $ENV{PWD};
+#my $path = $ENV{PWD};
+my $path = $ARGV[0];
 
 my $symbol_map = {};
 find( make_ifdef_processor( $symbol_map ), $path );
