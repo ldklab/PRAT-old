@@ -41,26 +41,25 @@ while true; do
 	esac
 done
 
-# This is for each of the feature compilations. 
-makeCovFiles() {
+# Generate coverage files for Mosquitto.
+makeMosquitto() {
 	flag=$1
+
 	printf "Building project with ${CYAN} ${FEAT^^}=$flag${NC}\n"
 	printf "Running::${CYAN} make binary -j WITH_COVERAGE=yes ${FEAT^^}=$flag${NC}\n"
+
 	# Make the binary without the feature.
 	make binary -j WITH_COVERAGE=yes ${FEAT^^}=$flag || exit 1
 	resloveDeps || exit 1 # Do this here because we need the shared lib.
+
 	# Later this will invoke some comprehensive tests.
 	printf "${GREEN} Generating gcov files...${NC}\n"
-	# Tests seem to fail on certain distros with connection refused. Ignore 
-	# for now and update when we need to generalize more. (fixed?)
-	#mosquittoTests || true
 	mosquittoTests || exit 1
-	#sleep 5s
-	#printf "Stopping broker @ ${RED}$broker_pid${NC}...\n"
-	#kill -KILL $broker_pid
+
 	(cd src; llvm-cov gcov *; cd -)
 	(cd lib; llvm-cov gcov *; cd -)
 	(cd client; llvm-cov gcov *; cd -)
+
 	mkdir -p "coverage_files_${FEAT^^}$flag"
 	mv src/*.gcov "coverage_files_${FEAT^^}$flag" || true
 	mv lib/*.gcov "coverage_files_${FEAT^^}$flag" || true
@@ -73,6 +72,13 @@ makeCovFiles() {
 
 	printf "Running::${CYAN} make clean${NC}\n"
 	make clean
+}
+
+# Generate the coverage files for non-Mosquitto projects.
+generateCov() {
+	# TODO.
+	printf "${RED} 'generateCov()' feature not yet implemented. ${NC}\n"
+	exit 1
 }
 
 resloveDeps() {
@@ -154,14 +160,13 @@ usage() {
 	exit 1
 }
 
-# Check if feature was correct first.
-#if containsElement "${FEAT^^}" "${featArr[@]}"; then echo "asdfasdf"; fi
-
 # I'll remove/fix later.
-if [[ $DIR =~ "mosquitto" ]] && containsElement "${FEAT^^}" "${featArr[@]}"
-then
+if [[ $DIR =~ "mosquitto" ]] && containsElement "${FEAT^^}" "${featArr[@]}"; then
 	# Run this guy in a subshell @ DIR.
-	(cd $DIR; makeCovFiles yes && makeCovFiles no; cd $WORKDIR; findMatches)
+	(cd $DIR; makeMosquitto yes && makeMosquitto no; cd $WORKDIR; findMatches)
+elif [[ $DIR != "mosquitto" ]] && [ "$#" -ne 0 ]; then
+	FEAT=$1
+	(generateCov; findMatches)
 else
 	printf "${RED} Can't run in ${DIR} or ${FEAT^^} does not exist. Exiting.${NC}\n"
 	exit 1
