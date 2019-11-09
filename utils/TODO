@@ -1,0 +1,2 @@
+1. Combine functionality of making diffs -> extracting features
+2. Clarify that `parse_directives.pl` is meant as a stand-in for extracting features from non-cmake-based projects
