@@ -45,9 +45,9 @@ done
 makeCovFiles() {
 	flag=$1
 	printf "Building project with ${CYAN} ${FEAT^^}=$flag${NC}\n"
-	printf "Running::${CYAN} make binary ${FEAT^^}=$flag${NC}\n"
+	printf "Running::${CYAN} make binary -j WITH_COVERAGE=yes ${FEAT^^}=$flag${NC}\n"
 	# Make the binary without the feature.
-	make binary ${FEAT^^}=$flag || exit 1
+	make binary -j WITH_COVERAGE=yes ${FEAT^^}=$flag || exit 1
 	resloveDeps || exit 1 # Do this here because we need the shared lib.
 	# Later this will invoke some comprehensive tests.
 	printf "${GREEN} Generating gcov files...${NC}\n"
@@ -66,6 +66,11 @@ makeCovFiles() {
 	mv lib/*.gcov "coverage_files_${FEAT^^}$flag" || true
 	mv client/*.gcov "coverage_files_${FEAT^^}$flag" || true
 	mv "coverage_files_${FEAT^^}$flag" $WORKDIR
+
+	#printf "Running::${CYAN} make coverage${NC}\n"
+	#make coverage
+	#mv coverage.info $WORKDIR && mv out $WORKDIR
+
 	printf "Running::${CYAN} make clean${NC}\n"
 	make clean
 }
@@ -128,7 +133,6 @@ makeDiffs() {
 	diff "./coverage_files_${FEAT^^}yes/$target" "./coverage_files_${FEAT^^}no/$target" > "diff_$FEAT/$target" &
 
 	# Remove the empty gcov files. makes reading manually easier.
-	# TODO: test.
 	find ./"diff_$FEAT" -size 0 -print0 | xargs -0 rm --
 
 	return
@@ -154,7 +158,7 @@ usage() {
 #if containsElement "${FEAT^^}" "${featArr[@]}"; then echo "asdfasdf"; fi
 
 # I'll remove/fix later.
-if [[ $DIR =~ "mosquitto-debloat" ]] && containsElement "${FEAT^^}" "${featArr[@]}"
+if [[ $DIR =~ "mosquitto" ]] && containsElement "${FEAT^^}" "${featArr[@]}"
 then
 	# Run this guy in a subshell @ DIR.
 	(cd $DIR; makeCovFiles yes && makeCovFiles no; cd $WORKDIR; findMatches)
