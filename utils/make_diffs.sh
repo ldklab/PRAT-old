@@ -107,6 +107,9 @@ mosquittoTests() {
 	# and run some tests.
 	(cd test/unit; make test -j; cd -)
 
+	# This is where I will call the symbolically-generated tests
+	# to get more precise coverage for removal.
+
 	./src/mosquitto &
 	broker_pid=$!
 

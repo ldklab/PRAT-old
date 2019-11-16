@@ -97,7 +97,7 @@ sub parse_file {
 
 		# For each of the files, remove the extracted code.
 		# This will preserve original in a *.bak file.
-		#remove_feature($obj, @{$unused_code{$obj}});
+		remove_feature($obj, @{$unused_code{$obj}});
 	}
 
 	# Run lint check and compile new binary.
