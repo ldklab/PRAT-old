@@ -3,7 +3,7 @@
 all : # TODO.
 
 mosquitto: # Hard-coded test to make easier on my dev system.
-	./make_diffs_mosquitto.sh -d ~/git/TARGETS/mosquitto-debloat -f with_tls
+	./make_diffs.sh -d ~/git/TARGETS/mosquitto -f with_tls
 
 libnyoci:
 	sh ~/git/libnyoci/configure --enable-code-coverage --enable-embedded

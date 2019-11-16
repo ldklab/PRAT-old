@@ -97,11 +97,11 @@ sub parse_file {
 
 		# For each of the files, remove the extracted code.
 		# This will preserve original in a *.bak file.
-		remove_feature($obj, @{$unused_code{$obj}});
+		#remove_feature($obj, @{$unused_code{$obj}});
 	}
 
 	# Run lint check and compile new binary.
-	sanity_check();
+	#sanity_check();
 
 	foreach my $gobj (keys %graph_content) {
 		# TODO: print block of code as node, but
@@ -118,6 +118,8 @@ sub parse_file {
 # Using the line numbers provided above, remove
 # the lines of code from the file then lint check
 # and recompile debloated binary.
+# Copy over whole source dir to work dir or
+# work directly in source dir?
 sub remove_feature {
 	my ($file, @lines) = @_;
 	#print "Removing @lines from $file \n";
