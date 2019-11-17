@@ -132,7 +132,7 @@ sub remove_feature {
 
 	# Remove the LoC for a feature and save file.
 	# Create .bak of original in case.
-	my $sed_cmd = "sed -i.bak -e '$cmd_substr' ./src/$file";
+	my $sed_cmd = "sed -i.bak -e '$cmd_substr' ./mosquitto/src/$file";
 
 	print "Attempting to run [$sed_cmd]\n";
 

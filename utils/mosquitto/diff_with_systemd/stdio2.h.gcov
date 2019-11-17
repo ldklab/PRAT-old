@@ -1,4 +1,0 @@
-99c99
-<         5:   97:  return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,
----
->        10:   97:  return __fprintf_chk (__stream, __USE_FORTIFY_LEVEL - 1, __fmt,

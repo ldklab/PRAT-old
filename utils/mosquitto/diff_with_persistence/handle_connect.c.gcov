@@ -1,6 +1,0 @@
-671,672c671,672
-<     #####:  669:	if(!clean_session){
-<     #####:  670:		db->persistence_changes++;
----
->         -:  669:	if(!clean_session){
->         -:  670:		db->persistence_changes++;

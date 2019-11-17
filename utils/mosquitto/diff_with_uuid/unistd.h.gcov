@@ -1,8 +1,0 @@
-2c2
-<         -:    0:Programs:9
----
->         -:    0:Programs:22
-356c356
-<         5:  354:  return __gethostname_alias (__buf, __buflen);
----
->        10:  354:  return __gethostname_alias (__buf, __buflen);

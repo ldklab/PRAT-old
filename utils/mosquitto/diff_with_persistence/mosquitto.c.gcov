@@ -1,6 +1,0 @@
-394,395c394,395
-<     #####:  392:	if(config.persistence){
-<     #####:  393:		persist__backup(&int_db, true);
----
->         -:  392:	if(config.persistence){
->         -:  393:		persist__backup(&int_db, true);
