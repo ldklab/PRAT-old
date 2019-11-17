@@ -137,7 +137,7 @@ sub remove_feature {
 	print "Attempting to run [$sed_cmd]\n";
 
 	system($sed_cmd) == 0
-		or warn "Could not launch [$sed_cmd]: $! / $?\n"; # Change back to die later.
+		or die "Could not launch [$sed_cmd]: $! / $?\n"; # Change back to die later.
 
 	return;
 }
