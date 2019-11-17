@@ -101,7 +101,7 @@ sub parse_file {
 	}
 
 	# Run lint check and compile new binary.
-	#sanity_check();
+	sanity_check("./mosquitto/");
 
 	foreach my $gobj (keys %graph_content) {
 		# TODO: print block of code as node, but
@@ -147,9 +147,12 @@ sub remove_feature {
 # Then check whole source file before recompiling project
 # to check for any errors i nthe whole program.
 sub sanity_check {
+  	my ($dir) = @_;
+	chdir($dir) or die "$!";
+
 	print colored(['bright_cyan'], "\n\nCompiling debloated binary...\n");
 
-	my $mk_cmd = "make clean && make binary";
+	my $mk_cmd = "make clean && make binary WITH_COVERAGE=yes -j";
 
 	# Call make command.
 	system($mk_cmd) == 0
