@@ -142,7 +142,7 @@ makeDiffs() {
 	diff "./coverage_files_${FEAT^^}yes/$target" "./coverage_files_${FEAT^^}no/$target" > "diff_$FEAT/$target" &
 
 	# Remove the empty gcov files. makes reading manually easier.
-	#find ./"diff_$FEAT" -size 0 -print0 | xargs -0 rm --
+	find ./"diff_$FEAT" -size 0 -print0 | xargs -0 rm --
 
 	return
 }

@@ -97,11 +97,15 @@ sub parse_file {
 
 		# For each of the files, remove the extracted code.
 		# This will preserve original in a *.bak file.
-		remove_feature($obj, @{$unused_code{$obj}});
+		if ($line_count > 0) {
+			remove_feature($obj, @{$unused_code{$obj}});
+		}
 	}
 
 	# Run lint check and compile new binary.
-	sanity_check("./mosquitto/");
+	if ($line_count > 0) {
+		sanity_check("./mosquitto/");
+	}
 
 	foreach my $gobj (keys %graph_content) {
 		# TODO: print block of code as node, but
