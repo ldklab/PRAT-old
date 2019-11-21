@@ -104,7 +104,7 @@ sub parse_file {
 
 	# Run lint check and compile new binary.
 	if ($line_count > 0) {
-		#sanity_check("./mosquitto/");
+		sanity_check("./mosquitto/");
 	}
 
 	foreach my $gobj (keys %graph_content) {
