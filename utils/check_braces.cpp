@@ -66,6 +66,8 @@ void removeInvalidParenthesis(string str) {
             // Removing parenthesis from str and 
             // pushing into queue, if not visited already .
             temp = str.substr(0, i) + str.substr(i + 1);
+            //cout << "temp str: " << temp << endl;
+
             if (visit.find(temp) == visit.end()) {
                 q.push(temp);
                 visit.insert(temp);
@@ -74,12 +76,16 @@ void removeInvalidParenthesis(string str) {
     }
 }
 
-//  Driver code to check above methods.
+// Driver code to check above methods.
+// This outputs all possible options for 
+// valid matching parens/braces.
 int main() {
     string expression = "()())()";
+    cout << "Testing: " << expression << endl;
     removeInvalidParenthesis(expression);
 
     expression = "()v)";
+    cout << "Testing: " << expression << endl;
     removeInvalidParenthesis(expression);
 
     return 0;
