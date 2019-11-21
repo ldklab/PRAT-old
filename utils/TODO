@@ -2,3 +2,4 @@
 2. Clarify that `parse_directives.pl` is meant as a stand-in for extracting features from non-cmake-based projects
 3. Combine make_diffs* and take cmd line arg for mosquitto vs other protocols
 4. Fix the error(s) of unmatched braces on code removal
+5. Integrate KLEE test generation into a script like `make_diffs.sh`
