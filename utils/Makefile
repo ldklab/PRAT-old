@@ -1,18 +1,24 @@
-.PHONY : all prerequisites mosquitto linter libnyoci clean
+.PHONY : all prerequisites mosquitto linter libnyoci klee clean
 
-all : # TODO.
+all : prerequisites linter klee mosquitto
 
-mosquitto: # Hard-coded test to make easier on my dev system.
+mosquitto : # Hard-coded test to make easier on my dev system.
 	./make_diffs.sh -d ~/git/TARGETS/mosquitto -f with_tls
 
-linter:
+linter :
 	g++ check_braces.cpp -o linter
 
-libnyoci:
+klee :
+	$(info Not yet implemented)
+
+libnyoci :
 	sh ~/git/libnyoci/configure --enable-code-coverage --enable-embedded
 	
-prerequisites:
+prerequisites :
 	sudo ../setup.sh
 
 clean :
 	rm -rf coverage_files* cov_files_* *.dot diff_* linter a.out
+
+reallyclean : clean
+	rm -rf klee-*
