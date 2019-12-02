@@ -8,10 +8,10 @@ mosquitto : # Hard-coded test to make easier on my dev system.
 linter :
 	g++ check_braces.cpp -o linter
 
-klee :
-	$(info Not yet implemented)
+klee:
+	$(info Not yet implemented.)
 
-libnyoci :
+libnyoci:
 	sh ~/git/libnyoci/configure --enable-code-coverage --enable-embedded
 	
 prerequisites :
