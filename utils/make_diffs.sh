@@ -81,6 +81,9 @@ generateCov() {
 	exit 1
 }
 
+# This sometimes does need to be re-run, so we need a better check.
+# Otherwise, we may get a version of the shared lib mismatch, which
+# makes tests fail.
 resloveDeps() {
 	if [[ ! -f "/usr/local/lib/libmosquitto.so.1" ]]
 	then
@@ -105,7 +108,7 @@ mosquittoTests() {
 	printf "${CYAN}Running all unit tests...${NC}\n"
 	# Broker is running; spawn clients
 	# and run some tests.
-	(cd test; make test -j; cd -)
+	(cd test; make test -j; cd -) # This might change back to test/unit dir.
 
 	# This is where I will call the symbolically-generated tests
 	# to get more precise coverage for removal.
