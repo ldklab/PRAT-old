@@ -4,5 +4,5 @@
 4. Fix the error(s) of unmatched braces on code removal
 5. Integrate KLEE test generation into a script like `make_diffs.sh`
 6. Individually-debloated Mosquitto versions for following features:
-	- Wrap, Websocket, persistence, TLS, PSK, Systree, and Bridge
+	- Wrap (done), Websocket (done), persistence (done), TLS, PSK, Systree (done), and Bridge (done)
 	- Also one version with all of the above features removed
