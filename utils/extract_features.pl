@@ -149,7 +149,7 @@ sub remove_feature {
 # Check each block of code to be removed and make sure
 # all braces are closed, and for any unused variables.
 # Then check whole source file before recompiling project
-# to check for any errors i nthe whole program.
+# to check for any errors in the whole program.
 sub sanity_check {
   	my ($dir) = @_;
 	chdir($dir) or die "$!";
