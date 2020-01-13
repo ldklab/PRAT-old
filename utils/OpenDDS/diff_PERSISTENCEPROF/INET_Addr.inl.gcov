@@ -1,8 +1,0 @@
-83c83
-<       110:   81:ACE_INET_Addr::get_port_number (void) const
----
->       102:   81:ACE_INET_Addr::get_port_number (void) const
-95c95
-<       110:   93:  return ACE_NTOHS (this->inet_addr_.in4_.sin_port);
----
->       102:   93:  return ACE_NTOHS (this->inet_addr_.in4_.sin_port);

@@ -1,6 +1,0 @@
-410,411c410,411
-<       104:  408:    __miter_base(_Iterator __it)
-<       104:  409:    { return __it; }
----
->       168:  408:    __miter_base(_Iterator __it)
->       168:  409:    { return __it; }

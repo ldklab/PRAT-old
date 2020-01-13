@@ -1,8 +1,0 @@
-41c41
-<      9827:   39:ACE_Addr::get_type (void) const
----
->      9873:   39:ACE_Addr::get_type (void) const
-43c43
-<      9827:   41:  return this->addr_type_;
----
->      9873:   41:  return this->addr_type_;

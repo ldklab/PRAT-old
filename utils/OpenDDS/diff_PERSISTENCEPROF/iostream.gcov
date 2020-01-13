@@ -1,8 +1,0 @@
-2c2
-<         -:    0:Programs:51
----
->         -:    0:Programs:3
-76c76
-<       120:   74:  static ios_base::Init __ioinit;
----
->         8:   74:  static ios_base::Init __ioinit;

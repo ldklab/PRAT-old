@@ -1,8 +1,0 @@
-61c61
-<       571:   59:ACE_Data_Block::size (void) const
----
->       811:   59:ACE_Data_Block::size (void) const
-64c64
-<       571:   62:  return this->cur_size_;
----
->       811:   62:  return this->cur_size_;

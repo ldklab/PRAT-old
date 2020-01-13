@@ -1,8 +1,0 @@
-146c146
-<       843:  144:ACE_OS::strchr (char *s, int c)
----
->      1054:  144:ACE_OS::strchr (char *s, int c)
-148c148
-<       843:  146:  return ::strchr (s, c);
----
->      1054:  146:  return ::strchr (s, c);

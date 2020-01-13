@@ -1,8 +1,0 @@
-243c243
-<        26:  241:ACE_Reactor::remove_handler (ACE_HANDLE handle,
----
->        27:  241:ACE_Reactor::remove_handler (ACE_HANDLE handle,
-246c246
-<        26:  244:  return this->implementation ()->remove_handler (handle, mask);
----
->        27:  244:  return this->implementation ()->remove_handler (handle, mask);

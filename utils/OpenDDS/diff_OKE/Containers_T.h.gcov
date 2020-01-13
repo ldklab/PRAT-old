@@ -1,8 +1,0 @@
-2c2
-<         -:    0:Programs:70
----
->         -:    0:Programs:69
-1996c1996
-<         9: 1994:class ACE_Array : public ACE_Array_Base<T>
----
->        13: 1994:class ACE_Array : public ACE_Array_Base<T>

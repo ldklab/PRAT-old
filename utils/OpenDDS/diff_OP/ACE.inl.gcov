@@ -1,8 +1,0 @@
-249c249
-<        90:  247:ACE::handle_write_ready (ACE_HANDLE handle, const ACE_Time_Value *timeout)
----
->       181:  247:ACE::handle_write_ready (ACE_HANDLE handle, const ACE_Time_Value *timeout)
-251c251
-<        90:  249:  return ACE::handle_ready (handle, timeout, 0, 1, 0);
----
->       181:  249:  return ACE::handle_ready (handle, timeout, 0, 1, 0);
