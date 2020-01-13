@@ -7,3 +7,5 @@ workspace.xml
 *.pickle
 [mM]odels
 data
+OpenDDS
+azure-uamqp-c
