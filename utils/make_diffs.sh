@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 set -o errexit -o pipefail -o noclobber -o nounset
-trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+# Following trap caused an error. Fix later.
+#trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 
 # Script to run gcov over C files and diff them
 # with and without feature enabled.
@@ -54,7 +55,7 @@ makeMosquitto() {
 
 	# Later this will invoke some comprehensive tests.
 	printf "${GREEN} Generating gcov files...${NC}\n"
-	mosquittoTests || exit 1
+	#mosquittoTests || exit 1
 
 	(cd src; llvm-cov gcov *; cd -)
 	(cd lib; llvm-cov gcov *; cd -)
@@ -91,7 +92,9 @@ resloveDeps() {
 		sudo cp "./lib/libmosquitto.so.1" "/usr/local/lib"
 		sudo /sbin/ldconfig
 	else
-		printf "${GREEN} /usr/local/lib/libmosquitto.so.1 ${NC} already exists. Skipping.\n"
+		printf "${GREEN} /usr/local/lib/libmosquitto.so.1 ${NC} already exists. Updating.\n"
+		sudo cp "./lib/libmosquitto.so.1" "/usr/local/lib"
+		sudo /sbin/ldconfig
 	fi
 
 	# Conf test.
@@ -108,7 +111,7 @@ mosquittoTests() {
 	printf "${CYAN}Running all unit tests...${NC}\n"
 	# Broker is running; spawn clients
 	# and run some tests.
-	(cd test; make test -j; cd -) # This might change back to test/unit dir.
+	#(cd test; make test -j; cd -) # This might change back to test/unit dir.
 
 	# This is where I will call the symbolically-generated tests
 	# to get more precise coverage for removal.
@@ -119,7 +122,7 @@ mosquittoTests() {
 	./client/mosquitto_sub -t 'test/topic1' -v &
 	./client/mosquitto_pub -t 'test/topic1' -m 'hello, world'
 
-	kill -KILL $broker_pid
+	kill -KILL $broker_pid || exit 1
 	#exit 1
 }
 
