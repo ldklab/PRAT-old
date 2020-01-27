@@ -86,6 +86,17 @@ sub parse_file {
 		close(FILE);
 	}
 
+	foreach my $gobj (keys %graph_content) {
+		# TODO: print block of code as node, but
+		# need to decide at what granularity.
+		# Print out each subgraph cluster in the form:
+		# SRC_FILES_NAME -> LINE.
+		print $fh "\"" , $gobj , "\" -> \"" , @{$graph_content{$gobj}}, "\";\n";
+	}
+
+	print $fh $bp_foot;
+	close $fh;
+
 	print "\n------------------\n";
 	print colored(['bright_green bold'], "Total lines to remove: " . $line_count . "\n");
 
@@ -106,17 +117,6 @@ sub parse_file {
 	if ($line_count > 0) {
 		sanity_check("./mosquitto/");
 	}
-
-	foreach my $gobj (keys %graph_content) {
-		# TODO: print block of code as node, but
-		# need to decide at what granularity.
-		# Print out each subgraph cluster in the form:
-		# SRC_FILES_NAME -> LINE.
-		print $fh "\"" , $gobj , "\" -> \"" , @{$graph_content{$gobj}}, "\";\n";
-	}
-
-	print $fh $bp_foot;
-	close $fh;
 }
 
 # Using the line numbers provided above, remove
