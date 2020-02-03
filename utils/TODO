@@ -6,3 +6,6 @@
 6. Individually-debloated Mosquitto versions for following features:
 	- Wrap (done), Websocket (done), persistence (done), TLS (done), PSK, Systree (done), and Bridge (done)
 	- Also one version with all of the above features removed
+
+7. Make command-line flag for switching between compiling `mosquitto` with `clang` vs `gcc`
+	- We currently invoke `gcc` for dumping the CFG `dot` files
