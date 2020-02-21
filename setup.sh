@@ -30,7 +30,7 @@ if [ $OS == "Ubuntu" ]; then
 
 	# Get dependencies for angr.
 	apt-get install -y python3-dev python3-pip libffi-dev build-essential virtualenvwrapper python3-tk
-	pip3 install -U -q h5py pyyaml tensorflow nltk spacy pandas
+	pip3 install -U -q h5py pyyaml tensorflow nltk spacy pandas paho-mqtt
 	pip3 install -U networkx matplotlib gensim annoy seaborn sklearn
 	python -m spacy download en_core_web_sm
 	# pip install prodigy.wh1
