@@ -48,7 +48,6 @@ def main():
 		args = my_parser.parse_args()
 
 		host = args.Host
-		status = args.status
 
 		client = mqtt.Client(client_id= "MqttClient")
 		client.on_connect = on_connect
