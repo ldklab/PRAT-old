@@ -3,15 +3,18 @@
 import paho.mqtt.client as mqtt
 
 import argparse
+import json
 import sys
 
 def on_connect(client, userdata, flags, rc):
 	print("[+] Connection successful")
 	client.subscribe('#', qos = 1) # Sub to all topics.
-	client.subscribe('$SYS/#')
+	client.subscribe('$SYS/#') # Broker status.
 
 def on_message(client, userdata, msg):
-	print("[+] Topic: {} - Message: {}".format(msg.topic, msg.payload))
+	parsed = json.loads(msg.payload)
+	print("[+] Topic: {}".format(msg.topic))
+	print("[+] Message: \n{}".format(json.dumps(parsed, indent=4, sort_keys=True)))
 
 if __name__ == "__main__":
 	try:
