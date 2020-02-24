@@ -27,7 +27,7 @@ def on_message(client, userdata, msg):
 		except UnicodeDecodeError:
 			print("[+] Message: \n{}".format(msg.payload))
 
-if __name__ == "__main__":
+def main():
 	try:
 		my_parser = argparse.ArgumentParser(description="Specify host IP to connect to")
 
@@ -59,4 +59,7 @@ if __name__ == "__main__":
 	except KeyboardInterrupt:
 		print("\n[-] Exiting.")
 		client.disconnect()
-		sys.exit()
+		sys.exit(0)
+
+if __name__ == "__main__":
+	main()
