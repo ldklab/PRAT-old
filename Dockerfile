@@ -12,3 +12,4 @@ RUN apk --no-cache add \
 
 EXPOSE 1883
 #CMD [ "", "" ]
+CMD ["/bin/ash"]
