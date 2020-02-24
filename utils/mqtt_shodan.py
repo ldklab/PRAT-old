@@ -9,7 +9,11 @@ import sys
 def on_connect(client, userdata, flags, rc):
 	print("[+] Connection successful")
 	client.subscribe('#', qos = 1) # Sub to all topics.
-	client.subscribe('$SYS/#') # Broker status.
+
+	if status:
+		client.subscribe('$SYS/#') # Broker status.
+	else:
+		print("[-] Ignoring $SYS messages")
 
 def on_message(client, userdata, msg):
 	parsed = json.loads(msg.payload)
@@ -24,10 +28,20 @@ if __name__ == "__main__":
 								metavar='host',
 								type=str,
 								help='The host to connect to')
+		my_parser.add_argument('--status',
+								dest='status',
+								action='store_true',
+								help='Enable broker status output')
+		my_parser.add_argument('--no-status',
+								dest='status',
+								action='store_false',
+								help='Disable broker status output')
 
+		my_parser.set_defaults(status=False)
 		args = my_parser.parse_args()
 
 		host = args.Host
+		status = args.status
 
 		client = mqtt.Client(client_id= "MqttClient")
 		client.on_connect = on_connect
