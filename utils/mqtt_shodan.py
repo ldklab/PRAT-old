@@ -22,7 +22,10 @@ def on_message(client, userdata, msg):
 		print("[+] Message: \n{}".format(json.dumps(parsed, indent=4, sort_keys=True)))
 	except ValueError:
 		#print("[-] {} could not be parsed as JSON. Getting str.".format(msg.payload))
-		print("[+] Message: \n{}".format(msg.payload))
+		try:
+			print("[+] Message: \n{}".format(msg.payload.decode('utf-16')))
+		except UnicodeDecodeError:
+			print("[+] Message: \n{}".format(msg.payload))
 
 if __name__ == "__main__":
 	try:
