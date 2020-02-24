@@ -16,9 +16,13 @@ def on_connect(client, userdata, flags, rc):
 		print("[-] Ignoring $SYS messages")
 
 def on_message(client, userdata, msg):
-	parsed = json.loads(msg.payload)
 	print("[+] Topic: {}".format(msg.topic))
-	print("[+] Message: \n{}".format(json.dumps(parsed, indent=4, sort_keys=True)))
+	try:
+		parsed = json.loads(msg.payload)
+		print("[+] Message: \n{}".format(json.dumps(parsed, indent=4, sort_keys=True)))
+	except ValueError:
+		#print("[-] {} could not be parsed as JSON. Getting str.".format(msg.payload))
+		print("[+] Message: \n{}".format(msg.payload))
 
 if __name__ == "__main__":
 	try:
