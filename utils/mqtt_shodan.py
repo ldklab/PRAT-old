@@ -55,4 +55,5 @@ if __name__ == "__main__":
 		client.loop_forever()
 	except KeyboardInterrupt:
 		print("\n[-] Exiting.")
+		client.disconnect()
 		sys.exit()
