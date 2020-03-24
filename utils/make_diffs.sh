@@ -14,8 +14,8 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 # Option strings.
-SHORT=d:f:
-LONG=dir:feat:
+SHORT=d:f:h:
+LONG=dir:feat:help:
 
 # Read args.
 OPTS=$(getopt --options $SHORT --long $LONG --name "$0" -- "$@")
@@ -26,6 +26,19 @@ eval set -- "$OPTS"
 
 # Populate a list of features using some NLP technique later.
 featArr=("INC_BRIDGE_SUPPORT" "INC_DB_UPGRADE" "INC_MEMTRACK" "USE_LIBWRAP" "WITH_TLS" "WITH_THREADING" "WITH_DLT" "WITH_TLS_PSK" "WITH_PIC" "WITH_BRIDGE" "WITH_PERSISTENCE" "WITH_MEMORY_TRACKING" "WITH_SYS_TREE" "WITH_SYSTEMD" "WITH_SRV" "WITH_UUID" "WITH_WRAP" "WITH_STATIC_WEBSOCKETS" "WITH_WEBSOCKETS" "WITH_EC" "WITH_SOCKS" "WITH_EPOLL" "WITH_SHARED_LIBRARIES" "WITH_BUNDLED_DEPS")
+openDDSFeatures=$(cat <<- EOM
+--[no-]built-in-topics          Built-in Topics (yes)
+--[no-]content-subscription     Content-Subscription Profile (yes)
+--[no-]content-filtered-topic   ContentFilteredTopic (CS Profile) (yes)
+--[no-]multi-topic              MultiTopic (CS Profile) (yes)
+--[no-]query-condition          QueryCondition (CS Profile) (yes)
+--[no-]ownership-profile        Ownership Profile (yes)
+--[no-]ownership-kind-exclusive Exclusive Ownership (Ownership Profile) (yes)
+--[no-]object-model-profile     Object Model Profile (yes)
+--[no-]persistence-profile      Persistence Profile (yes)
+--safety-profile[=VAL]          Safety Profile: base or extended (none)
+EOM
+)
 
 # Initial values.
 DIR="."
@@ -34,7 +47,7 @@ FEAT=""
 
 while true; do
 	case "$1" in
-		#-h | --help ) usage ;;
+		-h | --help ) usage ;;
 		-d | --dir ) DIR="$2"; shift 2 ;;
 		-f | --feat ) FEAT="$2"; shift 2 ;;
 		-- ) shift; break ;;
@@ -77,8 +90,34 @@ makeMosquitto() {
 
 # Generate the coverage files for non-Mosquitto projects.
 generateCov() {
-	# TODO.
-	printf "${RED} 'generateCov()' feature not yet implemented. ${NC}\n"
+	flag=$1
+	# Hard-code a feature for now; this whole part may be unneeded later.
+	if [ $flag == yes ]; then
+		feat="--persistence-profile"
+	else
+		feat="--no-persistence-profile"
+	fi
+
+	printf "${RED} 'generateCov()' feature is only working for OpenDDS right now. ${NC}\n"
+	printf "Available features for OpenDDS:\n $openDDSFeatures \n"
+	printf "Running::${CYAN} ./configure --no-tests $feat ${NC}\n"
+
+	# Prep the build.
+	./configure --no-tests $feat || exit 1
+	sh setenv.sh || exit 1
+
+	printf "Running::${CYAN} make -j ${NC}\n"
+	make -j || exit 1
+
+	# Later this will invoke some comprehensive tests.
+	printf "${GREEN} Generating gcov files...${NC}\n"
+	(cd dds; llvm-cov gcov *; cd -)
+
+	mkdir -p "coverage_files_PP$flag" || true
+	mv dds/*.gcov "coverage_files_PP$flag" || true
+
+	mv "coverage_files_PP$flag" $WORKDIR
+
 	exit 1
 }
 
@@ -174,10 +213,10 @@ if [[ $DIR =~ "mosquitto" ]] && containsElement "${FEAT^^}" "${featArr[@]}"; the
 	# Run this guy in a subshell @ DIR.
 	(cd $DIR; makeMosquitto yes && makeMosquitto no; cd $WORKDIR; findMatches)
 elif [[ $DIR != "mosquitto" ]] && [ "$#" -ne 0 ]; then
-	FEAT=$1
-	(generateCov; findMatches)
+	# This is hard-coded for now. Will maybe fix later.
+	DIR=$1
+	(cd $DIR; generateCov yes && generateCov no; findMatches)
 else
 	printf "${RED} Can't run in ${DIR} or ${FEAT^^} does not exist. Exiting.${NC}\n"
 	exit 1
 fi
-
