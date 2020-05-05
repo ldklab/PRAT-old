@@ -70,8 +70,8 @@ makeMosquitto() {
 	printf "${GREEN} Generating gcov files...${NC}\n"
 	#mosquittoTests || exit 1
 
-	(cd src; llvm-cov gcov *; cd -)
-	(cd lib; llvm-cov gcov *; cd -)
+	(cd src; llvm-cov-10 gcov *; cd -)
+	(cd lib; llvm-cov-10 gcov *; cd -)
 	#(cd client; llvm-cov gcov *; cd -)
 
 	mkdir -p "coverage_files_${FEAT^^}$flag"
