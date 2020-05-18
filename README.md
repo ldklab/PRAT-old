@@ -1,5 +1,6 @@
 ## PRAT
 
+![](https://github.com/RiS3-Lab/PRAT/workflows/Demo-Container-Build/badge.svg)  
 Protocol Representation and Analysis Toolkit
 
 ### Preparing Environment
