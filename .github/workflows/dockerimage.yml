@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Demo-Container-Build
 
 on:
   push:
