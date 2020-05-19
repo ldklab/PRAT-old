@@ -19,7 +19,7 @@ fi
 
 if [ $OS == "Ubuntu" ]; then
         # Install all the dependencies required for PRAT.
-        apt-get install -y libssl-dev libwebsockets-dev uuid-dev libsystemd-dev maven
+        apt-get install -y libssl-dev libwebsockets-dev uuid-dev libsystemd-dev maven git build-essential
         apt-get install -y libcunit1 libcunit1-doc libcunit1-dev gnutls-dev libwrap0 libwrap0-dev
 	
 	# Install lcov.
@@ -30,7 +30,7 @@ if [ $OS == "Ubuntu" ]; then
 
 	# Get dependencies for angr.
 	apt-get install -y python3-dev python3-pip libffi-dev build-essential virtualenvwrapper python3-tk
-	pip3 install -U -q h5py pyyaml tensorflow nltk spacy pandas paho-mqtt networkx matplotlib sklearn
+	#pip3 install -U -q h5py pyyaml tensorflow nltk spacy pandas paho-mqtt networkx matplotlib sklearn
 	#pip3 install -U networkx matplotlib gensim annoy seaborn sklearn
 	#python -m spacy download en_core_web_sm
 	# pip install prodigy.wh1
