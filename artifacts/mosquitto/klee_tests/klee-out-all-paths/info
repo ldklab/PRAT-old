@@ -1,0 +1,22 @@
+klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=../lib/libmosquitto.so.1 -link-llvm-lib=net.bc -link-llvm-lib=sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 mosquitto.bc --sym-args 0 3 4 --sym-files 2 4
+PID: 15748
+Using monotonic steady clock with 1/1000000000s resolution
+Started: 2019-12-02 14:17:22
+BEGIN searcher description
+<InterleavedSearcher> containing 2 searchers:
+RandomPathSearcher
+WeightedRandomSearcher::CoveringNew
+</InterleavedSearcher>
+END searcher description
+Finished: 2019-12-02 14:23:15
+Elapsed: 00:05:53
+KLEE: done: explored paths = 4369
+KLEE: done: avg. constructs per query = 19
+KLEE: done: total queries = 47
+KLEE: done: valid queries = 1
+KLEE: done: invalid queries = 46
+KLEE: done: query cex = 47
+
+KLEE: done: total instructions = 153892472
+KLEE: done: completed paths = 4369
+KLEE: done: generated tests = 4369

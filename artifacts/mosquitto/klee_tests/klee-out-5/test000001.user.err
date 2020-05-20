@@ -1,0 +1,10 @@
+Error: --sym-args expects three integer arguments <min-argvs> <max-argvs> <max-len>
+File: /home/ryan/git/klee/runtime/POSIX/klee_init_env.c
+Line: 24
+assembly.ll line: 7415
+Stack: 
+	#000007415 in __emit_error (=94706155258096) at /home/ryan/git/klee/runtime/POSIX/klee_init_env.c:24
+	#100006905 in klee_init_env (=94706154920392, =94706154920648) at /home/ryan/git/klee/runtime/POSIX/klee_init_env.c:145
+	#200007635 in __user_main (=4, =94706108739968) at /home/ryan/git/klee/runtime/POSIX/klee_init_env.c:244
+	#300001223 in __uClibc_main (=94706110367112, =4, =94706108739968, =0, =0, =0, =0) at libc/misc/internals/__uClibc_main.c:401
+	#400001390 in main (=4, =94706108739968)

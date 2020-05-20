@@ -1,0 +1,21 @@
+KLEE: WARNING: undefined reference to function: BIO_ctrl
+KLEE: WARNING: undefined reference to function: BIO_f_base64
+KLEE: WARNING: undefined reference to function: BIO_free_all
+KLEE: WARNING: undefined reference to function: BIO_new
+KLEE: WARNING: undefined reference to function: BIO_push
+KLEE: WARNING: undefined reference to function: BIO_s_mem
+KLEE: WARNING: undefined reference to function: BIO_set_flags
+KLEE: WARNING: undefined reference to function: BIO_write
+KLEE: WARNING: undefined reference to function: EVP_DigestFinal_ex
+KLEE: WARNING: undefined reference to function: EVP_DigestInit_ex
+KLEE: WARNING: undefined reference to function: EVP_DigestUpdate
+KLEE: WARNING: undefined reference to function: EVP_MD_CTX_free
+KLEE: WARNING: undefined reference to function: EVP_MD_CTX_new
+KLEE: WARNING: undefined reference to function: EVP_get_digestbyname
+KLEE: WARNING: undefined reference to function: OPENSSL_init_crypto
+KLEE: WARNING: undefined reference to function: RAND_bytes
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 94852059287056) at /home/ryan/git/klee/runtime/POSIX/fd.c:991 10
+KLEE: WARNING ONCE: calling __user_main with extra arguments.
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: sigaction: silently ignoring
+KLEE: WARNING ONCE: calling external: OPENSSL_init_crypto(8, 0) at mosquitto_passwd.c:460 10

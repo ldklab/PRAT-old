@@ -1,0 +1,9 @@
+Error: failed external call: OPENSSL_init_crypto
+File: mosquitto_passwd.c
+Line: 453
+assembly.ll line: 9444
+Stack: 
+	#000009444 in __klee_posix_wrapped_main (=1, =94852063181968) at mosquitto_passwd.c:453
+	#100007038 in __user_main (=1, =94852032598400) at /home/ryan/git/klee/runtime/POSIX/klee_init_env.c:245
+	#200000623 in __uClibc_main (=94852030993160, =1, =94852032598400, =0, =0, =0, =0) at libc/misc/internals/__uClibc_main.c:401
+	#300000790 in main (=1, =94852032598400)

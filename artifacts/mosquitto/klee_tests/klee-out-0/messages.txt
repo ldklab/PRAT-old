@@ -1,0 +1,3 @@
+KLEE: Using STP solver backend
+KLEE: ERROR: mosquitto.c:245: failed external call: net__broker_init
+KLEE: NOTE: now ignoring this error at this location
