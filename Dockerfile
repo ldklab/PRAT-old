@@ -20,4 +20,5 @@ RUN ./setup-docker.sh
 WORKDIR /PRAT/src
 #CMD ["make", "demo1"]
 RUN make demo1
-RUN ./extract_features.pl diff_with_tls
+#RUN ./extract_features.pl diff_with_tls
+CMD ["./extract_features.pl", "diff_with_tls/"]
