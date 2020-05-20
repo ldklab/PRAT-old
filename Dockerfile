@@ -5,7 +5,19 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get install -y apt-utils
 
-ADD src $HOME/src
-COPY setup.sh $HOME
+WORKDIR /PRAT
 
-RUN ./setup.sh
+#RUN mkdir -p ~/git/TARGETS/
+
+ADD src ./src
+ADD artifacts/mosquitto ./mosquitto
+COPY setup-docker.sh .
+
+# Setup all the dependencies/etc.
+RUN ./setup-docker.sh
+
+# Run the main PRAT functions in a WORKDIR.
+WORKDIR /PRAT/src
+#CMD ["make", "demo1"]
+RUN make demo1
+RUN ./extract_features.pl diff_with_websockets

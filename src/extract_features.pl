@@ -109,13 +109,13 @@ sub parse_file {
 		# For each of the files, remove the extracted code.
 		# This will preserve original in a *.bak file.
 		if ($line_count > 0) {
-			remove_feature($obj, @{$unused_code{$obj}});
+			#remove_feature($obj, @{$unused_code{$obj}});
 		}
 	}
 
 	# Run lint check and compile new binary.
 	if ($line_count > 0) {
-		sanity_check("./mosquitto/");
+		#sanity_check("./mosquitto/");
 	}
 }
 
