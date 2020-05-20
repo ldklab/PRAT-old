@@ -1,6 +1,0 @@
-Error: failed external call: net__broker_init
-File: mosquitto.c
-Line: 245
-assembly.ll line: 418
-Stack: 
-	#000000418 in main (=1, =94661201638336) at mosquitto.c:245
