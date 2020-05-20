@@ -6,8 +6,7 @@ mosquitto : # Hard-coded test to make easier on my dev system.
 	./make_diffs.sh -d ~/git/TARGETS/mosquitto -f with_tls
 
 demo1 : # Demo for first container.
-	./make_diffs.sh -d ../mosquitto -f with_websockets
-
+	./make_diffs.sh -d ../mosquitto -f with_tls
 
 linter :
 	g++ check_braces.cpp -o linter
