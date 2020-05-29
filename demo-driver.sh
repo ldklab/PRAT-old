@@ -20,4 +20,10 @@ sleep 5
 
 printf "\n----------------------\n"
 printf "${CYAN}[+] Running demo-2-1...${NC}\n\n\n"
-docker run --rm prat:demo2-1 /bin/bash -c "cloc src lib"
+docker run --rm prat:demo2-1 /bin/bash -c "ls -lh lib/libmosquitto.so.1 src/mosquitto && cloc src lib"
+printf "\n\n\n\n"
+sleep 5
+
+printf "\n----------------------\n"
+printf "${CYAN}[+] Getting feature graphs...${NC}\n\n\n"
+xdot artifacts/graphs/callgraph_tls.dot && xdot artifacts/graphs/callgraph_rm_tls.dot
