@@ -128,19 +128,19 @@ resloveDeps() {
 	if [[ ! -f "/usr/local/lib/libmosquitto.so.1" ]]
 	then
 		printf "${RED}libmosquitto.so.1 does not exist. Creating...${NC}\n"
-		cp "./lib/libmosquitto.so.1" "/usr/local/lib"
-		/sbin/ldconfig
+		sudo cp "./lib/libmosquitto.so.1" "/usr/local/lib"
+		sudo /sbin/ldconfig
 	else
 		printf "${GREEN} /usr/local/lib/libmosquitto.so.1 ${NC} already exists. Updating.\n"
-		cp "./lib/libmosquitto.so.1" "/usr/local/lib"
-		/sbin/ldconfig
+		sudo cp "./lib/libmosquitto.so.1" "/usr/local/lib"
+		sudo /sbin/ldconfig
 	fi
 
 	# Conf test.
 	if [[ ! -f "/etc/ld.so.conf.d/local.conf" ]]
 	then
 		echo "/usr/local/lib" > "/etc/ld.so.conf.d/local.conf"
-		/sbin/ldconfig
+		sudo /sbin/ldconfig
 	else
 		printf "${GREEN} /etc/ld.so.conf.d/local.conf ${NC} already exists. Skipping.\n"
 	fi
