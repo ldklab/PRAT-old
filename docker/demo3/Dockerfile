@@ -7,4 +7,4 @@ RUN apt-get install -y xdot
 ADD ./artifacts/graphs ./graphs
 
 # Just show xdot output? Test later.
-CMD ["xdot", "mosquitto.dot"]
+CMD ["xdot", "callgraph_tls.dot"]
