@@ -2,8 +2,8 @@ FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update
-RUN apt-get install -y apt-utils build-essential cloc clang
+RUN apt update
+RUN apt-get install -y apt-utils build-essential cloc clang --fix-missing
 
 WORKDIR /PRAT
 
