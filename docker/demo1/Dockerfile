@@ -9,9 +9,9 @@ WORKDIR /PRAT
 
 #RUN mkdir -p ~/git/TARGETS/
 
-ADD ../../src ./src
+ADD ./src ./src
 ADD artifacts/mosquitto ./mosquitto
-COPY ../../setup-docker.sh .
+COPY ./setup-docker.sh .
 
 # Setup all the dependencies/etc.
 RUN ./setup-docker.sh
