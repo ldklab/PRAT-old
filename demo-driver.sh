@@ -10,14 +10,35 @@ NC='\033[0m' # No Color
 printf "${CYAN}[+] Running demo-1...${NC}\n\n\n"
 docker run --rm prat:demo1
 printf "\n\n\n\n"
-sleep 5
 
-printf "\n----------------------\n"
-printf "${CYAN}[+] Running demo-2...${NC}\n\n\n"
-docker run --rm prat:demo2
-printf "\n\n\n\n"
-sleep 5
+read -n1 -rsp "Press space to continue..." key
 
-printf "\n----------------------\n"
-printf "${CYAN}[+] Running demo-2-1...${NC}\n\n\n"
-docker run --rm prat:demo2-1 /bin/bash -c "cloc src lib"
+if [ "$key" = '' ]; then
+    printf "\n----------------------\n"
+    printf "${CYAN}[+] Running demo-2-1...${NC}\n\n\n"
+    docker run --rm prat:demo2-1
+    printf "\n\n\n\n"
+else
+    echo "[-] Waiting..."
+fi
+
+read -n1 -rsp "Press space to continue..." key
+
+if [ "$key" = '' ]; then
+    printf "\n----------------------\n"
+    printf "${CYAN}[+] Running demo-2...${NC}\n\n\n"
+    docker run --rm prat:demo2 /bin/bash -c "ls -lh lib/libmosquitto.so.1 src/mosquitto && cloc src lib"
+    printf "\n\n\n\n"
+else
+    echo "[-] Waiting..."
+fi
+
+read -n1 -rsp "Press space to continue..." key
+
+if [ "$key" = '' ]; then
+    printf "\n----------------------\n"
+    printf "${CYAN}[+] Getting feature graphs...${NC}\n\n\n"
+    xdot artifacts/graphs/callgraph_tls.dot && xdot artifacts/graphs/callgraph_rm_tls.dot
+else
+    echo "[-] Waiting..."
+fi
