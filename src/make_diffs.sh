@@ -20,6 +20,17 @@ LONG=dir:feat:help:
 # Read args.
 OPTS=$(getopt --options $SHORT --long $LONG --name "$0" -- "$@")
 
+usage() {
+cat <<HELP_USAGE
+$0 -d <dir> -f <feature>
+
+-d Directory containing project source code
+-f Feature to target for removal
+HELP_USAGE
+}
+
+if [ "$#" -eq 0 ] ; then usage ; exit 1 ; fi
+
 if [ $? != 0 ] ; then echo "Failed to parse options. Exiting." >&2 ; exit 1 ; fi
 
 eval set -- "$OPTS"
@@ -200,18 +211,14 @@ containsElement() {
 	return 1
 }
 
-usage() {
-	echo "Usage $0 -d|--dir [source dir]"
-	echo ""
-	echo "[source dir] directory of source assets"
-	echo ""
-	exit 1
-}
-
 # I'll remove/fix later.
 if [[ $DIR =~ "mosquitto" ]] && containsElement "${FEAT^^}" "${featArr[@]}"; then
 	# Run this guy in a subshell @ DIR.
 	(cd $DIR; makeMosquitto yes && makeMosquitto no; cd $WORKDIR; findMatches)
+	# Now we want to run the perl script to make diffs and show # lines to remove.
+	printf "${CYAN}Extracting feature locations for removal...${NC}\n"
+	sleep 3
+	./extract_features.pl "diff_$FEAT/"
 elif [[ $DIR != "mosquitto" ]] && [ "$#" -ne 0 ]; then
 	# This is hard-coded for now. Will maybe fix later.
 	DIR=$1
