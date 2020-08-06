@@ -102,11 +102,13 @@ makeMosquitto() {
 # Generate the coverage files for non-Mosquitto projects.
 generateCov() {
 	flag=$1
+	baseFeat=$2
+
 	# Hard-code a feature for now; this whole part may be unneeded later.
 	if [ $flag == yes ]; then
-		feat="--persistence-profile"
+		feat="--$baseFeat"
 	else
-		feat="--no-persistence-profile"
+		feat="--no-$baseFeat"
 	fi
 
 	printf "${RED} 'generateCov()' feature is only working for OpenDDS right now. ${NC}\n"
@@ -122,12 +124,17 @@ generateCov() {
 
 	# Later this will invoke some comprehensive tests.
 	printf "${GREEN} Generating gcov files...${NC}\n"
-	(cd dds; llvm-cov gcov *; cd -)
+	if ! command -v llvm-cov &> /dev/null
+	then
+		(cd dds; llvm-cov-10 gcov *; cd ~)
+	else
+		(cd dds; llvm-cov gcov *; cd -)
+	fi
 
-	mkdir -p "coverage_files_PP$flag" || true
-	mv dds/*.gcov "coverage_files_PP$flag" || true
+	mkdir -p "coverage_files_$feat$flag" || true
+	mv dds/*.gcov "coverage_files_$feat$flag" || true
 
-	mv "coverage_files_PP$flag" $WORKDIR
+	mv "coverage_files_$feat$flag" $WORKDIR
 
 	exit 1
 }
@@ -220,9 +227,10 @@ if [[ $DIR =~ "mosquitto" ]] && containsElement "${FEAT^^}" "${featArr[@]}"; the
 	sleep 3
 	./extract_features.pl "diff_$FEAT/"
 elif [[ $DIR != "mosquitto" ]] && [ "$#" -ne 0 ]; then
-	# This is hard-coded for now. Will maybe fix later.
+	# This is hard-coded for now. Will fix later.
 	DIR=$1
-	(cd $DIR; generateCov yes && generateCov no; findMatches)
+	FEAT=$2
+	(cd $DIR; generateCov yes $FEAT&& generateCov no $FEAT; findMatches)
 else
 	printf "${RED} Can't run in ${DIR} or ${FEAT^^} does not exist. Exiting.${NC}\n"
 	exit 1
