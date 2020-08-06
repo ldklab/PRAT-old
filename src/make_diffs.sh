@@ -99,8 +99,29 @@ makeMosquitto() {
 	make clean
 }
 
-# Generate the coverage files for non-Mosquitto projects.
-generateCov() {
+# Generate the coverage files for CMake-based projects.
+generateCovCM() {
+	flag=$1
+	baseFeat=$2
+
+	if [ $flag == ON ]; then
+		feat="-D$baseFeat:BOOL=ON"
+	else
+		feat="-D$baseFeat:BOOL=OFF"
+	fi
+
+	printf "Running::${CYAN} cmake $feat .. ${NC}\n"
+
+	mkdir -p "coverage_files_$baseFeat$flag" || true
+	mv src/*.gcov "coverage_files_$baseFeat$flag" || true
+
+	mv "coverage_files_$baseFeat$flag" $WORKDIR
+
+	exit 1
+}
+
+# Generate the coverage files for autotool-based projects.
+generateCovAT() {
 	flag=$1
 	baseFeat=$2
 
@@ -226,11 +247,16 @@ if [[ $DIR =~ "mosquitto" ]] && containsElement "${FEAT^^}" "${featArr[@]}"; the
 	printf "${CYAN}Extracting feature locations for removal...${NC}\n"
 	sleep 3
 	./extract_features.pl "diff_$FEAT/"
-elif [[ $DIR != "mosquitto" ]] && [ "$#" -ne 0 ]; then
+elif [[ $DIR =~ "DDS" ]] && [ "$#" -ne 0 ]; then
 	# This is hard-coded for now. Will fix later.
 	DIR=$1
 	FEAT=$2
-	(cd $DIR; generateCov yes $FEAT&& generateCov no $FEAT; findMatches)
+	(cd $DIR; generateCovAT yes $FEAT&& generateCovAT no $FEAT; findMatches)
+elif [[ $DIR != "DDS" ]] && [ "$#" -ne 0 ]; then
+	# Other CMake-based ones.
+	DIR=$1
+	FEAT=$2
+	(cd $DIR; generateCovCM ON $FEAT&& generateCovCM OFF $FEAT; findMatches)
 else
 	printf "${RED} Can't run in ${DIR} or ${FEAT^^} does not exist. Exiting.${NC}\n"
 	exit 1
