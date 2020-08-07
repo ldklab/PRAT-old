@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# TODO: This should probably be ported to a Python program or
+# something else that provides a cleaner interface to the user
+# without bash versioning issues.
+
 set -o errexit -o pipefail -o noclobber -o nounset
 # Following trap caused an error. Fix later.
 #trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
@@ -239,7 +243,7 @@ containsElement() {
 	return 1
 }
 
-# I'll remove/fix later.
+# TODO: make this handle arguments cleanly. Right now it's buggy.
 if [[ $DIR =~ "mosquitto" ]] && containsElement "${FEAT^^}" "${featArr[@]}"; then
 	# Run this guy in a subshell @ DIR.
 	(cd $DIR; makeMosquitto yes && makeMosquitto no; cd $WORKDIR; findMatches)
