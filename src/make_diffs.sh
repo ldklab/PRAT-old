@@ -124,6 +124,46 @@ generateCovCM() {
 	exit 1
 }
 
+# Generate the coverage files for FFmpeg.
+makeFFmpeg() {
+	flag=$1
+	baseFeat=$2
+
+	# Hard-code a feature for now; this whole part may be unneeded later.
+	if [ $flag == yes ]; then
+		# This project might just need disabled, or nothing.
+		feat=""
+	else
+		feat="--disable-$baseFeat"
+	fi
+
+	printf "Running::${CYAN} ./configure --toolchain=gcov $feat ${NC}\n"
+
+	# Prep the build.
+	./configure --toolchain=gcov $feat || exit 1
+
+	printf "Running::${CYAN} make -j2 ${NC}\n"
+	make -j || exit 1
+
+	# Later this will invoke some comprehensive tests.
+	printf "${GREEN} Generating gcov files...${NC}\n"
+	if ! command -v gcov &> /dev/null
+	then
+		# Just testing on filters for now.
+		(cd libavfilter; gcov *; cd ~)
+	else
+		printf "[-] ${RED}gcov not available. Exiting${NC}\n"
+		exit 1
+	fi
+
+	mkdir -p "coverage_files_$feat$flag" || true
+	mv libavfilter/*.gcov "coverage_files_$feat$flag" || true
+
+	mv "coverage_files_$feat$flag" $WORKDIR
+
+	exit 1
+}
+
 # Generate the coverage files for autotool-based projects.
 generateCovAT() {
 	flag=$1
@@ -251,16 +291,20 @@ if [[ $DIR =~ "mosquitto" ]] && containsElement "${FEAT^^}" "${featArr[@]}"; the
 	printf "${CYAN}Extracting feature locations for removal...${NC}\n"
 	sleep 3
 	./extract_features.pl "diff_$FEAT/"
+elif [[ $DIR =~ "FFmpeg" ]] && [ "$#" -ne 0 ]; then
+	FEAT=$1
+	(cd $DIR; makeFFmpeg yes $FEAT && makeFFmpeg no $FEAT; findMatches)
 elif [[ $DIR =~ "DDS" ]] && [ "$#" -ne 0 ]; then
 	# This is hard-coded for now. Will fix later.
 	DIR=$1
 	FEAT=$2
 	(cd $DIR; generateCovAT yes $FEAT&& generateCovAT no $FEAT; findMatches)
-elif [[ $DIR != "DDS" ]] && [ "$#" -ne 0 ]; then
+# Fix this later, or wait till Python port.
+#elif [[ $DIR != "DDS" ]] && [ "$#" -ne 0 ]; then
 	# Other CMake-based ones.
-	DIR=$1
-	FEAT=$2
-	(cd $DIR; generateCovCM ON $FEAT&& generateCovCM OFF $FEAT; findMatches)
+#	DIR=$1
+#	FEAT=$2
+#	(cd $DIR; generateCovCM ON $FEAT&& generateCovCM OFF $FEAT; findMatches)
 else
 	printf "${RED} Can't run in ${DIR} or ${FEAT^^} does not exist. Exiting.${NC}\n"
 	exit 1
