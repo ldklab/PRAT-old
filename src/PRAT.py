@@ -1,10 +1,33 @@
 #!/usr/bin/env python3
 
 import argparse
+import subprocess
 import sys
 
-def makeMosquitto(path, feature):
-    print("[-] TODO: makeMosquitto.")
+# Generate coverage files for Mosquitto.
+
+def makeMosquitto(path, feature, flag):
+    print("[+] Running in: {}".format(path))
+    target = "WITH_" + feature + "=" + flag
+    p = subprocess.Popen(["make", "binary", "-j", target], cwd=path)
+    p.wait()
+
+    # Generate gcov files.
+    src = path + "/src"
+    lib = path + "/lib"
+    p = subprocess.Popen(["llvm-cov", "gcov", "*"], cwd=src)
+    p.wait()
+    p = subprocess.Popen(["llvm-cov", "gcov", "*"], cwd=lib)
+    p.wait()
+
+    # Make directories for storing the results.
+    coverageFiles = "coverage_files_" + feature + "_" + flag
+    p = subprocess.Popen(["mkdir", "-p", coverageFiles], cwd=path)
+    p.wait()
+    p = subprocess.Popen(["mv", src + "/*.gcov", coverageFiles], cwd=path)
+    p.wait()
+    p = subprocess.Popen(["mv", lib + "/*.gcov", coverageFiles], cwd=path)
+    p.wait()
 
 def makeFFmpeg(path, feature):
     print("[-] TODO: makeFFmpeg.")
@@ -25,7 +48,10 @@ if __name__ == '__main__':
     #print("[+] Targeting project in: {} and feature: {}".format(args.project, args.feature))
 
     if "mosquitto" in args.project:
-        makeMosquitto(args.project, args.feature)
+        # Compile with feature enabled.
+        makeMosquitto(args.project, args.feature, "yes")
+        # Compile with feature disabled.
+        makeMosquitto(args.project, args.feature, "no")
     elif "FFmpeg" in args.project:
         makeFFmpeg(args.project, args.feature)
     else:
