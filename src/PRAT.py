@@ -84,7 +84,6 @@ if __name__ == '__main__':
 
     home = os.getcwd()
 
-
     if "mosquitto" in args.project:
         # Compile with feature enabled.
         makeMosquitto(args.project, args.feature, "yes")
