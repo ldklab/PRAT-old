@@ -35,6 +35,19 @@ def makeDiffs(path1, path2, feat):
         if not os.path.getsize(outdir + "/" + covFile):
             #print("[-] {} is empty. Deleting".format(covFile))
             os.remove(outdir + "/" + covFile)
+    
+    return outdir
+
+def extractFeatures(path):
+    print("[+] Extract features for removal from: {}".format(path))
+    p = subprocess.Popen(["perl", "extract_features.pl", path + "/"])
+    p.wait()
+
+    if isTool("xdot"):
+        p = subprocess.Popen(["xdot", "FDG.dot"])
+        p.wait()
+    else:
+        print("[-] `xdot` is not available. Saving to FDG.dot")
 
 # Generate coverage files for Mosquitto.
 def makeMosquitto(path, feature, flag):
@@ -77,11 +90,15 @@ def makeDDS(path, feature):
 def makeCM(path, feature):
     print("[-] TODO: makeCM.")
 
+def isTool(prog):
+    return shutil.which(prog) is not None
+
 if __name__ == '__main__':
     # Setup the command line args for different projects.
     parser = argparse.ArgumentParser()
     parser.add_argument("project", help="Directory to project to target")
     parser.add_argument("feature", help="Feature to identify/remove from project")
+    parser.add_argument("--extract", help="Generate feature graph and show LoC to remove", action="store_true")
     args = parser.parse_args()
 
     home = os.getcwd()
@@ -95,11 +112,14 @@ if __name__ == '__main__':
         makeMosquitto(args.project, feature, "no")
 
         # Make one file with the `diff` of coverage info.
-        makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
             home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "FFmpeg" in args.project:
         makeFFmpeg(args.project, args.feature)
     else:
         print("[-] Target currently unsupported!")
+    
+    if args.extract:
+        extractFeatures(diffs)
 
     sys.exit(0)
