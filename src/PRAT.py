@@ -41,6 +41,7 @@ def makeMosquitto(path, feature, flag):
     print("[+] Running in: {}".format(path))
     target = "WITH_" + feature + "=" + flag
     p = subprocess.Popen(["make", "clean"], cwd=path)
+    p.wait()
     p = subprocess.Popen(["make", "binary", "-j", target], cwd=path)
     p.wait()
 
@@ -65,6 +66,7 @@ def makeMosquitto(path, feature, flag):
     # Move the files to working dir.
     home = os.getcwd()
     p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
+    p.wait()
 
 def makeFFmpeg(path, feature):
     print("[-] TODO: makeFFmpeg.")
@@ -85,14 +87,16 @@ if __name__ == '__main__':
     home = os.getcwd()
 
     if "mosquitto" in args.project:
+        # Mosquitto uses all-caps names.
+        feature = args.feature.upper()
         # Compile with feature enabled.
-        makeMosquitto(args.project, args.feature, "yes")
+        makeMosquitto(args.project, feature, "yes")
         # Compile with feature disabled.
-        makeMosquitto(args.project, args.feature, "no")
+        makeMosquitto(args.project, feature, "no")
 
         # Make one file with the `diff` of coverage info.
-        makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
-            home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
+        makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
+            home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "FFmpeg" in args.project:
         makeFFmpeg(args.project, args.feature)
     else:
