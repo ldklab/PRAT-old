@@ -84,13 +84,12 @@ if __name__ == '__main__':
 
     home = os.getcwd()
 
-    #print("[+] Targeting project in: {} and feature: {}".format(args.project, args.feature))
 
     if "mosquitto" in args.project:
         # Compile with feature enabled.
-        #makeMosquitto(args.project, args.feature, "yes")
+        makeMosquitto(args.project, args.feature, "yes")
         # Compile with feature disabled.
-        #makeMosquitto(args.project, args.feature, "no")
+        makeMosquitto(args.project, args.feature, "no")
 
         # Make one file with the `diff` of coverage info.
         makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
