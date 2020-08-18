@@ -50,13 +50,18 @@ def extractFeatures(path):
         print("[-] `xdot` is not available. Saving to FDG.dot")
 
 # Generate coverage files for Mosquitto.
-def makeMosquitto(path, feature, flag):
+def makeMosquitto(path, feature, flag, tests=None):
     print("[+] Running in: {}".format(path))
     target = "WITH_" + feature + "=" + flag
     p = subprocess.Popen(["make", "clean"], cwd=path)
     p.wait()
     p = subprocess.Popen(["make", "binary", "-j", target], cwd=path)
     p.wait()
+
+    # Add part here later for running tests.
+    if tests is not None:
+        p = subprocess.Popen(["make", "test", "-j"], cwd=path)
+        p.wait()
 
     # Generate gcov files.
     src = path + "/src"
@@ -81,8 +86,44 @@ def makeMosquitto(path, feature, flag):
     p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
     p.wait()
 
-def makeFFmpeg(path, feature):
-    print("[-] TODO: makeFFmpeg.")
+def makeFFmpeg(path, feature, flag):
+    print("[+] Running in: {}".format(path))
+
+    # Prep the build system using configure.
+    if flag == "yes":
+        # No explicit 'enable' flag for FFmpeg.
+        p = subprocess.Popen(["bash", "configure", "--toolchain=gcov"], cwd=path)
+        p.wait()
+    else:
+        target = "--disable-" + feature
+        p = subprocess.Popen(["bash", "configure", "--toolchain=gcov", target], cwd=path)
+        p.wait()
+    
+    p = subprocess.Popen(["make", "clean"], cwd=path)
+    p.wait()
+
+    p = subprocess.Popen(["make", "-j3"], cwd=path)
+    p.wait()
+
+    # Add part later for running tests.
+
+    # Then, generate coverage.
+    src = path + "/libavcodec"
+    # FFmpeg requires this version, not llvm-cov.
+    p = subprocess.Popen("gcov *", shell=True, cwd=src)
+    p.wait()
+
+    # Make directories for storing the results.
+    coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
+    p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+    p = subprocess.Popen("mv " + src + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+
+    # Move the files to working dir.
+    home = os.getcwd()
+    p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
+    p.wait()
 
 def makeDDS(path, feature):
     print("[-] TODO: makeDDS.")
@@ -99,6 +140,7 @@ if __name__ == '__main__':
     parser.add_argument("project", help="Directory to project to target")
     parser.add_argument("feature", help="Feature to identify/remove from project")
     parser.add_argument("--extract", help="Generate feature graph and show LoC to remove", action="store_true")
+    parser.add_argument("--tests", help="Run tests at compile time (necessary for better coverage results)", action="store_true")
     args = parser.parse_args()
 
     home = os.getcwd()
@@ -106,16 +148,18 @@ if __name__ == '__main__':
     if "mosquitto" in args.project:
         # Mosquitto uses all-caps names.
         feature = args.feature.upper()
+
         # Compile with feature enabled.
-        makeMosquitto(args.project, feature, "yes")
+        makeMosquitto(args.project, feature, "yes", args.tests)
         # Compile with feature disabled.
-        makeMosquitto(args.project, feature, "no")
+        makeMosquitto(args.project, feature, "no", args.tests)
 
         # Make one file with the `diff` of coverage info.
         diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
             home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "FFmpeg" in args.project:
-        makeFFmpeg(args.project, args.feature)
+        makeFFmpeg(args.project, args.feature, "yes")
+        #makeFFmpeg(args.project, args.feature, "no")
     else:
         print("[-] Target currently unsupported!")
     

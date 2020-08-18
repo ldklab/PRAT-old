@@ -13,7 +13,7 @@ That corresponds to never being called.
 '-:' corresponds to no code (comments, unreachable, etc.).
 =cut
 
-die "Usage: $0 DIR\n" if @ARGV < 1;
+die "Usage: $0 DIR\n\n[DIR] directory to coverage diffs to compare\n" if @ARGV < 1;
 
 my $diff_dir = $ARGV[0];
 my @content;
