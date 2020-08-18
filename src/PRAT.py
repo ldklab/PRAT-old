@@ -107,17 +107,30 @@ def makeFFmpeg(path, feature, flag):
 
     # Add part later for running tests.
 
+    p = subprocess.Popen(["./ffmpeg", "--help"], cwd=path)
+    p.wait()
+
     # Then, generate coverage.
-    src = path + "/libavcodec"
+    codec = path + "/libavcodec"
+    libfilter = path + "/libavfilter"
+    libfmt = path + "/libavformat"
     # FFmpeg requires this version, not llvm-cov.
-    p = subprocess.Popen("gcov *", shell=True, cwd=src)
+    p = subprocess.Popen("gcov *", shell=True, cwd=codec)
+    p.wait()
+    p = subprocess.Popen("gcov *", shell=True, cwd=libfilter)
+    p.wait()
+    p = subprocess.Popen("gcov *", shell=True, cwd=libfmt)
     p.wait()
 
     # Make directories for storing the results.
     coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
     p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
     p.wait()
-    p = subprocess.Popen("mv " + src + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p = subprocess.Popen("mv " + codec + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+    p = subprocess.Popen("mv " + libfilter + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+    p = subprocess.Popen("mv " + libfmt + "/*.gcov " + coverageFiles, shell=True, cwd=path)
     p.wait()
 
     # Move the files to working dir.
@@ -159,7 +172,11 @@ if __name__ == '__main__':
             home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "FFmpeg" in args.project:
         makeFFmpeg(args.project, args.feature, "yes")
-        #makeFFmpeg(args.project, args.feature, "no")
+        makeFFmpeg(args.project, args.feature, "no")
+
+        # Make one file with the `diff` of coverage info.
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
+            home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
     else:
         print("[-] Target currently unsupported!")
     
