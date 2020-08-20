@@ -178,10 +178,11 @@ if __name__ == '__main__':
         makeFFmpeg(args.project, args.feature, "no", args.tests)
 
         if args.tests:
-            # Download the test suite/etc for FFmpeg.
-            p = subprocess.Popen(["make", "fate-rsync", "SAMPLES=fate-suite/"], cwd=args.path)
-            p.wait()
-            # Now we can also run the tests in `makeFFmpeg`.
+            if os.path.isfile(args.path + "/fate-suite")
+                # Download the test suite/etc for FFmpeg.
+                p = subprocess.Popen(["make", "fate-rsync", "SAMPLES=fate-suite/"], cwd=args.path)
+                p.wait()
+                # Now we can also run the tests in `makeFFmpeg`.
 
         # Make one file with the `diff` of coverage info.
         diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
