@@ -9,6 +9,8 @@ def makeDiffs(path1, path2, feat):
     print("[+] Checking for matching files in {} and {}"
         .format(path1,  path2))
     
+    unused_files = []
+    
     aFiles = {os.path.splitext(x)[0] for x in os.listdir(path1)}
     bFiles = {os.path.splitext(x)[0] for x in os.listdir(path2)}
 
@@ -29,6 +31,8 @@ def makeDiffs(path1, path2, feat):
             # If an entire file is left out, we could posit that
             # it is only used when the tested feature ie enabled.
             print("[+] {} only exists with {} enabled".format(f, feat))
+            # These files are useful in some cases. Save and mark for deletion later.
+            unused_files.append(f)
     
     # Clean up empty files.
     for covFile in os.listdir(outdir):
@@ -107,7 +111,7 @@ def makeFFmpeg(path, feature, flag, tests=None):
 
     # Add part later for running tests.
     if tests is not None:
-        p = subprocess.Popen(["make", "fate", "-j", "SAMPLES=fate-suite/"], cwd=args.path)
+        p = subprocess.Popen(["make", "fate", "-j", "SAMPLES=fate-suite/"], cwd=path)
         p.wait()
 
     #p = subprocess.Popen(["./ffmpeg", "--help"], cwd=path)
@@ -175,9 +179,9 @@ if __name__ == '__main__':
             home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "FFmpeg" in args.project:
         if args.tests:
-            if not os.path.isfile(args.path + "/fate-suite"):
+            if not os.path.isfile(args.project + "/fate-suite"):
                 # Download the test suite/etc for FFmpeg.
-                p = subprocess.Popen(["make", "fate-rsync", "SAMPLES=fate-suite/"], cwd=args.path)
+                p = subprocess.Popen(["make", "fate-rsync", "SAMPLES=fate-suite/"], cwd=args.project)
                 p.wait()
                 # Now we can also run the tests in `makeFFmpeg`.
 
