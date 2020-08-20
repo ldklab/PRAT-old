@@ -110,8 +110,8 @@ def makeFFmpeg(path, feature, flag, tests=None):
         p = subprocess.Popen(["make", "fate", "-j", "SAMPLES=fate-suite/"], cwd=args.path)
         p.wait()
 
-    p = subprocess.Popen(["./ffmpeg", "--help"], cwd=path)
-    p.wait()
+    #p = subprocess.Popen(["./ffmpeg", "--help"], cwd=path)
+    #p.wait()
 
     # Then, generate coverage.
     codec = path + "/libavcodec"
@@ -174,15 +174,15 @@ if __name__ == '__main__':
         diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
             home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "FFmpeg" in args.project:
-        makeFFmpeg(args.project, args.feature, "yes", args.tests)
-        makeFFmpeg(args.project, args.feature, "no", args.tests)
-
         if args.tests:
-            if not os.path.isfile(args.path + "/fate-suite")
+            if not os.path.isfile(args.path + "/fate-suite"):
                 # Download the test suite/etc for FFmpeg.
                 p = subprocess.Popen(["make", "fate-rsync", "SAMPLES=fate-suite/"], cwd=args.path)
                 p.wait()
                 # Now we can also run the tests in `makeFFmpeg`.
+
+        makeFFmpeg(args.project, args.feature, "yes", args.tests)
+        makeFFmpeg(args.project, args.feature, "no", args.tests)
 
         # Make one file with the `diff` of coverage info.
         diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
