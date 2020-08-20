@@ -178,7 +178,7 @@ if __name__ == '__main__':
         makeFFmpeg(args.project, args.feature, "no", args.tests)
 
         if args.tests:
-            if os.path.isfile(args.path + "/fate-suite")
+            if not os.path.isfile(args.path + "/fate-suite")
                 # Download the test suite/etc for FFmpeg.
                 p = subprocess.Popen(["make", "fate-rsync", "SAMPLES=fate-suite/"], cwd=args.path)
                 p.wait()
