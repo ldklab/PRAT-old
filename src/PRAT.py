@@ -125,11 +125,11 @@ def makeFFmpeg(path, feature, flag, tests=False):
     libfilter = path + "/libavfilter"
     libfmt = path + "/libavformat"
     # FFmpeg requires this version, not llvm-cov.
-    p = subprocess.Popen("gcov *", shell=True, cwd=codec)
+    p = subprocess.Popen("gcov libavcodec/*", shell=True, cwd=path)
     p.wait()
-    p = subprocess.Popen("gcov *", shell=True, cwd=libfilter)
+    p = subprocess.Popen("gcov libavfilter/*", shell=True, cwd=path)
     p.wait()
-    p = subprocess.Popen("gcov *", shell=True, cwd=libfmt)
+    p = subprocess.Popen("gcov libavformat/*", shell=True, cwd=path)
     p.wait()
 
     # Make directories for storing the results.
@@ -197,7 +197,7 @@ if __name__ == '__main__':
             home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
 
         # Attempt to delete feature-specific source files.
-        if args.delete is not None:
+        if args.delete is not False:
             print("[+] Attempting to delete source files...")
             for td in diffs:
                 if os.path.exists(args.project + "/libavfilter/" + td):
