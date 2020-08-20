@@ -54,7 +54,8 @@ def extractFeatures(path):
         print("[-] `xdot` is not available. Saving to FDG.dot")
 
 # Generate coverage files for Mosquitto.
-def makeMosquitto(path, feature, flag, tests=None):
+def makeMosquitto(path, feature, flag, tests=False):
+    print("test: {}".format(tests))
     print("[+] Running in: {}".format(path))
     target = "WITH_" + feature + "=" + flag
     p = subprocess.Popen(["make", "clean"], cwd=path)
@@ -63,9 +64,11 @@ def makeMosquitto(path, feature, flag, tests=None):
     p.wait()
 
     # Add part here later for running tests.
-    if tests is not None:
+    if tests is not False:
         p = subprocess.Popen(["make", "test", "-j"], cwd=path)
         p.wait()
+    else:
+        print("[+] Not running tests. Continuing.")
 
     # Generate gcov files.
     src = path + "/src"
@@ -90,7 +93,7 @@ def makeMosquitto(path, feature, flag, tests=None):
     p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
     p.wait()
 
-def makeFFmpeg(path, feature, flag, tests=None):
+def makeFFmpeg(path, feature, flag, tests=False):
     print("[+] Running in: {}".format(path))
 
     # Prep the build system using configure.
@@ -110,7 +113,7 @@ def makeFFmpeg(path, feature, flag, tests=None):
     p.wait()
 
     # Add part later for running tests.
-    if tests is not None:
+    if tests is not False:
         p = subprocess.Popen(["make", "fate", "-j", "SAMPLES=fate-suite/"], cwd=path)
         p.wait()
 
@@ -205,6 +208,7 @@ if __name__ == '__main__':
                     os.remove(args.project + "/libavformat/" + td)
                 else:
                     print("[-] File: {} could not be found in source tree; skipping.".format(td))
+            print("[+] Finished deleting source files")
     else:
         print("[-] Target currently unsupported!")
     
