@@ -120,10 +120,6 @@ def makeFFmpeg(path, feature, flag, tests=False):
     #p = subprocess.Popen(["./ffmpeg", "--help"], cwd=path)
     #p.wait()
 
-    # Then, generate coverage.
-    codec = path + "/libavcodec"
-    libfilter = path + "/libavfilter"
-    libfmt = path + "/libavformat"
     # FFmpeg requires this version, not llvm-cov.
     p = subprocess.Popen("gcov libavcodec/*", shell=True, cwd=path)
     p.wait()
@@ -136,11 +132,11 @@ def makeFFmpeg(path, feature, flag, tests=False):
     coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
     p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
     p.wait()
-    p = subprocess.Popen("mv " + codec + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p = subprocess.Popen("mv " + "*.gcov " + coverageFiles, shell=True, cwd=path)
     p.wait()
-    p = subprocess.Popen("mv " + libfilter + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p = subprocess.Popen("mv " + "*.gcov " + coverageFiles, shell=True, cwd=path)
     p.wait()
-    p = subprocess.Popen("mv " + libfmt + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p = subprocess.Popen("mv " + "*.gcov " + coverageFiles, shell=True, cwd=path)
     p.wait()
 
     # Move the files to working dir.
