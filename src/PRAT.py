@@ -40,7 +40,7 @@ def makeDiffs(path1, path2, feat):
             #print("[-] {} is empty. Deleting".format(covFile))
             os.remove(outdir + "/" + covFile)
     
-    return outdir
+    return unused_files
 
 def extractFeatures(path):
     print("[+] Extract features for removal from: {}".format(path))
@@ -161,6 +161,7 @@ if __name__ == '__main__':
     parser.add_argument("feature", help="Feature to identify/remove from project")
     parser.add_argument("--extract", help="Generate feature graph and show LoC to remove", action="store_true")
     parser.add_argument("--tests", help="Run tests at compile time (necessary for better coverage results)", action="store_true")
+    parser.add_argument("--delete", help="Attempt to delete entire feature-specific files after analysis", action="store_true")
     args = parser.parse_args()
 
     home = os.getcwd()
@@ -191,6 +192,11 @@ if __name__ == '__main__':
         # Make one file with the `diff` of coverage info.
         diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
             home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
+
+        # Attempt to delete feature-specific source files.
+        if args.delete is not None:
+            for td in diffs:
+                os.remove(args.project + "/" + td)
     else:
         print("[-] Target currently unsupported!")
     
