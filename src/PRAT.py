@@ -195,8 +195,16 @@ if __name__ == '__main__':
 
         # Attempt to delete feature-specific source files.
         if args.delete is not None:
+            print("[+] Attempting to delete source files...")
             for td in diffs:
-                os.remove(args.project + "/" + td)
+                if os.path.exists(args.project + "/libavfilter/" + td):
+                    os.remove(args.project + "/libavfilter/" + td)
+                elif os.path.exists(args.project + "/libavcodec/" + td):
+                    os.remove(args.project + "/libavcodec/" + td)
+                elif os.path.exists(args.project + "/libavformat/" + td):
+                    os.remove(args.project + "/libavformat/" + td)
+                else:
+                    print("[-] File: {} could not be found in source tree; skipping.".format(td))
     else:
         print("[-] Target currently unsupported!")
     
