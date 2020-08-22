@@ -102,8 +102,11 @@ def makeFFmpeg(path, feature, flag, tests=False):
         p = subprocess.Popen(["bash", "configure", "--toolchain=gcov"], cwd=path)
         p.wait()
     else:
-        target = "--disable-" + feature
-        p = subprocess.Popen(["bash", "configure", "--toolchain=gcov", target], cwd=path)
+        target = ""
+        for feat in feature:
+            target += "--disable-" + feat + " "
+        print("[+] Running: `./configure --toolchain=gcov {}`".format(target))
+        p = subprocess.Popen("bash configure --toolchain=gcov " + target, shell=True, cwd=path)
         p.wait()
     
     p = subprocess.Popen(["make", "clean"], cwd=path)
@@ -129,7 +132,10 @@ def makeFFmpeg(path, feature, flag, tests=False):
     p.wait()
 
     # Make directories for storing the results.
-    coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
+    if len(feature) > 1:
+        coverageFiles = "coverage_files_WITH_[n]_" + flag
+    else:
+        coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
     p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
     p.wait()
     p = subprocess.Popen("mv " + "*.gcov " + coverageFiles, shell=True, cwd=path)
@@ -157,7 +163,7 @@ if __name__ == '__main__':
     # Setup the command line args for different projects.
     parser = argparse.ArgumentParser()
     parser.add_argument("project", help="Directory to project to target")
-    parser.add_argument("feature", help="Feature to identify/remove from project")
+    parser.add_argument("feature", help="Feature to identify/remove from project", nargs="+")
     parser.add_argument("--extract", help="Generate feature graph and show LoC to remove", action="store_true")
     parser.add_argument("--tests", help="Run tests at compile time (necessary for better coverage results)", action="store_true")
     parser.add_argument("--delete", help="Attempt to delete entire feature-specific files after analysis", action="store_true")
@@ -185,7 +191,7 @@ if __name__ == '__main__':
                 p.wait()
                 # Now we can also run the tests in `makeFFmpeg`.
 
-        makeFFmpeg(args.project, args.feature, "yes", args.tests)
+        #makeFFmpeg(args.project, args.feature, "yes", args.tests)
         makeFFmpeg(args.project, args.feature, "no", args.tests)
 
         # Make one file with the `diff` of coverage info.
