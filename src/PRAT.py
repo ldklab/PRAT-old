@@ -191,7 +191,7 @@ if __name__ == '__main__':
                 p.wait()
                 # Now we can also run the tests in `makeFFmpeg`.
 
-        #makeFFmpeg(args.project, args.feature, "yes", args.tests)
+        makeFFmpeg(args.project, args.feature, "yes", args.tests)
         makeFFmpeg(args.project, args.feature, "no", args.tests)
 
         # Make one file with the `diff` of coverage info.
