@@ -104,6 +104,7 @@ def makeFFmpeg(path, feature, flag, tests=False):
     else:
         target = "--disable-" + feature
         p = subprocess.Popen(["bash", "configure", "--toolchain=gcov", target], cwd=path)
+        #p = subprocess.Popen("bash configure --toolchain=gcov --disable-", shell=True, cwd=path)
         p.wait()
     
     p = subprocess.Popen(["make", "clean"], cwd=path)
