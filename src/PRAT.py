@@ -162,7 +162,7 @@ def makeRust(path, feature, flag, tests=False):
         p = subprocess.Popen(["cargo", "build"], cwd=path)
         p.wait()
     else:
-        p = subprocess.Popen(["cargo", "build", "--features", feature], cwd=path)
+        p = subprocess.Popen(["cargo", "build", "--features ", feature], cwd=path)
         p.wait()
     
     # Now generate the coverage files using kcov.
