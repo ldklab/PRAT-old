@@ -56,7 +56,6 @@ def extractFeatures(path):
 
 # Generate coverage files for Mosquitto.
 def makeMosquitto(path, feature, flag, tests=False):
-    print("test: {}".format(tests))
     print("[+] Running in: {}".format(path))
     target = "WITH_" + feature + "=" + flag
     p = subprocess.Popen(["make", "clean"], cwd=path)
@@ -185,6 +184,41 @@ def makeRust(path, feature, flag, tests=False):
     p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
     p.wait()
 
+def makeAOM(path, feature, flag, tests=False):
+    print("[+] Running in: {}".format(path))
+
+    if flag == "yes":
+        target = "-DCONFIG_" + feature + "=1"
+    else:
+        target = "-DCONFIG_" + feature + "=0"
+
+    p = subprocess.Popen(["cmake", target, ".."], cwd=path + "/build")
+    p.wait()
+
+    #p = subprocess.Popen(["make", "clean"], cwd=path)
+    #p.wait()
+    p = subprocess.Popen(["make", "-j"], cwd=path)
+    p.wait()
+
+    # Generate gcov files.
+    src = path + "/build/CMakeFiles/aom.dir/aom/src/"
+    p = subprocess.Popen("llvm-cov-10 gcov *", shell=True, cwd=src)
+    p.wait()
+
+    # Make directories for storing the results.
+    coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
+    p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+    p = subprocess.Popen("mv " + src + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+    #p = subprocess.Popen("mv " + lib + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    #p.wait()
+
+    # Move the files to working dir.
+    home = os.getcwd()
+    p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
+    p.wait()
+
 def makeDDS(path, feature):
     print("[-] TODO: makeDDS.")
 
@@ -256,6 +290,18 @@ if __name__ == '__main__':
         diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
             home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
 
+    elif "aom" in args.project:
+        # libaom uses all-caps names.
+        feature = args.feature.upper()
+
+        # Compile with feature enabled.
+        makeAOM(args.project, feature, "yes", args.tests)
+        # Compile with feature disabled.
+        makeAOM(args.project, feature, "no", args.tests)
+
+        # Make one file with the `diff` of coverage info.
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
+            home + "/coverage_files_WITH_" + feature + "_no", feature)
     else:
         print("[-] Target currently unsupported!")
     
