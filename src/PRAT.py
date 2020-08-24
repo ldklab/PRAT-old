@@ -145,6 +145,9 @@ def makeFFmpeg(path, feature, flag, tests=False):
     p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
     p.wait()
 
+def makeRust(path, feature, flag, tests=False):
+    print("[-] TODO: makeRust.")
+
 def makeDDS(path, feature):
     print("[-] TODO: makeDDS.")
 
@@ -206,6 +209,11 @@ if __name__ == '__main__':
                 else:
                     print("[-] File: {} could not be found in source tree; skipping.".format(td))
             print("[+] Finished deleting source files")
+    elif "rav1e" in args.project:
+        print("[+] Experimental feature: running on Rust-based project")
+
+        makeRust(args.project, args.feature, "yes", args.tests)
+
     else:
         print("[-] Target currently unsupported!")
     

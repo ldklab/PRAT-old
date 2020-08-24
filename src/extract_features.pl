@@ -19,6 +19,9 @@ my $diff_dir = $ARGV[0];
 my @content;
 my $line_count = 0;
 
+# For truncating long strings in the graph.
+my $MAX_LEN = 100;
+
 find(\&wanted, '.');
 
 if ($diff_dir) {
@@ -91,7 +94,14 @@ sub parse_file {
 		# need to decide at what granularity.
 		# Print out each subgraph cluster in the form:
 		# SRC_FILES_NAME -> LINE.
-		print $fh "\"" , $gobj , "\" -> \"" , @{$graph_content{$gobj}}, "\";\n";
+
+		# First, check length of string beacuse of dot limits.
+		if (scalar(@{$graph_content{$gobj}}) >= $MAX_LEN) {
+			my $trunc = substr(@{$graph_content{$gobj}}, 0, $MAX_LEN - 1);
+			print $fh "\"" , $gobj , "\" -> \"" , $trunc, "\";\n";
+		} else {
+			print $fh "\"" , $gobj , "\" -> \"" , @{$graph_content{$gobj}}, "\";\n";
+		}
 	}
 
 	print $fh $bp_foot;
