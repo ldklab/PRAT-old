@@ -4,6 +4,7 @@ import argparse
 import subprocess
 import sys, os
 import shutil
+import toml
 
 def makeDiffs(path1, path2, feat):
     print("[+] Checking for matching files in {} and {}"
@@ -146,7 +147,43 @@ def makeFFmpeg(path, feature, flag, tests=False):
     p.wait()
 
 def makeRust(path, feature, flag, tests=False):
-    print("[-] TODO: makeRust.")
+    print("[+] Loading `Cargo.toml`...")
+    cargo = toml.load(path + "/Cargo.toml")
+    features = cargo["features"]
+
+    print("[+] Found {} features\n".format(len(features)))
+
+    p = subprocess.Popen(["cargo", "clean"], cwd=path)
+
+    #for f in features:
+    #    print("[+] {}".format(f))
+    
+    if flag == "yes":
+        p = subprocess.Popen(["cargo", "build"], cwd=path)
+        p.wait()
+    else:
+        p = subprocess.Popen(["cargo", "build", "--features", feature], cwd=path)
+        p.wait()
+    
+    # Now generate the coverage files using kcov.
+    p = subprocess.Popen(["cargo", "test"], cwd=path)
+    p.wait()
+
+    src = path + "/target/debug/deps/"
+    p = subprocess.Popen("gcov-7 *", shell=True, cwd=src)
+    p.wait()
+
+    # Make directories for storing the results.
+    coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
+    p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+    p = subprocess.Popen("mv " + src + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+
+    # Move the files to working dir.
+    home = os.getcwd()
+    p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
+    p.wait()
 
 def makeDDS(path, feature):
     print("[-] TODO: makeDDS.")
@@ -213,6 +250,11 @@ if __name__ == '__main__':
         print("[+] Experimental feature: running on Rust-based project")
 
         makeRust(args.project, args.feature, "yes", args.tests)
+        makeRust(args.project, args.feature, "no", args.tests)
+
+        # Make one file with the `diff` of coverage info.
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
+            home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
 
     else:
         print("[-] Target currently unsupported!")
