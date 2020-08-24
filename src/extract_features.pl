@@ -19,6 +19,9 @@ my $diff_dir = $ARGV[0];
 my @content;
 my $line_count = 0;
 
+# For truncating long strings in the graph.
+my $MAX_LEN = 100;
+
 find(\&wanted, '.');
 
 if ($diff_dir) {
@@ -91,7 +94,14 @@ sub parse_file {
 		# need to decide at what granularity.
 		# Print out each subgraph cluster in the form:
 		# SRC_FILES_NAME -> LINE.
-		print $fh "\"" , $gobj , "\" -> \"" , @{$graph_content{$gobj}}, "\";\n";
+
+		# First, check length of string beacuse of dot limits.
+		if (scalar(@{$graph_content{$gobj}}) >= $MAX_LEN) {
+			my $trunc = substr(@{$graph_content{$gobj}}, 0, $MAX_LEN - 1);
+			print $fh "\"" , $gobj , "\" -> \"" , $trunc, "\";\n";
+		} else {
+			print $fh "\"" , $gobj , "\" -> \"" , @{$graph_content{$gobj}}, "\";\n";
+		}
 	}
 
 	print $fh $bp_foot;
@@ -109,6 +119,7 @@ sub parse_file {
 		# For each of the files, remove the extracted code.
 		# This will preserve original in a *.bak file.
 		if ($line_count > 0) {
+			# Manually comment/uncomment in lieu of command line arg.
 			#remove_feature($obj, @{$unused_code{$obj}});
 		}
 	}
@@ -134,9 +145,24 @@ sub remove_feature {
 		$cmd_substr = $cmd_substr . $_ . 'd;';
 	}
 
-	# Remove the LoC for a feature and save file.
-	# Create .bak of original in case.
-	my $sed_cmd = "sed -i.bak -e '$cmd_substr' ./mosquitto/src/$file";
+	my $sed_cmd = '';
+
+	# First, check which of 3 dirs the file is in.
+	# (libavcodec, libavformat, libavfilter)
+	my $fname1 = "./FFmpeg/libavcodec/$file";
+	my $fname2 = "./FFmpeg/libavformat/$file";
+	my $fname3 = "./FFmpeg/libavfilter/$file";
+	if (-e $fname1) {
+		# Remove the LoC for a feature and save file.
+		# Create .bak of original in case.
+		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./FFmpeg/libavcodec/$file";
+	} elsif (-e $fname2) {
+		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./FFmpeg/libavcodec/$file";
+	} elsif (-e $fname3) {
+		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./FFmpeg/libavcodec/$file";
+	} else {
+		print colored(['bright_red on_black'], "Could not find $file in appropriate source dir\n");
+	}
 
 	print colored(['bright_green bold'], "Attempting to run [$sed_cmd]\n");
 
