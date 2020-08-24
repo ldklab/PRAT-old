@@ -202,7 +202,7 @@ def makeAOM(path, feature, flag, tests=False):
 
     # Generate gcov files.
     src = path + "/build/CMakeFiles/aom.dir/aom/src/"
-    p = subprocess.Popen("llvm-cov-10 gcov *", shell=True, cwd=src)
+    p = subprocess.Popen("gcov *", shell=True, cwd=src)
     p.wait()
 
     # Make directories for storing the results.
