@@ -200,6 +200,13 @@ def makeAOM(path, feature, flag, tests=False):
     p = subprocess.Popen(["make", "-j"], cwd=path)
     p.wait()
 
+    # Add part here later for running tests.
+    if tests is not False:
+        p = subprocess.Popen("./test_libaom", shell=True, cwd=path)
+        p.wait()
+    else:
+        print("[+] Not running tests. Continuing.")
+
     # Generate gcov files.
     src = path + "/build/CMakeFiles/aom.dir/aom/src/"
     p = subprocess.Popen("gcov *", shell=True, cwd=src)
