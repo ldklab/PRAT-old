@@ -192,17 +192,18 @@ def makeAOM(path, feature, flag, tests=False):
     else:
         target = "-DCONFIG_" + feature + "=0"
 
-    p = subprocess.Popen(["cmake", target, ".."], cwd=path + "/build")
+    build = path + "/build"
+    p = subprocess.Popen(["cmake", target, ".."], cwd=build)
     p.wait()
 
     #p = subprocess.Popen(["make", "clean"], cwd=path)
     #p.wait()
-    p = subprocess.Popen(["make", "-j"], cwd=path)
+    p = subprocess.Popen(["make", "-j"], cwd=build)
     p.wait()
 
     # Add part here later for running tests.
     if tests is not False:
-        p = subprocess.Popen("./test_libaom", shell=True, cwd=path)
+        p = subprocess.Popen("./test_libaom", shell=True, cwd=build)
         p.wait()
     else:
         print("[+] Not running tests. Continuing.")
@@ -220,6 +221,12 @@ def makeAOM(path, feature, flag, tests=False):
     p.wait()
     #p = subprocess.Popen("mv " + lib + "/*.gcov " + coverageFiles, shell=True, cwd=path)
     #p.wait()
+
+    # Cleanup before leaving.
+    p = subprocess.Popen("rm -rf *", shell=True, cwd=build)
+    p.wait()
+    p = subprocess.Popen("git checkout .", shell=True, cwd=build)
+    p.wait()
 
     # Move the files to working dir.
     home = os.getcwd()
