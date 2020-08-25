@@ -41,7 +41,8 @@ def makeDiffs(path1, path2, feat):
             #print("[-] {} is empty. Deleting".format(covFile))
             os.remove(outdir + "/" + covFile)
     
-    return unused_files
+    #return unused_files
+    return outdir
 
 def extractFeatures(path):
     print("[+] Extract features for removal from: {}".format(path))
