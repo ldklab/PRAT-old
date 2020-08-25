@@ -146,6 +146,11 @@ def makeFFmpeg(path, feature, flag, tests=False):
     p.wait()
 
 def makeRust(path, feature, flag, tests=False):
+    print("[+] Prepping Rust environment for instrumentation...")
+    os.environ["CARGO_INCREMENTAL"] = "0"
+    os.environ["RUSTFLAGS"] = "-Zprofile -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort"
+    os.environ["RUSTDOCFLAGS"] = "-Cpanic=abort"
+
     print("[+] Loading `Cargo.toml`...")
     cargo = toml.load(path + "/Cargo.toml")
     features = cargo["features"]
@@ -153,15 +158,16 @@ def makeRust(path, feature, flag, tests=False):
     print("[+] Found {} features\n".format(len(features)))
 
     p = subprocess.Popen(["cargo", "clean"], cwd=path)
+    p.wait()
 
     #for f in features:
     #    print("[+] {}".format(f))
     
     if flag == "yes":
-        p = subprocess.Popen(["cargo", "build"], cwd=path)
+        p = subprocess.Popen(["cargo", "build", "--features", feature], cwd=path)
         p.wait()
     else:
-        p = subprocess.Popen(["cargo", "build", "--features ", feature], cwd=path)
+        p = subprocess.Popen(["cargo", "build", "--no-default-features"], cwd=path)
         p.wait()
     
     # Now generate the coverage files using kcov.
@@ -176,7 +182,7 @@ def makeRust(path, feature, flag, tests=False):
     coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
     p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
     p.wait()
-    p = subprocess.Popen("mv " + src + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p = subprocess.Popen("mv " + src + "*.gcov " + coverageFiles, shell=True, cwd=path)
     p.wait()
 
     # Move the files to working dir.
