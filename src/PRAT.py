@@ -280,6 +280,11 @@ if __name__ == '__main__':
 
     home = os.getcwd()
 
+    # Before checking the main loop below; look for list flag.
+    if args.list:
+        print("[+] Getting features available from: {}".format(args.project))
+        sys.exit(0)
+
     if "mosquitto" in args.project:
         # Mosquitto uses all-caps names.
         feature = args.feature.upper()
