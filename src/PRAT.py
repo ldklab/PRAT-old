@@ -254,6 +254,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("project", help="Directory to project to target")
     parser.add_argument("feature", help="Feature to identify/remove from project")
+    parser.add_argument("--list", help="List the features for the target codebase", action="store_true")
     parser.add_argument("--extract", help="Generate feature graph and show LoC to remove", action="store_true")
     parser.add_argument("--tests", help="Run tests at compile time (necessary for better coverage results)", action="store_true")
     parser.add_argument("--delete", help="Attempt to delete entire feature-specific files after analysis", action="store_true")
