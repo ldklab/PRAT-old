@@ -240,8 +240,26 @@ def makeAOM(path, feature, flag, tests=False):
     p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
     p.wait()
 
-def makeDDS(path, feature):
-    print("[-] TODO: makeDDS.")
+def makeDDS(path, feature, flag, tests=False):
+    print("[+] Running in: {}".format(path))
+
+    # Prep the build system using configure.
+    if flag == "yes":
+        # No explicit 'enable' flag for FFmpeg.
+        p = subprocess.Popen(["bash", "configure", "--no-tests"], cwd=path)
+        p.wait()
+    else:
+        target = "--disable-" + feature
+        p = subprocess.Popen(["bash", "configure", "--no-tests", target], cwd=path)
+        p.wait()
+    
+    p = subprocess.Popen(["make", "clean"], cwd=path)
+    p.wait()
+
+    p = subprocess.Popen(["make", "-j3"], cwd=path)
+    p.wait()
+
+    # TODO: finish running tests and making gcov files.
 
 def makeCM(path, feature):
     print("[-] TODO: makeCM.")
@@ -323,6 +341,13 @@ if __name__ == '__main__':
         # Make one file with the `diff` of coverage info.
         diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
             home + "/coverage_files_WITH_" + feature + "_no", feature)
+    elif "DDS" in args.project:
+        # Compile with feature enabled.
+        makeDDS(args.project, args.feature, "yes", args.tests)
+        # Compile with feature disabled.
+        makeDDS(args.project, args.feature, "no", args.tests)
+
+        # TODO: make diffs.
     else:
         print("[-] Target currently unsupported!")
     
