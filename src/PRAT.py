@@ -261,7 +261,7 @@ def makeDDS(path, feature, flag, tests=False):
 
     # TODO: finish running tests and making gcov files.
 
-def makeCM(path, feature):
+def makeCM(path, feature, flag, tests=False):
     print("[-] TODO: makeCM.")
 
 def isTool(prog):
@@ -352,6 +352,13 @@ if __name__ == '__main__':
         makeDDS(args.project, args.feature, "yes", args.tests)
         # Compile with feature disabled.
         makeDDS(args.project, args.feature, "no", args.tests)
+
+        # TODO: make diffs.
+    elif "azure" in args.project:
+        # Compile with feature enabled.
+        makeCM(args.project, args.feature, "yes", args.tests)
+        # Compile with feature disabled.
+        makeCM(args.project, args.feature, "no", args.tests)
 
         # TODO: make diffs.
     else:
