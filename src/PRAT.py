@@ -184,9 +184,10 @@ def makeRust(path, feature, flag, tests=False):
         p = subprocess.Popen(["cargo", "build", "--no-default-features"], cwd=path)
         p.wait()
     
-    # Now generate the coverage files using kcov.
-    p = subprocess.Popen(["cargo", "test"], cwd=path)
-    p.wait()
+    if tests is not False:
+        # Now generate the coverage files using kcov.
+        p = subprocess.Popen(["cargo", "test"], cwd=path)
+        p.wait()
 
     src = path + "/target/debug/deps/"
     p = subprocess.Popen("gcov-7 *", shell=True, cwd=src)
@@ -348,7 +349,6 @@ if __name__ == '__main__':
         # Make one file with the `diff` of coverage info.
         diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
             home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
-
     elif "aom" in args.project:
         # libaom uses all-caps names.
         feature = args.feature.upper()
@@ -375,6 +375,15 @@ if __name__ == '__main__':
         makeCM(args.project, args.feature, "no", args.tests)
 
         # TODO: make diffs.
+    elif "quiche" in args.project:
+        print("[+] Experimental feature: running on Rust-based project")
+
+        makeRust(args.project, args.feature, "yes", args.tests)
+        makeRust(args.project, args.feature, "no", args.tests)
+
+        # Make one file with the `diff` of coverage info.
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
+            home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
     else:
         print("[-] Target currently unsupported!")
     
