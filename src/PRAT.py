@@ -97,16 +97,29 @@ def makeMosquitto(path, feature, flag, tests=False):
 def makeFFmpeg(path, feature, flag, tests=False):
     print("[+] Running in: {}".format(path))
 
-    # Prep the build system using configure.
-    if flag == "yes":
-        # No explicit 'enable' flag for FFmpeg.
-        p = subprocess.Popen(["bash", "configure", "--toolchain=gcov"], cwd=path)
-        p.wait()
+    # This is just a test for now, but could be useful later.
+    # TODO: make a baseline/non-feature specific test.
+    if feature == "baseline":
+        if flag == "yes":
+            # No explicit 'enable' flag for FFmpeg.
+            p = subprocess.Popen(["bash", "configure", "--toolchain=gcov"], cwd=path)
+            p.wait()
+        else:
+            target = "--disable-" + feature
+            p = subprocess.Popen(["bash", "configure", "--toolchain=gcov", target], cwd=path)
+            #p = subprocess.Popen("bash configure --toolchain=gcov --disable-", shell=True, cwd=path)
+            p.wait()
     else:
-        target = "--disable-" + feature
-        p = subprocess.Popen(["bash", "configure", "--toolchain=gcov", target], cwd=path)
-        #p = subprocess.Popen("bash configure --toolchain=gcov --disable-", shell=True, cwd=path)
-        p.wait()
+        # Prep the build system using configure.
+        if flag == "yes":
+            # No explicit 'enable' flag for FFmpeg.
+            p = subprocess.Popen(["bash", "configure", "--toolchain=gcov"], cwd=path)
+            p.wait()
+        else:
+            target = "--disable-" + feature
+            p = subprocess.Popen(["bash", "configure", "--toolchain=gcov", target], cwd=path)
+            #p = subprocess.Popen("bash configure --toolchain=gcov --disable-", shell=True, cwd=path)
+            p.wait()
     
     p = subprocess.Popen(["make", "clean"], cwd=path)
     p.wait()
@@ -116,7 +129,7 @@ def makeFFmpeg(path, feature, flag, tests=False):
 
     # Add part later for running tests.
     if tests is not False:
-        p = subprocess.Popen(["make", "fate", "-j", "SAMPLES=fate-suite/"], cwd=path)
+        p = subprocess.Popen(["make", "fate", "-j3", "SAMPLES=fate-suite/"], cwd=path)
         p.wait()
 
     #p = subprocess.Popen(["./ffmpeg", "--help"], cwd=path)
@@ -313,6 +326,7 @@ if __name__ == '__main__':
             home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
 
         # Attempt to delete feature-specific source files.
+        # I made a change that broke this. Will fix later.
         if args.delete is not False:
             print("[+] Attempting to delete source files...")
             for td in diffs:
