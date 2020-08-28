@@ -367,7 +367,9 @@ if __name__ == '__main__':
         # Compile with feature disabled.
         makeDDS(args.project, args.feature, "no", args.tests)
 
-        # TODO: make diffs.
+        # Make one file with the `diff` of coverage info.
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
+            home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "azure" in args.project:
         # Compile with feature enabled.
         makeCM(args.project, args.feature, "yes", args.tests)
