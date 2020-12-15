@@ -1,0 +1,41 @@
+KLEE: WARNING ONCE: function "mosquitto_loop" has inline asm
+KLEE: WARNING ONCE: function "__libc_accept" has inline asm
+KLEE: WARNING ONCE: function "bind" has inline asm
+KLEE: WARNING ONCE: function "__libc_connect" has inline asm
+KLEE: WARNING ONCE: function "getpeername" has inline asm
+KLEE: WARNING ONCE: function "listen" has inline asm
+KLEE: WARNING ONCE: function "setsockopt" has inline asm
+KLEE: WARNING ONCE: function "socket" has inline asm
+KLEE: WARNING ONCE: function "socketpair" has inline asm
+KLEE: WARNING ONCE: function "__libc_recvfrom" has inline asm
+KLEE: WARNING ONCE: function "__libc_sendto" has inline asm
+KLEE: WARNING: undefined reference to function: config__cleanup
+KLEE: WARNING: undefined reference to function: config__init
+KLEE: WARNING: undefined reference to function: config__parse_args
+KLEE: WARNING: undefined reference to function: context__cleanup
+KLEE: WARNING: undefined reference to function: context__free_disused
+KLEE: WARNING: undefined reference to function: context__init
+KLEE: WARNING: undefined reference to function: context__send_will
+KLEE: WARNING: undefined reference to function: db__close
+KLEE: WARNING: undefined reference to function: db__open
+KLEE: WARNING: undefined reference to function: getrandom
+KLEE: WARNING: undefined reference to function: handle_sighup
+KLEE: WARNING: undefined reference to function: handle_sigint
+KLEE: WARNING: undefined reference to function: handle_sigusr1
+KLEE: WARNING: undefined reference to function: handle_sigusr2
+KLEE: WARNING: undefined reference to function: log__close
+KLEE: WARNING: undefined reference to function: log__init
+KLEE: WARNING: undefined reference to function: mosquitto_main_loop
+KLEE: WARNING: undefined reference to function: mosquitto_security_init
+KLEE: WARNING: undefined reference to function: mosquitto_security_module_cleanup
+KLEE: WARNING: undefined reference to function: mosquitto_security_module_init
+KLEE: WARNING: undefined reference to function: pselect
+KLEE: WARNING: undefined reference to function: session_expiry__remove_all
+KLEE: WARNING: undefined reference to function: setegid
+KLEE: WARNING: undefined reference to function: seteuid
+KLEE: WARNING: undefined reference to function: will_delay__send_all
+KLEE: WARNING: executable has module level assembly (ignoring)
+KLEE: WARNING ONCE: calling external: syscall(16, 0, 21505, 94809334058176) at runtime/POSIX/fd.c:1007 10
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+KLEE: WARNING ONCE: calling __klee_posix_wrapped_main with extra arguments.
+KLEE: WARNING ONCE: calling external: gettimeofday(94809334538448, 0) at mosquitto.c:236 11

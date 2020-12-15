@@ -1,0 +1,12 @@
+Error: inline assembly is unsupported
+File: libc/inet/socketcalls.c
+Line: 362
+assembly.ll line: 43305
+State: 2
+Stack: 
+	#000043305 in socket (=2, =1, =0) at libc/inet/socketcalls.c:362
+	#100039498 in net__broker_init () at net.c:68
+	#200010510 in __klee_posix_wrapped_main (=2, =94809335696928) at mosquitto.c:245
+	#300007757 in __user_main (=11, =94809289588736, =94809289588832) at runtime/POSIX/klee_init_env.c:245
+	#400001024 in __uClibc_main (=94809287861128, =11, =94809289588736, =0, =0, =0, =0) at libc/misc/internals/__uClibc_main.c:401
+	#500001189 in main (=11, =94809289588736)

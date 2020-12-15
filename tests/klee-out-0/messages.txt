@@ -1,0 +1,5 @@
+KLEE: Using Z3 solver backend
+KLEE: ERROR: libc/inet/socketcalls.c:362: inline assembly is unsupported
+KLEE: ERROR: libc/inet/socketcalls.c:362: inline assembly is unsupported
+KLEE: ERROR: libc/inet/socketcalls.c:362: inline assembly is unsupported
+KLEE: ERROR: libc/inet/socketcalls.c:362: inline assembly is unsupported
