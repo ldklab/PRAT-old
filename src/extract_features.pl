@@ -16,6 +16,7 @@ That corresponds to never being called.
 die "Usage: $0 DIR\n\n[DIR] directory to coverage diffs to compare\n" if @ARGV < 1;
 
 my $diff_dir = $ARGV[0];
+my $delete = $ARGV[1];
 my @content;
 my $line_count = 0;
 
@@ -120,6 +121,10 @@ sub parse_file {
 		# This will preserve original in a *.bak file.
 		if ($line_count > 0) {
 			# Manually comment/uncomment in lieu of command line arg.
+			if (defined $delete && $delete eq "--delete") {
+				print $delete . " is defined. Removing code...\n";
+				remove_feature($obj, @{$unused_code{$obj}});
+			}
 			#remove_feature($obj, @{$unused_code{$obj}});
 		}
 	}
@@ -152,6 +157,8 @@ sub remove_feature {
 	my $fname1 = "./FFmpeg/libavcodec/$file";
 	my $fname2 = "./FFmpeg/libavformat/$file";
 	my $fname3 = "./FFmpeg/libavfilter/$file";
+	my $mosq = "./mosquitto/src/$file";
+
 	if (-e $fname1) {
 		# Remove the LoC for a feature and save file.
 		# Create .bak of original in case.
@@ -160,6 +167,8 @@ sub remove_feature {
 		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./FFmpeg/libavcodec/$file";
 	} elsif (-e $fname3) {
 		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./FFmpeg/libavcodec/$file";
+	} elsif (-e $mosq) {
+		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./mosquitto/src/$file";
 	} else {
 		print colored(['bright_red on_black'], "Could not find $file in appropriate source dir\n");
 	}

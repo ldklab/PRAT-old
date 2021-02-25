@@ -54,6 +54,10 @@ def extractFeatures(path):
         p.wait()
     else:
         print("[-] `xdot` is not available. Saving to FDG.dot")
+    
+    # TODO: make this output content from `genhtml` or something to
+    # make the output a hierarchical webpage showing source files
+    # and not just the current graphviz output.
 
 # Generate coverage files for Mosquitto.
 def makeMosquitto(path, feature, flag, tests=False):
