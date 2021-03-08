@@ -26,7 +26,7 @@ def makeDiffs(path1, path2, feat):
             # Make diffs of the file and save in another folder.
             target = f + ".gcov"
             out = open(outdir + "/" + target, 'w')
-            p = subprocess.Popen(["diff", path1 + "/" + target, path2 + "/" + target], stdout=out)
+            p = subprocess.Popen(["diff", "-u", path1 + "/" + target, path2 + "/" + target], stdout=out)
             p.wait()
         else:
             # If an entire file is left out, we could posit that
@@ -58,6 +58,17 @@ def extractFeatures(path):
     # TODO: make this output content from `genhtml` or something to
     # make the output a hierarchical webpage showing source files
     # and not just the current graphviz output.
+    if isTool("pygmentize"):
+        print("[+] Generating HTML assets...")
+        print("[+] Attempting to open in firefox...")
+        # diff -y hc_no hc_yes | pygmentize -l diff -f html -O full -o file_diff.html
+        # diff -u hc_no hc_yes | pygmentize -l diff -f html -O full -o file_diff.html
+        subprocess.check_output("diff -u hc_no hc_yes | pygmentize -l diff -f html -O full -o diff_page.html", shell=True)
+        p = subprocess.Popen(["firefox", "diff_page.html"])
+        p.wait()
+    else:
+        print("[-] `pygments` is not available. Install with: `pip install Pygments`")
+        return
 
 # Generate coverage files for Mosquitto.
 def makeMosquitto(path, feature, flag, tests=False):
