@@ -21,7 +21,7 @@ prerequisites :
 	sudo ../setup.sh
 
 clean :
-	rm -rf coverage_files* cov_files_* *.dot diff_* linter a.out
+	rm -rf coverage_files* cov_files_* *.dot diff_* linter a.out *.html reports
 
 reallyclean : clean
 	rm -rf klee-*

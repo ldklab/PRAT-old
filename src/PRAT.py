@@ -18,6 +18,8 @@ def makeDiffs(path1, path2, feat):
     outdir = "diff_" + feat
     p = subprocess.Popen(["mkdir", "-p", outdir])
     p.wait()
+    p = subprocess.Popen(["mkdir", "-p", "reports"])
+    p.wait()
 
     for f in aFiles:
         # We only diff files that exist in both compilations.
@@ -25,7 +27,8 @@ def makeDiffs(path1, path2, feat):
             #print("[+] {}".format(f))
             # Make diffs of the file and save in another folder.
             target = f + ".gcov"
-            out = open(outdir + "/" + target, 'w')
+            abs_target = outdir + "/" + target
+            out = open(abs_target, 'w')
             p = subprocess.Popen(["diff", "-u", path1 + "/" + target, path2 + "/" + target], stdout=out)
             p.wait()
         else:
@@ -37,9 +40,20 @@ def makeDiffs(path1, path2, feat):
     
     # Clean up empty files.
     for covFile in os.listdir(outdir):
-        if not os.path.getsize(outdir + "/" + covFile):
+        real_file = outdir + "/" + covFile
+        if not os.path.getsize(real_file):
             #print("[-] {} is empty. Deleting".format(covFile))
-            os.remove(outdir + "/" + covFile)
+            os.remove(real_file)
+        else:
+            # Now that we've cleaned up.
+            # Generate HTML files here.
+            if isTool("pygmentize"):
+                print("[+] Generating HTML assets...")
+                p = subprocess.Popen(["pygmentize", "-l", "diff", "-f", "html", "-O", "full", "-o", "reports/" + covFile + "-diff.html", real_file])
+                p.wait()
+            else:
+                print("[-] `pygments` is not available. Install with: `pip install Pygments`")
+                continue
     
     #return unused_files
     return outdir
@@ -58,17 +72,15 @@ def extractFeatures(path):
     # TODO: make this output content from `genhtml` or something to
     # make the output a hierarchical webpage showing source files
     # and not just the current graphviz output.
-    if isTool("pygmentize"):
-        print("[+] Generating HTML assets...")
-        print("[+] Attempting to open in firefox...")
-        # diff -y hc_no hc_yes | pygmentize -l diff -f html -O full -o file_diff.html
-        # diff -u hc_no hc_yes | pygmentize -l diff -f html -O full -o file_diff.html
-        subprocess.check_output("diff -u hc_no hc_yes | pygmentize -l diff -f html -O full -o diff_page.html", shell=True)
-        p = subprocess.Popen(["firefox", "diff_page.html"])
-        p.wait()
-    else:
-        print("[-] `pygments` is not available. Install with: `pip install Pygments`")
-        return
+    html = "<html><body><h3>Files with content to remove</h3>"
+    for report in os.listdir("./reports"):
+        html += "<a href=\"./reports/%s\">%s</a><br/>" % (report, report)
+    outhtml = open("report.html", 'w')
+    outhtml.writelines(html)
+    
+    print("[+] Attempting to open with Firefox...")
+    p = subprocess.Popen(["firefox", "report.html"])
+    p.wait()
 
 # Generate coverage files for Mosquitto.
 def makeMosquitto(path, feature, flag, tests=False):
