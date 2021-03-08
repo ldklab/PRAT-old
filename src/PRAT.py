@@ -63,11 +63,11 @@ def extractFeatures(path):
     p = subprocess.Popen(["perl", "extract_features.pl", path + "/"])
     p.wait()
 
-    if isTool("xdot"):
-        p = subprocess.Popen(["xdot", "FDG.dot"])
-        p.wait()
-    else:
-        print("[-] `xdot` is not available. Saving to FDG.dot")
+    # if isTool("xdot"):
+    #     p = subprocess.Popen(["xdot", "FDG.dot"])
+    #     p.wait()
+    # else:
+    #     print("[-] `xdot` is not available. Saving to FDG.dot")
     
     # TODO: make this output content from `genhtml` or something to
     # make the output a hierarchical webpage showing source files
@@ -77,7 +77,7 @@ def extractFeatures(path):
         html += "<a href=\"./reports/%s\">%s</a><br/>" % (report, report)
     outhtml = open("report.html", 'w')
     outhtml.writelines(html)
-    
+
     print("[+] Attempting to open with Firefox...")
     p = subprocess.Popen(["firefox", "report.html"])
     p.wait()
