@@ -76,11 +76,8 @@ def extractFeatures(path):
     for report in os.listdir("./reports"):
         html += "<a href=\"./reports/%s\">%s</a><br/>" % (report, report)
     outhtml = open("report.html", 'w')
-    outhtml.writelines(html)
-
-    print("[+] Attempting to open with Firefox...")
-    p = subprocess.Popen(["firefox", "report.html"])
-    p.wait()
+    outhtml.write(html)
+    outhtml.close
 
 # Generate coverage files for Mosquitto.
 def makeMosquitto(path, feature, flag, tests=False):
@@ -422,5 +419,8 @@ if __name__ == '__main__':
     
     if args.extract:
         extractFeatures(diffs)
+        print("[+] Attempting to open with Firefox...")
+        p = subprocess.Popen(["firefox", "report.html"])
+        p.wait()
 
     sys.exit(0)
