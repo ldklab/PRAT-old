@@ -315,6 +315,10 @@ if __name__ == '__main__':
         # Make one file with the `diff` of coverage info.
         diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
             home + "/coverage_files_WITH_" + feature + "_no", feature)
+        
+        #print(f"Running make clean in: {args.project}")
+        p = subprocess.Popen(["make", "clean"], cwd=args.project)
+        p.wait()
     elif "FFmpeg" in args.project:
         if args.tests:
             if not os.path.isfile(args.project + "/fate-suite"):
