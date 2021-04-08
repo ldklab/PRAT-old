@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2019 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -114,7 +114,7 @@ int handle__pubrel(struct mosquitto_db *db, struct mosquitto *mosq)
 		}
 		if(mosq->on_message_v5){
 			mosq->in_callback = true;
-			mosq->on_message_v5(mosq, mosq->userdata, &message->msg, properties);
+			mosq->on_message_v5(mosq, mosq->userdata, &message->msg, message->properties);
 			mosq->in_callback = false;
 		}
 		pthread_mutex_unlock(&mosq->callback_mutex);

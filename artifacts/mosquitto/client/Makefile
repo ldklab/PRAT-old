@@ -20,44 +20,53 @@ static : static_pub static_sub static_rr
 	# This makes mosquitto_pub/sub/rr versions that are statically linked with
 	# libmosquitto only.
 
-static_pub : pub_client.bc pub_shared.bc client_props.bc client_shared.bc ../lib/libmosquitto.a
-	${CROSS_COMPILE}${CC} $^ -o mosquitto_pub ${CLIENT_LDFLAGS} ${STATIC_LIB_DEPS}
+static_pub : pub_client.o pub_shared.o client_props.o client_shared.o ../lib/libmosquitto.a
+	${CROSS_COMPILE}${CC} $^ -o mosquitto_pub ${CLIENT_LDFLAGS} ${STATIC_LIB_DEPS} ${CLIENT_STATIC_LDADD}
 
-static_sub : sub_client.bc sub_client_output.bc client_props.bc client_shared.bc ../lib/libmosquitto.a
-	${CROSS_COMPILE}${CC} $^ -o mosquitto_sub ${CLIENT_LDFLAGS} ${STATIC_LIB_DEPS}
+static_sub : sub_client.o sub_client_output.o client_props.o client_shared.o ../lib/libmosquitto.a
+	${CROSS_COMPILE}${CC} $^ -o mosquitto_sub ${CLIENT_LDFLAGS} ${STATIC_LIB_DEPS} ${CLIENT_STATIC_LDADD}
 
-static_rr : rr_client.bc client_props.bc client_shared.bc pub_shared.bc sub_client_output.bc ../lib/libmosquitto.a
-	${CROSS_COMPILE}${CC} $^ -o mosquitto_rr ${CLIENT_LDFLAGS} ${STATIC_LIB_DEPS}
+static_rr : rr_client.o client_props.o client_shared.o pub_shared.o sub_client_output.o ../lib/libmosquitto.a
+	${CROSS_COMPILE}${CC} $^ -o mosquitto_rr ${CLIENT_LDFLAGS} ${STATIC_LIB_DEPS} ${CLIENT_STATIC_LDADD}
 
-mosquitto_pub : pub_client.bc pub_shared.bc client_shared.bc client_props.bc
-	llvm-link-10 $^ -o $@ $(CLIENT_LDADD)
+mosquitto_pub : pub_client.o pub_shared.o client_shared.o client_props.o
+	${CROSS_COMPILE}${CC} $(CLIENT_LDFLAGS) $^ -o $@ $(CLIENT_LDADD)
 
-mosquitto_sub : sub_client.bc sub_client_output.bc client_shared.bc client_props.bc
-	llvm-link-10 $^ -o $@ $(CLIENT_LDADD)
+mosquitto_sub : sub_client.o sub_client_output.o client_shared.o client_props.o
+	${CROSS_COMPILE}${CC} $(CLIENT_LDFLAGS) $^ -o $@ $(CLIENT_LDADD)
 
-mosquitto_rr : rr_client.bc client_shared.bc client_props.bc pub_shared.bc sub_client_output.bc
-	llvm-link-10 $^ -o $@ $(CLIENT_LDADD)
+mosquitto_rr : rr_client.o client_shared.o client_props.o pub_shared.o sub_client_output.o
+	${CROSS_COMPILE}${CC} $(CLIENT_LDFLAGS) $^ -o $@ $(CLIENT_LDADD)
 
-pub_client.bc : pub_client.c ${SHARED_DEP}
+pub_client.o : pub_client.c ${SHARED_DEP}
 	${CROSS_COMPILE}${CC} $(CLIENT_CPPFLAGS) $(CLIENT_CFLAGS) -c $< -o $@
 
-pub_shared.bc : pub_shared.c ${SHARED_DEP}
+pub_shared.o : pub_shared.c ${SHARED_DEP}
 	${CROSS_COMPILE}${CC} $(CLIENT_CPPFLAGS) $(CLIENT_CFLAGS) -c $< -o $@
 
-sub_client.bc : sub_client.c ${SHARED_DEP}
+sub_client.o : sub_client.c ${SHARED_DEP}
 	${CROSS_COMPILE}${CC} $(CLIENT_CPPFLAGS) $(CLIENT_CFLAGS) -c $< -o $@
 
-sub_client_output.bc : sub_client_output.c ${SHARED_DEP}
+sub_client_output.o : sub_client_output.c ${SHARED_DEP}
 	${CROSS_COMPILE}${CC} $(CLIENT_CPPFLAGS) $(CLIENT_CFLAGS) -c $< -o $@
 
-rr_client.bc : rr_client.c ${SHARED_DEP}
+rr_client.o : rr_client.c ${SHARED_DEP}
 	${CROSS_COMPILE}${CC} $(CLIENT_CPPFLAGS) $(CLIENT_CFLAGS) -c $< -o $@
 
-client_shared.bc : client_shared.c client_shared.h
+client_shared.o : client_shared.c client_shared.h
 	${CROSS_COMPILE}${CC} $(CLIENT_CPPFLAGS) $(CLIENT_CFLAGS) -c $< -o $@
 
-client_props.bc : client_props.c client_shared.h
+client_props.o : client_props.c client_shared.h
 	${CROSS_COMPILE}${CC} $(CLIENT_CPPFLAGS) $(CLIENT_CFLAGS) -c $< -o $@
+
+# The "testing" target is intended to make it easy to compile a quick client
+# for testing purposes. testing.c should not be committed as a file.
+testing : testing.o
+	${CROSS_COMPILE}${CC} $(CLIENT_LDFLAGS) $^ -o $@ $(CLIENT_LDADD) $(CLIENT_LDFLAGS)
+
+testing.o : testing.c
+	${CROSS_COMPILE}${CC} $(CLIENT_CPPFLAGS) $(CLIENT_CFLAGS) -c $< -o $@
+
 
 ../lib/libmosquitto.so.${SOVERSION} :
 	$(MAKE) -C ../lib
@@ -79,4 +88,4 @@ uninstall :
 reallyclean : clean
 
 clean : 
-	rm -rf *.bc mosquitto_pub mosquitto_sub mosquitto_rr *.gcda *.gcno klee-*
+	-rm -f *.o mosquitto_pub mosquitto_sub mosquitto_rr *.gcda *.gcno *.c.* *.debug *.cfg *.dot

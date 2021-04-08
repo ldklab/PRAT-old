@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2019 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -44,7 +44,7 @@ int last_mid = 0;
 #ifndef WIN32
 void my_signal_handler(int signum)
 {
-	if(signum == SIGALRM){
+	if(signum == SIGALRM || signum == SIGTERM || signum == SIGINT){
 		process_messages = false;
 		mosquitto_disconnect_v5(mosq, MQTT_RC_DISCONNECT_WITH_WILL_MSG, cfg.disconnect_props);
 	}
@@ -76,10 +76,6 @@ void my_message_callback(struct mosquitto *mosq, void *obj, const struct mosquit
 
 	if(process_messages == false) return;
 
-	if(cfg.remove_retained && message->retain){
-		mosquitto_publish(mosq, &last_mid, message->topic, 0, NULL, 1, true);
-	}
-
 	if(cfg.retained_only && !message->retain && process_messages){
 		process_messages = false;
 		if(last_mid == 0){
@@ -94,6 +90,10 @@ void my_message_callback(struct mosquitto *mosq, void *obj, const struct mosquit
 			mosquitto_topic_matches_sub(cfg.filter_outs[i], message->topic, &res);
 			if(res) return;
 		}
+	}
+
+	if(cfg.remove_retained && message->retain){
+		mosquitto_publish(mosq, &last_mid, message->topic, 0, NULL, 1, true);
 	}
 
 	print_message(&cfg, message);
@@ -344,6 +344,16 @@ int main(int argc, char *argv[])
 		goto cleanup;
 	}
 
+	if(sigaction(SIGTERM, &sigact, NULL) == -1){
+		perror("sigaction");
+		goto cleanup;
+	}
+
+	if(sigaction(SIGINT, &sigact, NULL) == -1){
+		perror("sigaction");
+		goto cleanup;
+	}
+
 	if(cfg.timeout){
 		alarm(cfg.timeout);
 	}
@@ -364,6 +374,7 @@ int main(int argc, char *argv[])
 	return rc;
 
 cleanup:
+	mosquitto_destroy(mosq);
 	mosquitto_lib_cleanup();
 	client_config_cleanup(&cfg);
 	return 1;

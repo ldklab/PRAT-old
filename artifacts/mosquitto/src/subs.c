@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2010-2019 Roger Light <roger@atchoo.org>
+Copyright (c) 2010-2020 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -216,8 +216,8 @@ static struct sub__token *sub__topic_append(struct sub__token **tail, struct sub
 static int sub__topic_tokenise(const char *subtopic, struct sub__token **topics)
 {
 	struct sub__token *new_topic, *tail = NULL;
-	int len;
-	int start, stop, tlen;
+	size_t len;
+	size_t start, stop, tlen;
 	int i;
 	char *topic;
 	int count = 0;
@@ -225,12 +225,15 @@ static int sub__topic_tokenise(const char *subtopic, struct sub__token **topics)
 	assert(subtopic);
 	assert(topics);
 
+	len = strlen(subtopic);
+	if(len == 0){
+		return 1;
+	}
+
 	if(subtopic[0] != '$'){
 		new_topic = sub__topic_append(&tail, topics, "");
 		if(!new_topic) goto cleanup;
 	}
-
-	len = strlen(subtopic);
 
 	if(subtopic[0] == '/'){
 		new_topic = sub__topic_append(&tail, topics, "");
@@ -241,11 +244,10 @@ static int sub__topic_tokenise(const char *subtopic, struct sub__token **topics)
 		start = 0;
 	}
 
-	stop = 0;
 	for(i=start; i<len+1; i++){
-		count++;
 		if(subtopic[i] == '/' || subtopic[i] == '\0'){
 			stop = i;
+			count++;
 
 			if(start != stop){
 				tlen = stop-start;
@@ -269,7 +271,11 @@ static int sub__topic_tokenise(const char *subtopic, struct sub__token **topics)
 		goto cleanup;
 	}
 
-	return MOSQ_ERR_SUCCESS;
+	if(*topics != NULL){
+		return MOSQ_ERR_SUCCESS;
+	}else{
+		return 1;
+	}
 
 cleanup:
 	tail = *topics;
@@ -684,7 +690,7 @@ struct mosquitto__subhier *sub__add_hier_entry(struct mosquitto__subhier *parent
 	}
 	child->parent = parent;
 	child->topic_len = len;
-	child->topic = malloc(len+1);
+	child->topic = mosquitto__malloc(len+1);
 	if(!child->topic){
 		child->topic_len = 0;
 		mosquitto__free(child);
@@ -987,7 +993,7 @@ static int retain__process(struct mosquitto_db *db, struct mosquitto__subhier *b
 	mosquitto_property *properties = NULL;
 	struct mosquitto_msg_store *retained;
 
-	if(branch->retained->message_expiry_time > 0 && now > branch->retained->message_expiry_time){
+	if(branch->retained->message_expiry_time > 0 && now >= branch->retained->message_expiry_time){
 		db__msg_store_ref_dec(db, &branch->retained);
 		branch->retained = NULL;
 #ifdef WITH_SYS_TREE
