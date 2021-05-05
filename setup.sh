@@ -36,6 +36,8 @@ if [ $OS == "Ubuntu" ]; then
 	#python -m spacy download en_core_web_sm
 	# pip install prodigy.wh1
 
+        npm install -g diff2html-cli
+
 	#mkvirtualenv --python=$(which python3) angr && pip install angr
 	rm -rf lcov
 

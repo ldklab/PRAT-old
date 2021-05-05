@@ -49,6 +49,7 @@ def makeDiffs(path1, path2, feat):
             # Generate HTML files here.
             if isTool("pygmentize"):
                 print("[+] Generating HTML assets...")
+                # Generate individual, stylized HTML files.
                 p = subprocess.Popen(["pygmentize", "-l", "diff", "-f", "html", "-O", "full", "-o", "reports/" + covFile + "-diff.html", real_file])
                 p.wait()
             else:
@@ -72,9 +73,43 @@ def extractFeatures(path):
     # TODO: make this output content from `genhtml` or something to
     # make the output a hierarchical webpage showing source files
     # and not just the current graphviz output.
-    html = "<html><body><h3>Files with content to remove</h3>"
+    html = """
+    <!DOCTYPE html>
+    <head>
+        <title>Debloating Report</title>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="styles/styles.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/main.js"></script>
+    </head>
+        <body>
+
+        <table class="table table-striped" id="scTab">
+            <thead>
+            <tr>
+                <th scope="col">Source File</th>
+                <th scope="col">LoC to Remove</th>
+            </tr>
+            </thead>
+            <tbody id="scBody">
+    """
+
     for report in os.listdir("./reports"):
-        html += "<a href=\"./reports/%s\">%s</a><br/>" % (report, report)
+        html += "<tr><td>"
+        html += "<a href=\"./reports/%s\" target=\"_blank\">%s</a><br/>" % (report, report)
+        html += "</td><td>TODO"
+        html += "</td></tr>"
+    
+    html += "</tbody></table></body></html>"
+
     outhtml = open("report.html", 'w')
     outhtml.write(html)
     outhtml.close
@@ -420,7 +455,7 @@ if __name__ == '__main__':
     if args.extract:
         extractFeatures(diffs)
         print("[+] Attempting to open with Firefox...")
-        p = subprocess.Popen(["firefox", "./html/index.html"])
+        p = subprocess.Popen(["firefox", "./report.html"])
         p.wait()
 
     sys.exit(0)
