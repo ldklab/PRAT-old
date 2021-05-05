@@ -22,4 +22,4 @@ optional arguments:
   --tests     Run tests at compile time (necessary for better coverage results)
   --delete    Attempt to delete entire feature-specific files after analysis
 ```
-The `--extract` option is currently still in progress, but it generates a set of HTML files corresponding to the files and respective lines of code to remove for a given feature. 
+The `--extract` option is currently still in progress, but it generates a set of HTML files corresponding to the files and respective lines of code to remove for a given feature. Passing this feature will (attempt) to automatically open a browser with the table of applicable source files/artifacts.
