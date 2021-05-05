@@ -403,7 +403,6 @@ if __name__ == '__main__':
         makeCM(args.project, args.feature, "yes", args.tests)
         # Compile with feature disabled.
         makeCM(args.project, args.feature, "no", args.tests)
-
         # TODO: make diffs.
     elif "quiche" in args.project:
         print("[+] Experimental feature: running on Rust-based project")
@@ -416,11 +415,12 @@ if __name__ == '__main__':
             home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
     else:
         print("[-] Target currently unsupported!")
+        sys.exit(1)
     
     if args.extract:
         extractFeatures(diffs)
         print("[+] Attempting to open with Firefox...")
-        p = subprocess.Popen(["firefox", "report.html"])
+        p = subprocess.Popen(["firefox", "./html/index.html"])
         p.wait()
 
     sys.exit(0)
