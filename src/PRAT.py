@@ -91,7 +91,7 @@ def extractFeatures(path):
         <script src="js/main.js"></script>
     </head>
         <body>
-
+        <h3>Code to Remove for Feature: %s</h3>
         <table class="table table-striped" id="scTab">
             <thead>
             <tr>
@@ -100,19 +100,32 @@ def extractFeatures(path):
             </tr>
             </thead>
             <tbody id="scBody">
-    """
+    """ % feature
+
+    # Total LoC count.
+    tot_count = 0
 
     for report in os.listdir("./reports"):
+
+        # Count LoC to remove per file.
+        report_fh = open("./reports/" + report, 'r')
+        count = 0
+        for line in report_fh.readlines():
+            if "####" in line:
+                count += 1
+        tot_count += count
         html += "<tr><td>"
         html += "<a href=\"./reports/%s\" target=\"_blank\">%s</a><br/>" % (report, report)
-        html += "</td><td>TODO"
+        html += "</td><td>%d" % count
         html += "</td></tr>"
+        report_fh.close()
     
+    html += "<tr><td><b>Total LoC to Remove</b></td><td><b>%d</b></td></tr>" % tot_count
     html += "</tbody></table></body></html>"
 
     outhtml = open("report.html", 'w')
     outhtml.write(html)
-    outhtml.close
+    outhtml.close()
 
 # Generate coverage files for Mosquitto.
 def makeMosquitto(path, feature, flag, tests=False):
