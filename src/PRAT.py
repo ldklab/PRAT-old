@@ -18,6 +18,8 @@ def makeDiffs(path1, path2, feat):
     outdir = "diff_" + feat
     p = subprocess.Popen(["mkdir", "-p", outdir])
     p.wait()
+    p = subprocess.Popen(["mkdir", "-p", "reports"])
+    p.wait()
 
     for f in aFiles:
         # We only diff files that exist in both compilations.
@@ -25,8 +27,9 @@ def makeDiffs(path1, path2, feat):
             #print("[+] {}".format(f))
             # Make diffs of the file and save in another folder.
             target = f + ".gcov"
-            out = open(outdir + "/" + target, 'w')
-            p = subprocess.Popen(["diff", path1 + "/" + target, path2 + "/" + target], stdout=out)
+            abs_target = outdir + "/" + target
+            out = open(abs_target, 'w')
+            p = subprocess.Popen(["diff", "-u", path1 + "/" + target, path2 + "/" + target], stdout=out)
             p.wait()
         else:
             # If an entire file is left out, we could posit that
@@ -37,9 +40,21 @@ def makeDiffs(path1, path2, feat):
     
     # Clean up empty files.
     for covFile in os.listdir(outdir):
-        if not os.path.getsize(outdir + "/" + covFile):
+        real_file = outdir + "/" + covFile
+        if not os.path.getsize(real_file):
             #print("[-] {} is empty. Deleting".format(covFile))
-            os.remove(outdir + "/" + covFile)
+            os.remove(real_file)
+        else:
+            # Now that we've cleaned up.
+            # Generate HTML files here.
+            if isTool("pygmentize"):
+                print("[+] Generating HTML assets...")
+                # Generate individual, stylized HTML files.
+                p = subprocess.Popen(["pygmentize", "-l", "diff", "-f", "html", "-O", "full", "-o", "reports/" + covFile + "-diff.html", real_file])
+                p.wait()
+            else:
+                print("[-] `pygments` is not available. Install with: `pip install Pygments`")
+                continue
     
     #return unused_files
     return outdir
@@ -49,11 +64,55 @@ def extractFeatures(path):
     p = subprocess.Popen(["perl", "extract_features.pl", path + "/"])
     p.wait()
 
-    if isTool("xdot"):
-        p = subprocess.Popen(["xdot", "FDG.dot"])
-        p.wait()
-    else:
-        print("[-] `xdot` is not available. Saving to FDG.dot")
+    # if isTool("xdot"):
+    #     p = subprocess.Popen(["xdot", "FDG.dot"])
+    #     p.wait()
+    # else:
+    #     print("[-] `xdot` is not available. Saving to FDG.dot")
+    
+    # TODO: make this output content from `genhtml` or something to
+    # make the output a hierarchical webpage showing source files
+    # and not just the current graphviz output.
+    html = """
+    <!DOCTYPE html>
+    <head>
+        <title>Debloating Report</title>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="styles/styles.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html/bundles/css/diff2html.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/main.js"></script>
+    </head>
+        <body>
+
+        <table class="table table-striped" id="scTab">
+            <thead>
+            <tr>
+                <th scope="col">Source File</th>
+                <th scope="col">LoC to Remove</th>
+            </tr>
+            </thead>
+            <tbody id="scBody">
+    """
+
+    for report in os.listdir("./reports"):
+        html += "<tr><td>"
+        html += "<a href=\"./reports/%s\" target=\"_blank\">%s</a><br/>" % (report, report)
+        html += "</td><td>TODO"
+        html += "</td></tr>"
+    
+    html += "</tbody></table></body></html>"
+
+    outhtml = open("report.html", 'w')
+    outhtml.write(html)
+    outhtml.close
 
 # Generate coverage files for Mosquitto.
 def makeMosquitto(path, feature, flag, tests=False):
@@ -311,6 +370,10 @@ if __name__ == '__main__':
         # Make one file with the `diff` of coverage info.
         diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
             home + "/coverage_files_WITH_" + feature + "_no", feature)
+        
+        #print(f"Running make clean in: {args.project}")
+        p = subprocess.Popen(["make", "clean"], cwd=args.project)
+        p.wait()
     elif "FFmpeg" in args.project:
         if args.tests:
             if not os.path.isfile(args.project + "/fate-suite"):
@@ -375,7 +438,6 @@ if __name__ == '__main__':
         makeCM(args.project, args.feature, "yes", args.tests)
         # Compile with feature disabled.
         makeCM(args.project, args.feature, "no", args.tests)
-
         # TODO: make diffs.
     elif "quiche" in args.project:
         print("[+] Experimental feature: running on Rust-based project")
@@ -388,8 +450,12 @@ if __name__ == '__main__':
             home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
     else:
         print("[-] Target currently unsupported!")
+        sys.exit(1)
     
     if args.extract:
         extractFeatures(diffs)
+        print("[+] Attempting to open with Firefox...")
+        p = subprocess.Popen(["firefox", "./report.html"])
+        p.wait()
 
     sys.exit(0)

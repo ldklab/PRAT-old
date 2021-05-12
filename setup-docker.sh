@@ -20,8 +20,9 @@ fi
 if [ $OS == "Ubuntu" ]; then
         # Install all the dependencies required for PRAT.
 	apt -y update
-        apt-get install -y libssl-dev libwebsockets-dev uuid-dev libsystemd-dev maven git build-essential clang
+        apt-get install -y libssl-dev libwebsockets-dev uuid-dev libsystemd-dev maven git build-essential clang python3 python3-pip llvm-10
         apt-get install -y libcunit1 libcunit1-doc libcunit1-dev gnutls-dev libwrap0 libwrap0-dev cloc --fix-missing
+	pip3 install toml
 	# Install lcov.
 	#(git clone https://github.com/linux-test-project/lcov.git ; cd lcov; make install)
 elif [ $OS == "Arch Linux" ]; then

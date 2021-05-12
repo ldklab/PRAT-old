@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2018 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -51,6 +51,8 @@ int packet__read_byte(struct mosquitto__packet *packet, uint8_t *byte)
 
 	*byte = packet->payload[packet->pos];
 	packet->pos++;
+
+	//log__printf(NULL, MOSQ_LOG_NOTICE, "Packet byte: %s", byte);
 
 	return MOSQ_ERR_SUCCESS;
 }
@@ -110,6 +112,12 @@ int packet__read_binary(struct mosquitto__packet *packet, uint8_t **data, int *l
 		memcpy(*data, &(packet->payload[packet->pos]), slen);
 		((uint8_t *)(*data))[slen] = '\0';
 		packet->pos += slen;
+
+		// Tests - RPW.
+		#ifdef WITH_RPW_DBG
+		log__printf(NULL, MOSQ_LOG_NOTICE, "Read packet: %s", *data);
+		#endif
+		// End tests.
 	}else{
 		return MOSQ_ERR_NOMEM;
 	}

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2018 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -37,7 +37,6 @@ Contributors:
 /* Global variables for use in callbacks. See sub_client.c for an example of
  * using a struct to hold variables for use in callbacks. */
 int mid_sent = -1;
-int status = STATUS_CONNECTING;
 struct mosq_config cfg;
 
 void my_log_callback(struct mosquitto *mosq, void *obj, int level, const char *str)

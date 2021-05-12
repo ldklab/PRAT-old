@@ -82,6 +82,11 @@
 # Build static libraries
 #WITH_STATIC_LIBRARIES:=no
 
+# Use this variable to add extra library dependencies when building the clients
+# with the static libmosquitto library. This may be required on some systems
+# where e.g. -lz or -latomic are needed for openssl.
+#CLIENT_STATIC_LDADD:=
+
 # Build shared libraries
 WITH_SHARED_LIBRARIES:=yes
 
@@ -91,11 +96,14 @@ WITH_SHARED_LIBRARIES:=yes
 # Build with epoll support.
 #WITH_EPOLL:=yes
 
-# Build with bundled uthash.h
-#WITH_BUNDLED_DEPS:=yes
+# Build with bundled uthash.h / utlist.h.
+WITH_BUNDLED_DEPS:=yes
 
 # Build with coverage options
-#WITH_COVERAGE:=no
+WITH_COVERAGE:=yes
+
+# Build with stateful debug statements/etc.
+WITH_RPW_DBG=no
 
 # =============================================================================
 # End of user configuration
@@ -104,7 +112,7 @@ WITH_SHARED_LIBRARIES:=yes
 
 # Also bump lib/mosquitto.h, CMakeLists.txt,
 # installer/mosquitto.nsi, installer/mosquitto64.nsi
-VERSION=1.6.7
+VERSION=1.6.9
 
 # Client library SO version. Bump if incompatible API/ABI changes are made.
 SOVERSION=1
@@ -125,13 +133,18 @@ ifeq ($(UNAME),SunOS)
 		CFLAGS?=-Wall -ggdb -O2
 	endif
 else
-	CC=clang
-	CFLAGS?=-Wall -ggdb -O2 -c -emit-llvm
+  	CC=clang
+	CFLAGS?=-Wall #-ggdb #-fdump-tree-all-graph #-O2 #-L /home/ryan/git/klee/build/Debug+Asserts/lib -lkleeRuntest #-c -emit-llvm
+	#LDFLAGS:=$(LDFLAGS) -coverage
+	#LDADD:=$(LDADD) -lcunit
 endif
 
 STATIC_LIB_DEPS:=
 
-LIB_CPPFLAGS=$(CPPFLAGS) -I. -I.. -I../lib -I../src/deps
+LIB_CPPFLAGS=$(CPPFLAGS) -I. -I.. -I../lib
+ifeq ($(WITH_BUNDLED_DEPS),yes)
+	LIB_CPPFLAGS:=$(LIB_CPPFLAGS) -I../src/deps
+endif
 LIB_CFLAGS:=$(CFLAGS)
 LIB_CXXFLAGS:=$(CXXFLAGS)
 LIB_LDFLAGS:=$(LDFLAGS)
@@ -306,10 +319,19 @@ ifeq ($(WITH_BUNDLED_DEPS),yes)
 endif
 
 ifeq ($(WITH_COVERAGE),yes)
-	BROKER_CFLAGS:=$(BROKER_CFLAGS) -coverage
+	BROKER_CFLAGS:=$(BROKER_CFLAGS) -fprofile-arcs -ftest-coverage
 	BROKER_LDFLAGS:=$(BROKER_LDFLAGS) -coverage
-	LIB_CFLAGS:=$(LIB_CFLAGS) -coverage
-	LIB_LDFLAGS:=$(LIB_LDFLAGS) -coverage
-	CLIENT_CFLAGS:=$(CLIENT_CFLAGS) -coverage
+	LIB_CFLAGS:=$(LIB_CFLAGS) -fprofile-arcs -ftest-coverage
+	LIB_LDFLAGS:=$(LIB_LDFLAGS) -lgcov --coverage
+	CLIENT_CFLAGS:=$(CLIENT_CFLAGS) -fprofile-arcs -ftest-coverage
 	CLIENT_LDFLAGS:=$(CLIENT_LDFLAGS) -coverage
 endif
+
+ifeq ($(WITH_RPW_DBG),yes)
+	BROKER_CFLAGS:=$(BROKER_CFLAGS) -DWITH_RPW_DBG
+	BROKER_CPPFLAGS:=$(BROKER_CPPFLAGS) -DWITH_RPW_DBG
+endif
+
+#BROKER_LDADD:=${BROKER_LDADD} ${LDADD}
+#CLIENT_LDADD:=${CLIENT_LDADD} ${LDADD}
+#PASSWD_LDADD:=${PASSWD_LDADD} ${LDADD}

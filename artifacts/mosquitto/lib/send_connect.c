@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2019 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -44,6 +44,12 @@ int send__connect(struct mosquitto *mosq, uint16_t keepalive, bool clean_session
 	int proplen = 0, will_proplen, varbytes;
 	mosquitto_property *local_props = NULL;
 	uint16_t receive_maximum;
+
+    // TEST - RPW.
+    int nonce = 1337;
+    mosq->nonce = 1337;
+    //assert(mosq->nonce);
+    // END TEST - RPW.
 
 	assert(mosq);
 
@@ -195,10 +201,10 @@ int send__connect(struct mosquitto *mosq, uint16_t keepalive, bool clean_session
 	mosq->keepalive = keepalive;
 #ifdef WITH_BROKER
 # ifdef WITH_BRIDGE
-	log__printf(mosq, MOSQ_LOG_DEBUG, "Bridge %s sending CONNECT", clientid);
+	log__printf(mosq, MOSQ_LOG_NOTICE, "Bridge %s sending CONNECT", clientid);
 # endif
 #else
-	log__printf(mosq, MOSQ_LOG_DEBUG, "Client %s sending CONNECT", clientid);
+	log__printf(mosq, MOSQ_LOG_NOTICE, "Client %s sending CONNECT", clientid);
 #endif
 	return packet__queue(mosq, packet);
 }
