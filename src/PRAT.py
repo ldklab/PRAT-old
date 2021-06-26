@@ -294,7 +294,7 @@ def makeAOM(path, feature, flag, tests=False):
 
     #p = subprocess.Popen(["make", "clean"], cwd=path)
     #p.wait()
-    p = subprocess.Popen(["make", "-j"], cwd=build)
+    p = subprocess.Popen(["make", "-j3"], cwd=build)
     p.wait()
 
     # Add part here later for running tests.
