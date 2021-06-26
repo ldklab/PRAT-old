@@ -237,6 +237,9 @@ def makeRust(path, feature, flag, tests=False):
     os.environ["RUSTFLAGS"] = "-Zprofile -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort"
     os.environ["RUSTDOCFLAGS"] = "-Cpanic=abort"
 
+    # rustup install nightly
+    # rustup default nightly
+
     print("[+] Loading `Cargo.toml`...")
     cargo = toml.load(path + "/Cargo.toml")
     features = cargo["features"]
@@ -262,7 +265,7 @@ def makeRust(path, feature, flag, tests=False):
         p.wait()
 
     src = path + "/target/debug/deps/"
-    p = subprocess.Popen("gcov-7 *", shell=True, cwd=src)
+    p = subprocess.Popen("gcov-9 *", shell=True, cwd=src)
     p.wait()
 
     # Make directories for storing the results.
@@ -388,6 +391,8 @@ if __name__ == '__main__':
         p = subprocess.Popen(["make", "clean"], cwd=args.project)
         p.wait()
     elif "FFmpeg" in args.project:
+        feature = args.feature
+
         if args.tests:
             if not os.path.isfile(args.project + "/fate-suite"):
                 # Download the test suite/etc for FFmpeg.
@@ -395,12 +400,12 @@ if __name__ == '__main__':
                 p.wait()
                 # Now we can also run the tests in `makeFFmpeg`.
 
-        makeFFmpeg(args.project, args.feature, "yes", args.tests)
-        makeFFmpeg(args.project, args.feature, "no", args.tests)
+        makeFFmpeg(args.project, feature, "yes", args.tests)
+        makeFFmpeg(args.project, feature, "no", args.tests)
 
         # Make one file with the `diff` of coverage info.
-        diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
-            home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
+            home + "/coverage_files_WITH_" + feature + "_no", feature)
 
         # Attempt to delete feature-specific source files.
         # I made a change that broke this. Will fix later.
@@ -419,12 +424,14 @@ if __name__ == '__main__':
     elif "rav1e" in args.project:
         print("[+] Experimental feature: running on Rust-based project")
 
-        makeRust(args.project, args.feature, "yes", args.tests)
-        makeRust(args.project, args.feature, "no", args.tests)
+        feature = args.feature
+
+        makeRust(args.project, feature, "yes", args.tests)
+        makeRust(args.project, feature, "no", args.tests)
 
         # Make one file with the `diff` of coverage info.
-        diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
-            home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
+            home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "aom" in args.project:
         # libaom uses all-caps names.
         feature = args.feature.upper()
@@ -455,12 +462,14 @@ if __name__ == '__main__':
     elif "quiche" in args.project:
         print("[+] Experimental feature: running on Rust-based project")
 
-        makeRust(args.project, args.feature, "yes", args.tests)
-        makeRust(args.project, args.feature, "no", args.tests)
+        feature = args.feature
+
+        makeRust(args.project, feature, "yes", args.tests)
+        makeRust(args.project, feature, "no", args.tests)
 
         # Make one file with the `diff` of coverage info.
-        diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature + "_yes",
-            home + "/coverage_files_WITH_" + args.feature + "_no", args.feature)
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
+            home + "/coverage_files_WITH_" + feature + "_no", feature)
     else:
         print("[-] Target currently unsupported!")
         sys.exit(1)
