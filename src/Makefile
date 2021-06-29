@@ -28,8 +28,12 @@ reallyclean : clean
 
 democlean : clean
 	rm -rf ../artifacts/aom
-	cp -r ../../../App/aom ../artifacts/
+	cp -r ../App/aom ../artifacts/
 	rm -rf ../artifacts/rav1e
-	cp -r ../../../App/rav1e ../artifacts/
+	cp -r ../App/rav1e ../artifacts/
 	rm -rf ../artifacts/quiche
-	cp -r ../../../App/quiche ../artifacts/
+	cp -r ../App/quiche ../artifacts/
+	rm -rf ../artifacts/mosquitto
+	cp -r ../App/mosquitto ../artifacts/
+	rm -rf ../artifacts/FFmpeg
+	cp -r ../App/FFmpeg ../artifacts/
