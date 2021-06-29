@@ -1,0 +1,3 @@
+[submodule "rav1e"]
+	path = rav1e
+	url = https://github.com/xiph/rav1e.git
