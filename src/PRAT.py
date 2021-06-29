@@ -280,6 +280,27 @@ def makeRust(path, feature, flag, tests=False):
     p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
     p.wait()
 
+def makeRust2(path):
+    print("[+] Prepping Rust environment for instrumentation...")
+    os.environ["CARGO_INCREMENTAL"] = "0"
+    os.environ["RUSTFLAGS"] = "-Zprofile -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort"
+    os.environ["RUSTDOCFLAGS"] = "-Cpanic=abort"
+
+    # rustup install nightly
+    # rustup default nightly
+
+    print("[+] Loading `Cargo.toml`...")
+    cargo = toml.load(path + "/Cargo.toml")
+    features = cargo["features"]
+
+    print("[+] Found {} features\n".format(len(features)))
+
+    print("[+] All features are:")
+
+    for f in features:
+       print("[%] {}".format(f))
+    
+
 def makeAOM(path, feature, flag, tests=False):
     print("[+] Running in: {}".format(path))
 
@@ -372,6 +393,8 @@ if __name__ == '__main__':
     # Before checking the main loop below; look for list flag.
     if args.list:
         print("[+] Getting features available from: {}".format(args.project))
+        if "rav1e" in args.project or "quiche" in args.project:
+            makeRust2(args.project)
         sys.exit(0)
 
     if "mosquitto" in args.project:

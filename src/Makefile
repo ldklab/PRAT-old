@@ -25,3 +25,11 @@ clean :
 
 reallyclean : clean
 	rm -rf klee-*
+
+democlean : clean
+	rm -rf ../artifacts/aom
+	cp -r ../../../App/aom ../artifacts/
+	rm -rf ../artifacts/rav1e
+	cp -r ../../../App/rav1e ../artifacts/
+	rm -rf ../artifacts/quiche
+	cp -r ../../../App/quiche ../artifacts/
