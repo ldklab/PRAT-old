@@ -4,7 +4,11 @@ import argparse
 import subprocess
 import sys, os
 import shutil
+import tempfile
+
 import toml
+from buildparser.buildparser import cmake_parser
+from buildparser.buildparser import auto_parser
 
 def makeDiffs(path1, path2, feat):
     print("[+] Checking for matching files in {} and {}"
@@ -280,16 +284,16 @@ def makeRust(path, feature, flag, tests=False):
     p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
     p.wait()
 
-def makeRust2(path):
-    print("[+] Prepping Rust environment for instrumentation...")
-    os.environ["CARGO_INCREMENTAL"] = "0"
-    os.environ["RUSTFLAGS"] = "-Zprofile -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort"
-    os.environ["RUSTDOCFLAGS"] = "-Cpanic=abort"
+def featureDiscovery_Rust(path):
+    # print("[+] Prepping Rust environment for instrumentation...")
+    # os.environ["CARGO_INCREMENTAL"] = "0"
+    # os.environ["RUSTFLAGS"] = "-Zprofile -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort"
+    # os.environ["RUSTDOCFLAGS"] = "-Cpanic=abort"
 
     # rustup install nightly
     # rustup default nightly
 
-    print("[+] Loading `Cargo.toml`...")
+    print("[+] Loading 'Cargo.toml'...")
     cargo = toml.load(path + "/Cargo.toml")
     features = cargo["features"]
 
@@ -299,7 +303,26 @@ def makeRust2(path):
 
     for f in features:
        print("[%] {}".format(f))
-    
+
+def featureDiscovery_cMake(path):
+    print("[+] Loading 'CMakeLists.txt'...")
+    features = cmake_parser(os.path.join(path, 'CMakeLists.txt'))
+    print("[+] Found %d features\n" % len(features))
+    print("[+] All features are:")
+    for f in features:
+       print("[%] {}".format(f))
+
+def featureDiscovery_auto(path):
+    print("[+] Loading 'configure'...")
+    with tempfile.TemporaryDirectory() as tempdir:
+        cfgF = os.path.join(path, "configure")
+        tmpF = os.path.join(tempdir, "cfg_out")
+        os.system("%s --help > %s" % (cfgF, tmpF))
+        features = auto_parser(tmpF)
+    print("[+] Found %d features\n" % len(features))
+    print("[+] All features are:")
+    for f in features:
+       print("[%] {}".format(f))
 
 def makeAOM(path, feature, flag, tests=False):
     print("[+] Running in: {}".format(path))
@@ -381,7 +404,7 @@ if __name__ == '__main__':
     # Setup the command line args for different projects.
     parser = argparse.ArgumentParser()
     parser.add_argument("project", help="Directory to project to target")
-    parser.add_argument("feature", help="Feature to identify/remove from project")
+    parser.add_argument("feature", help="Feature to identify/remove from project", nargs="*")
     parser.add_argument("--list", help="List the features for the target codebase", action="store_true")
     parser.add_argument("--extract", help="Generate feature graph and show LoC to remove", action="store_true")
     parser.add_argument("--tests", help="Run tests at compile time (necessary for better coverage results)", action="store_true")
@@ -393,13 +416,24 @@ if __name__ == '__main__':
     # Before checking the main loop below; look for list flag.
     if args.list:
         print("[+] Getting features available from: {}".format(args.project))
-        if "rav1e" in args.project or "quiche" in args.project:
-            makeRust2(args.project)
+        # Attempt to auto-detect project type
+        tlfiles = [f for f in os.listdir(args.project) if os.path.isfile(os.path.join(args.project, f))]
+        if 'Cargo.toml' in tlfiles:
+            #Rust project!
+            featureDiscovery_Rust(args.project)
+        elif 'CMakeLists.txt' in tlfiles:
+            #CMake project!
+            featureDiscovery_cMake(args.project)
+        elif 'configure' in tlfiles:
+            #Autotools project!
+            featureDiscovery_auto(args.project)
+        else:
+            print("[+] Project %s uses an unsupported build system. Unable to discover features :-(", args.project)
         sys.exit(0)
 
     if "mosquitto" in args.project:
         # Mosquitto uses all-caps names.
-        feature = args.feature.upper()
+        feature = args.feature[0].upper()
 
         # Compile with feature enabled.
         makeMosquitto(args.project, feature, "yes", args.tests)
@@ -414,7 +448,7 @@ if __name__ == '__main__':
         p = subprocess.Popen(["make", "clean"], cwd=args.project)
         p.wait()
     elif "FFmpeg" in args.project:
-        feature = args.feature
+        feature = args.feature[0]
 
         if args.tests:
             if not os.path.isfile(args.project + "/fate-suite"):
@@ -447,7 +481,7 @@ if __name__ == '__main__':
     elif "rav1e" in args.project:
         print("[+] Experimental feature: running on Rust-based project")
 
-        feature = args.feature
+        feature = args.feature[0]
 
         makeRust(args.project, feature, "yes", args.tests)
         makeRust(args.project, feature, "no", args.tests)
@@ -457,7 +491,7 @@ if __name__ == '__main__':
             home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "aom" in args.project:
         # libaom uses all-caps names.
-        feature = args.feature.upper()
+        feature = args.feature[0].upper()
 
         # Compile with feature enabled.
         makeAOM(args.project, feature, "yes", args.tests)
@@ -469,23 +503,23 @@ if __name__ == '__main__':
             home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "DDS" in args.project:
         # Compile with feature enabled.
-        makeDDS(args.project, args.feature, "yes", args.tests)
+        makeDDS(args.project, args.feature[0], "yes", args.tests)
         # Compile with feature disabled.
-        makeDDS(args.project, args.feature, "no", args.tests)
+        makeDDS(args.project, args.feature[0], "no", args.tests)
 
         # Make one file with the `diff` of coverage info.
         diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
             home + "/coverage_files_WITH_" + feature + "_no", feature)
     elif "azure" in args.project:
         # Compile with feature enabled.
-        makeCM(args.project, args.feature, "yes", args.tests)
+        makeCM(args.project, args.feature[0], "yes", args.tests)
         # Compile with feature disabled.
-        makeCM(args.project, args.feature, "no", args.tests)
+        makeCM(args.project, args.feature[0], "no", args.tests)
         # TODO: make diffs.
     elif "quiche" in args.project:
         print("[+] Experimental feature: running on Rust-based project")
 
-        feature = args.feature
+        feature = args.feature[0]
 
         makeRust(args.project, feature, "yes", args.tests)
         makeRust(args.project, feature, "no", args.tests)
