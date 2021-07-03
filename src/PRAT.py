@@ -306,7 +306,10 @@ def featureDiscovery_Rust(path):
 
 def featureDiscovery_cMake(path):
     print("[+] Loading 'CMakeLists.txt'...")
-    features = cmake_parser(os.path.join(path, 'CMakeLists.txt'))
+    with tempfile.TemporaryDirectory() as tempdir:
+        abspath = os.path.abspath(path)
+        os.system("cd %s; cmake -LA %s > cmk_out" % (tempdir, abspath))
+        features = cmake_parser(os.path.join(tempdir, 'cmk_out'))
     print("[+] Found %d features\n" % len(features))
     print("[+] All features are:")
     for f in features:

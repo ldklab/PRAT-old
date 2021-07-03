@@ -15,10 +15,7 @@ def cmake_parser(file_name):
         if ':BOOL=' in line and not line.startswith('CMAKE_'):
             #print line
             feature_name = line.split(':')[0]
-            features.append({'feature': feature_name,
-                             'enable': '{}:BOOL=ON'.format(feature_name),
-                             'disable': '{}:BOOL=OFF'.format(feature_name)
-                             })
+            features.append(feature_name)
     return features
 
 
