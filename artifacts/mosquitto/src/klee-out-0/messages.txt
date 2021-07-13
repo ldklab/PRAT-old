@@ -1,0 +1,2 @@
+KLEE: Using Z3 solver backend
+KLEE: ERROR: (location information missing) failed external call: llvm_gcov_init
