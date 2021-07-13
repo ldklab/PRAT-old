@@ -1,5 +1,0 @@
-Error: failed external call: llvm_gcov_init
-Stack: 
-	#000010815 in __llvm_gcov_init ()
-	#100075720 in klee.ctor_stub ()
-	#200001843 in main (=11, =94715528931744)
