@@ -151,7 +151,7 @@ def makeMosquitto(path, feature, flag, tests=False):
     src = path + "/src"
     lib = path + "/lib"
     print("[+] Running in: {} and {}".format(src, lib))
-    p = subprocess.Popen("llvm-cov-10 gcov *", shell=True, cwd=src)
+    p = subprocess.Popen("llvm-cov-9 gcov *", shell=True, cwd=src)
     p.wait()
     #p = subprocess.Popen("llvm-cov-10", "gcov", "*", shell=True, cwd=lib)
     #p.wait()
