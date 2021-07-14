@@ -422,7 +422,6 @@ if __name__ == '__main__':
         os.system("klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=../lib/libmosquitto.so.1 -link-llvm-lib=net.bc -link-llvm-lib=sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 mosquitto.bc --sym-args 0 3 4 --sym-files 2 4 --max-fail 1 --max-time=60")
         print("[+] KLEE test cases are under: /home/klee/mosquitto_klee/klee_tests")
 
-
     home = os.getcwd()
 
     # Before checking the main loop below; look for list flag.
