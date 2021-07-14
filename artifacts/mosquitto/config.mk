@@ -134,7 +134,7 @@ ifeq ($(UNAME),SunOS)
 	endif
 else
   	CC=clang
-	CFLAGS?=-Wall -ggdb -O0 -c -emit-llvm #-ggdb #-fdump-tree-all-graph #-O2 #-L /home/ryan/git/klee/build/Debug+Asserts/lib -lkleeRuntest #-c -emit-llvm
+	CFLAGS?=-Wall #-ggdb #-fdump-tree-all-graph #-O2 #-L /home/ryan/git/klee/build/Debug+Asserts/lib -lkleeRuntest #-c -emit-llvm
 	#LDFLAGS:=$(LDFLAGS) -coverage
 	#LDADD:=$(LDADD) -lcunit
 endif
