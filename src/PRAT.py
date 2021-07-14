@@ -412,7 +412,16 @@ if __name__ == '__main__':
     parser.add_argument("--extract", help="Generate feature graph and show LoC to remove", action="store_true")
     parser.add_argument("--tests", help="Run tests at compile time (necessary for better coverage results)", action="store_true")
     parser.add_argument("--delete", help="Attempt to delete entire feature-specific files after analysis", action="store_true")
+    parser.add_argument("--klee", help="Run klee to generate test cases", action="store_true")
     args = parser.parse_args()
+
+    if args.klee:
+        print("[+] Run KLEE to generate test cases")
+        os.system("cd /home/klee/mosquitto_klee/ && make binary -j")
+        os.system("cd /home/klee/mosquitto_klee/src/")
+        os.system("klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=../lib/libmosquitto.so.1 -link-llvm-lib=net.bc -link-llvm-lib=sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 mosquitto.bc --sym-args 0 3 4 --sym-files 2 4 --max-fail 1 --max-time=60")
+        print("[+] KLEE test cases are under: /home/klee/mosquitto_klee/klee_tests")
+
 
     home = os.getcwd()
 
