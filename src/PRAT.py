@@ -482,8 +482,8 @@ if __name__ == '__main__':
             # for td in diffs:
             for tdp in os.listdir(diffs):
                 tdt = tdp.split(".")
-                td = ''
-                for i in range(0, len(tdt)-1):
+                td = tdt[0]
+                for i in range(1, len(tdt)-1):
                     td = td + '.' + tdt[i]
                 if os.path.exists(args.project + "/libavfilter/" + td):
                     os.remove(args.project + "/libavfilter/" + td)
