@@ -479,7 +479,8 @@ if __name__ == '__main__':
         # I made a change that broke this. Will fix later.
         if args.delete is not False:
             print("[+] Attempting to delete source files...")
-            for td in diffs:
+            # for td in diffs:
+            for td in os.listdir(diffs):
                 if os.path.exists(args.project + "/libavfilter/" + td):
                     os.remove(args.project + "/libavfilter/" + td)
                 elif os.path.exists(args.project + "/libavcodec/" + td):
