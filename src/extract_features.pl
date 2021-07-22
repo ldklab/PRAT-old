@@ -154,21 +154,22 @@ sub remove_feature {
 
 	# First, check which of 3 dirs the file is in.
 	# (libavcodec, libavformat, libavfilter)
-	my $fname1 = "./FFmpeg/libavcodec/$file";
-	my $fname2 = "./FFmpeg/libavformat/$file";
-	my $fname3 = "./FFmpeg/libavfilter/$file";
-	my $mosq = "./mosquitto/src/$file";
+	print "[+] in remove_feature function: " . $file . "\n";
+	my $fname1 = "../artifacts/FFmpeg/libavcodec/$file";
+	my $fname2 = "../artifacts/FFmpeg/libavformat/$file";
+	my $fname3 = "../artifacts/FFmpeg/libavfilter/$file";
+	my $mosq = "../artifacts/mosquitto/src/$file";
 
 	if (-e $fname1) {
 		# Remove the LoC for a feature and save file.
 		# Create .bak of original in case.
-		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./FFmpeg/libavcodec/$file";
+		$sed_cmd = "sed -i.bak -e '$cmd_substr' ../artifacts/FFmpeg/libavcodec/$file";
 	} elsif (-e $fname2) {
-		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./FFmpeg/libavcodec/$file";
+		$sed_cmd = "sed -i.bak -e '$cmd_substr' ../artifacts/FFmpeg/libavformat/$file";
 	} elsif (-e $fname3) {
-		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./FFmpeg/libavcodec/$file";
+		$sed_cmd = "sed -i.bak -e '$cmd_substr' ../artifacts/FFmpeg/libavfilter/$file";
 	} elsif (-e $mosq) {
-		$sed_cmd = "sed -i.bak -e '$cmd_substr' ./mosquitto/src/$file";
+		$sed_cmd = "sed -i.bak -e '$cmd_substr' ../artifacts/mosquitto/src/$file";
 	} else {
 		print colored(['bright_red on_black'], "Could not find $file in appropriate source dir\n");
 	}

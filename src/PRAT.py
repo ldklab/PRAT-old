@@ -67,6 +67,7 @@ def extractFeatures(path):
     print("[+] Extract features for removal from: {}".format(path))
     p = subprocess.Popen(["perl", "extract_features.pl", path + "/"])
     p.wait()
+    print("[+] in extractFeatures function, has finished perl script.")
 
     # if isTool("xdot"):
     #     p = subprocess.Popen(["xdot", "FDG.dot"])
@@ -130,6 +131,12 @@ def extractFeatures(path):
     outhtml = open("report.html", 'w')
     outhtml.write(html)
     outhtml.close()
+
+def deleteFeatures(path):
+    print("[+] Extract features for removal from: {}".format(path))
+    p = subprocess.Popen(["perl", "extract_features.pl", path + "/", "--delete"])
+    p.wait()
+    print("[+] in deleteFeatures function, has finished perl script.")
 
 # Generate coverage files for Mosquitto.
 def makeMosquitto(path, feature, flag, tests=False):
@@ -221,6 +228,7 @@ def makeFFmpeg(path, feature, flag, tests=False):
 
     # Make directories for storing the results.
     coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
+    print(f"[+] in makeFFmpeg function: {coverageFiles}")
     p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
     p.wait()
     p = subprocess.Popen("mv " + "*.gcov " + coverageFiles, shell=True, cwd=path)
@@ -475,25 +483,30 @@ if __name__ == '__main__':
         diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
             home + "/coverage_files_WITH_" + feature + "_no", feature)
 
-        # Attempt to delete feature-specific source files.
-        # I made a change that broke this. Will fix later.
         if args.delete is not False:
             print("[+] Attempting to delete source files...")
-            # for td in diffs:
-            for tdp in os.listdir(diffs):
-                tdt = tdp.split(".")
-                td = tdt[0]
-                for i in range(1, len(tdt)-1):
-                    td = td + '.' + tdt[i]
-                if os.path.exists(args.project + "/libavfilter/" + td):
-                    os.remove(args.project + "/libavfilter/" + td)
-                elif os.path.exists(args.project + "/libavcodec/" + td):
-                    os.remove(args.project + "/libavcodec/" + td)
-                elif os.path.exists(args.project + "/libavformat/" + td):
-                    os.remove(args.project + "/libavformat/" + td)
-                else:
-                    print("[-] File: {} could not be found in source tree; skipping.".format(td))
-            print("[+] Finished deleting source files")
+            deleteFeatures(diffs)
+            sys.exit(0)
+        
+        # Attempt to delete feature-specific source files.
+        # I made a change that broke this. Will fix later.
+        # if args.delete is not False:
+        #     print("[+] Attempting to delete source files...")
+        #     # for td in diffs:
+        #     for tdp in os.listdir(diffs):
+        #         tdt = tdp.split(".")
+        #         td = tdt[0]
+        #         for i in range(1, len(tdt)-1):
+        #             td = td + '.' + tdt[i]
+        #         if os.path.exists(args.project + "/libavfilter/" + td):
+        #             os.remove(args.project + "/libavfilter/" + td)
+        #         elif os.path.exists(args.project + "/libavcodec/" + td):
+        #             os.remove(args.project + "/libavcodec/" + td)
+        #         elif os.path.exists(args.project + "/libavformat/" + td):
+        #             os.remove(args.project + "/libavformat/" + td)
+        #         else:
+        #             print("[-] File: {} could not be found in source tree; skipping.".format(td))
+        #     print("[+] Finished deleting source files")
     elif "rav1e" in args.project:
         print("[+] Experimental feature: running on Rust-based project")
 
