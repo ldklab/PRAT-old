@@ -12,8 +12,7 @@ RUN apk --no-cache add \
       util-linux-dev \
       libwebsockets-dev \
       libxslt \
-      python2 \
-      ca-certificates
+      python2
 
 # This build procedure is based on:
 # https://github.com/alpinelinux/aports/blob/master/main/mosquitto/APKBUILD

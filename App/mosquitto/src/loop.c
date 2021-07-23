@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2019 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -62,10 +62,6 @@ extern bool flag_db_backup;
 #endif
 extern bool flag_tree_print;
 extern int run;
-
-#ifdef WITH_RPW_DBG
-int tc = 0;
-#endif
 
 #ifdef WITH_EPOLL
 static void loop_handle_reads_writes(struct mosquitto_db *db, mosq_sock_t sock, uint32_t events);
@@ -142,6 +138,8 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 	int err;
 	socklen_t len;
 #endif
+	time_t expiration_check_time = 0;
+	char *id;
 
 
 #if defined(WITH_WEBSOCKETS) && LWS_LIBRARY_VERSION_NUMBER == 3002000
@@ -170,6 +168,10 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 		return MOSQ_ERR_NOMEM;
 	}
 #endif
+
+	if(db->config->persistent_client_expiration > 0){
+		expiration_check_time = time(NULL) + 3600;
+	}
 
 #ifdef WITH_EPOLL
 	db->epollfd = 0;
@@ -207,9 +209,6 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 #endif
 
 	while(run){
-#ifdef WITH_RPW_DBG
-		if (tc > 20) break;
-#endif
 		context__free_disused(db);
 #ifdef WITH_SYS_TREE
 		if(db->config->sys_interval > 0){
@@ -219,6 +218,7 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 
 #ifndef WITH_EPOLL
 		memset(pollfds, -1, sizeof(struct pollfd)*pollfd_max);
+
 		pollfd_index = 0;
 		for(i=0; i<listensock_count; i++){
 			pollfds[pollfd_index].fd = listensock[i];
@@ -471,6 +471,31 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 			}
 		}
 #endif
+		now = time(NULL);
+		if(db->config->persistent_client_expiration > 0 && now > expiration_check_time){
+			HASH_ITER(hh_id, db->contexts_by_id, context, ctxt_tmp){
+				if(context->sock == INVALID_SOCKET && context->session_expiry_interval > 0 && context->session_expiry_interval != UINT32_MAX){
+					/* This is a persistent client, check to see if the
+					 * last time it connected was longer than
+					 * persistent_client_expiration seconds ago. If so,
+					 * expire it and clean up.
+					 */
+					if(now > context->session_expiry_time){
+						if(context->id){
+							id = context->id;
+						}else{
+							id = "<unknown>";
+						}
+						log__printf(NULL, MOSQ_LOG_NOTICE, "Expiring persistent client %s due to timeout.", id);
+						G_CLIENTS_EXPIRED_INC();
+						context->session_expiry_interval = 0;
+						mosquitto__set_state(context, mosq_cs_expiring);
+						do_disconnect(db, context, MOSQ_ERR_SUCCESS);
+					}
+				}
+			}
+			expiration_check_time = time(NULL) + 3600;
+		}
 
 #ifndef WIN32
 		sigprocmask(SIG_SETMASK, &sigblock, &origsig);
@@ -504,11 +529,10 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 								}
 								context = NULL;
 								HASH_FIND(hh_sock, db->contexts_by_sock, &(ev.data.fd), sizeof(mosq_sock_t), context);
-								if(context){
-									context->events = EPOLLIN;
-								}else{
+								if(!context) {
 									log__printf(NULL, MOSQ_LOG_ERR, "Error in epoll accepting: no context");
 								}
+								context->events = EPOLLIN;
 							}
 						}
 						break;
@@ -604,10 +628,6 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
 		if(db->config->have_websockets_listener){
 			temp__expire_websockets_clients(db);
 		}
-#endif
-#ifdef WITH_RPW_DBG
-		log__printf(NULL, MOSQ_LOG_NOTICE, "Exiting in: %d iterations", (20-tc));
-		tc++;
 #endif
 	}
 

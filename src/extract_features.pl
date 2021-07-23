@@ -158,7 +158,8 @@ sub remove_feature {
 	my $fname1 = "../artifacts/FFmpeg/libavcodec/$file";
 	my $fname2 = "../artifacts/FFmpeg/libavformat/$file";
 	my $fname3 = "../artifacts/FFmpeg/libavfilter/$file";
-	my $mosq = "../artifacts/mosquitto/src/$file";
+	my $mosq1 = "../artifacts/mosquitto/src/$file";
+	my $mosq2 = "../artifacts/mosquitto/lib/$file";
 
 	if (-e $fname1) {
 		# Remove the LoC for a feature and save file.
@@ -168,8 +169,10 @@ sub remove_feature {
 		$sed_cmd = "sed -i.bak -e '$cmd_substr' ../artifacts/FFmpeg/libavformat/$file";
 	} elsif (-e $fname3) {
 		$sed_cmd = "sed -i.bak -e '$cmd_substr' ../artifacts/FFmpeg/libavfilter/$file";
-	} elsif (-e $mosq) {
+	} elsif (-e $mosq1) {
 		$sed_cmd = "sed -i.bak -e '$cmd_substr' ../artifacts/mosquitto/src/$file";
+	} elsif (-e $mosq2) {
+		$sed_cmd = "sed -i.bak -e '$cmd_substr' ../artifacts/mosquitto/lib/$file";
 	} else {
 		print colored(['bright_red on_black'], "Could not find $file in appropriate source dir\n");
 	}

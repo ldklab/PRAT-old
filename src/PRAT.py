@@ -144,12 +144,12 @@ def makeMosquitto(path, feature, flag, tests=False):
     target = "WITH_" + feature + "=" + flag
     p = subprocess.Popen(["make", "clean"], cwd=path)
     p.wait()
-    p = subprocess.Popen(["make", "binary", "-j", target], cwd=path)
+    p = subprocess.Popen(["make", "binary", "-j", "WITH_COVERAGE=yes", target], cwd=path)
     p.wait()
 
     # Add part here later for running tests.
     if tests is not False:
-        p = subprocess.Popen(["make", "test", "-j"], cwd=path)
+        p = subprocess.Popen(["make", "utest", "-j", "WITH_COVERAGE=yes"], cwd=path)
         p.wait()
     else:
         print("[+] Not running tests. Continuing.")
@@ -160,17 +160,18 @@ def makeMosquitto(path, feature, flag, tests=False):
     print("[+] Running in: {} and {}".format(src, lib))
     p = subprocess.Popen("llvm-cov-9 gcov *", shell=True, cwd=src)
     p.wait()
-    #p = subprocess.Popen("llvm-cov-10", "gcov", "*", shell=True, cwd=lib)
-    #p.wait()
+    p = subprocess.Popen("llvm-cov-9 gcov *", shell=True, cwd=lib)
+    p.wait()
 
     # Make directories for storing the results.
     coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
     p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
     p.wait()
-    p = subprocess.Popen("mv " + src + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    # p = subprocess.Popen("mv " + src + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p = subprocess.Popen("mv src/*.gcov " + coverageFiles, shell=True, cwd=path)
     p.wait()
-    #p = subprocess.Popen("mv " + lib + "/*.gcov " + coverageFiles, shell=True, cwd=path)
-    #p.wait()
+    p = subprocess.Popen("mv lib/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p.wait()
 
     # Move the files to working dir.
     home = os.getcwd()
@@ -466,6 +467,10 @@ if __name__ == '__main__':
         #print(f"Running make clean in: {args.project}")
         p = subprocess.Popen(["make", "clean"], cwd=args.project)
         p.wait()
+        if args.delete is not False:
+            print("[+] Attempting to delete source files...")
+            deleteFeatures(diffs)
+            sys.exit(0)
     elif "FFmpeg" in args.project:
         feature = args.feature[0]
 

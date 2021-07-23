@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2019 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -34,8 +34,6 @@ int handle__packet(struct mosquitto_db *db, struct mosquitto *context)
 {
 	if(!context) return MOSQ_ERR_INVAL;
 
-	int id = 1337;
-
 	switch((context->in_packet.command)&0xF0){
 		case CMD_PINGREQ:
 			return handle__pingreq(context);
@@ -52,9 +50,7 @@ int handle__packet(struct mosquitto_db *db, struct mosquitto *context)
 		case CMD_PUBREL:
 			return handle__pubrel(db, context);
 		case CMD_CONNECT:
-			/* This is an instrumented call (manual). */
-			context->nonce = id;
-			return handle__connect(db, context, id);
+			return handle__connect(db, context);
 		case CMD_DISCONNECT:
 			return handle__disconnect(db, context);
 		case CMD_SUBSCRIBE:

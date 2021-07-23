@@ -9,7 +9,7 @@
 !define env_hklm 'HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"'
 
 Name "Eclipse Mosquitto"
-!define VERSION 1.6.9
+!define VERSION 1.6.7
 OutFile "mosquitto-${VERSION}-install-windows-x64.exe"
 
 !include "x64.nsh"
@@ -46,7 +46,6 @@ Section "Files" SecInstall
 	File "..\build64\src\Release\mosquitto_passwd.exe"
 	File "..\build64\client\Release\mosquitto_pub.exe"
 	File "..\build64\client\Release\mosquitto_sub.exe"
-	File "..\build64\client\Release\mosquitto_rr.exe"
 	File "..\build64\lib\Release\mosquitto.dll"
 	File "..\build64\lib\cpp\Release\mosquittopp.dll"
 	File "..\aclfile.example"
@@ -92,7 +91,6 @@ Section "Uninstall"
 	Delete "$INSTDIR\mosquitto_passwd.exe"
 	Delete "$INSTDIR\mosquitto_pub.exe"
 	Delete "$INSTDIR\mosquitto_sub.exe"
-	Delete "$INSTDIR\mosquitto_rr.exe"
 	Delete "$INSTDIR\mosquitto.dll"
 	Delete "$INSTDIR\mosquittopp.dll"
 	Delete "$INSTDIR\aclfile.example"

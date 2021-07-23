@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2019 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -283,7 +283,7 @@ struct mosquitto__config {
 	int listener_count;
 	int log_dest;
 	int log_facility;
-	unsigned int log_type;
+	int log_type;
 	bool log_timestamp;
 	char *log_timestamp_format;
 	char *log_file;
@@ -593,7 +593,7 @@ int net__tls_server_ctx(struct mosquitto__listener *listener);
  * ============================================================ */
 int handle__packet(struct mosquitto_db *db, struct mosquitto *context);
 int handle__connack(struct mosquitto_db *db, struct mosquitto *context);
-int handle__connect(struct mosquitto_db *db, struct mosquitto *context, int id);
+int handle__connect(struct mosquitto_db *db, struct mosquitto *context);
 int handle__disconnect(struct mosquitto_db *db, struct mosquitto *context);
 int handle__publish(struct mosquitto_db *db, struct mosquitto *context);
 int handle__subscribe(struct mosquitto_db *db, struct mosquitto *context);

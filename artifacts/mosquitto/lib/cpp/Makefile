@@ -6,6 +6,8 @@ endif
 
 .PHONY : clean install
 
+CC=clang
+
 ALL_DEPS=libmosquittopp.so.${SOVERSION}
 
 ifeq ($(WITH_STATIC_LIBRARIES),yes)
@@ -37,12 +39,12 @@ uninstall :
 clean :
 	-rm -f *.o libmosquittopp.so.${SOVERSION} libmosquittopp.a
 
-libmosquittopp.so.${SOVERSION} : mosquittopp.o
+libmosquittopp.so.${SOVERSION} : mosquittopp.bc
 	${CROSS_COMPILE}$(CXX) -shared $(LIB_LDFLAGS) $< -o $@ ../libmosquitto.so.${SOVERSION} $(LIB_LIDADD)
 
-libmosquittopp.a : mosquittopp.o
+libmosquittopp.a : mosquittopp.bc
 	${CROSS_COMPILE}$(AR) cr $@ $^
 
-mosquittopp.o : mosquittopp.cpp mosquittopp.h
+mosquittopp.bc : mosquittopp.cpp mosquittopp.h
 	${CROSS_COMPILE}$(CXX) $(LIB_CPPFLAGS) $(LIB_CXXFLAGS) -c $< -o $@
 

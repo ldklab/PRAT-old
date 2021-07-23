@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2019 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -160,9 +160,6 @@ int connect__on_authorised(struct mosquitto_db *db, struct mosquitto *context, v
 			}
 		}
 
-		if(context->clean_start == true){
-			sub__clean_session(db, found_context);
-		}
 		session_expiry__remove(found_context);
 		will_delay__remove(found_context);
 		will__clear(found_context);
@@ -358,19 +355,9 @@ error_cleanup:
 	return rc;
 }
 
-/**
- * This doesn't do anything right now.
- * Just a pre- function to call the next.
- * @param db
- * @param context
- */
-/*int handle__connect2(struct mosquitto_db *db, struct mosquitto *context) {
-    // This will be some "key" that is agreed upon at handshake time to determine client/broker version type.
-    int id = 1337;
-    handle__connect2(db, context, id);
-}*/
 
-int handle__connect(struct mosquitto_db *db, struct mosquitto *context, int version)
+
+int handle__connect(struct mosquitto_db *db, struct mosquitto *context)
 {
 	char protocol_name[7];
 	uint8_t protocol_version;
@@ -388,17 +375,6 @@ int handle__connect(struct mosquitto_db *db, struct mosquitto *context, int vers
 	uint16_t auth_data_len = 0;
 	void *auth_data_out = NULL;
 	uint16_t auth_data_out_len = 0;
-
-    // TEST - RPW.
-    int nonce = context->nonce;
-	log__printf(NULL, MOSQ_LOG_NOTICE, "Nonce value: %d", nonce);
-	/*if (nonce != 1337) {
-		log__printf(NULL, MOSQ_LOG_NOTICE, "Client::Broker mismatch. Disconnecting.");
-		goto handle_connect_error;
-	}*/
-    assert(nonce == 1337);
-    // END TEST - RPW.
-
 #ifdef WITH_TLS
 	int i;
 	X509 *client_cert = NULL;
@@ -412,12 +388,6 @@ int handle__connect(struct mosquitto_db *db, struct mosquitto *context, int vers
 	if(!context->listener){
 		return MOSQ_ERR_INVAL;
 	}
-
-	/* Manually-created check for the added dummy transformation. */
-	/*if(version != 1337) {
-	    log__printf(NULL, MOSQ_LOG_NOTICE, "Client::Broker mismatch. Disconnecting.");
-	    goto handle_connect_error;
-	}*/
 
 	/* Don't accept multiple CONNECT commands. */
 	if(context->state != mosq_cs_new){
@@ -443,12 +413,6 @@ int handle__connect(struct mosquitto_db *db, struct mosquitto *context, int vers
 		goto handle_connect_error;
 	}
 	protocol_name[slen] = '\0';
-
-	// Tests - RPW.
-	#ifdef WITH_RPW_DBG
-	log__printf(NULL, MOSQ_LOG_NOTICE, "Protocol name: %s", protocol_name);
-	#endif
-	// End tests.
 
 	if(packet__read_byte(&context->in_packet, &protocol_version)){
 		rc = 1;
@@ -905,9 +869,6 @@ handle_connect_error:
 	mosquitto__free(client_id);
 	mosquitto__free(username);
 	mosquitto__free(password);
-
-	// This will send DISCONNECT to the client.
-	//send__disconnect(context, 0, NULL);
 	if(will_struct){
 		mosquitto_property_free_all(&will_struct->properties);
 		mosquitto__free(will_struct->msg.payload);

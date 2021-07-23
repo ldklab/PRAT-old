@@ -15,4 +15,3 @@ import ssl
 import struct
 import subprocess
 import time
-import errno

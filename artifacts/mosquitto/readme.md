@@ -35,7 +35,7 @@ various platforms.
 ## Using KLEE Against Mosquitto
 
 ``` bash
-$klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=../lib/libmosquitto.so.1 -link-llvm-lib=net.bc -link-llvm-lib=sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 mosquitto.bc --sym-args 0 3 4 --sym-files 2 4 --max-fail 1 --max-time=60
+$klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=../lib/libmosquitto.so.1 -link-llvm-lib=net.bc -link-llvm-lib=sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 mosquitto.bc --sym-args 0 4 4 --sym-files 2 10 --sym-stdin 10 --sym-stdout --max-memory 4000 --max-fail 1 --max-time=60
 ```
 
 ### Replaying KLEE Tests

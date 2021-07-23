@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2009-2020 Roger Light <roger@atchoo.org>
+Copyright (c) 2009-2018 Roger Light <roger@atchoo.org>
 
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
@@ -51,9 +51,7 @@ int handle__disconnect(struct mosquitto *mosq)
 		mosquitto_property_free_all(&properties);
 	}
 
-	#ifdef WITH_RPW_DBG
-	log__printf(mosq, MOSQ_LOG_NOTICE, "Received DISCONNECT (%d)", reason_code);
-	#endif
+	log__printf(mosq, MOSQ_LOG_DEBUG, "Received DISCONNECT (%d)", reason_code);
 
 	do_client_disconnect(mosq, reason_code, properties);
 
