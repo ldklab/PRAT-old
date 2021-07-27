@@ -426,9 +426,9 @@ if __name__ == '__main__':
 
     if args.klee:
         print("[+] Run KLEE to generate test cases")
-        os.system("cd /home/klee/mosquitto_klee/ && make binary -j")
+        os.system("cd /home/klee/PRAT/artifacts/mosquitto/ && make binary -j")
         os.system("klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/lib/libmosquitto.so.1 -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/net.bc -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 /home/klee/PRAT/artifacts/mosquitto/src/mosquitto.bc --sym-args 0 3 4 --sym-files 2 4 --max-fail 1 --max-time=60")
-        print("[+] KLEE test cases are under: /home/klee/mosquitto_klee/klee_tests")
+        print("[+] KLEE test cases are under: /home/klee/PRAT/artifacts/mosquitto/klee_tests")
         sys.exit(0)
 
     home = os.getcwd()
