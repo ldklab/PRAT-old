@@ -427,7 +427,7 @@ if __name__ == '__main__':
     if args.klee:
         print("[+] Run KLEE to generate test cases")
         os.system("cd /home/klee/mosquitto_klee/ && make binary -j")
-        os.system("klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=/home/klee/mosquitto_klee/lib/libmosquitto.so.1 -link-llvm-lib=/home/klee/mosquitto_klee/src/net.bc -link-llvm-lib=/home/klee/mosquitto_klee/src/sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 /home/klee/mosquitto_klee/src/mosquitto.bc --sym-args 0 3 4 --sym-files 2 4 --max-fail 1 --max-time=60")
+        os.system("klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/lib/libmosquitto.so.1 -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/net.bc -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 /home/klee/PRAT/artifacts/mosquitto/src/mosquitto.bc --sym-args 0 3 4 --sym-files 2 4 --max-fail 1 --max-time=60")
         print("[+] KLEE test cases are under: /home/klee/mosquitto_klee/klee_tests")
         sys.exit(0)
 
@@ -542,8 +542,8 @@ if __name__ == '__main__':
         makeDDS(args.project, args.feature[0], "no", args.tests)
 
         # Make one file with the `diff` of coverage info.
-        diffs = makeDiffs(home + "/coverage_files_WITH_" + feature + "_yes",
-            home + "/coverage_files_WITH_" + feature + "_no", feature)
+        diffs = makeDiffs(home + "/coverage_files_WITH_" + args.feature[0] + "_yes",
+            home + "/coverage_files_WITH_" + args.feature[0] + "_no", args.feature[0])
     elif "azure" in args.project:
         # Compile with feature enabled.
         makeCM(args.project, args.feature[0], "yes", args.tests)
