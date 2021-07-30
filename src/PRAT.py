@@ -475,6 +475,7 @@ if __name__ == '__main__':
         #print(f"Running make clean in: {args.project}")
         p = subprocess.Popen(["make", "clean"], cwd=args.project)
         p.wait()
+        extractFeatures(diffs)
 
 
         # os.system("cd /home/klee/PRAT/artifacts/mosquitto/ && make binary -j")
