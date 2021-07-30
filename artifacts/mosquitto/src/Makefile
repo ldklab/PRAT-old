@@ -74,7 +74,7 @@ OBJS=	mosquitto.bc \
 		will_mosq.bc
 
 mosquitto : ${OBJS}
-	llvm-link-9 $^ -o $@
+	${CROSS_COMPILE}${CC} ${BROKER_LDFLAGS} $^ -o $@ $(BROKER_LDADD)
 
 mosquitto.bc : mosquitto.c mosquitto_broker_internal.h
 	${CROSS_COMPILE}${CC} $(BROKER_CPPFLAGS) $(BROKER_CFLAGS) -c $< -o $@

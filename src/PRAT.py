@@ -178,6 +178,42 @@ def makeMosquitto(path, feature, flag, tests=False):
     p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
     p.wait()
 
+def makeMosquitto2(path, feature, flag):
+    print("[+] Running in: {}".format(path))
+    target = "WITH_" + feature + "=" + flag
+    p = subprocess.Popen(["make", "clean"], cwd=path)
+    p.wait()
+    p = subprocess.Popen(["make", "binary", "-j", "WITH_COVERAGE=yes", target], cwd=path)
+    p.wait()
+
+    # os.system("cd /home/klee/PRAT/artifacts/mosquitto/ && make binary -j")
+    os.system("klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/lib/libmosquitto.so.1 -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/net.bc -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 /home/klee/PRAT/artifacts/mosquitto/src/mosquitto.bc --sym-args 0 3 4 --sym-files 2 4 --max-fail 1 --max-time=60")
+    os.system("cd /home/klee/PRAT/src/")
+
+    # Generate gcov files.
+    src = path + "/src"
+    lib = path + "/lib"
+    print("[+] Running in: {} and {}".format(src, lib))
+    p = subprocess.Popen("llvm-cov-9 gcov *", shell=True, cwd=src)
+    p.wait()
+    p = subprocess.Popen("llvm-cov-9 gcov *", shell=True, cwd=lib)
+    p.wait()
+
+    # Make directories for storing the results.
+    coverageFiles = "coverage_files_WITH_" + feature + "_" + flag
+    p = subprocess.Popen("mkdir -p " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+    # p = subprocess.Popen("mv " + src + "/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p = subprocess.Popen("mv src/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+    p = subprocess.Popen("mv lib/*.gcov " + coverageFiles, shell=True, cwd=path)
+    p.wait()
+
+    # Move the files to working dir.
+    home = os.getcwd()
+    p = subprocess.Popen(["mv", coverageFiles, home], cwd=path)
+    p.wait()
+
 def makeFFmpeg(path, feature, flag, tests=False):
     print("[+] Running in: {}".format(path))
 
@@ -423,12 +459,27 @@ if __name__ == '__main__':
     parser.add_argument("--delete", help="Attempt to delete entire feature-specific files after analysis", action="store_true")
     parser.add_argument("--klee", help="Run klee to generate test cases", action="store_true")
     args = parser.parse_args()
-
+    
     if args.klee:
         print("[+] Run KLEE to generate test cases")
-        os.system("cd /home/klee/PRAT/artifacts/mosquitto/ && make binary -j")
-        os.system("klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/lib/libmosquitto.so.1 -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/net.bc -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 /home/klee/PRAT/artifacts/mosquitto/src/mosquitto.bc --sym-args 0 3 4 --sym-files 2 4 --max-fail 1 --max-time=60")
-        print("[+] KLEE test cases are under: /home/klee/PRAT/artifacts/mosquitto/klee_tests")
+
+        feature = args.feature[0].upper()
+
+        makeMosquitto2(args.project, feature, "yes")
+        makeMosquitto2(args.project, feature, "no")
+
+        home2 = os.getcwd()
+        diffs = makeDiffs(home2 + "/coverage_files_WITH_" + feature + "_yes",
+            home2 + "/coverage_files_WITH_" + feature + "_no", feature)
+        
+        #print(f"Running make clean in: {args.project}")
+        p = subprocess.Popen(["make", "clean"], cwd=args.project)
+        p.wait()
+
+
+        # os.system("cd /home/klee/PRAT/artifacts/mosquitto/ && make binary -j")
+        # os.system("klee -emit-all-errors -only-output-states-covering-new -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/lib/libmosquitto.so.1 -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/net.bc -link-llvm-lib=/home/klee/PRAT/artifacts/mosquitto/src/sys_tree.bc --libc=uclibc --posix-runtime --solver-backend=z3 /home/klee/PRAT/artifacts/mosquitto/src/mosquitto.bc --sym-args 0 3 4 --sym-files 2 4 --max-fail 1 --max-time=60")
+        # print("[+] KLEE test cases are under: /home/klee/PRAT/artifacts/mosquitto/klee_tests")
         sys.exit(0)
 
     home = os.getcwd()
